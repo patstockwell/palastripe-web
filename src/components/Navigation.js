@@ -1,20 +1,31 @@
 import React from 'react';
-import { Link } from "react-router-dom";
+import { Link } from 'react-router-dom';
+import styled from 'styled-components';
+
+const Nav = styled.nav`
+  display: flex;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  justify-content: space-between;
+`;
 
 const Navigation = () => (
-  <nav>
-    <ul>
-      <li>
-        <Link to="/">Workouts</Link>
-      </li>
-      <li>
+    <Nav>
+      <div>
+        <Link to="/">Home</Link>
+      </div>
+      <div>
+        <Link to="/workout-plans/">Workout Plans</Link>
+      </div>
+      <div>
         <Link to="/about/">About</Link>
-      </li>
-      <li>
+      </div>
+      <div>
         <Link to="/users/">Users</Link>
-      </li>
-    </ul>
-  </nav>
+      </div>
+    </Nav>
 )
 
 export default Navigation;
