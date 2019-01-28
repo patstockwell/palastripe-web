@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
+import Helmet from 'react-helmet';
 
 import WorkoutPlans from './tabs/WorkoutPlans'
 import Navigation from './components/Navigation'
@@ -11,6 +12,7 @@ const Users = () => <h2>Users</h2>;
 const App = () => (
   <Router>
     <div>
+      <Helmet title="You Are Doing Great" />
       <Route path="/" exact component={Home} />
       <Route path="/workout-plans/" component={WorkoutPlans} />
       <Route path="/about/" component={About} />
