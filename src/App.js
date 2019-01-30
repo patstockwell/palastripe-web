@@ -11,7 +11,7 @@ import Home from './tabs/Home'
 import About from './tabs/About'
 import Users from './tabs/Users'
 
-const FourZeroFour = () => <h2>FourZeroFour</h2>;
+const FourZeroFour = () => <h2>404</h2>;
 
 const App = () => (
   <Router>
