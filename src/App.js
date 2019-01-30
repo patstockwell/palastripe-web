@@ -1,23 +1,29 @@
 import React from "react";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+} from "react-router-dom";
 import Helmet from 'react-helmet';
 
 import WorkoutPlans from './tabs/WorkoutPlans'
-import Navigation from './components/Navigation'
+import Home from './tabs/Home'
+import About from './tabs/About'
+import Users from './tabs/Users'
 
-const Home = () => <h2>Home</h2>;
-const About = () => <h2>About</h2>;
-const Users = () => <h2>Users</h2>;
+const FourZeroFour = () => <h2>FourZeroFour</h2>;
 
 const App = () => (
   <Router>
     <div>
       <Helmet title="You Are Doing Great" />
-      <Route path="/" exact component={Home} />
-      <Route path="/workout-plans/" component={WorkoutPlans} />
-      <Route path="/about/" component={About} />
-      <Route path="/users/" component={Users} />
-      <Navigation />
+      <Switch>
+        <Route path="/" exact component={Home} />
+        <Route path="/workout-plans/" component={WorkoutPlans} />
+        <Route path="/about/" component={About} />
+        <Route path="/users/" component={Users} />
+        <Route component={FourZeroFour} />
+      </Switch>
     </div>
   </Router>
 );

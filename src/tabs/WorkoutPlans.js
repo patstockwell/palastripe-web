@@ -1,4 +1,5 @@
 import React from 'react';
+import Navigation from '../components/Navigation'
 
 import Workout from '../components/Workout';
 
@@ -24,6 +25,7 @@ const WorkoutPlans = () => {
       <h1>Workout list</h1>
       <Workout workoutRoutine={twoExercisePlan} />
       <Workout workoutRoutine={twoExercisePlan} />
+      <Navigation />
     </div>
   )
 }
