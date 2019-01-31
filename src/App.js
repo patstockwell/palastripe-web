@@ -6,17 +6,21 @@ import {
 } from "react-router-dom";
 import Helmet from 'react-helmet';
 
-import WorkoutPlans from './tabs/WorkoutPlans'
-import Home from './tabs/Home'
-import About from './tabs/About'
-import Users from './tabs/Users'
+import { GlobalStyle } from './components/GlobalStyle';
+import WorkoutPlans from './tabs/WorkoutPlans';
+import Home from './tabs/Home';
+import About from './tabs/About';
+import Users from './tabs/Users';
 
 const FourZeroFour = () => <h2>404</h2>;
+const Header = () => <h1>Harder Better Faster Fitter</h1>
 
 const App = () => (
   <Router>
     <div>
       <Helmet title="You Are Doing Great" />
+      <GlobalStyle />
+      <Header />
       <Switch>
         <Route path="/" exact component={Home} />
         <Route path="/workout-plans/" component={WorkoutPlans} />

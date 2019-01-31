@@ -4,9 +4,9 @@ import Navigation from '../components/Navigation'
 import Workout from '../components/Workout';
 
 const WorkoutPlans = () => {
-  const twoExercisePlan = {
+  const monday = {
     workoutName: 'Legs Routine',
-    exercises: [
+    data: [
       {
         name: 'deadlift',
         weightInKilos: 80,
@@ -20,11 +20,27 @@ const WorkoutPlans = () => {
     ],
   };
 
+  const tuesday = {
+    workoutName: 'Arms Routine',
+    data: [
+      {
+        name: 'chinups',
+        weightInKilos: 0,
+        sets: [5, 5, 5, 5],
+      },
+      {
+        name: 'bicep curl',
+        weightInKilos: 12,
+        sets: [8, 8, 8, 8],
+      },
+    ],
+  };
+
   return (
     <div>
       <h1>Workout list</h1>
-      <Workout workoutRoutine={twoExercisePlan} />
-      <Workout workoutRoutine={twoExercisePlan} />
+      <Workout workoutRoutine={monday} />
+      <Workout workoutRoutine={tuesday} />
       <Navigation />
     </div>
   )
