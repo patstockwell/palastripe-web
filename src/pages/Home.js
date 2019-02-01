@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Navigation from '../components/Navigation';
 import Workout from '../components/Workout';
 
@@ -39,6 +40,7 @@ const Home = () => {
   return (
     <div>
       <h2>Home</h2>
+      <Link to="active-workout-overview">Start Workout</Link>
       <Workout workoutRoutine={monday} />
       <Workout workoutRoutine={tuesday} />
       <Navigation />
