@@ -21,6 +21,7 @@ const Home = () => {
               from={{ left: '100%' }}
               enter={{ left: '0' }}
               leave={{ left: '100%' }}
+              config={{ tension: 410, friction: 40 }}
             >
               {(loc, state) => style => {
                 return (
