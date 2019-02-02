@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { gutterWidth } from '../helpers/constants'
 
 const ExerciseListItemWrapper = styled.div`
   display: flex;
@@ -29,11 +30,13 @@ const ExerciseListItem = ({ sets, name, weightInKilos }) => {
 const Panel = styled.div`
   display: flex;
   justify-content: flex-start;
-  background-color: lightgray;
+  color: black;
+  background-color: white;
   border-radius: 5px;
   padding: 5px;
-  margin-bottom: 30px;
+  margin: 15px ${gutterWidth}px;
   box-sizing: border-box;
+  min-height: 70px;
 `
 
 const Title = styled.div`

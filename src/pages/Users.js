@@ -1,10 +1,13 @@
 import React from 'react';
+import BackSplash from '../components/BackSplash';
+import { orange, pink } from '../helpers/constants';
+import PageHeading from '../components/PageHeading';
 
 const Users = () => (
-  <div>
-    <h2>Users</h2>
+  <BackSplash topLeft={orange} bottomRight={pink}>
+    <PageHeading>Users</PageHeading>
     <p>someuser</p>
-  </div>
+  </BackSplash>
 );
 
 export default Users;

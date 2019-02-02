@@ -18,6 +18,7 @@ import FourZeroFour from './pages/FourZeroFour';
 
 const Landing = () => <Link to="/home">Get started</Link>
 const Header = () => <span>Harder Better Faster Fitter</span>
+
 const TabWindow = styled.div`
   position: relative;
   height: 100vh;

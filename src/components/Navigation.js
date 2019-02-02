@@ -10,23 +10,30 @@ const Nav = styled.nav`
   width: 100vw;
   justify-content: space-between;
   height: ${navBarHeight}px;
-  background-color: red;
+  background-color: black;
+  color: white;
   padding: 3px;
+  box-sizing: border-box;
 `;
+
+const NavLink = styled(Link)`
+  color: white;
+  text-decoration: none;
+`
 
 const Navigation = () => (
   <Nav>
     <div>
-      <Link to="/home">Home</Link>
+      <NavLink to="/home">Home</NavLink>
     </div>
     <div>
-      <Link to="/workout-plans/">Workout Plans</Link>
+      <NavLink to="/workout-plans/">Workout Plans</NavLink>
     </div>
     <div>
-      <Link to="/about/">About</Link>
+      <NavLink to="/about/">About</NavLink>
     </div>
     <div>
-      <Link to="/users/">Users</Link>
+      <NavLink to="/users/">Users</NavLink>
     </div>
   </Nav>
 )

@@ -1,9 +1,12 @@
 import React from 'react';
+import PageHeading from '../components/PageHeading';
+import BackSplash from '../components/BackSplash';
+import { blue, green } from '../helpers/constants';
 
 const About = () => (
-  <div>
-    <h2>About</h2>
-  </div>
+  <BackSplash topLeft={blue} bottomRight={green}>
+    <PageHeading>About</PageHeading>
+  </BackSplash>
 );
 
 export default About;

@@ -2,12 +2,15 @@ import React from 'react';
 import { Switch, Route, Link } from 'react-router-dom';
 import { Transition } from 'react-spring';
 import Workout from '../components/Workout';
+import PageHeading from '../components/PageHeading';
+import BackSplash from '../components/BackSplash';
 import ActiveWorkoutOverview from './ActiveWorkoutOverview';
 import { monday, tuesday } from '../helpers/data';
+import { pink, purple } from '../helpers/constants';
 
 const Home = () => {
   return (
-    <div>
+    <BackSplash topLeft={pink} bottomRight={purple} >
       <Route
         render={({ location }) => {
           return (
@@ -30,7 +33,7 @@ const Home = () => {
                     path="/home"
                     render={() => (
                       <div>
-                        <h2>Home</h2>
+                        <PageHeading>Home</PageHeading>
                         <Link to="/home/active-workout-overview">Start Workout</Link>
                         <Workout workoutRoutine={monday} />
                         <Workout workoutRoutine={tuesday} />
@@ -46,7 +49,7 @@ const Home = () => {
             </Transition>
         )}}
       />
-    </div>
+    </BackSplash>
   );
 };
 
