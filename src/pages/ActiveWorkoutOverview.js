@@ -1,11 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-
-
-const GreenOverviewSlider = styled.div`
-  background-color: green;
-`
+import { animated } from 'react-spring';
 
 const BackArrow = styled(Link)`
   text-decoration: none;
@@ -13,11 +9,19 @@ const BackArrow = styled(Link)`
   font-size: 30px;
 `
 
-const ActiveWorkoutOverview = () => (
-  <GreenOverviewSlider>
-    <BackArrow to="/">&#9667;</BackArrow>
+const ActiveWorkoutOverview = ({ animationStyles }) => (
+  <animated.div style={{
+    ...animationStyles,
+    position: 'absolute',
+    top: 0,
+    bottom: 0,
+    width: '100%',
+    backgroundColor: 'green',
+    zIndex: 10,
+  }}>
+    <BackArrow to="/home">&#9667;</BackArrow>
     <p>some content</p>
-  </GreenOverviewSlider>
+  </animated.div>
 )
 
 export default ActiveWorkoutOverview;

@@ -1,49 +1,51 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import Navigation from '../components/Navigation';
+import { Switch, Route, Link } from 'react-router-dom';
+import { Transition } from 'react-spring';
 import Workout from '../components/Workout';
+import ActiveWorkoutOverview from './ActiveWorkoutOverview';
+import { monday, tuesday } from '../helpers/data';
 
 const Home = () => {
-  const monday = {
-    workoutName: 'Legs Burn',
-    data: [
-      {
-        name: 'deadlift',
-        weightInKilos: 80,
-        sets: [7, 7, 7, 7],
-      },
-      {
-        name: 'squat',
-        weightInKilos: 50,
-        sets: [7, 7, 7, 7],
-      },
-    ],
-  };
-
-  const tuesday = {
-    workoutName: 'Arms Routine',
-    date: new Date(1543933984145),
-    data: [
-      {
-        name: 'chinups',
-        weightInKilos: 0,
-        sets: [5, 5, 5, 5],
-      },
-      {
-        name: 'bicep curl',
-        weightInKilos: 12,
-        sets: [8, 8, 8, 8],
-      },
-    ],
-  };
-
   return (
     <div>
-      <h2>Home</h2>
-      <Link to="active-workout-overview">Start Workout</Link>
-      <Workout workoutRoutine={monday} />
-      <Workout workoutRoutine={tuesday} />
-      <Navigation />
+      <Route
+        render={({ location }) => {
+          return (
+            <Transition
+              native
+              items={location}
+              keys={location.pathname.split('/')[2]}
+              from={{ left: '100%' }}
+              enter={{ left: '0' }}
+              leave={{ left: '100%' }}
+            >
+              {(loc, state) => style => {
+                return (
+                <Switch location={state === 'update' ? location : loc}>
+                  <Route
+                    path="/home/active-workout-overview/"
+                    render={() => <ActiveWorkoutOverview animationStyles={style}/>}
+                  />
+                  <Route
+                    path="/home"
+                    render={() => (
+                      <div>
+                        <h2>Home</h2>
+                        <Link to="/home/active-workout-overview">Start Workout</Link>
+                        <Workout workoutRoutine={monday} />
+                        <Workout workoutRoutine={tuesday} />
+                        <Workout workoutRoutine={tuesday} />
+                        <Workout workoutRoutine={tuesday} />
+                        <Workout workoutRoutine={tuesday} />
+                        <Workout workoutRoutine={tuesday} />
+                      </div>
+                    )}
+                  />
+                </Switch>
+              )}}
+            </Transition>
+        )}}
+      />
     </div>
   );
 };
