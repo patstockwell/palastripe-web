@@ -1,4 +1,4 @@
-export const navBarHeight = 30;
+export const navBarHeight = 40;
 export const gutterWidth = 7;
 
 export const pink = '#ff02c8';

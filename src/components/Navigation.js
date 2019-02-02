@@ -6,7 +6,8 @@ import { navBarHeight } from '../helpers/constants'
 const Nav = styled.nav`
   display: flex;
   position: fixed;
-  top: calc(100vh - ${navBarHeight}px);
+  // top: calc(100vh - ${navBarHeight}px);
+  bottom: 0;
   width: 100vw;
   justify-content: space-between;
   height: ${navBarHeight}px;
