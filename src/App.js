@@ -14,9 +14,9 @@ import WorkoutPlans from './pages/WorkoutPlans';
 import Home from './pages/Home';
 import About from './pages/About';
 import Users from './pages/Users';
+import FourZeroFour from './pages/FourZeroFour';
 
 const Landing = () => <Link to="/home">Get started</Link>
-const FourZeroFour = () => <h2>404</h2>;
 const Header = () => <span>Harder Better Faster Fitter</span>
 const TabWindow = styled.div`
   position: relative;
