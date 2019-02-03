@@ -36,7 +36,7 @@ const Home = () => {
                     render={() => <ActiveWorkoutOverview animationStyles={style}/>}
                   />
                   <Route
-                    path="/home"
+                    path="/"
                     render={() => (
                       <div>
                         <PageHeading>Home</PageHeading>
