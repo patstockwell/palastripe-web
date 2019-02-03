@@ -1,5 +1,5 @@
 export const monday = {
-  workoutName: 'Legs Burn',
+  workoutName: 'Leg Burn',
   data: [
     {
       name: 'Deadlift',
@@ -11,6 +11,11 @@ export const monday = {
       weightInKilos: 50,
       sets: [7, 7, 7, 7],
     },
+    {
+      name: 'Overhead Press',
+      weightInKilos: 50,
+      sets: [7, 7, 7, 7],
+    },
   ],
 };
 
@@ -19,12 +24,17 @@ export const tuesday = {
   date: new Date(1543933984145),
   data: [
     {
-      name: 'chinups',
+      name: 'Chinups',
       weightInKilos: 0,
       sets: [5, 5, 5, 5],
     },
     {
-      name: 'bicep curl',
+      name: 'Bench Press',
+      weightInKilos: 12,
+      sets: [8, 8, 8, 8],
+    },
+    {
+      name: 'Bicep Curl',
       weightInKilos: 12,
       sets: [8, 8, 8, 8],
     },

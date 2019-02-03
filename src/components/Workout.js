@@ -8,11 +8,18 @@ const ExerciseListItemWrapper = styled.div`
 `
 
 const ExerciseName = styled.h5`
-  flex-basis: 40%;
+  flex-basis: 50%;
+  font-size: 12px;
+  font-weight: 400;
 `
 
 const Sets = styled.p`
-  flex-basis: 30%;
+  flex-basis: 28%;
+  font-size: 12px;
+`
+
+const Weight = styled.p`
+  font-size: 12px;
 `
 
 const ExerciseListItem = ({ sets, name, weightInKilos }) => {
@@ -22,7 +29,7 @@ const ExerciseListItem = ({ sets, name, weightInKilos }) => {
     <ExerciseListItemWrapper key={name}>
       <ExerciseName>{name}</ExerciseName>
       <Sets>{setCount}</Sets>
-      <p>{weightInKilos}kg</p>
+      <Weight>{weightInKilos}kg</Weight>
     </ExerciseListItemWrapper>
   );
 }
@@ -41,6 +48,14 @@ const LayoutWrapper = styled.div`
   justify-content: flex-start;
 `
 
+const Date = styled.h3`
+  font-size: 17px;
+`
+
+const WorkoutName = styled.h4`
+  font-size: 15px;
+`
+
 const Workout = props => {
   const {
     workoutRoutine : {
@@ -56,8 +71,8 @@ const Workout = props => {
     <BlockPanel>
       <LayoutWrapper>
         <Title>
-          <h3>{date ? date.toDateString() : 'Next'}</h3>
-          <h4>{workoutName}</h4>
+          <Date>{date ? date.toDateString() : 'Next'}</Date>
+          <WorkoutName>{workoutName}</WorkoutName>
         </Title>
         <ExerciseList>
           {exercises}

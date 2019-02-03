@@ -4,7 +4,7 @@ import { Transition } from 'react-spring';
 import Workout from '../../components/Workout';
 import PageHeading from '../../components/PageHeading';
 import BackSplash from '../../components/BackSplash';
-import ActiveWorkoutOverview from './../ActiveWorkoutOverview';
+import ActiveWorkout from './../ActiveWorkout';
 import { monday, tuesday } from '../../helpers/data';
 import { pink, purple } from '../../helpers/constants';
 import Navigation from '../../components/Navigation';
@@ -32,15 +32,15 @@ const Home = () => {
                 return (
                 <Switch location={state === 'update' ? location : loc}>
                   <Route
-                    path="/home/active-workout-overview/"
-                    render={() => <ActiveWorkoutOverview animationStyles={style}/>}
+                    path="/home/active-workout/"
+                    render={() => <ActiveWorkout animationStyles={style}/>}
                   />
                   <Route
                     path="/"
                     render={() => (
                       <div>
                         <PageHeading>Home</PageHeading>
-                        <Link to="/home/active-workout-overview">Start Workout</Link>
+                        <Link to="/home/active-workout">Start Workout</Link>
                         <Workout workoutRoutine={monday} />
                         {workouts}
                         <Navigation />

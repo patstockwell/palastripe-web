@@ -28,7 +28,6 @@ const Set = styled.button`
 `
 
 const ActiveExercise = ({ exercise }) => {
-  console.log(exercise)
   const sets = exercise.sets.map((reps, i) =>
     <Set key={i}>{reps}</Set>
   )

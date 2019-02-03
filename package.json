@@ -18,8 +18,8 @@
     "postbuild": "react-snap",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "predeploy": "yarn build",
-    "deploy": "gh-pages -d master -d build"
+    "prepush": "yarn build",
+    "push": "gh-pages -d master -d build"
   },
   "eslintConfig": {
     "extends": "react-app"
