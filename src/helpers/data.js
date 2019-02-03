@@ -2,12 +2,12 @@ export const monday = {
   workoutName: 'Legs Burn',
   data: [
     {
-      name: 'deadlift',
+      name: 'Deadlift',
       weightInKilos: 80,
       sets: [7, 7, 7, 7],
     },
     {
-      name: 'squat',
+      name: 'Squat',
       weightInKilos: 50,
       sets: [7, 7, 7, 7],
     },

@@ -11,14 +11,14 @@ const Nav = styled.nav`
   width: 100vw;
   justify-content: space-between;
   height: ${navBarHeight}px;
-  background-color: black;
-  color: white;
+  background-color: white;
+  color: black;
   padding: 3px;
   box-sizing: border-box;
 `;
 
 const NavLink = styled(Link)`
-  color: white;
+  color: black;
   text-decoration: none;
 `
 

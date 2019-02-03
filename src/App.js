@@ -8,7 +8,6 @@ import {
 import Helmet from 'react-helmet';
 import styled from 'styled-components';
 
-import Navigation from './components/Navigation';
 import { GlobalStyle } from './components/GlobalStyle';
 import WorkoutPlans from './pages/WorkoutPlans';
 import Home from './pages/Home/';
@@ -24,21 +23,18 @@ const TabWindow = styled.div`
 
 const App = () => (
   <Router>
-    <div>
+    <TabWindow>
       <Helmet title="You Are Doing Great" />
       <GlobalStyle />
-      <TabWindow>
-        <Switch>
-          <Route path="/" exact component={Landing} />
-          <Route path="/home" component={Home} />
-          <Route path="/workout-plans/" component={WorkoutPlans} />
-          <Route path="/about/" component={About} />
-          <Route path="/users/" component={Users} />
-          <Route component={FourZeroFour} />
-        </Switch>
-        <Navigation />
-      </TabWindow>
-    </div>
+      <Switch>
+        <Route path="/" exact component={Landing} />
+        <Route path="/home" component={Home} />
+        <Route path="/workout-plans/" component={WorkoutPlans} />
+        <Route path="/about/" component={About} />
+        <Route path="/users/" component={Users} />
+        <Route component={FourZeroFour} />
+      </Switch>
+    </TabWindow>
   </Router>
 );
 

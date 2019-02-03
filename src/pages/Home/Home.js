@@ -7,10 +7,10 @@ import BackSplash from '../../components/BackSplash';
 import ActiveWorkoutOverview from './../ActiveWorkoutOverview';
 import { monday, tuesday } from '../../helpers/data';
 import { pink, purple } from '../../helpers/constants';
+import Navigation from '../../components/Navigation';
 
 const Home = () => {
   const [workoutHistory] = useState([tuesday, tuesday, tuesday]);
-  // const workoutHistory = [tuesday, tuesday, tuesday];
 
   const workouts = workoutHistory.map(workout => <Workout workoutRoutine={workout} />)
 
@@ -43,6 +43,7 @@ const Home = () => {
                         <Link to="/home/active-workout-overview">Start Workout</Link>
                         <Workout workoutRoutine={monday} />
                         {workouts}
+                        <Navigation />
                       </div>
                     )}
                   />

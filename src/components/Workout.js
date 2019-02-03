@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { gutterWidth } from '../helpers/constants'
+import BlockPanel from './BlockPanel';
 
 const ExerciseListItemWrapper = styled.div`
   display: flex;
@@ -27,18 +27,6 @@ const ExerciseListItem = ({ sets, name, weightInKilos }) => {
   );
 }
 
-const Panel = styled.div`
-  display: flex;
-  justify-content: flex-start;
-  color: black;
-  background-color: white;
-  border-radius: 5px;
-  padding: 5px;
-  margin: 15px ${gutterWidth}px;
-  box-sizing: border-box;
-  min-height: 70px;
-`
-
 const Title = styled.div`
   flex-basis: 100px;
   margin-right: 8px;
@@ -46,6 +34,11 @@ const Title = styled.div`
 
 const ExerciseList = styled.div`
   flex: 1;
+`
+
+const LayoutWrapper = styled.div`
+  display: flex;
+  justify-content: flex-start;
 `
 
 const Workout = props => {
@@ -60,15 +53,17 @@ const Workout = props => {
   const exercises = data.map(ExerciseListItem);
 
   return (
-    <Panel>
-      <Title>
-        <h3>{date ? date.toDateString() : 'Next'}</h3>
-        <h4>{workoutName}</h4>
-      </Title>
-      <ExerciseList>
-        {exercises}
-      </ExerciseList>
-    </Panel>
+    <BlockPanel>
+      <LayoutWrapper>
+        <Title>
+          <h3>{date ? date.toDateString() : 'Next'}</h3>
+          <h4>{workoutName}</h4>
+        </Title>
+        <ExerciseList>
+          {exercises}
+        </ExerciseList>
+      </LayoutWrapper>
+    </BlockPanel>
   );
 }
 
