@@ -1,14 +1,19 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Switch, Route, Link } from 'react-router-dom';
 import { Transition } from 'react-spring';
-import Workout from '../components/Workout';
-import PageHeading from '../components/PageHeading';
-import BackSplash from '../components/BackSplash';
-import ActiveWorkoutOverview from './ActiveWorkoutOverview';
-import { monday, tuesday } from '../helpers/data';
-import { pink, purple } from '../helpers/constants';
+import Workout from '../../components/Workout';
+import PageHeading from '../../components/PageHeading';
+import BackSplash from '../../components/BackSplash';
+import ActiveWorkoutOverview from './../ActiveWorkoutOverview';
+import { monday, tuesday } from '../../helpers/data';
+import { pink, purple } from '../../helpers/constants';
 
 const Home = () => {
+  const [workoutHistory] = useState([tuesday, tuesday, tuesday]);
+  // const workoutHistory = [tuesday, tuesday, tuesday];
+
+  const workouts = workoutHistory.map(workout => <Workout workoutRoutine={workout} />)
+
   return (
     <BackSplash topLeft={pink} bottomRight={purple} >
       <Route
@@ -37,11 +42,7 @@ const Home = () => {
                         <PageHeading>Home</PageHeading>
                         <Link to="/home/active-workout-overview">Start Workout</Link>
                         <Workout workoutRoutine={monday} />
-                        <Workout workoutRoutine={tuesday} />
-                        <Workout workoutRoutine={tuesday} />
-                        <Workout workoutRoutine={tuesday} />
-                        <Workout workoutRoutine={tuesday} />
-                        <Workout workoutRoutine={tuesday} />
+                        {workouts}
                       </div>
                     )}
                   />

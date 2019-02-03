@@ -11,17 +11,15 @@ import styled from 'styled-components';
 import Navigation from './components/Navigation';
 import { GlobalStyle } from './components/GlobalStyle';
 import WorkoutPlans from './pages/WorkoutPlans';
-import Home from './pages/Home';
+import Home from './pages/Home/';
 import About from './pages/About';
 import Users from './pages/Users';
 import FourZeroFour from './pages/FourZeroFour';
 
 const Landing = () => <Link to="/home">Get started</Link>
-const Header = () => <span>Harder Better Faster Fitter</span>
 
 const TabWindow = styled.div`
-  position: relative;
-  height: 100vh;
+  overflow-x: hidden;
 `
 
 const App = () => (
@@ -30,7 +28,6 @@ const App = () => (
       <Helmet title="You Are Doing Great" />
       <GlobalStyle />
       <TabWindow>
-        <Header />
         <Switch>
           <Route path="/" exact component={Landing} />
           <Route path="/home" component={Home} />

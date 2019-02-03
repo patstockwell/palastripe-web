@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { animated } from 'react-spring';
+import BackSplash from '../components/BackSplash';
+import { orange, pink } from '../helpers/constants';
 
 const Back = styled(Link)`
   color: white;
@@ -27,13 +29,14 @@ const ActiveWorkoutOverview = ({ animationStyles }) => (
     top: 0,
     bottom: 0,
     width: '100%',
-    backgroundColor: 'green',
     zIndex: 10,
   }}>
-    <Back to="/home">
-      <Arrow /> Back
-    </Back>
-    <p>some content</p>
+    <BackSplash topLeft={orange} bottomRight={pink}>
+      <Back to="/home">
+        <Arrow /> Back
+      </Back>
+      <p>some content</p>
+    </BackSplash>
   </animated.div>
 )
 
