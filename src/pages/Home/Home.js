@@ -10,6 +10,10 @@ const BottomScreenSpace = styled.div`
   height: 100px;
 `
 
+const StyledLink = styled(Link)`
+  text-decoration: none;
+`
+
 const Home = () => {
   const [workoutHistory] = useState([tuesday, tuesday, tuesday]);
 
@@ -20,8 +24,9 @@ const Home = () => {
   return (
     <div>
       <PageHeading>Home</PageHeading>
-      <Link to="/home/active-workout">Start Workout</Link>
-      <Workout workoutRoutine={monday} />
+      <StyledLink to="/home/active-workout">
+        <Workout workoutRoutine={monday} />
+      </StyledLink>
       {workouts}
       <BottomScreenSpace />
       <Navigation />
