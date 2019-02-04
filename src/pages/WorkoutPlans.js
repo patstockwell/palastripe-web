@@ -4,10 +4,10 @@ import BackSplash from '../components/BackSplash';
 import PageHeading from '../components/PageHeading';
 import Navigation from '../components/Navigation';
 import { monday } from '../helpers/data';
-import { yellow, green } from '../helpers/constants';
+import { purple, blue } from '../helpers/constants';
 
 const WorkoutPlans = () => (
-  <BackSplash topLeft={green} bottomRight={yellow}>
+  <BackSplash topLeft={purple} bottomRight={blue}>
     <PageHeading>Workout list</PageHeading>
     <Workout workoutRoutine={monday} />
     <Navigation />

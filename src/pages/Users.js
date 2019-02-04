@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import BackSplash from '../components/BackSplash';
 import Navigation from '../components/Navigation';
-import { orange, pink } from '../helpers/constants';
+import { green, yellow } from '../helpers/constants';
 import PageHeading from '../components/PageHeading';
 
 const P = styled.p`
@@ -10,7 +10,7 @@ const P = styled.p`
 `
 
 const Users = () => (
-  <BackSplash topLeft={orange} bottomRight={pink}>
+  <BackSplash topLeft={green} bottomRight={yellow}>
     <PageHeading>Users</PageHeading>
     <P>some user</P>
     <Navigation />
