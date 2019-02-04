@@ -65,7 +65,9 @@ const Workout = props => {
     },
   } = props;
 
-  const exercises = data.map(ExerciseListItem);
+  const exercises = data.map((e, i) =>
+    <ExerciseListItem {...e} key={i} />
+  );
 
   return (
     <BlockPanel>

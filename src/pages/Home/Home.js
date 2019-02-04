@@ -12,7 +12,9 @@ import Navigation from '../../components/Navigation';
 const Home = () => {
   const [workoutHistory] = useState([tuesday, tuesday, tuesday]);
 
-  const workouts = workoutHistory.map(workout => <Workout workoutRoutine={workout} />)
+  const workouts = workoutHistory.map((workout, i) =>
+    <Workout key={i} workoutRoutine={workout} />
+  );
 
   return (
     <BackSplash topLeft={pink} bottomRight={purple} >
