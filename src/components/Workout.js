@@ -1,25 +1,27 @@
 import React from 'react';
 import styled from 'styled-components';
+import moment from 'moment';
 import BlockPanel from './BlockPanel';
 
 const ExerciseListItemWrapper = styled.div`
   display: flex;
   align-items: baseline;
+  margin: 9px 0;
 `
 
 const ExerciseName = styled.h5`
-  flex-basis: 50%;
-  font-size: 12px;
+  flex-basis: 51%;
+  font-size: 14px;
   font-weight: 400;
 `
 
 const Sets = styled.p`
   flex-basis: 28%;
-  font-size: 12px;
+  font-size: 14px;
 `
 
 const Weight = styled.p`
-  font-size: 12px;
+  font-size: 14px;
 `
 
 const ExerciseListItem = ({ sets, name, weightInKilos }) => {
@@ -35,8 +37,13 @@ const ExerciseListItem = ({ sets, name, weightInKilos }) => {
 }
 
 const Title = styled.div`
-  flex-basis: 100px;
+  flex-basis: 88px;
   margin-right: 8px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  height: 80px;
 `
 
 const ExerciseList = styled.div`
@@ -44,22 +51,22 @@ const ExerciseList = styled.div`
 `
 
 const LayoutWrapper = styled.div`
+  min-height: 90px;
   display: flex;
   justify-content: flex-start;
+  padding: 5px;
 `
 
 const Date = styled.h3`
-  font-size: 17px;
-`
-
-const WorkoutName = styled.h4`
-  font-size: 15px;
+  display: inline-block;
+  font-size: 14px;
+  font-weight: 500;
+  color: grey;
 `
 
 const Workout = props => {
   const {
     workoutRoutine : {
-      workoutName,
       data,
       date,
     },
@@ -73,8 +80,8 @@ const Workout = props => {
     <BlockPanel>
       <LayoutWrapper>
         <Title>
-          <Date>{date ? date.toDateString() : 'Next'}</Date>
-          <WorkoutName>{workoutName}</WorkoutName>
+          <Date>{date ? moment(date).format('dddd') : 'Next'}</Date>
+          <Date>{date ? moment(date).format('D MMM') : ''}</Date>
         </Title>
         <ExerciseList>
           {exercises}
