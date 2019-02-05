@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { navBarHeight } from '../helpers/constants'
+import { navBarHeight } from '../helpers/constants';
 
 const Nav = styled.nav`
   display: flex;
@@ -20,7 +20,7 @@ const Nav = styled.nav`
 const NavLink = styled(Link)`
   color: black;
   text-decoration: none;
-`
+`;
 
 const Navigation = () => (
   <Nav>
@@ -37,7 +37,7 @@ const Navigation = () => (
       <NavLink to="/users/">Users</NavLink>
     </div>
   </Nav>
-)
+);
 
 export default Navigation;
 

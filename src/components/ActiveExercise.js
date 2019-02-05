@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import BlockPanel from './BlockPanel';
 
@@ -7,13 +8,13 @@ const HeadingWrapper = styled.div`
   justify-content: space-between;
   align-content: baseline;
   padding: 0 10px;
-`
+`;
 
 const SetsWrapper = styled.div`
   display: flex;
   justify-content: space-around;
   align-content: center;
-`
+`;
 
 const Set = styled.button`
   border-radius: 50%;
@@ -25,12 +26,10 @@ const Set = styled.button`
   align-items: center;
   margin: 10px 5px;
   border: 1px solid grey;
-`
+`;
 
 const ActiveExercise = ({ exercise }) => {
-  const sets = exercise.sets.map((reps, i) =>
-    <Set key={i}>{reps}</Set>
-  )
+  const sets = exercise.sets.map((reps, i) => <Set key={i}>{reps}</Set>);
 
   return (
     <BlockPanel>
@@ -42,8 +41,15 @@ const ActiveExercise = ({ exercise }) => {
         {sets}
       </SetsWrapper>
     </BlockPanel>
-  )
-}
+  );
+};
+
+ActiveExercise.propTypes = {
+  exercise: PropTypes.shape({
+    name: PropTypes.string,
+    weightInKilos: PropTypes.number,
+    sets: PropTypes.arrayOf(PropTypes.number),
+  }),
+};
 
 export default ActiveExercise;
-

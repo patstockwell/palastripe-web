@@ -7,7 +7,7 @@ import PageHeading from '../components/PageHeading';
 
 const P = styled.p`
   margin: 10px;
-`
+`;
 
 const Users = () => (
   <BackSplash topLeft={green} bottomRight={yellow}>

@@ -12,7 +12,7 @@ const WorkoutPlans = () => (
     <Workout workoutRoutine={monday} />
     <Navigation />
   </BackSplash>
-)
+);
 
 export default WorkoutPlans;
 

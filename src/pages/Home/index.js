@@ -22,19 +22,21 @@ export default () => (
           >
             {(loc, state) => style => {
               return (
-              <Switch location={state === 'update' ? location : loc}>
-                <Route
-                  path="/home/active-workout/"
-                  render={() => <ActiveWorkout animationStyles={style}/>}
-                />
-                <Route
-                  path="/"
-                  render={() => <Home />}
-                />
-              </Switch>
-            )}}
+                <Switch location={state === 'update' ? location : loc}>
+                  <Route
+                    path="/home/active-workout/"
+                    render={() => <ActiveWorkout animationStyles={style}/>}
+                  />
+                  <Route
+                    path="/"
+                    render={() => <Home />}
+                  />
+                </Switch>
+              );
+            }}
           </Transition>
-      )}}
+        );
+      }}
     />
   </BackSplash>
 );

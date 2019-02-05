@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { animated } from 'react-spring';
@@ -15,7 +16,7 @@ const StyledLink = styled(Link)`
   height: 20px;
   display: flex;
   align-items: center;
-`
+`;
 
 const Header = styled.div`
   display: flex;
@@ -23,7 +24,7 @@ const Header = styled.div`
   align-items: center;
   height: 50px;
   margin: 0 15px 0 10px;
-`
+`;
 
 const ActiveWorkoutOverview = ({ animationStyles }) => {
   const [activeWorkout] = useState(monday);
@@ -52,8 +53,12 @@ const ActiveWorkoutOverview = ({ animationStyles }) => {
         {exercises}
       </BackSplash>
     </animated.div>
-  )
-}
+  );
+};
+
+ActiveWorkoutOverview.propTypes = {
+  animationStyles: PropTypes.object,
+};
 
 export default ActiveWorkoutOverview;
 

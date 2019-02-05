@@ -8,7 +8,7 @@ const BlockPanel = styled.div`
   margin: 15px ${gutterWidth}px;
   box-sizing: border-box;
   min-height: 70px;
-`
+`;
 
 export default BlockPanel;
 

@@ -16,7 +16,7 @@ import FourZeroFour from './pages/FourZeroFour';
 
 const TabWindow = styled.div`
   overflow-x: hidden;
-`
+`;
 
 const App = () => (
   <Router>

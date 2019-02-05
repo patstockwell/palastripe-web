@@ -8,11 +8,11 @@ import { monday, tuesday } from '../../helpers/data';
 
 const BottomScreenSpace = styled.div`
   height: 100px;
-`
+`;
 
 const StyledLink = styled(Link)`
   text-decoration: none;
-`
+`;
 
 const Home = () => {
   const [workoutHistory] = useState([tuesday, tuesday, tuesday]);
