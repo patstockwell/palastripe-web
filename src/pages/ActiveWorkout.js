@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
@@ -7,7 +8,7 @@ import BackSplash from '../components/BackSplash';
 import ActiveExercise from '../components/ActiveExercise';
 import BackArrow from '../components/BackArrow';
 import { orange, pink } from '../helpers/constants';
-import { monday } from '../helpers/data';
+import { workoutPropType } from '../helpers/data';
 
 const StyledLink = styled(Link)`
   color: white;
@@ -26,8 +27,7 @@ const Header = styled.div`
   margin: 0 15px 0 10px;
 `;
 
-const ActiveWorkoutOverview = ({ animationStyles }) => {
-  const [activeWorkout] = useState(monday);
+const ActiveWorkout = ({ activeWorkout, animationStyles }) => {
   const exercises = activeWorkout.data.map(exercise =>
     <ActiveExercise key={exercise.name} exercise={exercise} />
   );
@@ -56,9 +56,14 @@ const ActiveWorkoutOverview = ({ animationStyles }) => {
   );
 };
 
-ActiveWorkoutOverview.propTypes = {
+ActiveWorkout.propTypes = {
   animationStyles: PropTypes.object,
+  activeWorkout: PropTypes.shape(workoutPropType),
 };
 
-export default ActiveWorkoutOverview;
+const mapStateToProps = state => ({
+  activeWorkout: state.activeWorkout,
+});
+
+export default connect(mapStateToProps)(ActiveWorkout);
 
