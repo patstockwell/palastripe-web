@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import BlockPanel from './BlockPanel';
@@ -28,8 +28,37 @@ const Set = styled.button`
   border: 1px solid grey;
 `;
 
-const ActiveExercise = ({ exercise }) => {
-  const sets = exercise.sets.map((reps, i) => <Set key={i}>{reps}</Set>);
+const setRepetitions = (workout, exerciseIndex, setIndex) => {
+  // iterate over the exercises and find the exercise that was clicked
+  const exercise = workout.data[exerciseIndex];
+  exercise.completedSets = exercise.completedSets || [];
+  const { sets, completedSets } = exercise;
+  if (completedSets[setIndex] <= 0) {
+    completedSets[setIndex] = undefined;
+  } else if (completedSets[setIndex] === undefined) {
+    completedSets[setIndex] = sets[setIndex];
+  } else {
+    completedSets[setIndex] -= 1;
+  }
+  return workout;
+};
+
+const ActiveExercise = ({ exerciseIndex, exercise }) => {
+  // TODO: replace useState with redux and create a reducer and action creator for setting reps
+  const [activeWorkout, setActiveWorkout] = useState();
+  console.log(activeWorkout);
+
+  const handleClick = setIndex => {
+    const updatedWorkout = setRepetitions(activeWorkout, exerciseIndex, setIndex );
+    setActiveWorkout(updatedWorkout);
+  };
+
+  const sets = exercise.sets.map((reps, index) =>
+    <Set
+      key={index}
+      onClick={() => handleClick(index)}
+    >{reps}</Set>
+  );
 
   return (
     <BlockPanel>
