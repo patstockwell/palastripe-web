@@ -1,4 +1,5 @@
-import React, {useState} from 'react';
+import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import BlockPanel from './BlockPanel';
@@ -28,43 +29,28 @@ const Set = styled.button`
   border: 1px solid grey;
 `;
 
-const setRepetitions = (workout, exerciseIndex, setIndex) => {
-  // iterate over the exercises and find the exercise that was clicked
-  const exercise = workout.data[exerciseIndex];
-  exercise.completedSets = exercise.completedSets || [];
-  const { sets, completedSets } = exercise;
-  if (completedSets[setIndex] <= 0) {
-    completedSets[setIndex] = undefined;
-  } else if (completedSets[setIndex] === undefined) {
-    completedSets[setIndex] = sets[setIndex];
-  } else {
-    completedSets[setIndex] -= 1;
-  }
-  return workout;
-};
-
-const ActiveExercise = ({ exerciseIndex, exercise }) => {
-  // TODO: replace useState with redux and create a reducer and action creator for setting reps
-  const [activeWorkout, setActiveWorkout] = useState();
-  console.log(activeWorkout);
+const ActiveExercise = ({ decrementReps, exerciseIndex, exercise }) => {
+  const { name, weightInKilos, completedSets = [] } = exercise;
 
   const handleClick = setIndex => {
-    const updatedWorkout = setRepetitions(activeWorkout, exerciseIndex, setIndex );
-    setActiveWorkout(updatedWorkout);
+    decrementReps({ setIndex, exerciseIndex });
   };
 
-  const sets = exercise.sets.map((reps, index) =>
-    <Set
-      key={index}
-      onClick={() => handleClick(index)}
-    >{reps}</Set>
-  );
+  const sets = exercise.sets.map((reps, index) => {
+    const completedReps = !isNaN(completedSets[index]) ? completedSets[index] : reps;
+    return (
+      <Set
+        key={index}
+        onClick={() => handleClick(index)}
+      >{completedReps}</Set>
+    );
+  });
 
   return (
     <BlockPanel>
       <HeadingWrapper>
-        <h3>{exercise.name}</h3>
-        <p>{exercise.weightInKilos}kg</p>
+        <h3>{name}</h3>
+        <p>{weightInKilos}kg</p>
       </HeadingWrapper>
       <SetsWrapper>
         {sets}
@@ -74,6 +60,8 @@ const ActiveExercise = ({ exerciseIndex, exercise }) => {
 };
 
 ActiveExercise.propTypes = {
+  decrementReps: PropTypes.func,
+  exerciseIndex: PropTypes.number,
   exercise: PropTypes.shape({
     name: PropTypes.string,
     weightInKilos: PropTypes.number,
@@ -81,4 +69,15 @@ ActiveExercise.propTypes = {
   }),
 };
 
-export default ActiveExercise;
+const mapStateToProps = (state, ownProps) => ({
+  exercise: state.activeWorkout.data[ownProps.exerciseIndex],
+});
+
+const mapDispatchToProps = {
+  decrementReps: ({ setIndex, exerciseIndex }) => ({
+    type: 'DECREMENT_REPS',
+    payload: { setIndex, exerciseIndex },
+  }),
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ActiveExercise);

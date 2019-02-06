@@ -29,7 +29,7 @@ const Header = styled.div`
 
 const ActiveWorkout = ({ activeWorkout, animationStyles }) => {
   const exercises = activeWorkout.data.map((exercise, i) =>
-    <ActiveExercise key={exercise.name} exercise={exercise} exerciseIndex={i} />
+    <ActiveExercise key={exercise.name} exerciseIndex={i} />
   );
 
   return (

@@ -5,7 +5,9 @@
     },
     "globals": {
         "it": true,
-        "describe": true
+        "describe": true,
+        "expect": true,
+        "beforeEach": true
     },
     "extends": [
       "plugin:react/recommended",
