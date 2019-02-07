@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import BlockPanel from './BlockPanel';
 import { DECREMENT_REPS } from '../reducers/actions';
+import { preventZoom } from '../helpers/functions';
 
 const HeadingWrapper = styled.div`
   display: flex;
@@ -19,43 +20,54 @@ const SetsWrapper = styled.div`
 `;
 
 const Set = styled.button`
+  color: ${({ text }) => text};
+  background-color: ${({ background }) => background};
+  border: 3px solid ${({ border }) => border};
   border-radius: 50%;
-  background-color: ${({ theme: { background } }) => background};
   width: 50px;
   height: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
   margin: 10px 5px;
-  border: 3px solid ${({ theme: { border } }) => border};
   font-size: 20px;
 `;
 
+export const getTheme = (completedReps, max) => {
+  if (completedReps === undefined) {
+    return { border: 'grey', background: 'white', text: 'grey' };
+  } else if (completedReps <= 0) {
+    return { border: 'grey', background: 'lightgrey', text: 'grey' };
+  } else if (completedReps >= max) {
+    return { border: 'green', background: 'lightgreen', text: 'black' };
+  } else {
+    return { border: 'blue', background: 'lightskyblue', text: 'black' };
+  }
+};
+
+
 const ActiveExercise = ({ decrementReps, exerciseIndex, exercise }) => {
-  const { name, weightInKilos, completedSets = [] } = exercise;
+  const { sets, name, weightInKilos, completedSets = [] } = exercise;
 
-  const handleClick = setIndex => {
-    decrementReps({ setIndex, exerciseIndex });
-  };
+  const handleClick = setIndex => decrementReps({ setIndex, exerciseIndex });
 
-  const sets = exercise.sets.map((reps, index) => {
-    // TODO: pull all this out into a '<Set /> component'
-    const completedReps =
-      !isNaN(completedSets[index]) ? completedSets[index] : reps;
-    const isIncomplete = completedSets[index] === undefined;
-    const theme = {
-      border: isIncomplete ? 'grey' : 'green',
-      background: isIncomplete ? 'lightgrey' : 'lightgreen',
-    };
+  const zippedSets = sets.map((reps, index) => [reps, completedSets[index]]);
 
-    return (
-      <Set
-        key={index}
-        onClick={() => handleClick(index)}
-        theme={theme}
-      >{completedReps}</Set>
-    );
-  });
+  const hightlightedSets = zippedSets.map(
+    ([ maxReps, completedReps ], index) => {
+      const reps = isNaN(completedReps) ? maxReps : completedReps;
+      const theme = getTheme(completedReps, maxReps);
+
+      return (
+        <Set
+          key={index}
+          onTouchStart={e => preventZoom(e)}
+          onClick={() => handleClick(index)}
+          {...theme}
+        >{reps}</Set>
+      );
+    }
+  );
 
   return (
     <BlockPanel>
@@ -64,7 +76,7 @@ const ActiveExercise = ({ decrementReps, exerciseIndex, exercise }) => {
         <p>{weightInKilos}kg</p>
       </HeadingWrapper>
       <SetsWrapper>
-        {sets}
+        {hightlightedSets}
       </SetsWrapper>
     </BlockPanel>
   );
