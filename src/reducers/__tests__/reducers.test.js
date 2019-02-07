@@ -1,4 +1,5 @@
 import { decrementReps } from '../reducers';
+import { DECREMENT_REPS } from '../reducers/actions';
 
 describe('Reducers', () => {
   describe('decrementReps()', () => {
@@ -18,7 +19,7 @@ describe('Reducers', () => {
     });
 
     const action = {
-      type: 'DECREMENT_REPS',
+      type: DECREMENT_REPS,
       payload: {
         exerciseIndex: 0,
         setIndex: 1,

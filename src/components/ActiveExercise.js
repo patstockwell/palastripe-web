@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import BlockPanel from './BlockPanel';
+import { DECREMENT_REPS } from '../reducers/actions';
 
 const HeadingWrapper = styled.div`
   display: flex;
@@ -85,7 +86,7 @@ const mapStateToProps = (state, ownProps) => ({
 
 const mapDispatchToProps = {
   decrementReps: ({ setIndex, exerciseIndex }) => ({
-    type: 'DECREMENT_REPS',
+    type: DECREMENT_REPS,
     payload: { setIndex, exerciseIndex },
   }),
 };
