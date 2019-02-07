@@ -19,14 +19,14 @@ const SetsWrapper = styled.div`
 
 const Set = styled.button`
   border-radius: 50%;
-  background-color: lightgrey;
+  background-color: ${({ theme: { background } }) => background};
   width: 50px;
   height: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
   margin: 10px 5px;
-  border: 1px solid grey;
+  border: 3px solid ${({ theme: { border } }) => border};
   font-size: 20px;
 `;
 
@@ -38,11 +38,20 @@ const ActiveExercise = ({ decrementReps, exerciseIndex, exercise }) => {
   };
 
   const sets = exercise.sets.map((reps, index) => {
-    const completedReps = !isNaN(completedSets[index]) ? completedSets[index] : reps;
+    // TODO: pull all this out into a '<Set /> component'
+    const completedReps =
+      !isNaN(completedSets[index]) ? completedSets[index] : reps;
+    const isIncomplete = completedSets[index] === undefined;
+    const theme = {
+      border: isIncomplete ? 'grey' : 'green',
+      background: isIncomplete ? 'lightgrey' : 'lightgreen',
+    };
+
     return (
       <Set
         key={index}
         onClick={() => handleClick(index)}
+        theme={theme}
       >{completedReps}</Set>
     );
   });
