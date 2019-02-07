@@ -57,11 +57,8 @@ const ExerciseList = styled.div`
   flex: 1;
 `;
 
-const LayoutWrapper = styled.div`
-  min-height: 90px;
+const LayoutWrapper = styled(BlockPanel)`
   display: flex;
-  justify-content: flex-start;
-  padding: 5px;
 `;
 
 const Date = styled.h3`
@@ -84,17 +81,15 @@ const Workout = props => {
   );
 
   return (
-    <BlockPanel>
-      <LayoutWrapper>
-        <Title>
-          <Date>{date ? moment(date).format('dddd') : 'Next'}</Date>
-          <Date>{date ? moment(date).format('D MMM') : ''}</Date>
-        </Title>
-        <ExerciseList>
-          {exercises}
-        </ExerciseList>
-      </LayoutWrapper>
-    </BlockPanel>
+    <LayoutWrapper>
+      <Title>
+        <Date>{date ? moment(date).format('dddd') : 'Next'}</Date>
+        <Date>{date ? moment(date).format('D MMM') : ''}</Date>
+      </Title>
+      <ExerciseList>
+        {exercises}
+      </ExerciseList>
+    </LayoutWrapper>
   );
 };
 

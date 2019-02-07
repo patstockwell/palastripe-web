@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -23,7 +23,7 @@ const Home = ({ activeWorkout, workoutHistory }) => {
   );
 
   return (
-    <div>
+    <Fragment>
       <PageHeading>Home</PageHeading>
       <StyledLink to="/home/active-workout">
         <Workout workoutRoutine={activeWorkout} />
@@ -31,7 +31,7 @@ const Home = ({ activeWorkout, workoutHistory }) => {
       {workouts}
       <BottomScreenSpace />
       <Navigation />
-    </div>
+    </Fragment>
   );
 };
 

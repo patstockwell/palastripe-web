@@ -27,6 +27,7 @@ const Set = styled.button`
   align-items: center;
   margin: 10px 5px;
   border: 1px solid grey;
+  font-size: 20px;
 `;
 
 const ActiveExercise = ({ decrementReps, exerciseIndex, exercise }) => {
