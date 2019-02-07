@@ -7,7 +7,7 @@ describe('Reducers', () => {
     beforeEach(() => {
       state.activeWorkout = {
         workoutName: 'Blast',
-        data: [
+        exercises: [
           {
             name: 'Dead lift',
             weightInKilos: 80,
@@ -26,11 +26,11 @@ describe('Reducers', () => {
     };
 
     it('decrements the reps when the reps are a positive integer', () => {
-      state.activeWorkout.data[0].completedSets = [3, 1];
+      state.activeWorkout.exercises[0].completedSets = [3, 1];
       expect(decrementReps(state, action)).toEqual({
         activeWorkout: {
           workoutName: 'Blast',
-          data: [
+          exercises: [
             {
               name: 'Dead lift',
               weightInKilos: 80,
@@ -43,11 +43,11 @@ describe('Reducers', () => {
     });
 
     it('sets the value to undefined when the completed sets are zero', () => {
-      state.activeWorkout.data[0].completedSets = [3, 0, 5];
+      state.activeWorkout.exercises[0].completedSets = [3, 0, 5];
       expect(decrementReps(state, action)).toEqual({
         activeWorkout: {
           workoutName: 'Blast',
-          data: [
+          exercises: [
             {
               name: 'Dead lift',
               weightInKilos: 80,
@@ -63,7 +63,7 @@ describe('Reducers', () => {
       expect(decrementReps(state, action)).toEqual({
         activeWorkout: {
           workoutName: 'Blast',
-          data: [
+          exercises: [
             {
               name: 'Dead lift',
               weightInKilos: 80,

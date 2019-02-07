@@ -28,7 +28,7 @@ const Header = styled.div`
 `;
 
 const ActiveWorkout = ({ activeWorkout, animationStyles }) => {
-  const exercises = activeWorkout.data.map((exercise, i) =>
+  const exercises = activeWorkout.exercises.map((exercise, i) =>
     <ActiveExercise key={exercise.name} exerciseIndex={i} />
   );
 

@@ -38,7 +38,7 @@ const Home = ({ activeWorkout, workoutHistory }) => {
 Home.propTypes = {
   workoutHistory: PropTypes.arrayOf(PropTypes.shape({
     date: PropTypes.object,
-    data: PropTypes.arrayOf(PropTypes.shape(exercisePropType)),
+    exercises: PropTypes.arrayOf(PropTypes.shape(exercisePropType)),
   })),
   activeWorkout: PropTypes.shape(workoutPropType),
 };

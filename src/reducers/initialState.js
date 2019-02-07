@@ -1,7 +1,7 @@
 export const initialState = {
   activeWorkout: {
     workoutName: 'Arms Routine',
-    data: [
+    exercises: [
       {
         name: 'Chinups',
         weightInKilos: 0,
@@ -22,7 +22,7 @@ export const initialState = {
   workoutPlan: [
     {
       workoutName: 'Arms Routine',
-      data: [
+      exercises: [
         {
           name: 'Chinups',
           weightInKilos: 0,
@@ -42,7 +42,7 @@ export const initialState = {
     },
     {
       workoutName: 'Leg Burn',
-      data: [
+      exercises: [
         {
           name: 'Deadlift',
           weightInKilos: 80,
@@ -65,7 +65,7 @@ export const initialState = {
     {
       workoutName: 'Arms Routine',
       date: new Date(1543933984145),
-      data: [
+      exercises: [
         {
           name: 'Chinups',
           weightInKilos: 0,
@@ -86,7 +86,7 @@ export const initialState = {
     {
       workoutName: 'Leg Burn',
       date: new Date(1543993984145),
-      data: [
+      exercises: [
         {
           name: 'Deadlift',
           weightInKilos: 80,
@@ -107,7 +107,7 @@ export const initialState = {
     {
       workoutName: 'Arms Routine',
       date: new Date(1542933984145),
-      data: [
+      exercises: [
         {
           name: 'Chinups',
           weightInKilos: 0,

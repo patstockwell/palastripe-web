@@ -71,12 +71,12 @@ const Date = styled.h3`
 const Workout = props => {
   const {
     workoutRoutine : {
-      data,
+      exercises,
       date,
     },
   } = props;
 
-  const exercises = data.map((e, i) =>
+  const exerciseTiles = exercises.map((e, i) =>
     <ExerciseListItem {...e} key={i} />
   );
 
@@ -87,7 +87,7 @@ const Workout = props => {
         <Date>{date ? moment(date).format('D MMM') : ''}</Date>
       </Title>
       <ExerciseList>
-        {exercises}
+        {exerciseTiles}
       </ExerciseList>
     </LayoutWrapper>
   );

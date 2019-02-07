@@ -8,12 +8,12 @@ export const exercisePropType = {
 
 export const workoutPropType = {
   workoutName: PropTypes.string,
-  data: PropTypes.arrayOf(PropTypes.shape(exercisePropType)),
+  exercises: PropTypes.arrayOf(PropTypes.shape(exercisePropType)),
 };
 
 export const monday = {
   workoutName: 'Leg Burn',
-  data: [
+  exercises: [
     {
       name: 'Deadlift',
       weightInKilos: 80,
@@ -35,7 +35,7 @@ export const monday = {
 export const tuesday = {
   workoutName: 'Arms Routine',
   date: new Date(1543933984145),
-  data: [
+  exercises: [
     {
       name: 'Chinups',
       weightInKilos: 0,

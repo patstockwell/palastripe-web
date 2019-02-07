@@ -80,7 +80,7 @@ ActiveExercise.propTypes = {
 };
 
 const mapStateToProps = (state, ownProps) => ({
-  exercise: state.activeWorkout.data[ownProps.exerciseIndex],
+  exercise: state.activeWorkout.exercises[ownProps.exerciseIndex],
 });
 
 const mapDispatchToProps = {

@@ -1,8 +1,8 @@
 export const decrementReps = (state, action) => {
   const { payload: { exerciseIndex, setIndex } } = action;
   const { activeWorkout } = state;
-  const { data } = activeWorkout;
-  const { completedSets = [], sets } = data[exerciseIndex];
+  const { exercises } = activeWorkout;
+  const { completedSets = [], sets } = exercises[exerciseIndex];
 
   const reps = completedSets[setIndex]; // the number of completed reps for this set
   const newCompletedSets = [...completedSets]; // make a copy
@@ -14,13 +14,13 @@ export const decrementReps = (state, action) => {
     ...state,
     activeWorkout: {
       ...activeWorkout,
-      data: [
-        ...data.slice(0, exerciseIndex),
+      exercises: [
+        ...exercises.slice(0, exerciseIndex),
         {
-          ...data[exerciseIndex],
+          ...exercises[exerciseIndex],
           completedSets: newCompletedSets,
         },
-        ...data.slice(exerciseIndex + 1, data.length),
+        ...exercises.slice(exerciseIndex + 1, exercises.length),
       ],
     },
   });
