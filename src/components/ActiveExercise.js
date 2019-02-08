@@ -48,11 +48,8 @@ export const getTheme = (completedReps, max) => {
 
 const ActiveExercise = ({ decrementReps, exerciseIndex, exercise }) => {
   const { sets, name, weightInKilos, completedSets = [] } = exercise;
-
   const handleClick = setIndex => decrementReps({ setIndex, exerciseIndex });
-
   const zippedSets = sets.map((reps, index) => [reps, completedSets[index]]);
-
   const hightlightedSets = zippedSets.map(
     ([ maxReps, completedReps ], index) => {
       const reps = isNaN(completedReps) ? maxReps : completedReps;

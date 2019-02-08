@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
@@ -9,6 +9,7 @@ import ActiveExercise from '../components/ActiveExercise';
 import BackArrow from '../components/BackArrow';
 import { orange, pink } from '../helpers/constants';
 import { workoutPropType } from '../helpers/data';
+import { preventZoom, useInterval } from '../helpers/functions';
 
 const StyledLink = styled(Link)`
   color: white;
@@ -28,8 +29,17 @@ const Header = styled.div`
 `;
 
 const ActiveWorkout = ({ activeWorkout, animationStyles }) => {
+  const [count, setCount] = useState(0);
+  useInterval(() => {
+    setCount(count + 1);
+  }, 1000);
+
   const exercises = activeWorkout.exercises.map((exercise, i) =>
-    <ActiveExercise key={exercise.name} exerciseIndex={i} />
+    <ActiveExercise
+      key={exercise.name}
+      exerciseIndex={i}
+      onTouchStart={e => preventZoom(e)}
+    />
   );
 
   return (
@@ -50,6 +60,7 @@ const ActiveWorkout = ({ activeWorkout, animationStyles }) => {
             Done
           </StyledLink>
         </Header>
+        {count}
         {exercises}
       </BackSplash>
     </animated.div>
