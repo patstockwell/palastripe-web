@@ -7,7 +7,7 @@ import { animated } from 'react-spring';
 import BackSplash from '../components/BackSplash';
 import ActiveExercise from '../components/ActiveExercise';
 import BackArrow from '../components/BackArrow';
-import { orange, pink } from '../helpers/constants';
+import { orange, pink, ONE_SECOND } from '../helpers/constants';
 import { workoutPropType } from '../helpers/data';
 import { preventZoom, useInterval } from '../helpers/functions';
 
@@ -32,7 +32,7 @@ const ActiveWorkout = ({ activeWorkout, animationStyles }) => {
   const [count, setCount] = useState(0);
   useInterval(() => {
     setCount(count + 1);
-  }, 1000);
+  }, ONE_SECOND);
 
   const exercises = activeWorkout.exercises.map((exercise, i) =>
     <ActiveExercise

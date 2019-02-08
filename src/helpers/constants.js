@@ -1,6 +1,8 @@
 export const navBarHeight = 40;
 export const gutterWidth = 7;
 
+export const ONE_SECOND = 1000;
+
 export const pink = '#ff02c8';
 export const purple = '#6702ff';
 export const blue = '#198FE3';
