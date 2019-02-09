@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import BlockPanel from './BlockPanel';
 import { DECREMENT_REPS } from '../reducers/actions';
-import { preventZoom } from '../helpers/functions';
+import { zipSets, preventZoom } from '../helpers/functions';
 
 const HeadingWrapper = styled.div`
   display: flex;
@@ -46,22 +46,17 @@ export const getTheme = (completedReps, max) => {
 };
 
 
-const ActiveExercise = ({
-  setShowRestTimer,
-  decrementReps,
-  exerciseIndex,
-  exercise,
-}) => {
+const ActiveExercise = ({ setShowRestTimer, decrementReps, exerciseIndex, exercise }) => {
   const { sets, name, weightInKilos, completedSets = [] } = exercise;
   const handleClick = (setIndex, reps) => {
     setShowRestTimer(reps !== 0);
     decrementReps({ setIndex, exerciseIndex });
   };
-  const zippedSets = sets.map((reps, index) => [reps, completedSets[index]]);
-  const hightlightedSets = zippedSets.map(
-    ([ maxReps, completedReps ], index) => {
-      const reps = isNaN(completedReps) ? maxReps : completedReps;
-      const theme = getTheme(completedReps, maxReps);
+
+  const hightlightedSets = zipSets(sets, completedSets).map(
+    ({ max, completed }, index) => {
+      const reps = isNaN(completed) ? max : completed;
+      const theme = getTheme(completed, max);
 
       return (
         <Set

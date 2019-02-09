@@ -27,7 +27,7 @@ export const decrementReps = (state, action) => {
 };
 
 export const endWorkout = state => {
-  const newWorkoutIndex = state.workoutCountForThisPlan % state.workoutPlan.length;
+  const newWorkoutIndex = (state.workoutCountForThisPlan + 1) % state.workoutPlan.length;
   return {
     ...state,
     workoutCountForThisPlan: state.workoutCountForThisPlan + 1,

@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import moment from 'moment';
 import BlockPanel from './BlockPanel';
 import { exercisePropType } from '../helpers/data';
+import { zipSets } from '../helpers/functions';
 
 const ExerciseListItemWrapper = styled.div`
   display: flex;
@@ -26,8 +27,8 @@ const Weight = styled.p`
   font-size: 14px;
 `;
 
-const ExerciseListItem = ({ completedSets = [], name, weightInKilos }) => {
-  const setCount = completedSets.map(count => count ? count : '-').join('/');
+const ExerciseListItem = ({ sets, completedSets = [], name, weightInKilos }) => {
+  const setCount = zipSets(sets, completedSets).map(({ completed }) => completed ? completed : '-').join('/');
 
   return (
     <ExerciseListItemWrapper key={name}>

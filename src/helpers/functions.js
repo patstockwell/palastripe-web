@@ -36,3 +36,10 @@ export const preventZoom = e => {
   e.preventDefault();
   e.target.click();
 };
+
+export const zipSets = (sets, completedSets) => (
+  sets.map((item, index) => ({
+    max: item,
+    completed: completedSets[index],
+  }))
+);
