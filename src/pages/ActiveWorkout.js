@@ -9,7 +9,7 @@ import ActiveExercise from '../components/ActiveExercise';
 import BackArrow from '../components/BackArrow';
 import { orange, pink, ONE_DAY, ONE_SECOND } from '../helpers/constants';
 import { workoutPropType } from '../helpers/data';
-import { preventZoom, useInterval } from '../helpers/functions';
+import { useInterval } from '../helpers/functions';
 
 const StyledLink = styled(Link)`
   color: white;
@@ -43,7 +43,6 @@ const ActiveWorkout = ({ endWorkout, activeWorkout, animationStyles }) => {
     <ActiveExercise
       key={exercise.name}
       exerciseIndex={i}
-      onTouchStart={e => preventZoom(e)}
       setShowRestTimer={setShowRestTimer}
     />
   );

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import BlockPanel from './BlockPanel';
 import { DECREMENT_REPS } from '../reducers/actions';
-import { zipSets, preventZoom } from '../helpers/functions';
+import { zipSets } from '../helpers/functions';
 
 const HeadingWrapper = styled.div`
   display: flex;
@@ -31,6 +31,8 @@ const Set = styled.button`
   align-items: center;
   margin: 10px 5px;
   font-size: 20px;
+  // stops double-tap-to-zoom
+  touch-action: manipulation;
 `;
 
 export const getTheme = (completedReps, max) => {
@@ -61,7 +63,6 @@ const ActiveExercise = ({ setShowRestTimer, decrementReps, exerciseIndex, exerci
       return (
         <Set
           key={index}
-          onTouchStart={e => preventZoom(e)}
           onClick={() => handleClick(index, reps)}
           {...theme}
         >{reps}</Set>
