@@ -46,9 +46,17 @@ export const getTheme = (completedReps, max) => {
 };
 
 
-const ActiveExercise = ({ decrementReps, exerciseIndex, exercise }) => {
+const ActiveExercise = ({
+  setShowRestTimer,
+  decrementReps,
+  exerciseIndex,
+  exercise,
+}) => {
   const { sets, name, weightInKilos, completedSets = [] } = exercise;
-  const handleClick = setIndex => decrementReps({ setIndex, exerciseIndex });
+  const handleClick = (setIndex, reps) => {
+    setShowRestTimer(reps !== 0);
+    decrementReps({ setIndex, exerciseIndex });
+  };
   const zippedSets = sets.map((reps, index) => [reps, completedSets[index]]);
   const hightlightedSets = zippedSets.map(
     ([ maxReps, completedReps ], index) => {
@@ -59,7 +67,7 @@ const ActiveExercise = ({ decrementReps, exerciseIndex, exercise }) => {
         <Set
           key={index}
           onTouchStart={e => preventZoom(e)}
-          onClick={() => handleClick(index)}
+          onClick={() => handleClick(index, reps)}
           {...theme}
         >{reps}</Set>
       );
@@ -80,6 +88,7 @@ const ActiveExercise = ({ decrementReps, exerciseIndex, exercise }) => {
 };
 
 ActiveExercise.propTypes = {
+  setShowRestTimer: PropTypes.func,
   decrementReps: PropTypes.func,
   exerciseIndex: PropTypes.number,
   exercise: PropTypes.shape({

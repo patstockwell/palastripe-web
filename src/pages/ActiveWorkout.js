@@ -7,7 +7,7 @@ import { animated } from 'react-spring';
 import BackSplash from '../components/BackSplash';
 import ActiveExercise from '../components/ActiveExercise';
 import BackArrow from '../components/BackArrow';
-import { orange, pink, ONE_SECOND } from '../helpers/constants';
+import { orange, pink, ONE_DAY, ONE_SECOND } from '../helpers/constants';
 import { workoutPropType } from '../helpers/data';
 import { preventZoom, useInterval } from '../helpers/functions';
 
@@ -30,15 +30,21 @@ const Header = styled.div`
 
 const ActiveWorkout = ({ activeWorkout, animationStyles }) => {
   const [count, setCount] = useState(0);
+  const [showRestTimer, setShowRestTimer] = useState(false);
   useInterval(() => {
     setCount(count + 1);
-  }, ONE_SECOND);
+  }, showRestTimer ? ONE_SECOND : ONE_DAY);
+  if (count === 11 || (!showRestTimer && count !== 0)) {
+    setCount(0);
+    setShowRestTimer(false);
+  }
 
   const exercises = activeWorkout.exercises.map((exercise, i) =>
     <ActiveExercise
       key={exercise.name}
       exerciseIndex={i}
       onTouchStart={e => preventZoom(e)}
+      setShowRestTimer={setShowRestTimer}
     />
   );
 
@@ -56,11 +62,11 @@ const ActiveWorkout = ({ activeWorkout, animationStyles }) => {
           <StyledLink to="/home">
             <BackArrow /> Back
           </StyledLink>
+          {showRestTimer && count}
           <StyledLink to="/home">
             Done
           </StyledLink>
         </Header>
-        {count}
         {exercises}
       </BackSplash>
     </animated.div>
