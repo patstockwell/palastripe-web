@@ -100,4 +100,10 @@ const mapDispatchToProps = {
   }),
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(ActiveExercise);
+const areEqualProps = (prev, next) => (
+  JSON.stringify(prev.exercise) === JSON.stringify(next.exercise)
+);
+
+const PureActiveExercise = React.memo(ActiveExercise, areEqualProps);
+
+export default connect(mapStateToProps, mapDispatchToProps)(PureActiveExercise);
