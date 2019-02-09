@@ -1,5 +1,5 @@
-import { decrementReps } from '../reducers';
-import { DECREMENT_REPS } from '../reducers/actions';
+import { endWorkout, decrementReps } from '../reducers';
+import { END_WORKOUT, DECREMENT_REPS } from '../actions';
 
 describe('Reducers', () => {
   describe('decrementReps()', () => {
@@ -73,6 +73,97 @@ describe('Reducers', () => {
             },
           ],
         },
+      });
+    });
+  });
+
+  describe('endWorkout()', () => {
+    const state = {};
+
+    beforeEach(() => {
+      state.history = [];
+      state.workoutCountForThisPlan = 0;
+      state.workoutPlan = [
+        {
+          workoutName: 'A',
+          exercises: [
+            {
+              name: 'Chinups',
+              weightInKilos: 0,
+              sets: [5, 5, 5, 5],
+            },
+          ],
+        },
+        {
+          workoutName: 'B',
+          exercises: [
+            {
+              name: 'Deadlift',
+              weightInKilos: 80,
+              sets: [7, 7, 7, 7],
+            },
+          ],
+        },
+      ];
+      state.activeWorkout = {
+        workoutName: 'A',
+        exercises: [
+          {
+            name: 'Chinups',
+            weightInKilos: 0,
+            sets: [5, 5, 5, 5],
+          },
+        ],
+      };
+    });
+
+    it('returns the correct state object', () => {
+      expect(endWorkout(state, { type: END_WORKOUT })).toEqual({
+        history: [{
+          date: expect.any(Date),
+          workoutName: 'A',
+          exercises: [
+            {
+              name: 'Chinups',
+              weightInKilos: 0,
+              sets: [5, 5, 5, 5],
+            },
+          ],
+        }],
+        workoutCountForThisPlan: 1,
+        workoutPlan: [
+          {
+            workoutName: 'A',
+            exercises: [
+              {
+                name: 'Chinups',
+                weightInKilos: 0,
+                sets: [5, 5, 5, 5],
+              },
+            ],
+          },
+          {
+            workoutName: 'B',
+            exercises: [
+              {
+                name: 'Deadlift',
+                weightInKilos: 80,
+                sets: [7, 7, 7, 7],
+              },
+            ],
+          },
+        ],
+        activeWorkout: {
+          workoutName: 'B',
+          exercises: [
+            {
+              name: 'Deadlift',
+              weightInKilos: 80,
+              sets: [7, 7, 7, 7],
+            },
+          ],
+        },
+
       });
     });
   });
