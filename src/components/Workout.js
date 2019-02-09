@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import moment from 'moment';
 import BlockPanel from './BlockPanel';
+import { exercisePropType } from '../helpers/data';
 
 const ExerciseListItemWrapper = styled.div`
   display: flex;
@@ -25,8 +26,8 @@ const Weight = styled.p`
   font-size: 14px;
 `;
 
-const ExerciseListItem = ({ sets, name, weightInKilos }) => {
-  const setCount = sets.join('/');
+const ExerciseListItem = ({ completedSets = [], name, weightInKilos }) => {
+  const setCount = completedSets.map(count => count ? count : '-').join('/');
 
   return (
     <ExerciseListItemWrapper key={name}>
@@ -37,11 +38,7 @@ const ExerciseListItem = ({ sets, name, weightInKilos }) => {
   );
 };
 
-ExerciseListItem.propTypes = {
-  name: PropTypes.string,
-  weightInKilos: PropTypes.number,
-  sets: PropTypes.arrayOf(PropTypes.number),
-};
+ExerciseListItem.propTypes = exercisePropType;
 
 const Title = styled.div`
   flex-basis: 88px;
