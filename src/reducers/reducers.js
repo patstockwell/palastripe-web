@@ -26,3 +26,21 @@ export const decrementReps = (state, action) => {
   });
 };
 
+export const endWorkout = state => {
+  const newWorkoutIndex = state.workoutCountForThisPlan % state.workoutPlan.length;
+  return {
+    ...state,
+    workoutCountForThisPlan: state.workoutCountForThisPlan + 1,
+    activeWorkout: {
+      ...state.workoutPlan[newWorkoutIndex],
+    },
+    history: [
+      {
+        ...state.activeWorkout,
+        date: new Date(),
+      },
+      ...state.history,
+    ],
+  };
+};
+

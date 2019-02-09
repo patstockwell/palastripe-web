@@ -1,1 +1,2 @@
 export const DECREMENT_REPS = 'DECREMENT_REPS';
+export const END_WORKOUT = 'END_WORKOUT';

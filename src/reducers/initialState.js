@@ -1,4 +1,5 @@
 export const initialState = {
+  workoutCountForThisPlan: 0,
   activeWorkout: {
     workoutName: 'Arms Routine',
     exercises: [

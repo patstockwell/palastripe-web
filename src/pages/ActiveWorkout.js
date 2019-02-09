@@ -28,7 +28,7 @@ const Header = styled.div`
   margin: 0 15px 0 10px;
 `;
 
-const ActiveWorkout = ({ activeWorkout, animationStyles }) => {
+const ActiveWorkout = ({ endWorkout, activeWorkout, animationStyles }) => {
   const [count, setCount] = useState(0);
   const [showRestTimer, setShowRestTimer] = useState(false);
   useInterval(() => {
@@ -63,7 +63,7 @@ const ActiveWorkout = ({ activeWorkout, animationStyles }) => {
             <BackArrow /> Back
           </StyledLink>
           {showRestTimer && count}
-          <StyledLink to="/home">
+          <StyledLink to="/home" onClick={endWorkout}>
             Done
           </StyledLink>
         </Header>
@@ -74,6 +74,7 @@ const ActiveWorkout = ({ activeWorkout, animationStyles }) => {
 };
 
 ActiveWorkout.propTypes = {
+  endWorkout: PropTypes.func,
   animationStyles: PropTypes.object,
   activeWorkout: PropTypes.shape(workoutPropType),
 };
@@ -82,5 +83,9 @@ const mapStateToProps = state => ({
   activeWorkout: state.activeWorkout,
 });
 
-export default connect(mapStateToProps)(ActiveWorkout);
+const mapDispatchToProps = {
+  endWorkout: () => ({ type: 'END_WORKOUT'}),
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(ActiveWorkout);
 
