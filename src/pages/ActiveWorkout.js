@@ -34,16 +34,26 @@ const ActiveWorkout = ({ endWorkout, activeWorkout, animationStyles }) => {
   useInterval(() => {
     setCount(count + 1);
   }, showRestTimer ? ONE_SECOND : ONE_DAY);
-  if (count === 11 || (!showRestTimer && count !== 0)) {
-    setCount(0);
+
+  const resetTimer = () => {
     setShowRestTimer(false);
+    setCount(0);
+  };
+
+  const setTimer = (show = true) => {
+    resetTimer();
+    setTimeout(() => setShowRestTimer(show), 1000);
+  };
+
+  if (count === 6 || (!showRestTimer && count !== 0)) {
+    resetTimer();
   }
 
   const exercises = activeWorkout.exercises.map((exercise, i) =>
     <ActiveExercise
       key={exercise.name}
       exerciseIndex={i}
-      setShowRestTimer={setShowRestTimer}
+      setTimer={setTimer}
     />
   );
 

@@ -48,10 +48,10 @@ export const getTheme = (completedReps, max) => {
 };
 
 
-const ActiveExercise = ({ setShowRestTimer, decrementReps, exerciseIndex, exercise }) => {
+const ActiveExercise = ({ setTimer, decrementReps, exerciseIndex, exercise }) => {
   const { sets, name, weightInKilos, completedSets = [] } = exercise;
   const handleClick = (setIndex, reps) => {
-    setShowRestTimer(reps !== 0);
+    setTimer(reps !== 0);
     decrementReps({ setIndex, exerciseIndex });
   };
 
@@ -84,7 +84,7 @@ const ActiveExercise = ({ setShowRestTimer, decrementReps, exerciseIndex, exerci
 };
 
 ActiveExercise.propTypes = {
-  setShowRestTimer: PropTypes.func,
+  setTimer: PropTypes.func,
   decrementReps: PropTypes.func,
   exerciseIndex: PropTypes.number,
   exercise: PropTypes.shape({
