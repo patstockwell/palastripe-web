@@ -71,7 +71,7 @@ const ActiveWorkout = ({ endWorkout, activeWorkout, animationStyles }) => {
           <StyledLink to="/home">
             <BackArrow /> Back
           </StyledLink>
-          {showRestTimer && count}
+          {showRestTimer && count > 0 && count}
           <StyledLink to="/home" onClick={endWorkout}>
             Done
           </StyledLink>

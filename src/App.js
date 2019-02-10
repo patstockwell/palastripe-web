@@ -7,7 +7,6 @@ import {
   Switch,
 } from 'react-router-dom';
 import Helmet from 'react-helmet';
-import styled from 'styled-components';
 
 import rootReducer from './reducers';
 import { GlobalStyle } from './components/GlobalStyle';
@@ -17,27 +16,21 @@ import About from './pages/About';
 import Users from './pages/Users';
 import FourZeroFour from './pages/FourZeroFour';
 
-const TabWindow = styled.div`
-  overflow-x: hidden;
-`;
-
 const store = createStore(rootReducer);
 
 const App = () => (
   <Provider store={store}>
+    <Helmet title="You Are Doing Great" />
+    <GlobalStyle />
     <Router>
-      <TabWindow>
-        <Helmet title="You Are Doing Great" />
-        <GlobalStyle />
-        <Switch>
-          <Route path="/" exact component={Home} />
-          <Route path="/home/" component={Home} />
-          <Route path="/workout-plans/" component={WorkoutPlans} />
-          <Route path="/about/" component={About} />
-          <Route path="/users/" component={Users} />
-          <Route component={FourZeroFour} />
-        </Switch>
-      </TabWindow>
+      <Switch>
+        <Route path="/" exact component={Home} />
+        <Route path="/home/" component={Home} />
+        <Route path="/workout-plans/" component={WorkoutPlans} />
+        <Route path="/about/" component={About} />
+        <Route path="/users/" component={Users} />
+        <Route component={FourZeroFour} />
+      </Switch>
     </Router>
   </Provider>
 );

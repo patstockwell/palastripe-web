@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import Banner from '../../components/Banner';
 import Navigation from '../../components/Navigation';
 import PageHeading from '../../components/PageHeading';
 import Workout from '../../components/Workout';
@@ -24,6 +25,7 @@ const Home = ({ activeWorkout, workoutHistory }) => {
 
   return (
     <Fragment>
+      <Banner />
       <PageHeading>Home</PageHeading>
       <StyledLink to="/home/active-workout">
         <Workout workoutRoutine={activeWorkout} />
