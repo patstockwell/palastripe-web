@@ -1,10 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import LayoutTile from './LayoutTile';
 import { DECREMENT_REPS } from '../reducers/actions';
 import { zipSets } from '../helpers/functions';
+
+const TILE_GAP = 15;
+
+const TileWithMargin = styled(LayoutTile)`
+  margin-top: ${TILE_GAP}px;
+  margin-bottom: ${TILE_GAP}px;
+`;
 
 const HeadingWrapper = styled.div`
   display: flex;
@@ -52,14 +59,42 @@ const ExerciseName = styled.h3`
   font-size: 19px;
 `;
 
-const WeightLabel = styled.button`
+const FlipButton = styled.button`
   border: 1px solid lightgrey;
   border-radius: 5px;
   background-color: transparent;
   font-size: 19px;
 `;
 
+const FlipContainer = styled.div`
+  perspective: 1000px;
+  transition: 0.6s;
+  transform-style: preserve-3d;
+
+  &.flip {
+    transform: rotateX(180deg);
+  }
+
+  .back {
+    transform: rotateX(180deg);
+    backface-visibility: hidden;
+    position: absolute;
+    height: 100%;
+    top: -${TILE_GAP}px;
+    left: 0;
+    right: 0;
+  }
+
+  .front {
+    transform: rotateX(0deg);
+    backface-visibility: hidden;
+    z-index: 2;
+  }
+`;
+
 const ActiveExerciseTile = ({ setTimer, decrementReps, exerciseIndex, exercise }) => {
+  const [flip, setFlip] = useState(false);
+
   const { sets, name, weightInKilos, completedSets = [] } = exercise;
   const handleClick = (setIndex, reps) => {
     setTimer(reps !== 0);
@@ -81,16 +116,26 @@ const ActiveExerciseTile = ({ setTimer, decrementReps, exerciseIndex, exercise }
     }
   );
 
+  const handleWeightClick = () => {
+    setFlip(!flip);
+  };
+
   return (
-    <LayoutTile>
-      <HeadingWrapper>
-        <ExerciseName>{name}</ExerciseName>
-        <WeightLabel>{weightInKilos}kg</WeightLabel>
-      </HeadingWrapper>
-      <SetsWrapper>
-        {hightlightedSets}
-      </SetsWrapper>
-    </LayoutTile>
+    <FlipContainer className={flip ? 'flip' : ''}>
+      <TileWithMargin className="front">
+        <HeadingWrapper>
+          <ExerciseName>{name}</ExerciseName>
+          <FlipButton onClick={handleWeightClick}>{weightInKilos}kg</FlipButton>
+        </HeadingWrapper>
+        <SetsWrapper>
+          {hightlightedSets}
+        </SetsWrapper>
+      </TileWithMargin>
+      <TileWithMargin className="back">
+        <FlipButton onClick={handleWeightClick}>Done</FlipButton>
+        backside
+      </TileWithMargin>
+    </FlipContainer>
   );
 };
 
