@@ -1,23 +1,20 @@
 import React from 'react';
-import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import BackSplash from '../components/BackSplash';
 import Banner from '../components/Banner';
 import Navigation from '../components/Navigation';
 import { green, yellow } from '../helpers/constants';
-import PageHeading from '../components/PageHeading';
 
-const P = styled.p`
-  margin: 10px;
-`;
-
-const Users = () => (
+const Users = ({ location }) => (
   <BackSplash topLeft={green} bottomRight={yellow}>
     <Banner />
-    <PageHeading>Users</PageHeading>
-    <P>some user</P>
-    <Navigation />
+    <Navigation pathname={location.pathname}/>
   </BackSplash>
 );
+
+Users.propTypes = {
+  location: PropTypes.object,
+};
 
 export default Users;
 

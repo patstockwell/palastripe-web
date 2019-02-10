@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Banner from '../../components/Banner';
 import Navigation from '../../components/Navigation';
-import PageHeading from '../../components/PageHeading';
 import Workout from '../../components/Workout';
 import EmptyHistoryTile from '../../components/EmptyHistoryTile';
 import { workoutPropType, exercisePropType } from '../../helpers/data';
@@ -25,7 +24,7 @@ const Hr = styled.hr`
   margin: ${gutterWidth}px;
 `;
 
-const Home = ({ activeWorkout, workoutHistory }) => {
+const Home = ({ location, activeWorkout, workoutHistory }) => {
 
   const workouts = workoutHistory.map((workout, i) =>
     <Workout key={i} workoutRoutine={workout} />
@@ -34,19 +33,19 @@ const Home = ({ activeWorkout, workoutHistory }) => {
   return (
     <Fragment>
       <Banner />
-      <PageHeading>Home</PageHeading>
       <StyledLink to="/home/active-workout">
         <Workout workoutRoutine={activeWorkout} />
       </StyledLink>
       <Hr />
       {workouts.length !== 0 ? workouts : <EmptyHistoryTile />}
       <BottomScreenSpace />
-      <Navigation />
+      <Navigation pathname={location.pathname} />
     </Fragment>
   );
 };
 
 Home.propTypes = {
+  location: PropTypes.object,
   workoutHistory: PropTypes.arrayOf(PropTypes.shape({
     date: PropTypes.object,
     exercises: PropTypes.arrayOf(PropTypes.shape(exercisePropType)),

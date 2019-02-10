@@ -29,7 +29,7 @@ export default () => (
                   />
                   <Route
                     path="/"
-                    render={() => <Home />}
+                    render={({ location }) => <Home location={location}/>}
                   />
                 </Switch>
               );

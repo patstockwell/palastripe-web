@@ -75,11 +75,11 @@ const ActiveWorkout = ({ endWorkout, activeWorkout, animationStyles }) => {
     }}>
       <BackSplash topLeft={orange} bottomRight={pink}>
         <Header>
-          <StyledLink to="/home">
+          <StyledLink to="/home/">
             <BackArrowWhite /> Back
           </StyledLink>
           {showRestTimer && count > 0 && count}
-          <StyledLink to="/home" onClick={endWorkout}>
+          <StyledLink to="/home/" onClick={endWorkout}>
             Done
           </StyledLink>
         </Header>

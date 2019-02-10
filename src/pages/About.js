@@ -1,17 +1,20 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Banner from '../components/Banner';
-import PageHeading from '../components/PageHeading';
 import Navigation from '../components/Navigation';
 import BackSplash from '../components/BackSplash';
 import { blue, green } from '../helpers/constants';
 
-const About = () => (
+const About = ({ location }) => (
   <BackSplash topLeft={blue} bottomRight={green}>
     <Banner />
-    <PageHeading>About</PageHeading>
-    <Navigation />
+    <Navigation pathname={location.pathname}/>
   </BackSplash>
 );
+
+About.propTypes = {
+  location: PropTypes.object,
+};
 
 export default About;
 
