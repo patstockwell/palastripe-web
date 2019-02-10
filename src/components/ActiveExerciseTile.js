@@ -29,7 +29,7 @@ const Set = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 10px 5px;
+  margin: 13px 5px 7px;
   font-size: 20px;
   // stops double-tap-to-zoom
   touch-action: manipulation;
@@ -47,8 +47,19 @@ export const getTheme = (completedReps, max) => {
   }
 };
 
+const ExerciseName = styled.h3`
+  font-weight: 400;
+  font-size: 19px;
+`;
 
-const ActiveExercise = ({ setTimer, decrementReps, exerciseIndex, exercise }) => {
+const WeightLabel = styled.button`
+  border: 1px solid lightgrey;
+  border-radius: 5px;
+  background-color: transparent;
+  font-size: 19px;
+`;
+
+const ActiveExerciseTile = ({ setTimer, decrementReps, exerciseIndex, exercise }) => {
   const { sets, name, weightInKilos, completedSets = [] } = exercise;
   const handleClick = (setIndex, reps) => {
     setTimer(reps !== 0);
@@ -73,8 +84,8 @@ const ActiveExercise = ({ setTimer, decrementReps, exerciseIndex, exercise }) =>
   return (
     <LayoutTile>
       <HeadingWrapper>
-        <h3>{name}</h3>
-        <p>{weightInKilos}kg</p>
+        <ExerciseName>{name}</ExerciseName>
+        <WeightLabel>{weightInKilos}kg</WeightLabel>
       </HeadingWrapper>
       <SetsWrapper>
         {hightlightedSets}
@@ -83,7 +94,7 @@ const ActiveExercise = ({ setTimer, decrementReps, exerciseIndex, exercise }) =>
   );
 };
 
-ActiveExercise.propTypes = {
+ActiveExerciseTile.propTypes = {
   setTimer: PropTypes.func,
   decrementReps: PropTypes.func,
   exerciseIndex: PropTypes.number,
@@ -93,10 +104,6 @@ ActiveExercise.propTypes = {
     sets: PropTypes.arrayOf(PropTypes.number),
   }),
 };
-
-const mapStateToProps = (state, ownProps) => ({
-  exercise: state.activeWorkout.exercises[ownProps.exerciseIndex],
-});
 
 const mapDispatchToProps = {
   decrementReps: ({ setIndex, exerciseIndex }) => ({
@@ -109,6 +116,6 @@ const areEqualProps = (prev, next) => (
   JSON.stringify(prev.exercise) === JSON.stringify(next.exercise)
 );
 
-const PureActiveExercise = React.memo(ActiveExercise, areEqualProps);
+const PureActiveExerciseTile = React.memo(ActiveExerciseTile, areEqualProps);
 
-export default connect(mapStateToProps, mapDispatchToProps)(PureActiveExercise);
+export default connect(null, mapDispatchToProps)(PureActiveExerciseTile);

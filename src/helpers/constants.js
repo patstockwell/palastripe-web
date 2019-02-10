@@ -2,6 +2,7 @@ export const workoutTileMinHeight = 90;
 export const navBarHeight = 40;
 export const gutterWidth = 7;
 
+export const REST_PERIOD_IN_SECONDS = 90;
 export const ONE_SECOND = 1000;
 export const ONE_DAY = 86400000;
 

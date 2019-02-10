@@ -5,9 +5,15 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { animated } from 'react-spring';
 import BackSplash from '../components/BackSplash';
-import ActiveExercise from '../components/ActiveExercise';
+import ActiveExerciseTile from '../components/ActiveExerciseTile';
 import { BackArrowWhite } from '../assets/Arrows';
-import { orange, pink, ONE_DAY, ONE_SECOND } from '../helpers/constants';
+import {
+  orange,
+  pink,
+  ONE_DAY,
+  ONE_SECOND,
+  REST_PERIOD_IN_SECONDS,
+} from '../helpers/constants';
 import { workoutPropType } from '../helpers/data';
 import { useInterval } from '../helpers/functions';
 
@@ -45,15 +51,16 @@ const ActiveWorkout = ({ endWorkout, activeWorkout, animationStyles }) => {
     setTimeout(() => setShowRestTimer(show), 1000);
   };
 
-  if (count === 6 || (!showRestTimer && count !== 0)) {
+  if (count === REST_PERIOD_IN_SECONDS || (!showRestTimer && count !== 0)) {
     resetTimer();
   }
 
   const exercises = activeWorkout.exercises.map((exercise, i) =>
-    <ActiveExercise
+    <ActiveExerciseTile
       key={exercise.name}
       exerciseIndex={i}
       setTimer={setTimer}
+      exercise={exercise}
     />
   );
 
