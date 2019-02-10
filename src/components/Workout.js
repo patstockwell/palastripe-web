@@ -1,4 +1,5 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import moment from 'moment';
@@ -27,8 +28,9 @@ const Weight = styled.p`
   font-size: 14px;
 `;
 
-const ExerciseListItem = ({ sets, completedSets = [], name, weightInKilos }) => {
-  const setCount = zipSets(sets, completedSets).map(({ completed }) => completed ? completed : '-').join('/');
+const ListItem = ({ sets, completedSets = [], name, weightInKilos }) => {
+  const setCount = zipSets(sets, completedSets)
+    .map(({ completed }) => completed ? completed : '-').join('/');
 
   return (
     <ExerciseListItemWrapper key={name}>
@@ -39,7 +41,7 @@ const ExerciseListItem = ({ sets, completedSets = [], name, weightInKilos }) => 
   );
 };
 
-ExerciseListItem.propTypes = exercisePropType;
+ListItem.propTypes = exercisePropType;
 
 const Title = styled.div`
   flex-basis: 88px;
@@ -66,22 +68,18 @@ const Date = styled.h3`
   color: grey;
 `;
 
-const Workout = props => {
-  const {
-    workoutRoutine : {
-      exercises,
-      date,
-    },
-  } = props;
+const Workout = ({ onGoing, workoutRoutine: { exercises, date }}) => {
 
   const exerciseTiles = exercises.map((e, i) =>
-    <ExerciseListItem {...e} key={i} />
+    <ListItem {...e} key={i} />
   );
+
+  const ActiveExerciseTitle = onGoing ? 'On Going' : 'Up Next';
 
   return (
     <LayoutWrapper>
       <Title>
-        <Date>{date ? moment(date).format('dddd') : 'Next'}</Date>
+        <Date>{date ? moment(date).format('dddd') : ActiveExerciseTitle}</Date>
         <Date>{date ? moment(date).format('D MMM') : ''}</Date>
       </Title>
       <ExerciseList>
@@ -92,8 +90,13 @@ const Workout = props => {
 };
 
 Workout.propTypes = {
+  onGoing: PropTypes.bool,
   workoutRoutine: PropTypes.object,
 };
 
-export default Workout;
+const mapStateToProps = state => ({
+  onGoing: state.activeWorkoutOnGoing,
+});
+
+export default connect(mapStateToProps)(Workout);
 

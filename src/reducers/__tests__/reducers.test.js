@@ -29,6 +29,7 @@ describe('Reducers', () => {
     it('decrements the reps when the reps are a positive integer', () => {
       state.activeWorkout.exercises[0].completedSets = [3, 1];
       expect(decrementReps(state, action)).toEqual({
+        activeWorkoutOnGoing: true,
         activeWorkout: {
           workoutName: 'Blast',
           exercises: [
@@ -46,6 +47,7 @@ describe('Reducers', () => {
     it('sets the value to undefined when the completed sets are zero', () => {
       state.activeWorkout.exercises[0].completedSets = [3, 0, 5];
       expect(decrementReps(state, action)).toEqual({
+        activeWorkoutOnGoing: true,
         activeWorkout: {
           workoutName: 'Blast',
           exercises: [
@@ -62,6 +64,7 @@ describe('Reducers', () => {
 
     it('Sets the value to the total rep count when the completed reps is undefined', () => {
       expect(decrementReps(state, action)).toEqual({
+        activeWorkoutOnGoing: true,
         activeWorkout: {
           workoutName: 'Blast',
           exercises: [
@@ -82,6 +85,7 @@ describe('Reducers', () => {
 
     beforeEach(() => {
       state.history = [];
+      state.activeWorkoutOnGoing = true;
       state.workoutCountForThisPlan = 0;
       state.workoutPlan = [
         {
@@ -119,6 +123,7 @@ describe('Reducers', () => {
 
     it('returns the correct state object', () => {
       expect(endWorkout(state, { type: END_WORKOUT })).toEqual({
+        activeWorkoutOnGoing: false,
         history: [{
           date: expect.any(Date),
           workoutName: 'A',
