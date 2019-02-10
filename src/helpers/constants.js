@@ -1,3 +1,4 @@
+export const workoutTileMinHeight = 90;
 export const navBarHeight = 40;
 export const gutterWidth = 7;
 

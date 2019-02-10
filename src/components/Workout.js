@@ -3,29 +3,42 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import moment from 'moment';
-import BlockPanel from './BlockPanel';
+import LayoutTile from './LayoutTile';
 import { exercisePropType } from '../helpers/data';
 import { zipSets } from '../helpers/functions';
+import { ForwardArrowBlack } from '../assets/Arrows';
 
 const ExerciseListItemWrapper = styled.div`
   display: flex;
   align-items: baseline;
-  margin: 9px 0;
+  margin: 6px 0;
 `;
 
 const ExerciseName = styled.h5`
   flex-basis: 51%;
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 400;
+
+  @media (max-width: 374px) {
+    font-size: 14px;
+  }
 `;
 
 const Sets = styled.p`
   flex-basis: 28%;
-  font-size: 14px;
+  font-size: 16px;
+
+  @media (max-width: 374px) {
+    font-size: 14px;
+  }
 `;
 
 const Weight = styled.p`
-  font-size: 14px;
+  font-size: 16px;
+
+  @media (max-width: 374px) {
+    font-size: 14px;
+  }
 `;
 
 const ListItem = ({ sets, completedSets = [], name, weightInKilos }) => {
@@ -57,7 +70,7 @@ const ExerciseList = styled.div`
   flex: 1;
 `;
 
-const LayoutWrapper = styled(BlockPanel)`
+const LayoutWrapper = styled(LayoutTile)`
   display: flex;
 `;
 
@@ -66,6 +79,15 @@ const Date = styled.h3`
   font-size: 14px;
   font-weight: 500;
   color: grey;
+`;
+
+const ForwardArrowPanel = styled.div`
+  border-radius: 0 3px 3px 0;
+  padding: 2px;
+  display: flex;
+  align-items: center;
+  width: 12px;
+  margin-left: 5px;
 `;
 
 const Workout = ({ onGoing, workoutRoutine: { exercises, date }}) => {
@@ -85,6 +107,9 @@ const Workout = ({ onGoing, workoutRoutine: { exercises, date }}) => {
       <ExerciseList>
         {exerciseTiles}
       </ExerciseList>
+      <ForwardArrowPanel>
+        {!date && <ForwardArrowBlack />}
+      </ForwardArrowPanel>
     </LayoutWrapper>
   );
 };

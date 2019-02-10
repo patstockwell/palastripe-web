@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import { animated } from 'react-spring';
 import BackSplash from '../components/BackSplash';
 import ActiveExercise from '../components/ActiveExercise';
-import BackArrow from '../components/BackArrow';
+import { BackArrowWhite } from '../assets/Arrows';
 import { orange, pink, ONE_DAY, ONE_SECOND } from '../helpers/constants';
 import { workoutPropType } from '../helpers/data';
 import { useInterval } from '../helpers/functions';
@@ -69,7 +69,7 @@ const ActiveWorkout = ({ endWorkout, activeWorkout, animationStyles }) => {
       <BackSplash topLeft={orange} bottomRight={pink}>
         <Header>
           <StyledLink to="/home">
-            <BackArrow /> Back
+            <BackArrowWhite /> Back
           </StyledLink>
           {showRestTimer && count > 0 && count}
           <StyledLink to="/home" onClick={endWorkout}>

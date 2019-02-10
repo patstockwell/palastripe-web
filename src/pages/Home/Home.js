@@ -7,14 +7,22 @@ import Banner from '../../components/Banner';
 import Navigation from '../../components/Navigation';
 import PageHeading from '../../components/PageHeading';
 import Workout from '../../components/Workout';
+import EmptyHistoryTile from '../../components/EmptyHistoryTile';
 import { workoutPropType, exercisePropType } from '../../helpers/data';
+import { workoutTileMinHeight, gutterWidth } from '../../helpers/constants';
 
 const BottomScreenSpace = styled.div`
-  height: 100px;
+  height: ${workoutTileMinHeight}px;
 `;
 
 const StyledLink = styled(Link)`
   text-decoration: none;
+`;
+
+const Hr = styled.hr`
+  border: none;
+  border-bottom: 1px solid white;
+  margin: ${gutterWidth}px;
 `;
 
 const Home = ({ activeWorkout, workoutHistory }) => {
@@ -30,7 +38,8 @@ const Home = ({ activeWorkout, workoutHistory }) => {
       <StyledLink to="/home/active-workout">
         <Workout workoutRoutine={activeWorkout} />
       </StyledLink>
-      {workouts}
+      <Hr />
+      {workouts.length !== 0 ? workouts : <EmptyHistoryTile />}
       <BottomScreenSpace />
       <Navigation />
     </Fragment>

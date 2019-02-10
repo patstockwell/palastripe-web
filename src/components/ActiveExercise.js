@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import BlockPanel from './BlockPanel';
+import LayoutTile from './LayoutTile';
 import { DECREMENT_REPS } from '../reducers/actions';
 import { zipSets } from '../helpers/functions';
 
@@ -71,7 +71,7 @@ const ActiveExercise = ({ setTimer, decrementReps, exerciseIndex, exercise }) =>
   );
 
   return (
-    <BlockPanel>
+    <LayoutTile>
       <HeadingWrapper>
         <h3>{name}</h3>
         <p>{weightInKilos}kg</p>
@@ -79,7 +79,7 @@ const ActiveExercise = ({ setTimer, decrementReps, exerciseIndex, exercise }) =>
       <SetsWrapper>
         {hightlightedSets}
       </SetsWrapper>
-    </BlockPanel>
+    </LayoutTile>
   );
 };
 

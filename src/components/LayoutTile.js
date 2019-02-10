@@ -1,15 +1,15 @@
 import styled from 'styled-components';
-import { gutterWidth } from '../helpers/constants';
+import { workoutTileMinHeight, gutterWidth } from '../helpers/constants';
 
-const BlockPanel = styled.div`
+const LayoutTile = styled.div`
   color: black;
   background-color: white;
   border-radius: 5px;
   margin: 15px ${gutterWidth}px;
   box-sizing: border-box;
-  min-height: 70px;
+  min-height: ${workoutTileMinHeight}px;
   padding: 5px;
 `;
 
-export default BlockPanel;
+export default LayoutTile;
 
