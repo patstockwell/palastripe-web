@@ -46,3 +46,24 @@ export const endWorkout = state => {
   };
 };
 
+export const changeWeight = (state, action) => {
+  const { payload: { exerciseIndex, diff } } = action;
+  const { activeWorkout } = state;
+  const { exercises } = activeWorkout;
+  const updatedWeight = exercises[exerciseIndex].weightInKilos + diff;
+
+  return {
+    ...state,
+    activeWorkout: {
+      ...activeWorkout,
+      exercises: [
+        ...exercises.slice(0, exerciseIndex),
+        {
+          ...exercises[exerciseIndex],
+          weightInKilos: updatedWeight,
+        },
+        ...exercises.slice(exerciseIndex + 1, exercises.length),
+      ],
+    },
+  };
+};

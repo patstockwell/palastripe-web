@@ -11,12 +11,12 @@ export const initialState = {
       },
       {
         name: 'Bench Press',
-        weightInKilos: 12,
+        weightInKilos: 40,
         sets: [8, 8, 8, 8],
       },
       {
         name: 'Bicep Curl',
-        weightInKilos: 12,
+        weightInKilos: 12.5,
         sets: [8, 8, 8, 8],
       },
     ],
@@ -32,12 +32,12 @@ export const initialState = {
         },
         {
           name: 'Bench Press',
-          weightInKilos: 12,
+          weightInKilos: 40,
           sets: [8, 8, 8, 8],
         },
         {
           name: 'Bicep Curl',
-          weightInKilos: 12,
+          weightInKilos: 12.5,
           sets: [8, 8, 8, 8],
         },
       ],
@@ -57,7 +57,7 @@ export const initialState = {
         },
         {
           name: 'Overhead Press',
-          weightInKilos: 50,
+          weightInKilos: 30,
           sets: [7, 7, 7, 7],
         },
       ],

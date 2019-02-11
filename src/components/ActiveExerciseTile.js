@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import LayoutTile from './LayoutTile';
 import FlipContainer from './FlipContainer';
-import { DECREMENT_REPS } from '../reducers/actions';
+import { CHANGE_WEIGHT, DECREMENT_REPS } from '../reducers/actions';
 import { zipSets } from '../helpers/functions';
 import { pink } from '../helpers/constants';
 
@@ -63,27 +63,38 @@ const FlipButton = styled.button`
 const RowLayout = styled.div`
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  margin-top: 10px;
+  align-items: flex-end;
+  width: 200px;
+  margin: 0 auto;
 `;
 
 const ChangeWeightButton = styled.button`
-  font-size: ${({ fontSize }) => fontSize}px;
-  width: ${({ width }) => width}px;
-  height: ${({ height }) => height}px;
-  border: 2px solid grey;
-  border-radius: 50%;
-  background-color: white;
-  padding: 1px;
+  font-size: 80px;
+  border: none;
+  background-color: transparent;
+  font-weight: 100;
+  line-height: 0.5;
   // stops double-tap-to-zoom
   touch-action: manipulation;
 
   &:active {
-    border-color: ${pink};
+    color: ${pink};
   }
 `;
 
-const ActiveExerciseTile = ({ setTimer, decrementReps, exerciseIndex, exercise }) => {
+const Weight = styled.h3`
+  font-size: 30px;
+  font-weight: 200;
+  line-height: 1;
+`;
+
+const ActiveExerciseTile = ({
+  setTimer,
+  decrementReps,
+  exerciseIndex,
+  exercise,
+  changeWeight,
+}) => {
   const [flip, setFlip] = useState(false);
 
   const { sets, name, weightInKilos, completedSets = [] } = exercise;
@@ -91,6 +102,7 @@ const ActiveExerciseTile = ({ setTimer, decrementReps, exerciseIndex, exercise }
     setTimer(reps !== 0);
     decrementReps({ setIndex, exerciseIndex });
   };
+  const handleWeightChange = diff => changeWeight({ exerciseIndex, diff });
 
   const hightlightedSets = zipSets(sets, completedSets).map(
     ({ max, completed }, index) => {
@@ -107,7 +119,7 @@ const ActiveExerciseTile = ({ setTimer, decrementReps, exerciseIndex, exercise }
     }
   );
 
-  const handleWeightClick = () => {
+  const handleTileFlip = () => {
     setFlip(!flip);
   };
 
@@ -117,7 +129,7 @@ const ActiveExerciseTile = ({ setTimer, decrementReps, exerciseIndex, exercise }
       <LayoutTile className="front">
         <HeadingWrapper>
           <ExerciseName>{name}</ExerciseName>
-          <FlipButton onClick={handleWeightClick}>{weightInKilos}kg</FlipButton>
+          <FlipButton onClick={handleTileFlip}>{weightInKilos}kg</FlipButton>
         </HeadingWrapper>
         <SetsWrapper>
           {hightlightedSets}
@@ -125,14 +137,13 @@ const ActiveExerciseTile = ({ setTimer, decrementReps, exerciseIndex, exercise }
       </LayoutTile>
 
       <LayoutTile className="back">
-        <FlipButton onClick={handleWeightClick}>Done</FlipButton>
+        <FlipButton onClick={handleTileFlip}>Done</FlipButton>
         <RowLayout>
-          <ChangeWeightButton width={55} height={55} fontSize={30}>-</ChangeWeightButton>
-          <ChangeWeightButton width={40} height={40} fontSize={22}>-</ChangeWeightButton>
-          <ChangeWeightButton width={26} height={26} fontSize={12}>-</ChangeWeightButton>
-          <ChangeWeightButton width={26} height={26} fontSize={12}>+</ChangeWeightButton>
-          <ChangeWeightButton width={40} height={40} fontSize={22}>+</ChangeWeightButton>
-          <ChangeWeightButton width={55} height={55} fontSize={30}>+</ChangeWeightButton>
+          <ChangeWeightButton
+            onClick={() => handleWeightChange(-2.5)}>-</ChangeWeightButton>
+          <Weight>{weightInKilos}</Weight>
+          <ChangeWeightButton
+            onClick={() => handleWeightChange(2.5)}>+</ChangeWeightButton>
         </RowLayout>
       </LayoutTile>
 
@@ -143,6 +154,7 @@ const ActiveExerciseTile = ({ setTimer, decrementReps, exerciseIndex, exercise }
 ActiveExerciseTile.propTypes = {
   setTimer: PropTypes.func,
   decrementReps: PropTypes.func,
+  changeWeight: PropTypes.func,
   exerciseIndex: PropTypes.number,
   exercise: PropTypes.shape({
     name: PropTypes.string,
@@ -155,6 +167,10 @@ const mapDispatchToProps = {
   decrementReps: ({ setIndex, exerciseIndex }) => ({
     type: DECREMENT_REPS,
     payload: { setIndex, exerciseIndex },
+  }),
+  changeWeight: ({ exerciseIndex, diff }) => ({
+    type: CHANGE_WEIGHT,
+    payload: { exerciseIndex, diff },
   }),
 };
 
