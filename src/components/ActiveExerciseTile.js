@@ -6,6 +6,7 @@ import LayoutTile from './LayoutTile';
 import FlipContainer from './FlipContainer';
 import { DECREMENT_REPS } from '../reducers/actions';
 import { zipSets } from '../helpers/functions';
+import { pink } from '../helpers/constants';
 
 const HeadingWrapper = styled.div`
   display: flex;
@@ -59,6 +60,29 @@ const FlipButton = styled.button`
   font-size: 19px;
 `;
 
+const RowLayout = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 10px;
+`;
+
+const ChangeWeightButton = styled.button`
+  font-size: ${({ fontSize }) => fontSize}px;
+  width: ${({ width }) => width}px;
+  height: ${({ height }) => height}px;
+  border: 2px solid grey;
+  border-radius: 50%;
+  background-color: white;
+  padding: 1px;
+  // stops double-tap-to-zoom
+  touch-action: manipulation;
+
+  &:active {
+    border-color: ${pink};
+  }
+`;
+
 const ActiveExerciseTile = ({ setTimer, decrementReps, exerciseIndex, exercise }) => {
   const [flip, setFlip] = useState(false);
 
@@ -102,7 +126,14 @@ const ActiveExerciseTile = ({ setTimer, decrementReps, exerciseIndex, exercise }
 
       <LayoutTile className="back">
         <FlipButton onClick={handleWeightClick}>Done</FlipButton>
-        backside
+        <RowLayout>
+          <ChangeWeightButton width={55} height={55} fontSize={30}>-</ChangeWeightButton>
+          <ChangeWeightButton width={40} height={40} fontSize={22}>-</ChangeWeightButton>
+          <ChangeWeightButton width={26} height={26} fontSize={12}>-</ChangeWeightButton>
+          <ChangeWeightButton width={26} height={26} fontSize={12}>+</ChangeWeightButton>
+          <ChangeWeightButton width={40} height={40} fontSize={22}>+</ChangeWeightButton>
+          <ChangeWeightButton width={55} height={55} fontSize={30}>+</ChangeWeightButton>
+        </RowLayout>
       </LayoutTile>
 
     </FlipContainer>
