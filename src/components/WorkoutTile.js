@@ -90,7 +90,7 @@ const ForwardArrowPanel = styled.div`
   margin-left: 5px;
 `;
 
-const Workout = ({ onGoing, workoutRoutine: { exercises, date }}) => {
+const WorkoutTile = ({ onGoing, workoutRoutine: { exercises, date }}) => {
 
   const exerciseTiles = exercises.map((e, i) =>
     <ListItem {...e} key={i} />
@@ -114,7 +114,7 @@ const Workout = ({ onGoing, workoutRoutine: { exercises, date }}) => {
   );
 };
 
-Workout.propTypes = {
+WorkoutTile.propTypes = {
   onGoing: PropTypes.bool,
   workoutRoutine: PropTypes.object,
 };
@@ -123,5 +123,5 @@ const mapStateToProps = state => ({
   onGoing: state.activeWorkoutOnGoing,
 });
 
-export default connect(mapStateToProps)(Workout);
+export default connect(mapStateToProps)(WorkoutTile);
 

@@ -5,13 +5,13 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Banner from '../../components/Banner';
 import Navigation from '../../components/Navigation';
-import Workout from '../../components/Workout';
+import WorkoutTile from '../../components/WorkoutTile';
 import EmptyHistoryTile from '../../components/EmptyHistoryTile';
 import { workoutPropType, exercisePropType } from '../../helpers/data';
-import { workoutTileMinHeight, gutterWidth } from '../../helpers/constants';
+import { tileMinHeight, gutterWidth } from '../../helpers/constants';
 
 const BottomScreenSpace = styled.div`
-  height: ${workoutTileMinHeight}px;
+  height: ${tileMinHeight}px;
 `;
 
 const StyledLink = styled(Link)`
@@ -27,14 +27,14 @@ const Hr = styled.hr`
 const Home = ({ location, activeWorkout, workoutHistory }) => {
 
   const workouts = workoutHistory.map((workout, i) =>
-    <Workout key={i} workoutRoutine={workout} />
+    <WorkoutTile key={i} workoutRoutine={workout} />
   );
 
   return (
     <Fragment>
       <Banner />
       <StyledLink to="/home/active-workout">
-        <Workout workoutRoutine={activeWorkout} />
+        <WorkoutTile workoutRoutine={activeWorkout} />
       </StyledLink>
       <Hr />
       {workouts.length !== 0 ? workouts : <EmptyHistoryTile />}

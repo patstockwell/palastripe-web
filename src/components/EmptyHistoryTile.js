@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import LayoutTile from './LayoutTile';
-import { workoutTileMinHeight } from '../helpers/constants';
+import { tileMinHeight } from '../helpers/constants';
 
 const Tile = styled(LayoutTile)`
-  min-height: ${workoutTileMinHeight}px;
+  min-height: ${tileMinHeight}px;
   border: 1px solid rgba(256, 256, 256, 0.3);
   background-color: rgba(256, 256, 256, 0.5);
   display: flex;

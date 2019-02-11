@@ -3,15 +3,9 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import LayoutTile from './LayoutTile';
+import FlipContainer from './FlipContainer';
 import { DECREMENT_REPS } from '../reducers/actions';
 import { zipSets } from '../helpers/functions';
-
-const TILE_GAP = 15;
-
-const TileWithMargin = styled(LayoutTile)`
-  margin-top: ${TILE_GAP}px;
-  margin-bottom: ${TILE_GAP}px;
-`;
 
 const HeadingWrapper = styled.div`
   display: flex;
@@ -60,36 +54,9 @@ const ExerciseName = styled.h3`
 `;
 
 const FlipButton = styled.button`
-  border: 1px solid lightgrey;
-  border-radius: 5px;
+  border: none;
   background-color: transparent;
   font-size: 19px;
-`;
-
-const FlipContainer = styled.div`
-  perspective: 1000px;
-  transition: 0.6s;
-  transform-style: preserve-3d;
-
-  &.flip {
-    transform: rotateX(180deg);
-  }
-
-  .back {
-    transform: rotateX(180deg);
-    backface-visibility: hidden;
-    position: absolute;
-    height: 100%;
-    top: -${TILE_GAP}px;
-    left: 0;
-    right: 0;
-  }
-
-  .front {
-    transform: rotateX(0deg);
-    backface-visibility: hidden;
-    z-index: 2;
-  }
 `;
 
 const ActiveExerciseTile = ({ setTimer, decrementReps, exerciseIndex, exercise }) => {
@@ -122,7 +89,8 @@ const ActiveExerciseTile = ({ setTimer, decrementReps, exerciseIndex, exercise }
 
   return (
     <FlipContainer className={flip ? 'flip' : ''}>
-      <TileWithMargin className="front">
+
+      <LayoutTile className="front">
         <HeadingWrapper>
           <ExerciseName>{name}</ExerciseName>
           <FlipButton onClick={handleWeightClick}>{weightInKilos}kg</FlipButton>
@@ -130,11 +98,13 @@ const ActiveExerciseTile = ({ setTimer, decrementReps, exerciseIndex, exercise }
         <SetsWrapper>
           {hightlightedSets}
         </SetsWrapper>
-      </TileWithMargin>
-      <TileWithMargin className="back">
+      </LayoutTile>
+
+      <LayoutTile className="back">
         <FlipButton onClick={handleWeightClick}>Done</FlipButton>
         backside
-      </TileWithMargin>
+      </LayoutTile>
+
     </FlipContainer>
   );
 };
