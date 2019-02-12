@@ -2,25 +2,13 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import LayoutTile from './LayoutTile';
-import FlipContainer from './FlipContainer';
-import { CHANGE_WEIGHT, DECREMENT_REPS } from '../reducers/actions';
-import { zipSets } from '../helpers/functions';
-import { pink } from '../helpers/constants';
-import { SubtractionSymbol, AdditionSymbol } from '../assets/SVGs';
-
-const HeadingWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-content: baseline;
-  padding: 0 10px;
-`;
-
-const SetsWrapper = styled.div`
-  display: flex;
-  justify-content: space-around;
-  align-content: center;
-`;
+import FrontTile from './FrontTile';
+import LayoutTile from '../LayoutTile';
+import FlipContainer from '../FlipContainer';
+import { CHANGE_WEIGHT, DECREMENT_REPS } from '../../reducers/actions';
+import { zipSets } from '../../helpers/functions';
+import { pink } from '../../helpers/constants';
+import { SubtractionSymbol, AdditionSymbol } from '../../assets/SVGs';
 
 const Set = styled.button`
   color: ${({ text }) => text};
@@ -50,9 +38,36 @@ export const getTheme = (completedReps, max) => {
   }
 };
 
-const ExerciseName = styled.h3`
-  font-weight: 400;
-  font-size: 19px;
+const RowLayoutRightAlign = styled.div`
+  display: flex;
+  justify-content: flex-end;
+`;
+
+const RowLayout = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+  width: 200px;
+`;
+
+const SvgButtonWrapper = styled.button`
+  background-color: transparent;
+  border: none;
+  border-radius: 50%;
+  // stops double-tap-to-zoom
+  width: 65px;
+  height: 65px;
+  padding: 0;
+
+  & > svg {
+    width: 50px;
+    height: 50px;
+  }
+  &:active {
+    background-color: ${pink};
+    fill: white;
+  }
 `;
 
 const FlipButton = styled.button`
@@ -61,46 +76,25 @@ const FlipButton = styled.button`
   font-size: 19px;
 `;
 
-const RowLayout = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 0;
-`;
-
-const SvgButtonWrapper = styled.button`
-  border: none;
-  background-color: transparent;
-  // stops double-tap-to-zoom
-  touch-action: manipulation;
-
-  &:active {
-    fill: ${pink};
-  }
-`;
-
-const Weight = styled.h3`
-  font-size: 30px;
-  font-weight: 200;
-  line-height: 1;
-`;
-
-const ActiveExerciseTile = ({
-  setTimer,
-  decrementReps,
-  exerciseIndex,
-  exercise,
-  changeWeight,
-}) => {
+const ActiveExerciseTile = props => {
   const [flip, setFlip] = useState(false);
-
-  const { sets, name, weightInKilos, completedSets = [] } = exercise;
+  const [weight, setWeight] = useState(props.exercise.weightInKilos);
+  const {
+    setTimer,
+    decrementReps,
+    exerciseIndex,
+    exercise: { sets, name, weightInKilos, completedSets = [] },
+    changeWeight,
+  } = props;
   const handleClick = (setIndex, reps) => {
     setTimer(reps !== 0);
     decrementReps({ setIndex, exerciseIndex });
   };
-  const handleWeightChange = diff => changeWeight({ exerciseIndex, diff });
-
+  const handleTileFlip = () => {
+    // only set the redux state when the tile flips back over
+    changeWeight({ exerciseIndex, diff: (weight - weightInKilos) });
+    setFlip(!flip);
+  };
   const hightlightedSets = zipSets(sets, completedSets).map(
     ({ max, completed }, index) => {
       const reps = isNaN(completed) ? max : completed;
@@ -116,31 +110,26 @@ const ActiveExerciseTile = ({
     }
   );
 
-  const handleTileFlip = () => {
-    setFlip(!flip);
-  };
-
   return (
     <FlipContainer className={flip ? 'flip' : ''}>
 
-      <LayoutTile className="front">
-        <HeadingWrapper>
-          <ExerciseName>{name}</ExerciseName>
-          <FlipButton onClick={handleTileFlip}>{weightInKilos}kg</FlipButton>
-        </HeadingWrapper>
-        <SetsWrapper>
-          {hightlightedSets}
-        </SetsWrapper>
-      </LayoutTile>
+      <FrontTile
+        name={name}
+        handleClick={handleTileFlip}
+        weightInKilos={weightInKilos}
+      >
+        {hightlightedSets}
+      </FrontTile>
 
       <LayoutTile className="back">
-        <FlipButton onClick={handleTileFlip}>Done</FlipButton>
+        <RowLayoutRightAlign>
+          <FlipButton onClick={handleTileFlip}>{weight}kg</FlipButton>
+        </RowLayoutRightAlign>
         <RowLayout>
-          <SvgButtonWrapper onClick={() => handleWeightChange(-2.5)}>
+          <SvgButtonWrapper onClick={() => setWeight(weight - 2.5)}>
             <SubtractionSymbol />
           </SvgButtonWrapper>
-          <Weight>{weightInKilos}</Weight>
-          <SvgButtonWrapper onClick={() => handleWeightChange(2.5)}>
+          <SvgButtonWrapper onClick={() => setWeight(weight + 2.5)}>
             <AdditionSymbol />
           </SvgButtonWrapper>
         </RowLayout>
