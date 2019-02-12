@@ -6,7 +6,7 @@ import moment from 'moment';
 import LayoutTile from './LayoutTile';
 import { exercisePropType } from '../helpers/data';
 import { zipSets } from '../helpers/functions';
-import { ForwardArrowBlack } from '../assets/Arrows';
+import { ForwardArrowBlack } from '../assets/SVGs';
 
 const ExerciseListItemWrapper = styled.div`
   display: flex;

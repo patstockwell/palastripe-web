@@ -7,6 +7,7 @@ import FlipContainer from './FlipContainer';
 import { CHANGE_WEIGHT, DECREMENT_REPS } from '../reducers/actions';
 import { zipSets } from '../helpers/functions';
 import { pink } from '../helpers/constants';
+import { SubtractionSymbol, AdditionSymbol } from '../assets/SVGs';
 
 const HeadingWrapper = styled.div`
   display: flex;
@@ -63,22 +64,18 @@ const FlipButton = styled.button`
 const RowLayout = styled.div`
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
-  width: 200px;
-  margin: 0 auto;
+  align-items: center;
+  margin: 0;
 `;
 
-const ChangeWeightButton = styled.button`
-  font-size: 80px;
+const SvgButtonWrapper = styled.button`
   border: none;
   background-color: transparent;
-  font-weight: 100;
-  line-height: 0.5;
   // stops double-tap-to-zoom
   touch-action: manipulation;
 
   &:active {
-    color: ${pink};
+    fill: ${pink};
   }
 `;
 
@@ -139,11 +136,13 @@ const ActiveExerciseTile = ({
       <LayoutTile className="back">
         <FlipButton onClick={handleTileFlip}>Done</FlipButton>
         <RowLayout>
-          <ChangeWeightButton
-            onClick={() => handleWeightChange(-2.5)}>-</ChangeWeightButton>
+          <SvgButtonWrapper onClick={() => handleWeightChange(-2.5)}>
+            <SubtractionSymbol />
+          </SvgButtonWrapper>
           <Weight>{weightInKilos}</Weight>
-          <ChangeWeightButton
-            onClick={() => handleWeightChange(2.5)}>+</ChangeWeightButton>
+          <SvgButtonWrapper onClick={() => handleWeightChange(2.5)}>
+            <AdditionSymbol />
+          </SvgButtonWrapper>
         </RowLayout>
       </LayoutTile>
 

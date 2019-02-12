@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import { animated } from 'react-spring';
 import BackSplash from '../components/BackSplash';
 import ActiveExerciseTile from '../components/ActiveExerciseTile';
-import { BackArrowWhite } from '../assets/Arrows';
+import { BackArrowWhite } from '../assets/SVGs';
 import {
   orange,
   pink,
