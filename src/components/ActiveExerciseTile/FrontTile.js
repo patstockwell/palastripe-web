@@ -27,6 +27,7 @@ const SetsWrapper = styled.div`
   display: flex;
   justify-content: space-around;
   align-content: center;
+  flex-wrap: wrap;
 `;
 
 const FrontTile = ({ name, children, handleClick, weightInKilos }) => (

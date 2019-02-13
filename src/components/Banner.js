@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import GoldCupBase64 from '../assets/GoldCupBase64';
+import { GoldCup } from '../assets/SVGs';
 
 const Title = styled.h1`
   font-family: 'Muli', 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -10,10 +10,6 @@ const Title = styled.h1`
   font-weight: 900;
   font-style: italic;
   padding: 0 5px;
-`;
-
-const Image = styled.img`
-  height: 100%;
 `;
 
 export const TopPanel = styled.div`
@@ -29,7 +25,7 @@ export const TopPanel = styled.div`
 
 const Banner = () => (
   <TopPanel>
-    <Image src={GoldCupBase64} />
+    <GoldCup height={36}/>
     <Title>hbff</Title>
   </TopPanel>
 );
