@@ -2,6 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import LayoutTile from '../LayoutTile';
+import { FlipArrows } from '../../assets/SVGs';
+import { pink } from '../../helpers/constants';
 
 const ExerciseName = styled.h3`
   font-weight: 400;
@@ -31,7 +33,10 @@ const FrontTile = ({ name, children, handleClick, weightInKilos }) => (
   <LayoutTile className="front">
     <HeadingWrapper>
       <ExerciseName>{name}</ExerciseName>
-      <FlipButton onClick={handleClick}>{weightInKilos}kg</FlipButton>
+      <FlipButton onClick={handleClick}>
+        {weightInKilos}kg&nbsp;
+        <FlipArrows height={15} colour={pink}/>
+      </FlipButton>
     </HeadingWrapper>
     <SetsWrapper>
       {children}

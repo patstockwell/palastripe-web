@@ -7,6 +7,7 @@ import LayoutTile from '../LayoutTile';
 import FlipContainer from '../FlipContainer';
 import { CHANGE_WEIGHT, DECREMENT_REPS } from '../../reducers/actions';
 import { zipSets } from '../../helpers/functions';
+import { FlipArrows } from '../../assets/SVGs';
 import { pink } from '../../helpers/constants';
 import { SubtractionSymbol, AdditionSymbol } from '../../assets/SVGs';
 
@@ -123,7 +124,10 @@ const ActiveExerciseTile = props => {
 
       <LayoutTile className="back">
         <RowLayoutRightAlign>
-          <FlipButton onClick={handleTileFlip}>{weight}kg</FlipButton>
+          <FlipButton onClick={handleTileFlip}>
+            {weight}kg&nbsp;
+            <FlipArrows height={15} colour={pink}/>
+          </FlipButton>
         </RowLayoutRightAlign>
         <RowLayout>
           <SvgButtonWrapper onClick={() => setWeight(weight - 2.5)}>
