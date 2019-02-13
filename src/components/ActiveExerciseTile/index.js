@@ -3,13 +3,10 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import FrontTile from './FrontTile';
-import LayoutTile from '../LayoutTile';
+import BackTile from './BackTile';
 import FlipContainer from '../FlipContainer';
 import { CHANGE_WEIGHT, DECREMENT_REPS } from '../../reducers/actions';
 import { zipSets } from '../../helpers/functions';
-import { FlipArrows } from '../../assets/SVGs';
-import { pink } from '../../helpers/constants';
-import { SubtractionSymbol, AdditionSymbol } from '../../assets/SVGs';
 
 const Set = styled.button`
   color: ${({ text }) => text};
@@ -38,45 +35,6 @@ export const getTheme = (completedReps, max) => {
     return { border: 'blue', background: 'lightskyblue', text: 'black' };
   }
 };
-
-const RowLayoutRightAlign = styled.div`
-  display: flex;
-  justify-content: flex-end;
-`;
-
-const RowLayout = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 0 auto;
-  width: 200px;
-`;
-
-const SvgButtonWrapper = styled.button`
-  background-color: transparent;
-  border: none;
-  border-radius: 50%;
-  // stops double-tap-to-zoom
-  touch-action: manipulation;
-  width: 65px;
-  height: 65px;
-  padding: 0;
-
-  & > svg {
-    width: 50px;
-    height: 50px;
-  }
-  &:active {
-    background-color: ${pink};
-    fill: white;
-  }
-`;
-
-const FlipButton = styled.button`
-  border: none;
-  background-color: transparent;
-  font-size: 19px;
-`;
 
 const ActiveExerciseTile = props => {
   const [flip, setFlip] = useState(false);
@@ -114,7 +72,6 @@ const ActiveExerciseTile = props => {
 
   return (
     <FlipContainer className={flip ? 'flip' : ''}>
-
       <FrontTile
         name={name}
         handleClick={handleTileFlip}
@@ -122,24 +79,11 @@ const ActiveExerciseTile = props => {
       >
         {hightlightedSets}
       </FrontTile>
-
-      <LayoutTile className="back">
-        <RowLayoutRightAlign>
-          <FlipButton onClick={handleTileFlip}>
-            {weight}kg&nbsp;
-            <FlipArrows height={15} colour={pink}/>
-          </FlipButton>
-        </RowLayoutRightAlign>
-        <RowLayout>
-          <SvgButtonWrapper onClick={() => setWeight(weight - 2.5)}>
-            <SubtractionSymbol />
-          </SvgButtonWrapper>
-          <SvgButtonWrapper onClick={() => setWeight(weight + 2.5)}>
-            <AdditionSymbol />
-          </SvgButtonWrapper>
-        </RowLayout>
-      </LayoutTile>
-
+      <BackTile
+        handleTileFlip={handleTileFlip}
+        weight={weight}
+        setWeight={setWeight}
+      />
     </FlipContainer>
   );
 };

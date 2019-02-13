@@ -48,7 +48,7 @@ const ActiveWorkout = ({ endWorkout, activeWorkout, animationStyles }) => {
 
   const setTimer = (show = true) => {
     resetTimer();
-    setTimeout(() => setShowRestTimer(show), 1000);
+    setTimeout(() => setShowRestTimer(show), 400);
   };
 
   if (count === REST_PERIOD_IN_SECONDS || (!showRestTimer && count !== 0)) {

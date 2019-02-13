@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
+import muli from '../assets/muli.woff2';
 
 export const GlobalStyle = createGlobalStyle`
   body {
@@ -20,5 +21,13 @@ export const GlobalStyle = createGlobalStyle`
     -webkit-tap-highlight-color: transparent;
     outline-style: none;
   }
+
+  @font-face {
+    font-family: 'Muli';
+    font-style: italic;
+    font-weight: 900;
+    src: url(${muli}) format('woff2');
+  }
+}
 `;
 
