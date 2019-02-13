@@ -57,6 +57,7 @@ const SvgButtonWrapper = styled.button`
   border: none;
   border-radius: 50%;
   // stops double-tap-to-zoom
+  touch-action: manipulation;
   width: 65px;
   height: 65px;
   padding: 0;
