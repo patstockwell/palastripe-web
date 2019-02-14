@@ -4,8 +4,7 @@ import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import moment from 'moment';
 import LayoutTile from './LayoutTile';
-import { exercisePropType } from '../helpers/data';
-import { zipSets } from '../helpers/functions';
+import { exercisePropTypeShape } from '../helpers/data';
 import { ForwardArrowBlack } from '../assets/SVGs';
 
 const ExerciseListItemWrapper = styled.div`
@@ -41,9 +40,10 @@ const Weight = styled.p`
   }
 `;
 
-const ListItem = ({ sets, completedSets = [], name, weightInKilos }) => {
-  const setCount = zipSets(sets, completedSets)
-    .map(({ completed }) => completed ? completed : '-').join('/');
+const ListItem = ({ sets, name, weightInKilos }) => {
+  const setCount = sets.map(({ completed }) => (
+    completed ? completed : '-'
+  )).join('/');
 
   return (
     <ExerciseListItemWrapper key={name}>
@@ -54,7 +54,7 @@ const ListItem = ({ sets, completedSets = [], name, weightInKilos }) => {
   );
 };
 
-ListItem.propTypes = exercisePropType;
+ListItem.propTypes = exercisePropTypeShape;
 
 const Title = styled.div`
   flex-basis: 88px;
@@ -90,29 +90,30 @@ const ForwardArrowPanel = styled.div`
   margin-left: 5px;
 `;
 
-const WorkoutTile = ({ onGoing, workoutRoutine: { exercises, date }}) => {
+const WorkoutTile =
+  ({ onGoing, workoutRoutine: { exercises, date, order }}) => {
 
-  const exerciseTiles = exercises.map((e, i) =>
-    <ListItem {...e} key={i} />
-  );
+    const exerciseTiles = order.map((e, i) =>
+      <ListItem {...exercises[e]} key={i} />
+    );
 
-  const ActiveExerciseTitle = onGoing ? 'On Going' : 'Up Next';
+    const ActiveExerciseTitle = onGoing ? 'On Going' : 'Up Next';
 
-  return (
-    <LayoutWrapper>
-      <Title>
-        <Date>{date ? moment(date).format('dddd') : ActiveExerciseTitle}</Date>
-        <Date>{date ? moment(date).format('D MMM') : ''}</Date>
-      </Title>
-      <ExerciseList>
-        {exerciseTiles}
-      </ExerciseList>
-      <ForwardArrowPanel>
-        {!date && <ForwardArrowBlack />}
-      </ForwardArrowPanel>
-    </LayoutWrapper>
-  );
-};
+    return (
+      <LayoutWrapper>
+        <Title>
+          <Date>{date ? moment(date).format('dddd') : ActiveExerciseTitle}</Date>
+          <Date>{date ? moment(date).format('D MMM') : ''}</Date>
+        </Title>
+        <ExerciseList>
+          {exerciseTiles}
+        </ExerciseList>
+        <ForwardArrowPanel>
+          {!date && <ForwardArrowBlack />}
+        </ForwardArrowPanel>
+      </LayoutWrapper>
+    );
+  };
 
 WorkoutTile.propTypes = {
   onGoing: PropTypes.bool,

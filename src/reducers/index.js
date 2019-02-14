@@ -1,15 +1,15 @@
-import { initialState } from './initialState';
-import { changeWeight, endWorkout, decrementReps } from './reducers';
+import initialState from './initialState';
+import { updateCompletedReps, changeWeight, endWorkout } from './reducers';
 import {
   CHANGE_WEIGHT,
   END_WORKOUT,
-  DECREMENT_REPS,
+  UPDATE_COMPLETED_REPS,
 } from '../reducers/actions';
 
-export default (state = initialState, action) => {
+const rootReducer = (state = initialState, action) => {
   switch (action.type) {
-  case DECREMENT_REPS:
-    return decrementReps(state, action);
+  case UPDATE_COMPLETED_REPS:
+    return updateCompletedReps(state, action);
   case END_WORKOUT:
     return endWorkout(state);
   case CHANGE_WEIGHT:
@@ -19,4 +19,5 @@ export default (state = initialState, action) => {
   }
 };
 
+export default rootReducer;
 

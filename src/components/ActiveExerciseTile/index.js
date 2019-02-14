@@ -5,8 +5,9 @@ import styled from 'styled-components';
 import FrontTile from './FrontTile';
 import BackTile from './BackTile';
 import FlipContainer from '../FlipContainer';
-import { CHANGE_WEIGHT, DECREMENT_REPS } from '../../reducers/actions';
-import { zipSets } from '../../helpers/functions';
+import { changeWeight, updateCompletedReps } from '../../reducers/actions';
+import { exercisePropTypeShape } from '../../helpers/data';
+import { decrementReps } from '../../helpers/functions';
 
 const Set = styled.button`
   color: ${({ text }) => text};
@@ -41,21 +42,21 @@ const ActiveExerciseTile = props => {
   const [weight, setWeight] = useState(props.exercise.weightInKilos);
   const {
     setTimer,
-    decrementReps,
-    exerciseIndex,
-    exercise: { sets, name, weightInKilos, completedSets = [] },
+    updateCompletedReps,
+    exercise: { id, sets, name, weightInKilos },
     changeWeight,
   } = props;
-  const handleClick = (setIndex, reps) => {
-    setTimer(reps !== 0);
-    decrementReps({ setIndex, exerciseIndex });
+  const handleClick = (setIndex, r) => {
+    const reps = decrementReps(r, 5);
+    setTimer(reps !== undefined);
+    updateCompletedReps({ exerciseId: id, setIndex, reps });
   };
   const handleTileFlip = () => {
     // only set the redux state when the tile flips back over
-    changeWeight({ exerciseIndex, diff: (weight - weightInKilos) });
+    changeWeight({ exerciseId: id, weight });
     setFlip(!flip);
   };
-  const hightlightedSets = zipSets(sets, completedSets).map(
+  const hightlightedSets = sets.map(
     ({ max, completed }, index) => {
       const reps = isNaN(completed) ? max : completed;
       const theme = getTheme(completed, max);
@@ -63,7 +64,7 @@ const ActiveExerciseTile = props => {
       return (
         <Set
           key={index}
-          onClick={() => handleClick(index, reps)}
+          onClick={() => handleClick(index, completed)}
           {...theme}
         >{reps}</Set>
       );
@@ -90,26 +91,12 @@ const ActiveExerciseTile = props => {
 
 ActiveExerciseTile.propTypes = {
   setTimer: PropTypes.func,
-  decrementReps: PropTypes.func,
+  updateCompletedReps: PropTypes.func,
   changeWeight: PropTypes.func,
-  exerciseIndex: PropTypes.number,
-  exercise: PropTypes.shape({
-    name: PropTypes.string,
-    weightInKilos: PropTypes.number,
-    sets: PropTypes.arrayOf(PropTypes.number),
-  }),
+  exercise: PropTypes.shape(exercisePropTypeShape),
 };
 
-const mapDispatchToProps = {
-  decrementReps: ({ setIndex, exerciseIndex }) => ({
-    type: DECREMENT_REPS,
-    payload: { setIndex, exerciseIndex },
-  }),
-  changeWeight: ({ exerciseIndex, diff }) => ({
-    type: CHANGE_WEIGHT,
-    payload: { exerciseIndex, diff },
-  }),
-};
+const mapDispatchToProps = { updateCompletedReps, changeWeight };
 
 const areEqualProps = (prev, next) => (
   JSON.stringify(prev.exercise) === JSON.stringify(next.exercise)

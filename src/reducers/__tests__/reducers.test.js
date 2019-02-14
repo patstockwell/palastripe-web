@@ -1,174 +1,155 @@
-import { endWorkout, decrementReps } from '../reducers';
-import { END_WORKOUT, DECREMENT_REPS } from '../actions';
+import initialState from '../initialState';
+import { changeWeight, endWorkout } from '../reducers';
+import { CHANGE_WEIGHT, END_WORKOUT } from '../actions';
 
 describe('Reducers', () => {
-  describe('decrementReps()', () => {
-    const state = {};
+  let state;
 
-    beforeEach(() => {
-      state.activeWorkout = {
-        workoutName: 'Blast',
-        exercises: [
-          {
-            name: 'Dead lift',
-            weightInKilos: 80,
-            sets: [5, 5, 5, 5],
-          },
-        ],
-      };
-    });
-
-    const action = {
-      type: DECREMENT_REPS,
-      payload: {
-        exerciseIndex: 0,
-        setIndex: 1,
-      },
+  beforeEach(() => {
+    state = {
+      ...initialState,
     };
+  });
 
-    it('decrements the reps when the reps are a positive integer', () => {
-      state.activeWorkout.exercises[0].completedSets = [3, 1];
-      expect(decrementReps(state, action)).toEqual({
-        activeWorkoutOnGoing: true,
+  describe('changeWeight()', () => {
+    it('returns the correct state object', () => {
+      expect(changeWeight(state, {
+        type: CHANGE_WEIGHT,
+        payload: { exerciseId: 'exercise2', weight: 34 },
+      })).toEqual({
+        ...state,
         activeWorkout: {
-          workoutName: 'Blast',
-          exercises: [
-            {
-              name: 'Dead lift',
+          workoutId: 'workout1',
+          exercises: {
+            'exercise1': {
+              id: 'exercise1',
+              name: 'Dead Lift',
               weightInKilos: 80,
-              sets: [5, 5, 5, 5],
-              completedSets: [3, 0],
+              sets:[
+                { max: 5, completed: undefined },
+                { max: 5, completed: undefined },
+                { max: 5, completed: undefined },
+                { max: 5, completed: undefined },
+              ],
             },
-          ],
-        },
-      });
-    });
-
-    it('sets the value to undefined when the completed sets are zero', () => {
-      state.activeWorkout.exercises[0].completedSets = [3, 0, 5];
-      expect(decrementReps(state, action)).toEqual({
-        activeWorkoutOnGoing: true,
-        activeWorkout: {
-          workoutName: 'Blast',
-          exercises: [
-            {
-              name: 'Dead lift',
-              weightInKilos: 80,
-              sets: [5, 5, 5, 5],
-              completedSets: [3, undefined, 5],
+            'exercise2': {
+              id: 'exercise2',
+              name: 'Squat',
+              weightInKilos: 34,
+              sets:[
+                { max: 5, completed: undefined },
+                { max: 5, completed: undefined },
+                { max: 5, completed: undefined },
+                { max: 5, completed: undefined },
+              ],
             },
-          ],
-        },
-      });
-    });
-
-    it('Sets the value to the total rep count when the completed reps is undefined', () => {
-      expect(decrementReps(state, action)).toEqual({
-        activeWorkoutOnGoing: true,
-        activeWorkout: {
-          workoutName: 'Blast',
-          exercises: [
-            {
-              name: 'Dead lift',
-              weightInKilos: 80,
-              sets: [5, 5, 5, 5],
-              completedSets: [undefined, 5],
+            'exercise3': {
+              id: 'exercise3',
+              name: 'Overhead Press',
+              weightInKilos: 40,
+              sets:[
+                { max: 5, completed: undefined },
+                { max: 5, completed: undefined },
+                { max: 5, completed: undefined },
+                { max: 5, completed: undefined },
+              ],
             },
-          ],
+          },
+          order: ['exercise1', 'exercise2', 'exercise3'],
         },
       });
     });
   });
 
   describe('endWorkout()', () => {
-    const state = {};
-
-    beforeEach(() => {
-      state.history = [];
-      state.activeWorkoutOnGoing = true;
-      state.workoutCountForThisPlan = 0;
-      state.workoutPlan = [
-        {
-          workoutName: 'A',
-          exercises: [
-            {
-              name: 'Chinups',
-              weightInKilos: 0,
-              sets: [5, 5, 5, 5],
-            },
-          ],
-        },
-        {
-          workoutName: 'B',
-          exercises: [
-            {
-              name: 'Deadlift',
-              weightInKilos: 80,
-              sets: [7, 7, 7, 7],
-            },
-          ],
-        },
-      ];
-      state.activeWorkout = {
-        workoutName: 'A',
-        exercises: [
-          {
-            name: 'Chinups',
-            weightInKilos: 0,
-            sets: [5, 5, 5, 5],
-          },
-        ],
-      };
-    });
-
     it('returns the correct state object', () => {
       expect(endWorkout(state, { type: END_WORKOUT })).toEqual({
-        activeWorkoutOnGoing: false,
-        history: [{
-          date: expect.any(Date),
-          workoutName: 'A',
-          exercises: [
-            {
-              name: 'Chinups',
-              weightInKilos: 0,
-              sets: [5, 5, 5, 5],
-            },
-          ],
-        }],
-        workoutCountForThisPlan: 1,
-        workoutPlan: [
-          {
-            workoutName: 'A',
-            exercises: [
-              {
-                name: 'Chinups',
-                weightInKilos: 0,
-                sets: [5, 5, 5, 5],
-              },
-            ],
-          },
-          {
-            workoutName: 'B',
-            exercises: [
-              {
-                name: 'Deadlift',
-                weightInKilos: 80,
-                sets: [7, 7, 7, 7],
-              },
-            ],
-          },
-        ],
-        activeWorkout: {
-          workoutName: 'B',
-          exercises: [
-            {
-              name: 'Deadlift',
-              weightInKilos: 80,
-              sets: [7, 7, 7, 7],
-            },
-          ],
+        entities: {
+          ...state.entities,
         },
-
+        activeWorkoutOnGoing: false,
+        currentPlanId: 'plan1',
+        activeWorkout: {
+          workoutId: 'workout2',
+          exercises: {
+            'exercise4': {
+              id: 'exercise4',
+              name: 'Chin-up',
+              weightInKilos: 0,
+              sets:[
+                { max: 5, completed: undefined },
+                { max: 5, completed: undefined },
+                { max: 5, completed: undefined },
+                { max: 5, completed: undefined },
+              ],
+            },
+            'exercise5': {
+              id: 'exercise5',
+              name: 'Bench Press',
+              weightInKilos: 60,
+              sets:[
+                { max: 5, completed: undefined },
+                { max: 5, completed: undefined },
+                { max: 5, completed: undefined },
+                { max: 5, completed: undefined },
+              ],
+            },
+            'exercise6': {
+              id: 'exercise6',
+              name: 'Bicep Curl',
+              weightInKilos: 30,
+              sets:[
+                { max: 5, completed: undefined },
+                { max: 5, completed: undefined },
+                { max: 5, completed: undefined },
+                { max: 5, completed: undefined },
+              ],
+            },
+          },
+          order: ['exercise4', 'exercise5', 'exercise6'],
+        },
+        history: [
+          {
+            date: expect.any(Date),
+            workoutId: 'workout1',
+            exercises: {
+              'exercise1': {
+                id: 'exercise1',
+                name: 'Dead Lift',
+                weightInKilos: 80,
+                sets:[
+                  { max: 5, completed: undefined },
+                  { max: 5, completed: undefined },
+                  { max: 5, completed: undefined },
+                  { max: 5, completed: undefined },
+                ],
+              },
+              'exercise2': {
+                id: 'exercise2',
+                name: 'Squat',
+                weightInKilos: 60,
+                sets:[
+                  { max: 5, completed: undefined },
+                  { max: 5, completed: undefined },
+                  { max: 5, completed: undefined },
+                  { max: 5, completed: undefined },
+                ],
+              },
+              'exercise3': {
+                id: 'exercise3',
+                name: 'Overhead Press',
+                weightInKilos: 40,
+                sets:[
+                  { max: 5, completed: undefined },
+                  { max: 5, completed: undefined },
+                  { max: 5, completed: undefined },
+                  { max: 5, completed: undefined },
+                ],
+              },
+            },
+            order: ['exercise1', 'exercise2', 'exercise3'],
+          }
+        ],
       });
     });
   });

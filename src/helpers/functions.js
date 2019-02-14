@@ -21,9 +21,16 @@ export function useInterval(callback, delay) {
   }, [delay]);
 }
 
-export const zipSets = (sets, completedSets) => (
-  sets.map((item, index) => ({
-    max: item,
-    completed: completedSets[index],
-  }))
-);
+export const getActiveWorkoutFromState = state => {
+  const { entities, currentWorkoutId } = state;
+  const exerciseIds = entities.workouts.byId[currentWorkoutId].exercises;
+  const exercises = exerciseIds.map(id => entities.exercises.byId[id]);
+
+  return { exercises };
+};
+
+// decrement reps or loop back to the start
+// undefined -> 5 -> 4 -> 3 -> 2 -> 1 -> 0 -> undefined -> ...
+export const decrementReps = (reps, max) =>
+  reps === undefined ? max :
+    reps === 0 ? undefined : reps - 1;

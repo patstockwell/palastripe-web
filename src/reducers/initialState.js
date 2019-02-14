@@ -1,68 +1,134 @@
-export const initialState = {
-  workoutCountForThisPlan: 0,
+const initialState = {
   activeWorkoutOnGoing: false,
+  currentPlanId: 'plan1',
   activeWorkout: {
-    workoutName: 'Arms Routine',
-    exercises: [
-      {
-        name: 'Chinups',
-        weightInKilos: 0,
-        sets: [5, 5, 5, 5],
+    workoutId: 'workout1',
+    exercises: {
+      'exercise1': {
+        id: 'exercise1',
+        name: 'Dead Lift',
+        weightInKilos: 80,
+        sets:[
+          { max: 5, completed: undefined },
+          { max: 5, completed: undefined },
+          { max: 5, completed: undefined },
+          { max: 5, completed: undefined },
+        ],
       },
-      {
-        name: 'Bench Press',
+      'exercise2': {
+        id: 'exercise2',
+        name: 'Squat',
+        weightInKilos: 60,
+        sets:[
+          { max: 5, completed: undefined },
+          { max: 5, completed: undefined },
+          { max: 5, completed: undefined },
+          { max: 5, completed: undefined },
+        ],
+      },
+      'exercise3': {
+        id: 'exercise3',
+        name: 'Overhead Press',
         weightInKilos: 40,
-        sets: [8, 8, 8, 8],
+        sets:[
+          { max: 5, completed: undefined },
+          { max: 5, completed: undefined },
+          { max: 5, completed: undefined },
+          { max: 5, completed: undefined },
+        ],
       },
-      {
-        name: 'Bicep Curl',
-        weightInKilos: 12.5,
-        sets: [8, 8, 8, 8],
-      },
-    ],
+    },
+    order: ['exercise1', 'exercise2', 'exercise3'],
   },
-  workoutPlan: [
-    {
-      workoutName: 'Arms Routine',
-      exercises: [
-        {
-          name: 'Chinups',
+
+  entities: {
+    exercises: {
+      byId: {
+        'exercise1': {
+          id: 'exercise1',
+          name: 'Dead Lift',
+          weightInKilos: 80,
+          sets: [5, 5, 5, 5],
+        },
+        'exercise2': {
+          id: 'exercise2',
+          name: 'Squat',
+          weightInKilos: 60,
+          sets: [5, 5, 5, 5],
+        },
+        'exercise3': {
+          id: 'exercise3',
+          name: 'Overhead Press',
+          weightInKilos: 40,
+          sets: [5, 5, 5, 5],
+        },
+        'exercise4': {
+          id: 'exercise4',
+          name: 'Chin-up',
           weightInKilos: 0,
           sets: [5, 5, 5, 5],
         },
-        {
+        'exercise5': {
+          id: 'exercise5',
           name: 'Bench Press',
-          weightInKilos: 40,
-          sets: [8, 8, 8, 8],
+          weightInKilos: 60,
+          sets: [5, 5, 5, 5],
         },
-        {
+        'exercise6': {
+          id: 'exercise6',
           name: 'Bicep Curl',
-          weightInKilos: 12.5,
-          sets: [8, 8, 8, 8],
-        },
-      ],
-    },
-    {
-      workoutName: 'Leg Burn',
-      exercises: [
-        {
-          name: 'Deadlift',
-          weightInKilos: 80,
-          sets: [7, 7, 7, 7],
-        },
-        {
-          name: 'Squat',
-          weightInKilos: 50,
-          sets: [7, 7, 7, 7],
-        },
-        {
-          name: 'Overhead Press',
           weightInKilos: 30,
-          sets: [7, 7, 7, 7],
+          sets: [5, 5, 5, 5],
         },
+        'exercise7': {
+          id: 'exercise7',
+          name: 'Row',
+          weightInKilos: 40,
+          sets: [5, 5, 5, 5],
+        },
+      },
+      allIds: [
+        'exercise1',
+        'exercise2',
+        'exercise3',
+        'exercise4',
+        'exercise5',
+        'exercise6',
+        'exercise7',
       ],
     },
-  ],
+
+    workouts: {
+      byId: {
+        'workout1': {
+          id: 'workout1',
+          exercises: ['exercise1', 'exercise2', 'exercise3'],
+        },
+        'workout2': {
+          id: 'workout2',
+          exercises: ['exercise4', 'exercise5', 'exercise6'],
+        },
+        'workout3': {
+          id: 'workout3',
+          exercises: ['exercise1', 'exercise5', 'exercise7'],
+        },
+      },
+      allIds: ['workout1', 'workout2', 'workout3']
+    },
+
+    workoutPlans: {
+      byId: {
+        'plan1': {
+          id: 'plan1',
+          workouts: ['workout1', 'workout2', 'workout3'],
+        },
+      },
+      allIds: ['plan1'],
+    },
+  },
+
   history: [],
 };
+
+export default initialState;
 

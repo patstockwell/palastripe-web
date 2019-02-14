@@ -7,7 +7,7 @@ import Banner from '../../components/Banner';
 import Navigation from '../../components/Navigation';
 import WorkoutTile from '../../components/WorkoutTile';
 import EmptyHistoryTile from '../../components/EmptyHistoryTile';
-import { workoutPropType, exercisePropType } from '../../helpers/data';
+import { workoutPropType, exercisePropTypeShape } from '../../helpers/data';
 import { tileMinHeight, gutterWidth } from '../../helpers/constants';
 
 const BottomScreenSpace = styled.div`
@@ -48,7 +48,8 @@ Home.propTypes = {
   location: PropTypes.object,
   workoutHistory: PropTypes.arrayOf(PropTypes.shape({
     date: PropTypes.object,
-    exercises: PropTypes.arrayOf(PropTypes.shape(exercisePropType)),
+    exercises: PropTypes.objectOf(PropTypes.shape(exercisePropTypeShape)),
+    order: PropTypes.arrayOf(PropTypes.string),
   })),
   activeWorkout: PropTypes.shape(workoutPropType),
 };

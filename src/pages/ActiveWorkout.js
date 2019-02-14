@@ -54,13 +54,13 @@ const ActiveWorkout = ({ endWorkout, activeWorkout, animationStyles }) => {
   if (count === REST_PERIOD_IN_SECONDS || (!showRestTimer && count !== 0)) {
     resetTimer();
   }
+  const { order, exercises } = activeWorkout;
 
-  const exercises = activeWorkout.exercises.map((exercise, i) =>
+  const exerciseTiles = order.map(id =>
     <ActiveExerciseTile
-      key={exercise.name}
-      exerciseIndex={i}
+      key={exercises[id].name}
       setTimer={setTimer}
-      exercise={exercise}
+      exercise={exercises[id]}
     />
   );
 
@@ -83,7 +83,7 @@ const ActiveWorkout = ({ endWorkout, activeWorkout, animationStyles }) => {
             Done
           </StyledLink>
         </Header>
-        {exercises}
+        {exerciseTiles}
       </BackSplash>
     </animated.div>
   );

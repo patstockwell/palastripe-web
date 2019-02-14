@@ -1,40 +1,60 @@
-export const decrementReps = (state, action) => {
-  const { payload: { exerciseIndex, setIndex } } = action;
+export const updateCompletedReps = (state, action) => {
+  const { payload: { exerciseId, setIndex, reps } } = action;
   const { activeWorkout } = state;
   const { exercises } = activeWorkout;
-  const { completedSets = [], sets } = exercises[exerciseIndex];
+  const exercise = exercises[exerciseId];
 
-  const reps = completedSets[setIndex]; // the number of completed reps for this set
-  const newCompletedSets = [...completedSets]; // make a copy
-  const newReps = reps === undefined ? sets[setIndex] :
-    reps === 0 ? undefined : reps - 1; // decrement reps or loop back to the start
-  newCompletedSets[setIndex] = newReps; // update the completed sets
-
-  return ({
+  return {
     ...state,
-    activeWorkoutOnGoing: true,
     activeWorkout: {
       ...activeWorkout,
-      exercises: [
-        ...exercises.slice(0, exerciseIndex),
-        {
-          ...exercises[exerciseIndex],
-          completedSets: newCompletedSets,
+      exercises: {
+        ...exercises,
+        [exerciseId]: {
+          ...exercise,
+          sets: exercise.sets.map((set, i) => (
+            i === setIndex ? { ...set, completed: reps } : set
+          )),
         },
-        ...exercises.slice(exerciseIndex + 1, exercises.length),
-      ],
+      },
     },
-  });
+  };
 };
 
 export const endWorkout = state => {
-  const newWorkoutIndex = (state.workoutCountForThisPlan + 1) % state.workoutPlan.length;
+  const {
+    activeWorkout: { workoutId },
+    entities: {
+      workouts: { byId: workoutsById, allIds },
+      exercises: { byId: exercisesById },
+    }
+  } = state;
+
+  // get the next workout
+  const currentIndex = allIds.indexOf(workoutId);
+  const nextWorkoutId = allIds[(currentIndex + 1) % allIds.length];
+  const nextWorkout = workoutsById[nextWorkoutId];
+
+  // create activeWorkout based on next workout's exercise ids
+  const exercises = nextWorkout.exercises
+    .map(id => exercisesById[id])
+    .reduce((acc, exercise) => ({
+      ...acc,
+      [exercise.id]: {
+        ...exercise,
+        sets: exercise.sets.map(reps => ({
+          max: reps,
+          completed: undefined,
+        }))},
+    }), {});
+
   return {
     ...state,
     activeWorkoutOnGoing: false,
-    workoutCountForThisPlan: state.workoutCountForThisPlan + 1,
     activeWorkout: {
-      ...state.workoutPlan[newWorkoutIndex],
+      workoutId: nextWorkoutId,
+      exercises,
+      order: nextWorkout.exercises,
     },
     history: [
       {
@@ -47,23 +67,22 @@ export const endWorkout = state => {
 };
 
 export const changeWeight = (state, action) => {
-  const { payload: { exerciseIndex, diff } } = action;
+  const { payload: { exerciseId, weight } } = action;
   const { activeWorkout } = state;
   const { exercises } = activeWorkout;
-  const updatedWeight = exercises[exerciseIndex].weightInKilos + diff;
+  const exercise = exercises[exerciseId];
 
   return {
     ...state,
     activeWorkout: {
       ...activeWorkout,
-      exercises: [
-        ...exercises.slice(0, exerciseIndex),
-        {
-          ...exercises[exerciseIndex],
-          weightInKilos: updatedWeight,
+      exercises: {
+        ...exercises,
+        [exerciseId]: {
+          ...exercise,
+          weightInKilos: weight,
         },
-        ...exercises.slice(exerciseIndex + 1, exercises.length),
-      ],
+      },
     },
   };
 };
