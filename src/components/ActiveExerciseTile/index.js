@@ -51,10 +51,10 @@ const ActiveExerciseTile = props => {
     setTimer(reps !== undefined);
     updateCompletedReps({ exerciseId: id, setIndex, reps });
   };
-  const handleTileFlip = () => {
+  const handleTileFlip = isFlipped => {
     // only set the redux state when the tile flips back over
     changeWeight({ exerciseId: id, weight });
-    setFlip(!flip);
+    setFlip(isFlipped);
   };
   const hightlightedSets = sets.map(
     ({ max, completed }, index) => {
@@ -75,7 +75,7 @@ const ActiveExerciseTile = props => {
     <FlipContainer className={flip ? 'flip' : ''}>
       <FrontTile
         name={name}
-        handleClick={handleTileFlip}
+        handleTileFlip={handleTileFlip}
         weightInKilos={weightInKilos}
       >
         {hightlightedSets}

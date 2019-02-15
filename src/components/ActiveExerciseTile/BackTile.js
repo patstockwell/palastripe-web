@@ -48,7 +48,7 @@ const RowLayout = styled.div`
 const BackTile = ({ handleTileFlip, weight, setWeight }) => (
   <LayoutTile className="back">
     <RowLayoutRightAlign>
-      <FlipButton onClick={handleTileFlip}>
+      <FlipButton onClick={() => handleTileFlip(false)}>
         {weight}kg&nbsp;
         <FlipArrows height={15} colour={pink}/>
       </FlipButton>

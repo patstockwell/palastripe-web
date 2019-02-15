@@ -30,11 +30,11 @@ const SetsWrapper = styled.div`
   flex-wrap: wrap;
 `;
 
-const FrontTile = ({ name, children, handleClick, weightInKilos }) => (
+const FrontTile = ({ name, children, handleTileFlip, weightInKilos }) => (
   <LayoutTile className="front">
     <HeadingWrapper>
       <ExerciseName>{name}</ExerciseName>
-      <FlipButton onClick={handleClick}>
+      <FlipButton onClick={() => handleTileFlip(true)}>
         {weightInKilos}kg&nbsp;
         <FlipArrows height={15} colour={pink}/>
       </FlipButton>
@@ -46,7 +46,7 @@ const FrontTile = ({ name, children, handleClick, weightInKilos }) => (
 );
 
 FrontTile.propTypes = {
-  handleClick: PropTypes.func,
+  handleTileFlip: PropTypes.func,
   weightInKilos: PropTypes.number,
   name: PropTypes.string,
   children: PropTypes.node,
