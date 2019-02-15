@@ -1,6 +1,6 @@
 import initialState from '../initialState';
-import { changeWeight, endWorkout } from '../reducers';
-import { CHANGE_WEIGHT, END_WORKOUT } from '../actions';
+import { updateCompletedReps, changeWeight, endWorkout } from '../reducers';
+import { UPDATE_COMPLETED_REPS, CHANGE_WEIGHT, END_WORKOUT } from '../actions';
 
 describe('Reducers', () => {
   let state;
@@ -9,6 +9,56 @@ describe('Reducers', () => {
     state = {
       ...initialState,
     };
+  });
+
+  describe('updateCompletedReps()', () => {
+    it('returns the coreect state object', () => {
+      expect(updateCompletedReps(state, {
+        type: UPDATE_COMPLETED_REPS,
+        payload: { exerciseId: 'exercise1', setIndex: 2, reps: 3 },
+      })).toEqual({
+        ...state,
+        activeWorkout: {
+          workoutId: 'workout1',
+          exercises: {
+            'exercise1': {
+              id: 'exercise1',
+              name: 'Dead Lift',
+              weightInKilos: 80,
+              sets:[
+                { max: 5, completed: undefined },
+                { max: 5, completed: undefined },
+                { max: 5, completed: 3 },
+                { max: 5, completed: undefined },
+              ],
+            },
+            'exercise2': {
+              id: 'exercise2',
+              name: 'Squat',
+              weightInKilos: 60,
+              sets:[
+                { max: 5, completed: undefined },
+                { max: 5, completed: undefined },
+                { max: 5, completed: undefined },
+                { max: 5, completed: undefined },
+              ],
+            },
+            'exercise3': {
+              id: 'exercise3',
+              name: 'Overhead Press',
+              weightInKilos: 40,
+              sets:[
+                { max: 5, completed: undefined },
+                { max: 5, completed: undefined },
+                { max: 5, completed: undefined },
+                { max: 5, completed: undefined },
+              ],
+            },
+          },
+          order: ['exercise1', 'exercise2', 'exercise3'],
+        },
+      });
+    });
   });
 
   describe('changeWeight()', () => {
