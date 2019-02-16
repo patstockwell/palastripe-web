@@ -13,3 +13,9 @@ export const blue = '#198FE3';
 export const green = '#14D790';
 export const yellow = '#f7f529';
 export const orange = '#f79729';
+
+// action types
+export const CHANGE_WEIGHT = 'CHANGE_WEIGHT';
+export const UPDATE_COMPLETED_REPS = 'UPDATE_COMPLETED_REPS';
+export const END_WORKOUT = 'END_WORKOUT';
+

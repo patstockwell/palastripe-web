@@ -5,9 +5,9 @@ import styled from 'styled-components';
 import FrontTile from './FrontTile';
 import BackTile from './BackTile';
 import FlipContainer from '../FlipContainer';
-import { changeWeight, updateCompletedReps } from '../../reducers/actions';
 import { exercisePropTypeShape } from '../../helpers/data';
 import { decrementReps } from '../../helpers/functions';
+import { UPDATE_COMPLETED_REPS, CHANGE_WEIGHT } from '../../helpers/constants';
 
 const Set = styled.button`
   color: ${({ text }) => text};
@@ -96,7 +96,16 @@ ActiveExerciseTile.propTypes = {
   exercise: PropTypes.shape(exercisePropTypeShape),
 };
 
-const mapDispatchToProps = { updateCompletedReps, changeWeight };
+const mapDispatchToProps = {
+  updateCompletedReps: ({ exerciseId, setIndex, reps }) => ({
+    type: UPDATE_COMPLETED_REPS,
+    payload: { exerciseId, setIndex, reps },
+  }),
+  changeWeight: ({ exerciseId, weight }) => ({
+    type: CHANGE_WEIGHT,
+    payload: { exerciseId, weight },
+  }),
+};
 
 const areEqualProps = (prev, next) => (
   JSON.stringify(prev.exercise) === JSON.stringify(next.exercise)

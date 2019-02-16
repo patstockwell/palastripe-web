@@ -79,7 +79,7 @@ const ActiveWorkout = ({ endWorkout, activeWorkout, animationStyles }) => {
             <BackArrowWhite /> Back
           </StyledLink>
           {showRestTimer && count > 0 && count}
-          <StyledLink to="/home/" onClick={endWorkout}>
+          <StyledLink to="/home/" onClick={() => endWorkout(activeWorkout)}>
             Done
           </StyledLink>
         </Header>
@@ -100,7 +100,10 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
-  endWorkout: () => ({ type: 'END_WORKOUT'}),
+  endWorkout: activeWorkout => ({
+    type: 'END_WORKOUT',
+    payload: { activeWorkout },
+  }),
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(ActiveWorkout);

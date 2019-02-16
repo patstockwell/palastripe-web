@@ -1,8 +1,12 @@
 const initialState = {
-  activeWorkoutOnGoing: false,
-  currentPlanId: 'plan1',
+  settings: {
+    planId: 'plan1',
+    useKilos: true,
+  },
+
   activeWorkout: {
     workoutId: 'workout1',
+    onGoing: false,
     exercises: {
       'exercise1': {
         id: 'exercise1',
@@ -78,7 +82,7 @@ const initialState = {
           id: 'exercise6',
           name: 'Bicep Curl',
           weightInKilos: 30,
-          sets: [5, 5, 5, 5],
+          sets: [12, 12, 12, 12],
         },
         'exercise7': {
           id: 'exercise7',
