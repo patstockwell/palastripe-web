@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { animated } from 'react-spring';
 import BackSplash from '../components/BackSplash';
+import AlertConfirm from '../components/AlertConfirm';
 import ActiveExerciseTile from '../components/ActiveExerciseTile';
 import { BackArrowWhite } from '../assets/SVGs';
 import {
@@ -37,6 +38,7 @@ const Header = styled.div`
 const ActiveWorkout = ({ endWorkout, activeWorkout, animationStyles }) => {
   const [count, setCount] = useState(0);
   const [showRestTimer, setShowRestTimer] = useState(false);
+  const [showAlert, setShowAlert] = useState(false);
   useInterval(() => {
     setCount(count + 1);
   }, showRestTimer ? ONE_SECOND : ONE_DAY);
@@ -54,8 +56,13 @@ const ActiveWorkout = ({ endWorkout, activeWorkout, animationStyles }) => {
   if (count === REST_PERIOD_IN_SECONDS || (!showRestTimer && count !== 0)) {
     resetTimer();
   }
-  const { order, exercises } = activeWorkout;
 
+  const showConfirmation = e => {
+    e.preventDefault();
+    setShowAlert(true);
+  };
+
+  const { order, exercises } = activeWorkout;
   const exerciseTiles = order.map(id =>
     <ActiveExerciseTile
       key={exercises[id].name}
@@ -79,11 +86,17 @@ const ActiveWorkout = ({ endWorkout, activeWorkout, animationStyles }) => {
             <BackArrowWhite /> Back
           </StyledLink>
           {showRestTimer && count > 0 && count}
-          <StyledLink to="/home/" onClick={() => endWorkout(activeWorkout)}>
+          <StyledLink to="/home/" onClick={e => showConfirmation(e)}>
             Done
           </StyledLink>
         </Header>
         {exerciseTiles}
+        {showAlert &&
+          <AlertConfirm
+            setShowAlert={setShowAlert}
+            endWorkout={() => endWorkout(activeWorkout)}
+          />
+        }
       </BackSplash>
     </animated.div>
   );
