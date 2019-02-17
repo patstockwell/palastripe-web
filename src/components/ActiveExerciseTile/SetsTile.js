@@ -30,7 +30,7 @@ const SetsWrapper = styled.div`
   flex-wrap: wrap;
 `;
 
-const FrontTile = ({ name, children, handleTileFlip, weightInKilos }) => (
+const SetsTile = ({ name, children, handleTileFlip, weightInKilos }) => (
   <LayoutTile className="front">
     <HeadingWrapper>
       <ExerciseName>{name}</ExerciseName>
@@ -45,7 +45,7 @@ const FrontTile = ({ name, children, handleTileFlip, weightInKilos }) => (
   </LayoutTile>
 );
 
-FrontTile.propTypes = {
+SetsTile.propTypes = {
   handleTileFlip: PropTypes.func,
   weightInKilos: PropTypes.number,
   name: PropTypes.string,
@@ -62,7 +62,7 @@ const areEqualProps = (prev, next) => {
   return newRepCount && prev.weightInKilos === next.weightInKilos;
 };
 
-const PureFrontTile = React.memo(FrontTile, areEqualProps);
+const PureSetsTile = React.memo(SetsTile, areEqualProps);
 
-export default PureFrontTile;
+export default PureSetsTile;
 

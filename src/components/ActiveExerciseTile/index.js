@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import FrontTile from './FrontTile';
-import BackTile from './BackTile';
+import SetsTile from './SetsTile';
+import WeightIncrementTile from './WeightIncrementTile';
+import Set, { getTheme } from './Set';
 import { exercisePropTypeShape } from '../../helpers/data';
 import { decrementReps } from '../../helpers/functions';
 import {
@@ -17,34 +17,6 @@ import {
   getStyles,
   backfaceVisibility,
 } from '../FlipContainer';
-
-const Set = styled.button`
-  color: ${({ text }) => text};
-  background-color: ${({ background }) => background};
-  border: 3px solid ${({ border }) => border};
-  border-radius: 50%;
-  width: 50px;
-  height: 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 13px 0px 7px;
-  font-size: 20px;
-  // stops double-tap-to-zoom
-  touch-action: manipulation;
-`;
-
-export const getTheme = (completedReps, max) => {
-  if (completedReps === undefined) {
-    return { border: 'grey', background: 'white', text: 'grey' };
-  } else if (completedReps <= 0) {
-    return { border: 'grey', background: 'lightgrey', text: 'grey' };
-  } else if (completedReps >= max) {
-    return { border: 'green', background: 'lightgreen', text: 'black' };
-  } else {
-    return { border: 'blue', background: 'lightskyblue', text: 'black' };
-  }
-};
 
 const ActiveExerciseTile = props => {
   const [flip, setFlip] = useState(false);
@@ -88,13 +60,13 @@ const ActiveExerciseTile = props => {
   return (
     <RelativeDiv>
       <FrontFace style={{ transform, ...backfaceVisibility }} >
-        <FrontTile
+        <SetsTile
           name={name}
           handleTileFlip={handleTileFlip}
           weightInKilos={weightInKilos}
         >
           {hightlightedSets}
-        </FrontTile>
+        </SetsTile>
       </FrontFace>
       <BackFace
         style={{
@@ -102,7 +74,7 @@ const ActiveExerciseTile = props => {
           ...backfaceVisibility
         }}
       >
-        <BackTile
+        <WeightIncrementTile
           handleTileFlip={handleTileFlip}
           weight={weight}
           setWeight={setWeight}

@@ -45,7 +45,7 @@ const RowLayout = styled.div`
   width: 200px;
 `;
 
-const BackTile = ({ handleTileFlip, weight, setWeight }) => (
+const WeightIncrementTile = ({ handleTileFlip, weight, setWeight }) => (
   <LayoutTile className="back">
     <RowLayoutRightAlign>
       <FlipButton onClick={() => handleTileFlip(false)}>
@@ -64,7 +64,7 @@ const BackTile = ({ handleTileFlip, weight, setWeight }) => (
   </LayoutTile>
 );
 
-BackTile.propTypes = {
+WeightIncrementTile.propTypes = {
   handleTileFlip: PropTypes.func.isRequired,
   weight: PropTypes.number.isRequired,
   setWeight: PropTypes.func.isRequired,
@@ -74,7 +74,7 @@ const areEqualProps = (prev, next) => (
   prev.weight === next.weight
 );
 
-const PureBackTile = React.memo(BackTile, areEqualProps);
+const PureWeightIncrementTile = React.memo(WeightIncrementTile, areEqualProps);
 
-export default PureBackTile;
+export default PureWeightIncrementTile;
 

@@ -30,6 +30,6 @@ export const getStyles = flip => {
 };
 
 export const backfaceVisibility = {
-  '-webkit-backface-visibility': 'hidden',
-  'backface-visibility': 'hidden',
+  WebkitBackfaceVisibility: 'hidden',
+  backfaceVisibility: 'hidden',
 };

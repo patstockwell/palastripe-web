@@ -2,29 +2,11 @@ import React from 'react';
 import { useTransition, animated } from 'react-spring';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 import { purple } from '../helpers/constants';
 
 const bounceSpace = 50;
 const popUpHeight = 200 + bounceSpace;
-
-const slideUp = keyframes`
-  0% {
-    transform: translateY(${popUpHeight}px);
-  }
-
-  70% {
-    transform: translateY(0px);
-  }
-
-  85% {
-    transform: translateY(5px);
-  }
-
-  100% {
-    transform: translateY(0px);
-  }
-`;
 
 const Background = styled.div`
   position: absolute;
@@ -45,7 +27,6 @@ const Dialog = styled.div`
   bottom: 0;
   left: 0;
   width: 100vw;
-  // animation: ${slideUp} 300ms ease-in-out;
 `;
 
 const Message = styled.p`
