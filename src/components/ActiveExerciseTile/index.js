@@ -2,12 +2,21 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import { useSpring, animated } from 'react-spring';
 import FrontTile from './FrontTile';
 import BackTile from './BackTile';
 import { exercisePropTypeShape } from '../../helpers/data';
 import { decrementReps } from '../../helpers/functions';
-import { tileGap, UPDATE_COMPLETED_REPS, CHANGE_WEIGHT } from '../../helpers/constants';
+import {
+  UPDATE_COMPLETED_REPS,
+  CHANGE_WEIGHT,
+} from '../../helpers/constants';
+import {
+  RelativeDiv,
+  FrontFace,
+  BackFace,
+  getStyles,
+  backfaceVisibility,
+} from '../FlipContainer';
 
 const Set = styled.button`
   color: ${({ text }) => text};
@@ -37,23 +46,6 @@ export const getTheme = (completedReps, max) => {
   }
 };
 
-const RelativeDiv = styled.div`
-  position: relative;
-`;
-
-const FrontFace = styled(animated.div)`
-  backface-visibility: hidden,
-`;
-
-const BackFace = styled(animated.div)`
-  position: absolute;
-  backface-visibility: hidden;
-  height: 100%;
-  top: -${tileGap}px;
-  left: 0;
-  right: 0;
-`;
-
 const ActiveExerciseTile = props => {
   const [flip, setFlip] = useState(false);
   const [weight, setWeight] = useState(props.exercise.weightInKilos);
@@ -76,11 +68,6 @@ const ActiveExerciseTile = props => {
     setFlip(isFlipped);
   };
 
-  const { transform } = useSpring({
-    transform: `perspective(1300px) rotateX(${flip ? 180 : 0}deg)`,
-    config: { mass: 5, tension: 700, friction: 68 }
-  });
-
   const hightlightedSets = sets.map(
     ({ max, completed }, index) => {
       const reps = isNaN(completed) ? max : completed;
@@ -96,15 +83,11 @@ const ActiveExerciseTile = props => {
     }
   );
 
+  const transform = getStyles(flip);
+
   return (
     <RelativeDiv>
-      <FrontFace
-        style={{
-          transform,
-          '-webkit-backface-visibility': 'hidden',
-          'backface-visibility': 'hidden',
-        }}
-      >
+      <FrontFace style={{ transform, ...backfaceVisibility }} >
         <FrontTile
           name={name}
           handleTileFlip={handleTileFlip}
@@ -116,8 +99,7 @@ const ActiveExerciseTile = props => {
       <BackFace
         style={{
           transform: transform.interpolate(t => `${t} rotateX(180deg)`),
-          '-webkit-backface-visibility': 'hidden',
-          'backface-visibility': 'hidden',
+          ...backfaceVisibility
         }}
       >
         <BackTile

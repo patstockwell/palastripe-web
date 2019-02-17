@@ -1,32 +1,35 @@
 import styled from 'styled-components';
 import { tileGap } from '../helpers/constants';
+import { useSpring, animated } from 'react-spring';
 
-const FlipContainer = styled.div`
-  perspective: 1000px;
-  transition: 0.6s;
-  transform-style: preserve-3d;
+export const RelativeDiv = styled.div`
+  position: relative;
+`;
 
-  &.flip {
-    transform: rotateX(180deg);
-  }
+export const FrontFace = styled(animated.div)`
+  backface-visibility: hidden,
+`;
 
-  .back {
-    transform: rotateX(180deg);
-    backface-visibility: hidden;
-    position: absolute;
-    height: 100%;
-    top: -${tileGap}px;
-    left: 0;
-    right: 0;
-  }
-
-  .front {
-    transform: rotateX(0deg);
-    backface-visibility: hidden;
-    z-index: 2;
-  }
+export const BackFace = styled(animated.div)`
+  position: absolute;
+  backface-visibility: hidden;
+  height: 100%;
+  top: -${tileGap}px;
+  left: 0;
+  right: 0;
 `;
 
 
-export default FlipContainer;
+export const getStyles = flip => {
+  const { transform } = useSpring({
+    transform: `perspective(1300px) rotateX(${flip ? 180 : 0}deg)`,
+    config: { mass: 5, tension: 400, friction: 68 }
+  });
 
+  return transform;
+};
+
+export const backfaceVisibility = {
+  '-webkit-backface-visibility': 'hidden',
+  'backface-visibility': 'hidden',
+};
