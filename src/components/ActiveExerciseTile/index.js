@@ -2,12 +2,12 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { useSpring, animated } from 'react-spring';
 import FrontTile from './FrontTile';
 import BackTile from './BackTile';
-import FlipContainer from '../FlipContainer';
 import { exercisePropTypeShape } from '../../helpers/data';
 import { decrementReps } from '../../helpers/functions';
-import { UPDATE_COMPLETED_REPS, CHANGE_WEIGHT } from '../../helpers/constants';
+import { tileGap, UPDATE_COMPLETED_REPS, CHANGE_WEIGHT } from '../../helpers/constants';
 
 const Set = styled.button`
   color: ${({ text }) => text};
@@ -37,6 +37,23 @@ export const getTheme = (completedReps, max) => {
   }
 };
 
+const RelativeDiv = styled.div`
+  position: relative;
+`;
+
+const FrontFace = styled(animated.div)`
+  backface-visibility: hidden,
+`;
+
+const BackFace = styled(animated.div)`
+  position: absolute;
+  backface-visibility: hidden;
+  height: 100%;
+  top: -${tileGap}px;
+  left: 0;
+  right: 0;
+`;
+
 const ActiveExerciseTile = props => {
   const [flip, setFlip] = useState(false);
   const [weight, setWeight] = useState(props.exercise.weightInKilos);
@@ -46,16 +63,24 @@ const ActiveExerciseTile = props => {
     exercise: { id, sets, name, weightInKilos },
     changeWeight,
   } = props;
+
   const handleClick = (setIndex, r) => {
     const reps = decrementReps(r, 5);
     setTimer(reps !== undefined);
     updateCompletedReps({ exerciseId: id, setIndex, reps });
   };
+
   const handleTileFlip = isFlipped => {
     // only set the redux state when the tile flips back over
     changeWeight({ exerciseId: id, weight });
     setFlip(isFlipped);
   };
+
+  const { transform } = useSpring({
+    transform: `perspective(1300px) rotateX(${flip ? 180 : 0}deg)`,
+    config: { mass: 5, tension: 700, friction: 68 }
+  });
+
   const hightlightedSets = sets.map(
     ({ max, completed }, index) => {
       const reps = isNaN(completed) ? max : completed;
@@ -72,20 +97,36 @@ const ActiveExerciseTile = props => {
   );
 
   return (
-    <FlipContainer className={flip ? 'flip' : ''}>
-      <FrontTile
-        name={name}
-        handleTileFlip={handleTileFlip}
-        weightInKilos={weightInKilos}
+    <RelativeDiv>
+      <FrontFace
+        style={{
+          transform,
+          '-webkit-backface-visibility': 'hidden',
+          'backface-visibility': 'hidden',
+        }}
       >
-        {hightlightedSets}
-      </FrontTile>
-      <BackTile
-        handleTileFlip={handleTileFlip}
-        weight={weight}
-        setWeight={setWeight}
-      />
-    </FlipContainer>
+        <FrontTile
+          name={name}
+          handleTileFlip={handleTileFlip}
+          weightInKilos={weightInKilos}
+        >
+          {hightlightedSets}
+        </FrontTile>
+      </FrontFace>
+      <BackFace
+        style={{
+          transform: transform.interpolate(t => `${t} rotateX(180deg)`),
+          '-webkit-backface-visibility': 'hidden',
+          'backface-visibility': 'hidden',
+        }}
+      >
+        <BackTile
+          handleTileFlip={handleTileFlip}
+          weight={weight}
+          setWeight={setWeight}
+        />
+      </BackFace>
+    </RelativeDiv>
   );
 };
 
