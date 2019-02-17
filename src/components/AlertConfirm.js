@@ -1,10 +1,12 @@
 import React from 'react';
+import { useTransition, animated } from 'react-spring';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import styled, { keyframes } from 'styled-components';
 import { purple } from '../helpers/constants';
 
-const popUpHeight = 200;
+const bounceSpace = 50;
+const popUpHeight = 200 + bounceSpace;
 
 const slideUp = keyframes`
   0% {
@@ -29,7 +31,8 @@ const Background = styled.div`
   top: 0;
   left: 0;
   width: 100vw;
-  height: 100vh;
+  height: calc(100vh + ${popUpHeight}px);
+  transform: translateY(-${popUpHeight - bounceSpace}px);
   z-index: 5;
   background-color: rgba(0, 0, 0, 0.4);
 `;
@@ -42,7 +45,7 @@ const Dialog = styled.div`
   bottom: 0;
   left: 0;
   width: 100vw;
-  animation: ${slideUp} 300ms ease-in-out;
+  // animation: ${slideUp} 300ms ease-in-out;
 `;
 
 const Message = styled.p`
@@ -88,26 +91,44 @@ const ClickableSpace = styled.div`
   transform: translateY(-${popUpHeight}px);
 `;
 
-const AlertConfirm = ({ endWorkout, setShowAlert }) => {
-  return (
-    <Background>
-      <ClickableSpace onClick={() => setShowAlert(false)}/>
-      <Dialog>
-        <Message>Are you sure you want to finish this workout?</Message>
-        <ButtonWrapper>
-          <Button onClick={() => setShowAlert(false)} background={'grey'}>No</Button>
-          <LinkButton to="/home/" onClick={endWorkout} background={purple}>
-            <span>Yes</span>
-          </LinkButton>
-        </ButtonWrapper>
-      </Dialog>
-    </Background>
-  );
+const AlertConfirm = ({ showAlert, endWorkout, setShowAlert }) => {
+  const transitions = useTransition(showAlert, null, {
+    from: {
+      transform: `translateY(${popUpHeight}px)`,
+      position: `absolute`,
+      top: 0,
+      left: 0,
+      opacity: 0,
+    },
+    enter: { opacity: 1, transform: `translateY(0px)` },
+    leave: { opacity: 0, transform: `translateY(${popUpHeight}px)` },
+    config: { tension: 810, friction: 40 }
+  });
+
+  return transitions.map(({ item, props }) => {
+    return item ?
+      <animated.div key={'unique'} style={props}>
+        <Background>
+          <ClickableSpace onClick={() => setShowAlert(false)}/>
+          <Dialog>
+            <Message>Are you sure you want to finish this workout?</Message>
+            <ButtonWrapper>
+              <Button onClick={() => setShowAlert(false)} background={'grey'}>No</Button>
+              <LinkButton to="/home/" onClick={endWorkout} background={purple}>
+                <span>Yes</span>
+              </LinkButton>
+            </ButtonWrapper>
+          </Dialog>
+        </Background>
+      </animated.div>
+      : null
+  });
 };
 
 AlertConfirm.propTypes = {
   endWorkout: PropTypes.func,
   setShowAlert: PropTypes.func,
+  showAlert: PropTypes.bool,
 };
 
 export default AlertConfirm;

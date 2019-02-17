@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { animated } from 'react-spring';
+import { animated } from 'react-spring/renderprops';
 import BackSplash from '../components/BackSplash';
 import AlertConfirm from '../components/AlertConfirm';
 import ActiveExerciseTile from '../components/ActiveExerciseTile';
@@ -91,12 +91,11 @@ const ActiveWorkout = ({ endWorkout, activeWorkout, animationStyles }) => {
           </StyledLink>
         </Header>
         {exerciseTiles}
-        {showAlert &&
-          <AlertConfirm
-            setShowAlert={setShowAlert}
-            endWorkout={() => endWorkout(activeWorkout)}
-          />
-        }
+        <AlertConfirm
+          setShowAlert={setShowAlert}
+          endWorkout={() => endWorkout(activeWorkout)}
+          showAlert={showAlert}
+        />
       </BackSplash>
     </animated.div>
   );

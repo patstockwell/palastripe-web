@@ -1,6 +1,6 @@
 import React  from 'react';
 import { Switch, Route } from 'react-router-dom';
-import { Transition } from 'react-spring';
+import { Transition } from 'react-spring/renderprops';
 import Home from './Home';
 import BackSplash from '../../components/BackSplash';
 import ActiveWorkout from './../ActiveWorkout';
@@ -14,7 +14,7 @@ export default () => (
           <Transition
             native
             items={location}
-            keys={location.pathname.split('/')[2]}
+            keys={location.pathname}
             from={{ left: '100%' }}
             enter={{ left: '0' }}
             leave={{ left: '100%' }}
