@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { purple } from '../helpers/constants';
 
-const bounceSpace = 50;
+const bounceSpace = 5;
 const popUpHeight = 200 + bounceSpace;
 
 const Background = styled.div`
@@ -76,14 +76,14 @@ const AlertConfirm = ({ showAlert, endWorkout, setShowAlert }) => {
   const transitions = useTransition(showAlert, null, {
     from: {
       transform: `translateY(${popUpHeight}px)`,
-      position: `absolute`,
+      position: 'absolute',
       top: 0,
       left: 0,
       opacity: 0,
     },
-    enter: { opacity: 1, transform: `translateY(0px)` },
+    enter: { opacity: 1, transform: 'translateY(0px)' },
     leave: { opacity: 0, transform: `translateY(${popUpHeight}px)` },
-    config: { tension: 810, friction: 40 }
+    config: { mass: 1, tension: 710, friction: 40 }
   });
 
   return transitions.map(({ item, props }) => {
