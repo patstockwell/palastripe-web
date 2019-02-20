@@ -9,7 +9,7 @@ const Nav = styled.nav`
   position: fixed;
   bottom: 0;
   width: 100vw;
-  justify-content: space-between;
+  justify-content: space-around;
   height: ${navBarHeight}px;
   background-color: white;
   color: black;
@@ -44,12 +44,6 @@ const Navigation = ({ pathname }) => {
         to="/about/"
       >
         About
-      </NavLink>
-      <NavLink
-        highlight={/\/users*/.test(pathname) ? pink : 'black'}
-        to="/users/"
-      >
-        Users
       </NavLink>
     </Nav>
   );

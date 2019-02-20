@@ -90,7 +90,7 @@ const ForwardArrowPanel = styled.div`
   margin-left: 5px;
 `;
 
-const WorkoutTile =
+const HistoryTile =
   ({ onGoing, workoutRoutine: { exercises, date, order }}) => {
 
     const exerciseTiles = order.map((e, i) =>
@@ -115,7 +115,7 @@ const WorkoutTile =
     );
   };
 
-WorkoutTile.propTypes = {
+HistoryTile.propTypes = {
   onGoing: PropTypes.bool,
   workoutRoutine: PropTypes.object,
 };
@@ -124,5 +124,5 @@ const mapStateToProps = state => ({
   onGoing: state.activeWorkoutOnGoing,
 });
 
-export default connect(mapStateToProps)(WorkoutTile);
+export default connect(mapStateToProps)(HistoryTile);
 

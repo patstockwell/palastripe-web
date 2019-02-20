@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import Banner from '../../components/Banner';
 import Navigation from '../../components/Navigation';
-import WorkoutTile from '../../components/WorkoutTile';
+import HistoryTile from '../../components/HistoryTile';
 import EmptyHistoryTile from '../../components/EmptyHistoryTile';
 import { workoutPropType, exercisePropTypeShape } from '../../helpers/data';
 import { tileMinHeight, gutterWidth } from '../../helpers/constants';
@@ -27,14 +27,14 @@ const Hr = styled.hr`
 const Home = ({ location, activeWorkout, workoutHistory }) => {
 
   const workouts = workoutHistory.map((workout, i) =>
-    <WorkoutTile key={i} workoutRoutine={workout} />
+    <HistoryTile key={i} workoutRoutine={workout} />
   );
 
   return (
     <Fragment>
       <Banner />
       <StyledLink to="/home/active-workout">
-        <WorkoutTile workoutRoutine={activeWorkout} />
+        <HistoryTile workoutRoutine={activeWorkout} />
       </StyledLink>
       <Hr />
       {workouts.length !== 0 ? workouts : <EmptyHistoryTile />}

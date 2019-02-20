@@ -3,15 +3,26 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import LayoutTile from '../components/LayoutTile';
-import WorkoutTile from '../components/WorkoutTile';
 import BackSplash from '../components/BackSplash';
 import Navigation from '../components/Navigation';
 import Banner from '../components/Banner';
-import { purple, blue } from '../helpers/constants';
+import { green, yellow } from '../helpers/constants';
 
-const OpaqueTile = styled(LayoutTile)`
-  background-color: rgba(0, 0, 0, 0.3);
-  color: white;
+const WorkoutTile = styled(LayoutTile)`
+  box-shadow: 0px 4px 12px lightgrey;
+  display: inline-block;
+  width: 80%;
+  scroll-snap-align: center;
+  scroll-padding: 50%;
+`;
+
+const ScrollContainer = styled.div`
+  scroll-snap-type: x mandatory;
+  overflow-x: scroll;
+  white-space: nowrap;
+  overflow-y: hidden;
+  overflow: scroll;
+  -webkit-overflow-scrolling: touch; // enables momentum scolling
 `;
 
 const WorkoutPlans = ({ entities, location }) => {
@@ -21,7 +32,6 @@ const WorkoutPlans = ({ entities, location }) => {
     exercises: { byId: byExercise },
   } = entities;
 
-  console.log(entities);
   const singleWorkoutPlan = allPlans[0];
   const dataForWorkouts = byPlan[singleWorkoutPlan].workouts
     .map(id => byWorkout[id].exercises)
@@ -29,11 +39,22 @@ const WorkoutPlans = ({ entities, location }) => {
   console.log(dataForWorkouts);
 
   return (
-    <BackSplash topLeft={purple} bottomRight={blue}>
+    <BackSplash topLeft={green} bottomRight={yellow}>
       <Banner />
-      <OpaqueTile>
+      <LayoutTile>
         something here
-      </OpaqueTile>
+        <ScrollContainer>
+          <WorkoutTile>
+            inside
+          </WorkoutTile>
+          <WorkoutTile>
+            inside
+          </WorkoutTile>
+          <WorkoutTile>
+            inside
+          </WorkoutTile>
+        </ScrollContainer>
+      </LayoutTile>
       <Navigation pathname={location.pathname}/>
     </BackSplash>
   );
