@@ -1,29 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
-import LayoutTile from '../components/LayoutTile';
 import BackSplash from '../components/BackSplash';
 import Navigation from '../components/Navigation';
+import WorkoutPlanTile from '../components/WorkoutPlanTile';
 import Banner from '../components/Banner';
 import { green, yellow } from '../helpers/constants';
-
-const WorkoutTile = styled(LayoutTile)`
-  box-shadow: 0px 4px 12px lightgrey;
-  display: inline-block;
-  width: 80%;
-  scroll-snap-align: center;
-  scroll-padding: 50%;
-`;
-
-const ScrollContainer = styled.div`
-  scroll-snap-type: x mandatory;
-  overflow-x: scroll;
-  white-space: nowrap;
-  overflow-y: hidden;
-  overflow: scroll;
-  -webkit-overflow-scrolling: touch; // enables momentum scolling
-`;
 
 const WorkoutPlans = ({ entities, location }) => {
   const {
@@ -32,29 +14,22 @@ const WorkoutPlans = ({ entities, location }) => {
     exercises: { byId: byExercise },
   } = entities;
 
-  const singleWorkoutPlan = allPlans[0];
-  const dataForWorkouts = byPlan[singleWorkoutPlan].workouts
-    .map(id => byWorkout[id].exercises)
-    .map(exercises => exercises.map(id => byExercise[id]));
-  console.log(dataForWorkouts);
+  const plans = allPlans.map(p => ({
+    name: byPlan[p].name,
+    id: byPlan[p].id,
+    workouts: byPlan[p].workouts.map(w => ({
+      name: byWorkout[w].name,
+      id: w,
+      exercises: byWorkout[w].exercises.map(e => byExercise[e])
+    }))
+  }));
+
+  const tiles = plans.map(p => <WorkoutPlanTile key={p.id} plan={p} />);
 
   return (
     <BackSplash topLeft={green} bottomRight={yellow}>
       <Banner />
-      <LayoutTile>
-        something here
-        <ScrollContainer>
-          <WorkoutTile>
-            inside
-          </WorkoutTile>
-          <WorkoutTile>
-            inside
-          </WorkoutTile>
-          <WorkoutTile>
-            inside
-          </WorkoutTile>
-        </ScrollContainer>
-      </LayoutTile>
+      {tiles}
       <Navigation pathname={location.pathname}/>
     </BackSplash>
   );

@@ -106,14 +106,17 @@ const initialState = {
       byId: {
         'workout1': {
           id: 'workout1',
+          name: 'Workout A',
           exercises: ['exercise1', 'exercise2', 'exercise3'],
         },
         'workout2': {
           id: 'workout2',
+          name: 'Workout B',
           exercises: ['exercise4', 'exercise5', 'exercise6'],
         },
         'workout3': {
           id: 'workout3',
+          name: 'Workout C',
           exercises: ['exercise1', 'exercise5', 'exercise7'],
         },
       },
@@ -124,10 +127,16 @@ const initialState = {
       byId: {
         'plan1': {
           id: 'plan1',
+          name: 'Harder, better, faster, fitter',
           workouts: ['workout1', 'workout2', 'workout3'],
         },
+        'plan2': {
+          id: 'plan2',
+          name: 'Power',
+          workouts: ['workout2', 'workout1'],
+        },
       },
-      allIds: ['plan1'],
+      allIds: ['plan1', 'plan2'],
     },
   },
 
