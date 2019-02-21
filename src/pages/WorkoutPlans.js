@@ -20,7 +20,10 @@ const WorkoutPlans = ({ entities, location }) => {
     workouts: byPlan[p].workouts.map(w => ({
       name: byWorkout[w].name,
       id: w,
-      exercises: byWorkout[w].exercises.map(e => byExercise[e])
+      exercises: byWorkout[w].exercises.map(e => ({
+        ...byExercise[e],
+        sets: byExercise[e].sets.map(s => ({ max: s }))
+      })),
     }))
   }));
 

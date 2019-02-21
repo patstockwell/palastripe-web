@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
+import ExerciseList from '../components/ExerciseList';
 import LayoutTile from '../components/LayoutTile';
 
 export const ScrollContainer = styled.div`
@@ -12,7 +14,7 @@ export const ScrollContainer = styled.div`
 `;
 
 const WorkoutTile = styled(LayoutTile)`
-  box-shadow: 0px 4px 12px lightgrey;
+  box-shadow: 0px 3px 14px rgba(0,0,0,0.3);
   display: inline-block;
   width: 80%;
   scroll-snap-align: center;
@@ -22,7 +24,7 @@ const WorkoutTile = styled(LayoutTile)`
 
 const ScrollingTile = ({ workout }) => {
   const exercises = workout.exercises.map(e =>
-    <div key={e.id}>{e.name}, {e.weightInKilos}kg</div>
+    <ExerciseList key={e.name} small showAllSets {...e} />
   );
 
   return (
@@ -31,6 +33,10 @@ const ScrollingTile = ({ workout }) => {
       {exercises}
     </WorkoutTile>
   );
+};
+
+ScrollingTile.propTypes = {
+  workout: PropTypes.object,
 };
 
 const WorkoutPlanTile = ({ plan }) => {
@@ -47,5 +53,10 @@ const WorkoutPlanTile = ({ plan }) => {
     </LayoutTile>
   );
 };
+
+WorkoutPlanTile.propTypes = {
+  plan: PropTypes.object,
+};
+
 export default WorkoutPlanTile;
 

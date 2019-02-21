@@ -28,8 +28,8 @@ const ActiveExerciseTile = props => {
     changeWeight,
   } = props;
 
-  const handleClick = (setIndex, r) => {
-    const reps = decrementReps(r, 5);
+  const handleClick = (setIndex, r, max) => {
+    const reps = decrementReps(r, max);
     setTimer(reps !== undefined);
     updateCompletedReps({ exerciseId: id, setIndex, reps });
   };
@@ -48,7 +48,7 @@ const ActiveExerciseTile = props => {
       return (
         <Set
           key={index}
-          onClick={() => handleClick(index, completed)}
+          onClick={() => handleClick(index, completed, max)}
           {...theme}
         >{reps}</Set>
       );
