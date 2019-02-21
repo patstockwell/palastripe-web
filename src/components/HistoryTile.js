@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import moment from 'moment';
 import LayoutTile from './LayoutTile';
 import { exercisePropTypeShape } from '../helpers/data';
+import { fadedYellow } from '../helpers/constants';
 import { ForwardArrowBlack } from '../assets/SVGs';
 
 const ExerciseListItemWrapper = styled.div`
@@ -72,6 +73,7 @@ const ExerciseList = styled.div`
 
 const LayoutWrapper = styled(LayoutTile)`
   display: flex;
+  background-color: ${({ background }) => background};
 `;
 
 const Date = styled.h3`
@@ -98,9 +100,11 @@ const HistoryTile =
     );
 
     const ActiveExerciseTitle = onGoing ? 'On Going' : 'Up Next';
+    const isRecent = moment(date).isAfter(moment().subtract(1, 'minute'));
+    const backgroundColour = date && isRecent ? fadedYellow : 'white';
 
     return (
-      <LayoutWrapper>
+      <LayoutWrapper background={backgroundColour}>
         <Title>
           <Date>{date ? moment(date).format('dddd') : ActiveExerciseTitle}</Date>
           <Date>{date ? moment(date).format('D MMM') : ''}</Date>
