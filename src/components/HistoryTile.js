@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import moment from 'moment';
 import LayoutTile from './LayoutTile';
 import { exercisePropTypeShape } from '../helpers/data';
@@ -73,7 +73,7 @@ const ExerciseList = styled.div`
 
 const LayoutWrapper = styled(LayoutTile)`
   display: flex;
-  background-color: ${({ background }) => background};
+  animation: ${({ animation }) => animation} 6s ease-out;
 `;
 
 const Date = styled.h3`
@@ -92,6 +92,32 @@ const ForwardArrowPanel = styled.div`
   margin-left: 5px;
 `;
 
+const highlightRecent = keyframes`
+  0% {
+    background-color: ${fadedYellow};
+  }
+
+  10% {
+    background-color: ${fadedYellow};
+    transform: scale(1);
+    box-shadow: 0px 4px 19px rgba(0, 0, 0, 0.2);
+  }
+
+  13% {
+    transform: scale(1.05);
+    box-shadow: 0px 5px 30px rgba(0, 0, 0, 0.7);
+  }
+
+  16% {
+    transform: scale(1);
+    box-shadow: 0px 4px 19px rgba(0, 0, 0, 0.2);
+  }
+
+  100% {
+    background-color: white;
+  }
+`;
+
 const HistoryTile =
   ({ onGoing, workoutRoutine: { exercises, date, order }}) => {
 
@@ -100,11 +126,11 @@ const HistoryTile =
     );
 
     const ActiveExerciseTitle = onGoing ? 'On Going' : 'Up Next';
-    const isRecent = moment(date).isAfter(moment().subtract(1, 'minute'));
-    const backgroundColour = date && isRecent ? fadedYellow : 'white';
+    const isRecent = moment(date).isAfter(moment().subtract(3, 'second'));
+    const backgroundColour = date && isRecent ? highlightRecent : undefined;
 
     return (
-      <LayoutWrapper background={backgroundColour}>
+      <LayoutWrapper animation={backgroundColour}>
         <Title>
           <Date>{date ? moment(date).format('dddd') : ActiveExerciseTitle}</Date>
           <Date>{date ? moment(date).format('D MMM') : ''}</Date>

@@ -13,7 +13,7 @@ export const blue = '#198FE3';
 export const green = '#14D790';
 export const yellow = '#f7f529';
 export const orange = '#f79729';
-export const fadedYellow = '#fffbdd';
+export const fadedYellow = '#fffd8e';
 
 // action types
 export const CHANGE_WEIGHT = 'CHANGE_WEIGHT';
