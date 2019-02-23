@@ -24,7 +24,7 @@ const ExerciseListWrapper = styled.div`
 
 const LayoutWrapper = styled(LayoutTile)`
   display: flex;
-  animation: ${({ animation }) => animation} 6s ease-out;
+  animation: ${({ animation }) => animation} 4s ease-out;
 `;
 
 const Date = styled.h3`

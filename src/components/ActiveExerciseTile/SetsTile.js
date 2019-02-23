@@ -53,13 +53,15 @@ SetsTile.propTypes = {
 };
 
 const areEqualProps = (prev, next) => {
-  const newRepCount = prev.children.reduce((acc, curr, i) => {
-    // compare the set's number ('children') and colour ('background')
-    return curr.props.children === next.children[i].props.children
-      && curr.props.background === next.children[i].props.background
-      && acc;
-  }, true);
-  return newRepCount && prev.weightInKilos === next.weightInKilos;
+  console.log(prev, next);
+  // const newRepCount = prev.children.reduce((acc, curr, i) => {
+  //   // compare the set's number ('children') and colour ('background')
+  //   return curr.props.children === next.children[i].props.children
+  //     && curr.props.background === next.children[i].props.background
+  //     && acc;
+  // }, true);
+  // return newRepCount && prev.weightInKilos === next.weightInKilos;
+  return false;
 };
 
 const PureSetsTile = React.memo(SetsTile, areEqualProps);

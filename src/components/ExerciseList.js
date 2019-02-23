@@ -18,18 +18,7 @@ const fontStyle = `
 `;
 
 const ExerciseName = styled.h5`
-  flex-basis: 51%;
-  ${fontStyle}
-  font-size: ${({ small }) => small ? '13px' : '16px'};
-
-  @media (max-width: 374px) {
-    font-size: 14px;
-    font-size: ${({ small }) => small ? '12px' : '14px'};
-  }
-`;
-
-const Sets = styled.p`
-  flex-basis: 28%;
+  flex-basis: 40%;
   ${fontStyle}
   font-size: ${({ small }) => small ? '13px' : '16px'};
 
@@ -51,15 +40,42 @@ const Weight = styled.p`
   }
 `;
 
+const SetsWrapper = styled.div`
+  display: flex;
+  flex-basis: 40%;
+  ${fontStyle}
+  font-size: ${({ small }) => small ? '13px' : '16px'};
+
+  @media (max-width: 374px) {
+    font-size: 14px;
+    font-size: ${({ small }) => small ? '12px' : '14px'};
+  }
+
+  span {
+    flex-basis: ${({ small }) => small ? '18px' : '22px'};
+    width: 100%;
+    text-align: center;
+    border-right: 1px solid lightgrey;
+    border-bottom: 1px solid lightgrey;
+  }
+
+  span:last-child {
+    border: none;
+    border-bottom: 1px solid lightgrey;
+  }
+`;
+
 const ExerciseList = ({ small, showAllSets, sets, name, weightInKilos }) => {
-  const setCount = sets.map(({ max, completed }) => (
-    completed ? completed : (showAllSets ? max : '-')
-  )).join('/');
+  const setContainers = sets.map(({ max, completed }, i) => (
+    <span key={i}>{completed !== undefined ? completed : (showAllSets ? max : '-')}</span>
+  ));
 
   return (
     <ExerciseListItemWrapper key={name}>
       <ExerciseName small={small}>{name}</ExerciseName>
-      <Sets small={small}>{setCount}</Sets>
+      <SetsWrapper small={small}>
+        {setContainers}
+      </SetsWrapper>
       <Weight small={small}>{weightInKilos}kg</Weight>
     </ExerciseListItemWrapper>
   );

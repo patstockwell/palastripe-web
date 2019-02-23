@@ -47,6 +47,7 @@ const endWorkout = (state, entities) => {
 
   return {
     workoutId: nextWorkoutId,
+    name: nextWorkout.name,
     onGoing: false,
     exercises,
     order: nextWorkout.exercises,
@@ -55,12 +56,16 @@ const endWorkout = (state, entities) => {
 
 const updateCompletedReps = (state, action) => {
   const { payload: { exerciseId, setIndex, reps } } = action;
-
-  return changeExercise(state, exerciseId, {
+  const newState = changeExercise(state, exerciseId, {
     sets: state.exercises[exerciseId].sets.map((set, i) => (
       i === setIndex ? { ...set, completed: reps } : set
     )),
   });
+
+  return {
+    ...newState,
+    onGoing: true,
+  };
 };
 
 const changeWeight = (state, action) => {
