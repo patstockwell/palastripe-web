@@ -25,44 +25,48 @@ describe('the activeWorkoutReducer', () => {
           reps: 12,
         },
       })).toEqual({
+        name: 'Pull',
         workoutId: 'workout1',
-        onGoing: false,
+        onGoing: true,
         exercises: {
           'exercise1': {
             id: 'exercise1',
             name: 'Dead Lift',
-            weightInKilos: 80,
+            weightInKilos: 137.5,
             sets:[
-              { max: 5, completed: undefined },
-              { max: 5, completed: undefined },
-              { max: 5, completed: 12 },
-              { max: 5, completed: undefined },
+              { max: 7, completed: undefined },
+              { max: 7, completed: undefined },
+              { max: 7, completed: 12 },
+              { max: 7, completed: undefined },
+              { max: 7, completed: undefined },
             ],
           },
-          'exercise2': {
-            id: 'exercise2',
-            name: 'Squat',
-            weightInKilos: 60,
+          'exercise4': {
+            id: 'exercise4',
+            name: 'Chin-Up',
+            weightInKilos: 0,
             sets:[
-              { max: 5, completed: undefined },
-              { max: 5, completed: undefined },
-              { max: 5, completed: undefined },
-              { max: 5, completed: undefined },
+              { max: 7, completed: undefined },
+              { max: 7, completed: undefined },
+              { max: 7, completed: undefined },
+              { max: 7, completed: undefined },
+              { max: 7, completed: undefined },
             ],
           },
-          'exercise3': {
-            id: 'exercise3',
-            name: 'Overhead Press',
-            weightInKilos: 40,
+          'exercise6': {
+            id: 'exercise6',
+            name: 'Bicep Curl',
+            weightInKilos: 25,
             sets:[
-              { max: 5, completed: undefined },
-              { max: 5, completed: undefined },
-              { max: 5, completed: undefined },
-              { max: 5, completed: undefined },
+              { max: 7, completed: undefined },
+              { max: 7, completed: undefined },
+              { max: 7, completed: undefined },
+              { max: 7, completed: undefined },
+              { max: 7, completed: undefined },
             ],
           },
         },
-        order: ['exercise1', 'exercise2', 'exercise3'],
+        order: ['exercise1', 'exercise4', 'exercise6'],
 
       });
     });
@@ -79,42 +83,46 @@ describe('the activeWorkoutReducer', () => {
       })).toEqual({
         workoutId: 'workout1',
         onGoing: false,
+        name: 'Pull',
         exercises: {
           'exercise1': {
             id: 'exercise1',
             name: 'Dead Lift',
             weightInKilos: 37.5,
             sets:[
-              { max: 5, completed: undefined },
-              { max: 5, completed: undefined },
-              { max: 5, completed: undefined },
-              { max: 5, completed: undefined },
+              { max: 7, completed: undefined },
+              { max: 7, completed: undefined },
+              { max: 7, completed: undefined },
+              { max: 7, completed: undefined },
+              { max: 7, completed: undefined },
             ],
           },
-          'exercise2': {
-            id: 'exercise2',
-            name: 'Squat',
-            weightInKilos: 60,
+          'exercise4': {
+            id: 'exercise4',
+            name: 'Chin-Up',
+            weightInKilos: 0,
             sets:[
-              { max: 5, completed: undefined },
-              { max: 5, completed: undefined },
-              { max: 5, completed: undefined },
-              { max: 5, completed: undefined },
+              { max: 7, completed: undefined },
+              { max: 7, completed: undefined },
+              { max: 7, completed: undefined },
+              { max: 7, completed: undefined },
+              { max: 7, completed: undefined },
             ],
           },
-          'exercise3': {
-            id: 'exercise3',
-            name: 'Overhead Press',
-            weightInKilos: 40,
+          'exercise6': {
+            id: 'exercise6',
+            name: 'Bicep Curl',
+            weightInKilos: 25,
             sets:[
-              { max: 5, completed: undefined },
-              { max: 5, completed: undefined },
-              { max: 5, completed: undefined },
-              { max: 5, completed: undefined },
+              { max: 7, completed: undefined },
+              { max: 7, completed: undefined },
+              { max: 7, completed: undefined },
+              { max: 7, completed: undefined },
+              { max: 7, completed: undefined },
             ],
           },
         },
-        order: ['exercise1', 'exercise2', 'exercise3'],
+        order: ['exercise1', 'exercise4', 'exercise6'],
 
       });
     });
@@ -124,19 +132,33 @@ describe('the activeWorkoutReducer', () => {
     it('returns the correct state object', () => {
       expect(activeWorkoutReducer(state, {
         type: END_WORKOUT,
-      }, initialState.entities)).toEqual({
+      }, initialState.entities, 'plan1')).toEqual({
+        name: 'Push',
         workoutId: 'workout2',
         onGoing: false,
         exercises: {
-          'exercise4': {
-            id: 'exercise4',
-            name: 'Chin-up',
-            weightInKilos: 0,
+          'exercise2': {
+            id: 'exercise2',
+            name: 'Squat',
+            weightInKilos: 60,
             sets:[
-              { max: 5, completed: undefined },
-              { max: 5, completed: undefined },
-              { max: 5, completed: undefined },
-              { max: 5, completed: undefined },
+              { max: 7, completed: undefined },
+              { max: 7, completed: undefined },
+              { max: 7, completed: undefined },
+              { max: 7, completed: undefined },
+              { max: 7, completed: undefined },
+            ],
+          },
+          'exercise3': {
+            id: 'exercise3',
+            name: 'Overhead Press',
+            weightInKilos: 40,
+            sets:[
+              { max: 7, completed: undefined },
+              { max: 7, completed: undefined },
+              { max: 7, completed: undefined },
+              { max: 7, completed: undefined },
+              { max: 7, completed: undefined },
             ],
           },
           'exercise5': {
@@ -144,25 +166,15 @@ describe('the activeWorkoutReducer', () => {
             name: 'Bench Press',
             weightInKilos: 60,
             sets:[
-              { max: 5, completed: undefined },
-              { max: 5, completed: undefined },
-              { max: 5, completed: undefined },
-              { max: 5, completed: undefined },
-            ],
-          },
-          'exercise6': {
-            id: 'exercise6',
-            name: 'Bicep Curl',
-            weightInKilos: 30,
-            sets:[
-              { max: 12, completed: undefined },
-              { max: 12, completed: undefined },
-              { max: 12, completed: undefined },
-              { max: 12, completed: undefined },
+              { max: 7, completed: undefined },
+              { max: 7, completed: undefined },
+              { max: 7, completed: undefined },
+              { max: 7, completed: undefined },
+              { max: 7, completed: undefined },
             ],
           },
         },
-        order: ['exercise4', 'exercise5', 'exercise6'],
+        order: ['exercise2', 'exercise3', 'exercise5'],
 
       });
     });
