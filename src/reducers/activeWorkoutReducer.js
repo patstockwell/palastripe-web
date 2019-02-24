@@ -4,12 +4,12 @@ import {
   CHANGE_WEIGHT,
 } from '../helpers/constants';
 
-const activeWorkoutReducer = (state, action, entities) => {
+const activeWorkoutReducer = (state, action, entities, planId) => {
   switch (action.type) {
   case UPDATE_COMPLETED_REPS:
     return updateCompletedReps(state, action);
   case END_WORKOUT:
-    return endWorkout(state, entities);
+    return endWorkout(state, entities, planId);
   case CHANGE_WEIGHT:
     return changeWeight(state, action);
   default:
@@ -17,19 +17,21 @@ const activeWorkoutReducer = (state, action, entities) => {
   }
 };
 
-const endWorkout = (state, entities) => {
+const endWorkout = (state, entities, planId) => {
   const {
-    workoutId ,
+    workoutId,
   } = state;
 
   const {
-    workouts: { byId: workoutsById, allIds },
+    workoutPlans: { byId: plansById },
+    workouts: { byId: workoutsById },
     exercises: { byId: exercisesById },
   } = entities;
 
   // get the next workout
-  const currentIndex = allIds.indexOf(workoutId);
-  const nextWorkoutId = allIds[(currentIndex + 1) % allIds.length];
+  const workoutIds = plansById[planId].workouts;
+  const currentIndex = workoutIds.indexOf(workoutId);
+  const nextWorkoutId = workoutIds[(currentIndex + 1) % workoutIds.length];
   const nextWorkout = workoutsById[nextWorkoutId];
 
   // map exercise data

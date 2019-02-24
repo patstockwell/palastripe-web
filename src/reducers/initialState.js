@@ -6,7 +6,7 @@ const initialState = {
 
   activeWorkout: {
     workoutId: 'workout1',
-    name: 'Push',
+    name: 'Pull',
     onGoing: false,
     exercises: {
       'exercise1': {
@@ -14,39 +14,39 @@ const initialState = {
         name: 'Dead Lift',
         weightInKilos: 137.5,
         sets:[
-          { max: 5, completed: undefined },
-          { max: 5, completed: undefined },
-          { max: 5, completed: undefined },
-          { max: 5, completed: undefined },
-          { max: 5, completed: undefined },
+          { max: 7, completed: undefined },
+          { max: 7, completed: undefined },
+          { max: 7, completed: undefined },
+          { max: 7, completed: undefined },
+          { max: 7, completed: undefined },
         ],
       },
-      'exercise2': {
-        id: 'exercise2',
-        name: 'Squat',
-        weightInKilos: 60,
+      'exercise4': {
+        id: 'exercise4',
+        name: 'Chin-Up',
+        weightInKilos: 0,
         sets:[
-          { max: 5, completed: undefined },
-          { max: 5, completed: undefined },
-          { max: 5, completed: undefined },
-          { max: 5, completed: undefined },
-          { max: 5, completed: undefined },
+          { max: 7, completed: undefined },
+          { max: 7, completed: undefined },
+          { max: 7, completed: undefined },
+          { max: 7, completed: undefined },
+          { max: 7, completed: undefined },
         ],
       },
-      'exercise3': {
-        id: 'exercise3',
-        name: 'Overhead Press',
-        weightInKilos: 40,
+      'exercise6': {
+        id: 'exercise6',
+        name: 'Bicep Curl',
+        weightInKilos: 25,
         sets:[
-          { max: 5, completed: undefined },
-          { max: 5, completed: undefined },
-          { max: 5, completed: undefined },
-          { max: 5, completed: undefined },
-          { max: 5, completed: undefined },
+          { max: 7, completed: undefined },
+          { max: 7, completed: undefined },
+          { max: 7, completed: undefined },
+          { max: 7, completed: undefined },
+          { max: 7, completed: undefined },
         ],
       },
     },
-    order: ['exercise1', 'exercise2', 'exercise3'],
+    order: ['exercise1', 'exercise4', 'exercise6'],
   },
 
   entities: {
@@ -56,31 +56,31 @@ const initialState = {
           id: 'exercise1',
           name: 'Dead Lift',
           weightInKilos: 137.5,
-          sets: [5, 5, 5, 5, 5],
+          sets: [7, 7, 7, 7, 7],
         },
         'exercise2': {
           id: 'exercise2',
           name: 'Squat',
           weightInKilos: 60,
-          sets: [5, 5, 5, 5],
+          sets: [7, 7, 7, 7, 7],
         },
         'exercise3': {
           id: 'exercise3',
           name: 'Overhead Press',
           weightInKilos: 40,
-          sets: [5, 5, 5, 5],
+          sets: [7, 7, 7, 7, 7],
         },
         'exercise4': {
           id: 'exercise4',
           name: 'Chin-up',
           weightInKilos: 0,
-          sets: [5, 5, 5, 5, 5],
+          sets: [7, 7, 7, 7, 7],
         },
         'exercise5': {
           id: 'exercise5',
           name: 'Bench Press',
           weightInKilos: 60,
-          sets: [5, 5, 5, 5, 5],
+          sets: [7, 7, 7, 7, 7],
         },
         'exercise6': {
           id: 'exercise6',
@@ -92,7 +92,7 @@ const initialState = {
           id: 'exercise7',
           name: 'Row',
           weightInKilos: 40,
-          sets: [5, 5, 5, 5],
+          sets: [7, 7, 7, 7, 7],
         },
       },
       allIds: [
@@ -136,8 +136,8 @@ const initialState = {
       byId: {
         'plan1': {
           id: 'plan1',
-          name: 'Harder, better, faster, fitter',
-          workouts: ['workout1', 'workout2', 'workout3'],
+          name: 'Compound Sevens',
+          workouts: ['workout1', 'workout2'],
         },
         'plan2': {
           id: 'plan2',
