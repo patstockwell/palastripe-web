@@ -21,6 +21,7 @@ export const TopPanel = styled.div`
   align-items: center;
   justify-content: center;
   border-bottom: solid 0.5px grey;
+  z-index: 3;
 `;
 
 const Banner = () => (
