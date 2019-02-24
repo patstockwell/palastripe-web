@@ -1,46 +1,29 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled, { keyframes } from 'styled-components';
 import moment from 'moment';
 import LayoutTile from './LayoutTile';
 import ExerciseList from './ExerciseList';
 import { fadedYellow } from '../helpers/constants';
-import { ForwardArrowBlack } from '../assets/SVGs';
 
 const Title = styled.div`
-  flex-basis: 88px;
-  margin-right: 8px;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-evenly;
-  height: 80px;
 `;
 
 const ExerciseListWrapper = styled.div`
+  margin: 12px 8px;
   flex: 1;
 `;
 
 const LayoutWrapper = styled(LayoutTile)`
-  display: flex;
   animation: ${({ animation }) => animation} 4s ease-out;
 `;
 
 const Date = styled.h3`
+  margin: 8px;
   display: inline-block;
   font-size: 14px;
   font-weight: 500;
   color: grey;
-`;
-
-const ForwardArrowPanel = styled.div`
-  border-radius: 0 3px 3px 0;
-  padding: 2px;
-  display: flex;
-  align-items: center;
-  width: 12px;
-  margin-left: 5px;
 `;
 
 const highlightRecent = keyframes`
@@ -69,41 +52,30 @@ const highlightRecent = keyframes`
   }
 `;
 
-const HistoryTile =
-  ({ onGoing, workoutRoutine: { exercises, date, order }}) => {
+const HistoryTile = ({ workout: { exercises, date, order }}) => {
 
-    const exerciseTiles = order.map((e, i) =>
-      <ExerciseList {...exercises[e]} key={i} />
-    );
+  const exerciseList = order.map((e, i) =>
+    <ExerciseList {...exercises[e]} key={i} />
+  );
 
-    const ActiveExerciseTitle = onGoing ? 'On Going' : 'Up Next';
-    const isRecent = moment(date).isAfter(moment().subtract(3, 'second'));
-    const backgroundColour = date && isRecent ? highlightRecent : undefined;
+  const isRecent = moment(date).isAfter(moment().subtract(3, 'second'));
+  const backgroundColour = date && isRecent ? highlightRecent : undefined;
 
-    return (
-      <LayoutWrapper animation={backgroundColour}>
-        <Title>
-          <Date>{date ? moment(date).format('dddd') : ActiveExerciseTitle}</Date>
-          <Date>{date ? moment(date).format('D MMM') : ''}</Date>
-        </Title>
-        <ExerciseListWrapper>
-          {exerciseTiles}
-        </ExerciseListWrapper>
-        <ForwardArrowPanel>
-          {!date && <ForwardArrowBlack />}
-        </ForwardArrowPanel>
-      </LayoutWrapper>
-    );
-  };
-
-HistoryTile.propTypes = {
-  onGoing: PropTypes.bool,
-  workoutRoutine: PropTypes.object,
+  return (
+    <LayoutWrapper animation={backgroundColour}>
+      <Title>
+        <Date>{moment(date).format('dddd')} {moment(date).format('D MMM')}</Date>
+      </Title>
+      <ExerciseListWrapper>
+        {exerciseList}
+      </ExerciseListWrapper>
+    </LayoutWrapper>
+  );
 };
 
-const mapStateToProps = state => ({
-  onGoing: state.activeWorkoutOnGoing,
-});
+HistoryTile.propTypes = {
+  workout: PropTypes.object,
+};
 
-export default connect(mapStateToProps)(HistoryTile);
+export default HistoryTile;
 

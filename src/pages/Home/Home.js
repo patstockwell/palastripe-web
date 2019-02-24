@@ -28,7 +28,7 @@ const Hr = styled.hr`
 const Home = ({ location, activeWorkout, workoutHistory }) => {
 
   const workouts = workoutHistory.map((workout, i) =>
-    <HistoryTile key={i} workoutRoutine={workout} />
+    <HistoryTile key={i} workout={workout} />
   );
 
   return (
