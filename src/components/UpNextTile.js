@@ -10,15 +10,15 @@ import { ForwardArrowBlack } from '../assets/SVGs';
 const Title = styled.div`
   display: flex;
   align-items: center;
+  margin: 8px;
 `;
 
 const ExerciseListWrapper = styled.div`
+  margin: 12px 8px;
   flex: 1;
 `;
 
 const ForwardArrowPanel = styled.div`
-  border-radius: 0 3px 3px 0;
-  padding: 2px;
   display: flex;
   align-items: center;
   width: 12px;
@@ -27,7 +27,7 @@ const ForwardArrowPanel = styled.div`
 const Svg = styled.svg`
   width: 8px;
   height: 8px;
-  margin: 0 4px;
+  margin-right: 4px;
   fill: ${({ colour }) => colour};
   overflow: visible;
 `;
@@ -42,7 +42,7 @@ const Hr = styled.hr`
   border: none;
   height: 1px;
   background-color: lightgray;
-  margin: 0;
+  margin: 0 8px;
 `;
 
 const WorkoutNameOverflow = styled.div`

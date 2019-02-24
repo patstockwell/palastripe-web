@@ -5,7 +5,7 @@ import { exercisePropTypeShape } from '../helpers/data';
 const ExerciseListItemWrapper = styled.div`
   display: flex;
   align-items: baseline;
-  margin: 6px 0;
+  margin: 8px 0;
 `;
 
 const fontStyle = `
