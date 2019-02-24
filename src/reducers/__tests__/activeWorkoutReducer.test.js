@@ -38,7 +38,6 @@ describe('the activeWorkoutReducer', () => {
               { max: 7, completed: undefined },
               { max: 7, completed: 12 },
               { max: 7, completed: undefined },
-              { max: 7, completed: undefined },
             ],
           },
           'exercise4': {
@@ -50,7 +49,6 @@ describe('the activeWorkoutReducer', () => {
               { max: 7, completed: undefined },
               { max: 7, completed: undefined },
               { max: 7, completed: undefined },
-              { max: 7, completed: undefined },
             ],
           },
           'exercise6': {
@@ -58,7 +56,6 @@ describe('the activeWorkoutReducer', () => {
             name: 'Bicep Curl',
             weightInKilos: 25,
             sets:[
-              { max: 7, completed: undefined },
               { max: 7, completed: undefined },
               { max: 7, completed: undefined },
               { max: 7, completed: undefined },
@@ -94,7 +91,6 @@ describe('the activeWorkoutReducer', () => {
               { max: 7, completed: undefined },
               { max: 7, completed: undefined },
               { max: 7, completed: undefined },
-              { max: 7, completed: undefined },
             ],
           },
           'exercise4': {
@@ -106,7 +102,6 @@ describe('the activeWorkoutReducer', () => {
               { max: 7, completed: undefined },
               { max: 7, completed: undefined },
               { max: 7, completed: undefined },
-              { max: 7, completed: undefined },
             ],
           },
           'exercise6': {
@@ -114,7 +109,6 @@ describe('the activeWorkoutReducer', () => {
             name: 'Bicep Curl',
             weightInKilos: 25,
             sets:[
-              { max: 7, completed: undefined },
               { max: 7, completed: undefined },
               { max: 7, completed: undefined },
               { max: 7, completed: undefined },
@@ -146,7 +140,6 @@ describe('the activeWorkoutReducer', () => {
               { max: 7, completed: undefined },
               { max: 7, completed: undefined },
               { max: 7, completed: undefined },
-              { max: 7, completed: undefined },
             ],
           },
           'exercise3': {
@@ -158,7 +151,6 @@ describe('the activeWorkoutReducer', () => {
               { max: 7, completed: undefined },
               { max: 7, completed: undefined },
               { max: 7, completed: undefined },
-              { max: 7, completed: undefined },
             ],
           },
           'exercise5': {
@@ -166,7 +158,6 @@ describe('the activeWorkoutReducer', () => {
             name: 'Bench Press',
             weightInKilos: 60,
             sets:[
-              { max: 7, completed: undefined },
               { max: 7, completed: undefined },
               { max: 7, completed: undefined },
               { max: 7, completed: undefined },
