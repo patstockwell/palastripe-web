@@ -14,6 +14,8 @@ BackArrowWhite.propTypes = {
   style: PropTypes.object,
 };
 
+// home, calendar, user:
+// https://www.flaticon.com/packs/ui-interface-22
 export const User = () => (
   <svg x="0px" y="0px" viewBox="0 0 512 512" width='20' height='20'>
     <g>
