@@ -83,6 +83,7 @@ const ActiveWorkout = ({ endWorkout, activeWorkout, animationStyles }) => {
       <BackSplash topLeft={orange} bottomRight={pink}>
         <Header>
           <StyledLink to="/home/">
+            <BackArrowWhite style={{ marginRight: '-12px' }} />
             <BackArrowWhite /> Back
           </StyledLink>
           {showRestTimer && count > 0 && count}
