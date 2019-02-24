@@ -20,6 +20,7 @@ const SvgButtonWrapper = styled.button`
     width: 50px;
     height: 50px;
   }
+
   &:active {
     background-color: ${pink};
     fill: white;

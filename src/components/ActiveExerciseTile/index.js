@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import SetsTile from './SetsTile';
 import WeightIncrementTile from './WeightIncrementTile';
-import Set, { getTheme } from './Set';
 import { exercisePropTypeShape } from '../../helpers/data';
 import { decrementReps } from '../../helpers/functions';
 import {
@@ -20,7 +19,6 @@ import {
 
 const ActiveExerciseTile = props => {
   const [flip, setFlip] = useState(false);
-  const [weight, setWeight] = useState(props.exercise.weightInKilos);
   const {
     setTimer,
     updateCompletedReps,
@@ -35,25 +33,8 @@ const ActiveExerciseTile = props => {
   };
 
   const handleTileFlip = isFlipped => {
-    // only set the redux state when the tile flips back over
-    changeWeight({ exerciseId: id, weight });
     setFlip(isFlipped);
   };
-
-  const hightlightedSets = sets.map(
-    ({ max, completed }, index) => {
-      const reps = isNaN(completed) ? max : completed;
-      const theme = getTheme(completed, max);
-
-      return (
-        <Set
-          key={index}
-          onClick={() => handleClick(index, completed, max)}
-          {...theme}
-        >{reps}</Set>
-      );
-    }
-  );
 
   const transform = getStyles(flip);
 
@@ -63,10 +44,11 @@ const ActiveExerciseTile = props => {
         <SetsTile
           name={name}
           handleTileFlip={handleTileFlip}
-          weightInKilos={weightInKilos}
-        >
-          {hightlightedSets}
-        </SetsTile>
+          weight={weightInKilos}
+          flip={flip}
+          sets={sets}
+          handleClick={handleClick}
+        />
       </FrontFace>
       <BackFace
         style={{
@@ -76,8 +58,8 @@ const ActiveExerciseTile = props => {
       >
         <WeightIncrementTile
           handleTileFlip={handleTileFlip}
-          weight={weight}
-          setWeight={setWeight}
+          weight={weightInKilos}
+          setWeight={weight => changeWeight({ exerciseId: id, weight })}
         />
       </BackFace>
     </RelativeDiv>
