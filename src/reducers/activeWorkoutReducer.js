@@ -5,11 +5,17 @@ import {
 } from '../helpers/constants';
 
 const activeWorkoutReducer = (state, action, entities, planId) => {
+  if (!state) {
+    // The app starts without an activeWorkout
+    // if the state is undefined, then the app has just started and
+    // we need to generate an activeWorkout
+    return createNewActiveWorkout(state, entities, planId);
+  }
   switch (action.type) {
   case UPDATE_COMPLETED_REPS:
     return updateCompletedReps(state, action);
   case END_WORKOUT:
-    return endWorkout(state, entities, planId);
+    return createNewActiveWorkout(state, entities, planId);
   case CHANGE_WEIGHT:
     return changeWeight(state, action);
   default:
@@ -17,10 +23,10 @@ const activeWorkoutReducer = (state, action, entities, planId) => {
   }
 };
 
-const endWorkout = (state, entities, planId) => {
+const createNewActiveWorkout = (state, entities, planId) => {
   const {
     workoutId,
-  } = state;
+  } = state || {};
 
   const {
     workoutPlans: { byId: plansById },

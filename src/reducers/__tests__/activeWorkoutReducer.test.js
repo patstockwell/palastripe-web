@@ -1,5 +1,5 @@
 import activeWorkoutReducer from '../activeWorkoutReducer';
-import initialState from '../initialState';
+import initialState, { mockActiveWorkout } from '../initialState';
 import {
   UPDATE_COMPLETED_REPS,
   END_WORKOUT,
@@ -11,7 +11,7 @@ describe('the activeWorkoutReducer', () => {
 
   beforeEach(() => {
     state = {
-      ...initialState.activeWorkout,
+      ...mockActiveWorkout,
     };
   });
 
