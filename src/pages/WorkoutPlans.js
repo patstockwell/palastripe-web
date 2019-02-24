@@ -1,11 +1,16 @@
 import React from 'react';
+import styled from 'styled-components';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import BackSplash from '../components/BackSplash';
 import Navigation from '../components/Navigation';
 import WorkoutPlanTile from '../components/WorkoutPlanTile';
 import Banner from '../components/Banner';
-import { green, yellow } from '../helpers/constants';
+import { tileMinHeight, green, yellow } from '../helpers/constants';
+
+const BottomScreenSpace = styled.div`
+  height: ${2 * tileMinHeight}px;
+`;
 
 const WorkoutPlans = ({ entities, location }) => {
   const {
@@ -34,6 +39,7 @@ const WorkoutPlans = ({ entities, location }) => {
       <Banner />
       {tiles}
       <Navigation pathname={location.pathname}/>
+      <BottomScreenSpace />
     </BackSplash>
   );
 };

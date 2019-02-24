@@ -1,7 +1,8 @@
-export const tileGap = 15;
+export const tileGap = 16;
 export const tileMinHeight = 90;
 export const navBarHeight = 52;
-export const gutterWidth = 7;
+export const bannerHeight = 40;
+export const gutterWidth = 8;
 
 export const REST_PERIOD_IN_SECONDS = 91;
 export const ONE_SECOND = 1000;
