@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import LayoutTile from './LayoutTile';
 import { tileMinHeight } from '../helpers/constants';
@@ -16,11 +17,15 @@ const Info = styled.p`
   color: black;
 `;
 
-const EmptyHistoryTile = () => (
+const EmptyTile = ({ children }) => (
   <Tile>
-    <Info>Your workout history will appear here</Info>
+    <Info>{children}</Info>
   </Tile>
 );
 
-export default EmptyHistoryTile;
+EmptyTile.propTypes = {
+  children: PropTypes.string,
+};
+
+export default EmptyTile;
 

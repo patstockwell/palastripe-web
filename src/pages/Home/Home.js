@@ -7,7 +7,7 @@ import Banner from '../../components/Banner';
 import Navigation from '../../components/Navigation';
 import UpNextTile from '../../components/UpNextTile';
 import HistoryTile from '../../components/HistoryTile';
-import EmptyHistoryTile from '../../components/EmptyHistoryTile';
+import EmptyTile from '../../components/EmptyTile';
 import { workoutPropType, exercisePropTypeShape } from '../../helpers/data';
 import { tileMinHeight, gutterWidth } from '../../helpers/constants';
 
@@ -38,7 +38,11 @@ const Home = ({ location, activeWorkout, workoutHistory }) => {
         <UpNextTile workout={activeWorkout} />
       </StyledLink>
       <Hr />
-      {workouts.length !== 0 ? workouts : <EmptyHistoryTile />}
+      {workouts.length !== 0 ? workouts :
+        <EmptyTile>
+          Your workout history will appear here
+        </EmptyTile>
+      }
       <BottomScreenSpace />
       <Navigation pathname={location.pathname} />
     </Fragment>

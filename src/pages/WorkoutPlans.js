@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import BackSplash from '../components/BackSplash';
+import EmptyTile from '../components/EmptyTile';
 import Navigation from '../components/Navigation';
 import WorkoutPlanTile from '../components/WorkoutPlanTile';
 import Banner from '../components/Banner';
@@ -39,6 +40,9 @@ const WorkoutPlans = ({ entities, location }) => {
       <Banner />
       {tiles}
       <Navigation pathname={location.pathname}/>
+      <EmptyTile>
+        + Create you own workout plan - coming soon
+      </EmptyTile>
       <BottomScreenSpace />
     </BackSplash>
   );

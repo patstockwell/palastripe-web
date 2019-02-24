@@ -94,13 +94,8 @@ const initialState = {
           name: 'Compound Sevens',
           workouts: ['workout1', 'workout2'],
         },
-        'plan2': {
-          id: 'plan2',
-          name: 'Power',
-          workouts: ['workout3', 'workout4'],
-        },
       },
-      allIds: ['plan1', 'plan2'],
+      allIds: ['plan1'],
     },
   },
 
