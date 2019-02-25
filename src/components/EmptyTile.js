@@ -15,6 +15,8 @@ const Tile = styled(LayoutTile)`
 
 const Info = styled.p`
   color: black;
+  margin: 16px;
+  text-align: center;
 `;
 
 const EmptyTile = ({ children }) => (
@@ -24,7 +26,7 @@ const EmptyTile = ({ children }) => (
 );
 
 EmptyTile.propTypes = {
-  children: PropTypes.string,
+  children: PropTypes.node,
 };
 
 export default EmptyTile;

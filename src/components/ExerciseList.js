@@ -67,7 +67,9 @@ const SetsWrapper = styled.div`
 
 const ExerciseList = ({ small, showAllSets, sets, name, weightInKilos }) => {
   const setContainers = sets.map(({ max, completed }, i) => (
-    <span key={i}>{completed !== undefined ? completed : (showAllSets ? max : '-')}</span>
+    <span key={i}>
+      {completed !== undefined ? completed : (showAllSets ? max : '-')}
+    </span>
   ));
 
   return (
