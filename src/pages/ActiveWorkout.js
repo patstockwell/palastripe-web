@@ -5,10 +5,12 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { animated } from 'react-spring/renderprops';
 import BackSplash from '../components/BackSplash';
+import Timer from '../components/Timer';
 import AlertConfirm from '../components/AlertConfirm';
 import ActiveExerciseTile from '../components/ActiveExerciseTile';
-import { BackArrowWhite } from '../assets/SVGs';
+import { BackArrow } from '../assets/SVGs';
 import {
+  bannerHeight,
   orange,
   pink,
   ONE_DAY,
@@ -19,20 +21,22 @@ import { workoutPropType } from '../helpers/data';
 import { useInterval } from '../helpers/functions';
 
 const StyledLink = styled(Link)`
-  color: white;
+  color: grey;
   text-decoration: none;
   font-size: 17px;
   height: 20px;
   display: flex;
   align-items: center;
+  margin: 16px;
 `;
 
 const Header = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 50px;
-  margin: 0 15px 0 10px;
+  height: ${bannerHeight}px;
+  background-color: white;
+  border-bottom: solid 0.5px grey;
 `;
 
 const ActiveWorkout = ({ endWorkout, activeWorkout, animationStyles }) => {
@@ -83,15 +87,19 @@ const ActiveWorkout = ({ endWorkout, activeWorkout, animationStyles }) => {
       <BackSplash topLeft={orange} bottomRight={pink}>
         <Header>
           <StyledLink to="/home/">
-            <BackArrowWhite style={{ marginRight: '-12px' }} />
-            <BackArrowWhite /> Back
+            <BackArrow style={{ margin: '0 -12px 0 -8px' }} />
+            <BackArrow /> Back
           </StyledLink>
-          {showRestTimer && count > 0 && count}
           <StyledLink to="/home/" onClick={e => showConfirmation(e)}>
             Done
           </StyledLink>
         </Header>
         {exerciseTiles}
+        <Timer
+          showRestTimer={showRestTimer}
+          clickHandler={resetTimer}
+          count={count}
+        />
         <AlertConfirm
           setShowAlert={setShowAlert}
           endWorkout={() => endWorkout(activeWorkout)}

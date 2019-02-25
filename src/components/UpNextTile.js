@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import LayoutTile from './LayoutTile';
 import ExerciseList from './ExerciseList';
 import { orange, green } from '../helpers/constants';
-import { ForwardArrowBlack } from '../assets/SVGs';
+import { ForwardArrow } from '../assets/SVGs';
 
 const Title = styled.div`
   display: flex;
@@ -21,7 +21,6 @@ const ExerciseListWrapper = styled.div`
 const ForwardArrowPanel = styled.div`
   display: flex;
   align-items: center;
-  width: 12px;
 `;
 
 const Svg = styled.svg`
@@ -78,9 +77,10 @@ const UpNextTile = ({ onGoing, workout: { exercises, name, order }}) => {
         <WorkoutNameOverflow>
           <WorkoutName>{name}</WorkoutName>
         </WorkoutNameOverflow>
-        <ForwardText>{onGoing ? 'On Going' : 'Start'}</ForwardText>
         <ForwardArrowPanel>
-          <ForwardArrowBlack />
+          <ForwardText>{onGoing ? 'On Going' : 'Start'}</ForwardText>
+          <ForwardArrow style={{ height: '12px', margin: '0 -14px 0 -4px'}} />
+          <ForwardArrow style={{ height: '12px' }} />
         </ForwardArrowPanel>
       </Title>
       <Hr />
