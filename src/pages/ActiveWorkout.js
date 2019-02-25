@@ -15,7 +15,6 @@ import {
   pink,
   ONE_DAY,
   ONE_SECOND,
-  REST_PERIOD_IN_SECONDS,
 } from '../helpers/constants';
 import { workoutPropType } from '../helpers/data';
 import { useInterval } from '../helpers/functions';
@@ -56,11 +55,7 @@ const ActiveWorkout = ({ endWorkout, activeWorkout, animationStyles }) => {
     resetTimer();
     setTimeout(() => setShowRestTimer(show), 400);
   };
-
-  if (count === REST_PERIOD_IN_SECONDS || (!showRestTimer && count !== 0)) {
-    resetTimer();
-  }
-
+  // (!showRestTimer && count !== 0)
   const showConfirmation = e => {
     e.preventDefault();
     setShowAlert(true);
@@ -95,11 +90,13 @@ const ActiveWorkout = ({ endWorkout, activeWorkout, animationStyles }) => {
           </StyledLink>
         </Header>
         {exerciseTiles}
-        <Timer
-          showRestTimer={showRestTimer}
-          clickHandler={resetTimer}
-          count={count}
-        />
+        {showRestTimer && count > 0 &&
+          <Timer
+            showRestTimer={showRestTimer}
+            resetTimer={resetTimer}
+            count={count - 1}
+          />
+        }
         <AlertConfirm
           setShowAlert={setShowAlert}
           endWorkout={() => endWorkout(activeWorkout)}

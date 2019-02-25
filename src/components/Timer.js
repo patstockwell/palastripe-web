@@ -2,9 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { useSpring, animated } from 'react-spring';
+import { REST_PERIOD_IN_SECONDS } from '../helpers/constants';
 
 const TimerBackground = styled(animated.div)`
-  // display: ${({ display }) => display };
+  display: flex;
   background-color: rgba(0, 0, 0, 0.7);
   position: absolute;
   bottom: 0;
@@ -21,18 +22,35 @@ const Number = styled(animated.p)`
   overflow: hidden;
 `;
 
-const Timer = ({ showRestTimer, clickHandler, count }) => {
+const Timer = ({ resetTimer, count }) => {
+  // animation config
+  const [ divStyle, setDivStyle ] = useSpring(() => ({
+    opacity: 1,
+    from: { opacity: 0, },
+    onRest: () => count > 0 && resetTimer(),
+  }));
+  const [ pStyle, setPStyle ] = useSpring(() => ({
+    height: '70px',
+    from: { height: '0px' },
+  }));
+
+  // graceful way to unmount
+  const fadeAndReset = () => {
+    setPStyle({ height: '0px' });
+    setDivStyle({ opacity: 0, onRest: () => count > 0 && resetTimer() });
+  };
+
+  // unmount after rest period
+  if (count >= REST_PERIOD_IN_SECONDS) {
+    fadeAndReset();
+  }
+
+  // format the timer
   const timerMinutes = Math.floor(count / 60);
   const timerSeconds = count % 60;
-  const divStyle = useSpring({ display: showRestTimer ? 'flex' : 'none', opacity: showRestTimer ? 1 : 0 });
-  const pStyle = useSpring({ height: showRestTimer ? '70px' : '0px' });
 
   return (
-    <TimerBackground
-      style={divStyle}
-      onClick={clickHandler}
-      display={showRestTimer ? 'flex' : 'none'}
-    >
+    <TimerBackground style={divStyle} onClick={fadeAndReset} >
       <Number style={pStyle}>
         {timerMinutes}{timerSeconds > 9 ? ':' : ':0'}{timerSeconds}
       </Number>
@@ -41,7 +59,7 @@ const Timer = ({ showRestTimer, clickHandler, count }) => {
 };
 
 Timer.propTypes = {
-  clickHandler: PropTypes.func.isRequired,
+  resetTimer: PropTypes.func.isRequired,
   count: PropTypes.number.isRequired,
   showRestTimer: PropTypes.bool.isRequired,
 };
