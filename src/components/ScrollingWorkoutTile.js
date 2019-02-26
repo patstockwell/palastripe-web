@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import ExerciseList from '../components/ExerciseList';
+import ExerciseListItem from '../components/ExerciseListItem';
 import LayoutTile from '../components/LayoutTile';
 
 const WorkoutTile = styled(LayoutTile)`
@@ -27,7 +27,7 @@ const DetailWrapper = styled.div`
 
 const ScrollingWorkoutTile = ({ workout }) => {
   const exercises = workout.exercises.map(e =>
-    <ExerciseList key={e.name} small showAllSets {...e} />
+    <ExerciseListItem key={e.name} small showAllSets {...e} />
   );
 
   const minutes = workout.exercises.reduce((acc, curr) => (

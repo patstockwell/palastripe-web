@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled, { keyframes } from 'styled-components';
 import moment from 'moment';
 import LayoutTile from './LayoutTile';
-import ExerciseList from './ExerciseList';
+import ExerciseListItem from './ExerciseListItem';
 import { fadedYellow } from '../helpers/constants';
 
 const Title = styled.div`
@@ -55,7 +55,7 @@ const highlightRecent = keyframes`
 const HistoryTile = ({ workout: { exercises, date, order }}) => {
 
   const exerciseList = order.map((e, i) =>
-    <ExerciseList {...exercises[e]} key={i} />
+    <ExerciseListItem {...exercises[e]} key={i} />
   );
 
   const isRecent = moment(date).isAfter(moment().subtract(3, 'second'));

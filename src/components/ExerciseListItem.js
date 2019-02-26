@@ -65,7 +65,7 @@ const SetsWrapper = styled.div`
   }
 `;
 
-const ExerciseList = ({ small, showAllSets, sets, name, weightInKilos }) => {
+const ExerciseListItem = ({ small, showAllSets, sets, name, weightInKilos }) => {
   const setContainers = sets.map(({ max, completed }, i) => (
     <span key={i}>
       {completed !== undefined ? completed : (showAllSets ? max : '-')}
@@ -83,7 +83,7 @@ const ExerciseList = ({ small, showAllSets, sets, name, weightInKilos }) => {
   );
 };
 
-ExerciseList.propTypes = exercisePropTypeShape;
+ExerciseListItem.propTypes = exercisePropTypeShape;
 
-export default ExerciseList;
+export default ExerciseListItem;
 

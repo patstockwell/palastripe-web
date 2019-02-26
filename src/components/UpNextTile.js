@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import LayoutTile from './LayoutTile';
-import ExerciseList from './ExerciseList';
+import ExerciseListItem from './ExerciseListItem';
 import { orange, green } from '../helpers/constants';
 import { ForwardArrow } from '../assets/SVGs';
 
@@ -64,7 +64,7 @@ const ForwardText = styled.p`
 
 const UpNextTile = ({ onGoing, workout: { exercises, name, order }}) => {
   const exerciseTiles = order.map((e, i) =>
-    <ExerciseList {...exercises[e]} key={i} />
+    <ExerciseListItem {...exercises[e]} key={i} />
   );
   const colour = onGoing ? orange : green;
 
