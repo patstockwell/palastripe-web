@@ -57,6 +57,7 @@ const ActiveExerciseTile = props => {
         }}
       >
         <WeightIncrementTile
+          name={name}
           handleTileFlip={handleTileFlip}
           weight={weightInKilos}
           setWeight={weight => changeWeight({ exerciseId: id, weight })}

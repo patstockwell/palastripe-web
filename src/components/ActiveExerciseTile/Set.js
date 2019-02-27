@@ -10,7 +10,7 @@ const Set = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 13px 0px 7px;
+  margin: 12px 0px;
   font-size: 20px;
   // stops double-tap-to-zoom
   touch-action: manipulation;

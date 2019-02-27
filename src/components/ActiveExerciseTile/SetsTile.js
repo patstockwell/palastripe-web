@@ -6,19 +6,22 @@ import { FlipArrows } from '../../assets/SVGs';
 import { pink } from '../../helpers/constants';
 import Set, { getTheme } from './Set';
 
-const ExerciseName = styled.h3`
+export const TileName = styled.h3`
   font-weight: 400;
   font-size: 19px;
-  padding: 0 10px;
+  margin: 8px;
+  padding: 4px 0px;
 `;
 
-const FlipButton = styled.button`
+export const FlipButton = styled.button`
   border: none;
   background-color: transparent;
   font-size: 19px;
+  padding: 0;
+  margin: 8px;
 `;
 
-const HeadingWrapper = styled.div`
+export const HeadingWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   align-content: baseline;
@@ -50,7 +53,7 @@ const SetsTile = ({ name, handleClick, sets, handleTileFlip, weight }) => {
   return (
     <LayoutTile className="front">
       <HeadingWrapper>
-        <ExerciseName>{name}</ExerciseName>
+        <TileName>{name}</TileName>
         <FlipButton onClick={() => handleTileFlip(true)}>
           {weight}kg&nbsp;
           <FlipArrows height={15} colour={pink}/>

@@ -79,8 +79,8 @@ const UpNextTile = ({ onGoing, workout: { exercises, name, order }}) => {
         </WorkoutNameOverflow>
         <ForwardArrowPanel>
           <ForwardText>{onGoing ? 'On Going' : 'Start'}</ForwardText>
-          <ForwardArrow style={{ height: '12px', margin: '0 -14px 0 -4px'}} />
-          <ForwardArrow style={{ height: '12px' }} />
+          <ForwardArrow style={{ fill: 'grey', height: '12px', margin: '0 -14px 0 -4px'}} />
+          <ForwardArrow style={{ fill: 'grey', height: '12px' }} />
         </ForwardArrowPanel>
       </Title>
       <Hr />

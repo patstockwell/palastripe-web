@@ -82,8 +82,8 @@ const ActiveWorkout = ({ endWorkout, activeWorkout, animationStyles }) => {
       <BackSplash topLeft={orange} bottomRight={pink}>
         <Header>
           <StyledLink to="/home/">
-            <BackArrow style={{ margin: '0 -12px 0 -8px' }} />
-            <BackArrow /> Back
+            <BackArrow style={{ fill: 'grey', margin: '0 -12px 0 -8px' }} />
+            <BackArrow style={{ fill: 'grey' }} /> Back
           </StyledLink>
           <StyledLink to="/home/" onClick={e => showConfirmation(e)}>
             Done

@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { FlipArrows } from '../../assets/SVGs';
 import { SubtractionSymbol, AdditionSymbol } from '../../assets/SVGs';
 import { pink } from '../../helpers/constants';
+import { HeadingWrapper, TileName, FlipButton } from './SetsTile';
 
 const SvgButtonWrapper = styled.button`
   background-color: transparent;
@@ -27,17 +28,6 @@ const SvgButtonWrapper = styled.button`
   }
 `;
 
-const FlipButton = styled.button`
-  border: none;
-  background-color: transparent;
-  font-size: 19px;
-`;
-
-const RowLayoutRightAlign = styled.div`
-  display: flex;
-  justify-content: flex-end;
-`;
-
 const RowLayout = styled.div`
   display: flex;
   justify-content: space-between;
@@ -46,14 +36,15 @@ const RowLayout = styled.div`
   width: 200px;
 `;
 
-const WeightIncrementTile = ({ handleTileFlip, weight, setWeight }) => (
+const WeightIncrementTile = ({ name, handleTileFlip, weight, setWeight }) => (
   <LayoutTile className="back">
-    <RowLayoutRightAlign>
+    <HeadingWrapper>
+      <TileName>{name}</TileName>
       <FlipButton onClick={() => handleTileFlip(false)}>
         {weight}kg&nbsp;
         <FlipArrows height={15} colour={pink}/>
       </FlipButton>
-    </RowLayoutRightAlign>
+    </HeadingWrapper>
     <RowLayout>
       <SvgButtonWrapper onClick={() => setWeight(weight - 2.5)}>
         <SubtractionSymbol />
@@ -68,6 +59,7 @@ const WeightIncrementTile = ({ handleTileFlip, weight, setWeight }) => (
 WeightIncrementTile.propTypes = {
   handleTileFlip: PropTypes.func.isRequired,
   weight: PropTypes.number.isRequired,
+  name: PropTypes.string.isRequired,
   setWeight: PropTypes.func.isRequired,
 };
 

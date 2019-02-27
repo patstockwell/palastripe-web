@@ -15,10 +15,7 @@ export const ScrollContainer = styled.div`
 `;
 
 const PlanName = styled.h2`
-  text-transform: uppercase;
   margin: 8px;
-  font-weight: 400;
-  font-size: 20px;
 `;
 
 const Hr = styled.hr`

@@ -6,7 +6,7 @@ import { REST_PERIOD_IN_SECONDS } from '../helpers/constants';
 
 const TimerBackground = styled(animated.div)`
   display: flex;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.8);
   position: absolute;
   bottom: 0;
   right: 0;

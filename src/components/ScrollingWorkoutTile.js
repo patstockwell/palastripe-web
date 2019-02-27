@@ -21,12 +21,17 @@ const WorkoutDetail = styled.p`
 const DetailWrapper = styled.div`
   display: flex;
   align-items: center;
-  margin: 8px;
+  margin: 4px;
+  margin-bottom: 12px;
   justify-content: space-between;
 `;
 
+const ExerciseListWrapper = styled.div`
+  margin: 4px;
+`;
+
 const ScrollingWorkoutTile = ({ workout }) => {
-  const exercises = workout.exercises.map(e =>
+  const exerciseList = workout.exercises.map(e =>
     <ExerciseListItem key={e.name} small showAllSets {...e} />
   );
 
@@ -41,7 +46,9 @@ const ScrollingWorkoutTile = ({ workout }) => {
         <h5>{workout.name}</h5>
         <WorkoutDetail>&asymp; {minutes}min</WorkoutDetail>
       </DetailWrapper>
-      {exercises}
+      <ExerciseListWrapper>
+        {exerciseList}
+      </ExerciseListWrapper>
     </WorkoutTile>
   );
 };
