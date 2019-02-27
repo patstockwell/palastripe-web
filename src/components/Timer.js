@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import { useSpring, animated } from 'react-spring';
 import { REST_PERIOD_IN_SECONDS } from '../helpers/constants';
 
+const countDownSize = 90;
+
 const TimerBackground = styled(animated.div)`
   display: flex;
   background-color: rgba(0, 0, 0, 0.8);
@@ -14,12 +16,25 @@ const TimerBackground = styled(animated.div)`
   top: 0;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
 `;
 
 const Number = styled(animated.p)`
   color: white;
-  font-size: 70px;
+  font-size: ${countDownSize}px;
   overflow: hidden;
+`;
+
+const NumberWrapper = styled.div`
+  height: ${countDownSize}px;
+  margin: 40px;
+  display: flex;
+  align-items: flex-end;
+`;
+
+const Message = styled(animated.p)`
+  color: white;
+  font-size: 17px;
 `;
 
 const Timer = ({ resetTimer, count }) => {
@@ -30,8 +45,9 @@ const Timer = ({ resetTimer, count }) => {
     onRest: () => count > 0 && resetTimer(),
   }));
   const [ pStyle, setPStyle ] = useSpring(() => ({
-    height: '70px',
+    height: `${countDownSize}px`,
     from: { height: '0px' },
+    config: { mass: 3, tension: 170, friction: 40 },
   }));
 
   // graceful way to unmount
@@ -46,14 +62,20 @@ const Timer = ({ resetTimer, count }) => {
   }
 
   // format the timer
-  const timerMinutes = Math.floor(count / 60);
-  const timerSeconds = count % 60;
+  const countDown = REST_PERIOD_IN_SECONDS - count;
+  const timerMinutes = Math.floor(countDown / 60);
+  const timerSeconds = countDown % 60;
 
   return (
     <TimerBackground style={divStyle} onClick={fadeAndReset} >
-      <Number style={pStyle}>
-        {timerMinutes}{timerSeconds > 9 ? ':' : ':0'}{timerSeconds}
-      </Number>
+      <NumberWrapper>
+        <Number style={pStyle}>
+          {timerMinutes}{timerSeconds > 9 ? ':' : ':0'}{timerSeconds}
+        </Number>
+      </NumberWrapper>
+      <Message>
+        You&apos;re doing great, take a rest
+      </Message>
     </TimerBackground>
   );
 };

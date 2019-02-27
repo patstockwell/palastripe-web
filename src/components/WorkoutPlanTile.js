@@ -15,6 +15,8 @@ export const ScrollContainer = styled.div`
 `;
 
 const PlanName = styled.h2`
+  font-size: 16px;
+  font-weight: 400;
   margin: 8px;
 `;
 
@@ -36,16 +38,11 @@ const WorkoutPlanTile = ({ plan }) => {
     <ScrollingWorkoutTile key={w.id} workout={w} />
   );
 
-  const numberOfExercises = plan.workouts.reduce((acc, curr) => (
-    curr.exercises.length + acc
-  ), 0);
-
   return (
     <LayoutTile>
       <PlanName>{plan.name}</PlanName>
       <Hr />
       <PlanDetail>{plan.workouts.length} alternating workouts</PlanDetail>
-      <PlanDetail>{numberOfExercises} exercises</PlanDetail>
       <ScrollContainer>
         {tiles}
       </ScrollContainer>
