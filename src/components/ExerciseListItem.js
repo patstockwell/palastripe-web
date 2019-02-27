@@ -57,6 +57,7 @@ const SetsWrapper = styled.div`
     text-align: center;
     border-right: 1px solid lightgrey;
     border-bottom: 1px solid lightgrey;
+    color: ${({ showAllSets, small }) => showAllSets && !small ? 'lightgrey' : 'initial'};
   }
 
   span:last-child {
@@ -75,7 +76,7 @@ const ExerciseListItem = ({ small, showAllSets, sets, name, weightInKilos }) => 
   return (
     <ExerciseListItemWrapper key={name}>
       <ExerciseName small={small}>{name}</ExerciseName>
-      <SetsWrapper small={small}>
+      <SetsWrapper showAllSets={showAllSets} small={small}>
         {setContainers}
       </SetsWrapper>
       <Weight small={small}>{weightInKilos}kg</Weight>

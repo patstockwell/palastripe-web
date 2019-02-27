@@ -64,7 +64,7 @@ const ForwardText = styled.p`
 
 const UpNextTile = ({ onGoing, workout: { exercises, name, order }}) => {
   const exerciseTiles = order.map((e, i) =>
-    <ExerciseListItem {...exercises[e]} key={i} />
+    <ExerciseListItem showAllSets={!onGoing} {...exercises[e]} key={i} />
   );
   const colour = onGoing ? orange : green;
 
