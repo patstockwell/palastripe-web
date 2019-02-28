@@ -73,6 +73,7 @@ const updateCompletedReps = (state, action) => {
   return {
     ...newState,
     onGoing: true,
+    startTime: state.startTime || Date.now(),
   };
 };
 

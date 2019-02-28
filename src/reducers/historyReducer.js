@@ -13,7 +13,7 @@ const endWorkout = (state, action) => {
   return [
     {
       ...action.payload.activeWorkout,
-      date: new Date(),
+      finishTime: new Date(),
     },
     ...state,
   ];
