@@ -5,16 +5,16 @@ import Navigation from '../components/Navigation';
 import BackSplash from '../components/BackSplash';
 import { blue, green } from '../helpers/constants';
 
-const About = ({ location }) => (
+const Me = ({ location }) => (
   <BackSplash topLeft={blue} bottomRight={green}>
     <Banner />
     <Navigation pathname={location.pathname}/>
   </BackSplash>
 );
 
-About.propTypes = {
+Me.propTypes = {
   location: PropTypes.object,
 };
 
-export default About;
+export default Me;
 

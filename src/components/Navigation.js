@@ -52,8 +52,8 @@ const Navigation = ({ pathname }) => {
         <LinkName>Workout Plans</LinkName>
       </NavLink>
       <NavLink
-        highlight={/\/about*/.test(pathname) ? pink : 'black'}
-        to="/about/"
+        highlight={/\/me*/.test(pathname) ? pink : 'black'}
+        to="/me/"
       >
         <User />
         <LinkName>Me</LinkName>
