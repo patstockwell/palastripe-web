@@ -6,6 +6,7 @@ import LayoutTile from './LayoutTile';
 import ExerciseListItem from './ExerciseListItem';
 import { orange, green } from '../helpers/constants';
 import { ForwardArrow } from '../assets/SVGs';
+import { calculateWorkoutTime } from './ScrollingWorkoutTile';
 
 const Title = styled.div`
   display: flex;
@@ -44,12 +45,8 @@ const Hr = styled.hr`
   margin: 0 8px;
 `;
 
-const WorkoutNameOverflow = styled.div`
+const TileHeading = styled.h2`
   flex-grow: 1;
-  overflow: hidden;
-`;
-
-const WorkoutName = styled.h2`
   text-overflow: ellipsis;
   white-space: nowrap;
   word-wrap: normal;
@@ -62,28 +59,51 @@ const ForwardText = styled.p`
   margin: 4px;
 `;
 
+const WorkoutNameWrapper = styled.div`
+  margin: 12px 8px;
+  display: flex;
+  align-items: center;
+`;
+
+const WorkoutName = styled.p`
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 1;
+`;
+
+const WorkoutDetail = styled.p`
+  color: grey;
+  font-size: 14px;
+  margin-left: 8px;
+`;
+
 const UpNextTile = ({ onGoing, workout: { exercises, name, order }}) => {
   const exerciseTiles = order.map((e, i) =>
     <ExerciseListItem showAllSets={!onGoing} {...exercises[e]} key={i} />
   );
   const colour = onGoing ? orange : green;
+  const minutes = calculateWorkoutTime(order.map(e => exercises[e]));
 
   return (
     <LayoutTile>
       <Title>
-        <Svg colour={colour}>
-          <Circle />
-        </Svg>
-        <WorkoutNameOverflow>
-          <WorkoutName>{name}</WorkoutName>
-        </WorkoutNameOverflow>
+        <TileHeading>{onGoing ? 'On Going' : 'Up Next'}</TileHeading>
         <ForwardArrowPanel>
-          <ForwardText>{onGoing ? 'On Going' : 'Start'}</ForwardText>
+          <ForwardText>{onGoing ? 'Continue' : 'Start'}</ForwardText>
           <ForwardArrow style={{ fill: 'grey', height: '12px', margin: '0 -14px 0 -4px'}} />
           <ForwardArrow style={{ fill: 'grey', height: '12px' }} />
         </ForwardArrowPanel>
       </Title>
       <Hr />
+      <WorkoutNameWrapper>
+        <Svg colour={colour}>
+          <Circle />
+        </Svg>
+        <WorkoutName>
+          {name}
+        </WorkoutName>
+        <WorkoutDetail>&asymp; {minutes}min</WorkoutDetail>
+      </WorkoutNameWrapper>
       <ExerciseListWrapper>
         {exerciseTiles}
       </ExerciseListWrapper>

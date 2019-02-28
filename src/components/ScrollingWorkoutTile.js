@@ -30,15 +30,19 @@ const ExerciseListWrapper = styled.div`
   margin: 4px;
 `;
 
+export const calculateWorkoutTime = exercises => (
+  exercises.reduce((acc, curr) => (
+    // 3 minutes per set, plus 2 minutes to set up the exercise
+    (curr.sets.length * 3) + acc + 2
+  ), 0)
+);
+
 const ScrollingWorkoutTile = ({ workout }) => {
   const exerciseList = workout.exercises.map(e =>
     <ExerciseListItem key={e.name} small showAllSets {...e} />
   );
 
-  const minutes = workout.exercises.reduce((acc, curr) => (
-    // 3 minutes per set, plus 2 minutes to set up the exercise
-    (curr.sets.length * 3) + acc + 2
-  ), 0);
+  const minutes = calculateWorkoutTime(workout.exercises);
 
   return (
     <WorkoutTile>

@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import { purple } from '../helpers/constants';
 
 const bounceSpace = 5;
-const popUpHeight = 200 + bounceSpace;
+const popUpHeight = 255 + bounceSpace;
 
 const Background = styled.div`
   position: absolute;
