@@ -1,16 +1,31 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import LayoutTile from '../LayoutTile';
-import { FlipArrows } from '../../assets/SVGs';
-import { pink } from '../../helpers/constants';
+import { Badge, FlipArrows } from '../../assets/SVGs';
+import { pink, orange } from '../../helpers/constants';
+import { checkAllSetsAreComplete } from '../../helpers/functions';
 import Set, { getTheme } from './Set';
 
+const scale = keyframes`
+  0% { transform: scale(0); }
+  90% { transform: scale(0); }
+  100% { transform: scale(1); }
+`;
+
 export const TileName = styled.h3`
+  display: flex;
+  align-items: center;
   font-weight: 400;
   font-size: 17px;
   margin: 8px;
   padding: 4px 0px;
+
+  & > svg {
+    fill: ${orange};
+    margin-left: 8px;
+    animation: ${scale} linear 1s;
+  }
 `;
 
 export const Weight = styled.div`
@@ -55,10 +70,20 @@ const SetsTile = ({ name, handleClick, sets, handleTileFlip, weight }) => {
     }
   );
 
+  const allSetsCompleted = checkAllSetsAreComplete(sets);
+
   return (
     <LayoutTile>
       <HeadingWrapper onClick={() => handleTileFlip(true)}>
-        <TileName>{name}</TileName>
+        <TileName>
+          {name}
+          {allSetsCompleted &&
+            <Badge style={{
+              height: '15px',
+              width: '15px',
+            }}/>
+          }
+        </TileName>
         <Weight>
           {weight}kg&nbsp;
           <FlipArrows height={15} colour={pink}/>

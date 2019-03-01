@@ -26,3 +26,7 @@ export function useInterval(callback, delay) {
 export const decrementReps = (reps, max) =>
   reps === undefined ? max :
     reps === 0 ? undefined : reps - 1;
+
+export const checkAllSetsAreComplete = sets => sets.reduce((acc, curr) => (
+  curr.max === curr.completed && acc
+), true);
