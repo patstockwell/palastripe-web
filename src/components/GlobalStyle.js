@@ -20,6 +20,7 @@ export const GlobalStyle = createGlobalStyle`
   a, button {
     -webkit-tap-highlight-color: transparent;
     outline-style: none;
+    cursor: pointer;
   }
 
   @font-face {

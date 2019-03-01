@@ -8,23 +8,28 @@ import Set, { getTheme } from './Set';
 
 export const TileName = styled.h3`
   font-weight: 400;
-  font-size: 19px;
+  font-size: 17px;
   margin: 8px;
   padding: 4px 0px;
 `;
 
-export const FlipButton = styled.button`
+export const Weight = styled.div`
+  display: flex;
+  align-items: center;
   border: none;
   background-color: transparent;
-  font-size: 19px;
+  font-size: 17px;
   padding: 0;
   margin: 8px;
 `;
 
 export const HeadingWrapper = styled.div`
+  -webkit-tap-highlight-color: transparent;
+  outline-style: none;
   display: flex;
   justify-content: space-between;
   align-content: baseline;
+  cursor: pointer;
 `;
 
 const SetsWrapper = styled.div`
@@ -51,13 +56,13 @@ const SetsTile = ({ name, handleClick, sets, handleTileFlip, weight }) => {
   );
 
   return (
-    <LayoutTile className="front">
-      <HeadingWrapper>
+    <LayoutTile>
+      <HeadingWrapper onClick={() => handleTileFlip(true)}>
         <TileName>{name}</TileName>
-        <FlipButton onClick={() => handleTileFlip(true)}>
+        <Weight>
           {weight}kg&nbsp;
           <FlipArrows height={15} colour={pink}/>
-        </FlipButton>
+        </Weight>
       </HeadingWrapper>
       <SetsWrapper>
         {hightlightedSets}
