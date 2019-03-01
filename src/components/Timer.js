@@ -42,7 +42,6 @@ const Timer = ({ resetTimer, count }) => {
   const [ divStyle, setDivStyle ] = useSpring(() => ({
     opacity: 1,
     from: { opacity: 0, },
-    onRest: () => count > 0 && resetTimer(),
   }));
   const [ pStyle, setPStyle ] = useSpring(() => ({
     height: `${countDownSize}px`,
@@ -53,7 +52,7 @@ const Timer = ({ resetTimer, count }) => {
   // graceful way to unmount
   const fadeAndReset = () => {
     setPStyle({ height: '0px' });
-    setDivStyle({ opacity: 0, onRest: () => count > 0 && resetTimer() });
+    setDivStyle({ opacity: 0, onRest: resetTimer });
   };
 
   // unmount after rest period

@@ -94,7 +94,7 @@ const ActiveWorkout = ({ endWorkout, activeWorkout, animationStyles }) => {
           <Timer
             showRestTimer={showRestTimer}
             resetTimer={resetTimer}
-            count={count - 1}
+            count={count - 1} // minus one second for the animation
           />
         }
         <AlertConfirm
