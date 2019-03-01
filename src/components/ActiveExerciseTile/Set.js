@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { purple, green } from '../../helpers/constants';
 
 const Set = styled.button`
   color: ${({ text }) => text};
@@ -12,19 +13,20 @@ const Set = styled.button`
   align-items: center;
   margin: 12px 0px;
   font-size: 22px;
+  font-weight: 600;
   // stops double-tap-to-zoom
   touch-action: manipulation;
 `;
 
 export const getTheme = (completedReps, max) => {
   if (completedReps === undefined) {
-    return { border: 'grey', background: 'white', text: 'grey' };
+    return { border: 'lightgrey', background: 'lightgrey', text: 'white' };
   } else if (completedReps <= 0) {
-    return { border: 'grey', background: 'lightgrey', text: 'grey' };
+    return { border: 'grey', background: 'grey', text: 'white' };
   } else if (completedReps >= max) {
-    return { border: 'green', background: 'lightgreen', text: 'black' };
+    return { border: green, background: green, text: 'white' };
   } else {
-    return { border: 'blue', background: 'lightskyblue', text: 'black' };
+    return { border: purple, background: purple, text: 'white' };
   }
 };
 

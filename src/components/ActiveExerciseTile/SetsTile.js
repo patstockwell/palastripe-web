@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled, { keyframes } from 'styled-components';
 import LayoutTile from '../LayoutTile';
 import { Badge, FlipArrows } from '../../assets/SVGs';
-import { pink, orange } from '../../helpers/constants';
+import { pink, green } from '../../helpers/constants';
 import { checkAllSetsAreComplete } from '../../helpers/functions';
 import Set, { getTheme } from './Set';
 
@@ -22,7 +22,7 @@ export const TileName = styled.h3`
   padding: 4px 0px;
 
   & > svg {
-    fill: ${orange};
+    fill: ${green};
     margin-left: 8px;
     animation: ${scale} linear 1s;
   }

@@ -31,6 +31,7 @@ const Svg = styled.svg`
   margin-right: 4px;
   fill: ${({ colour }) => colour};
   overflow: visible;
+  padding-bottom: 2px;
 `;
 
 const Circle = styled.circle`
@@ -99,6 +100,7 @@ const UpNextTile = ({ emptyHistory, onGoing, workout }) => {
   );
   const colour = onGoing ? orange : green;
   const minutes = calculateWorkoutTime(order.map(e => exercises[e]));
+  const arrowStyle = { fill: 'grey', height: '12px' };
 
   return (
     <LayoutTile>
@@ -106,8 +108,8 @@ const UpNextTile = ({ emptyHistory, onGoing, workout }) => {
         <TileHeading>{onGoing ? 'On Going' : 'Up Next'}</TileHeading>
         <ForwardArrowPanel animation={emptyHistory && indicateStart}>
           <ForwardText>{onGoing ? 'Continue' : 'Start'}</ForwardText>
-          <ForwardArrow style={{ fill: 'grey', height: '12px', margin: '0 -14px 0 -4px'}} />
-          <ForwardArrow style={{ fill: 'grey', height: '12px' }} />
+          <ForwardArrow style={{ ...arrowStyle, margin: '0 -14px 0 -4px'}} />
+          <ForwardArrow style={arrowStyle} />
         </ForwardArrowPanel>
       </Title>
       <Hr />
