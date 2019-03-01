@@ -32,7 +32,7 @@ export const User = () => (
 
 // https://www.flaticon.com/packs/finance-57
 export const Badge = ({ style }) => (
-  <svg x="0px" y="0px" viewBox="0 0 512 512" style={style}>
+  <svg x="0px" y="0px" viewBox="0 0 454.656 454.656" style={style}>
     <g>
       <g>
         <path d="M454.656,227.584l-38.912-50.688l8.704-62.976l-59.392-23.552l-23.552-59.392l-62.976,8.704l-51.2-39.424L176.64,39.168
