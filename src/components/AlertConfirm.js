@@ -5,8 +5,8 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { purple } from '../helpers/constants';
 
-const bounceSpace = 5;
-const popUpHeight = 255 + bounceSpace;
+const bounceSpace = 7;
+const popUpHeight = 253 + bounceSpace;
 
 const Background = styled.div`
   position: absolute;

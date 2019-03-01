@@ -62,7 +62,7 @@ const ForwardText = styled.p`
 const WorkoutNameWrapper = styled.div`
   margin: 12px 8px;
   display: flex;
-  align-items: center;
+  align-items: baseline;
 `;
 
 const WorkoutName = styled.p`
