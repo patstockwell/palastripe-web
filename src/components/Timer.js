@@ -74,7 +74,7 @@ const Timer = ({ resetTimer, count }) => {
         </Number>
       </NumberWrapper>
       <Message>
-        You&apos;re doing great, take a rest
+        {'You\'re doing great, take a rest'}
       </Message>
     </TimerBackground>
   );

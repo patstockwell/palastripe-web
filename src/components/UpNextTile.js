@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import LayoutTile from './LayoutTile';
 import ExerciseListItem from './ExerciseListItem';
 import { orange, green } from '../helpers/constants';
@@ -20,6 +20,7 @@ const ExerciseListWrapper = styled.div`
 `;
 
 const ForwardArrowPanel = styled.div`
+  animation: ${({ animation }) => animation} 4s linear;
   display: flex;
   align-items: center;
 `;
@@ -77,7 +78,22 @@ const WorkoutDetail = styled.p`
   margin-left: 8px;
 `;
 
-const UpNextTile = ({ onGoing, workout: { exercises, name, order }}) => {
+const indicateStart = keyframes`
+  90% {
+    transform: translateX(0);
+  }
+
+  95% {
+    transform: translateX(-8px);
+  }
+
+  100% {
+    transform: translateX(0);
+  }
+`;
+
+const UpNextTile = ({ emptyHistory, onGoing, workout }) => {
+  const { exercises, name, order } = workout;
   const exerciseTiles = order.map((e, i) =>
     <ExerciseListItem showAllSets={!onGoing} {...exercises[e]} key={i} />
   );
@@ -88,7 +104,7 @@ const UpNextTile = ({ onGoing, workout: { exercises, name, order }}) => {
     <LayoutTile>
       <Title>
         <TileHeading>{onGoing ? 'On Going' : 'Up Next'}</TileHeading>
-        <ForwardArrowPanel>
+        <ForwardArrowPanel animation={emptyHistory && indicateStart}>
           <ForwardText>{onGoing ? 'Continue' : 'Start'}</ForwardText>
           <ForwardArrow style={{ fill: 'grey', height: '12px', margin: '0 -14px 0 -4px'}} />
           <ForwardArrow style={{ fill: 'grey', height: '12px' }} />
@@ -113,11 +129,13 @@ const UpNextTile = ({ onGoing, workout: { exercises, name, order }}) => {
 
 UpNextTile.propTypes = {
   onGoing: PropTypes.bool,
-  workout: PropTypes.object,
+  emptyHistory: PropTypes.bool,
+  workout: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = state => ({
   onGoing: state.activeWorkout.onGoing,
+  emptyHistory: state.history.length === 0,
 });
 
 export default connect(mapStateToProps)(UpNextTile);
