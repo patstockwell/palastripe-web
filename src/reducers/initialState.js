@@ -1,3 +1,10 @@
+import { getLocalState } from '../helpers/functions';
+import {
+  LOCAL_STORAGE_ENTITIES,
+  LOCAL_STORAGE_HISTORY,
+  LOCAL_STORAGE_ACTIVE_WORKOUT,
+ } from '../helpers/constants';
+
 const initialState = {
   settings: {
     planId: 'plan1',
@@ -99,49 +106,13 @@ const initialState = {
     },
   },
 
-  history: [],
+  history: undefined,
 };
 
-export default initialState;
-
-export const mockActiveWorkout = {
-  workoutId: 'workout1',
-  name: 'Pull',
-  onGoing: false,
-  exercises: {
-    'exercise1': {
-      id: 'exercise1',
-      name: 'Dead Lift',
-      weightInKilos: 137.5,
-      sets:[
-        { max: 7, completed: undefined },
-        { max: 7, completed: undefined },
-        { max: 7, completed: undefined },
-        { max: 7, completed: undefined },
-      ],
-    },
-    'exercise4': {
-      id: 'exercise4',
-      name: 'Chin-Up',
-      weightInKilos: 0,
-      sets:[
-        { max: 7, completed: undefined },
-        { max: 7, completed: undefined },
-        { max: 7, completed: undefined },
-        { max: 7, completed: undefined },
-      ],
-    },
-    'exercise6': {
-      id: 'exercise6',
-      name: 'Bicep Curl',
-      weightInKilos: 25,
-      sets:[
-        { max: 7, completed: undefined },
-        { max: 7, completed: undefined },
-        { max: 7, completed: undefined },
-        { max: 7, completed: undefined },
-      ],
-    },
-  },
-  order: ['exercise1', 'exercise4', 'exercise6'],
+export default {
+  ...initialState,
+  entities: getLocalState(LOCAL_STORAGE_ENTITIES, initialState.entities),
+  history: getLocalState(LOCAL_STORAGE_HISTORY, []),
+  activeWorkout: getLocalState(LOCAL_STORAGE_ACTIVE_WORKOUT, undefined),
 };
+

@@ -15,6 +15,8 @@ import {
   pink,
   ONE_DAY,
   ONE_SECOND,
+  END_WORKOUT,
+  SET_LOCAL_STORAGE,
 } from '../helpers/constants';
 import { workoutPropType } from '../helpers/data';
 import { useInterval } from '../helpers/functions';
@@ -38,7 +40,7 @@ const Header = styled.div`
   border-bottom: solid 0.5px grey;
 `;
 
-const ActiveWorkout = ({ endWorkout, activeWorkout, animationStyles }) => {
+const ActiveWorkout = ({ setLocalStorage, endWorkout, activeWorkout, animationStyles }) => {
   const [count, setCount] = useState(0);
   const [showRestTimer, setShowRestTimer] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
@@ -59,6 +61,11 @@ const ActiveWorkout = ({ endWorkout, activeWorkout, animationStyles }) => {
   const showConfirmation = e => {
     e.preventDefault();
     setShowAlert(true);
+  };
+
+  const callEndWorkoutActions = () => {
+    endWorkout(activeWorkout);
+    setLocalStorage();
   };
 
   const { order, exercises } = activeWorkout;
@@ -99,7 +106,7 @@ const ActiveWorkout = ({ endWorkout, activeWorkout, animationStyles }) => {
         }
         <AlertConfirm
           setShowAlert={setShowAlert}
-          endWorkout={() => endWorkout(activeWorkout)}
+          endWorkout={() => callEndWorkoutActions()}
           showAlert={showAlert}
         />
       </BackSplash>
@@ -109,6 +116,7 @@ const ActiveWorkout = ({ endWorkout, activeWorkout, animationStyles }) => {
 
 ActiveWorkout.propTypes = {
   endWorkout: PropTypes.func,
+  setLocalStorage: PropTypes.func,
   animationStyles: PropTypes.object,
   activeWorkout: PropTypes.shape(workoutPropType),
 };
@@ -118,8 +126,11 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
+  setLocalStorage: () => ({
+    type: SET_LOCAL_STORAGE,
+  }),
   endWorkout: activeWorkout => ({
-    type: 'END_WORKOUT',
+    type: END_WORKOUT,
     payload: { activeWorkout },
   }),
 };

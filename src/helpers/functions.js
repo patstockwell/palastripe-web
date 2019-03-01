@@ -30,3 +30,10 @@ export const decrementReps = (reps, max) =>
 export const checkAllSetsAreComplete = sets => sets.reduce((acc, curr) => (
   curr.max === curr.completed && acc
 ), true);
+
+export const getLocalState = (name, defaultValue) => {
+  return localStorage.getItem(name)
+    ? JSON.parse(localStorage.getItem(name))
+    : defaultValue;
+};
+

@@ -2,11 +2,12 @@ import {
   UPDATE_COMPLETED_REPS,
   END_WORKOUT,
   CHANGE_WEIGHT,
+  SET_LOCAL_STORAGE,
+  LOCAL_STORAGE_ACTIVE_WORKOUT,
 } from '../helpers/constants';
 
 const activeWorkoutReducer = (state, action, entities, planId) => {
   if (!state) {
-    // The app starts without an activeWorkout
     // if the state is undefined, then the app has just started and
     // we need to generate an activeWorkout
     return createNewActiveWorkout(state, entities, planId);
@@ -18,10 +19,16 @@ const activeWorkoutReducer = (state, action, entities, planId) => {
     return createNewActiveWorkout(state, entities, planId);
   case CHANGE_WEIGHT:
     return changeWeight(state, action);
+  case SET_LOCAL_STORAGE:
+    setLocalStorage(state);
+    return state;
   default:
     return state;
   }
 };
+
+const setLocalStorage = state =>
+  localStorage.setItem(LOCAL_STORAGE_ACTIVE_WORKOUT, JSON.stringify(state));
 
 const createNewActiveWorkout = (state, entities, planId) => {
   const {
