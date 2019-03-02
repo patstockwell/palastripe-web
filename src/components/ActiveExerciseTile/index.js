@@ -26,6 +26,8 @@ const ActiveExerciseTile = props => {
     changeWeight,
   } = props;
 
+  const handleRemoveExercise = () => console.log('removed');
+
   const handleClick = (setIndex, r, max) => {
     const reps = decrementReps(r, max);
     setTimer(reps !== undefined);
@@ -59,6 +61,7 @@ const ActiveExerciseTile = props => {
         <WeightIncrementTile
           name={name}
           handleTileFlip={handleTileFlip}
+          handleRemoveExercise={handleRemoveExercise}
           weight={weightInKilos}
           setWeight={weight => changeWeight({ exerciseId: id, weight })}
         />

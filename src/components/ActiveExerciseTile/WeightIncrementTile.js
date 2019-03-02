@@ -14,18 +14,20 @@ const SvgButtonWrapper = styled.button`
   border-radius: 50%;
   // stops double-tap-to-zoom
   touch-action: manipulation;
-  width: 65px;
-  height: 65px;
+  width: 50px;
+  height: 50px;
   padding: 0;
+  background-color: ${({ background }) => background};
+  margin-right: ${({ margin }) => margin}px;
+  transform: rotate(${({ degrees }) => degrees}deg);
 
   & > svg {
-    width: 50px;
-    height: 50px;
+    width: 30px;
+    height: 30px;
   }
 
   &:active {
     background-color: ${pink};
-    fill: white;
   }
 `;
 
@@ -33,12 +35,22 @@ const RowLayout = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: 0 auto;
-  width: 200px;
+  margin: 10px auto;
+  width: 280px;
 `;
 
-const WeightIncrementTile = ({ name, handleTileFlip, weight, setWeight }) => (
-  <LayoutTile>
+const Tile = styled(LayoutTile)`
+  height: 100%;
+`;
+
+const WeightIncrementTile = ({
+  name,
+  handleTileFlip,
+  handleRemoveExercise,
+  weight,
+  setWeight,
+}) => (
+  <Tile>
     <HeadingWrapper onClick={() => handleTileFlip(false)}>
       <TileName>{name}</TileName>
       <Weight>
@@ -47,18 +59,32 @@ const WeightIncrementTile = ({ name, handleTileFlip, weight, setWeight }) => (
       </Weight>
     </HeadingWrapper>
     <RowLayout>
-      <SvgButtonWrapper onClick={() => setWeight(weight - 2.5)}>
+      <SvgButtonWrapper
+        onClick={handleRemoveExercise}
+        background={'#555'}
+        degrees={45} // rotate the addition symbol to become a mulitply
+      >
+        <AdditionSymbol fill={'white'}/>
+      </SvgButtonWrapper>
+      <SvgButtonWrapper
+        onClick={() => setWeight(weight - 2.5)}
+        background={'lightgrey'}
+      >
         <SubtractionSymbol />
       </SvgButtonWrapper>
-      <SvgButtonWrapper onClick={() => setWeight(weight + 2.5)}>
+      <SvgButtonWrapper
+        onClick={() => setWeight(weight + 2.5)}
+        background={'lightgrey'}
+      >
         <AdditionSymbol />
       </SvgButtonWrapper>
     </RowLayout>
-  </LayoutTile>
+  </Tile>
 );
 
 WeightIncrementTile.propTypes = {
   handleTileFlip: PropTypes.func.isRequired,
+  handleRemoveExercise: PropTypes.func.isRequired,
   weight: PropTypes.number.isRequired,
   name: PropTypes.string.isRequired,
   setWeight: PropTypes.func.isRequired,
