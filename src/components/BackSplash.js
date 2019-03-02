@@ -10,7 +10,7 @@ const BackSplash = styled.div`
   padding-bottom: 1px;
   background-color: ${({ topLeft }) => topLeft};
   background-image: linear-gradient(
-    140deg,
+    ${({deg}) => deg || 140}deg,
     ${({ topLeft }) => topLeft},
     ${({ bottomRight }) => bottomRight}
   );

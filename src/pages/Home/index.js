@@ -7,7 +7,7 @@ import ActiveWorkout from './../ActiveWorkout';
 import { pink, purple } from '../../helpers/constants';
 
 export default () => (
-  <BackSplash topLeft={pink} bottomRight={purple} >
+  <BackSplash deg={285} topLeft={pink} bottomRight={purple} >
     <Route
       render={({ location }) => {
         return (
