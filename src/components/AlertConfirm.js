@@ -1,12 +1,20 @@
 import React from 'react';
 import { useTransition, animated } from 'react-spring';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { purple } from '../helpers/constants';
 
 const bounceSpace = 7;
 const popUpHeight = 253 + bounceSpace;
+
+export const buttonStyle = `
+  color: white;
+  border: none;
+  border-radius: 5px;
+  height: 50px;
+  width: 100px;
+  font-size: 20px;
+  margin: 0 15px;
+`;
 
 const Background = styled.div`
   position: absolute;
@@ -29,50 +37,12 @@ const Dialog = styled.div`
   width: 100vw;
 `;
 
-const Message = styled.p`
-  color: black;
-  padding: 20px;
-  text-align: center;
-  margin-bottom: 15px;
-`;
-
-const ButtonWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 300px;
-  margin: 0 auto;
-`;
-
-const buttonStyle = `
-  color: white;
-  border: none;
-  border-radius: 5px;
-  height: 50px;
-  width: 100px;
-  font-size: 20px;
-  margin: 0 15px;
-`;
-
-const Button = styled.button`
-  ${buttonStyle}
-  background-color: ${({ background }) => background};
-`;
-
-const LinkButton = styled(Link)`
-  ${buttonStyle}
-  background-color: ${({ background }) => background};
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-`;
-
 const ClickableSpace = styled.div`
   height: 100%;
   transform: translateY(-${popUpHeight}px);
 `;
 
-const AlertConfirm = ({ showAlert, endWorkout, setShowAlert }) => {
+const AlertConfirm = ({ children, showAlert, setShowAlert }) => {
   const transitions = useTransition(showAlert, null, {
     from: {
       transform: `translateY(${popUpHeight}px)`,
@@ -92,13 +62,7 @@ const AlertConfirm = ({ showAlert, endWorkout, setShowAlert }) => {
         <Background>
           <ClickableSpace onClick={() => setShowAlert(false)}/>
           <Dialog>
-            <Message>Are you sure you want to finish this workout?</Message>
-            <ButtonWrapper>
-              <Button onClick={() => setShowAlert(false)} background={'grey'}>No</Button>
-              <LinkButton to="/home/" onClick={endWorkout} background={purple}>
-                <span>Yes</span>
-              </LinkButton>
-            </ButtonWrapper>
+            {children}
           </Dialog>
         </Background>
       </animated.div>

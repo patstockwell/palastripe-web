@@ -6,7 +6,7 @@ import styled from 'styled-components';
 import { animated } from 'react-spring/renderprops';
 import BackSplash from '../components/BackSplash';
 import Timer from '../components/Timer';
-import AlertConfirm from '../components/AlertConfirm';
+import AlertConfirmEndWorkout from '../components/AlertConfirmEndWorkout';
 import ActiveExerciseTile from '../components/ActiveExerciseTile';
 import BackArrow from '../assets/svg/BackArrow';
 import {
@@ -48,7 +48,7 @@ const ActiveWorkout = ({
 }) => {
   const [count, setCount] = useState(0);
   const [showRestTimer, setShowRestTimer] = useState(false);
-  const [showAlert, setShowAlert] = useState(false);
+  const [showAlertEnd, setShowAlertEnd] = useState(false);
   useInterval(() => {
     setCount(count + 1);
   }, showRestTimer ? ONE_SECOND : ONE_DAY);
@@ -65,7 +65,7 @@ const ActiveWorkout = ({
   // (!showRestTimer && count !== 0)
   const showConfirmation = e => {
     e.preventDefault();
-    setShowAlert(true);
+    setShowAlertEnd(true);
   };
 
   const callEndWorkoutActions = () => {
@@ -109,10 +109,10 @@ const ActiveWorkout = ({
             count={count - 1} // minus one second for the animation
           />
         }
-        <AlertConfirm
-          setShowAlert={setShowAlert}
+        <AlertConfirmEndWorkout
+          setShowAlert={setShowAlertEnd}
           endWorkout={() => callEndWorkoutActions()}
-          showAlert={showAlert}
+          showAlert={showAlertEnd}
         />
       </BackSplash>
     </animated.div>
