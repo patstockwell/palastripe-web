@@ -3,7 +3,9 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { pink, navBarHeight } from '../helpers/constants';
-import { User, Home, Calendar } from '../assets/SVGs';
+import User from '../assets/svg/User';
+import Home from '../assets/svg/Home';
+import Calendar from '../assets/svg/Calendar';
 
 const Nav = styled.nav`
   display: flex;

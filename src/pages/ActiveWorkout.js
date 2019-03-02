@@ -8,7 +8,7 @@ import BackSplash from '../components/BackSplash';
 import Timer from '../components/Timer';
 import AlertConfirm from '../components/AlertConfirm';
 import ActiveExerciseTile from '../components/ActiveExerciseTile';
-import { BackArrow } from '../assets/SVGs';
+import BackArrow from '../assets/svg/BackArrow';
 import {
   bannerHeight,
   orange,

@@ -2,8 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import LayoutTile from '../LayoutTile';
 import styled from 'styled-components';
-import { FlipArrows } from '../../assets/SVGs';
-import { SubtractionSymbol, AdditionSymbol } from '../../assets/SVGs';
+import FlipArrows from '../../assets/svg/FlipArrows';
+import AdditionSymbol from '../../assets/svg/AdditionSymbol';
+import SubtractionSymbol from '../../assets/svg/SubtractionSymbol';
 import { pink } from '../../helpers/constants';
 import { HeadingWrapper, TileName, Weight } from './SetsTile';
 

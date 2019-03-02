@@ -3,7 +3,7 @@ import {
   LOCAL_STORAGE_ENTITIES,
   LOCAL_STORAGE_HISTORY,
   LOCAL_STORAGE_ACTIVE_WORKOUT,
- } from '../helpers/constants';
+} from '../helpers/constants';
 
 const initialState = {
   settings: {

@@ -5,7 +5,7 @@ import styled, { keyframes } from 'styled-components';
 import LayoutTile from './LayoutTile';
 import ExerciseListItem from './ExerciseListItem';
 import { orange, green } from '../helpers/constants';
-import { ForwardArrow } from '../assets/SVGs';
+import ForwardArrow from '../assets/svg/ForwardArrow';
 import { calculateWorkoutTime } from './ScrollingWorkoutTile';
 
 const Title = styled.div`

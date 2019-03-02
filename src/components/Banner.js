@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { GoldCup } from '../assets/SVGs';
+import GoldCup from '../assets/svg/GoldCup';
 import { bannerHeight } from '../helpers/constants';
 
 const Title = styled.h1`
