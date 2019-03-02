@@ -13,6 +13,7 @@ import {
   bannerHeight,
   orange,
   pink,
+  REMOVE_EXERCISE,
   ONE_DAY,
   ONE_SECOND,
   END_WORKOUT,
@@ -20,6 +21,7 @@ import {
 } from '../helpers/constants';
 import { workoutPropType } from '../helpers/data';
 import { useInterval } from '../helpers/functions';
+import AlertConfirmRemoveExercise from '../components/AlertConfirmRemoveExercise';
 
 const StyledLink = styled(Link)`
   color: grey;
@@ -42,6 +44,7 @@ const Header = styled.div`
 
 const ActiveWorkout = ({
   setLocalStorage,
+  removeExercise,
   endWorkout,
   activeWorkout,
   animationStyles,
@@ -49,6 +52,7 @@ const ActiveWorkout = ({
   const [count, setCount] = useState(0);
   const [showRestTimer, setShowRestTimer] = useState(false);
   const [showAlertEnd, setShowAlertEnd] = useState(false);
+  const [exerciseId, setExerciseId] = useState(undefined);
   useInterval(() => {
     setCount(count + 1);
   }, showRestTimer ? ONE_SECOND : ONE_DAY);
@@ -79,6 +83,7 @@ const ActiveWorkout = ({
       key={exercises[id].name}
       setTimer={setTimer}
       exercise={exercises[id]}
+      setShowAlertRemove={setExerciseId}
     />
   );
 
@@ -114,6 +119,11 @@ const ActiveWorkout = ({
           endWorkout={() => callEndWorkoutActions()}
           showAlert={showAlertEnd}
         />
+        <AlertConfirmRemoveExercise
+          removeExercise={() => removeExercise(exerciseId)}
+          setExerciseId={setExerciseId}
+          showAlert={!!exerciseId}
+        />
       </BackSplash>
     </animated.div>
   );
@@ -121,6 +131,7 @@ const ActiveWorkout = ({
 
 ActiveWorkout.propTypes = {
   endWorkout: PropTypes.func,
+  removeExercise: PropTypes.func,
   setLocalStorage: PropTypes.func,
   animationStyles: PropTypes.object,
   activeWorkout: PropTypes.shape(workoutPropType),
@@ -131,6 +142,10 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = {
+  removeExercise: exerciseId => ({
+    type: REMOVE_EXERCISE,
+    payload: { exerciseId },
+  }),
   setLocalStorage: () => ({
     type: SET_LOCAL_STORAGE,
   }),

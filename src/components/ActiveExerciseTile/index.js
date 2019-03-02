@@ -17,14 +17,14 @@ import {
   backfaceVisibility,
 } from '../FlipContainer';
 
-const ActiveExerciseTile = props => {
+const ActiveExerciseTile = ({
+  setTimer,
+  updateCompletedReps,
+  exercise: { id, sets, name, weightInKilos },
+  changeWeight,
+  setShowAlertRemove,
+}) => {
   const [flip, setFlip] = useState(false);
-  const {
-    setTimer,
-    updateCompletedReps,
-    exercise: { id, sets, name, weightInKilos },
-    changeWeight,
-  } = props;
 
   const handleClick = (setIndex, r, max) => {
     const reps = decrementReps(r, max);
@@ -59,9 +59,9 @@ const ActiveExerciseTile = props => {
         <WeightIncrementTile
           name={name}
           handleTileFlip={handleTileFlip}
-          exerciseId={id}
           weight={weightInKilos}
           setWeight={weight => changeWeight({ exerciseId: id, weight })}
+          setShowAlertRemove={() => setShowAlertRemove(id)}
         />
       </BackFace>
     </RelativeDiv>
@@ -70,6 +70,7 @@ const ActiveExerciseTile = props => {
 
 ActiveExerciseTile.propTypes = {
   setTimer: PropTypes.func,
+  setShowAlertRemove: PropTypes.func,
   updateCompletedReps: PropTypes.func,
   changeWeight: PropTypes.func,
   exercise: PropTypes.shape(exercisePropTypeShape),
