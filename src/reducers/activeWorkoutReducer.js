@@ -4,6 +4,7 @@ import {
   CHANGE_WEIGHT,
   SET_LOCAL_STORAGE,
   LOCAL_STORAGE_ACTIVE_WORKOUT,
+  REMOVE_EXERCISE,
 } from '../helpers/constants';
 
 const activeWorkoutReducer = (state, action, entities, planId) => {
@@ -13,6 +14,8 @@ const activeWorkoutReducer = (state, action, entities, planId) => {
     return createNewActiveWorkout(state, entities, planId);
   }
   switch (action.type) {
+  case REMOVE_EXERCISE:
+    return removeExercise(state, action);
   case UPDATE_COMPLETED_REPS:
     return updateCompletedReps(state, action);
   case END_WORKOUT:
@@ -25,6 +28,21 @@ const activeWorkoutReducer = (state, action, entities, planId) => {
   default:
     return state;
   }
+};
+
+const removeExercise = (state, action) => {
+  const { exerciseId: id } = action.payload;
+
+  return {
+    ...state,
+    exercises: {
+      ...state.exercises,
+      [id]: undefined,
+    },
+    order: state.order.reduce((acc, curr) => (
+      curr === id ? acc : acc.concat(curr)
+    ), []),
+  };
 };
 
 const setLocalStorage = state =>

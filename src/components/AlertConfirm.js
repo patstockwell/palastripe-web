@@ -102,7 +102,7 @@ const AlertConfirm = ({ showAlert, endWorkout, setShowAlert }) => {
           </Dialog>
         </Background>
       </animated.div>
-      : null
+      : null;
   });
 };
 

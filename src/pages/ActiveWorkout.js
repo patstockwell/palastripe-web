@@ -40,7 +40,12 @@ const Header = styled.div`
   border-bottom: solid 0.5px grey;
 `;
 
-const ActiveWorkout = ({ setLocalStorage, endWorkout, activeWorkout, animationStyles }) => {
+const ActiveWorkout = ({
+  setLocalStorage,
+  endWorkout,
+  activeWorkout,
+  animationStyles,
+}) => {
   const [count, setCount] = useState(0);
   const [showRestTimer, setShowRestTimer] = useState(false);
   const [showAlert, setShowAlert] = useState(false);

@@ -1,11 +1,12 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import LayoutTile from '../LayoutTile';
 import styled from 'styled-components';
 import FlipArrows from '../../assets/svg/FlipArrows';
 import AdditionSymbol from '../../assets/svg/AdditionSymbol';
 import SubtractionSymbol from '../../assets/svg/SubtractionSymbol';
-import { pink } from '../../helpers/constants';
+import { REMOVE_EXERCISE, pink } from '../../helpers/constants';
 import { HeadingWrapper, TileName, Weight } from './SetsTile';
 
 const SvgButtonWrapper = styled.button`
@@ -46,9 +47,10 @@ const Tile = styled(LayoutTile)`
 const WeightIncrementTile = ({
   name,
   handleTileFlip,
-  handleRemoveExercise,
+  removeExercise,
   weight,
   setWeight,
+  exerciseId,
 }) => (
   <Tile>
     <HeadingWrapper onClick={() => handleTileFlip(false)}>
@@ -60,7 +62,7 @@ const WeightIncrementTile = ({
     </HeadingWrapper>
     <RowLayout>
       <SvgButtonWrapper
-        onClick={handleRemoveExercise}
+        onClick={() => removeExercise({ exerciseId })}
         background={'#555'}
         degrees={45} // rotate the addition symbol to become a mulitply
       >
@@ -84,8 +86,9 @@ const WeightIncrementTile = ({
 
 WeightIncrementTile.propTypes = {
   handleTileFlip: PropTypes.func.isRequired,
-  handleRemoveExercise: PropTypes.func.isRequired,
+  removeExercise: PropTypes.func.isRequired,
   weight: PropTypes.number.isRequired,
+  exerciseId: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
   setWeight: PropTypes.func.isRequired,
 };
@@ -94,7 +97,14 @@ const areEqualProps = (prev, next) => (
   prev.weight === next.weight
 );
 
+const mapDispatchToProps = {
+  removeExercise: ({ exerciseId }) => ({
+    type: REMOVE_EXERCISE,
+    payload: { exerciseId },
+  }),
+};
+
 const PureWeightIncrementTile = React.memo(WeightIncrementTile, areEqualProps);
 
-export default PureWeightIncrementTile;
+export default connect(null, mapDispatchToProps)(PureWeightIncrementTile);
 
