@@ -6,7 +6,6 @@ import {
   Route,
   Switch,
 } from 'react-router-dom';
-import Helmet from 'react-helmet';
 
 import rootReducer from './reducers';
 import { GlobalStyle } from './components/GlobalStyle';
@@ -19,7 +18,6 @@ const store = createStore(rootReducer);
 
 const App = () => (
   <Provider store={store}>
-    <Helmet title="You Are Doing Great" />
     <GlobalStyle />
     <Router>
       <Switch>
