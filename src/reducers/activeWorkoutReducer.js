@@ -6,6 +6,9 @@ import {
   REMOVE_EXERCISE,
 } from '../helpers/constants';
 
+// Note: The activeWorkoutReducer is not the default export from this module.
+// It is wrapped with a higher order function that sets localStorage.
+
 const activeWorkoutReducer = (state, action, entities, planId) => {
   if (!state) {
     // if the state is undefined, then the app has just started and
@@ -14,24 +17,16 @@ const activeWorkoutReducer = (state, action, entities, planId) => {
   }
   switch (action.type) {
     case REMOVE_EXERCISE: {
-      const workout = removeExercise(state, action);
-      setLocalStorage(workout);
-      return workout;
+      return removeExercise(state, action);
     }
     case UPDATE_COMPLETED_REPS: {
-      const workout = updateCompletedReps(state, action);
-      setLocalStorage(workout);
-      return workout;
+      return updateCompletedReps(state, action);
     }
     case END_WORKOUT: {
-      const workout = createNewActiveWorkout(state, entities, planId);
-      setLocalStorage(workout);
-      return workout;
+      return createNewActiveWorkout(state, entities, planId);
     }
     case CHANGE_WEIGHT: {
-      const workout = changeWeight(state, action);
-      setLocalStorage(workout);
-      return workout;
+      return changeWeight(state, action);
     }
     default: {
       return state;
@@ -41,6 +36,12 @@ const activeWorkoutReducer = (state, action, entities, planId) => {
 
 const setLocalStorage = state =>
   localStorage.setItem(LOCAL_STORAGE_ACTIVE_WORKOUT, JSON.stringify(state));
+
+const activeWorkoutReducerWithLocalStorage = (...args) => {
+  const state = activeWorkoutReducer(...args);
+  setLocalStorage(state);
+  return state;
+};
 
 const removeExercise = (state, action) => {
   const { exerciseId: id } = action.payload;
@@ -135,5 +136,5 @@ const changeExercise = (state, exerciseId, newData) => {
   };
 };
 
-export default activeWorkoutReducer;
+export default activeWorkoutReducerWithLocalStorage;
 

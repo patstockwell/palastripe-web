@@ -3,17 +3,24 @@ import {
   END_WORKOUT,
 } from '../helpers/constants';
 
+// Note: The reducer is not the default export from this module.
+// It is wrapped with a higher order function that sets localStorage.
+
 const entitiesReducer = (state, action) => {
   switch (action.type) {
     case END_WORKOUT: {
-      const newState = endWorkout(state, action);
-      setLocalStorage(newState);
-      return newState;
+      return endWorkout(state, action);
     }
     default: {
       return state;
     }
   }
+};
+
+const entitiesReducerWithLocalStorage = (...args) => {
+  const state = entitiesReducer(...args);
+  setLocalStorage(state);
+  return state;
 };
 
 const endWorkout = (state, action) => {
@@ -44,5 +51,5 @@ const endWorkout = (state, action) => {
 const setLocalStorage = state =>
   localStorage.setItem(LOCAL_STORAGE_ENTITIES, JSON.stringify(state));
 
-export default entitiesReducer;
+export default entitiesReducerWithLocalStorage;
 
