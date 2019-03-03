@@ -6,7 +6,7 @@ import {
   REMOVE_EXERCISE,
 } from '../helpers/constants';
 
-// Note: The activeWorkoutReducer is not the default export from this module.
+// Note: The reducer is not the default export from this module.
 // It is wrapped with a higher order function that sets localStorage.
 
 const activeWorkoutReducer = (state, action, entities, planId) => {
@@ -108,7 +108,7 @@ const updateCompletedReps = (state, action) => {
   return {
     ...newState,
     onGoing: true,
-    startTime: state.startTime || Date.now(),
+    startTime: state.startTime || new Date(),
   };
 };
 

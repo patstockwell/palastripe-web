@@ -19,7 +19,7 @@ describe('the historyReducer', () => {
         activeWorkout: { exercise: 'push ups', reps: 10 },
       },
     })).toEqual([
-      { exercise: 'push ups', reps: 10, date: expect.any(Date) },
+      { exercise: 'push ups', reps: 10, finishTime: expect.any(Date) },
       { exercise: 'dips', reps: 4 }
     ]);
   });

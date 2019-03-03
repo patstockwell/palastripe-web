@@ -68,6 +68,7 @@ describe('the activeWorkoutReducer', () => {
         },
       })).toEqual({
         name: 'Pull',
+        startTime: expect.any(Date),
         workoutId: 'workout1',
         onGoing: true,
         exercises: {
