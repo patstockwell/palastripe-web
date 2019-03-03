@@ -20,7 +20,6 @@ export const fadedYellow = '#fffd8e';
 export const CHANGE_WEIGHT = 'CHANGE_WEIGHT';
 export const UPDATE_COMPLETED_REPS = 'UPDATE_COMPLETED_REPS';
 export const END_WORKOUT = 'END_WORKOUT';
-export const SET_LOCAL_STORAGE = 'SET_LOCAL_STORAGE';
 export const REMOVE_EXERCISE = 'REMOVE_EXERCISE';
 
 export const LOCAL_STORAGE_HISTORY = 'HBFF_HISTORY';

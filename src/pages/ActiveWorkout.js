@@ -17,7 +17,6 @@ import {
   ONE_DAY,
   ONE_SECOND,
   END_WORKOUT,
-  SET_LOCAL_STORAGE,
 } from '../helpers/constants';
 import { workoutPropType } from '../helpers/data';
 import { useInterval } from '../helpers/functions';
@@ -43,7 +42,6 @@ const Header = styled.div`
 `;
 
 const ActiveWorkout = ({
-  setLocalStorage,
   removeExercise,
   endWorkout,
   activeWorkout,
@@ -74,7 +72,6 @@ const ActiveWorkout = ({
 
   const callEndWorkoutActions = () => {
     endWorkout(activeWorkout);
-    setLocalStorage();
   };
 
   const { order, exercises } = activeWorkout;
@@ -132,7 +129,6 @@ const ActiveWorkout = ({
 ActiveWorkout.propTypes = {
   endWorkout: PropTypes.func,
   removeExercise: PropTypes.func,
-  setLocalStorage: PropTypes.func,
   animationStyles: PropTypes.object,
   activeWorkout: PropTypes.shape(workoutPropType),
 };
@@ -145,9 +141,6 @@ const mapDispatchToProps = {
   removeExercise: exerciseId => ({
     type: REMOVE_EXERCISE,
     payload: { exerciseId },
-  }),
-  setLocalStorage: () => ({
-    type: SET_LOCAL_STORAGE,
   }),
   endWorkout: activeWorkout => ({
     type: END_WORKOUT,

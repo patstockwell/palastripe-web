@@ -1,18 +1,18 @@
 import {
   LOCAL_STORAGE_ENTITIES,
   END_WORKOUT,
-  SET_LOCAL_STORAGE,
 } from '../helpers/constants';
 
 const entitiesReducer = (state, action) => {
   switch (action.type) {
-  case END_WORKOUT:
-    return endWorkout(state, action);
-  case SET_LOCAL_STORAGE:
-    setLocalStorage(state);
-    return state;
-  default:
-    return state;
+    case END_WORKOUT: {
+      const newState = endWorkout(state, action);
+      setLocalStorage(newState);
+      return newState;
+    }
+    default: {
+      return state;
+    }
   }
 };
 

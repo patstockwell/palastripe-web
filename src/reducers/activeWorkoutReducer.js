@@ -2,7 +2,6 @@ import {
   UPDATE_COMPLETED_REPS,
   END_WORKOUT,
   CHANGE_WEIGHT,
-  SET_LOCAL_STORAGE,
   LOCAL_STORAGE_ACTIVE_WORKOUT,
   REMOVE_EXERCISE,
 } from '../helpers/constants';
@@ -14,21 +13,34 @@ const activeWorkoutReducer = (state, action, entities, planId) => {
     return createNewActiveWorkout(state, entities, planId);
   }
   switch (action.type) {
-  case REMOVE_EXERCISE:
-    return removeExercise(state, action);
-  case UPDATE_COMPLETED_REPS:
-    return updateCompletedReps(state, action);
-  case END_WORKOUT:
-    return createNewActiveWorkout(state, entities, planId);
-  case CHANGE_WEIGHT:
-    return changeWeight(state, action);
-  case SET_LOCAL_STORAGE:
-    setLocalStorage(state);
-    return state;
-  default:
-    return state;
+    case REMOVE_EXERCISE: {
+      const workout = removeExercise(state, action);
+      setLocalStorage(workout);
+      return workout;
+    }
+    case UPDATE_COMPLETED_REPS: {
+      const workout = updateCompletedReps(state, action);
+      setLocalStorage(workout);
+      return workout;
+    }
+    case END_WORKOUT: {
+      const workout = createNewActiveWorkout(state, entities, planId);
+      setLocalStorage(workout);
+      return workout;
+    }
+    case CHANGE_WEIGHT: {
+      const workout = changeWeight(state, action);
+      setLocalStorage(workout);
+      return workout;
+    }
+    default: {
+      return state;
+    }
   }
 };
+
+const setLocalStorage = state =>
+  localStorage.setItem(LOCAL_STORAGE_ACTIVE_WORKOUT, JSON.stringify(state));
 
 const removeExercise = (state, action) => {
   const { exerciseId: id } = action.payload;
@@ -44,9 +56,6 @@ const removeExercise = (state, action) => {
     ), []),
   };
 };
-
-const setLocalStorage = state =>
-  localStorage.setItem(LOCAL_STORAGE_ACTIVE_WORKOUT, JSON.stringify(state));
 
 const createNewActiveWorkout = (state, entities, planId) => {
   const {
