@@ -37,12 +37,13 @@ const WorkoutPlanTile = ({ plan }) => {
   const tiles = plan.workouts.map(w =>
     <ScrollingWorkoutTile key={w.id} workout={w} />
   );
+  const { name, workouts: { length } } = plan;
 
   return (
     <LayoutTile>
-      <PlanName>{plan.name}</PlanName>
+      <PlanName>{name}</PlanName>
       <Hr />
-      <PlanDetail>{plan.workouts.length} alternating workouts</PlanDetail>
+      <PlanDetail>{length} {length === 1 ? 'day' : 'days'} / week</PlanDetail>
       <ScrollContainer>
         {tiles}
       </ScrollContainer>

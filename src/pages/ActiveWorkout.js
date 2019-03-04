@@ -47,6 +47,7 @@ const ActiveWorkout = ({
   activeWorkout,
   animationStyles,
 }) => {
+  // use a negative start number to simulate delay. Show the timer at zero
   const [count, setCount] = useState(-DELAY_BEFORE_SHOWING_TIMER);
   const [showRestTimer, setShowRestTimer] = useState(false);
   const [showAlertEnd, setShowAlertEnd] = useState(false);
