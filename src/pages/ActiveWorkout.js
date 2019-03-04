@@ -14,7 +14,7 @@ import {
   orange,
   pink,
   REMOVE_EXERCISE,
-  ONE_DAY,
+  DELAY_BEFORE_SHOWING_TIMER,
   ONE_SECOND,
   END_WORKOUT,
 } from '../helpers/constants';
@@ -47,24 +47,24 @@ const ActiveWorkout = ({
   activeWorkout,
   animationStyles,
 }) => {
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(-DELAY_BEFORE_SHOWING_TIMER);
   const [showRestTimer, setShowRestTimer] = useState(false);
   const [showAlertEnd, setShowAlertEnd] = useState(false);
   const [exerciseId, setExerciseId] = useState(undefined);
   useInterval(() => {
     setCount(count + 1);
-  }, showRestTimer ? ONE_SECOND : ONE_DAY);
+  }, ONE_SECOND);
 
   const resetTimer = () => {
     setShowRestTimer(false);
-    setCount(0);
+    setCount(-DELAY_BEFORE_SHOWING_TIMER);
   };
 
   const setTimer = (show = true) => {
     resetTimer();
-    setTimeout(() => setShowRestTimer(show), 400);
+    setShowRestTimer(show);
   };
-  // (!showRestTimer && count !== 0)
+
   const showConfirmation = e => {
     e.preventDefault();
     setShowAlertEnd(true);
@@ -104,11 +104,11 @@ const ActiveWorkout = ({
           </StyledLink>
         </Header>
         {exerciseTiles}
-        {showRestTimer && count > 0 &&
+        {showRestTimer && count >= 0 &&
           <Timer
             showRestTimer={showRestTimer}
             resetTimer={resetTimer}
-            count={count - 1} // minus one second for the animation
+            count={count}
           />
         }
         <AlertConfirmEndWorkout

@@ -4,7 +4,8 @@ export const navBarHeight = 48;
 export const bannerHeight = 48;
 export const gutterWidth = 12;
 
-export const REST_PERIOD_IN_SECONDS = 90;
+export const DELAY_BEFORE_SHOWING_TIMER = 2;
+export const REST_PERIOD_IN_SECONDS = 120;
 export const ONE_SECOND = 1000;
 export const ONE_DAY = 86400000;
 export const MILLISECONDS_IN_A_SECOND = 1000;

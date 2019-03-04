@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { useSpring, animated } from 'react-spring';
 import { REST_PERIOD_IN_SECONDS } from '../helpers/constants';
 
-const countDownSize = 90;
+const countDownSize = 130;
 
 const TimerBackground = styled(animated.div)`
   display: flex;
@@ -39,14 +39,16 @@ const Message = styled(animated.p)`
 
 const Timer = ({ resetTimer, count }) => {
   // animation config
+  const config = { mass: 1, tension: 470, friction: 40 };
   const [ divStyle, setDivStyle ] = useSpring(() => ({
     opacity: 1,
     from: { opacity: 0, },
+    config,
   }));
   const [ pStyle, setPStyle ] = useSpring(() => ({
     height: `${countDownSize}px`,
     from: { height: '0px' },
-    config: { mass: 3, tension: 170, friction: 40 },
+    config,
   }));
 
   // graceful way to unmount
