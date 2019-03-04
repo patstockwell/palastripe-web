@@ -7,6 +7,33 @@ export const gutterWidth = 12;
 export const REST_PERIOD_IN_SECONDS = 90;
 export const ONE_SECOND = 1000;
 export const ONE_DAY = 86400000;
+export const MILLISECONDS_IN_A_SECOND = 1000;
+export const SECONDS_IN_A_MINUTE = 60;
+export const MILLISECONDS_IN_A_MINUTE =
+  MILLISECONDS_IN_A_SECOND * SECONDS_IN_A_MINUTE;
+export const DAYS_OF_THE_WEEK = [
+  'Sunday',
+  'Monday',
+  'Tuesday',
+  'Wednesday',
+  'Thursday',
+  'Friday',
+  'Saturday',
+];
+export const MONTHS_OF_THE_YEAR = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+];
 
 export const pink = '#ff02c8';
 export const purple = '#6702ff';

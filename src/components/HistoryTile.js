@@ -1,10 +1,14 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled, { keyframes } from 'styled-components';
-import moment from 'moment';
 import LayoutTile from './LayoutTile';
 import ExerciseListItem from './ExerciseListItem';
-import { fadedYellow } from '../helpers/constants';
+import { formatDate } from '../helpers/functions';
+import {
+  fadedYellow,
+  MILLISECONDS_IN_A_MINUTE,
+  ONE_SECOND,
+} from '../helpers/constants';
 
 const Title = styled.div`
   display: flex;
@@ -73,16 +77,17 @@ const highlightRecent = keyframes`
 
 const HistoryTile = ({ workout }) => {
   const { name, exercises, startTime, finishTime, order } = workout;
-  const finish = moment(finishTime);
-  const start = moment(startTime);
-  const diff = finish.diff(start) < 0
-    ? 0 : Math.round(finish.diff(start) / 1000 / 60);
+  const { day, date, month } = formatDate(finishTime);
+
+  const isRecent = finishTime > Date.now() - (3 * ONE_SECOND);
+  const diff = startTime ? Math.ceil(
+    (finishTime - startTime) / MILLISECONDS_IN_A_MINUTE
+  ) : 0;
 
   const exerciseList = order.map((e, i) =>
     <ExerciseListItem {...exercises[e]} key={i} />
   );
 
-  const isRecent = finish.isAfter(moment().subtract(3, 'second'));
   const backgroundColour = finishTime && isRecent ? highlightRecent : undefined;
 
   return (
@@ -95,7 +100,7 @@ const HistoryTile = ({ workout }) => {
           </Time>
         </NameWrapper>
         <TileDetail>
-          {`${finish.format('dddd')} ${finish.format('D MMM')}`}
+          {`${day}, ${date} ${month}`}
         </TileDetail>
       </Title>
       <ExerciseListWrapper>

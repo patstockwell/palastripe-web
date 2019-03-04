@@ -27,7 +27,7 @@ const endWorkout = (state, action) => {
   return [
     {
       ...action.payload.activeWorkout,
-      finishTime: new Date(),
+      finishTime: Date.now(),
     },
     ...state,
   ];

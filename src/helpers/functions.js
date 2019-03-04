@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { MONTHS_OF_THE_YEAR, DAYS_OF_THE_WEEK } from './constants';
 
 export function useInterval(callback, delay) {
   // https://overreacted.io/making-setinterval-declarative-with-react-hooks/
@@ -35,5 +36,14 @@ export const getLocalState = (name, defaultValue) => {
   return localStorage.getItem(name)
     ? JSON.parse(localStorage.getItem(name))
     : defaultValue;
+};
+
+export const formatDate = time => {
+  const date = new Date(time);
+  return {
+    day: DAYS_OF_THE_WEEK[date.getUTCDay()],
+    date: date.getUTCDate(),
+    month: MONTHS_OF_THE_YEAR[date.getMonth()],
+  };
 };
 
