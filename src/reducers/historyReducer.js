@@ -1,10 +1,4 @@
-import {
-  LOCAL_STORAGE_HISTORY,
-  END_WORKOUT,
-} from '../helpers/constants';
-
-// Note: The reducer is not the default export from this module.
-// It is wrapped with a higher order function that sets localStorage.
+import { END_WORKOUT } from '../helpers/constants';
 
 const historyReducer = (state, action) => {
   switch (action.type) {
@@ -17,12 +11,6 @@ const historyReducer = (state, action) => {
   }
 };
 
-const historyReducerWithLocalStorage = (...args) => {
-  const state = historyReducer(...args);
-  setLocalStorage(state);
-  return state;
-};
-
 const endWorkout = (state, action) => {
   return [
     {
@@ -33,8 +21,5 @@ const endWorkout = (state, action) => {
   ];
 };
 
-const setLocalStorage = history =>
-  localStorage.setItem(LOCAL_STORAGE_HISTORY, JSON.stringify(history));
-
-export default historyReducerWithLocalStorage;
+export default historyReducer;
 

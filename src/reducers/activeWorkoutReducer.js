@@ -2,12 +2,8 @@ import {
   UPDATE_COMPLETED_REPS,
   END_WORKOUT,
   CHANGE_WEIGHT,
-  LOCAL_STORAGE_ACTIVE_WORKOUT,
   REMOVE_EXERCISE,
 } from '../helpers/constants';
-
-// Note: The reducer is not the default export from this module.
-// It is wrapped with a higher order function that sets localStorage.
 
 const activeWorkoutReducer = (state, action, entities, planId) => {
   if (!state) {
@@ -32,15 +28,6 @@ const activeWorkoutReducer = (state, action, entities, planId) => {
       return state;
     }
   }
-};
-
-const setLocalStorage = state =>
-  localStorage.setItem(LOCAL_STORAGE_ACTIVE_WORKOUT, JSON.stringify(state));
-
-const activeWorkoutReducerWithLocalStorage = (...args) => {
-  const state = activeWorkoutReducer(...args);
-  setLocalStorage(state);
-  return state;
 };
 
 const removeExercise = (state, action) => {
@@ -136,5 +123,5 @@ const changeExercise = (state, exerciseId, newData) => {
   };
 };
 
-export default activeWorkoutReducerWithLocalStorage;
+export default activeWorkoutReducer;
 

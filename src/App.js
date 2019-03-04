@@ -13,12 +13,14 @@ import WorkoutPlans from './pages/WorkoutPlans';
 import Home from './pages/Home/';
 import Me from './pages/Me';
 import FourZeroFour from './pages/FourZeroFour';
+import LocalStorageSetter from './components/LocalStorageSetter';
 
 const store = createStore(rootReducer);
 
 const App = () => (
   <Provider store={store}>
     <GlobalStyle />
+    <LocalStorageSetter />
     <Router>
       <Switch>
         <Route path="/" exact component={Home} />

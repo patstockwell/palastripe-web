@@ -1,4 +1,4 @@
-import { getLocalState } from '../helpers/functions';
+import { getLocalStorage } from '../helpers/functions';
 import {
   LOCAL_STORAGE_ENTITIES,
   LOCAL_STORAGE_HISTORY,
@@ -111,8 +111,8 @@ const initialState = {
 
 export default {
   ...initialState,
-  entities: getLocalState(LOCAL_STORAGE_ENTITIES, initialState.entities),
-  history: getLocalState(LOCAL_STORAGE_HISTORY, []),
-  activeWorkout: getLocalState(LOCAL_STORAGE_ACTIVE_WORKOUT, undefined),
+  entities: getLocalStorage(LOCAL_STORAGE_ENTITIES, initialState.entities),
+  history: getLocalStorage(LOCAL_STORAGE_HISTORY, []),
+  activeWorkout: getLocalStorage(LOCAL_STORAGE_ACTIVE_WORKOUT, undefined),
 };
 
