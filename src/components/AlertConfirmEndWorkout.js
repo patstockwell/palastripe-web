@@ -34,14 +34,14 @@ const LinkButton = styled(Link)`
 `;
 
 const AlertConfirmEndWorkout = ({
-  setShowAlert,
+  continueWorkout,
   endWorkout,
   showAlert,
 }) => (
-  <AlertConfirm showAlert={showAlert} setShowAlert={setShowAlert}>
+  <AlertConfirm showAlert={showAlert} cancelAlert={continueWorkout}>
     <Message>Are you sure you want to finish this workout?</Message>
     <ButtonWrapper>
-      <Button onClick={() => setShowAlert(false)} background={'grey'}>No</Button>
+      <Button onClick={continueWorkout} background={'grey'}>No</Button>
       <LinkButton to="/home/" onClick={endWorkout} background={purple}>
         <span>Yes</span>
       </LinkButton>
@@ -51,7 +51,7 @@ const AlertConfirmEndWorkout = ({
 
 AlertConfirmEndWorkout.propTypes = {
   endWorkout: PropTypes.func,
-  setShowAlert: PropTypes.func,
+  continueWorkout: PropTypes.func,
   showAlert: PropTypes.bool,
 };
 

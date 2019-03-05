@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { useSpring, animated } from 'react-spring';
-import { REST_PERIOD_IN_SECONDS } from '../helpers/constants';
 
 const countDownSize = 130;
 
@@ -37,7 +36,7 @@ const Message = styled(animated.p)`
   font-size: 17px;
 `;
 
-const Timer = ({ resetTimer, count }) => {
+const Timer = ({ resetTimer, count, restPeriod }) => {
   // animation config
   const config = { mass: 1, tension: 470, friction: 40 };
   const [ divStyle, setDivStyle ] = useSpring(() => ({
@@ -58,12 +57,12 @@ const Timer = ({ resetTimer, count }) => {
   };
 
   // unmount after rest period
-  if (count >= REST_PERIOD_IN_SECONDS) {
+  if (count >= restPeriod) {
     fadeAndReset();
   }
 
   // format the timer
-  const countDown = REST_PERIOD_IN_SECONDS - count;
+  const countDown = restPeriod - count;
   const timerMinutes = Math.floor(countDown / 60);
   const timerSeconds = countDown % 60;
 
@@ -84,6 +83,7 @@ const Timer = ({ resetTimer, count }) => {
 Timer.propTypes = {
   resetTimer: PropTypes.func.isRequired,
   count: PropTypes.number.isRequired,
+  restPeriod: PropTypes.number.isRequired,
   showRestTimer: PropTypes.bool.isRequired,
 };
 

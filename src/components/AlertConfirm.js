@@ -42,7 +42,7 @@ const ClickableSpace = styled.div`
   transform: translateY(-${popUpHeight}px);
 `;
 
-const AlertConfirm = ({ children, showAlert, setShowAlert }) => {
+const AlertConfirm = ({ children, showAlert, cancelAlert }) => {
   const transitions = useTransition(showAlert, null, {
     from: {
       transform: `translateY(${popUpHeight}px)`,
@@ -60,7 +60,7 @@ const AlertConfirm = ({ children, showAlert, setShowAlert }) => {
     return item ?
       <animated.div key={'unique'} style={props}>
         <Background>
-          <ClickableSpace onClick={() => setShowAlert(false)}/>
+          <ClickableSpace onClick={cancelAlert}/>
           <Dialog>
             {children}
           </Dialog>
@@ -71,9 +71,8 @@ const AlertConfirm = ({ children, showAlert, setShowAlert }) => {
 };
 
 AlertConfirm.propTypes = {
-  endWorkout: PropTypes.func,
-  setShowAlert: PropTypes.func,
-  showAlert: PropTypes.bool,
+  cancelAlert: PropTypes.func.isRequired,
+  showAlert: PropTypes.bool.isRequired,
 };
 
 export default AlertConfirm;

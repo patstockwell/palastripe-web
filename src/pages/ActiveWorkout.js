@@ -17,6 +17,7 @@ import {
   DELAY_BEFORE_SHOWING_TIMER,
   ONE_SECOND,
   END_WORKOUT,
+  DEFAULT_REST_PERIOD_IN_SECONDS,
 } from '../helpers/constants';
 import { workoutPropType } from '../helpers/data';
 import { useInterval } from '../helpers/functions';
@@ -50,8 +51,9 @@ const ActiveWorkout = ({
   // use a negative start number to simulate delay. Show the timer at zero
   const [count, setCount] = useState(-DELAY_BEFORE_SHOWING_TIMER);
   const [showRestTimer, setShowRestTimer] = useState(false);
-  const [showAlertEnd, setShowAlertEnd] = useState(false);
-  const [exerciseId, setExerciseId] = useState(undefined);
+  const [restPeriod, setRestPeriod] = useState(DEFAULT_REST_PERIOD_IN_SECONDS);
+  const [showAlertEndWorkout, setShowAlertEndWorkout] = useState(false);
+  const [exerciseIdForRemoval, setExerciseIdForRemoval] = useState(undefined);
   useInterval(() => {
     setCount(count + 1);
   }, ONE_SECOND);
@@ -61,27 +63,24 @@ const ActiveWorkout = ({
     setCount(-DELAY_BEFORE_SHOWING_TIMER);
   };
 
-  const setTimer = (show = true) => {
+  const setTimer = (exerciseId, show = true) => {
+    setRestPeriod(activeWorkout.exercises[exerciseId].restPeriodInSeconds);
     resetTimer();
     setShowRestTimer(show);
   };
 
   const showConfirmation = e => {
     e.preventDefault();
-    setShowAlertEnd(true);
-  };
-
-  const callEndWorkoutActions = () => {
-    endWorkout(activeWorkout);
+    setShowAlertEndWorkout(true);
   };
 
   const { order, exercises } = activeWorkout;
   const exerciseTiles = order.map(id =>
     <ActiveExerciseTile
       key={exercises[id].name}
-      setTimer={setTimer}
+      setTimer={show => setTimer(id, show)}
       exercise={exercises[id]}
-      setShowAlertRemove={setExerciseId}
+      setShowAlertRemove={setExerciseIdForRemoval}
     />
   );
 
@@ -107,20 +106,21 @@ const ActiveWorkout = ({
         {exerciseTiles}
         {showRestTimer && count >= 0 &&
           <Timer
+            restPeriod={restPeriod}
             showRestTimer={showRestTimer}
             resetTimer={resetTimer}
             count={count}
           />
         }
         <AlertConfirmEndWorkout
-          setShowAlert={setShowAlertEnd}
-          endWorkout={() => callEndWorkoutActions()}
-          showAlert={showAlertEnd}
+          continueWorkout={() => setShowAlertEndWorkout(false)}
+          endWorkout={() => endWorkout(activeWorkout)}
+          showAlert={showAlertEndWorkout}
         />
         <AlertConfirmRemoveExercise
-          removeExercise={() => removeExercise(exerciseId)}
-          setExerciseId={setExerciseId}
-          showAlert={!!exerciseId}
+          removeExercise={() => removeExercise(exerciseIdForRemoval)}
+          cancelRemove={() => setExerciseIdForRemoval(undefined)}
+          showAlert={!!exerciseIdForRemoval}
         />
       </BackSplash>
     </animated.div>

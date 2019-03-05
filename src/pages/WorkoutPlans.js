@@ -15,7 +15,7 @@ const BottomScreenSpace = styled.div`
 
 const WorkoutPlans = ({ entities, location }) => {
   const {
-    workoutPlans: { byId: byPlan, allIds: allPlans },
+    plans: { byId: byPlan, allIds: allPlans },
     workouts: { byId: byWorkout },
     exercises: { byId: byExercise },
   } = entities;
@@ -23,14 +23,19 @@ const WorkoutPlans = ({ entities, location }) => {
   const plans = allPlans.map(p => ({
     name: byPlan[p].name,
     id: byPlan[p].id,
-    workouts: byPlan[p].workouts.map(w => ({
-      name: byWorkout[w].name,
-      id: w,
-      exercises: byWorkout[w].exercises.map(e => ({
-        ...byExercise[e],
-        sets: byExercise[e].sets.map(s => ({ max: s }))
-      })),
-    }))
+    workouts: byPlan[p].workouts.map(w => {
+      const { name, id, order, exercises } = byWorkout[w];
+
+      return {
+        name: name,
+        id: id,
+        exercises: order.map(e => ({
+          ...byExercise[e], // data from exercise entity
+          ...exercises[e], // data from workout entity
+          sets: exercises[e].sets.map(s => ({ max: s }))
+        })),
+      };
+    })
   }));
 
   const tiles = plans.map(p => <WorkoutPlanTile key={p.id} plan={p} />);

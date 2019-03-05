@@ -25,17 +25,17 @@ const Button = styled.button`
 
 const AlertConfirmEndWorkout = ({
   removeExercise,
-  setExerciseId,
+  cancelRemove,
   showAlert,
 }) => (
-  <AlertConfirm showAlert={showAlert} setShowAlert={() => setExerciseId(undefined)}>
+  <AlertConfirm showAlert={showAlert} cancelAlert={cancelRemove}>
     <Message>Are you sure you want to remove this exercise?</Message>
     <ButtonWrapper>
-      <Button onClick={() => setExerciseId(undefined)} background={'grey'}>No</Button>
+      <Button onClick={cancelRemove} background={'grey'}>No</Button>
       <Button
         onClick={() => {
           removeExercise();
-          setExerciseId(undefined);
+          cancelRemove();
         }}
         background={purple}
       >
@@ -47,7 +47,7 @@ const AlertConfirmEndWorkout = ({
 
 AlertConfirmEndWorkout.propTypes = {
   removeExercise: PropTypes.func,
-  setExerciseId: PropTypes.func,
+  cancelRemove: PropTypes.func,
   showAlert: PropTypes.bool,
 };
 

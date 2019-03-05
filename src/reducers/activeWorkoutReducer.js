@@ -51,7 +51,7 @@ const createNewActiveWorkout = (state, entities, planId) => {
   } = state || {};
 
   const {
-    workoutPlans: { byId: plansById },
+    plans: { byId: plansById },
     workouts: { byId: workoutsById },
     exercises: { byId: exercisesById },
   } = entities;
@@ -63,8 +63,12 @@ const createNewActiveWorkout = (state, entities, planId) => {
   const nextWorkout = workoutsById[nextWorkoutId];
 
   // map exercise data
-  const exercises = nextWorkout.exercises
-    .map(id => exercisesById[id])
+  const exercises = nextWorkout.order
+    .map(id => ({
+      // combine global exercise data and specific workout data
+      ...exercisesById[id],
+      ...nextWorkout.exercises[id],
+    }))
     .reduce((acc, exercise) => ({
       ...acc,
       [exercise.id]: {
@@ -80,7 +84,7 @@ const createNewActiveWorkout = (state, entities, planId) => {
     name: nextWorkout.name,
     onGoing: false,
     exercises,
-    order: nextWorkout.exercises,
+    order: nextWorkout.order,
   };
 };
 
