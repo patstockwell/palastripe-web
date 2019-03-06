@@ -12,17 +12,42 @@ const entitiesReducer = (state, action) => {
 };
 
 const endWorkout = (state, action) => {
-  const { activeWorkout: { order, exercises } } = action.payload;
-  const { exercises: allExercises } = state;
+  const { workouts, exercises: allExercises } = state;
+  const { activeWorkout: {
+    workoutId,
+    order,
+    exercises: activeExercises,
+  }} = action.payload;
 
-  const updatedExercises = order
-    .reduce((acc, currId) => ({
+  const updatedExerciseDefinitions = order.reduce((acc, currId) => {
+    const { weightInKilos } = activeExercises[currId]; // activeWorkout
+    const { mostWeightInKilos } = allExercises.byId[currId]; // entities
+    const newBestWeight = weightInKilos > mostWeightInKilos
+      ? weightInKilos
+      : mostWeightInKilos;
+
+    return {
       ...acc,
       [currId]: {
         ...allExercises.byId[currId],
-        weightInKilos: exercises[currId].weightInKilos,
+        weightInKilos: newBestWeight,
       },
-    }), {});
+    };
+  }, {});
+
+  const updatedExerciseInstances = order.reduce((acc, curr) => {
+    // only create an exercise if it exists in the original workout
+    if (workouts.byId[workoutId].exercises[curr]) {
+      return {
+        ...acc,
+        [curr]: {
+          ...workouts.byId[workoutId].exercises[curr],
+          weightInKilos: activeExercises[curr].weightInKilos,
+        },
+      };
+    }
+    return acc;
+  }, {});
 
   return {
     ...state,
@@ -30,7 +55,17 @@ const endWorkout = (state, action) => {
       ...allExercises,
       byId: {
         ...allExercises.byId,
-        ...updatedExercises,
+        ...updatedExerciseDefinitions,
+      },
+    },
+    workouts: {
+      ...workouts,
+      byId: {
+        ...workouts.byId,
+        [workoutId]: {
+          ...workouts.byId[workoutId],
+          exercises: updatedExerciseInstances,
+        },
       },
     },
   };
