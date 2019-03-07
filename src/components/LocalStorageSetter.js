@@ -8,10 +8,10 @@ import {
 } from '../helpers/constants';
 
 const LocalStorageSetter = ({
-  activeWorkout,
-  entities,
-  settings,
   history,
+  settings,
+  entities,
+  activeWorkout,
 }) => {
   localStorage.setItem(LOCAL_STORAGE_HISTORY, JSON.stringify(history));
   localStorage.setItem(LOCAL_STORAGE_SETTINGS, JSON.stringify(settings));
@@ -21,10 +21,10 @@ const LocalStorageSetter = ({
 };
 
 LocalStorageSetter.propTypes = {
-  activeWorkout: PropTypes.object,
-  entities: PropTypes.object,
-  settings: PropTypes.object,
   history: PropTypes.arrayOf(PropTypes.object),
+  settings: PropTypes.object,
+  entities: PropTypes.object,
+  activeWorkout: PropTypes.object,
 };
 
 const mapStateToProps = state => state;

@@ -16,37 +16,37 @@ const initialState = {
         'exercise1': {
           id: 'exercise1',
           name: 'Dead Lift',
-          mostWeightInKilos: 130.5,
+          mostWeightInKilos: undefined,
         },
         'exercise2': {
           id: 'exercise2',
           name: 'Squat',
-          mostWeightInKilos: 60,
+          mostWeightInKilos: undefined,
         },
         'exercise3': {
           id: 'exercise3',
           name: 'Overhead Press',
-          mostWeightInKilos: 40,
+          mostWeightInKilos: undefined,
         },
         'exercise4': {
           id: 'exercise4',
           name: 'Chin-up',
-          mostWeightInKilos: 0,
+          mostWeightInKilos: undefined,
         },
         'exercise5': {
           id: 'exercise5',
           name: 'Bench Press',
-          mostWeightInKilos: 60,
+          mostWeightInKilos: undefined,
         },
         'exercise6': {
           id: 'exercise6',
           name: 'Bicep Curl',
-          mostWeightInKilos: 30,
+          mostWeightInKilos: undefined,
         },
         'exercise7': {
           id: 'exercise7',
           name: 'Row',
-          mostWeightInKilos: 40,
+          mostWeightInKilos: undefined,
         },
       },
       allIds: [
