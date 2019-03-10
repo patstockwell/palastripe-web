@@ -177,7 +177,9 @@ describe('the activeWorkoutReducer', () => {
           'exercise2': {
             id: 'exercise2',
             name: 'Squat',
-            weightInKilos: 60,
+            weightInKilos: 40,
+            mostWeightInKilos: undefined,
+            restPeriodInSeconds: 150,
             sets:[
               { max: 7, completed: undefined },
               { max: 7, completed: undefined },
@@ -188,7 +190,9 @@ describe('the activeWorkoutReducer', () => {
           'exercise3': {
             id: 'exercise3',
             name: 'Overhead Press',
-            weightInKilos: 40,
+            weightInKilos: 30,
+            mostWeightInKilos: undefined,
+            restPeriodInSeconds: 120,
             sets:[
               { max: 7, completed: undefined },
               { max: 7, completed: undefined },
@@ -199,7 +203,9 @@ describe('the activeWorkoutReducer', () => {
           'exercise5': {
             id: 'exercise5',
             name: 'Bench Press',
-            weightInKilos: 60,
+            weightInKilos: 40,
+            mostWeightInKilos: undefined,
+            restPeriodInSeconds: 120,
             sets:[
               { max: 7, completed: undefined },
               { max: 7, completed: undefined },

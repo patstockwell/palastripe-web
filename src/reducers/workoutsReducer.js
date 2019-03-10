@@ -39,7 +39,10 @@ const endWorkout = (state, action) => {
       ...state.byId,
       [workoutId]: {
         ...state.byId[workoutId],
-        exercises: updatedExerciseInstances,
+        exercises: {
+          ...state.byId[workoutId].exercises,
+          ...updatedExerciseInstances,
+        },
       },
     },
   };
