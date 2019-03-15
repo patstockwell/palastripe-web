@@ -3,12 +3,8 @@ import PropTypes from 'prop-types';
 import styled, { keyframes } from 'styled-components';
 import LayoutTile from './LayoutTile';
 import ExerciseListItem from './ExerciseListItem';
-import { formatDate } from '../helpers/functions';
-import {
-  fadedYellow,
-  MILLISECONDS_IN_A_MINUTE,
-  ONE_SECOND,
-} from '../helpers/constants';
+import { getDiff, formatDate } from '../helpers/functions';
+import { fadedYellow, ONE_SECOND } from '../helpers/constants';
 
 const Title = styled.div`
   display: flex;
@@ -80,9 +76,7 @@ const HistoryTile = ({ workout }) => {
   const { day, date, month } = formatDate(finishTime);
 
   const isRecent = finishTime > Date.now() - (3 * ONE_SECOND);
-  const diff = startTime ? Math.ceil(
-    (finishTime - startTime) / MILLISECONDS_IN_A_MINUTE
-  ) : 0;
+  const diff = getDiff(startTime, finishTime);
 
   const exerciseList = order.map((e, i) =>
     <ExerciseListItem {...exercises[e]} key={i} />

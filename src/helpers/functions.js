@@ -1,5 +1,9 @@
 import { useEffect, useRef } from 'react';
-import { MONTHS_OF_THE_YEAR, DAYS_OF_THE_WEEK } from './constants';
+import {
+  MONTHS_OF_THE_YEAR,
+  DAYS_OF_THE_WEEK,
+  MILLISECONDS_IN_A_MINUTE,
+} from './constants';
 
 export function useInterval(callback, delay) {
   // https://overreacted.io/making-setinterval-declarative-with-react-hooks/
@@ -47,3 +51,13 @@ export const formatDate = time => {
   };
 };
 
+export const getDiff = (start, finish) => {
+  // create date object first because we can't guarantee that it is in
+  // the unix epoc time format
+  const startTime = new Date(start);
+  const finishTime = new Date(finish);
+
+  return startTime.getTime() ? Math.ceil(
+    (finishTime.getTime() - startTime.getTime()) / MILLISECONDS_IN_A_MINUTE
+  ) : 0;
+};

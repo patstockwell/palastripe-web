@@ -42,7 +42,11 @@ const ActiveWorkout = ({
   };
 
   const setTimer = (exerciseId, show = true) => {
-    setRestPeriod(activeWorkout.exercises[exerciseId].restPeriodInSeconds);
+    const rest =
+      activeWorkout.exercises[exerciseId].restPeriodInSeconds
+      || DEFAULT_REST_PERIOD_IN_SECONDS;
+
+    setRestPeriod(rest);
     resetTimer();
     setShowRestTimer(show);
   };
