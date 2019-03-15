@@ -1,16 +1,13 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import styled from 'styled-components';
 import { animated } from 'react-spring/renderprops';
 import BackSplash from '../components/BackSplash';
 import Timer from '../components/Timer';
 import AlertConfirm, { Button, LinkButton } from '../components/AlertConfirm';
 import ActiveExerciseTile from '../components/ActiveExerciseTile';
-import BackArrow from '../assets/svg/BackArrow';
+import BannerForActiveWorkout from '../components/BannerForActiveWorkout';
 import {
-  bannerHeight,
   purple,
   orange,
   pink,
@@ -22,25 +19,6 @@ import {
 } from '../helpers/constants';
 import { workoutPropType } from '../helpers/data';
 import { useInterval } from '../helpers/functions';
-
-const StyledLink = styled(Link)`
-  color: grey;
-  text-decoration: none;
-  font-size: 17px;
-  height: 20px;
-  display: flex;
-  align-items: center;
-  margin: 16px;
-`;
-
-const Header = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: ${bannerHeight}px;
-  background-color: white;
-  border-bottom: solid 0.5px grey;
-`;
 
 const ActiveWorkout = ({
   removeExercise,
@@ -94,15 +72,7 @@ const ActiveWorkout = ({
       zIndex: 10,
     }}>
       <BackSplash topLeft={orange} bottomRight={pink}>
-        <Header>
-          <StyledLink to="/home/">
-            <BackArrow style={{ fill: 'grey', margin: '0 -12px 0 -8px' }} />
-            <BackArrow style={{ fill: 'grey' }} /> Back
-          </StyledLink>
-          <StyledLink to="/home/" onClick={e => showConfirmation(e)}>
-            Done
-          </StyledLink>
-        </Header>
+        <BannerForActiveWorkout showConfirmation={showConfirmation} />
         {exerciseTiles}
         {showRestTimer && count >= 0 &&
           <Timer
