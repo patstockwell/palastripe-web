@@ -2,11 +2,12 @@ import React from 'react';
 import { useTransition, animated } from 'react-spring';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const bounceSpace = 7;
 const popUpHeight = 253 + bounceSpace;
 
-export const buttonStyle = `
+const buttonStyle = `
   color: white;
   border: none;
   border-radius: 5px;
@@ -14,6 +15,20 @@ export const buttonStyle = `
   width: 100px;
   font-size: 20px;
   margin: 0 15px;
+`;
+
+export const Button = styled.button`
+  ${buttonStyle}
+  background-color: ${({ background }) => background};
+`;
+
+export const LinkButton = styled(Link)`
+  ${buttonStyle}
+  background-color: ${({ background }) => background};
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
 `;
 
 const Background = styled.div`
@@ -42,7 +57,26 @@ const ClickableSpace = styled.div`
   transform: translateY(-${popUpHeight}px);
 `;
 
-const AlertConfirm = ({ children, showAlert, cancelAlert }) => {
+const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 300px;
+  margin: 0 auto;
+`;
+
+const Message = styled.p`
+  color: black;
+  padding: 20px;
+  text-align: center;
+  margin-bottom: 15px;
+`;
+
+const AlertConfirm = ({
+  children,
+  showAlert,
+  cancelAlert,
+  message,
+}) => {
   const transitions = useTransition(showAlert, null, {
     from: {
       transform: `translateY(${popUpHeight}px)`,
@@ -62,7 +96,10 @@ const AlertConfirm = ({ children, showAlert, cancelAlert }) => {
         <Background>
           <ClickableSpace onClick={cancelAlert}/>
           <Dialog>
-            {children}
+            <Message>{message}</Message>
+            <ButtonWrapper>
+              {children}
+            </ButtonWrapper>
           </Dialog>
         </Background>
       </animated.div>

@@ -6,11 +6,12 @@ import styled from 'styled-components';
 import { animated } from 'react-spring/renderprops';
 import BackSplash from '../components/BackSplash';
 import Timer from '../components/Timer';
-import AlertConfirmEndWorkout from '../components/AlertConfirmEndWorkout';
+import AlertConfirm, { Button, LinkButton } from '../components/AlertConfirm';
 import ActiveExerciseTile from '../components/ActiveExerciseTile';
 import BackArrow from '../assets/svg/BackArrow';
 import {
   bannerHeight,
+  purple,
   orange,
   pink,
   REMOVE_EXERCISE,
@@ -21,7 +22,6 @@ import {
 } from '../helpers/constants';
 import { workoutPropType } from '../helpers/data';
 import { useInterval } from '../helpers/functions';
-import AlertConfirmRemoveExercise from '../components/AlertConfirmRemoveExercise';
 
 const StyledLink = styled(Link)`
   color: grey;
@@ -112,16 +112,33 @@ const ActiveWorkout = ({
             count={count}
           />
         }
-        <AlertConfirmEndWorkout
-          continueWorkout={() => setShowAlertEndWorkout(false)}
-          endWorkout={() => endWorkout(activeWorkout)}
+        <AlertConfirm
+          cancelAlert={() => setShowAlertEndWorkout(false)}
           showAlert={showAlertEndWorkout}
-        />
-        <AlertConfirmRemoveExercise
-          removeExercise={() => removeExercise(exerciseIdForRemoval)}
-          cancelRemove={() => setExerciseIdForRemoval(undefined)}
+          message={'Are you sure you want to finish this workout?'}
+        >
+          <Button onClick={() => setShowAlertEndWorkout(false)} background={'grey'}>No</Button>
+          <LinkButton to="/home/" onClick={() => endWorkout(activeWorkout)} background={purple} >
+            <span>Yes</span>
+          </LinkButton>
+        </AlertConfirm>
+
+        <AlertConfirm
+          cancelAlert={() => setExerciseIdForRemoval(undefined)}
           showAlert={!!exerciseIdForRemoval}
-        />
+          message={'Are you sure you want to remove this exercise?'}
+        >
+          <Button onClick={() => setExerciseIdForRemoval(undefined)} background={'grey'}>No</Button>
+          <Button
+            onClick={() => {
+              removeExercise(exerciseIdForRemoval);
+              setExerciseIdForRemoval(undefined);
+            }}
+            background={purple}
+          >
+            Yes
+          </Button>
+        </AlertConfirm>
       </BackSplash>
     </animated.div>
   );
