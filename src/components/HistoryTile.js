@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import styled, { keyframes } from 'styled-components';
 import LayoutTile from './LayoutTile';
 import ExerciseListItem from './ExerciseListItem';
-import { getDiff, formatDate } from '../helpers/functions';
+import { formatTime, getDiff, formatDate } from '../helpers/functions';
 import { fadedYellow, ONE_SECOND } from '../helpers/constants';
 
 const Title = styled.div`
@@ -77,6 +77,7 @@ const HistoryTile = ({ workout }) => {
 
   const isRecent = finishTime > Date.now() - (3 * ONE_SECOND);
   const diff = getDiff(startTime, finishTime);
+  const formattedTime = formatTime(diff);
 
   const exerciseList = order.map((e, i) =>
     <ExerciseListItem {...exercises[e]} key={i} />
@@ -90,7 +91,7 @@ const HistoryTile = ({ workout }) => {
         <NameWrapper>
           <WorkoutName>{name}</WorkoutName>
           <Time>
-            {diff}min
+            {formattedTime}
           </Time>
         </NameWrapper>
         <TileDetail>

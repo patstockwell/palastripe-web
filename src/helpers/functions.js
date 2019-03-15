@@ -61,3 +61,13 @@ export const getDiff = (start, finish) => {
     (finishTime.getTime() - startTime.getTime()) / MILLISECONDS_IN_A_MINUTE
   ) : 0;
 };
+
+export const formatTime = minutes => {
+  if (minutes < 60) {
+    return `${minutes}min`;
+  } else {
+    const hours = Math.floor(minutes / 60);
+    const mins = minutes % 60;
+    return `${hours}hr ${mins < 9 ? `0${mins}` : mins}min`;
+  }
+};
