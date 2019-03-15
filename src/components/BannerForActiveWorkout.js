@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import BackArrow from '../assets/svg/BackArrow';
-import { bannerHeight } from '../helpers/constants';
+import AlertConfirm, { Button, LinkButton } from '../components/AlertConfirm';
+import { purple, bannerHeight } from '../helpers/constants';
 
 const StyledLink = styled(Link)`
   color: grey;
@@ -24,20 +25,40 @@ const Header = styled.div`
   border-bottom: solid 0.5px grey;
 `;
 
-const BannerForActiveWorkout = ({ showConfirmation }) => (
-  <Header>
-    <StyledLink to="/home/">
-      <BackArrow style={{ fill: 'grey', margin: '0 -12px 0 -8px' }} />
-      <BackArrow style={{ fill: 'grey' }} /> Back
-    </StyledLink>
-    <StyledLink to="/home/" onClick={showConfirmation}>
-      Done
-    </StyledLink>
-  </Header>
-);
+const BannerForActiveWorkout = ({ endWorkout }) => {
+  const [showAlertEndWorkout, setShowAlertEndWorkout] = useState(false);
+
+  const showConfirmation = e => {
+    e.preventDefault();
+    setShowAlertEndWorkout(true);
+  };
+
+  return (
+    <Header>
+      <StyledLink to="/home/">
+        <BackArrow style={{ fill: 'grey', margin: '0 -12px 0 -8px' }} />
+        <BackArrow style={{ fill: 'grey' }} /> Back
+      </StyledLink>
+      <StyledLink to="/home/" onClick={showConfirmation}>
+        Done
+      </StyledLink>
+
+      <AlertConfirm
+        cancelAlert={() => setShowAlertEndWorkout(false)}
+        showAlert={showAlertEndWorkout}
+        message={'Are you sure you want to finish this workout?'}
+      >
+        <Button onClick={() => setShowAlertEndWorkout(false)} background={'grey'}>No</Button>
+        <LinkButton to="/home/" onClick={endWorkout} background={purple} >
+          <span>Yes</span>
+        </LinkButton>
+      </AlertConfirm>
+    </Header>
+  );
+};
 
 BannerForActiveWorkout.propTypes = {
-  showConfirmation: PropTypes.func.isRequired,
+  endWorkout: PropTypes.func.isRequired,
 };
 
 export default BannerForActiveWorkout;

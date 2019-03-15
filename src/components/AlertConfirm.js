@@ -84,6 +84,7 @@ const AlertConfirm = ({
       top: 0,
       left: 0,
       opacity: 0,
+      zIndex: 10,
     },
     enter: { opacity: 1, transform: 'translateY(0px)' },
     leave: { opacity: 0, transform: `translateY(${popUpHeight}px)` },

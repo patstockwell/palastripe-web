@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { animated } from 'react-spring/renderprops';
 import BackSplash from '../components/BackSplash';
 import Timer from '../components/Timer';
-import AlertConfirm, { Button, LinkButton } from '../components/AlertConfirm';
+import AlertConfirm, { Button } from '../components/AlertConfirm';
 import ActiveExerciseTile from '../components/ActiveExerciseTile';
 import BannerForActiveWorkout from '../components/BannerForActiveWorkout';
 import {
@@ -30,7 +30,6 @@ const ActiveWorkout = ({
   const [count, setCount] = useState(-DELAY_BEFORE_SHOWING_TIMER);
   const [showRestTimer, setShowRestTimer] = useState(false);
   const [restPeriod, setRestPeriod] = useState(DEFAULT_REST_PERIOD_IN_SECONDS);
-  const [showAlertEndWorkout, setShowAlertEndWorkout] = useState(false);
   const [exerciseIdForRemoval, setExerciseIdForRemoval] = useState(undefined);
   useInterval(() => {
     setCount(count + 1);
@@ -49,11 +48,6 @@ const ActiveWorkout = ({
     setRestPeriod(rest);
     resetTimer();
     setShowRestTimer(show);
-  };
-
-  const showConfirmation = e => {
-    e.preventDefault();
-    setShowAlertEndWorkout(true);
   };
 
   const { order, exercises } = activeWorkout;
@@ -76,7 +70,7 @@ const ActiveWorkout = ({
       zIndex: 10,
     }}>
       <BackSplash topLeft={orange} bottomRight={pink}>
-        <BannerForActiveWorkout showConfirmation={showConfirmation} />
+        <BannerForActiveWorkout endWorkout={() => endWorkout(activeWorkout)}/>
         {exerciseTiles}
         {showRestTimer && count >= 0 &&
           <Timer
@@ -86,16 +80,6 @@ const ActiveWorkout = ({
             count={count}
           />
         }
-        <AlertConfirm
-          cancelAlert={() => setShowAlertEndWorkout(false)}
-          showAlert={showAlertEndWorkout}
-          message={'Are you sure you want to finish this workout?'}
-        >
-          <Button onClick={() => setShowAlertEndWorkout(false)} background={'grey'}>No</Button>
-          <LinkButton to="/home/" onClick={() => endWorkout(activeWorkout)} background={purple} >
-            <span>Yes</span>
-          </LinkButton>
-        </AlertConfirm>
 
         <AlertConfirm
           cancelAlert={() => setExerciseIdForRemoval(undefined)}
