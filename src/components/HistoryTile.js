@@ -19,6 +19,8 @@ const WorkoutName = styled.h3`
 `;
 
 const NameWrapper = styled.div`
+  // stops double-tap-to-zoom
+  touch-action: manipulation;
   margin: 8px;
   display: flex;
   align-items: center;
@@ -30,6 +32,8 @@ const ExerciseListWrapper = styled.div`
 `;
 
 const LayoutWrapper = styled(LayoutTile)`
+  // stops double-tap-to-zoom
+  touch-action: manipulation;
   animation: ${({ animation }) => animation} 4s ease-out;
 `;
 
