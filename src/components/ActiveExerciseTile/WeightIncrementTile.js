@@ -4,6 +4,7 @@ import LayoutTile from '../LayoutTile';
 import styled from 'styled-components';
 import FlipArrows from '../../assets/svg/FlipArrows';
 import AdditionSymbol from '../../assets/svg/AdditionSymbol';
+import TrashCan from '../../assets/svg/TrashCan';
 import SubtractionSymbol from '../../assets/svg/SubtractionSymbol';
 import { pink } from '../../helpers/constants';
 import { HeadingWrapper, TileName, Weight } from './SetsTile';
@@ -62,9 +63,8 @@ const WeightIncrementTile = ({
       <SvgButtonWrapper
         onClick={() => setShowAlertRemove()}
         background={'#555'}
-        degrees={45} // rotate the addition symbol to become a mulitply
       >
-        <AdditionSymbol fill={'white'}/>
+        <TrashCan fill={'white'}/>
       </SvgButtonWrapper>
       <SvgButtonWrapper
         onClick={() => setWeight(weight - 2.5)}
