@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 // https://www.flaticon.com/packs/arrow-set-2
 
 const BackArrow = ({ style }) => (
@@ -9,10 +8,6 @@ const BackArrow = ({ style }) => (
     </g>
   </svg>
 );
-
-BackArrow.propTypes = {
-  style: PropTypes.object,
-};
 
 export default BackArrow;
 

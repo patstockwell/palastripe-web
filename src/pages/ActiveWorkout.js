@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import { animated } from 'react-spring/renderprops';
 import BackSplash from '../components/BackSplash';
 import Timer from '../components/Timer';
@@ -17,7 +16,6 @@ import {
   END_WORKOUT,
   DEFAULT_REST_PERIOD_IN_SECONDS,
 } from '../helpers/constants';
-import { workoutPropType } from '../helpers/data';
 import { useInterval } from '../helpers/functions';
 
 const ActiveWorkout = ({
@@ -100,13 +98,6 @@ const ActiveWorkout = ({
       </BackSplash>
     </animated.div>
   );
-};
-
-ActiveWorkout.propTypes = {
-  endWorkout: PropTypes.func,
-  removeExercise: PropTypes.func,
-  animationStyles: PropTypes.object,
-  activeWorkout: PropTypes.shape(workoutPropType),
 };
 
 const mapStateToProps = state => ({

@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import LayoutTile from './LayoutTile';
 import { tileMinHeight } from '../helpers/constants';
@@ -24,10 +23,6 @@ const EmptyTile = ({ children }) => (
     <Info>{children}</Info>
   </Tile>
 );
-
-EmptyTile.propTypes = {
-  children: PropTypes.node,
-};
 
 export default EmptyTile;
 

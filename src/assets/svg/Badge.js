@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 // https://www.flaticon.com/packs/finance-57
 const Badge = ({ style }) => (
@@ -14,10 +13,6 @@ const Badge = ({ style }) => (
     </g>
   </svg>
 );
-
-Badge.propTypes = {
-  style: PropTypes.object,
-};
 
 export default Badge;
 

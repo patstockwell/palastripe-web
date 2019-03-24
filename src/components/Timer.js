@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { useSpring, animated } from 'react-spring';
 
@@ -78,13 +77,6 @@ const Timer = ({ resetTimer, count, restPeriod }) => {
       </Message>
     </TimerBackground>
   );
-};
-
-Timer.propTypes = {
-  resetTimer: PropTypes.func.isRequired,
-  count: PropTypes.number.isRequired,
-  restPeriod: PropTypes.number.isRequired,
-  showRestTimer: PropTypes.bool.isRequired,
 };
 
 export default Timer;

@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import SetsTile from './SetsTile';
 import WeightIncrementTile from './WeightIncrementTile';
-import { exercisePropTypeShape } from '../../helpers/data';
 import { decrementReps } from '../../helpers/functions';
 import {
   UPDATE_COMPLETED_REPS,
@@ -66,14 +64,6 @@ const ActiveExerciseTile = ({
       </BackFace>
     </RelativeDiv>
   );
-};
-
-ActiveExerciseTile.propTypes = {
-  setTimer: PropTypes.func,
-  setShowAlertRemove: PropTypes.func,
-  updateCompletedReps: PropTypes.func,
-  changeWeight: PropTypes.func,
-  exercise: PropTypes.shape(exercisePropTypeShape),
 };
 
 const mapDispatchToProps = {

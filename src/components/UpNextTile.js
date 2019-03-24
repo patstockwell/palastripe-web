@@ -1,6 +1,5 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import styled, { keyframes } from 'styled-components';
 import LayoutTile from './LayoutTile';
 import ExerciseListItem from './ExerciseListItem';
@@ -127,12 +126,6 @@ const UpNextTile = ({ emptyHistory, onGoing, workout }) => {
       </ExerciseListWrapper>
     </LayoutTile>
   );
-};
-
-UpNextTile.propTypes = {
-  onGoing: PropTypes.bool,
-  emptyHistory: PropTypes.bool,
-  workout: PropTypes.object.isRequired,
 };
 
 const mapStateToProps = state => ({

@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 // https://www.flaticon.com/free-icon/garbage_149343#
 const TrashCan = ({ fill }) => (
@@ -12,10 +11,6 @@ const TrashCan = ({ fill }) => (
     </g>
   </svg>
 );
-
-TrashCan.propTypes = {
-  fill: PropTypes.string,
-};
 
 export default TrashCan;
 

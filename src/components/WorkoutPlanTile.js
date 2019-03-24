@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import PropTypes from 'prop-types';
 import LayoutTile from '../components/LayoutTile';
 import ScrollingWorkoutTile from '../components/ScrollingWorkoutTile';
 
@@ -49,10 +48,6 @@ const WorkoutPlanTile = ({ plan }) => {
       </ScrollContainer>
     </LayoutTile>
   );
-};
-
-WorkoutPlanTile.propTypes = {
-  plan: PropTypes.object,
 };
 
 export default WorkoutPlanTile;

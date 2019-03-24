@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { pink, navBarHeight } from '../helpers/constants';
@@ -62,10 +61,6 @@ const Navigation = ({ pathname }) => {
       </NavLink>
     </Nav>
   );
-};
-
-Navigation.propTypes = {
-  pathname: PropTypes.string,
 };
 
 export default Navigation;

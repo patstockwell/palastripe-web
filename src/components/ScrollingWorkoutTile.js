@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import ExerciseListItem from '../components/ExerciseListItem';
 import LayoutTile from '../components/LayoutTile';
@@ -55,10 +54,6 @@ const ScrollingWorkoutTile = ({ workout }) => {
       </ExerciseListWrapper>
     </WorkoutTile>
   );
-};
-
-ScrollingWorkoutTile.propTypes = {
-  workout: PropTypes.object,
 };
 
 export default ScrollingWorkoutTile;

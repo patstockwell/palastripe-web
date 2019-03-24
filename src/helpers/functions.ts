@@ -5,9 +5,9 @@ import {
   MILLISECONDS_IN_A_MINUTE,
 } from './constants';
 
-export function useInterval(callback, delay) {
+export function useInterval(callback: () => any, delay: number) {
   // https://overreacted.io/making-setinterval-declarative-with-react-hooks/
-  const savedCallback = useRef();
+  const savedCallback: any = useRef();
 
   // Remember the latest callback.
   useEffect(() => {
@@ -28,21 +28,25 @@ export function useInterval(callback, delay) {
 
 // decrement reps or loop back to the start
 // undefined -> 5 -> 4 -> 3 -> 2 -> 1 -> 0 -> undefined -> ...
-export const decrementReps = (reps, max) =>
+export const decrementReps = (reps: (number | undefined), max: number) =>
   reps === undefined ? max :
     reps <= 0 ? undefined : reps - 1;
 
-export const checkAllSetsAreComplete = sets => sets.reduce((acc, curr) => (
+interface Set {
+  max: number,
+  completed: (number | undefined),
+}
+
+export const checkAllSetsAreComplete = (sets: Array<Set>) => sets.reduce((acc, curr) => (
   curr.max === curr.completed && acc
 ), true);
 
-export const getLocalStorage = (name, defaultValue) => {
-  return localStorage.getItem(name)
-    ? JSON.parse(localStorage.getItem(name))
-    : defaultValue;
+export const getLocalStorage = (name: string, defaultValue: any) => {
+  const item: (string | null) = localStorage.getItem(name);
+  return item ? JSON.parse(item) : defaultValue;
 };
 
-export const formatDate = time => {
+export const formatDate = (time: number) => {
   const date = new Date(time);
   return {
     day: DAYS_OF_THE_WEEK[date.getUTCDay()],
@@ -51,7 +55,7 @@ export const formatDate = time => {
   };
 };
 
-export const getDiff = (start, finish) => {
+export const getDiff = (start: number, finish: number) => {
   // create date object first because we can't guarantee that it is in
   // the unix epoc time format
   const startTime = new Date(start);
@@ -62,7 +66,7 @@ export const getDiff = (start, finish) => {
   ) : 0;
 };
 
-export const formatTime = minutes => {
+export const formatTime = (minutes: number) => {
   if (minutes < 60) {
     return `${minutes}min`;
   } else {

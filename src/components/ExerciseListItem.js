@@ -2,7 +2,6 @@ import React from 'react';
 import styled from 'styled-components';
 import Badge from '../assets/svg/Badge';
 import { checkAllSetsAreComplete } from '../helpers/functions';
-import { exercisePropTypeShape } from '../helpers/data';
 import { purple } from '../helpers/constants';
 
 const ExerciseListItemWrapper = styled.div`
@@ -102,8 +101,6 @@ const ExerciseListItem = ({ small, showAllSets, sets, name, weightInKilos }) => 
     </ExerciseListItemWrapper>
   );
 };
-
-ExerciseListItem.propTypes = exercisePropTypeShape;
 
 export default ExerciseListItem;
 

@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 const ForwardArrow= ({ style }) => (
   <svg style={style} viewBox='0 0 240 240' width='20' height='20'>
@@ -10,10 +9,6 @@ const ForwardArrow= ({ style }) => (
     </g>
   </svg>
 );
-
-ForwardArrow.propTypes = {
-  style: PropTypes.object,
-};
 
 export default ForwardArrow;
 

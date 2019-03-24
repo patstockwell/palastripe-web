@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 const GoldCup = ({ height }) => (
   <svg viewBox="0 0 512 512" height={height} width={height}>
@@ -162,10 +161,6 @@ const GoldCup = ({ height }) => (
       c9.064-5.917,17.739-12.194,26.194-18.958C475.445,270.859,463.49,285.721,448.051,293.856z"/>
   </svg>
 );
-
-GoldCup.propTypes = {
-  height: PropTypes.number.isRequired,
-};
 
 export default GoldCup;
 

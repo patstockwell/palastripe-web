@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 // https://www.flaticon.com/free-icon/arrows-circle_32220#term=circle%20arrows&page=1&position=92
 const FlipArrows = ({ colour, height }) => (
@@ -18,11 +17,6 @@ const FlipArrows = ({ colour, height }) => (
     L264.737,345.957z"/>
   </svg>
 );
-
-FlipArrows.propTypes = {
-  height: PropTypes.number.isRequired,
-  colour: PropTypes.string.isRequired,
-};
 
 export default FlipArrows;
 

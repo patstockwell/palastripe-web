@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import BackSplash from '../components/BackSplash';
 import EmptyTile from '../components/EmptyTile';
 import Navigation from '../components/Navigation';
@@ -51,11 +50,6 @@ const WorkoutPlans = ({ entities, location }) => {
       <BottomScreenSpace />
     </BackSplash>
   );
-};
-
-WorkoutPlans.propTypes = {
-  location: PropTypes.object,
-  entities: PropTypes.object,
 };
 
 const mapStateToProps = state => ({

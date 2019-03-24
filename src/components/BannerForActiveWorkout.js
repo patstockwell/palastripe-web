@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import BackArrow from '../assets/svg/BackArrow';
@@ -55,10 +54,6 @@ const BannerForActiveWorkout = ({ endWorkout }) => {
       </AlertConfirm>
     </Header>
   );
-};
-
-BannerForActiveWorkout.propTypes = {
-  endWorkout: PropTypes.func.isRequired,
 };
 
 export default BannerForActiveWorkout;

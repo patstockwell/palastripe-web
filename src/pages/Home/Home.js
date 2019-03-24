@@ -1,5 +1,4 @@
 import React, { Fragment } from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
@@ -8,7 +7,6 @@ import Navigation from '../../components/Navigation';
 import UpNextTile from '../../components/UpNextTile';
 import HistoryTile from '../../components/HistoryTile';
 import EmptyTile from '../../components/EmptyTile';
-import { workoutPropType, exercisePropTypeShape } from '../../helpers/data';
 import { tileMinHeight, gutterWidth } from '../../helpers/constants';
 
 const BottomScreenSpace = styled.div`
@@ -47,16 +45,6 @@ const Home = ({ location, activeWorkout, workoutHistory }) => {
       <Navigation pathname={location.pathname} />
     </Fragment>
   );
-};
-
-Home.propTypes = {
-  location: PropTypes.object,
-  workoutHistory: PropTypes.arrayOf(PropTypes.shape({
-    date: PropTypes.object,
-    exercises: PropTypes.objectOf(PropTypes.shape(exercisePropTypeShape)),
-    order: PropTypes.arrayOf(PropTypes.string),
-  })),
-  activeWorkout: PropTypes.shape(workoutPropType),
 };
 
 const mapStateToProps = state => ({

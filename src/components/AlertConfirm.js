@@ -1,6 +1,5 @@
 import React from 'react';
 import { useTransition, animated } from 'react-spring';
-import PropTypes from 'prop-types';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
@@ -106,11 +105,6 @@ const AlertConfirm = ({
       </animated.div>
       : null;
   });
-};
-
-AlertConfirm.propTypes = {
-  cancelAlert: PropTypes.func.isRequired,
-  showAlert: PropTypes.bool.isRequired,
 };
 
 export default AlertConfirm;

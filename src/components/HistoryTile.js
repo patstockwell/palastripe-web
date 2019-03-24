@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled, { keyframes } from 'styled-components';
 import LayoutTile from './LayoutTile';
 import ExerciseListItem from './ExerciseListItem';
@@ -107,10 +106,6 @@ const HistoryTile = ({ workout }) => {
       </ExerciseListWrapper>
     </LayoutWrapper>
   );
-};
-
-HistoryTile.propTypes = {
-  workout: PropTypes.object,
 };
 
 export default HistoryTile;

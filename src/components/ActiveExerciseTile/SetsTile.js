@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import styled, { keyframes } from 'styled-components';
 import LayoutTile from '../LayoutTile';
 import FlipArrows from '../../assets/svg/FlipArrows';
@@ -95,15 +94,6 @@ const SetsTile = ({ name, handleClick, sets, handleTileFlip, weight }) => {
       </SetsWrapper>
     </LayoutTile>
   );
-};
-
-SetsTile.propTypes = {
-  handleTileFlip: PropTypes.func.isRequired,
-  handleClick: PropTypes.func.isRequired,
-  weight: PropTypes.number.isRequired,
-  name: PropTypes.string.isRequired,
-  flip: PropTypes.bool,
-  sets: PropTypes.array.isRequired,
 };
 
 const areEqualProps = (prev, next) => {

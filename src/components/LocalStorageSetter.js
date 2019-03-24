@@ -1,5 +1,4 @@
 import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import {
   LOCAL_STORAGE_HISTORY,
   LOCAL_STORAGE_SETTINGS,
@@ -18,13 +17,6 @@ const LocalStorageSetter = ({
   localStorage.setItem(LOCAL_STORAGE_ENTITIES, JSON.stringify(entities));
   localStorage.setItem(LOCAL_STORAGE_ACTIVE_WORKOUT, JSON.stringify(activeWorkout));
   return null;
-};
-
-LocalStorageSetter.propTypes = {
-  history: PropTypes.arrayOf(PropTypes.object),
-  settings: PropTypes.object,
-  entities: PropTypes.object,
-  activeWorkout: PropTypes.object,
 };
 
 const mapStateToProps = state => state;

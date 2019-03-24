@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import LayoutTile from '../LayoutTile';
 import styled from 'styled-components';
 import FlipArrows from '../../assets/svg/FlipArrows';
@@ -81,14 +80,6 @@ const WeightIncrementTile = ({
     </RowLayout>
   </Tile>
 );
-
-WeightIncrementTile.propTypes = {
-  handleTileFlip: PropTypes.func.isRequired,
-  setShowAlertRemove: PropTypes.func.isRequired,
-  weight: PropTypes.number.isRequired,
-  name: PropTypes.string.isRequired,
-  setWeight: PropTypes.func.isRequired,
-};
 
 const areEqualProps = (prev, next) => (
   prev.weight === next.weight
