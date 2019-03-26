@@ -48,6 +48,34 @@ const initialState = {
           name: 'Row',
           mostWeightInKilos: undefined,
         },
+        'exercise8': {
+          id: 'exercise8',
+          name: 'Straight-leg Dumbbell Deadlift',
+        },
+        'exercise9': {
+          id: 'exercise9',
+          name: 'Dumbbell Overhead Press',
+        },
+        'exercise10': {
+          id: 'exercise10',
+          name: 'Sit-ups',
+        },
+        'exercise11': {
+          id: 'exercise11',
+          name: 'Right Arm Cross Body',
+        },
+        'exercise12': {
+          id: 'exercise12',
+          name: 'Left Arm Cross Body',
+        },
+        'exercise13': {
+          id: 'exercise13',
+          name: 'Left Glute Pigeon Pose',
+        },
+        'exercise14': {
+          id: 'exercise14',
+          name: 'Right Glute Pigeon Pose',
+        },
       },
       allIds: [
         'exercise1',
@@ -57,6 +85,8 @@ const initialState = {
         'exercise5',
         'exercise6',
         'exercise7',
+        'exercise8',
+        'exercise9',
       ],
     },
 
@@ -105,6 +135,113 @@ const initialState = {
             },
           },
           order: ['exercise2', 'exercise3', 'exercise5'],
+        },
+
+        'newWorkoutShape1': {
+          id: 'newWorkoutShape1',
+          name: 'Full Body Dumbbell Strength',
+          exercises: {
+            warmUp: [
+              {
+                exerciseId: 'exercise10',
+                timerInSeconds: 60,
+                completed: false,
+              },
+            ],
+            sets: [
+              {
+                exerciseId: 'exercise8',
+                weightInKilos: 15,
+                maxReps: 8,
+                completedReps: undefined,
+                autoIncrement: 2.5,
+              },
+              {
+                exerciseId: 'exercise8',
+                weightInKilos: 15,
+                maxReps: 10,
+                completedReps: undefined,
+                autoIncrement: 2.5,
+              },
+              {
+                exerciseId: 'exercise8',
+                weightInKilos: 15,
+                maxReps: 12,
+                completedReps: undefined,
+                autoIncrement: 2.5,
+              },
+              {
+                exerciseId: 'exercise9',
+                weightInKilos: 15,
+                maxReps: 12,
+                completedReps: undefined,
+                autoIncrement: 2.5,
+              },
+              {
+                exerciseId: 'exercise9',
+                weightInKilos: 15,
+                maxReps: 12,
+                completedReps: undefined,
+                autoIncrement: 2.5,
+              },
+              {
+                exerciseId: 'exercise9',
+                weightInKilos: 15,
+                maxReps: 12,
+                completedReps: undefined,
+                autoIncrement: 2.5,
+              },
+              {
+                exerciseId: 'exercise6',
+                weightInKilos: 15,
+                maxReps: 6,
+                completedReps: undefined,
+                autoIncrement: 2.5,
+              },
+              {
+                exerciseId: 'exercise6',
+                weightInKilos: 15,
+                maxReps: 6,
+                completedReps: undefined,
+                autoIncrement: 2.5,
+              },
+              {
+                exerciseId: 'exercise6',
+                weightInKilos: 15,
+                maxReps: 6,
+                completedReps: undefined,
+                autoIncrement: 2.5,
+              },
+            ],
+            stretch: [
+              {
+                exerciseId: 'exercise11',
+                timerInSeconds: 60,
+                completed: false,
+              },
+              {
+                exerciseId: 'exercise12',
+                timerInSeconds: 60,
+                completed: false,
+              },
+              {
+                exerciseId: 'exercise13',
+                timerInSeconds: 60,
+                completed: false,
+              },
+              {
+                exerciseId: 'exercise14',
+                timerInSeconds: 60,
+                completed: false,
+              },
+            ],
+            allExerciseIds: [
+              'exercise6',
+              'exercise8',
+              'exercise9',
+              'exercise10',
+            ],
+          },
         },
       },
       allIds: ['workout1', 'workout2']
