@@ -1,12 +1,9 @@
-import { getLocalStorage } from '../helpers/functions';
-import {
-  LOCAL_STORAGE_HISTORY,
-  LOCAL_STORAGE_ACTIVE_WORKOUT,
-} from '../helpers/constants';
+import { State } from '../helpers/types';
 
-const initialState = {
+const initialState: State = {
+  // activeWorkout: undefined
+
   settings: {
-    planId: 'plan1',
     useKilos: true,
   },
 
@@ -92,121 +89,76 @@ const initialState = {
 
     workouts: {
       byId: {
-        'workout1': {
-          id: 'workout1',
-          name: 'Pull',
-          exercises: {
-            'exercise1': {
-              sets: [7, 7, 7, 7],
-              restPeriodInSeconds: 120,
-              weightInKilos: 40,
-            },
-            'exercise4': {
-              sets: [7, 7, 7, 7],
-              restPeriodInSeconds: 150,
-              weightInKilos: 0,
-            },
-            'exercise6': {
-              sets: [7, 7, 7, 7],
-              restPeriodInSeconds: 90,
-              weightInKilos: 20,
-            },
-          },
-          order: ['exercise1', 'exercise4', 'exercise6'],
-        },
-        'workout2': {
-          id: 'workout2',
-          name: 'Push',
-          exercises: {
-            'exercise2': {
-              sets: [7, 7, 7, 7],
-              restPeriodInSeconds: 150,
-              weightInKilos: 40,
-            },
-            'exercise3': {
-              sets: [7, 7, 7, 7],
-              restPeriodInSeconds: 120,
-              weightInKilos: 30,
-            },
-            'exercise5': {
-              sets: [7, 7, 7, 7],
-              restPeriodInSeconds: 120,
-              weightInKilos: 40,
-            },
-          },
-          order: ['exercise2', 'exercise3', 'exercise5'],
-        },
-
         'newWorkoutShape1': {
           id: 'newWorkoutShape1',
           name: 'Full Body Dumbbell Strength',
           exercises: {
             warmUp: [
               {
-                exerciseId: 'exercise10',
+                id: 'exercise10',
                 timerInSeconds: 60,
                 completed: false,
               },
             ],
             sets: [
               {
-                exerciseId: 'exercise8',
+                id: 'exercise8',
                 weightInKilos: 15,
                 maxReps: 8,
                 completedReps: undefined,
                 autoIncrement: 2.5,
               },
               {
-                exerciseId: 'exercise8',
+                id: 'exercise8',
                 weightInKilos: 15,
                 maxReps: 10,
                 completedReps: undefined,
                 autoIncrement: 2.5,
               },
               {
-                exerciseId: 'exercise8',
+                id: 'exercise8',
                 weightInKilos: 15,
                 maxReps: 12,
                 completedReps: undefined,
                 autoIncrement: 2.5,
               },
               {
-                exerciseId: 'exercise9',
+                id: 'exercise9',
                 weightInKilos: 15,
                 maxReps: 12,
                 completedReps: undefined,
                 autoIncrement: 2.5,
               },
               {
-                exerciseId: 'exercise9',
+                id: 'exercise9',
                 weightInKilos: 15,
                 maxReps: 12,
                 completedReps: undefined,
                 autoIncrement: 2.5,
               },
               {
-                exerciseId: 'exercise9',
+                id: 'exercise9',
                 weightInKilos: 15,
                 maxReps: 12,
                 completedReps: undefined,
                 autoIncrement: 2.5,
               },
               {
-                exerciseId: 'exercise6',
+                id: 'exercise6',
                 weightInKilos: 15,
                 maxReps: 6,
                 completedReps: undefined,
                 autoIncrement: 2.5,
               },
               {
-                exerciseId: 'exercise6',
+                id: 'exercise6',
                 weightInKilos: 15,
                 maxReps: 6,
                 completedReps: undefined,
                 autoIncrement: 2.5,
               },
               {
-                exerciseId: 'exercise6',
+                id: 'exercise6',
                 weightInKilos: 15,
                 maxReps: 6,
                 completedReps: undefined,
@@ -215,22 +167,22 @@ const initialState = {
             ],
             stretch: [
               {
-                exerciseId: 'exercise11',
+                id: 'exercise11',
                 timerInSeconds: 60,
                 completed: false,
               },
               {
-                exerciseId: 'exercise12',
+                id: 'exercise12',
                 timerInSeconds: 60,
                 completed: false,
               },
               {
-                exerciseId: 'exercise13',
+                id: 'exercise13',
                 timerInSeconds: 60,
                 completed: false,
               },
               {
-                exerciseId: 'exercise14',
+                id: 'exercise14',
                 timerInSeconds: 60,
                 completed: false,
               },
@@ -246,27 +198,10 @@ const initialState = {
       },
       allIds: ['workout1', 'workout2']
     },
-
-    plans: {
-      byId: {
-        'plan1': {
-          id: 'plan1',
-          name: 'Compound Sevens',
-          workouts: ['workout1', 'workout2'],
-        },
-      },
-      allIds: ['plan1'],
-    },
   },
 
-  history: undefined,
+  history: [],
 };
 
-export default {
-  ...initialState,
-  // Add this back in when a user can create exercises and workouts
-  // entities: getLocalStorage(LOCAL_STORAGE_ENTITIES, initialState.entities),
-  history: getLocalStorage(LOCAL_STORAGE_HISTORY, []),
-  activeWorkout: getLocalStorage(LOCAL_STORAGE_ACTIVE_WORKOUT, undefined),
-};
+export default initialState;
 

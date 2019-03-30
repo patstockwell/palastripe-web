@@ -2,10 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import styled, { keyframes } from 'styled-components';
 import LayoutTile from './LayoutTile';
-import ExerciseListItem from './ExerciseListItem';
 import { orange, green } from '../helpers/constants';
 import ForwardArrow from '../assets/svg/ForwardArrow';
-import { calculateWorkoutTime } from './ScrollingWorkoutTile';
 
 const Title = styled.div`
   display: flex;
@@ -92,20 +90,20 @@ const indicateStart = keyframes`
   }
 `;
 
-const UpNextTile = ({ emptyHistory, onGoing, workout }) => {
-  const { exercises, name, order } = workout;
-  const exerciseTiles = order.map((e, i) =>
-    <ExerciseListItem showAllSets={!onGoing} {...exercises[e]} key={i} />
-  );
+const UpNextTile = ({ onGoing }) => {
+  // const { exercises, name, order } = workout;
+  // const exerciseTiles = order.map((e, i) =>
+  //   <ExerciseListItem showAllSets={!onGoing} {...exercises[e]} key={i} />
+  // );
   const colour = onGoing ? orange : green;
-  const minutes = calculateWorkoutTime(order.map(e => exercises[e]));
+  // const minutes = calculateWorkoutTime(order.map(e => exercises[e]));
   const arrowStyle = { fill: 'grey', height: '12px' };
 
   return (
     <LayoutTile>
       <Title>
         <TileHeading>{onGoing ? 'On Going' : 'Up Next'}</TileHeading>
-        <ForwardArrowPanel animation={emptyHistory && indicateStart}>
+        <ForwardArrowPanel animation={indicateStart}>
           <ForwardText>{onGoing ? 'Continue' : 'Start'}</ForwardText>
           <ForwardArrow style={{ ...arrowStyle, margin: '0 -14px 0 -4px'}} />
           <ForwardArrow style={arrowStyle} />
@@ -117,19 +115,18 @@ const UpNextTile = ({ emptyHistory, onGoing, workout }) => {
           <Circle />
         </Svg>
         <WorkoutName>
-          {name}
+          blah
         </WorkoutName>
-        <WorkoutDetail>&asymp; {minutes}min</WorkoutDetail>
+        <WorkoutDetail>&asymp; {10}min</WorkoutDetail>
       </WorkoutNameWrapper>
       <ExerciseListWrapper>
-        {exerciseTiles}
       </ExerciseListWrapper>
     </LayoutTile>
   );
 };
 
 const mapStateToProps = state => ({
-  onGoing: state.activeWorkout.onGoing,
+  onGoing: false,
   emptyHistory: state.history.length === 0,
 });
 

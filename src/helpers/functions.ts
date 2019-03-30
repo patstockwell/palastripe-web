@@ -1,8 +1,8 @@
 import { useEffect, useRef } from 'react';
 import {
-  MONTHS_OF_THE_YEAR,
   DAYS_OF_THE_WEEK,
   MILLISECONDS_IN_A_MINUTE,
+  MONTHS_OF_THE_YEAR,
 } from './constants';
 
 export function useInterval(callback: () => any, delay: number) {
@@ -20,7 +20,7 @@ export function useInterval(callback: () => any, delay: number) {
       savedCallback.current();
     }
     if (delay !== null) {
-      let id = setInterval(tick, delay);
+      const id = setInterval(tick, delay);
       return () => clearInterval(id);
     }
   }, [delay]);
@@ -33,11 +33,11 @@ export const decrementReps = (reps: (number | undefined), max: number) =>
     reps <= 0 ? undefined : reps - 1;
 
 interface Set {
-  max: number,
-  completed: (number | undefined),
+  max: number;
+  completed: (number | undefined);
 }
 
-export const checkAllSetsAreComplete = (sets: Array<Set>) => sets.reduce((acc, curr) => (
+export const checkAllSetsAreComplete = (sets: Set[]) => sets.reduce((acc, curr) => (
   curr.max === curr.completed && acc
 ), true);
 

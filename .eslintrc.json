@@ -22,12 +22,13 @@
         "sourceType": "module"
     },
     "plugins": [
-        "react"
+        "react", "@typescript-eslint"
     ],
     "rules": {
         "react/prop-types": [0],
         "react/display-name": ["off"],
-        "indent": [
+        "indent": "off",
+        "@typescript-eslint/indent": [
             "error",
             2,
             { "SwitchCase": 1 }

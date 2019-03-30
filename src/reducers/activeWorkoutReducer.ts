@@ -1,17 +1,16 @@
 import {
-  UPDATE_COMPLETED_REPS,
-  END_WORKOUT,
   CHANGE_WEIGHT,
+  END_WORKOUT,
   REMOVE_EXERCISE,
+  START_WORKOUT,
+  UPDATE_COMPLETED_REPS,
 } from '../helpers/constants';
 
-const activeWorkoutReducer = (state, action, entities, planId) => {
-  if (!state) {
-    // if the state is undefined, then the app has just started and
-    // we need to generate an activeWorkout
-    return createNewActiveWorkout(state, entities, planId);
-  }
+const activeWorkoutReducer = (state, action, entities) => {
   switch (action.type) {
+    case START_WORKOUT: {
+      return createNewActiveWorkout(state, action, entities);
+    }
     case REMOVE_EXERCISE: {
       return removeExercise(state, action);
     }
@@ -19,7 +18,7 @@ const activeWorkoutReducer = (state, action, entities, planId) => {
       return updateCompletedReps(state, action);
     }
     case END_WORKOUT: {
-      return createNewActiveWorkout(state, entities, planId);
+      return removeActiveWorkout(state);
     }
     case CHANGE_WEIGHT: {
       return changeWeight(state, action);
@@ -29,6 +28,11 @@ const activeWorkoutReducer = (state, action, entities, planId) => {
     }
   }
 };
+
+const removeActiveWorkout = (state) => ({
+  ...state,
+  activeWorkout: undefined,
+});
 
 const removeExercise = (state, action) => {
   const { exerciseId: id } = action.payload;
@@ -45,46 +49,23 @@ const removeExercise = (state, action) => {
   };
 };
 
-const createNewActiveWorkout = (state, entities, planId) => {
+const createNewActiveWorkout = (state, action, entities) => {
   const {
-    workoutId,
-  } = state || {};
-
-  const {
-    plans: { byId: plansById },
     workouts: { byId: workoutsById },
     exercises: { byId: exercisesById },
   } = entities;
 
-  // get the next workout
-  const workoutIds = plansById[planId].workouts;
-  const currentIndex = workoutIds.indexOf(workoutId);
-  const nextWorkoutId = workoutIds[(currentIndex + 1) % workoutIds.length];
-  const nextWorkout = workoutsById[nextWorkoutId];
-
-  // map exercise data
-  const exercises = nextWorkout.order
-    .map(id => ({
-      // combine global exercise data and specific workout data
-      ...exercisesById[id],
-      ...nextWorkout.exercises[id],
-    }))
-    .reduce((acc, exercise) => ({
-      ...acc,
-      [exercise.id]: {
-        ...exercise,
-        sets: exercise.sets.map(reps => ({
-          max: reps,
-          completed: undefined,
-        }))},
-    }), {});
+  const workout = workoutsById[action.payload.workoutId];
+  const { warmUp, sets, stretch } = workout.exercises;
+  const combineExercise = e => ({ ...e, ...exercisesById[e.id] });
 
   return {
-    workoutId: nextWorkoutId,
-    name: nextWorkout.name,
-    onGoing: false,
-    exercises,
-    order: nextWorkout.order,
+    ...workout,
+    exercises: {
+      warmUp: warmUp.map(combineExercise),
+      sets: sets.map(combineExercise),
+      stretch: stretch.map(combineExercise),
+    },
   };
 };
 
@@ -128,4 +109,3 @@ const changeExercise = (state, exerciseId, newData) => {
 };
 
 export default activeWorkoutReducer;
-
