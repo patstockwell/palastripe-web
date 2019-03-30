@@ -9,7 +9,7 @@ import {
 
 import rootReducer from './reducers';
 import { GlobalStyle } from './components/GlobalStyle';
-import WorkoutPlans from './pages/WorkoutPlans';
+import Workouts from './pages/Workouts';
 import Home from './pages/Home/';
 import Me from './pages/Me';
 import FourZeroFour from './pages/FourZeroFour';
@@ -25,7 +25,7 @@ const App = () => (
       <Switch>
         <Route path="/" exact component={Home} />
         <Route path="/home/" component={Home} />
-        <Route path="/workout-plans/" component={WorkoutPlans} />
+        <Route path="/workout-plans/" component={Workouts} />
         <Route path="/me/" component={Me} />
         <Route component={FourZeroFour} />
       </Switch>

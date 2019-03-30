@@ -5,7 +5,7 @@ import Navigation from '../components/Navigation';
 import Banner from '../components/Banner';
 import { green, yellow } from '../helpers/constants';
 
-const WorkoutPlans = ({ location }) => (
+const Workouts = ({ location }) => (
   <BackSplash topLeft={green} bottomRight={yellow}>
     <Banner />
     <Navigation pathname={location.pathname}/>
@@ -15,5 +15,5 @@ const WorkoutPlans = ({ location }) => (
 const mapStateToProps = () => ({
 });
 
-export default connect(mapStateToProps)(WorkoutPlans);
+export default connect(mapStateToProps)(Workouts);
 
