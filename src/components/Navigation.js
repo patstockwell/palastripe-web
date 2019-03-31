@@ -46,11 +46,11 @@ const Navigation = ({ pathname }) => {
         <LinkName>Home</LinkName>
       </NavLink>
       <NavLink
-        highlight={/\/workout-plans*/.test(pathname) ? pink : 'black'}
-        to="/workout-plans/"
+        highlight={/\/workouts*/.test(pathname) ? pink : 'black'}
+        to="/workouts/"
       >
         <Calendar />
-        <LinkName>Workout Plans</LinkName>
+        <LinkName>Workouts</LinkName>
       </NavLink>
       <NavLink
         highlight={/\/me*/.test(pathname) ? pink : 'black'}

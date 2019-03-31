@@ -1,9 +1,27 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState} from 'react';
 import {
   DAYS_OF_THE_WEEK,
   MILLISECONDS_IN_A_MINUTE,
   MONTHS_OF_THE_YEAR,
 } from './constants';
+
+export const useHasScrolled = () => {
+  const [scrolled, setScrolled] = useState(false);
+
+  const handleScroll = () => {
+    const top = window.pageYOffset || document.documentElement.scrollTop;
+    setScrolled(top > 0);
+  };
+
+  useEffect(() => {
+    window.addEventListener('scroll', handleScroll);
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  return scrolled;
+};
 
 export function useInterval(callback: () => any, delay: number) {
   // https://overreacted.io/making-setinterval-declarative-with-react-hooks/

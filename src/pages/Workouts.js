@@ -1,15 +1,21 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
-import BackSplash from '../components/BackSplash';
+import styled from 'styled-components';
 import Navigation from '../components/Navigation';
 import Banner from '../components/Banner';
-import { green, yellow } from '../helpers/constants';
+
+const Big = styled.div`
+  height: 2000px;
+`;
 
 const Workouts = ({ location }) => (
-  <BackSplash topLeft={green} bottomRight={yellow}>
-    <Banner />
+  <Big>
+    <Banner heading={'Workouts'}/>
+    <p>something here</p>
+    <p>something here</p>
+    <p>something here</p>
     <Navigation pathname={location.pathname}/>
-  </BackSplash>
+  </Big>
 );
 
 const mapStateToProps = () => ({
