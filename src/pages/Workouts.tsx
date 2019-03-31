@@ -3,21 +3,22 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 import Navigation from '../components/Navigation';
 import Banner from '../components/Banner';
-import { State, Workout } from '../helpers/types';
+import WorkoutTile from '../components/WorkoutTile';
+import { State } from '../helpers/types';
 
 const Big = styled.div`
   height: 2000px;
 `;
 
 const Workouts = ({ location, workouts}) => {
-  console.log(workouts);
+  const workoutTiles = workouts.map(w =>
+    <WorkoutTile key={w.id} workout={w} />
+  );
 
   return (
     <Big>
       <Banner heading={'Workouts'}/>
-      <p>something here</p>
-      <p>something here</p>
-      <p>something here</p>
+      {workoutTiles}
       <Navigation pathname={location.pathname}/>
     </Big>
   );

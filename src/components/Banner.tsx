@@ -65,12 +65,12 @@ const Banner = ({ heading }: Props) => {
     transformHeading,
     transformLogo
   } = useSpring({
-    fontSize: `${scrolled ? 1.2 : 2}em`,
+    fontSize: `${scrolled ? 1.1 : 2}em`,
     marginLeft: `${scrolled ? 50 : 0}%`,
     transformHeading: `translateX(-${scrolled ? 50 : 0}%)`,
     transformLogo: `translateY(${scrolled ? bannerHeight : 0}px)`,
     marginTop: `${scrolled ? 13 : 0}px`,
-    config: { mass: 1, tension: 870, friction: 40 },
+    config: { mass: 1, tension: 570, friction: 40 },
   });
 
   return (

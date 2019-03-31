@@ -43,6 +43,7 @@ export const green: string = '#02d386';
 export const yellow: string = '#f7f529';
 export const orange: string = '#f79729';
 export const fadedYellow: string = '#fffd8e';
+export const superLightGrey = '#f4f4f4';
 
 // action types
 export const CHANGE_WEIGHT: string = 'CHANGE_WEIGHT';
