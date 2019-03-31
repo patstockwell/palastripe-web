@@ -6,7 +6,7 @@ import { blue, green } from '../helpers/constants';
 
 const Me = ({ location }) => (
   <BackSplash topLeft={blue} bottomRight={green}>
-    <Banner />
+    <Banner heading={'Me'}/>
     <Navigation pathname={location.pathname}/>
   </BackSplash>
 );

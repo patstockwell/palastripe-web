@@ -52,8 +52,12 @@ const VisibleHeader = styled.div`
   width: 100%;
 `;
 
-const Banner = ({ heading }) => {
-  const scrolled = useHasScrolled();
+interface Props {
+  heading: string;
+}
+
+const Banner = ({ heading }: Props) => {
+  const scrolled: boolean = useHasScrolled();
   const {
     fontSize,
     marginLeft,

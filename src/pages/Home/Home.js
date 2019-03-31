@@ -31,7 +31,7 @@ const Home = ({ location, activeWorkout, workoutHistory }) => {
 
   return (
     <Fragment>
-      <Banner />
+      <Banner heading={'Home'}/>
       <StyledLink to="/home/active-workout">
         <UpNextTile workout={activeWorkout} />
       </StyledLink>
