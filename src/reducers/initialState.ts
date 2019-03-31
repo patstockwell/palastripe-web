@@ -1,4 +1,6 @@
 import { State } from '../helpers/types';
+import circuitSpeed from '../workoutData/circuitSpeed';
+import fullBodyDumbbellStrength from '../workoutData/fullBodyDumbbellStrength';
 
 const initialState: State = {
   // activeWorkout: undefined
@@ -10,193 +12,89 @@ const initialState: State = {
   entities: {
     exercises: {
       byId: {
-        'exercise1': {
-          id: 'exercise1',
+        'dead_lift': {
+          id: 'dead_lift',
           name: 'Dead Lift',
           mostWeightInKilos: undefined,
         },
-        'exercise2': {
-          id: 'exercise2',
-          name: 'Squat',
+        'back_squat': {
+          id: 'back_squat',
+          name: 'Back Squat',
           mostWeightInKilos: undefined,
         },
-        'exercise3': {
-          id: 'exercise3',
+        'overhead_press': {
+          id: 'overhead_press',
           name: 'Overhead Press',
           mostWeightInKilos: undefined,
         },
-        'exercise4': {
-          id: 'exercise4',
+        'chin_up': {
+          id: 'chin_up',
           name: 'Chin-up',
           mostWeightInKilos: undefined,
         },
-        'exercise5': {
-          id: 'exercise5',
+        'bench_press': {
+          id: 'bench_press',
           name: 'Bench Press',
           mostWeightInKilos: undefined,
         },
-        'exercise6': {
-          id: 'exercise6',
+        'bicep_curl': {
+          id: 'bicep_curl',
           name: 'Bicep Curl',
           mostWeightInKilos: undefined,
         },
-        'exercise7': {
-          id: 'exercise7',
-          name: 'Row',
+        'upright_row': {
+          id: 'upright_row',
+          name: 'Upright Row',
           mostWeightInKilos: undefined,
         },
-        'exercise8': {
-          id: 'exercise8',
+        'straight_leg_dumbbell_deadlift': {
+          id: 'straight_leg_dumbbell_deadlift',
           name: 'Straight-leg Dumbbell Deadlift',
         },
-        'exercise9': {
-          id: 'exercise9',
+        'dumbbell_overhead_press': {
+          id: 'dumbbell_overhead_press',
           name: 'Dumbbell Overhead Press',
         },
-        'exercise10': {
-          id: 'exercise10',
+        'sit_ups': {
+          id: 'sit_ups',
           name: 'Sit-ups',
         },
-        'exercise11': {
-          id: 'exercise11',
-          name: 'Right Arm Cross Body',
+        'right_arm_cross_body_stretch': {
+          id: 'right_arm_cross_body_stretch',
+          name: 'Right Arm Cross Body Stretch',
         },
-        'exercise12': {
-          id: 'exercise12',
-          name: 'Left Arm Cross Body',
+        'left_arm_cross_body_stretch': {
+          id: 'left_arm_cross_body_stretch',
+          name: 'Left Arm Cross Body Stretch',
         },
-        'exercise13': {
-          id: 'exercise13',
-          name: 'Left Glute Pigeon Pose',
+        'left_glute_pigeon_pose_stretch': {
+          id: 'left_glute_pigeon_pose_stretch',
+          name: 'Left Glute Pigeon Pose Stretch',
         },
-        'exercise14': {
-          id: 'exercise14',
-          name: 'Right Glute Pigeon Pose',
+        'right_glute_pigeon_pose_stretch': {
+          id: 'right_glute_pigeon_pose_stretch',
+          name: 'Right Glute Pigeon Pose Stretch',
         },
       },
       allIds: [
-        'exercise1',
-        'exercise2',
-        'exercise3',
-        'exercise4',
-        'exercise5',
-        'exercise6',
-        'exercise7',
-        'exercise8',
-        'exercise9',
+        'dead_lift',
+        'back_squat',
+        'overhead_press',
+        'chin_up',
+        'bench_press',
+        'bicep_curl',
+        'upright_row',
+        'straight_leg_dumbbell_deadlift',
+        'dumbbell_overhead_press',
       ],
     },
 
     workouts: {
       byId: {
-        'newWorkoutShape1': {
-          id: 'newWorkoutShape1',
-          name: 'Full Body Dumbbell Strength',
-          exercises: {
-            warmUp: [
-              {
-                id: 'exercise10',
-                timerInSeconds: 60,
-                completed: false,
-              },
-            ],
-            sets: [
-              {
-                id: 'exercise8',
-                weightInKilos: 15,
-                maxReps: 8,
-                completedReps: undefined,
-                autoIncrement: 2.5,
-              },
-              {
-                id: 'exercise8',
-                weightInKilos: 15,
-                maxReps: 10,
-                completedReps: undefined,
-                autoIncrement: 2.5,
-              },
-              {
-                id: 'exercise8',
-                weightInKilos: 15,
-                maxReps: 12,
-                completedReps: undefined,
-                autoIncrement: 2.5,
-              },
-              {
-                id: 'exercise9',
-                weightInKilos: 15,
-                maxReps: 12,
-                completedReps: undefined,
-                autoIncrement: 2.5,
-              },
-              {
-                id: 'exercise9',
-                weightInKilos: 15,
-                maxReps: 12,
-                completedReps: undefined,
-                autoIncrement: 2.5,
-              },
-              {
-                id: 'exercise9',
-                weightInKilos: 15,
-                maxReps: 12,
-                completedReps: undefined,
-                autoIncrement: 2.5,
-              },
-              {
-                id: 'exercise6',
-                weightInKilos: 15,
-                maxReps: 6,
-                completedReps: undefined,
-                autoIncrement: 2.5,
-              },
-              {
-                id: 'exercise6',
-                weightInKilos: 15,
-                maxReps: 6,
-                completedReps: undefined,
-                autoIncrement: 2.5,
-              },
-              {
-                id: 'exercise6',
-                weightInKilos: 15,
-                maxReps: 6,
-                completedReps: undefined,
-                autoIncrement: 2.5,
-              },
-            ],
-            stretch: [
-              {
-                id: 'exercise11',
-                timerInSeconds: 60,
-                completed: false,
-              },
-              {
-                id: 'exercise12',
-                timerInSeconds: 60,
-                completed: false,
-              },
-              {
-                id: 'exercise13',
-                timerInSeconds: 60,
-                completed: false,
-              },
-              {
-                id: 'exercise14',
-                timerInSeconds: 60,
-                completed: false,
-              },
-            ],
-            allExerciseIds: [
-              'exercise6',
-              'exercise8',
-              'exercise9',
-              'exercise10',
-            ],
-          },
-        },
+        'full_body_dumbbell_strength': { ...fullBodyDumbbellStrength },
+        'circuit_speed': { ...circuitSpeed },
       },
-      allIds: ['workout1', 'workout2']
+      allIds: ['full_body_dumbbell_strength', 'circuit_speed']
     },
   },
 

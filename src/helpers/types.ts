@@ -36,25 +36,25 @@ export interface Workout {
   finishTime?: number;
   name: string;
   exercises: {
-    warmUp: (TimedActivity[] | WeightedActivity[]);
+    warmUp?: (TimedActivity[] | WeightedActivity[]);
     sets: (TimedActivity[] | WeightedActivity[]);
-    stretch: (TimedActivity[] | WeightedActivity[]);
+    stretch?: (TimedActivity[] | WeightedActivity[]);
     allExerciseIds: string[];
   };
 }
 
-interface TimedActivity {
+export interface TimedActivity {
   id: string;
   name?: string;
   timerInSeconds: number;
   completed: boolean;
 }
 
-interface WeightedActivity {
+export interface WeightedActivity {
   id: string;
   name?: string;
   weightInKilos: number;
-  maxReps: number;
+  repsGoal: number;
   completedReps: number;
   autoIncrement: number;
 }
