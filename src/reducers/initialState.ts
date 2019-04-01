@@ -12,89 +12,89 @@ const initialState: State = {
   entities: {
     exercises: {
       byId: {
-        'dead_lift': {
-          id: 'dead_lift',
+        'dead-lift': {
+          id: 'dead-lift',
           name: 'Dead Lift',
           mostWeightInKilos: undefined,
         },
-        'back_squat': {
-          id: 'back_squat',
+        'back-squat': {
+          id: 'back-squat',
           name: 'Back Squat',
           mostWeightInKilos: undefined,
         },
-        'overhead_press': {
-          id: 'overhead_press',
+        'overhead-press': {
+          id: 'overhead-press',
           name: 'Overhead Press',
           mostWeightInKilos: undefined,
         },
-        'chin_up': {
-          id: 'chin_up',
+        'chin-up': {
+          id: 'chin-up',
           name: 'Chin-up',
           mostWeightInKilos: undefined,
         },
-        'bench_press': {
-          id: 'bench_press',
+        'bench-press': {
+          id: 'bench-press',
           name: 'Bench Press',
           mostWeightInKilos: undefined,
         },
-        'bicep_curl': {
-          id: 'bicep_curl',
+        'bicep-curl': {
+          id: 'bicep-curl',
           name: 'Bicep Curl',
           mostWeightInKilos: undefined,
         },
-        'upright_row': {
-          id: 'upright_row',
+        'upright-row': {
+          id: 'upright-row',
           name: 'Upright Row',
           mostWeightInKilos: undefined,
         },
-        'straight_leg_dumbbell_deadlift': {
-          id: 'straight_leg_dumbbell_deadlift',
+        'straight-leg-dumbbell-deadlift': {
+          id: 'straight-leg-dumbbell-deadlift',
           name: 'Straight-leg Dumbbell Deadlift',
         },
-        'dumbbell_overhead_press': {
-          id: 'dumbbell_overhead_press',
+        'dumbbell-overhead-press': {
+          id: 'dumbbell-overhead-press',
           name: 'Dumbbell Overhead Press',
         },
-        'sit_ups': {
-          id: 'sit_ups',
+        'sit-ups': {
+          id: 'sit-ups',
           name: 'Sit-ups',
         },
-        'right_arm_cross_body_stretch': {
-          id: 'right_arm_cross_body_stretch',
+        'right-arm-cross-body-stretch': {
+          id: 'right-arm-cross-body-stretch',
           name: 'Right Arm Cross Body Stretch',
         },
-        'left_arm_cross_body_stretch': {
-          id: 'left_arm_cross_body_stretch',
+        'left-arm-cross-body-stretch': {
+          id: 'left-arm-cross-body-stretch',
           name: 'Left Arm Cross Body Stretch',
         },
-        'left_glute_pigeon_pose_stretch': {
-          id: 'left_glute_pigeon_pose_stretch',
+        'left-glute-pigeon-pose-stretch': {
+          id: 'left-glute-pigeon-pose-stretch',
           name: 'Left Glute Pigeon Pose Stretch',
         },
-        'right_glute_pigeon_pose_stretch': {
-          id: 'right_glute_pigeon_pose_stretch',
+        'right-glute-pigeon-pose-stretch': {
+          id: 'right-glute-pigeon-pose-stretch',
           name: 'Right Glute Pigeon Pose Stretch',
         },
       },
       allIds: [
-        'dead_lift',
-        'back_squat',
-        'overhead_press',
-        'chin_up',
-        'bench_press',
-        'bicep_curl',
-        'upright_row',
-        'straight_leg_dumbbell_deadlift',
-        'dumbbell_overhead_press',
+        'dead-lift',
+        'back-squat',
+        'overhead-press',
+        'chin-up',
+        'bench-press',
+        'bicep-curl',
+        'upright-row',
+        'straight-leg-dumbbell-deadlift',
+        'dumbbell-overhead-press',
       ],
     },
 
     workouts: {
       byId: {
-        'full_body_dumbbell_strength': { ...fullBodyDumbbellStrength },
-        'circuit_speed': { ...circuitSpeed },
+        'full-body-dumbbell-strength': { ...fullBodyDumbbellStrength },
+        'circuit-speed': { ...circuitSpeed },
       },
-      allIds: ['full_body_dumbbell_strength', 'circuit_speed']
+      allIds: ['full-body-dumbbell-strength', 'circuit-speed']
     },
   },
 
