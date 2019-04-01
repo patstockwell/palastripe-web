@@ -17,7 +17,7 @@ const Nav = styled.nav`
   color: black;
   padding: 3px;
   box-sizing: border-box;
-  border-top: solid 0.5px grey;
+  border-top: solid 0.5px lightgrey;
   align-items: flex-end;
 `;
 
