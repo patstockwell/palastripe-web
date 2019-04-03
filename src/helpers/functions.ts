@@ -1,16 +1,24 @@
-import { useEffect, useRef, useState} from 'react';
+import { useContext, useEffect, useRef, useState} from 'react';
+import { __RouterContext } from 'react-router-dom';
 import {
   DAYS_OF_THE_WEEK,
   MILLISECONDS_IN_A_MINUTE,
   MONTHS_OF_THE_YEAR,
 } from './constants';
 
+// https://codesandbox.io/embed/jp1wr1867w
+export default function useRouter(): any {
+  return useContext(__RouterContext);
+}
+
 export const useHasScrolled = () => {
   const [scrolled, setScrolled] = useState(false);
 
   const handleScroll = () => {
     const top = window.pageYOffset || document.documentElement.scrollTop;
-    setScrolled(top > 0);
+    // setting 5px here allows a faster reset when scrolling back to the top
+    // as we doesn't have to wait for the window bounce to settle
+    setScrolled(top > 5);
   };
 
   useEffect(() => {

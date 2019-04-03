@@ -14,16 +14,16 @@ export interface State {
   history: Workout[];
 }
 
-interface Settings {
+export interface Settings {
   useKilos: boolean;
 }
 
-interface Entities {
+export interface Entities {
   exercises: Exercises;
   workouts: Workouts;
 }
 
-interface Workouts {
+export interface Workouts {
   byId: {
     [propName: string]: Workout,
   };
@@ -35,12 +35,14 @@ export interface Workout {
   startTime?: number;
   finishTime?: number;
   name: string;
-  exercises: {
-    warmUp?: (TimedActivity[] | WeightedActivity[]);
-    sets: (TimedActivity[] | WeightedActivity[]);
-    stretch?: (TimedActivity[] | WeightedActivity[]);
-    allExerciseIds: string[];
-  };
+  exercises: WorkoutActivities;
+}
+
+export interface WorkoutActivities {
+  warmUp?: Activity[];
+  sets: Activity[];
+  stretch?: Activity[];
+  allExerciseIds: string[];
 }
 
 export interface TimedActivity {
@@ -59,14 +61,16 @@ export interface WeightedActivity {
   autoIncrement: number;
 }
 
-interface Exercises {
+export type Activity = WeightedActivity | TimedActivity;
+
+export interface Exercises {
   byId: {
     [propName: string]: Exercise,
   },
   allIds: string[],
 }
 
-interface Exercise {
+export interface Exercise {
   id: string,
   name: string,
   mostWeightInKilos?: number,

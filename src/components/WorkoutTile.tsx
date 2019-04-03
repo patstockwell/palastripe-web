@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { Workout } from '../helpers/types';
 import { superLightGrey, tileMinHeight } from '../helpers/constants';
@@ -48,23 +49,32 @@ const Minutes = styled.p`
   font-weight: 800;
 `;
 
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: initial;
+`;
+
 interface Props {
   workout: Workout;
   i: number;
 }
 
 const WorkoutTile = ({ i, workout }: Props) => {
+  const handleClick = () => console.log('clicked', workout.id);
+
   return (
-    <Tile>
-      <Square i={i}>
-        <Minutes>34min</Minutes>
-      </Square>
-      <div>
-        <Name>
-          {workout.name}
-        </Name>
-      </div>
-    </Tile>
+    <StyledLink to={`/workouts/${workout.id}/`}>
+      <Tile onClick={handleClick}>
+        <Square i={i}>
+          <Minutes>34min</Minutes>
+        </Square>
+        <div>
+          <Name>
+            {workout.name}
+          </Name>
+        </div>
+      </Tile>
+    </StyledLink>
   );
 };
 
