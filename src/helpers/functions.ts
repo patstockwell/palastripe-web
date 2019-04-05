@@ -1,15 +1,12 @@
-import { useContext, useEffect, useRef, useState} from 'react';
-import { __RouterContext } from 'react-router-dom';
+import { useEffect, useRef, useState} from 'react';
 import {
   DAYS_OF_THE_WEEK,
   MILLISECONDS_IN_A_MINUTE,
   MONTHS_OF_THE_YEAR,
+  SECONDS_IN_A_MINUTE,
+  DEFAULT_REST_PERIOD_IN_SECONDS,
 } from './constants';
-
-// https://codesandbox.io/embed/jp1wr1867w
-export default function useRouter(): any {
-  return useContext(__RouterContext);
-}
+import { isTimed, Activity, TimedActivity, Workout } from './types';
 
 export const useHasScrolled = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -101,3 +98,29 @@ export const formatTime = (minutes: number) => {
     return `${hours}hr ${mins < 9 ? `0${mins}` : mins}min`;
   }
 };
+
+const ONE_REP_IN_SECONDS = 3;
+
+const getReps = (a: Activity): number =>
+  isTimed(a) ? 0 : (a.repsGoal * ONE_REP_IN_SECONDS);
+
+const getTimer = (a: Activity): number =>
+  isTimed(a) ? a.timerInSeconds : 0;
+
+const getRestTime = (a: Activity): number =>
+  a.restPeriodInSeconds || 0;
+
+const getTotalActivityTime = (a: Activity): number =>
+  getRestTime(a) + (getTimer(a) || getReps(a));
+
+const add = (acc, curr) => acc + curr;
+
+export const calculateWorkoutTime = (w: Workout): number => {
+  const { exercises : { warmUp, sets, stretch } } = w;
+  const allActivities = warmUp.concat(sets).concat(stretch);
+  const total = allActivities
+    .map(getTotalActivityTime)
+    .reduce(add, 0);
+  return Math.round(total / SECONDS_IN_A_MINUTE);
+};
+

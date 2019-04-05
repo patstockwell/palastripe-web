@@ -18,6 +18,7 @@ const fullBodyDumbbellStrength: Workout = {
         repsGoal: 8,
         completedReps: undefined,
         autoIncrement: 2.5,
+        restPeriodInSeconds: 60,
       },
       {
         id: 'straight-leg-dumbbell-deadlift',
@@ -25,6 +26,7 @@ const fullBodyDumbbellStrength: Workout = {
         repsGoal: 10,
         completedReps: undefined,
         autoIncrement: 2.5,
+        restPeriodInSeconds: 60,
       },
       {
         id: 'straight-leg-dumbbell-deadlift',
@@ -32,6 +34,7 @@ const fullBodyDumbbellStrength: Workout = {
         repsGoal: 12,
         completedReps: undefined,
         autoIncrement: 2.5,
+        restPeriodInSeconds: 60,
       },
       {
         id: 'dumbbell-overhead-press',
@@ -39,6 +42,7 @@ const fullBodyDumbbellStrength: Workout = {
         repsGoal: 12,
         completedReps: undefined,
         autoIncrement: 2.5,
+        restPeriodInSeconds: 60,
       },
       {
         id: 'dumbbell-overhead-press',
@@ -46,6 +50,7 @@ const fullBodyDumbbellStrength: Workout = {
         repsGoal: 12,
         completedReps: undefined,
         autoIncrement: 2.5,
+        restPeriodInSeconds: 60,
       },
       {
         id: 'dumbbell-overhead-press',
@@ -53,6 +58,7 @@ const fullBodyDumbbellStrength: Workout = {
         repsGoal: 12,
         completedReps: undefined,
         autoIncrement: 2.5,
+        restPeriodInSeconds: 60,
       },
       {
         id: 'bicep-curl',
@@ -60,6 +66,7 @@ const fullBodyDumbbellStrength: Workout = {
         repsGoal: 6,
         completedReps: undefined,
         autoIncrement: 2.5,
+        restPeriodInSeconds: 60,
       },
       {
         id: 'bicep-curl',
@@ -67,6 +74,7 @@ const fullBodyDumbbellStrength: Workout = {
         repsGoal: 6,
         completedReps: undefined,
         autoIncrement: 2.5,
+        restPeriodInSeconds: 60,
       },
       {
         id: 'bicep-curl',
@@ -74,6 +82,7 @@ const fullBodyDumbbellStrength: Workout = {
         repsGoal: 6,
         completedReps: undefined,
         autoIncrement: 2.5,
+        restPeriodInSeconds: 60,
       },
     ],
     stretch: [

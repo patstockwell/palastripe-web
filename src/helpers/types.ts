@@ -48,6 +48,7 @@ export interface WorkoutActivities {
 export interface TimedActivity {
   id: string;
   name?: string;
+  restPeriodInSeconds?: number;
   timerInSeconds: number;
   completed: boolean;
 }
@@ -55,6 +56,7 @@ export interface TimedActivity {
 export interface WeightedActivity {
   id: string;
   name?: string;
+  restPeriodInSeconds?: number;
   weightInKilos: number;
   repsGoal: number;
   completedReps: number;
@@ -75,3 +77,8 @@ export interface Exercise {
   name: string,
   mostWeightInKilos?: number,
 }
+
+export const isTimed = (activity: Activity): activity is TimedActivity => {
+  return (<TimedActivity>activity).timerInSeconds !== undefined;
+};
+

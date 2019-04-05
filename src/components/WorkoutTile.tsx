@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { Workout } from '../helpers/types';
 import { superLightGrey, tileMinHeight } from '../helpers/constants';
+import { calculateWorkoutTime } from '../helpers/functions';
 import DumbbellPicture from '../assets/images/bicep-workout-1851820.jpg';
 import KettleBellPicture from '../assets/images/active-body-crossfit-1533897.jpg';
 
@@ -60,13 +61,11 @@ interface Props {
 }
 
 const WorkoutTile = ({ i, workout }: Props) => {
-  const handleClick = () => console.log('clicked', workout.id);
-
   return (
     <StyledLink to={`/workouts/${workout.id}/`}>
-      <Tile onClick={handleClick}>
+      <Tile>
         <Square i={i}>
-          <Minutes>34min</Minutes>
+          <Minutes>{calculateWorkoutTime(workout)}min</Minutes>
         </Square>
         <div>
           <Name>

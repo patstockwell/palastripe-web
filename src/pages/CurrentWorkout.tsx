@@ -49,13 +49,13 @@ const CurrentWorkout: React.FC<Props> = ({
   const workoutWithDetail: Workout =
     updateAllExercises(workout, entities.exercises);
   const warmUpTiles = workoutWithDetail.exercises.warmUp.map((a: Activity, i) =>
-    <div key={`${a.id}${i}`}>{a.name}</div>
+    <div key={i}>{a.name}</div>
   );
   const exercisesTiles = workoutWithDetail.exercises.sets.map((a: Activity, i) =>
-    <div key={`${a.id}${i}`}>{a.name}</div>
+    <div key={i}>{a.name}</div>
   );
   const stretchTiles = workoutWithDetail.exercises.stretch.map((a: Activity, i) =>
-    <div key={`${a.id}${i}`}>{a.name}</div>
+    <div key={i}>{a.name}</div>
   );
 
   return (
