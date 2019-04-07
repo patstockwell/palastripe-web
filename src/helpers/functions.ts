@@ -4,9 +4,8 @@ import {
   MILLISECONDS_IN_A_MINUTE,
   MONTHS_OF_THE_YEAR,
   SECONDS_IN_A_MINUTE,
-  DEFAULT_REST_PERIOD_IN_SECONDS,
 } from './constants';
-import { isTimed, Activity, TimedActivity, Workout } from './types';
+import { isTimed, Activity, Workout } from './types';
 
 export const useHasScrolled = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -48,21 +47,6 @@ export function useInterval(callback: () => any, delay: number) {
     }
   }, [delay]);
 }
-
-// decrement reps or loop back to the start
-// undefined -> 5 -> 4 -> 3 -> 2 -> 1 -> 0 -> undefined -> ...
-export const decrementReps = (reps: (number | undefined), max: number) =>
-  reps === undefined ? max :
-    reps <= 0 ? undefined : reps - 1;
-
-interface Set {
-  max: number;
-  completed: (number | undefined);
-}
-
-export const checkAllSetsAreComplete = (sets: Set[]) => sets.reduce((acc, curr) => (
-  curr.max === curr.completed && acc
-), true);
 
 export const getLocalStorage = (name: string, defaultValue: any) => {
   const item: (string | null) = localStorage.getItem(name);

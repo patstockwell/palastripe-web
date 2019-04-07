@@ -10,7 +10,7 @@ import {
 import rootReducer from './reducers';
 import { GlobalStyle } from './components/GlobalStyle';
 import Workouts from './pages/Workouts';
-import Home from './pages/Home/';
+import Home from './pages/Home';
 import Me from './pages/Me';
 import FourZeroFour from './pages/FourZeroFour';
 import LocalStorageSetter from './components/LocalStorageSetter';
