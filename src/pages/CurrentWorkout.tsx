@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { animated } from 'react-spring/renderprops';
 import BackSplash from '../components/BackSplash';
+import BannerForActiveWorkout from '../components/BannerForActiveWorkout';
 import {
   Activity,
   Exercises,
@@ -16,22 +17,19 @@ interface Props {
   match: any;
 }
 
-const combineData = (exercises: Exercises) => (activity: Activity): Activity => ({
+const combineExerciseData = (exercises: Exercises) => (activity: Activity): Activity => ({
   ...activity,
   ...exercises.byId[activity.id] || {},
 });
 
-const updateAllExercises = (workout: Workout, exercisesList: Exercises): Workout => {
-  const e: WorkoutActivities = workout.exercises;
-  const warmUp: Activity[] = e.warmUp || [];
-  const stretch: Activity[] = e.stretch || [];
-  const sets: Activity[] = e.sets;
-  const addExerciseData = combineData(exercisesList);
+const combineDataForAllExercises = (workout: Workout, exercisesList: Exercises): Workout => {
+  const { exercises: { warmUp, sets, stretch } } = workout;
+  const addExerciseData = combineExerciseData(exercisesList);
 
   return {
     ...workout,
     exercises: {
-      ...e,
+      ...workout.exercises,
       warmUp: warmUp.map(addExerciseData),
       sets: sets.map(addExerciseData),
       stretch: stretch.map(addExerciseData),
@@ -46,28 +44,40 @@ const CurrentWorkout: React.FC<Props> = ({
 }) => {
   const { id }: { id: string } = match.params;
   const workout: Workout = entities.workouts.byId[id];
-  const workoutWithDetail: Workout =
-    updateAllExercises(workout, entities.exercises);
-  const warmUpTiles = workoutWithDetail.exercises.warmUp.map((a: Activity, i) =>
+  if (!workout) {
+    // TODO: move all the workout tile stuff into another component that
+    // knows how to handle a URL that doesn't point to a workout
+    return null;
+  }
+  const {
+    exercises: {
+      warmUp,
+      sets,
+      stretch,
+    },
+  }: Workout = combineDataForAllExercises(workout, entities.exercises);
+
+  const warmUpTiles = warmUp.map((a: Activity, i) =>
     <div key={i}>{a.name}</div>
   );
-  const exercisesTiles = workoutWithDetail.exercises.sets.map((a: Activity, i) =>
+  const exercisesTiles = sets.map((a: Activity, i) =>
     <div key={i}>{a.name}</div>
   );
-  const stretchTiles = workoutWithDetail.exercises.stretch.map((a: Activity, i) =>
+  const stretchTiles = stretch.map((a: Activity, i) =>
     <div key={i}>{a.name}</div>
   );
 
   return (
     <animated.div style={{
       ...animationStyles,
-      position: 'absolute',
+      position: 'fixed',
       top: 0,
       bottom: 0,
       width: '100%',
       zIndex: 10,
     }}>
       <BackSplash>
+        <BannerForActiveWorkout hash={workout.id}/>
         <h1>workout</h1>
         <h2>warm up</h2>
         {warmUpTiles}

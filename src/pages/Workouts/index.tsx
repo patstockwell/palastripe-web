@@ -22,7 +22,12 @@ export default () => (
               <Switch location={state === 'update' ? location : loc}>
                 <Route
                   path="/workouts/:id/"
-                  render={({ match }) => <CurrentWorkout match={match} animationStyles={style}/>}
+                  render={({ match }) =>
+                    <CurrentWorkout
+                      match={match}
+                      animationStyles={style}
+                    />
+                  }
                 />
                 <Route
                   path="/workouts/"

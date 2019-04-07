@@ -1,11 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import { HashLink } from 'react-router-hash-link';
 import BackArrow from '../assets/svg/BackArrow';
-import AlertConfirm, { Button, LinkButton } from '../components/AlertConfirm';
-import { purple, bannerHeight } from '../helpers/constants';
+import { bannerHeight } from '../helpers/constants';
 
-const StyledLink = styled(Link)`
+const StyledLink = styled(HashLink)`
   color: grey;
   text-decoration: none;
   font-size: 17px;
@@ -21,37 +20,16 @@ const Header = styled.div`
   align-items: center;
   height: ${bannerHeight}px;
   background-color: white;
-  border-bottom: solid 0.5px grey;
+  border-bottom: solid 0.5px lightgrey;
 `;
 
-const BannerForActiveWorkout = ({ endWorkout }) => {
-  const [showAlertEndWorkout, setShowAlertEndWorkout] = useState(false);
-
-  const showConfirmation = e => {
-    e.preventDefault();
-    setShowAlertEndWorkout(true);
-  };
-
+const BannerForActiveWorkout = ({ hash }) => {
   return (
     <Header>
-      <StyledLink to="/home/">
+      <StyledLink to={`/workouts#${hash}`}>
         <BackArrow style={{ fill: 'grey', margin: '0 -12px 0 -8px' }} />
         <BackArrow style={{ fill: 'grey' }} /> Back
       </StyledLink>
-      <StyledLink to="/home/" onClick={showConfirmation}>
-        Done
-      </StyledLink>
-
-      <AlertConfirm
-        cancelAlert={() => setShowAlertEndWorkout(false)}
-        showAlert={showAlertEndWorkout}
-        message={'Are you sure you want to finish this workout?'}
-      >
-        <Button onClick={() => setShowAlertEndWorkout(false)} background={'grey'}>No</Button>
-        <LinkButton to="/home/" onClick={endWorkout} background={purple} >
-          <span>Yes</span>
-        </LinkButton>
-      </AlertConfirm>
     </Header>
   );
 };

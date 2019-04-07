@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { Workout } from '../helpers/types';
@@ -7,11 +7,12 @@ import { calculateWorkoutTime } from '../helpers/functions';
 import DumbbellPicture from '../assets/images/bicep-workout-1851820.jpg';
 import KettleBellPicture from '../assets/images/active-body-crossfit-1533897.jpg';
 
+
 const Tile = styled.section`
   height: ${tileMinHeight}px;
-  border-bottom: solid ${superLightGrey} 0.5px;
   display: flex;
   align-items: center;
+  border-bottom: solid 1px ${superLightGrey};
 `;
 
 const Square = styled.div`
@@ -26,8 +27,10 @@ const Square = styled.div`
   align-items: center;
   justify-content: center;
 
+  // put the image in an 'after' pseudo element. Set it behind the original
+  // element which has opacity giving it the dark filter look
   &::after {
-    content: '';
+    content: ' ';
     position: absolute;
     top: 0;
     left: 0;

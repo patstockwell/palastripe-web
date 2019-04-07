@@ -1,13 +1,18 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import Navigation from '../../components/Navigation';
 import Banner from '../../components/Banner';
 import WorkoutTile from '../../components/WorkoutTile';
 import { State } from '../../helpers/types';
+import { tileMinHeight } from '../../helpers/constants';
+
+const EmptySpace = styled.div`
+  height: ${tileMinHeight}px;
+`;
 
 const Big = styled.div`
-  height: 2000px;
+  height: 500px;
 `;
 
 const Workouts = ({ location, workouts}) => {
@@ -16,18 +21,14 @@ const Workouts = ({ location, workouts}) => {
   );
 
   return (
-    <Big>
+    <Fragment>
       <Banner heading={'Workouts'}/>
+      <Big />
       {workoutTiles}
-      {workoutTiles}
-      {workoutTiles}
-      {workoutTiles}
-      {workoutTiles}
-      {workoutTiles}
-      {workoutTiles}
-      {workoutTiles}
+      <Big />
+      <EmptySpace />
       <Navigation pathname={location.pathname}/>
-    </Big>
+    </Fragment>
   );
 };
 
