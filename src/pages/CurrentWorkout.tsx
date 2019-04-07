@@ -23,7 +23,7 @@ const combineExerciseData = (exercises: Exercises) => (activity: Activity): Acti
 });
 
 const combineDataForAllExercises = (workout: Workout, exercisesList: Exercises): Workout => {
-  const { exercises: { warmUp, sets, stretch } } = workout;
+  const { exercises: { warmUp, workingSets, stretch } } = workout;
   const addExerciseData = combineExerciseData(exercisesList);
 
   return {
@@ -31,7 +31,7 @@ const combineDataForAllExercises = (workout: Workout, exercisesList: Exercises):
     exercises: {
       ...workout.exercises,
       warmUp: warmUp.map(addExerciseData),
-      sets: sets.map(addExerciseData),
+      workingSets: workingSets.map(addExerciseData),
       stretch: stretch.map(addExerciseData),
     },
   };
@@ -52,7 +52,7 @@ const CurrentWorkout: React.FC<Props> = ({
   const {
     exercises: {
       warmUp,
-      sets,
+      workingSets,
       stretch,
     },
   }: Workout = combineDataForAllExercises(workout, entities.exercises);
@@ -60,7 +60,7 @@ const CurrentWorkout: React.FC<Props> = ({
   const warmUpTiles = warmUp.map((a: Activity, i) =>
     <div key={i}>{a.name}</div>
   );
-  const exercisesTiles = sets.map((a: Activity, i) =>
+  const exercisesTiles = workingSets.map((a: Activity, i) =>
     <div key={i}>{a.name}</div>
   );
   const stretchTiles = stretch.map((a: Activity, i) =>

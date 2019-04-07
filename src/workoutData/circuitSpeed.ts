@@ -11,7 +11,7 @@ const circuitSpeed: Workout = {
         timerInSeconds: 60,
       }
     ],
-    sets: [
+    workingSets: [
       {
         id: 'upright-row',
         autoIncrement: 0,

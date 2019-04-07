@@ -11,7 +11,7 @@ const fullBodyDumbbellStrength: Workout = {
         completed: false,
       },
     ],
-    sets: [
+    workingSets: [
       {
         id: 'straight-leg-dumbbell-deadlift',
         weightInKilos: 15,

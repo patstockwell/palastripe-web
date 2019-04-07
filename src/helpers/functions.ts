@@ -116,8 +116,8 @@ const getTotalActivityTime = (a: Activity): number =>
 const add = (acc, curr) => acc + curr;
 
 export const calculateWorkoutTime = (w: Workout): number => {
-  const { exercises : { warmUp, sets, stretch } } = w;
-  const allActivities = warmUp.concat(sets).concat(stretch);
+  const { exercises : { warmUp, workingSets, stretch } } = w;
+  const allActivities = warmUp.concat(workingSets).concat(stretch);
   const total = allActivities
     .map(getTotalActivityTime)
     .reduce(add, 0);

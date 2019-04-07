@@ -50,7 +50,7 @@ export interface Workout {
 
 export interface WorkoutActivities {
   warmUp?: Activity[];
-  sets: Activity[];
+  workingSets: Activity[];
   stretch?: Activity[];
   allExerciseIds: string[];
 }
