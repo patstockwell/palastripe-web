@@ -1,8 +1,10 @@
 import { Workout } from '../helpers/types';
+import Image from '../assets/images/active-body-crossfit-1533897.jpg';
 
 const circuitSpeed: Workout = {
   id: 'circuit-speed',
   name: 'Circuit Speed',
+  imageUrl: Image,
   exercises: {
     warmUp: [
       {

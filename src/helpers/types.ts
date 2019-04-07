@@ -42,6 +42,7 @@ export interface Workouts {
 
 export interface Workout {
   id: string;
+  imageUrl?: string;
   startTime?: number;
   finishTime?: number;
   name: string;

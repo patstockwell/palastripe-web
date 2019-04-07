@@ -1,8 +1,10 @@
 import { Workout } from '../helpers/types';
+import Image from '../assets/images/bicep-workout-1851820.jpg';
 
 const fullBodyDumbbellStrength: Workout = {
   id: 'full-body-dumbbell-strength',
   name: 'Full Body Dumbbell Strength',
+  imageUrl: Image,
   exercises: {
     warmUp: [
       {

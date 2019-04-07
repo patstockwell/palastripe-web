@@ -10,9 +10,6 @@ import {
   SET_WINDOW_SCROLL,
 } from '../helpers/constants';
 import { calculateWorkoutTime } from '../helpers/functions';
-import DumbbellPicture from '../assets/images/bicep-workout-1851820.jpg';
-import KettleBellPicture from '../assets/images/active-body-crossfit-1533897.jpg';
-
 
 const Tile = styled.section`
   height: ${tileMinHeight}px;
@@ -42,7 +39,7 @@ const Square = styled.div`
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url(${({ i }) => i % 2 === 0 ? DumbbellPicture : KettleBellPicture});
+    background-image: url(${({ image }) => image});
     background-size: cover;
     opacity: 0.5;
     z-index: -1;
@@ -66,12 +63,11 @@ const StyledLink = styled(Link)`
 
 interface Props {
   workout: Workout;
-  i: number;
   setWindowScroll: (number) => ReduxAction;
   scrollY: number;
 }
 
-const WorkoutTile = ({ setWindowScroll, scrollY = 0, i, workout }: Props) => {
+const WorkoutTile = ({ setWindowScroll, scrollY = 0, workout }: Props) => {
   useEffect(() => {
     window.scrollTo(0, scrollY);
   });
@@ -83,7 +79,7 @@ const WorkoutTile = ({ setWindowScroll, scrollY = 0, i, workout }: Props) => {
   return (
     <StyledLink onClick={handleClick} to={`/workouts/${workout.id}/`}>
       <Tile>
-        <Square i={i}>
+        <Square image={workout.imageUrl}>
           <Minutes>{calculateWorkoutTime(workout)}min</Minutes>
         </Square>
         <div>

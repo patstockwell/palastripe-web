@@ -17,7 +17,7 @@ const Big = styled.div`
 
 const Workouts = ({ location, workouts}) => {
   const workoutTiles = workouts.map((w, i) =>
-    <WorkoutTile i={i} key={w.id} workout={w} />
+    <WorkoutTile key={w.id} workout={w} />
   );
 
   return (
