@@ -5,6 +5,10 @@ import fullBodyDumbbellStrength from '../workoutData/fullBodyDumbbellStrength';
 const initialState: State = {
   // activeWorkout: undefined
 
+  scrollY: {
+    WORKOUTS: 0,
+  },
+
   settings: {
     useKilos: true,
   },

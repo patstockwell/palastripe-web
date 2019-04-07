@@ -1,8 +1,14 @@
-import React, { Fragment } from 'react';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { Workout } from '../helpers/types';
-import { superLightGrey, tileMinHeight } from '../helpers/constants';
+import { ReduxAction, Workout } from '../helpers/types';
+import {
+  superLightGrey,
+  tileMinHeight,
+  WORKOUTS,
+  SET_WINDOW_SCROLL,
+} from '../helpers/constants';
 import { calculateWorkoutTime } from '../helpers/functions';
 import DumbbellPicture from '../assets/images/bicep-workout-1851820.jpg';
 import KettleBellPicture from '../assets/images/active-body-crossfit-1533897.jpg';
@@ -61,11 +67,21 @@ const StyledLink = styled(Link)`
 interface Props {
   workout: Workout;
   i: number;
+  setWindowScroll: (number) => ReduxAction;
+  scrollY: number;
 }
 
-const WorkoutTile = ({ i, workout }: Props) => {
+const WorkoutTile = ({ setWindowScroll, scrollY = 0, i, workout }: Props) => {
+  useEffect(() => {
+    window.scrollTo(0, scrollY);
+  });
+
+  const handleClick = () => {
+    setWindowScroll(window.scrollY);
+  };
+
   return (
-    <StyledLink to={`/workouts/${workout.id}/`}>
+    <StyledLink onClick={handleClick} to={`/workouts/${workout.id}/`}>
       <Tile>
         <Square i={i}>
           <Minutes>{calculateWorkoutTime(workout)}min</Minutes>
@@ -80,4 +96,18 @@ const WorkoutTile = ({ i, workout }: Props) => {
   );
 };
 
-export default WorkoutTile;
+const mapStateToProps = ({ scrollY: { WORKOUTS } }) => ({
+  scrollY: WORKOUTS,
+});
+
+const mapDispatchToProps = {
+  setWindowScroll: (scrollY: number) => ({
+    type: SET_WINDOW_SCROLL,
+    payload: {
+      scrollY,
+      page: WORKOUTS,
+    },
+  }),
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(WorkoutTile);

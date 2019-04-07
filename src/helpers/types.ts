@@ -1,3 +1,8 @@
+export interface ReduxAction {
+  type: string;
+  payload: any;
+}
+
 export interface WorkingSet {
   id: string,
   weightInKilos: number,
@@ -9,9 +14,14 @@ export interface WorkingSet {
 // State shape
 export interface State {
   activeWorkout?: Workout;
+  scrollY: ScrollY;
   settings: Settings;
   entities: Entities;
   history: Workout[];
+}
+
+export interface ScrollY {
+  WORKOUTS: number;
 }
 
 export interface Settings {
