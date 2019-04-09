@@ -1,9 +1,20 @@
 import React from 'react';
+import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { animated } from 'react-spring/renderprops';
 import BackSplash from '../components/BackSplash';
 import ActivityListWithWindow from '../components/ActivityListWithWindow';
 import { Entities, Workout } from '../helpers/types';
+
+const AnimatedSlidingPage = styled(animated.div)`
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  z-index: 10;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch; // enables momentum scolling
+`;
 
 interface Props {
   animationStyles: any;
@@ -25,19 +36,14 @@ const CurrentWorkout: React.FC<Props> = ({
   }
 
   return (
-    <animated.div style={{
+    <AnimatedSlidingPage style={{
       ...animationStyles,
-      position: 'fixed',
-      top: 0,
-      bottom: 0,
-      width: '100%',
-      zIndex: 10,
-      overflowY: 'scroll',
+
     }}>
       <BackSplash>
         <ActivityListWithWindow entities={entities} workout={workout} />
       </BackSplash>
-    </animated.div>
+    </AnimatedSlidingPage>
   );
 };
 

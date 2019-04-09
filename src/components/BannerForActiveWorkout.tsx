@@ -21,7 +21,8 @@ const Header = styled.div`
   justify-content: space-between;
   align-items: center;
   height: ${bannerHeight}px;
-  background-color: white;
+  z-index: 2;
+  background-color: rgba(256, 256, 256, 0.8);
 `;
 
 interface Props {

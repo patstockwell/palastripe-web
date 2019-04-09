@@ -2,32 +2,14 @@ import React, { Fragment } from 'react';
 import styled from 'styled-components';
 import ActivityTile from './ActivityTile';
 import BannerForActiveWorkout from './BannerForActiveWorkout';
+import WorkoutWindow from './WorkoutWindow';
 import { combineDataForAllExercises } from '../helpers/functions';
-import { bannerHeight, superLightGrey } from '../helpers/constants';
+import {
+  bannerHeight,
+  workoutWindowViewport,
+  superLightGrey,
+} from '../helpers/constants';
 import { Activity, Entities, Exercises, Workout } from '../helpers/types';
-
-const Window = styled.div`
-  height: 300px;
-  position: sticky;
-  top: ${bannerHeight}px;
-  background-color: black;
-  color: white;
-
-  // put the image in an 'after' pseudo element. Set it behind the original
-  // element which has opacity giving it the dark filter look
-  &::after {
-    content: ' ';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url(${({ imageUrl }) => imageUrl});
-    background-size: cover;
-    opacity: 0.5;
-    z-index: -1;
-  }
-`;
 
 const ActivityHeading = styled.div`
   height: 40px;
@@ -35,7 +17,7 @@ const ActivityHeading = styled.div`
   display: flex;
   align-items: center;
   position: sticky;
-  top: calc(${bannerHeight}px + 300px);
+  top: calc(${bannerHeight}px + (${workoutWindowViewport}vh / 2));
   border-top: white 1px solid
 
   h2 {
@@ -72,9 +54,7 @@ const ActivityListWithWindow = ({ entities, workout }: Props) => {
   return (
     <Fragment>
       <BannerForActiveWorkout hash={workout.id}/>
-      <Window imageUrl={workout.imageUrl}>
-        <h1>workout</h1>
-      </Window>
+      <WorkoutWindow title={ workout.name} imageUrl={workout.imageUrl} />
       <ActivityHeading>
         <h2>warm up</h2>
       </ActivityHeading>

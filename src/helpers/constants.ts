@@ -2,6 +2,7 @@ export const tileGap: number = 16;
 export const tileMinHeight: number = 90;
 export const navBarHeight: number = 48;
 export const bannerHeight: number = 48;
+export const workoutWindowViewport: number = 50;
 export const gutterWidth: number = 12;
 
 export const DELAY_BEFORE_SHOWING_TIMER: number = 2;
