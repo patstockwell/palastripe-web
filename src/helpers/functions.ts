@@ -5,7 +5,12 @@ import {
   MONTHS_OF_THE_YEAR,
   SECONDS_IN_A_MINUTE,
 } from './constants';
-import { isTimed, Activity, Workout } from './types';
+import {
+  isTimed,
+  Activity,
+  Exercises,
+  Workout,
+} from './types';
 
 export const useHasScrolled = () => {
   const [scrolled, setScrolled] = useState(false);
@@ -47,6 +52,27 @@ export function useInterval(callback: () => any, delay: number) {
     }
   }, [delay]);
 }
+
+const combineExerciseData =
+  (exercises: Exercises) => (activity: Activity): Activity => ({
+    ...activity,
+    ...exercises.byId[activity.id] || {},
+  });
+
+export const combineDataForAllExercises = (workout: Workout, exercisesList: Exercises): Workout => {
+  const { exercises: { warmUp, workingSets, stretch } } = workout;
+  const addExerciseData = combineExerciseData(exercisesList);
+
+  return {
+    ...workout,
+    exercises: {
+      ...workout.exercises,
+      warmUp: warmUp.map(addExerciseData),
+      workingSets: workingSets.map(addExerciseData),
+      stretch: stretch.map(addExerciseData),
+    },
+  };
+};
 
 export const getLocalStorage = (name: string, defaultValue: any) => {
   const item: (string | null) = localStorage.getItem(name);

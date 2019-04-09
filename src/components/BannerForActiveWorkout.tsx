@@ -16,12 +16,17 @@ const StyledLink = styled(HashLink)`
 
 const Header = styled.div`
   display: flex;
+  position: sticky;
+  top: 0;
   justify-content: space-between;
   align-items: center;
   height: ${bannerHeight}px;
   background-color: white;
-  border-bottom: solid 0.5px lightgrey;
 `;
+
+interface Props {
+  hash: string;
+}
 
 const BannerForActiveWorkout = ({ hash }) => {
   return (
