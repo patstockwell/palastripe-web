@@ -41,7 +41,7 @@ const CurrentWorkout: React.FC<Props> = ({
 
     }}>
       <BackSplash>
-        <ActivityListWithWindow entities={entities} workout={workout} />
+        <ActivityListWithWindow workout={workout} />
       </BackSplash>
     </AnimatedSlidingPage>
   );

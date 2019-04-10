@@ -9,7 +9,7 @@ import {
   WORKOUTS,
   SET_WINDOW_SCROLL,
 } from '../helpers/constants';
-import { calculateWorkoutTime } from '../helpers/functions';
+import { calculateWorkoutTime, formatTime } from '../helpers/functions';
 
 const Tile = styled.section`
   height: ${tileMinHeight}px;
@@ -80,7 +80,7 @@ const WorkoutTile = ({ setWindowScroll, scrollY = 0, workout }: Props) => {
     <StyledLink onClick={handleClick} to={`/workouts/${workout.id}/`}>
       <Tile>
         <Square image={workout.imageUrl}>
-          <Minutes>{calculateWorkoutTime(workout)}min</Minutes>
+          <Minutes>{formatTime(calculateWorkoutTime(workout))}</Minutes>
         </Square>
         <div>
           <Name>

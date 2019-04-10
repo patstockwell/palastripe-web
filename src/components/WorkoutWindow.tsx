@@ -1,23 +1,21 @@
 import React from 'react';
 import styled from 'styled-components';
+import { buttonStyle } from './AlertConfirm';
 import {
-  bannerHeight,
-  pink,
   purple,
   workoutWindowViewport,
 } from '../helpers/constants';
 
 const Window = styled.div`
   height: ${workoutWindowViewport}vh;
-  position: sticky;
-  top: calc(0px - (${workoutWindowViewport}vh / 2) + ${bannerHeight}px);
-  // top: calc(0px - 1vh + ${bannerHeight}px);
+  position: relative;
   background-color: black;
   color: white;
+  text-align: center;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  justify-content: space-around;
+  align-items: center;
+  justify-content: center;
   padding: 0 16px;
 
   // put the image in an 'after' pseudo element. Set it behind the original
@@ -33,7 +31,6 @@ const Window = styled.div`
     background-size: cover;
     background-position: top;
     opacity: 0.5;
-    z-index: -1;
   }
 `;
 
@@ -42,45 +39,41 @@ const Title = styled.h1`
   text-transform: uppercase;
   font-family: 'Muli','Helvetica Neue',Helvetica,Arial,sans-serif;
   font-style: italic;
+  z-index: 1;
 `;
 
 const Time = styled.p`
   color: white;
   size: 16px;
-  font-weight: 300;
-`;
-
-const StickyContainer = styled.div`
-  position: sticky;
-  top: ${bannerHeight}px;
+  font-weight: 400;
+  margin: 16px;
+  z-index: 1;
 `;
 
 const Button = styled.button`
+  ${buttonStyle}
   color: white;
   border: none;
-  background-color: ${purple};
-  background-image: linear-gradient( 140deg, ${pink}, ${purple});
   border-radius: 5px;
-  padding: 8px 16px;
-  font-size: 20px
-  font-family: 'Muli','Helvetica Neue',Helvetica,Arial,sans-serif;
-  font-style: italic;
+  background-color: ${purple};
   text-transform: uppercase;
   margin: 16px 0;
+  font-weight: 800;
+  font-size: 16px
+  z-index: 1;
 `;
 
 interface Props {
   imageUrl: string;
   title: string;
+  time: string;
 }
 
-const WorkoutWindow = ({ imageUrl, title }: Props) => (
+const WorkoutWindow = ({ imageUrl, time, title }: Props) => (
   <Window imageUrl={imageUrl}>
-    <StickyContainer>
-      <Title>{title}</Title>
-      <Time>41min</Time>
-      <Button>start</Button>
-    </StickyContainer>
+    <Title>{title}</Title>
+    <Time>{time}</Time>
+    <Button>start</Button>
   </Window>
 );
 

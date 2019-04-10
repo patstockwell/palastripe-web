@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 const bounceSpace = 7;
 const popUpHeight = 253 + bounceSpace;
 
-const buttonStyle = `
+export const buttonStyle = `
   color: white;
   border: none;
   border-radius: 5px;

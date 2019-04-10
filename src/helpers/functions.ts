@@ -99,13 +99,13 @@ export const getDiff = (start: number, finish: number) => {
   ) : 0;
 };
 
-export const formatTime = (minutes: number) => {
+export const formatTime = (minutes: number): string => {
   if (minutes < 60) {
     return `${minutes}min`;
   } else {
     const hours = Math.floor(minutes / 60);
     const mins = minutes % 60;
-    return `${hours}hr ${mins < 9 ? `0${mins}` : mins}min`;
+    return `${hours}:${mins < 9 ? `0${mins}` : mins}min`;
   }
 };
 

@@ -22,7 +22,7 @@ const Header = styled.div`
   align-items: center;
   height: ${bannerHeight}px;
   z-index: 2;
-  background-color: rgba(256, 256, 256, 0.8);
+  background-color: white
 `;
 
 interface Props {
