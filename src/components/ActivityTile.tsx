@@ -9,12 +9,12 @@ import { formatSeconds } from '../helpers/functions';
 
 const Tile = styled.li`
   min-height: ${tileMinHeight}px;
+  border: none;
   border-bottom: 1px solid ${superLightGrey};
   display: flex;
   align-items: center;
   flex-direction: row-reverse;
   justify-content: flex-end;
-  border: none;
 `;
 
 const Name = styled.h3`

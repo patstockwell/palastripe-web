@@ -4,7 +4,10 @@ import { connect } from 'react-redux';
 import { animated } from 'react-spring/renderprops';
 import BackSplash from '../components/BackSplash';
 import ActivityListWithWindow from '../components/ActivityListWithWindow';
-import { Entities, Workout } from '../helpers/types';
+import {
+  Entities, // eslint-disable-line no-unused-vars
+  Workout, // eslint-disable-line no-unused-vars
+} from '../helpers/types';
 
 const AnimatedSlidingPage = styled(animated.div)`
   position: fixed;

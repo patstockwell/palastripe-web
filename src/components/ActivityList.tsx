@@ -4,8 +4,10 @@ import { connect } from 'react-redux';
 import ActivityTile from './ActivityTile';
 import { combineDataForAllExercises } from '../helpers/functions';
 import {
+  activityHeadingHeight,
   bannerHeight,
   superLightGrey,
+  tileMinHeight,
 } from '../helpers/constants';
 import {
   Activity, // eslint-disable-line no-unused-vars
@@ -20,13 +22,12 @@ interface Props {
 }
 
 const ActivityHeading = styled.li`
-  height: 40px;
+  height: ${activityHeadingHeight}px;
   background-color: ${superLightGrey};
   display: flex;
   align-items: center;
   position: sticky;
   top: ${bannerHeight}px;
-  border-top: white 1px solid
 
   h2 {
     font-size: 14px;
@@ -40,6 +41,12 @@ const Ul = styled.ul`
   padding: 0;
   list-style-type: none;
   list-style: none;
+`;
+
+const EmptySpace = styled.div`
+  height: calc(100vh - ${
+    activityHeadingHeight + bannerHeight + tileMinHeight
+  }px);
 `;
 
 const ActivityList = ({ workout, entities}) => {
@@ -80,6 +87,7 @@ const ActivityList = ({ workout, entities}) => {
           <h2>stretch</h2>
         </ActivityHeading>
         {stretchTiles}
+        <EmptySpace />
       </Ul>
     </Ul>
   );
