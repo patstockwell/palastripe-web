@@ -4,7 +4,7 @@ import WorkoutWindow from './WorkoutWindow';
 import ActivityList from './ActivityList';
 import {
   calculateWorkoutTime,
-  formatTime,
+  formatMinutes,
 } from '../helpers/functions';
 import { Workout } from '../helpers/types';
 
@@ -19,7 +19,7 @@ const ActivityListWithWindow = ({ workout }: Props) => {
       <WorkoutWindow
         title={workout.name}
         imageUrl={workout.imageUrl}
-        time={formatTime(calculateWorkoutTime(workout))}
+        time={formatMinutes(calculateWorkoutTime(workout))}
       />
       <ActivityList workout={workout} />
     </Fragment>

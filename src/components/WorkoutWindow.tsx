@@ -52,14 +52,10 @@ const Time = styled.p`
 
 const Button = styled.button`
   ${buttonStyle}
-  color: white;
-  border: none;
-  border-radius: 5px;
   background-color: ${purple};
   text-transform: uppercase;
   margin: 16px 0;
   font-weight: 800;
-  font-size: 16px
   z-index: 1;
 `;
 

@@ -9,10 +9,10 @@ const popUpHeight = 253 + bounceSpace;
 export const buttonStyle = `
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 25px;
   height: 50px;
   width: 100px;
-  font-size: 20px;
+  font-size: 16px;
   margin: 0 15px;
 `;
 

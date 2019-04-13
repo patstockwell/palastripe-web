@@ -7,9 +7,9 @@ import {
 } from './constants';
 import {
   isTimed,
-  Activity,
-  Exercises,
-  Workout,
+  Activity, // eslint-disable-line no-unused-vars
+  Exercises, // eslint-disable-line no-unused-vars
+  Workout, // eslint-disable-line no-unused-vars
 } from './types';
 
 export const useHasScrolled = () => {
@@ -99,7 +99,13 @@ export const getDiff = (start: number, finish: number) => {
   ) : 0;
 };
 
-export const formatTime = (minutes: number): string => {
+export const formatSeconds = (seconds: number): string => {
+  const mins = Math.floor(seconds / 60);
+  const secs = seconds % 60;
+  return `${mins}:${secs < 9 ? `0${secs}` : secs}`;
+};
+
+export const formatMinutes = (minutes: number): string => {
   if (minutes < 60) {
     return `${minutes}min`;
   } else {

@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React  from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import ActivityTile from './ActivityTile';
@@ -8,10 +8,10 @@ import {
   superLightGrey,
 } from '../helpers/constants';
 import {
-  Activity,
-  Entities,
-  State,
-  Workout,
+  Activity, // eslint-disable-line no-unused-vars
+  Entities, // eslint-disable-line no-unused-vars
+  State, // eslint-disable-line no-unused-vars
+  Workout,  // eslint-disable-line no-unused-vars
 } from '../helpers/types';
 
 interface Props {
@@ -19,7 +19,7 @@ interface Props {
   entities: Entities;
 }
 
-const ActivityHeading = styled.div`
+const ActivityHeading = styled.li`
   height: 40px;
   background-color: ${superLightGrey};
   display: flex;
@@ -33,6 +33,13 @@ const ActivityHeading = styled.div`
     text-transform: uppercase;
     font-weight: 500;
   }
+`;
+
+const Ul = styled.ul`
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  list-style: none;
 `;
 
 const ActivityList = ({ workout, entities}) => {
@@ -55,20 +62,26 @@ const ActivityList = ({ workout, entities}) => {
   );
 
   return (
-    <Fragment>
-      <ActivityHeading>
-        <h2>warm up</h2>
-      </ActivityHeading>
-      {warmUpTiles}
-      <ActivityHeading>
-        <h2>exercises</h2>
-      </ActivityHeading>
-      {exercisesTiles}
-      <ActivityHeading>
-        <h2>stretch</h2>
-      </ActivityHeading>
-      {stretchTiles}
-    </Fragment>
+    <Ul>
+      <Ul>
+        <ActivityHeading>
+          <h2>warm up</h2>
+        </ActivityHeading>
+        {warmUpTiles}
+      </Ul>
+      <Ul>
+        <ActivityHeading>
+          <h2>exercises</h2>
+        </ActivityHeading>
+        {exercisesTiles}
+      </Ul>
+      <Ul>
+        <ActivityHeading>
+          <h2>stretch</h2>
+        </ActivityHeading>
+        {stretchTiles}
+      </Ul>
+    </Ul>
   );
 };
 
