@@ -17,14 +17,29 @@ const Tile = styled.li`
   justify-content: flex-end;
 `;
 
+const Details = styled.div`
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0 8px;
+`;
+
 const Name = styled.h3`
+  font-size: 16px;
+`;
+
+const Weight = styled.p`
+  color: grey;
 `;
 
 const Duration = styled.div`
-  flex-basis: 80px;
+  flex-basis: 44px;
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-shrink: 0;
+  padding: 0 8px;
 `;
 
 interface Props {
@@ -38,7 +53,12 @@ const ActivityTile:React.FC<Props> = ({ activity }) => {
 
   return (
     <Tile>
-      <Name>{activity.name}</Name>
+      <Details>
+        <Name>{activity.name}</Name>
+        {!isTimed(activity) &&
+          <Weight>Weight: {activity.weightInKilos}kg</Weight>
+        }
+      </Details>
       <Duration>
         <p>{duration}</p>
       </Duration>
