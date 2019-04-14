@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import { animated } from 'react-spring/renderprops';
+import FourZeroFour from '../pages/FourZeroFour';
 import BackSplash from '../components/BackSplash';
 import ActivityListWithWindow from '../components/ActivityListWithWindow';
 import {
@@ -33,15 +34,12 @@ const CurrentWorkout: React.FC<Props> = ({
   const { id }: { id: string } = match.params;
   const workout: Workout = entities.workouts.byId[id];
   if (!workout) {
-    // TODO: move all the workout tile stuff into another component that
-    // knows how to handle a URL that doesn't point to a workout
-    return null;
+    return <FourZeroFour />;
   }
 
   return (
     <AnimatedSlidingPage style={{
       ...animationStyles,
-
     }}>
       <BackSplash>
         <ActivityListWithWindow workout={workout} />

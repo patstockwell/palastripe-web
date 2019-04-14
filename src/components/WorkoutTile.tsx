@@ -2,7 +2,10 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { ReduxAction, Workout } from '../helpers/types';
+import {
+  ReduxAction, // eslint-disable-line no-unused-vars
+  Workout, // eslint-disable-line no-unused-vars
+} from '../helpers/types';
 import {
   superLightGrey,
   tileMinHeight,

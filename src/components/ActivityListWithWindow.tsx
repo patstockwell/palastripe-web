@@ -6,7 +6,9 @@ import {
   calculateWorkoutTime,
   formatMinutes,
 } from '../helpers/functions';
-import { Workout } from '../helpers/types';
+import {
+  Workout, // eslint-disable-line no-unused-vars
+} from '../helpers/types';
 
 interface Props {
   workout: Workout;

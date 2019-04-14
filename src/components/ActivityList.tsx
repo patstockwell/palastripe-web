@@ -33,6 +33,7 @@ const ActivityHeading = styled.li`
     font-size: 14px;
     text-transform: uppercase;
     font-weight: 500;
+    margin: 0 12px;
   }
 `;
 
@@ -45,8 +46,7 @@ const Ul = styled.ul`
 
 const EmptySpace = styled.div`
   height: calc(100vh - ${
-    activityHeadingHeight + bannerHeight + tileMinHeight
-  }px);
+  activityHeadingHeight + bannerHeight + tileMinHeight}px);
 `;
 
 const ActivityList = ({ workout, entities}) => {

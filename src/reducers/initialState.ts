@@ -65,19 +65,19 @@ const initialState: State = {
         },
         'right-arm-cross-body-stretch': {
           id: 'right-arm-cross-body-stretch',
-          name: 'Right Arm Cross Body Stretch',
+          name: 'Right Arm Cross Body',
         },
         'left-arm-cross-body-stretch': {
           id: 'left-arm-cross-body-stretch',
-          name: 'Left Arm Cross Body Stretch',
+          name: 'Left Arm Cross Body',
         },
         'left-glute-pigeon-pose-stretch': {
           id: 'left-glute-pigeon-pose-stretch',
-          name: 'Left Glute Pigeon Pose Stretch',
+          name: 'Left Glute Pigeon Pose',
         },
         'right-glute-pigeon-pose-stretch': {
           id: 'right-glute-pigeon-pose-stretch',
-          name: 'Right Glute Pigeon Pose Stretch',
+          name: 'Right Glute Pigeon Pose',
         },
       },
       allIds: [

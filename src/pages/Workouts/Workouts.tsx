@@ -4,7 +4,10 @@ import styled from 'styled-components';
 import Navigation from '../../components/Navigation';
 import Banner from '../../components/Banner';
 import WorkoutTile from '../../components/WorkoutTile';
-import { State } from '../../helpers/types';
+import {
+  State, // eslint-disable-line no-unused-vars
+  Workout, // eslint-disable-line no-unused-vars
+} from '../../helpers/types';
 import { tileMinHeight } from '../../helpers/constants';
 
 const EmptySpace = styled.div`
@@ -15,8 +18,13 @@ const Big = styled.div`
   height: 500px;
 `;
 
-const Workouts = ({ location, workouts}) => {
-  const workoutTiles = workouts.map((w, i) =>
+interface Props {
+  location: any;
+  workouts: Workout[];
+}
+
+const Workouts = ({ location, workouts}: Props) => {
+  const workoutTiles = workouts.map(w =>
     <WorkoutTile key={w.id} workout={w} />
   );
 

@@ -10,7 +10,9 @@ import {
   ME,
   WORKOUTS,
 } from '../helpers/constants';
-import { ReduxAction } from '../helpers/types';
+import {
+  ReduxAction, // eslint-disable-line no-unused-vars
+} from '../helpers/types';
 import User from '../assets/svg/User';
 import Home from '../assets/svg/Home';
 import Calendar from '../assets/svg/Calendar';

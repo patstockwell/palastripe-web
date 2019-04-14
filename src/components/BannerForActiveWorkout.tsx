@@ -1,10 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
-import { HashLink } from 'react-router-hash-link';
+import { Link } from 'react-router-dom';
 import BackArrow from '../assets/svg/BackArrow';
 import { bannerHeight } from '../helpers/constants';
 
-const StyledLink = styled(HashLink)`
+const StyledLink = styled(Link)`
   color: grey;
   text-decoration: none;
   font-size: 17px;
