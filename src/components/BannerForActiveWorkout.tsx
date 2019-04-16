@@ -25,14 +25,10 @@ const Header = styled.div`
   background-color: white
 `;
 
-interface Props {
-  hash: string;
-}
-
-const BannerForActiveWorkout = ({ hash }) => {
+const BannerForActiveWorkout = () => {
   return (
     <Header>
-      <StyledLink to={`/workouts#${hash}`}>
+      <StyledLink to="/workouts">
         <BackArrow style={{ fill: 'grey', margin: '0 -12px 0 -8px' }} />
         <BackArrow style={{ fill: 'grey' }} /> Back
       </StyledLink>

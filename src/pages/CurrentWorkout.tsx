@@ -5,6 +5,8 @@ import { animated } from 'react-spring/renderprops';
 import FourZeroFour from '../pages/FourZeroFour';
 import BackSplash from '../components/BackSplash';
 import ActivityListWithWindow from '../components/ActivityListWithWindow';
+import { combineDataForAllExercises } from '../helpers/functions';
+import { SET_CURRENT_WORKOUT } from '../helpers/constants';
 import {
   Entities, // eslint-disable-line no-unused-vars
   Workout, // eslint-disable-line no-unused-vars
@@ -37,12 +39,15 @@ const CurrentWorkout: React.FC<Props> = ({
     return <FourZeroFour />;
   }
 
+  const workoutWithAllActivityData: Workout =
+    combineDataForAllExercises(workout, entities.exercises);
+
   return (
     <AnimatedSlidingPage style={{
       ...animationStyles,
     }}>
       <BackSplash>
-        <ActivityListWithWindow workout={workout} />
+        <ActivityListWithWindow workout={workoutWithAllActivityData} />
       </BackSplash>
     </AnimatedSlidingPage>
   );

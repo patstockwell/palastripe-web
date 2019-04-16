@@ -17,7 +17,7 @@ interface Props {
 const ActivityListWithWindow = ({ workout }: Props) => {
   return (
     <Fragment>
-      <BannerForActiveWorkout hash={workout.id}/>
+      <BannerForActiveWorkout />
       <WorkoutWindow
         title={workout.name}
         imageUrl={workout.imageUrl}

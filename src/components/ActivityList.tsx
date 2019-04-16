@@ -2,7 +2,6 @@ import React  from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import ActivityTile from './ActivityTile';
-import { combineDataForAllExercises } from '../helpers/functions';
 import {
   activityHeadingHeight,
   bannerHeight,
@@ -49,14 +48,19 @@ const EmptySpace = styled.div`
   activityHeadingHeight + bannerHeight + tileMinHeight}px);
 `;
 
-const ActivityList = ({ workout, entities}) => {
-  const {
+interface Props {
+  workout: Workout;
+}
+
+const ActivityList: React.FC<Props> = ({
+  workout: {
     exercises: {
       warmUp,
       workingSets,
       stretch,
     },
-  }: Workout = combineDataForAllExercises(workout, entities.exercises);
+  },
+}) => {
 
   const warmUpTiles = warmUp.map((a: Activity, i) =>
     <ActivityTile key={i} activity={a} />

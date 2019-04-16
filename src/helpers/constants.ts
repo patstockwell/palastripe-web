@@ -48,11 +48,7 @@ export const fadedYellow: string = '#fffd8e';
 export const superLightGrey = '#f4f4f4';
 
 // action types
-export const CHANGE_WEIGHT: string = 'CHANGE_WEIGHT';
-export const UPDATE_COMPLETED_REPS: string = 'UPDATE_COMPLETED_REPS';
-export const END_WORKOUT: string = 'END_WORKOUT';
-export const REMOVE_EXERCISE: string = 'REMOVE_EXERCISE';
-export const START_WORKOUT: string = 'START_WORKOUT';
+export const SET_CURRENT_WORKOUT: string = 'SET_CURRENT_WORKOUT';
 export const SET_WINDOW_SCROLL: string = 'SET_WINDOW_SCROLL';
 
 // page names for setting the current scroll height
