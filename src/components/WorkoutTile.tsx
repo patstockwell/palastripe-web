@@ -80,7 +80,13 @@ const WorkoutTile = ({ setWindowScroll, scrollY = 0, workout }: Props) => {
   };
 
   return (
-    <StyledLink onClick={handleClick} to={`/workouts/${workout.id}/`}>
+    <StyledLink
+      onClick={handleClick}
+      to={{
+        pathname: `/workouts/${workout.id}/`,
+        state: { immediate: false },
+      }}
+    >
       <Tile>
         <Square image={workout.imageUrl}>
           <Minutes>{formatMinutes(calculateWorkoutTime(workout))}</Minutes>

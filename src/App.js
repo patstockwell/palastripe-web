@@ -1,20 +1,12 @@
 import React from 'react';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
-import {
-  BrowserRouter as Router,
-  Route,
-  Switch,
-} from 'react-router-dom';
+import { BrowserRouter as Router } from 'react-router-dom';
 
 import rootReducer from './reducers';
 import { GlobalStyle } from './components/GlobalStyle';
-import Workouts from './pages/Workouts';
-import ActiveWorkout from './pages/ActiveWorkout';
-import Home from './pages/Home';
-import Me from './pages/Me';
-import FourZeroFour from './pages/FourZeroFour';
 import LocalStorageSetter from './components/LocalStorageSetter';
+import Routes from './components/Routes';
 
 const store = createStore(rootReducer);
 
@@ -23,14 +15,7 @@ const App = () => (
     <GlobalStyle />
     <LocalStorageSetter />
     <Router>
-      <Switch>
-        <Route path="/" exact component={Home} />
-        <Route path="/home/" component={Home} />
-        <Route path="/workouts/" component={Workouts} />
-        <Route path="/me/" component={Me} />
-        <Route path="/active-workout/" component={ActiveWorkout} />
-        <Route component={FourZeroFour} />
-      </Switch>
+      <Routes />
     </Router>
   </Provider>
 );

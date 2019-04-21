@@ -50,6 +50,7 @@ export const superLightGrey = '#f4f4f4';
 // action types
 export const SET_CURRENT_WORKOUT: string = 'SET_CURRENT_WORKOUT';
 export const SET_WINDOW_SCROLL: string = 'SET_WINDOW_SCROLL';
+export const SET_IMMEDIATE: string = 'SET_IMMEDIATE';
 
 // page names for setting the current scroll height
 export const WORKOUTS: string = 'WORKOUTS';

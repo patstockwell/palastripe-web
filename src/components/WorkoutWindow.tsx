@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { buttonStyle } from './AlertConfirm';
 import {
@@ -50,7 +51,7 @@ const Time = styled.p`
   z-index: 1;
 `;
 
-const Button = styled.button`
+const Start = styled(Link)`
   ${buttonStyle}
   background-color: ${purple};
   text-transform: uppercase;
@@ -69,7 +70,7 @@ const WorkoutWindow = ({ imageUrl, time, title }: Props) => (
   <Window imageUrl={imageUrl}>
     <Title>{title}</Title>
     <Time>{time}</Time>
-    <Button>start</Button>
+    <Start to={{ pathname: '/active-workout/', state: { immediate: false } }}>start</Start>
   </Window>
 );
 

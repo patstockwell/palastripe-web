@@ -28,7 +28,7 @@ const Header = styled.div`
 const BannerForActiveWorkout = () => {
   return (
     <Header>
-      <StyledLink to="/workouts">
+      <StyledLink to={{ pathname: '/workouts/', state: { immediate: false } }}>
         <BackArrow style={{ fill: 'grey', margin: '0 -12px 0 -8px' }} />
         <BackArrow style={{ fill: 'grey' }} /> Back
       </StyledLink>

@@ -14,6 +14,7 @@ export interface WorkingSet {
 // State shape
 export interface State {
   activeWorkout?: Workout;
+  immediate: boolean;
   scrollY: ScrollY;
   settings: Settings;
   entities: Entities;

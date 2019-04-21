@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState} from 'react';
+import { useContext, useEffect, useRef, useState} from 'react';
+import { __RouterContext } from 'react-router-dom';
 import {
   DAYS_OF_THE_WEEK,
   MILLISECONDS_IN_A_MINUTE,
@@ -11,6 +12,11 @@ import {
   Exercises, // eslint-disable-line no-unused-vars
   Workout, // eslint-disable-line no-unused-vars
 } from './types';
+
+export function useRouter(): any {
+  return useContext(__RouterContext);
+}
+
 
 export const useHasScrolled = () => {
   const [scrolled, setScrolled] = useState(false);

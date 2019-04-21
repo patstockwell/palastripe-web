@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { animated } from 'react-spring/renderprops';
+import { animated } from 'react-spring';
 import BackSplash from '../components/BackSplash';
 import {
   Entities, // eslint-disable-line no-unused-vars
@@ -24,7 +24,7 @@ interface Props {
 const CurrentWorkout: React.FC<Props> = ({ animationStyles }) => {
   return (
     <AnimatedSlidingPage style={{
-      ...animationStyles,
+      top: animationStyles.left,
     }}>
       <BackSplash>
         The new active workout page

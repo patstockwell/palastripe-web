@@ -1,13 +1,13 @@
 import React from 'react';
+import { animated } from 'react-spring';
 import Banner from '../components/Banner';
 import Navigation from '../components/Navigation';
-import BackSplash from '../components/BackSplash';
 
-const Me = ({ location }) => (
-  <BackSplash>
+const Me = ({ animationStyles, location }) => (
+  <animated.div style={{ position: 'relative', ...animationStyles }}>
     <Banner heading={'Me'}/>
     <Navigation pathname={location.pathname}/>
-  </BackSplash>
+  </animated.div>
 );
 
 export default Me;
