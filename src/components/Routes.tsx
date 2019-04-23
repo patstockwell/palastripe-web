@@ -1,8 +1,8 @@
 import React from 'react';
 import { useTransition } from 'react-spring';
 import { Route, Switch } from 'react-router-dom';
-import Workouts from '../pages/Workouts/Workouts';
-import CurrentWorkout from '../pages/CurrentWorkout';
+import Workouts from '../pages/Workouts';
+import ViewWorkout from '../pages/ViewWorkout';
 import ActiveWorkout from '../pages/ActiveWorkout';
 import Home from '../pages/Home';
 import Me from '../pages/Me';
@@ -12,7 +12,6 @@ import { useRouter } from '../helpers/functions';
 const Routes = () => {
   const { location } = useRouter();
   const { state = { immediate: true } } = location;
-  console.log(location);
 
   const transitions = useTransition(location, location => location.key, {
     immediate: state.immediate,
@@ -31,7 +30,7 @@ const Routes = () => {
       />
       <Route path="/workouts/" exact component={Workouts} />
       <Route path="/workouts/:id/" render={({ match }) =>
-        <CurrentWorkout match={match} animationStyles={props} />}
+        <ViewWorkout match={match} animationStyles={props} />}
       />
       <Route path="/active-workout/" render={() =>
         <ActiveWorkout animationStyles={props} />} />

@@ -27,7 +27,7 @@ interface Props {
   match: any;
 }
 
-const CurrentWorkout: React.FC<Props> = ({
+const ViewWorkout: React.FC<Props> = ({
   animationStyles,
   entities,
   match,
@@ -54,4 +54,4 @@ const mapStateToProps = ({ entities }) => ({
   entities,
 });
 
-export default connect(mapStateToProps)(CurrentWorkout);
+export default connect(mapStateToProps)(ViewWorkout);

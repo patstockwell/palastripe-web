@@ -1,14 +1,14 @@
 import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import Navigation from '../../components/Navigation';
-import Banner from '../../components/Banner';
-import WorkoutTile from '../../components/WorkoutTile';
+import Navigation from '../components/Navigation';
+import Banner from '../components/Banner';
+import WorkoutTile from '../components/WorkoutTile';
 import {
   State, // eslint-disable-line no-unused-vars
   Workout, // eslint-disable-line no-unused-vars
-} from '../../helpers/types';
-import { tileMinHeight } from '../../helpers/constants';
+} from '../helpers/types';
+import { tileMinHeight } from '../helpers/constants';
 
 const EmptySpace = styled.div`
   height: ${tileMinHeight}px;
@@ -31,7 +31,6 @@ const Workouts = ({ location, workouts}: Props) => {
   return (
     <Fragment>
       <Banner heading={'Workouts'}/>
-      <Big />
       {workoutTiles}
       <Big />
       <EmptySpace />

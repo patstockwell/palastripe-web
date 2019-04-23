@@ -21,16 +21,16 @@ interface Props {
   animationStyles: any;
 }
 
-const CurrentWorkout: React.FC<Props> = ({ animationStyles }) => {
+const ActiveWorkout: React.FC<Props> = ({ animationStyles }) => {
   return (
     <AnimatedSlidingPage style={{
       top: animationStyles.left,
     }}>
-      <BackSplash>
+      <BackSplash topLeft={'blue'}>
         The new active workout page
       </BackSplash>
     </AnimatedSlidingPage>
   );
 };
 
-export default CurrentWorkout;
+export default ActiveWorkout;
