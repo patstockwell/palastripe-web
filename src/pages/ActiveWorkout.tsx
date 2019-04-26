@@ -1,13 +1,15 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { animated } from 'react-spring';
-import BackSplash from '../components/BackSplash';
+import ActivityList from '../components/ActivityList';
 import {
   Entities, // eslint-disable-line no-unused-vars
+  State, // eslint-disable-line no-unused-vars
   Workout, // eslint-disable-line no-unused-vars
 } from '../helpers/types';
 
-const AnimatedSlidingPage = styled(animated.div)`
+export const AnimatedSlidingPage = styled(animated.div)`
   position: fixed;
   top: 0;
   bottom: 0;
@@ -19,18 +21,22 @@ const AnimatedSlidingPage = styled(animated.div)`
 
 interface Props {
   animationStyles: any;
+  workout: Workout;
 }
 
-const ActiveWorkout: React.FC<Props> = ({ animationStyles }) => {
+const ActiveWorkout: React.FC<Props> = ({ animationStyles, workout }) => {
+  console.log(workout);
+
   return (
-    <AnimatedSlidingPage style={{
-      top: animationStyles.left,
-    }}>
-      <BackSplash topLeft={'blue'}>
-        The new active workout page
-      </BackSplash>
+    <AnimatedSlidingPage style={{ top: animationStyles.left }}>
+      The new active workout page
+      <ActivityList workout={workout} />
     </AnimatedSlidingPage>
   );
 };
 
-export default ActiveWorkout;
+const mapStateToProps = (state: State) => ({
+  workout: state.activeWorkout,
+});
+
+export default connect(mapStateToProps)(ActiveWorkout);

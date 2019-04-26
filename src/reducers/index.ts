@@ -1,12 +1,12 @@
 import initialState from './initialState';
 import settingsReducer from './settingsReducer';
 import scrollYReducer from './scrollYReducer';
-import transitionReducer from './transitionReducer';
+import activeWorkoutReducer from './activeWorkoutReducer';
 
 const rootReducer = (state = initialState, action) => ({
   ...state,
+  activeWorkout: activeWorkoutReducer(state.activeWorkout, action),
   scrollY: scrollYReducer(state.scrollY, action),
-  immediateTransition: transitionReducer(state.immediateTransition, action),
   settings: settingsReducer(state.settings, action),
 });
 

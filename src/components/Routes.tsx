@@ -15,9 +15,9 @@ const Routes = () => {
 
   const transitions = useTransition(location, location => location.key, {
     immediate: state.immediate,
-    from: { opacity: 0, left: '100%' },
-    enter: { opacity: 1, left: '0%' },
-    leave: { opacity: 0, left: '100%' },
+    from: { left: '100%' },
+    enter: { left: '0%' },
+    leave: { left: '100%' },
     config: { tension: 410, friction: 40 },
   });
 
@@ -25,9 +25,7 @@ const Routes = () => {
     <Switch key={key} location={item}>
       <Route path="/" exact component={Home} />
       <Route path="/home/" component={Home} />
-      <Route path="/me/" render={({ location }) =>
-        <Me location={location} animationStyles={props} />}
-      />
+      <Route path="/me/" component={Me} />
       <Route path="/workouts/" exact component={Workouts} />
       <Route path="/workouts/:id/" render={({ match }) =>
         <ViewWorkout match={match} animationStyles={props} />}
