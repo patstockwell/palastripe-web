@@ -2,10 +2,11 @@ import React from 'react';
 import { connect } from 'react-redux';
 import FourZeroFour from '../pages/FourZeroFour';
 import BannerForActiveWorkout from '../components/BannerForActiveWorkout';
-import WorkoutWindow from '../components/WorkoutWindow';
+import ViewWorkoutHero from '../components/ViewWorkoutHero';
 import ActivityList from '../components/ActivityList';
 import { AnimatedSlidingPage } from './ActiveWorkout';
 import { combineDataForAllExercises } from '../helpers/functions';
+import { bannerHeight } from '../helpers/constants';
 import {
   Entities, // eslint-disable-line no-unused-vars
   Workout, // eslint-disable-line no-unused-vars
@@ -34,10 +35,10 @@ const ViewWorkout: React.FC<Props> = ({
   return (
     <AnimatedSlidingPage style={{ left: animationStyles.left }}>
       <BannerForActiveWorkout />
-      <WorkoutWindow
+      <ViewWorkoutHero
         workout={workoutWithAllActivityData}
       />
-      <ActivityList workout={workoutWithAllActivityData} />
+      <ActivityList stickyTop={bannerHeight} workout={workoutWithAllActivityData} />
     </AnimatedSlidingPage>
   );
 };

@@ -26,7 +26,7 @@ const ActivityHeading = styled.li`
   display: flex;
   align-items: center;
   position: sticky;
-  top: ${bannerHeight}px;
+  top: ${({ top }) => top || 0}px;
 
   h2 {
     font-size: 14px;
@@ -43,16 +43,18 @@ const Ul = styled.ul`
   list-style: none;
 `;
 
-const EmptySpace = styled.div`
-  height: calc(100vh - ${
-  activityHeadingHeight + bannerHeight + tileMinHeight}px);
+const BottomEmptySpace = styled.div`
+  height: calc(100vh - ${({ stickyTop = 0 }) =>
+    activityHeadingHeight + tileMinHeight + stickyTop}px);
 `;
 
 interface Props {
   workout: Workout;
+  stickyTop?: number;
 }
 
 const ActivityList: React.FC<Props> = ({
+  stickyTop,
   workout: {
     exercises: {
       warmUp,
@@ -61,7 +63,6 @@ const ActivityList: React.FC<Props> = ({
     },
   },
 }) => {
-
   const warmUpTiles = warmUp.map((a: Activity, i) =>
     <ActivityTile key={i} activity={a} />
   );
@@ -75,23 +76,23 @@ const ActivityList: React.FC<Props> = ({
   return (
     <Ul>
       <Ul>
-        <ActivityHeading>
+        <ActivityHeading top={stickyTop}>
           <h2>warm up</h2>
         </ActivityHeading>
         {warmUpTiles}
       </Ul>
       <Ul>
-        <ActivityHeading>
+        <ActivityHeading top={stickyTop}>
           <h2>exercises</h2>
         </ActivityHeading>
         {exercisesTiles}
       </Ul>
       <Ul>
-        <ActivityHeading>
+        <ActivityHeading top={stickyTop}>
           <h2>stretch</h2>
         </ActivityHeading>
         {stretchTiles}
-        <EmptySpace />
+        <BottomEmptySpace stickyTop={stickyTop} />
       </Ul>
     </Ul>
   );

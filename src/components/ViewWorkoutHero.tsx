@@ -79,7 +79,7 @@ interface Props {
   setActiveWorkout: (workout: Workout) => ReduxAction;
 }
 
-const WorkoutWindow = ({ setActiveWorkout, workout, workout: { imageUrl, name }}: Props) => (
+const ViewWorkoutHero = ({ setActiveWorkout, workout, workout: { imageUrl, name }}: Props) => (
   <Window imageUrl={imageUrl}>
     <Title>{name}</Title>
     <Time>{formatMinutes(calculateWorkoutTime(workout))}</Time>
@@ -99,4 +99,4 @@ const mapDispatchToProps = {
   }),
 };
 
-export default connect(null, mapDispatchToProps)(WorkoutWindow);
+export default connect(null, mapDispatchToProps)(ViewWorkoutHero);

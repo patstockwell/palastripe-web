@@ -15,7 +15,8 @@ const LocalStorageSetter = ({
   localStorage.setItem(LOCAL_STORAGE_HISTORY, JSON.stringify(history));
   localStorage.setItem(LOCAL_STORAGE_SETTINGS, JSON.stringify(settings));
   localStorage.setItem(LOCAL_STORAGE_ENTITIES, JSON.stringify(entities));
-  localStorage.setItem(LOCAL_STORAGE_ACTIVE_WORKOUT, JSON.stringify(activeWorkout));
+  // only try to add the activeWorkout to local storage if it exists.
+  activeWorkout && localStorage.setItem(LOCAL_STORAGE_ACTIVE_WORKOUT, JSON.stringify(activeWorkout));
   return null;
 };
 

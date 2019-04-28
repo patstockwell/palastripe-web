@@ -25,7 +25,6 @@ interface Props {
 }
 
 const ActiveWorkout: React.FC<Props> = ({ animationStyles, workout }) => {
-  console.log(workout);
 
   return (
     <AnimatedSlidingPage style={{ top: animationStyles.left }}>

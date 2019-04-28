@@ -1,4 +1,8 @@
-import { State } from '../helpers/types';
+import { getLocalStorage } from '../helpers/functions';
+import { LOCAL_STORAGE_ACTIVE_WORKOUT } from '../helpers/constants';
+import {
+  State, // eslint-disable-line no-unused-vars
+} from '../helpers/types';
 import circuitSpeed from '../workoutData/circuitSpeed';
 import fullBodyDumbbellStrength from '../workoutData/fullBodyDumbbellStrength';
 
@@ -106,5 +110,8 @@ const initialState: State = {
   history: [],
 };
 
-export default initialState;
+export default {
+  ...initialState,
+  activeWorkout: getLocalStorage(LOCAL_STORAGE_ACTIVE_WORKOUT, undefined),
+};
 

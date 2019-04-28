@@ -8,6 +8,9 @@ import {
 } from '../helpers/types';
 
 const activeWorkoutReducer = (state: Workout, action: ReduxAction) => {
+  if (state === undefined) {
+  }
+
   switch (action.type) {
     case SET_ACTIVE_WORKOUT: {
       return setActiveWorkout(state, action);
