@@ -3,11 +3,13 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { animated } from 'react-spring';
 import ActivityList from '../components/ActivityList';
+import ActiveWorkoutWindow from '../components/ActiveWorkoutWindow';
 import {
   Entities, // eslint-disable-line no-unused-vars
   State, // eslint-disable-line no-unused-vars
   Workout, // eslint-disable-line no-unused-vars
 } from '../helpers/types';
+import { activeWorkoutWindowHeight } from '../helpers/constants';
 
 export const AnimatedSlidingPage = styled(animated.div)`
   position: fixed;
@@ -28,8 +30,8 @@ const ActiveWorkout: React.FC<Props> = ({ animationStyles, workout }) => {
 
   return (
     <AnimatedSlidingPage style={{ top: animationStyles.left }}>
-      The new active workout page
-      <ActivityList workout={workout} />
+      <ActiveWorkoutWindow />
+      <ActivityList stickyTop={activeWorkoutWindowHeight} workout={workout} />
     </AnimatedSlidingPage>
   );
 };
