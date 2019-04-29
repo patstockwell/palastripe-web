@@ -53,6 +53,12 @@ export const SET_ACTIVE_WORKOUT: string = 'SET_ACTIVE_WORKOUT';
 export const SET_WINDOW_SCROLL: string = 'SET_WINDOW_SCROLL';
 export const WORKOUT_SHAPE_VERSION: string = 'v1';
 
+// activity group names
+
+export const WARM_UP = 'warmUp';
+export const WORKING_SETS = 'workingSets';
+export const STRETCH = 'stretch';
+
 // page names for setting the current scroll height
 export const WORKOUTS: string = 'WORKOUTS';
 export const HOME: string = 'HOME';

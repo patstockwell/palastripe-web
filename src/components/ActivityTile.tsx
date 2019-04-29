@@ -44,15 +44,16 @@ const Duration = styled.div`
 
 interface Props {
   activity: Activity;
+  handleClick: any;
 }
 
-const ActivityTile:React.FC<Props> = ({ activity }) => {
+const ActivityTile:React.FC<Props> = ({ activity, handleClick }) => {
   const duration = isTimed(activity)
     ? formatSeconds(activity.timerInSeconds)
     : activity.repsGoal;
 
   return (
-    <Tile>
+    <Tile onClick={handleClick}>
       <Details>
         <Name>{activity.name}</Name>
         {!isTimed(activity) &&

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { animated } from 'react-spring';
@@ -9,7 +9,10 @@ import {
   State, // eslint-disable-line no-unused-vars
   Workout, // eslint-disable-line no-unused-vars
 } from '../helpers/types';
-import { activeWorkoutWindowHeight } from '../helpers/constants';
+import {
+  activeWorkoutWindowHeight,
+  WARM_UP,
+} from '../helpers/constants';
 
 export const AnimatedSlidingPage = styled(animated.div)`
   position: fixed;
@@ -27,11 +30,19 @@ interface Props {
 }
 
 const ActiveWorkout: React.FC<Props> = ({ animationStyles, workout }) => {
+  const [ selected, setSelected ] = useState({
+    group: WARM_UP,
+    index: 0,
+  });
 
   return (
     <AnimatedSlidingPage style={{ top: animationStyles.left }}>
-      <ActiveWorkoutWindow />
-      <ActivityList stickyTop={activeWorkoutWindowHeight} workout={workout} />
+      <ActiveWorkoutWindow selected={selected} workout={workout} />
+      <ActivityList
+        handleClick={setSelected}
+        stickyTop={activeWorkoutWindowHeight}
+        workout={workout}
+      />
     </AnimatedSlidingPage>
   );
 };

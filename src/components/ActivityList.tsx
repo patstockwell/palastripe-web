@@ -4,9 +4,11 @@ import { connect } from 'react-redux';
 import ActivityTile from './ActivityTile';
 import {
   activityHeadingHeight,
-  bannerHeight,
   superLightGrey,
   tileMinHeight,
+  STRETCH,
+  WARM_UP,
+  WORKING_SETS,
 } from '../helpers/constants';
 import {
   Activity, // eslint-disable-line no-unused-vars
@@ -49,11 +51,13 @@ const BottomEmptySpace = styled.div`
 `;
 
 interface Props {
+  handleClick?: any;
   workout: Workout;
   stickyTop?: number;
 }
 
 const ActivityList: React.FC<Props> = ({
+  handleClick = () => {},
   stickyTop,
   workout: {
     exercises: {
@@ -64,13 +68,19 @@ const ActivityList: React.FC<Props> = ({
   },
 }) => {
   const warmUpTiles = warmUp.map((a: Activity, i) =>
-    <ActivityTile key={i} activity={a} />
+    <ActivityTile key={i} activity={a} handleClick={
+      () => handleClick({ group: WARM_UP, index: i })
+    }/>
   );
   const exercisesTiles = workingSets.map((a: Activity, i) =>
-    <ActivityTile key={i} activity={a} />
+    <ActivityTile key={i} activity={a} handleClick={
+      () => handleClick({ group: WORKING_SETS, index: i })
+    }/>
   );
   const stretchTiles = stretch.map((a: Activity, i) =>
-    <ActivityTile key={i} activity={a} />
+    <ActivityTile key={i} activity={a} handleClick={
+      () => handleClick({ group: STRETCH, index: i })
+    }/>
   );
 
   return (

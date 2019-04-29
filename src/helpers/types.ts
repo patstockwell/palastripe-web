@@ -7,7 +7,7 @@ export interface WorkingSet {
   id: string,
   weightInKilos: number,
   maxReps: number,
-  completedReps: number,
+  completed: number,
   autoIncrement: number,
 }
 
@@ -71,7 +71,7 @@ export interface WeightedActivity {
   restPeriodInSeconds?: number;
   weightInKilos: number;
   repsGoal: number;
-  completedReps: number;
+  completed: number;
   autoIncrement: number;
 }
 

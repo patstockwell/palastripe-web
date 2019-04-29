@@ -17,7 +17,7 @@ const circuitSpeed: Workout = {
       {
         id: 'upright-row',
         autoIncrement: 0,
-        completedReps: 0,
+        completed: 0,
         repsGoal: 10,
         weightInKilos: 30,
         restPeriodInSeconds: 60,
@@ -25,7 +25,7 @@ const circuitSpeed: Workout = {
       {
         id: 'upright-row',
         autoIncrement: 0,
-        completedReps: 0,
+        completed: 0,
         repsGoal: 10,
         weightInKilos: 30,
         restPeriodInSeconds: 60,
@@ -33,7 +33,7 @@ const circuitSpeed: Workout = {
       {
         id: 'upright-row',
         autoIncrement: 0,
-        completedReps: 0,
+        completed: 0,
         repsGoal: 10,
         weightInKilos: 30,
         restPeriodInSeconds: 60,
@@ -41,7 +41,7 @@ const circuitSpeed: Workout = {
       {
         id: 'upright-row',
         autoIncrement: 0,
-        completedReps: 0,
+        completed: 0,
         repsGoal: 10,
         weightInKilos: 30,
         restPeriodInSeconds: 60,
