@@ -31,7 +31,7 @@ const Routes = () => {
         <ViewWorkout match={match} animationStyles={props} />}
       />
       <Route path="/active-workout/" render={() =>
-        <ActiveWorkout animationStyles={props} />} />
+        <ActiveWorkout pathname={location.pathname} animationStyles={props} />} />
       <Route component={FourZeroFour} />
     </Switch>
   ));
