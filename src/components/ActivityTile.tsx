@@ -9,8 +9,10 @@ import { formatSeconds } from '../helpers/functions';
 
 const Tile = styled.li`
   min-height: ${tileMinHeight}px;
+  color: #444;
   border: none;
-  border-bottom: 1px solid ${superLightGrey};
+  border-bottom: 1px solid white;
+  background-color: ${superLightGrey};
   display: flex;
   align-items: center;
   flex-direction: row-reverse;

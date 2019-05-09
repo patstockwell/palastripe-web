@@ -38,7 +38,11 @@ const ViewWorkout: React.FC<Props> = ({
       <ViewWorkoutHero
         workout={workoutWithAllActivityData}
       />
-      <ActivityList stickyTop={bannerHeight} workout={workoutWithAllActivityData} />
+      <ActivityList
+        stickyTop={bannerHeight}
+        workout={workoutWithAllActivityData}
+        handleClick={() => {}}
+      />
     </AnimatedSlidingPage>
   );
 };

@@ -2,9 +2,9 @@ import React  from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import ActivityTile from './ActivityTile';
+import ActivityListHeading from './ActivityListHeading';
 import {
   activityHeadingHeight,
-  superLightGrey,
   tileMinHeight,
   STRETCH,
   WARM_UP,
@@ -22,22 +22,6 @@ interface Props {
   entities: Entities;
 }
 
-const ActivityHeading = styled.li`
-  height: ${activityHeadingHeight}px;
-  background-color: ${superLightGrey};
-  display: flex;
-  align-items: center;
-  position: sticky;
-  top: ${({ top }) => top || 0}px;
-
-  h2 {
-    font-size: 14px;
-    text-transform: uppercase;
-    font-weight: 500;
-    margin: 0 12px;
-  }
-`;
-
 const Ul = styled.ul`
   margin: 0;
   padding: 0;
@@ -51,13 +35,13 @@ const BottomEmptySpace = styled.div`
 `;
 
 interface Props {
-  handleClick?: any;
+  handleClick: ({ group: string, index: number }) => void;
   workout: Workout;
   stickyTop?: number;
 }
 
 const ActivityList: React.FC<Props> = ({
-  handleClick = () => {},
+  handleClick,
   stickyTop,
   workout: {
     exercises: {
@@ -86,21 +70,27 @@ const ActivityList: React.FC<Props> = ({
   return (
     <Ul>
       <Ul>
-        <ActivityHeading top={stickyTop}>
-          <h2>warm up</h2>
-        </ActivityHeading>
+        <ActivityListHeading
+          stickyTop={stickyTop}
+          heading={'warm up'}
+          activityTotal={warmUpTiles.length}
+        />
         {warmUpTiles}
       </Ul>
       <Ul>
-        <ActivityHeading top={stickyTop}>
-          <h2>exercises</h2>
-        </ActivityHeading>
+        <ActivityListHeading
+          stickyTop={stickyTop}
+          heading={'exercises'}
+          activityTotal={exercisesTiles.length}
+        />
         {exercisesTiles}
       </Ul>
       <Ul>
-        <ActivityHeading top={stickyTop}>
-          <h2>stretch</h2>
-        </ActivityHeading>
+        <ActivityListHeading
+          stickyTop={stickyTop}
+          heading={'stretch'}
+          activityTotal={stretchTiles.length}
+        />
         {stretchTiles}
         <BottomEmptySpace stickyTop={stickyTop} />
       </Ul>
