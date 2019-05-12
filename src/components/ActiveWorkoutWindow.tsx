@@ -29,6 +29,7 @@ const WeightedActivityWindow = ({ activity }) => (
 );
 
 interface Props {
+  handleClick: () => void;
   height: number;
   workout: Workout;
   selected: {
@@ -38,6 +39,7 @@ interface Props {
 }
 
 const ActiveWorkoutWindow: React.FC<Props> = ({
+  handleClick,
   height,
   workout: {
     exercises,
@@ -53,6 +55,7 @@ const ActiveWorkoutWindow: React.FC<Props> = ({
 
   return (
     <Window height={height}>
+      <button onClick={handleClick}>Toggle</button>
       <h1>{workoutName}</h1>
       <h2>{name}</h2>
       {isTimed(activity)

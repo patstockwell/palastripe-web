@@ -3,6 +3,7 @@ export const tileMinHeight: number = 100;
 export const navBarHeight: number = 48;
 export const bannerHeight: number = 48;
 export const activeWorkoutWindowHeight = 300;
+export const activeWorkoutWindowHeightCollapsed = 100;
 export const activityHeadingHeight: number = 40;
 export const workoutWindowViewport: number = 50;
 export const gutterWidth: number = 12;

@@ -12,6 +12,7 @@ import {
 } from '../helpers/types';
 import {
   activeWorkoutWindowHeight,
+  activeWorkoutWindowHeightCollapsed,
   WARM_UP,
 } from '../helpers/constants';
 
@@ -66,9 +67,16 @@ const ActiveWorkout: React.FC<Props> = ({
   });
   const [ windowHeight, setWindowHeight ] = useState(activeWorkoutWindowHeight);
 
+  const changeWindowHeight = () => setWindowHeight(
+    windowHeight === activeWorkoutWindowHeight
+      ? activeWorkoutWindowHeightCollapsed
+      : activeWorkoutWindowHeight
+  );
+
   return (
     <AnimatedSlidingPage style={{ top: animationStyles.left }}>
       <ActiveWorkoutWindow
+        handleClick={changeWindowHeight}
         height={windowHeight}
         selected={selected}
         workout={workout}
