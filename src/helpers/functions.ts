@@ -82,7 +82,18 @@ export const combineDataForAllExercises = (workout: Workout, exercisesList: Exer
 
 export const getLocalStorage = (name: string, defaultValue: any) => {
   const item: (string | null) = localStorage.getItem(name);
-  return item ? JSON.parse(item) : defaultValue;
+
+  if (item) {
+    // try to parse the string, if it's not an object, then unset it.
+    try {
+      return JSON.parse(item)
+    } catch {
+      localStorage.removeItem(name)
+      return defaultValue
+    }
+  }
+
+  return defaultValue;
 };
 
 export const formatDate = (time: number) => {
