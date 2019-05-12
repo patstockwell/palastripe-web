@@ -86,10 +86,10 @@ export const getLocalStorage = (name: string, defaultValue: any) => {
   if (item) {
     // try to parse the string, if it's not an object, then unset it.
     try {
-      return JSON.parse(item)
+      return JSON.parse(item);
     } catch {
-      localStorage.removeItem(name)
-      return defaultValue
+      localStorage.removeItem(name);
+      return defaultValue;
     }
   }
 

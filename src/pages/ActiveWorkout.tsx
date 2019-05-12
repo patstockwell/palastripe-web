@@ -25,6 +25,12 @@ export const AnimatedSlidingPage = styled(animated.div)`
   -webkit-overflow-scrolling: touch; // enables momentum scolling
 `;
 
+const ScrollablePanel = styled.div`
+  height: calc(100vh - ${({ offsetHeight = 0 }) => offsetHeight}px);
+  overflow: scroll;
+  -webkit-overflow-scrolling: touch; // enables momentum scolling
+`;
+
 interface Props {
   animationStyles: any;
   workout: Workout;
@@ -58,15 +64,22 @@ const ActiveWorkout: React.FC<Props> = ({
     group: WARM_UP,
     index: 0,
   });
+  const [ windowHeight, setWindowHeight ] = useState(activeWorkoutWindowHeight);
 
   return (
     <AnimatedSlidingPage style={{ top: animationStyles.left }}>
-      <ActiveWorkoutWindow selected={selected} workout={workout} />
-      <ActivityList
-        handleClick={setSelected}
-        stickyTop={activeWorkoutWindowHeight}
+      <ActiveWorkoutWindow
+        height={windowHeight}
+        selected={selected}
         workout={workout}
       />
+      <ScrollablePanel offsetHeight={windowHeight}>
+        <ActivityList
+          handleClick={setSelected}
+          workout={workout}
+          offsetHeight={windowHeight}
+        />
+      </ScrollablePanel>
     </AnimatedSlidingPage>
   );
 };

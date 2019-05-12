@@ -1,6 +1,5 @@
 import React from 'react';
 import styled from 'styled-components';
-import { activeWorkoutWindowHeight } from '../helpers/constants';
 import {
   isTimed,
   Activity, // eslint-disable-line no-unused-vars
@@ -9,9 +8,7 @@ import {
 } from '../helpers/types';
 
 const Window = styled.div`
-  position: sticky;
-  top: 0;
-  height: ${activeWorkoutWindowHeight}px;
+  height: ${({ height }) => height}px;
   border-bottom: 1px solid lightgrey;
   box-sizing: border-box;
   z-index: 2;
@@ -32,6 +29,7 @@ const WeightedActivityWindow = ({ activity }) => (
 );
 
 interface Props {
+  height: number;
   workout: Workout;
   selected: {
     group: string;
@@ -40,6 +38,7 @@ interface Props {
 }
 
 const ActiveWorkoutWindow: React.FC<Props> = ({
+  height,
   workout: {
     exercises,
     name: workoutName,
@@ -51,9 +50,9 @@ const ActiveWorkoutWindow: React.FC<Props> = ({
 }) => {
   const activity: Activity = exercises[group][index];
   const { name } = activity;
-  console.log(activity);
+
   return (
-    <Window>
+    <Window height={height}>
       <h1>{workoutName}</h1>
       <h2>{name}</h2>
       {isTimed(activity)

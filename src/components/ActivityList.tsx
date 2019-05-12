@@ -30,17 +30,19 @@ const Ul = styled.ul`
 `;
 
 const BottomEmptySpace = styled.div`
-  height: calc(100vh - ${({ stickyTop = 0 }) =>
-    activityHeadingHeight + tileMinHeight + stickyTop}px);
+  height: calc(100vh - ${({ offsetHeight = 0, stickyTop = 0 }) =>
+    activityHeadingHeight + tileMinHeight + stickyTop + offsetHeight}px);
 `;
 
 interface Props {
   handleClick: ({ group: string, index: number }) => void;
+  offsetHeight?: number;
   workout: Workout;
   stickyTop?: number;
 }
 
 const ActivityList: React.FC<Props> = ({
+  offsetHeight,
   handleClick,
   stickyTop,
   workout: {
@@ -69,30 +71,36 @@ const ActivityList: React.FC<Props> = ({
 
   return (
     <Ul>
-      <Ul>
-        <ActivityListHeading
-          stickyTop={stickyTop}
-          heading={'warm up'}
-          activityTotal={warmUpTiles.length}
-        />
-        {warmUpTiles}
-      </Ul>
+      <ActivityListHeading
+        stickyTop={stickyTop}
+        heading={'warm up'}
+        activityTotal={warmUpTiles.length}
+      >
+        <Ul>
+          {warmUpTiles}
+        </Ul>
+      </ActivityListHeading>
       <Ul>
         <ActivityListHeading
           stickyTop={stickyTop}
           heading={'exercises'}
           activityTotal={exercisesTiles.length}
-        />
-        {exercisesTiles}
+        >
+          {exercisesTiles}
+        </ActivityListHeading>
       </Ul>
       <Ul>
         <ActivityListHeading
           stickyTop={stickyTop}
           heading={'stretch'}
           activityTotal={stretchTiles.length}
-        />
-        {stretchTiles}
-        <BottomEmptySpace stickyTop={stickyTop} />
+        >
+          {stretchTiles}
+          <BottomEmptySpace
+            offsetHeight={offsetHeight}
+            stickyTop={stickyTop}
+          />
+        </ActivityListHeading>
       </Ul>
     </Ul>
   );

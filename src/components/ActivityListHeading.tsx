@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import styled from 'styled-components';
 import {
   activityHeadingHeight,
@@ -10,7 +10,7 @@ interface Props {
   stickyTop?: number;
 }
 
-const ListItem = styled.li`
+const HeadingPanel = styled.div`
   height: ${activityHeadingHeight}px;
   background-color: white;
   display: flex;
@@ -18,28 +18,36 @@ const ListItem = styled.li`
   justify-content: space-between;
   position: sticky;
   top: ${({ top }) => top || 0}px;
-
-  h2 {
-    font-size: 12px;
-    text-transform: uppercase;
-    font-weight: 500;
-    margin: 0 12px;
-  }
-
-  p {
-    font-size: 12px;
-    color: grey;
-    margin: 0 12px;
-  }
 `;
 
-const ActivityListHeading: React.FC<Props> = ({ activityTotal, heading, stickyTop }) => (
-  <ListItem top={stickyTop}>
-    <h2>{heading}</h2>
-    {activityTotal &&
-      <p>{activityTotal} {activityTotal === 1 ? 'set' : 'sets'}</p>
-    }
-  </ListItem>
+const Heading = styled.h2`
+  font-size: 12px;
+  text-transform: uppercase;
+  font-weight: 500;
+  margin: 0 12px;
+`;
+
+const Sets = styled.p`
+  font-size: 12px;
+  color: grey;
+  margin: 0 12px;
+`;
+
+const ActivityListHeading: React.FC<Props> = ({
+  activityTotal,
+  children,
+  heading,
+  stickyTop,
+}) => (
+  <li>
+    <HeadingPanel top={stickyTop}>
+      <Heading>{heading}</Heading>
+      {activityTotal &&
+        <Sets>{activityTotal} {activityTotal === 1 ? 'set' : 'sets'}</Sets>
+      }
+    </HeadingPanel>
+    {children}
+  </li>
 );
 
 export default ActivityListHeading;
