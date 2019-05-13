@@ -13,7 +13,6 @@ import {
 const AnimatedSlidingPageBase = styled(animated.div)`
   position: relative;
   z-index: 10;
-  top: 0;
 `;
 
 export const AnimatedSlidingPage = styled(AnimatedSlidingPageBase)`
@@ -56,7 +55,7 @@ const ActiveWorkout: React.FC<Props> = ({
 
   return (
     <AnimatedSlidingPageBase style={{ top: animationStyles.top }}>
-      <ActivityList workout={workout} />
+      <ActivityList selectable workout={workout} />
     </AnimatedSlidingPageBase>
   );
 };

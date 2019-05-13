@@ -37,13 +37,11 @@ const BottomEmptySpace = styled.div`
 interface Props {
   workout: Workout;
   stickyTop?: number;
-  selected?: {
-    group: string;
-    index: number;
-  };
+  selectable?: boolean;
 }
 
 const ActivityList: React.FC<Props> = ({
+  selectable,
   stickyTop,
   workout: {
     exercises: {
@@ -57,7 +55,7 @@ const ActivityList: React.FC<Props> = ({
 
   const createTile = (group: string) => (a: Activity, i) =>
     <ActivityTile
-      selected={selected.group === group && selected.index === i}
+      selected={selectable && selected.group === group && selected.index === i}
       key={i}
       activity={a}
       handleClick={() => setSelected({ group, index: i })}
