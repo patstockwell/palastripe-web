@@ -1,7 +1,8 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import {
   activityHeadingHeight,
+  lightLightGrey,
 } from '../helpers/constants';
 
 interface Props {
@@ -13,6 +14,7 @@ interface Props {
 const HeadingPanel = styled.div`
   height: ${activityHeadingHeight}px;
   background-color: white;
+  border-bottom: 1px solid ${lightLightGrey};
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -39,7 +41,7 @@ const ActivityListHeading: React.FC<Props> = ({
   heading,
   stickyTop,
 }) => (
-  <li>
+  <li key={heading}>
     <HeadingPanel top={stickyTop}>
       <Heading>{heading}</Heading>
       {activityTotal &&

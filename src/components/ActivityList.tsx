@@ -1,4 +1,4 @@
-import React  from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import ActivityTile from './ActivityTile';
@@ -30,20 +30,20 @@ const Ul = styled.ul`
 `;
 
 const BottomEmptySpace = styled.div`
-  height: calc(100vh - ${({ offsetHeight = 0, stickyTop = 0 }) =>
-    activityHeadingHeight + tileMinHeight + stickyTop + offsetHeight}px);
+  height: calc(100vh - ${({ stickyTop = 0 }) =>
+    activityHeadingHeight + tileMinHeight + stickyTop}px);
 `;
 
 interface Props {
-  handleClick: ({ group: string, index: number }) => void;
-  offsetHeight?: number;
   workout: Workout;
   stickyTop?: number;
+  selected?: {
+    group: string;
+    index: number;
+  };
 }
 
 const ActivityList: React.FC<Props> = ({
-  offsetHeight,
-  handleClick,
   stickyTop,
   workout: {
     exercises: {
@@ -53,21 +53,19 @@ const ActivityList: React.FC<Props> = ({
     },
   },
 }) => {
-  const warmUpTiles = warmUp.map((a: Activity, i) =>
-    <ActivityTile key={i} activity={a} handleClick={
-      () => handleClick({ group: WARM_UP, index: i })
-    }/>
-  );
-  const exercisesTiles = workingSets.map((a: Activity, i) =>
-    <ActivityTile key={i} activity={a} handleClick={
-      () => handleClick({ group: WORKING_SETS, index: i })
-    }/>
-  );
-  const stretchTiles = stretch.map((a: Activity, i) =>
-    <ActivityTile key={i} activity={a} handleClick={
-      () => handleClick({ group: STRETCH, index: i })
-    }/>
-  );
+  const [ selected, setSelected ] = useState({ group: WARM_UP, index: 0 });
+
+  const createTile = (group: string) => (a: Activity, i) =>
+    <ActivityTile
+      selected={selected.group === group && selected.index === i}
+      key={i}
+      activity={a}
+      handleClick={() => setSelected({ group, index: i })}
+    />;
+
+  const warmUpTiles = warmUp.map(createTile(WARM_UP));
+  const exercisesTiles = workingSets.map(createTile(WORKING_SETS));
+  const stretchTiles = stretch.map(createTile(STRETCH));
 
   return (
     <Ul>
@@ -76,32 +74,28 @@ const ActivityList: React.FC<Props> = ({
         heading={'warm up'}
         activityTotal={warmUpTiles.length}
       >
-        <Ul>
-          {warmUpTiles}
-        </Ul>
+        <Ul>{warmUpTiles}</Ul>
       </ActivityListHeading>
-      <Ul>
-        <ActivityListHeading
-          stickyTop={stickyTop}
-          heading={'exercises'}
-          activityTotal={exercisesTiles.length}
-        >
-          {exercisesTiles}
-        </ActivityListHeading>
-      </Ul>
-      <Ul>
-        <ActivityListHeading
-          stickyTop={stickyTop}
-          heading={'stretch'}
-          activityTotal={stretchTiles.length}
-        >
-          {stretchTiles}
-          <BottomEmptySpace
-            offsetHeight={offsetHeight}
-            stickyTop={stickyTop}
-          />
-        </ActivityListHeading>
-      </Ul>
+
+      <ActivityListHeading
+        stickyTop={stickyTop}
+        heading={'exercises'}
+        activityTotal={exercisesTiles.length}
+      >
+        <Ul>{exercisesTiles}</Ul>
+      </ActivityListHeading>
+
+      <ActivityListHeading
+        stickyTop={stickyTop}
+        heading={'stretch'}
+        activityTotal={stretchTiles.length}
+      >
+        <Ul>{stretchTiles}</Ul>
+      </ActivityListHeading>
+
+      <BottomEmptySpace
+        stickyTop={stickyTop}
+      />
     </Ul>
   );
 };

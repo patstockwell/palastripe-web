@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { animated } from 'react-spring';
 import ActivityList from '../components/ActivityList';
-import ActiveWorkoutWindow from '../components/ActiveWorkoutWindow';
 import {
   Entities, // eslint-disable-line no-unused-vars
   State, // eslint-disable-line no-unused-vars
@@ -23,12 +22,6 @@ export const AnimatedSlidingPage = styled(animated.div)`
   width: 100%;
   z-index: 10;
   overflow-y: scroll;
-  -webkit-overflow-scrolling: touch; // enables momentum scolling
-`;
-
-const ScrollablePanel = styled.div`
-  height: calc(100vh - ${({ offsetHeight = 0 }) => offsetHeight}px);
-  overflow: scroll;
   -webkit-overflow-scrolling: touch; // enables momentum scolling
 `;
 
@@ -61,33 +54,9 @@ const ActiveWorkout: React.FC<Props> = ({
     return null;
   } // else we have a workout and should render normally
 
-  const [ selected, setSelected ] = useState({
-    group: WARM_UP,
-    index: 0,
-  });
-  const [ windowHeight, setWindowHeight ] = useState(activeWorkoutWindowHeight);
-
-  const changeWindowHeight = () => setWindowHeight(
-    windowHeight === activeWorkoutWindowHeight
-      ? activeWorkoutWindowHeightCollapsed
-      : activeWorkoutWindowHeight
-  );
-
   return (
     <AnimatedSlidingPage style={{ top: animationStyles.left }}>
-      <ActiveWorkoutWindow
-        handleClick={changeWindowHeight}
-        height={windowHeight}
-        selected={selected}
-        workout={workout}
-      />
-      <ScrollablePanel offsetHeight={windowHeight}>
-        <ActivityList
-          handleClick={setSelected}
-          workout={workout}
-          offsetHeight={windowHeight}
-        />
-      </ScrollablePanel>
+      <ActivityList workout={workout} />
     </AnimatedSlidingPage>
   );
 };

@@ -4,15 +4,19 @@ import {
   isTimed,
   Activity, // eslint-disable-line no-unused-vars
 } from '../helpers/types';
-import { superLightGrey, tileMinHeight } from '../helpers/constants';
+import {
+  lightLightGrey,
+  superLightGrey,
+  tileMinHeight,
+} from '../helpers/constants';
 import { formatSeconds } from '../helpers/functions';
 
 const Tile = styled.li`
   min-height: ${tileMinHeight}px;
-  color: #444;
+  color: ${({ selected }) => selected ? 'black' : '#444'};
   border: none;
-  border-bottom: 1px solid white;
-  background-color: ${superLightGrey};
+  border-bottom: 1px solid ${lightLightGrey};
+  background-color: ${({ selected }) => selected ? 'white' : superLightGrey};
   display: flex;
   align-items: center;
   flex-direction: row-reverse;
@@ -47,15 +51,20 @@ const Duration = styled.div`
 interface Props {
   activity: Activity;
   handleClick: any;
+  selected?: boolean;
 }
 
-const ActivityTile:React.FC<Props> = ({ activity, handleClick }) => {
+const ActivityTile:React.FC<Props> = ({
+  activity,
+  handleClick,
+  selected,
+}) => {
   const duration = isTimed(activity)
     ? formatSeconds(activity.timerInSeconds)
     : activity.repsGoal;
 
   return (
-    <Tile onClick={handleClick}>
+    <Tile selected={selected} onClick={handleClick}>
       <Details>
         <Name>{activity.name}</Name>
         {!isTimed(activity) &&
