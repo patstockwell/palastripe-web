@@ -15,9 +15,9 @@ const Routes = () => {
 
   const transitions = useTransition(location, location => location.key, {
     immediate: state.immediate,
-    from: { left: '100%' },
-    enter: { left: '0%' },
-    leave: { left: '100%' },
+    from: { left: '100%', top: '100vh' },
+    enter: { left: '0%', top: '0vh' },
+    leave: { left: '100%', top: '100vh' },
     config: { tension: 410, friction: 40 },
   });
 

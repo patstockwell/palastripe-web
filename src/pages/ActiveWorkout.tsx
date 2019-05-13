@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Redirect } from 'react-router';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
@@ -9,18 +9,18 @@ import {
   State, // eslint-disable-line no-unused-vars
   Workout, // eslint-disable-line no-unused-vars
 } from '../helpers/types';
-import {
-  activeWorkoutWindowHeight,
-  activeWorkoutWindowHeightCollapsed,
-  WARM_UP,
-} from '../helpers/constants';
 
-export const AnimatedSlidingPage = styled(animated.div)`
+const AnimatedSlidingPageBase = styled(animated.div)`
+  position: relative;
+  z-index: 10;
+  top: 0;
+`;
+
+export const AnimatedSlidingPage = styled(AnimatedSlidingPageBase)`
   position: fixed;
   top: 0;
   bottom: 0;
   width: 100%;
-  z-index: 10;
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch; // enables momentum scolling
 `;
@@ -55,9 +55,9 @@ const ActiveWorkout: React.FC<Props> = ({
   } // else we have a workout and should render normally
 
   return (
-    <AnimatedSlidingPage style={{ top: animationStyles.left }}>
+    <AnimatedSlidingPageBase style={{ top: animationStyles.top }}>
       <ActivityList workout={workout} />
-    </AnimatedSlidingPage>
+    </AnimatedSlidingPageBase>
   );
 };
 
