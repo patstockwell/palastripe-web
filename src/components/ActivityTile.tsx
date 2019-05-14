@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import Line from '../assets/svg/Line';
 import {
   isTimed,
   Activity, // eslint-disable-line no-unused-vars
@@ -12,6 +13,7 @@ import {
 import { formatSeconds } from '../helpers/functions';
 
 const Tile = styled.li`
+  position: relative;
   min-height: ${tileMinHeight}px;
   color: ${({ selected }) => selected ? 'black' : '#444'};
   border: none;
@@ -48,6 +50,13 @@ const Duration = styled.div`
   padding: 0 8px;
 `;
 
+const SeeMoreLineWrapper = styled.div`
+  position: absolute;
+  bottom: -16px;
+  left: 50%;
+  transform: translateX(-50%);
+`;
+
 interface Props {
   activity: Activity;
   handleClick: any;
@@ -74,6 +83,11 @@ const ActivityTile:React.FC<Props> = ({
       <Duration>
         <p>{duration}</p>
       </Duration>
+      {selected &&
+        <SeeMoreLineWrapper>
+          <Line style={{ fill: 'grey' }}/>
+        </SeeMoreLineWrapper>
+      }
     </Tile>
   );
 };
