@@ -14,15 +14,10 @@ import { formatSeconds } from '../helpers/functions';
 
 const Tile = styled.li`
   position: relative;
-  min-height: ${tileMinHeight}px;
   color: ${({ selected }) => selected ? 'black' : '#444'};
   border: none;
   border-bottom: 1px solid ${lightLightGrey};
   background-color: ${({ selected }) => selected ? 'white' : superLightGrey};
-  display: flex;
-  align-items: center;
-  flex-direction: row-reverse;
-  justify-content: flex-end;
 `;
 
 const Details = styled.div`
@@ -57,14 +52,28 @@ const SeeMoreLineWrapper = styled.div`
   transform: translateX(-50%);
 `;
 
+const CollapsableArea = styled.div`
+  height: ${({ show }) => show ? 300 : 0}px;
+`;
+
+const VisibleArea = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: row-reverse;
+  justify-content: flex-end;
+  min-height: ${tileMinHeight}px;
+`;
+
 interface Props {
   activity: Activity;
   handleClick: any;
-  selected?: boolean;
+  selected: boolean;
+  show: boolean;
 }
 
 const ActivityTile:React.FC<Props> = ({
   activity,
+  show,
   handleClick,
   selected,
 }) => {
@@ -74,22 +83,37 @@ const ActivityTile:React.FC<Props> = ({
 
   return (
     <Tile selected={selected} onClick={handleClick}>
-      <Details>
-        <Name>{activity.name}</Name>
-        {!isTimed(activity) &&
-          <Weight>Weight: {activity.weightInKilos}kg</Weight>
-        }
-      </Details>
-      <Duration>
-        <p>{duration}</p>
-      </Duration>
+      <VisibleArea>
+        <Details>
+          <Name>{activity.name}</Name>
+          {!isTimed(activity) &&
+            <Weight>Weight: {activity.weightInKilos}kg</Weight>
+          }
+        </Details>
+        <Duration>
+          <p>{duration}</p>
+        </Duration>
+      </VisibleArea>
+
       {selected &&
-        <SeeMoreLineWrapper>
-          <Line style={{ fill: 'grey' }}/>
-        </SeeMoreLineWrapper>
+        <React.Fragment>
+          <CollapsableArea show={show}>
+            Hidden area!
+          </CollapsableArea>
+          <SeeMoreLineWrapper>
+            <Line style={{ fill: 'grey' }}/>
+          </SeeMoreLineWrapper>
+        </React.Fragment>
       }
     </Tile>
   );
 };
 
-export default ActivityTile;
+const areEqual = (prevProps, nextProps) => {
+  // the props handleClick and activity should never change
+  // we only care about show and selected
+  return prevProps.show === nextProps.show
+    && prevProps.selected === nextProps.selected;
+};
+
+export default React.memo(ActivityTile, areEqual);

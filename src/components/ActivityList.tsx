@@ -52,14 +52,28 @@ const ActivityList: React.FC<Props> = ({
   },
 }) => {
   const [ selected, setSelected ] = useState({ group: WARM_UP, index: 0 });
+  const [ show, setShow ] = useState(false);
 
-  const createTile = (group: string) => (a: Activity, i) =>
-    <ActivityTile
-      selected={selectable && selected.group === group && selected.index === i}
-      key={i}
-      activity={a}
-      handleClick={() => setSelected({ group, index: i })}
-    />;
+  const createTile = (group: string) => (a: Activity, i) => {
+    const isSelected = selected.group === group && selected.index === i;
+
+    return (
+      <ActivityTile
+        selected={selectable && isSelected}
+        show={isSelected && show}
+        key={i}
+        activity={a}
+        handleClick={() => {
+          if (selected.group === group && selected.index === i) {
+            setShow(!show);
+          } else {
+            setSelected({ group, index: i });
+            setShow(false);
+          }
+        }}
+      />
+    );
+  };
 
   const warmUpTiles = warmUp.map(createTile(WARM_UP));
   const exercisesTiles = workingSets.map(createTile(WORKING_SETS));
