@@ -20,6 +20,7 @@ const HeadingPanel = styled.div`
   justify-content: space-between;
   position: sticky;
   top: ${({ top }) => top || 0}px;
+  z-index: 2;
 `;
 
 const Heading = styled.h2`

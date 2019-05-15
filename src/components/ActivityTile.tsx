@@ -1,4 +1,5 @@
 import React from 'react';
+import { useSpring, animated } from 'react-spring';
 import styled from 'styled-components';
 import Line from '../assets/svg/Line';
 import {
@@ -52,10 +53,6 @@ const SeeMoreLineWrapper = styled.div`
   transform: translateX(-50%);
 `;
 
-const CollapsableArea = styled.div`
-  height: ${({ show }) => show ? 300 : 0}px;
-`;
-
 const VisibleArea = styled.div`
   display: flex;
   align-items: center;
@@ -77,6 +74,11 @@ const ActivityTile:React.FC<Props> = ({
   handleClick,
   selected,
 }) => {
+  const animatedStyles = useSpring({
+    to: { height: show ? 300 : 0 },
+    config: { tension: 410, friction: 40 },
+  });
+
   const duration = isTimed(activity)
     ? formatSeconds(activity.timerInSeconds)
     : activity.repsGoal;
@@ -94,16 +96,13 @@ const ActivityTile:React.FC<Props> = ({
           <p>{duration}</p>
         </Duration>
       </VisibleArea>
-
+      <animated.div style={animatedStyles}>
+        Hidden area!
+      </animated.div>
       {selected &&
-        <React.Fragment>
-          <CollapsableArea show={show}>
-            Hidden area!
-          </CollapsableArea>
-          <SeeMoreLineWrapper>
-            <Line style={{ fill: 'grey' }}/>
-          </SeeMoreLineWrapper>
-        </React.Fragment>
+        <SeeMoreLineWrapper>
+          <Line style={{ fill: 'grey' }}/>
+        </SeeMoreLineWrapper>
       }
     </Tile>
   );
