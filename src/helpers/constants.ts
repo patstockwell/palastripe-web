@@ -7,6 +7,7 @@ export const activeWorkoutWindowHeightCollapsed = 100;
 export const activityHeadingHeight: number = 40;
 export const workoutWindowViewport: number = 50;
 export const gutterWidth: number = 12;
+export const timedExerciseWaitPeriod: number = 3;
 
 export const DELAY_BEFORE_SHOWING_TIMER: number = 2;
 export const DEFAULT_REST_PERIOD_IN_SECONDS: number = 120;

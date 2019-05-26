@@ -21,7 +21,7 @@ const Header = styled.div`
   justify-content: space-between;
   align-items: center;
   height: ${bannerHeight}px;
-  z-index: 2;
+  z-index: 3;
   background-color: white
 `;
 

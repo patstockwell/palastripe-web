@@ -51,7 +51,7 @@ const ActivityList: React.FC<Props> = ({
     },
   },
 }) => {
-  const [ selected, setSelected ] = useState({ group: WARM_UP, index: 0 });
+  const [ selected, setSelected ] = useState({ group: undefined, index: undefined });
   const [ show, setShow ] = useState(false);
 
   const createTile = (group: string) => (a: Activity, i) => {
@@ -64,9 +64,12 @@ const ActivityList: React.FC<Props> = ({
         key={i}
         activity={a}
         handleClick={() => {
-          if (selected.group === group && selected.index === i) {
+          if (!selectable) { // if this list is read only, do nothing
+            return;
+          } else if (selected.group === group && selected.index === i) {
+            // else if this tile is already selected, toggle it
             setShow(!show);
-          } else {
+          } else { // else select this tile
             setSelected({ group, index: i });
             setShow(false);
           }

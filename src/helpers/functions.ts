@@ -146,14 +146,12 @@ const getRestTime = (a: Activity): number =>
 const getTotalActivityTime = (a: Activity): number =>
   getRestTime(a) + (getTimer(a) || getReps(a));
 
-const add = (acc, curr) => acc + curr;
-
 export const calculateWorkoutTime = (w: Workout): number => {
   const { exercises : { warmUp, workingSets, stretch } } = w;
   const allActivities = warmUp.concat(workingSets).concat(stretch);
   const total = allActivities
     .map(getTotalActivityTime)
-    .reduce(add, 0);
+    .reduce((acc, curr) => acc + curr, 0);
   return Math.round(total / SECONDS_IN_A_MINUTE);
 };
 
