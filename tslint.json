@@ -9,6 +9,7 @@
       "no-console": ["false"],
       "arrow-parens": ["false"],
       "interface-name": ["false"],
+      "ordered-imports": ["false"],
       "jsx-alignment": ["false"],
       "jsx-no-multiline-js": ["false"],
       "object-literal-sort-keys": ["false"],

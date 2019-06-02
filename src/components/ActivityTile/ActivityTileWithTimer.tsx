@@ -11,6 +11,8 @@ import {
   Title,
   Duration,
   VisibleArea,
+  SelectionArea,
+  SelectComplete,
 } from './index';
 
 const grow = keyframes`
@@ -42,7 +44,7 @@ interface Props {
   selected: boolean;
 }
 
-const ActivityTile:React.FC<Props> = ({
+const ActivityTile: React.FC<Props> = ({
   activity,
   handleClick,
   selected,
@@ -72,6 +74,9 @@ const ActivityTile:React.FC<Props> = ({
         <Duration>
           <p>{formatSeconds(activity.timerInSeconds)}</p>
         </Duration>
+        <SelectionArea>
+          <SelectComplete />
+        </SelectionArea>
       </VisibleArea>
     </Tile>
   );

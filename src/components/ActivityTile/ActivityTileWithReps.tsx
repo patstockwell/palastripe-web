@@ -12,6 +12,8 @@ import {
   SubTitle,
   Duration,
   VisibleArea,
+  SelectionArea,
+  SelectComplete,
 } from './index';
 
 const SeeMoreArrowWrapper = styled(animated.div)`
@@ -28,7 +30,7 @@ interface Props {
   show: boolean;
 }
 
-const ActivityTile:React.FC<Props> = ({
+const ActivityTile: React.FC<Props> = ({
   activity,
   show,
   handleClick,
@@ -51,7 +53,11 @@ const ActivityTile:React.FC<Props> = ({
         <Duration>
           <p>{activity.repsGoal}</p>
         </Duration>
+        <SelectionArea>
+          <SelectComplete />
+        </SelectionArea>
       </VisibleArea>
+
       <animated.div style={{
         height: animatedStyles.height,
         opacity: animatedStyles.opacity,
@@ -62,7 +68,7 @@ const ActivityTile:React.FC<Props> = ({
         <SeeMoreArrowWrapper
           style={{
             transform: animatedStyles.x.interpolate(x =>
-              `translateX(-50%) rotate(${x}deg`)
+              `translateX(-50%) rotate(${x}deg`),
           }}>
           <DownArrow style={{ fill: 'grey' }}/>
         </SeeMoreArrowWrapper>
