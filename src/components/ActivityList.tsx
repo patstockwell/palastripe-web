@@ -59,19 +59,20 @@ const ActivityList: React.FC<Props> = ({
 
     return (
       <ActivityTile
+        selectable={selectable}
         selected={selectable && isSelected}
         show={isSelected && show}
         key={i}
         activity={a}
-        handleClick={() => {
-          if (!selectable) { // if this list is read only, do nothing
-            return;
-          } else if (selected.group === group && selected.index === i) {
-            // else if this tile is already selected, toggle it
-            setShow(!show);
-          } else { // else select this tile
+        handleSelect={() => {
+          if (selectable && !isSelected) {
             setSelected({ group, index: i });
             setShow(false);
+          }
+        }}
+        handleOpen={() => {
+          if (selectable && isSelected) {
+            setShow(!show);
           }
         }}
       />

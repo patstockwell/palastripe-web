@@ -40,13 +40,15 @@ const ActiveTimer = styled.div`
 
 interface Props {
   activity: TimedActivity;
-  handleClick: any;
+  handleSelect: any;
+  selectable: boolean;
   selected: boolean;
 }
 
-const ActivityTile: React.FC<Props> = ({
+const ActivityTileWithTimer: React.FC<Props> = ({
   activity,
-  handleClick,
+  selectable,
+  handleSelect,
   selected,
 }) => {
   const [count, setCount] = useState(0);
@@ -62,7 +64,7 @@ const ActivityTile: React.FC<Props> = ({
   });
 
   return (
-    <Tile selected={selected} onClick={handleClick}>
+    <Tile selected={selected} onClick={handleSelect}>
       {selected && (count < timedExerciseWaitPeriod
         ? <PreparationTimer />
         : <ActiveTimer />
@@ -74,19 +76,21 @@ const ActivityTile: React.FC<Props> = ({
         <Duration>
           <p>{formatSeconds(activity.timerInSeconds)}</p>
         </Duration>
-        <SelectionArea>
-          <SelectComplete />
-        </SelectionArea>
+        {selectable &&
+          <SelectionArea>
+            <SelectComplete />
+          </SelectionArea>
+        }
       </VisibleArea>
     </Tile>
   );
 };
 
 const areEqual = (prevProps, nextProps) => {
-  // the props handleClick and activity should never change
+  // the props handleSelect and activity should never change
   // we only care about show and selected
   return prevProps.show === nextProps.show
     && prevProps.selected === nextProps.selected;
 };
 
-export default React.memo(ActivityTile, areEqual);
+export default React.memo(ActivityTileWithTimer, areEqual);

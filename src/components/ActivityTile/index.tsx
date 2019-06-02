@@ -19,8 +19,7 @@ export const Tile = styled.li`
 
 export const SelectionArea = styled.div`
   order: 3;
-  height: 50px;
-  width: 50px;
+  width: 48px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -28,9 +27,10 @@ export const SelectionArea = styled.div`
 `;
 
 export const SelectComplete = styled.button`
-  border: none;
-  height: 30px;
-  width: 30px;
+  border: 1px solid darkgrey;
+  background-color: transparent;
+  height: 28px;
+  width: 28px;
   border-radius: 50%;
   color: white;
 `;
@@ -56,19 +56,19 @@ export const SubTitle = styled.p`
 `;
 
 export const Duration = styled.div`
-  flex-basis: 44px;
+  flex-basis: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  padding: 0 8px;
+  padding: 0 4px;
   order: 1;
 `;
 
 export const VisibleArea = styled.div`
   position: relative;
   display: flex;
-  align-items: center;
+  align-items: stretch;
   flex-direction: row;
   justify-content: flex-start;
   min-height: ${tileMinHeight}px;

@@ -25,15 +25,19 @@ const SeeMoreArrowWrapper = styled(animated.div)`
 
 interface Props {
   activity: WeightedActivity;
-  handleClick: any;
+  handleSelect: any;
+  handleOpen: any;
+  selectable: boolean;
   selected: boolean;
   show: boolean;
 }
 
-const ActivityTile: React.FC<Props> = ({
+const ActivityTileWithReps: React.FC<Props> = ({
   activity,
   show,
-  handleClick,
+  handleSelect,
+  handleOpen,
+  selectable,
   selected,
 }) => {
   const animatedStyles = useSpring({
@@ -44,18 +48,20 @@ const ActivityTile: React.FC<Props> = ({
   });
 
   return (
-    <Tile selected={selected} onClick={handleClick}>
+    <Tile selected={selected} onClick={handleSelect}>
       <VisibleArea>
-        <Details>
+        <Details onClick={handleOpen}>
           <Title>{activity.name}</Title>
           <SubTitle>Weight: {activity.weightInKilos}kg</SubTitle>
         </Details>
         <Duration>
           <p>{activity.repsGoal}</p>
         </Duration>
-        <SelectionArea>
-          <SelectComplete />
-        </SelectionArea>
+        {selectable &&
+          <SelectionArea>
+            <SelectComplete />
+          </SelectionArea>
+        }
       </VisibleArea>
 
       <animated.div style={{
@@ -78,10 +84,10 @@ const ActivityTile: React.FC<Props> = ({
 };
 
 const areEqual = (prevProps, nextProps) => {
-  // the props handleClick and activity should never change
+  // the props handleSelect and activity should never change
   // we only care about show and selected
   return prevProps.show === nextProps.show
     && prevProps.selected === nextProps.selected;
 };
 
-export default React.memo(ActivityTile, areEqual);
+export default React.memo(ActivityTileWithReps, areEqual);
