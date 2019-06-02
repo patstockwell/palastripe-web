@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSpring, animated } from 'react-spring';
 import styled from 'styled-components';
+import IncrementDecrementPanel from './IncrementDecrementPanel';
 import DownArrow from '../../assets/svg/DownArrow';
 import {
   WeightedActivity, // eslint-disable-line no-unused-vars
@@ -68,7 +69,14 @@ const ActivityTileWithReps: React.FC<Props> = ({
         height: animatedStyles.height,
         opacity: animatedStyles.opacity,
       }}>
-        Hidden area!
+        <IncrementDecrementPanel
+          number={activity.repsGoal}
+          label={'Reps'}
+        />
+        <IncrementDecrementPanel
+          number={activity.weightInKilos}
+          label={'kg'}
+        />
       </animated.div>
       {selected &&
         <SeeMoreArrowWrapper
