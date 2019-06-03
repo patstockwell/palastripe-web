@@ -62,6 +62,8 @@ const ActivityList: React.FC<Props> = ({
         selectable={selectable}
         selected={selectable && isSelected}
         show={isSelected && show}
+        group={group}
+        index={i}
         key={i}
         activity={a}
         handleSelect={() => {

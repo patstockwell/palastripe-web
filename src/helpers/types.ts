@@ -48,6 +48,7 @@ export interface Workout {
   finishTime?: number;
   name: string;
   exercises: WorkoutActivities;
+  version?: string;
 }
 
 export interface WorkoutActivities {

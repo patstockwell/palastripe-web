@@ -2,6 +2,7 @@ import React from 'react';
 import { useSpring, animated } from 'react-spring';
 import styled from 'styled-components';
 import HiddenArea from './HiddenArea';
+import ToggleSetCompleteButton from './ToggleSetCompleteButton';
 import DownArrow from '../../assets/svg/DownArrow';
 import {
   WeightedActivity, // eslint-disable-line no-unused-vars
@@ -13,8 +14,6 @@ import {
   SubTitle,
   Duration,
   VisibleArea,
-  SelectionArea,
-  SelectComplete,
 } from './index';
 
 const SeeMoreArrowWrapper = styled(animated.div)`
@@ -26,8 +25,10 @@ const SeeMoreArrowWrapper = styled(animated.div)`
 
 interface Props {
   activity: WeightedActivity;
-  handleSelect: any;
+  group: string;
   handleOpen: any;
+  handleSelect: any;
+  index: number;
   selectable: boolean;
   selected: boolean;
   show: boolean;
@@ -35,11 +36,13 @@ interface Props {
 
 const ActivityTileWithReps: React.FC<Props> = ({
   activity,
-  show,
+  group,
   handleSelect,
   handleOpen,
+  index,
   selectable,
   selected,
+  show,
 }) => {
   const animatedStyles = useSpring({
     height: show ? 300 : 0,
@@ -59,9 +62,11 @@ const ActivityTileWithReps: React.FC<Props> = ({
           <p>{activity.repsGoal}</p>
         </Duration>
         {selectable &&
-          <SelectionArea>
-            <SelectComplete />
-          </SelectionArea>
+          <ToggleSetCompleteButton
+            selected={selected}
+            group={group}
+            index={index}
+          />
         }
       </VisibleArea>
 

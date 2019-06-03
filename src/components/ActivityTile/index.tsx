@@ -4,6 +4,9 @@ import { isTimed } from '../../helpers/types';
 import ActivityTileWithReps from './ActivityTileWithReps';
 import ActivityTileWithTimer from './ActivityTileWithTimer';
 import {
+  Activity, // eslint-disable-line no-unused-vars
+} from '../../helpers/types';
+import {
   lightLightGrey,
   superLightGrey,
   tileMinHeight,
@@ -75,10 +78,46 @@ export const VisibleArea = styled.div`
   background-color: transparent;
 `;
 
-const ActivityTile = props => (
-  isTimed(props.activity)
-    ? <ActivityTileWithTimer {...props} />
-    : <ActivityTileWithReps {...props} />
+interface Props {
+  activity: Activity;
+  group: string;
+  index: number;
+  handleSelect: any;
+  handleOpen: any;
+  selectable: boolean;
+  selected: boolean;
+  show: boolean;
+}
+
+const ActivityTile: React.FC<Props> = ({
+  activity,
+  group,
+  index,
+  handleSelect,
+  handleOpen,
+  selectable,
+  selected,
+  show,
+}) => (
+  isTimed(activity)
+    ? <ActivityTileWithTimer
+      selectable={selectable}
+      selected={selected}
+      group={group}
+      index={index}
+      activity={activity}
+      handleSelect={handleSelect}
+    />
+    : <ActivityTileWithReps
+      selectable={selectable}
+      selected={selected}
+      show={show}
+      group={group}
+      index={index}
+      activity={activity}
+      handleSelect={handleSelect}
+      handleOpen={handleOpen}
+    />
 );
 
 export default ActivityTile;

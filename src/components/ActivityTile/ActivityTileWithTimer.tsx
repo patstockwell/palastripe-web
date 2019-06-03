@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled, { keyframes } from 'styled-components';
+import ToggleSetCompleteButton from './ToggleSetCompleteButton';
 import {
   TimedActivity, // eslint-disable-line no-unused-vars
 } from '../../helpers/types';
@@ -11,8 +12,6 @@ import {
   Title,
   Duration,
   VisibleArea,
-  SelectionArea,
-  SelectComplete,
 } from './index';
 
 const grow = keyframes`
@@ -40,6 +39,8 @@ const ActiveTimer = styled.div`
 
 interface Props {
   activity: TimedActivity;
+  group: string;
+  index: number;
   handleSelect: any;
   selectable: boolean;
   selected: boolean;
@@ -47,6 +48,8 @@ interface Props {
 
 const ActivityTileWithTimer: React.FC<Props> = ({
   activity,
+  group,
+  index,
   selectable,
   handleSelect,
   selected,
@@ -77,9 +80,11 @@ const ActivityTileWithTimer: React.FC<Props> = ({
           <p>{formatSeconds(activity.timerInSeconds)}</p>
         </Duration>
         {selectable &&
-          <SelectionArea>
-            <SelectComplete />
-          </SelectionArea>
+          <ToggleSetCompleteButton
+            selected={selected}
+            group={group}
+            index={index}
+          />
         }
       </VisibleArea>
     </Tile>
