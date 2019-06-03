@@ -4,7 +4,7 @@ import {
   TimedActivity, // eslint-disable-line no-unused-vars
 } from '../../helpers/types';
 import { formatSeconds } from '../../helpers/functions';
-import { green, timedExerciseWaitPeriod } from '../../helpers/constants';
+import { purple, timedExerciseWaitPeriod } from '../../helpers/constants';
 import {
   Tile,
   Details,
@@ -22,7 +22,7 @@ const grow = keyframes`
 
 const PreparationTimer = styled.div`
   position: absolute;
-  top: 0;
+  top: 90%;
   bottom: 0;
   left: 0;
   background-color: lightgrey;
@@ -31,10 +31,10 @@ const PreparationTimer = styled.div`
 
 const ActiveTimer = styled.div`
   position: absolute;
-  top: 0;
+  top: 90%;
   bottom: 0;
   left: 0;
-  background-color: ${green};
+  background-color: ${purple};
   animation: ${grow} 60s linear;
 `;
 
