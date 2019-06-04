@@ -1,11 +1,17 @@
 import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
 import styled, { keyframes } from 'styled-components';
 import ToggleSetCompleteButton from './ToggleSetCompleteButton';
 import {
+  ReduxAction, // eslint-disable-line no-unused-vars
   TimedActivity, // eslint-disable-line no-unused-vars
 } from '../../helpers/types';
 import { formatSeconds } from '../../helpers/functions';
-import { purple, timedExerciseWaitPeriod } from '../../helpers/constants';
+import {
+  purple,
+  timedExerciseWaitPeriod,
+  TOGGLE_SET_COMPLETE,
+} from '../../helpers/constants';
 import {
   Tile,
   Details,
@@ -44,15 +50,15 @@ interface Props {
   handleSelect: any;
   selectable: boolean;
   selected: boolean;
+  toggleSetComplete?: () => ReduxAction;
 }
 
 const ActivityTileWithTimer: React.FC<Props> = ({
   activity,
-  group,
-  index,
   selectable,
   handleSelect,
   selected,
+  toggleSetComplete,
 }) => {
   const [count, setCount] = useState(0);
 
@@ -81,9 +87,7 @@ const ActivityTileWithTimer: React.FC<Props> = ({
         </Duration>
         {selectable &&
           <ToggleSetCompleteButton
-            selected={selected}
-            group={group}
-            index={index}
+            toggleSetComplete={toggleSetComplete}
           />
         }
       </VisibleArea>
@@ -98,4 +102,18 @@ const areEqual = (prevProps, nextProps) => {
     && prevProps.selected === nextProps.selected;
 };
 
-export default React.memo(ActivityTileWithTimer, areEqual);
+const mapDispatchToProps = (dispatch, ownProps: Props) => {
+  const { selected, group, index } = ownProps;
+
+  return {
+    toggleSetComplete: (): ReduxAction => dispatch({
+      type: selected && TOGGLE_SET_COMPLETE,
+      payload: { group, index },
+    }),
+  };
+};
+
+export default connect(
+  null,
+  mapDispatchToProps,
+)(React.memo(ActivityTileWithTimer, areEqual));

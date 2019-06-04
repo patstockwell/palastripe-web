@@ -1,7 +1,7 @@
 import {
   SET_ACTIVE_WORKOUT,
   WORKOUT_SHAPE_VERSION,
-  TOOGLE_SET_COMPLETE,
+  TOGGLE_SET_COMPLETE,
 } from '../helpers/constants';
 import {
   ReduxAction, // eslint-disable-line no-unused-vars
@@ -13,7 +13,7 @@ const activeWorkoutReducer = (state: Workout, action: ReduxAction) => {
     case SET_ACTIVE_WORKOUT: {
       return setActiveWorkout(state, action);
     }
-    case TOOGLE_SET_COMPLETE: {
+    case TOGGLE_SET_COMPLETE: {
       return toggleSetComplete(state, action);
     }
     default: {
@@ -23,6 +23,8 @@ const activeWorkoutReducer = (state: Workout, action: ReduxAction) => {
 };
 
 const toggleSetComplete = (state: Workout, action: ReduxAction): Workout => {
+  console.log(state, action);
+
   const {
     payload: {
       group,

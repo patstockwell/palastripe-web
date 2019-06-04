@@ -1,12 +1,15 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { useSpring, animated } from 'react-spring';
 import styled from 'styled-components';
 import HiddenArea from './HiddenArea';
 import ToggleSetCompleteButton from './ToggleSetCompleteButton';
 import DownArrow from '../../assets/svg/DownArrow';
 import {
+  ReduxAction, // eslint-disable-line no-unused-vars
   WeightedActivity, // eslint-disable-line no-unused-vars
 } from '../../helpers/types';
+import { TOGGLE_SET_COMPLETE } from '../../helpers/constants';
 import {
   Tile,
   Details,
@@ -32,17 +35,17 @@ interface Props {
   selectable: boolean;
   selected: boolean;
   show: boolean;
+  toggleSetComplete?: () => ReduxAction;
 }
 
 const ActivityTileWithReps: React.FC<Props> = ({
   activity,
-  group,
   handleSelect,
   handleOpen,
-  index,
   selectable,
   selected,
   show,
+  toggleSetComplete,
 }) => {
   const animatedStyles = useSpring({
     height: show ? 300 : 0,
@@ -63,9 +66,7 @@ const ActivityTileWithReps: React.FC<Props> = ({
         </Duration>
         {selectable &&
           <ToggleSetCompleteButton
-            selected={selected}
-            group={group}
-            index={index}
+            toggleSetComplete={() => selected && toggleSetComplete()}
           />
         }
       </VisibleArea>
@@ -96,4 +97,18 @@ const areEqual = (prevProps, nextProps) => {
     && prevProps.selected === nextProps.selected;
 };
 
-export default React.memo(ActivityTileWithReps, areEqual);
+const mapDispatchToProps = (dispatch, ownProps: Props) => {
+  const { group, index } = ownProps;
+
+  return {
+    toggleSetComplete: (): ReduxAction => dispatch({
+      type: TOGGLE_SET_COMPLETE,
+      payload: { group, index },
+    }),
+  };
+};
+
+export default connect(
+  null,
+  mapDispatchToProps,
+)(React.memo(ActivityTileWithReps, areEqual));

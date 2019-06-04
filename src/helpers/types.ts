@@ -3,14 +3,6 @@ export interface ReduxAction {
   payload: any;
 }
 
-export interface WorkingSet {
-  id: string,
-  weightInKilos: number,
-  maxReps: number,
-  completed: number,
-  autoIncrement: number,
-}
-
 // State shape
 export interface State {
   activeWorkout?: Workout;
@@ -63,7 +55,7 @@ export interface TimedActivity {
   name?: string;
   restPeriodInSeconds?: number;
   timerInSeconds: number;
-  completed: boolean;
+  completed?: boolean;
 }
 
 export interface WeightedActivity {
@@ -72,7 +64,8 @@ export interface WeightedActivity {
   restPeriodInSeconds?: number;
   weightInKilos: number;
   repsGoal: number;
-  completed: number;
+  repsAchieved?: number;
+  completed?: number;
   autoIncrement: number;
 }
 
