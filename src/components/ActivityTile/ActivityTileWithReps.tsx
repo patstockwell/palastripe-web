@@ -66,7 +66,8 @@ const ActivityTileWithReps: React.FC<Props> = ({
         </Duration>
         {selectable &&
           <ToggleSetCompleteButton
-            toggleSetComplete={() => selected && toggleSetComplete()}
+            toggleSetComplete={toggleSetComplete}
+            completed={activity.completed}
           />
         }
       </VisibleArea>
@@ -77,6 +78,7 @@ const ActivityTileWithReps: React.FC<Props> = ({
       }}>
         <HiddenArea activity={activity} />
       </animated.div>
+
       {selected &&
         <SeeMoreArrowWrapper
           style={{
@@ -94,15 +96,17 @@ const areEqual = (prevProps, nextProps) => {
   // the props handleSelect and activity should never change
   // we only care about show and selected
   return prevProps.show === nextProps.show
-    && prevProps.selected === nextProps.selected;
+    && prevProps.selected === nextProps.selected
+    && prevProps.activity.completed === nextProps.activity.completed;
 };
 
 const mapDispatchToProps = (dispatch, ownProps: Props) => {
-  const { group, index } = ownProps;
+  const { selected, group, index } = ownProps;
 
   return {
     toggleSetComplete: (): ReduxAction => dispatch({
-      type: TOGGLE_SET_COMPLETE,
+      // only set the type correctly if this tile is selected
+      type: selected && TOGGLE_SET_COMPLETE,
       payload: { group, index },
     }),
   };

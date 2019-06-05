@@ -1,4 +1,5 @@
 import React from 'react';
+import CircleTick from '../../assets/svg/CircleTick';
 import {
   ReduxAction, // eslint-disable-line no-unused-vars
 } from '../../helpers/types';
@@ -8,12 +9,18 @@ import {
 } from './index';
 
 interface Props {
-  toggleSetComplete: () => (ReduxAction | boolean);
+  toggleSetComplete: () => ReduxAction;
+  completed: boolean;
 }
 
-const ToggleSetCompleteButton: React.FC<Props> = ({ toggleSetComplete }) => (
+const ToggleSetCompleteButton: React.FC<Props> = ({
+  toggleSetComplete,
+  completed,
+}) => (
   <SelectionArea>
-    <SelectComplete onClick={toggleSetComplete} />
+    <SelectComplete onClick={toggleSetComplete}>
+      {completed && <CircleTick />}
+    </SelectComplete>
   </SelectionArea>
 );
 

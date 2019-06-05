@@ -1,4 +1,6 @@
-import { Workout } from '../helpers/types';
+import {
+  Workout, // eslint-disable-line no-unused-vars
+} from '../helpers/types';
 import Image from '../assets/images/active-body-crossfit-1533897.jpg';
 
 const circuitSpeed: Workout = {
@@ -17,7 +19,7 @@ const circuitSpeed: Workout = {
       {
         id: 'upright-row',
         autoIncrement: 0,
-        completed: 0,
+        completed: false,
         repsGoal: 10,
         weightInKilos: 30,
         restPeriodInSeconds: 60,
@@ -25,7 +27,7 @@ const circuitSpeed: Workout = {
       {
         id: 'upright-row',
         autoIncrement: 0,
-        completed: 0,
+        completed: false,
         repsGoal: 10,
         weightInKilos: 30,
         restPeriodInSeconds: 60,
@@ -33,7 +35,7 @@ const circuitSpeed: Workout = {
       {
         id: 'upright-row',
         autoIncrement: 0,
-        completed: 0,
+        completed: false,
         repsGoal: 10,
         weightInKilos: 30,
         restPeriodInSeconds: 60,
@@ -41,7 +43,7 @@ const circuitSpeed: Workout = {
       {
         id: 'upright-row',
         autoIncrement: 0,
-        completed: 0,
+        completed: false,
         repsGoal: 10,
         weightInKilos: 30,
         restPeriodInSeconds: 60,

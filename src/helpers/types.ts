@@ -65,7 +65,7 @@ export interface WeightedActivity {
   weightInKilos: number;
   repsGoal: number;
   repsAchieved?: number;
-  completed?: number;
+  completed?: boolean;
   autoIncrement: number;
 }
 

@@ -30,12 +30,16 @@ export const SelectionArea = styled.div`
 `;
 
 export const SelectComplete = styled.button`
-  border: 1px solid darkgrey;
-  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid white;
+  background-color: lightgrey;
   height: 28px;
   width: 28px;
   border-radius: 50%;
   color: white;
+  padding: 0;
 `;
 
 export const Details = styled.div`
