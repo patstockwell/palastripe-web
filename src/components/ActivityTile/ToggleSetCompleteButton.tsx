@@ -9,7 +9,7 @@ import {
 } from './index';
 
 interface Props {
-  toggleSetComplete: () => ReduxAction;
+  toggleSetComplete: (completed?: boolean) => ReduxAction;
   completed: boolean;
 }
 

@@ -23,10 +23,9 @@ const activeWorkoutReducer = (state: Workout, action: ReduxAction) => {
 };
 
 const toggleSetComplete = (state: Workout, action: ReduxAction): Workout => {
-  console.log(state, action);
-
   const {
     payload: {
+      completed: done,
       group,
       index,
     },
@@ -37,10 +36,10 @@ const toggleSetComplete = (state: Workout, action: ReduxAction): Workout => {
     ...state,
     exercises: {
       ...exercises,
-      [group]: exercises[group].map((set, i) => (i === index ? {
-        ...set,
-        completed: !set.completed,
-      } : set)),
+      [group]: exercises[group].map((s, i) => (i === index ? {
+        ...s,
+        completed: done ? done : !s.completed,
+      } : s)),
     },
   };
 };

@@ -40,7 +40,7 @@ const ActiveTimer = styled.div`
   bottom: 0;
   left: 0;
   background-color: ${green};
-  animation: ${grow} 60s linear;
+  animation: ${grow} ${({timer}) => timer}s linear;
 `;
 
 interface Props {
@@ -50,11 +50,15 @@ interface Props {
   handleSelect: any;
   selectable: boolean;
   selected: boolean;
-  toggleSetComplete?: () => ReduxAction;
+  toggleSetComplete?: (completed?: boolean) => ReduxAction;
 }
 
 const ActivityTileWithTimer: React.FC<Props> = ({
-  activity,
+  activity: {
+    name,
+    timerInSeconds,
+    completed,
+  },
   selectable,
   handleSelect,
   selected,
@@ -62,33 +66,40 @@ const ActivityTileWithTimer: React.FC<Props> = ({
 }) => {
   const [count, setCount] = useState(0);
 
+  const totalExerciseTime = timedExerciseWaitPeriod + timerInSeconds;
+
   useEffect(() => {
-    if (selected) {
+    if (selected && !completed && count < totalExerciseTime) {
+      // if we're below the count threshold, keep counting
       const id = setInterval(() => setCount(count + 1), 1000);
       return () => clearInterval(id);
+    } else if (selected && !completed && count >= totalExerciseTime) {
+      // if we're above the count threshold, toggle the 'completed' button
+      toggleSetComplete(true);
+    } else if (completed) {
+      return; // do nothing
     } else {
-      // reset count when not selected
-      setCount(0);
+      setCount(0); // else if not selected and not complete, reset counter
     }
   });
 
   return (
     <Tile selected={selected} onClick={handleSelect}>
-      {selected && (count < timedExerciseWaitPeriod
+      {selected && !completed && (count < timedExerciseWaitPeriod
         ? <PreparationTimer />
-        : <ActiveTimer />
+        : <ActiveTimer timer={timerInSeconds} />
       )}
       <VisibleArea>
         <Details>
-          <Title>{activity.name}</Title>
+          <Title>{name}</Title>
         </Details>
         <Duration>
-          <p>{formatSeconds(activity.timerInSeconds)}</p>
+          <p>{formatSeconds(timerInSeconds)}</p>
         </Duration>
         {selectable &&
           <ToggleSetCompleteButton
-            toggleSetComplete={toggleSetComplete}
-            completed={activity.completed}
+            toggleSetComplete={() => toggleSetComplete()}
+            completed={completed}
           />
         }
       </VisibleArea>
@@ -108,10 +119,10 @@ const mapDispatchToProps = (dispatch, ownProps: Props) => {
   const { selected, group, index } = ownProps;
 
   return {
-    toggleSetComplete: (): ReduxAction => dispatch({
-      // only set the type correctly if this tile is selected
+    toggleSetComplete: (completed?: boolean): ReduxAction => dispatch({
+      // only set the action type correctly if this tile is selected
       type: selected && TOGGLE_SET_COMPLETE,
-      payload: { group, index },
+      payload: { completed, group, index },
     }),
   };
 };
