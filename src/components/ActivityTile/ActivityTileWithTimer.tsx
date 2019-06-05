@@ -8,7 +8,7 @@ import {
 } from '../../helpers/types';
 import { formatSeconds } from '../../helpers/functions';
 import {
-  purple,
+  green,
   timedExerciseWaitPeriod,
   TOGGLE_SET_COMPLETE,
 } from '../../helpers/constants';
@@ -39,7 +39,7 @@ const ActiveTimer = styled.div`
   top: 90%;
   bottom: 0;
   left: 0;
-  background-color: ${purple};
+  background-color: ${green};
   animation: ${grow} 60s linear;
 `;
 
