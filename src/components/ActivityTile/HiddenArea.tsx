@@ -18,11 +18,11 @@ const HiddenArea: React.FC<Props> = ({
     <React.Fragment>
       <IncrementDecrementPanel
         isRepetitions
-        number={repsGoal}
+        displayedValue={repsGoal}
         label={'Reps'}
       />
       <IncrementDecrementPanel
-        number={weightInKilos}
+        displayedValue={weightInKilos}
         label={'kg'}
       />
     </React.Fragment>

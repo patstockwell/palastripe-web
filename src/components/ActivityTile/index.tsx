@@ -18,6 +18,7 @@ export const Tile = styled.li`
   border: none;
   border-bottom: 1px solid ${lightLightGrey};
   background-color: ${({ selected }) => selected ? 'white' : superLightGrey};
+  cursor: pointer;
 `;
 
 export const SelectionArea = styled.div`

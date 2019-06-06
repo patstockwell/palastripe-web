@@ -56,12 +56,12 @@ const Reps = styled.p`
 
 interface Props {
   isRepetitions?: boolean;
-  number: number;
+  displayedValue: number;
   label: string;
 }
 
 const IncrementDecrementPanel: React.FC<Props> = ({
-  number,
+  displayedValue,
   label,
   isRepetitions,
 }) => (
@@ -72,7 +72,7 @@ const IncrementDecrementPanel: React.FC<Props> = ({
     <OuterCircle>
       <InnerCircle>
         <Reps>
-          <MainValue>{number}</MainValue>
+          <MainValue>{displayedValue}</MainValue>
           {isRepetitions && '/12'}
         </Reps>
         <p>{label}</p>

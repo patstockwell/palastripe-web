@@ -7,6 +7,9 @@
     "jsRules": true,
     "rules": {
       "no-console": ["false"],
+      "jsx-boolean-value": ["false"],
+      "trailing-comma": ["false"],
+      "jsx-no-lambda": ["false"],
       "arrow-parens": ["false"],
       "interface-name": ["false"],
       "ordered-imports": ["false"],

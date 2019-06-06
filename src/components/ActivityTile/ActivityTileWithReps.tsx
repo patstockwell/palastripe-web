@@ -81,6 +81,7 @@ const ActivityTileWithReps: React.FC<Props> = ({
 
       {selected &&
         <SeeMoreArrowWrapper
+          onClick={handleOpen}
           style={{
             transform: animatedStyles.x.interpolate(x =>
               `translateX(-50%) rotate(${x}deg`),
@@ -114,5 +115,5 @@ const mapDispatchToProps = (dispatch, ownProps: Props) => {
 
 export default connect(
   null,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(React.memo(ActivityTileWithReps, areEqual));
