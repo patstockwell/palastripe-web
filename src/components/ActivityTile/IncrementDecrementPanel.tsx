@@ -46,36 +46,14 @@ const Panel = styled.div`
   padding: 12px 0;
 `;
 
-const MainValue = styled.span`
-  font-size: 32px;
-  font-weight: 800;
-`;
-
-const Reps = styled.p`
-`;
-
-interface Props {
-  isRepetitions?: boolean;
-  displayedValue: number;
-  label: string;
-}
-
-const IncrementDecrementPanel: React.FC<Props> = ({
-  displayedValue,
-  label,
-  isRepetitions,
-}) => (
+const IncrementDecrementPanel: React.FC<{}> = ({ children }) => (
   <Panel>
     <Button>
       <SubtractionSymbol fill={'white'} />
     </Button>
     <OuterCircle>
       <InnerCircle>
-        <Reps>
-          <MainValue>{displayedValue}</MainValue>
-          {isRepetitions && '/12'}
-        </Reps>
-        <p>{label}</p>
+        {children}
       </InnerCircle>
     </OuterCircle>
     <Button>
