@@ -105,24 +105,27 @@ const ActivityTile: React.FC<Props> = ({
   show,
 }) => (
   isTimed(activity)
-    ? <ActivityTileWithTimer
-      selectable={selectable}
-      selected={selected}
-      group={group}
-      index={index}
-      activity={activity}
-      handleSelect={handleSelect}
-    />
-    : <ActivityTileWithReps
-      selectable={selectable}
-      selected={selected}
-      show={show}
-      group={group}
-      index={index}
-      activity={activity}
-      handleSelect={handleSelect}
-      handleOpen={handleOpen}
-    />
+    ? (
+      <ActivityTileWithTimer
+        selectable={selectable}
+        selected={selected}
+        group={group}
+        index={index}
+        activity={activity}
+        handleSelect={handleSelect}
+      />
+    ) : (
+      <ActivityTileWithReps
+        selectable={selectable}
+        selected={selected}
+        show={show}
+        group={group}
+        index={index}
+        activity={activity}
+        handleSelect={handleSelect}
+        handleOpen={handleOpen}
+      />
+    )
 );
 
 export default ActivityTile;

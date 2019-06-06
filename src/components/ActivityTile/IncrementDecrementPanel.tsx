@@ -3,6 +3,9 @@ import styled from 'styled-components';
 import AdditionSymbol from '../../assets/svg/AdditionSymbol';
 import SubtractionSymbol from '../../assets/svg/SubtractionSymbol';
 import { pink, purple } from '../../helpers/constants';
+import {
+  ReduxAction, // eslint-disable-line no-unused-vars
+} from '../../helpers/types';
 
 const Button = styled.button`
   border-radius: 50%;
@@ -46,9 +49,18 @@ const Panel = styled.div`
   padding: 12px 0;
 `;
 
-const IncrementDecrementPanel: React.FC<{}> = ({ children }) => (
+interface Props {
+  handleDecrement?: () => ReduxAction;
+  handleIncrement?: () => ReduxAction;
+}
+
+const IncrementDecrementPanel: React.FC<Props> = ({
+  children,
+  handleDecrement,
+  handleIncrement,
+}) => (
   <Panel>
-    <Button>
+    <Button onClick={handleDecrement}>
       <SubtractionSymbol fill={'white'} />
     </Button>
     <OuterCircle>
@@ -56,7 +68,7 @@ const IncrementDecrementPanel: React.FC<{}> = ({ children }) => (
         {children}
       </InnerCircle>
     </OuterCircle>
-    <Button>
+    <Button onClick={handleIncrement}>
       <AdditionSymbol fill={'white'} />
     </Button>
   </Panel>

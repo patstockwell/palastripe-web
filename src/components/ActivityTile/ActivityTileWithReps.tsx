@@ -1,5 +1,4 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React from 'react'; import { connect } from 'react-redux';
 import { useSpring, animated } from 'react-spring';
 import styled from 'styled-components';
 import HiddenArea from './HiddenArea';
@@ -26,7 +25,7 @@ const SeeMoreArrowWrapper = styled(animated.div)`
   transform: translateX(-50%);
 `;
 
-interface Props {
+interface OwnProps {
   activity: WeightedActivity;
   group: string;
   handleOpen: any;
@@ -35,11 +34,18 @@ interface Props {
   selectable: boolean;
   selected: boolean;
   show: boolean;
-  toggleSetComplete?: () => ReduxAction;
 }
+
+interface DispatchProps {
+  toggleSetComplete: () => ReduxAction;
+}
+
+type Props = DispatchProps & OwnProps;
 
 const ActivityTileWithReps: React.FC<Props> = ({
   activity,
+  group,
+  index,
   handleSelect,
   handleOpen,
   selectable,
@@ -76,7 +82,11 @@ const ActivityTileWithReps: React.FC<Props> = ({
         height: animatedStyles.height,
         opacity: animatedStyles.opacity,
       }}>
-        <HiddenArea activity={activity} />
+        <HiddenArea
+          activity={activity}
+          group={group}
+          index={index}
+        />
       </animated.div>
 
       {selected &&
@@ -93,11 +103,11 @@ const ActivityTileWithReps: React.FC<Props> = ({
   );
 };
 
-const areEqual = (prevProps, nextProps) => {
+const areEqual = (prevProps: Props, nextProps: Props) => {
   // the props handleSelect and activity should never change
-  // we only care about show and selected
   return prevProps.show === nextProps.show
     && prevProps.selected === nextProps.selected
+    && prevProps.activity.repsAchieved === nextProps.activity.repsAchieved
     && prevProps.activity.completed === nextProps.activity.completed;
 };
 
@@ -113,7 +123,7 @@ const mapDispatchToProps = (dispatch, ownProps: Props) => {
   };
 };
 
-export default connect(
+export default connect<void, DispatchProps, OwnProps>(
   null,
   mapDispatchToProps
 )(React.memo(ActivityTileWithReps, areEqual));

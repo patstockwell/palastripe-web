@@ -129,5 +129,5 @@ const mapDispatchToProps = (dispatch, ownProps: Props) => {
 
 export default connect(
   null,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(React.memo(ActivityTileWithTimer, areEqual));
