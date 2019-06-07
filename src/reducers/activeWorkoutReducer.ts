@@ -1,5 +1,6 @@
 import {
   CHANGE_REPS,
+  CHANGE_WEIGHT,
   SET_ACTIVE_WORKOUT,
   WORKOUT_SHAPE_VERSION,
   TOGGLE_SET_COMPLETE,
@@ -13,6 +14,9 @@ import {
 
 const activeWorkoutReducer = (state: Workout, action: ReduxAction) => {
   switch (action.type) {
+    case CHANGE_WEIGHT: {
+      return changeWeight(state, action);
+    }
     case CHANGE_REPS: {
       return changeReps(state, action);
     }
@@ -26,6 +30,22 @@ const activeWorkoutReducer = (state: Workout, action: ReduxAction) => {
       return state;
     }
   }
+};
+
+const changeWeight = (state: Workout, action: ReduxAction): Workout => {
+  const { payload: { weight: w, group, index } } = action;
+  const { exercises } = state;
+
+  return {
+    ...state,
+    exercises: {
+      ...exercises,
+      [group]: exercises[group].map((wa: WeightedActivity, i) => (i === index ? {
+        ...wa,
+        weightInKilos: wa.weightInKilos + w < 0 ? 0 : wa.weightInKilos + w,
+      } : wa)),
+    },
+  };
 };
 
 const changeReps = (state: Workout, action: ReduxAction): Workout => {

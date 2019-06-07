@@ -50,8 +50,8 @@ const Panel = styled.div`
 `;
 
 interface Props {
-  handleDecrement?: () => ReduxAction;
-  handleIncrement?: () => ReduxAction;
+  handleDecrement: () => ReduxAction;
+  handleIncrement: () => ReduxAction;
 }
 
 const IncrementDecrementPanel: React.FC<Props> = ({

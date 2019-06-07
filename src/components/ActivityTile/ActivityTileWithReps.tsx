@@ -103,14 +103,6 @@ const ActivityTileWithReps: React.FC<Props> = ({
   );
 };
 
-const areEqual = (prevProps: Props, nextProps: Props) => {
-  // the props handleSelect and activity should never change
-  return prevProps.show === nextProps.show
-    && prevProps.selected === nextProps.selected
-    && prevProps.activity.repsAchieved === nextProps.activity.repsAchieved
-    && prevProps.activity.completed === nextProps.activity.completed;
-};
-
 const mapDispatchToProps = (dispatch, ownProps: Props) => {
   const { selected, group, index } = ownProps;
 
@@ -126,4 +118,4 @@ const mapDispatchToProps = (dispatch, ownProps: Props) => {
 export default connect<void, DispatchProps, OwnProps>(
   null,
   mapDispatchToProps
-)(React.memo(ActivityTileWithReps, areEqual));
+)(ActivityTileWithReps);

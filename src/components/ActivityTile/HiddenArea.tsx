@@ -5,7 +5,7 @@ import {
   ReduxAction, // eslint-disable-line no-unused-vars
   WeightedActivity, // eslint-disable-line no-unused-vars
 } from '../../helpers/types';
-import { CHANGE_REPS } from '../../helpers/constants';
+import { CHANGE_WEIGHT, CHANGE_REPS } from '../../helpers/constants';
 import IncrementDecrementPanel from './IncrementDecrementPanel';
 
 const MainValue = styled.span`
@@ -23,6 +23,7 @@ type Props = DispatchProps & OwnProps;
 
 const HiddenArea: React.FC<Props> = ({
   changeReps,
+  changeWeight,
   activity: {
     repsGoal,
     weightInKilos,
@@ -30,9 +31,13 @@ const HiddenArea: React.FC<Props> = ({
   },
 }) => {
   const reps = repsAchieved !== undefined ? repsAchieved : repsGoal;
+
   return (
     <React.Fragment>
-      <IncrementDecrementPanel>
+      <IncrementDecrementPanel
+        handleDecrement={() => changeWeight(-2.5)}
+        handleIncrement={() => changeWeight(2.5)}
+      >
         <p>
           <MainValue>{weightInKilos}</MainValue>
         </p>
@@ -53,6 +58,14 @@ const HiddenArea: React.FC<Props> = ({
 };
 
 const mapDispatchToProps = (dispatch, ownProps: OwnProps) => ({
+  changeWeight: (weight: number) => dispatch ({
+    type: CHANGE_WEIGHT,
+    payload: {
+      group: ownProps.group,
+      index: ownProps.index,
+      weight,
+    },
+  }),
   changeReps: (increment: number) => dispatch({
     type: CHANGE_REPS,
     payload: {
@@ -64,8 +77,11 @@ const mapDispatchToProps = (dispatch, ownProps: OwnProps) => ({
 });
 
 interface DispatchProps {
+  changeWeight: (weight: number) => ReduxAction;
   changeReps: (increment: number) => ReduxAction;
 }
 
-export default connect<void, DispatchProps, OwnProps>
-  (null, mapDispatchToProps)(HiddenArea);
+export default connect<void, DispatchProps, OwnProps>(
+  null,
+  mapDispatchToProps
+)(HiddenArea);
