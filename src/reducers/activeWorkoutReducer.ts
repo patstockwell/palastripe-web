@@ -10,9 +10,10 @@ import {
   ReduxAction, // eslint-disable-line no-unused-vars
   Workout, // eslint-disable-line no-unused-vars
   WeightedActivity, // eslint-disable-line no-unused-vars
+  SingleSetAction, // eslint-disable-line no-unused-vars
 } from '../helpers/types';
 
-const activeWorkoutReducer = (state: Workout, action: ReduxAction) => {
+const activeWorkoutReducer = (state: Workout, action: ReduxAction<any>) => {
   switch (action.type) {
     case CHANGE_WEIGHT: {
       return changeWeight(state, action);
@@ -32,7 +33,9 @@ const activeWorkoutReducer = (state: Workout, action: ReduxAction) => {
   }
 };
 
-const changeWeight = (state: Workout, action: ReduxAction): Workout => {
+const changeWeight = (state: Workout, action: ReduxAction<SingleSetAction & {
+  weight: number,
+}>): Workout => {
   const { payload: { weight: w, group, index } } = action;
   const { exercises } = state;
 
@@ -48,7 +51,11 @@ const changeWeight = (state: Workout, action: ReduxAction): Workout => {
   };
 };
 
-const changeReps = (state: Workout, action: ReduxAction): Workout => {
+const changeReps = (state: Workout, action: ReduxAction<{
+  group: string,
+  index: number,
+  increment: number,
+}>): Workout => {
   const { payload: { increment, group, index } } = action;
   const { exercises } = state;
 
@@ -73,7 +80,11 @@ const changeReps = (state: Workout, action: ReduxAction): Workout => {
   };
 };
 
-const toggleSetComplete = (state: Workout, action: ReduxAction): Workout => {
+const toggleSetComplete = (state: Workout, action: ReduxAction<{
+  group: string,
+  index: number,
+  completed: boolean,
+}>): Workout => {
   const { payload: { completed: done, group, index } } = action;
   const { exercises } = state;
 
@@ -89,14 +100,13 @@ const toggleSetComplete = (state: Workout, action: ReduxAction): Workout => {
   };
 };
 
-const setActiveWorkout = (state: Workout, action: ReduxAction): Workout => {
-  const { payload } = action;
-
-  return {
-    version: WORKOUT_SHAPE_VERSION,
-    startTime: Date.now(),
-    ...payload,
-  };
-};
+const setActiveWorkout = (
+  state: Workout,
+  action: ReduxAction<Workout>
+): Workout => ({
+  version: WORKOUT_SHAPE_VERSION,
+  startTime: Date.now(),
+  ...action.payload,
+});
 
 export default activeWorkoutReducer;

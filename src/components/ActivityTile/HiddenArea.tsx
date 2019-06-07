@@ -2,6 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import {
+  SingleSetAction, // eslint-disable-line no-unused-vars
   ReduxAction, // eslint-disable-line no-unused-vars
   WeightedActivity, // eslint-disable-line no-unused-vars
 } from '../../helpers/types';
@@ -63,7 +64,7 @@ const mapDispatchToProps = (dispatch, ownProps: OwnProps) => ({
     payload: {
       group: ownProps.group,
       index: ownProps.index,
-      weight,
+      value: weight,
     },
   }),
   changeReps: (increment: number) => dispatch({
@@ -71,14 +72,14 @@ const mapDispatchToProps = (dispatch, ownProps: OwnProps) => ({
     payload: {
       group: ownProps.group,
       index: ownProps.index,
-      increment,
+      value: increment,
     },
   }),
 });
 
 interface DispatchProps {
-  changeWeight: (weight: number) => ReduxAction;
-  changeReps: (increment: number) => ReduxAction;
+  changeWeight: (weight: number) => ReduxAction<SingleSetAction & { value: number }>;
+  changeReps: (increment: number) => ReduxAction<SingleSetAction & { value: number }>;
 }
 
 export default connect<void, DispatchProps, OwnProps>(

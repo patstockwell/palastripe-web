@@ -76,7 +76,7 @@ const Start = styled(Link)`
 
 interface Props {
   workout: Workout;
-  setActiveWorkout: (workout: Workout) => ReduxAction;
+  setActiveWorkout: (workout: Workout) => ReduxAction<Workout>;
 }
 
 const ViewWorkoutHero = ({ setActiveWorkout, workout, workout: { imageUrl, name }}: Props) => (
@@ -93,7 +93,7 @@ const ViewWorkoutHero = ({ setActiveWorkout, workout, workout: { imageUrl, name 
 );
 
 const mapDispatchToProps = {
-  setActiveWorkout: (workout: Workout): ReduxAction => ({
+  setActiveWorkout: (workout: Workout): ReduxAction<Workout> => ({
     type: SET_ACTIVE_WORKOUT,
     payload: workout,
   }),

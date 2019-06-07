@@ -4,6 +4,7 @@ import AdditionSymbol from '../../assets/svg/AdditionSymbol';
 import SubtractionSymbol from '../../assets/svg/SubtractionSymbol';
 import { pink, purple } from '../../helpers/constants';
 import {
+  SingleSetAction, // eslint-disable-line no-unused-vars
   ReduxAction, // eslint-disable-line no-unused-vars
 } from '../../helpers/types';
 
@@ -50,8 +51,8 @@ const Panel = styled.div`
 `;
 
 interface Props {
-  handleDecrement: () => ReduxAction;
-  handleIncrement: () => ReduxAction;
+  handleDecrement: () => ReduxAction<SingleSetAction & { value: number }>;
+  handleIncrement: () => ReduxAction<SingleSetAction & { value: number }>;
 }
 
 const IncrementDecrementPanel: React.FC<Props> = ({

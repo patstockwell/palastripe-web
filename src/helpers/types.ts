@@ -1,6 +1,11 @@
-export interface ReduxAction {
+export interface ReduxAction<P> {
   type: string;
-  payload: any;
+  payload: P;
+}
+
+export interface SingleSetAction {
+  group: string;
+  index: number;
 }
 
 // State shape

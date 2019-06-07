@@ -66,7 +66,7 @@ const StyledLink = styled(Link)`
 
 interface Props {
   workout: Workout;
-  setWindowScroll: (number) => ReduxAction;
+  setWindowScroll: (number) => ReduxAction<{ scrollY: number, page: string }>;
   scrollY: number;
 }
 
@@ -106,7 +106,10 @@ const mapStateToProps = ({ scrollY: { WORKOUTS } }) => ({
 });
 
 const mapDispatchToProps = {
-  setWindowScroll: (scrollY: number) => ({
+  setWindowScroll: (scrollY: number): ReduxAction<{
+    scrollY: number,
+    page: string,
+  }> => ({
     type: SET_WINDOW_SCROLL,
     payload: {
       scrollY,

@@ -2,6 +2,7 @@ import React from 'react';
 import CircleTick from '../../assets/svg/CircleTick';
 import {
   ReduxAction, // eslint-disable-line no-unused-vars
+  SingleSetAction, // eslint-disable-line no-unused-vars
 } from '../../helpers/types';
 import {
   SelectionArea,
@@ -9,7 +10,9 @@ import {
 } from './index';
 
 interface Props {
-  toggleSetComplete: (completed?: boolean) => ReduxAction;
+  toggleSetComplete: (completed?: boolean) => ReduxAction<SingleSetAction & {
+    completed?: boolean,
+  }>;
   completed: boolean;
 }
 

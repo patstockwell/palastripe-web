@@ -4,6 +4,7 @@ import styled, { keyframes } from 'styled-components';
 import ToggleSetCompleteButton from './ToggleSetCompleteButton';
 import {
   ReduxAction, // eslint-disable-line no-unused-vars
+  SingleSetAction, // eslint-disable-line no-unused-vars
   TimedActivity, // eslint-disable-line no-unused-vars
 } from '../../helpers/types';
 import { formatSeconds } from '../../helpers/functions';
@@ -43,15 +44,22 @@ const ActiveTimer = styled.div`
   animation: ${grow} ${({timer}) => timer}s linear;
 `;
 
-interface Props {
+interface OwnProps {
   activity: TimedActivity;
   group: string;
   index: number;
   handleSelect: any;
   selectable: boolean;
   selected: boolean;
-  toggleSetComplete?: (completed?: boolean) => ReduxAction;
 }
+
+interface DispatchProps {
+  toggleSetComplete: (completed?: boolean) => ReduxAction<SingleSetAction & {
+    completed: boolean
+  }>;
+}
+
+type Props = OwnProps & DispatchProps;
 
 const ActivityTileWithTimer: React.FC<Props> = ({
   activity: {
@@ -115,11 +123,13 @@ const areEqual = (prevProps, nextProps) => {
     && prevProps.activity.completed === nextProps.activity.completed;
 };
 
-const mapDispatchToProps = (dispatch, ownProps: Props) => {
+const mapDispatchToProps = (dispatch, ownProps: OwnProps) => {
   const { selected, group, index } = ownProps;
 
   return {
-    toggleSetComplete: (completed?: boolean): ReduxAction => dispatch({
+    toggleSetComplete: (completed?: boolean): ReduxAction<SingleSetAction & {
+      completed: boolean,
+    }> => dispatch({
       // only set the action type correctly if this tile is selected
       type: selected && TOGGLE_SET_COMPLETE,
       payload: { completed, group, index },

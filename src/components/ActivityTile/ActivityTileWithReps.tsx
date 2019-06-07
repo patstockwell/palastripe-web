@@ -6,6 +6,7 @@ import ToggleSetCompleteButton from './ToggleSetCompleteButton';
 import DownArrow from '../../assets/svg/DownArrow';
 import {
   ReduxAction, // eslint-disable-line no-unused-vars
+  SingleSetAction, // eslint-disable-line no-unused-vars
   WeightedActivity, // eslint-disable-line no-unused-vars
 } from '../../helpers/types';
 import { TOGGLE_SET_COMPLETE } from '../../helpers/constants';
@@ -37,7 +38,7 @@ interface OwnProps {
 }
 
 interface DispatchProps {
-  toggleSetComplete: () => ReduxAction;
+  toggleSetComplete: () => ReduxAction<SingleSetAction>;
 }
 
 type Props = DispatchProps & OwnProps;
@@ -107,7 +108,7 @@ const mapDispatchToProps = (dispatch, ownProps: Props) => {
   const { selected, group, index } = ownProps;
 
   return {
-    toggleSetComplete: (): ReduxAction => dispatch({
+    toggleSetComplete: (): ReduxAction<SingleSetAction> => dispatch({
       // only set the type correctly if this tile is selected
       type: selected && TOGGLE_SET_COMPLETE,
       payload: { group, index },

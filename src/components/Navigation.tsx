@@ -60,7 +60,10 @@ const getCurrentPage = (pathname: string): string => {
 
 interface Props {
   pathname: string;
-  setWindowScroll: (number, string) => ReduxAction;
+  setWindowScroll: (number, string) => ReduxAction<{
+    scrollY: number,
+    page: string
+  }>;
 }
 
 const Navigation = ({ pathname, setWindowScroll }: Props) => {
@@ -105,7 +108,10 @@ const Navigation = ({ pathname, setWindowScroll }: Props) => {
 };
 
 const mapDispatchToProps = {
-  setWindowScroll: (scrollY: number, page: string) => ({
+  setWindowScroll: (scrollY: number, page: string): ReduxAction<{
+    scrollY: number,
+    page: string
+  }> => ({
     type: SET_WINDOW_SCROLL,
     payload: {
       scrollY,
