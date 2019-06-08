@@ -15,7 +15,7 @@ const Button = styled.button`
   width: 48px
   margin: 16px;
   background-color: ${purple};
-  // background-image: linear-gradient(140deg, ${pink}, ${purple});
+  touch-action: manipulation; // stops double-tap-to-zoom
 `;
 
 const InnerCircle = styled.div`

@@ -14,6 +14,7 @@ export const TileStyle = css`
   background-color: ${({ selected }) => selected ? 'white' : superLightGrey};
   cursor: ${({ selectable }) => selectable ? 'pointer' : 'default'};
   min-height: ${tileMinHeight}px;
+  touch-action: manipulation; // stops double-tap-to-zoom
 `;
 
 export const ButtonStyle = `
