@@ -34,9 +34,9 @@ const activeWorkoutReducer = (state: Workout, action: ReduxAction<any>) => {
 };
 
 const changeWeight = (state: Workout, action: ReduxAction<SingleSetAction & {
-  weight: number,
+  value: number,
 }>): Workout => {
-  const { payload: { weight: w, group, index } } = action;
+  const { payload: { value: w, group, index } } = action;
   const { exercises } = state;
 
   return {
@@ -54,9 +54,9 @@ const changeWeight = (state: Workout, action: ReduxAction<SingleSetAction & {
 const changeReps = (state: Workout, action: ReduxAction<{
   group: string,
   index: number,
-  increment: number,
+  value: number,
 }>): Workout => {
-  const { payload: { increment, group, index } } = action;
+  const { payload: { value, group, index } } = action;
   const { exercises } = state;
 
   return {
@@ -66,7 +66,7 @@ const changeReps = (state: Workout, action: ReduxAction<{
       [group]: exercises[group].map((wa: WeightedActivity, i) => {
         if (i === index) {
           const { repsGoal: g, repsAchieved: a } = wa;
-          const newRepsAchieved = a !== undefined ? a + increment : g + increment;
+          const newRepsAchieved = a !== undefined ? a + value : g + value;
 
           return {
             ...wa,
