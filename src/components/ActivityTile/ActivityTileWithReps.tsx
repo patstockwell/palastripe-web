@@ -3,6 +3,7 @@ import { useSpring, animated } from 'react-spring';
 import styled from 'styled-components';
 import HiddenArea from './HiddenArea';
 import ToggleSetCompleteButton from './ToggleSetCompleteButton';
+import { TileStyle } from '../SharedStyles';
 import DownArrow from '../../assets/svg/DownArrow';
 import {
   ReduxAction, // eslint-disable-line no-unused-vars
@@ -11,13 +12,16 @@ import {
 } from '../../helpers/types';
 import { TOGGLE_SET_COMPLETE } from '../../helpers/constants';
 import {
-  Tile,
   Details,
   Title,
   SubTitle,
   Duration,
   VisibleArea,
 } from './index';
+
+const Tile = styled.li`
+  ${TileStyle}
+`;
 
 const SeeMoreArrowWrapper = styled(animated.div)`
   position: absolute;
@@ -62,7 +66,7 @@ const ActivityTileWithReps: React.FC<Props> = ({
   });
 
   return (
-    <Tile selected={selected} onClick={handleSelect}>
+    <Tile selectable={selectable} selected={selected} onClick={handleSelect}>
       <VisibleArea>
         <Details onClick={handleOpen}>
           <Title>{activity.name}</Title>

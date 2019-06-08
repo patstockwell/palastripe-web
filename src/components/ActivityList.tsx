@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import ActivityTile from './ActivityTile';
+import FinishWorkoutButton from './FinishWorkoutButton';
 import ActivityListHeading from './ActivityListHeading';
 import {
   activityHeadingHeight,
@@ -31,17 +32,17 @@ const Ul = styled.ul`
 
 const BottomEmptySpace = styled.div`
   height: calc(100vh - ${({ stickyTop = 0 }) =>
-    activityHeadingHeight + tileMinHeight + stickyTop}px);
+    activityHeadingHeight + (2 * tileMinHeight) + stickyTop}px);
 `;
 
 interface Props {
   workout: Workout;
   stickyTop?: number;
-  selectable?: boolean;
+  readOnly?: boolean;
 }
 
 const ActivityList: React.FC<Props> = ({
-  selectable,
+  readOnly,
   stickyTop,
   workout: {
     exercises: {
@@ -59,21 +60,21 @@ const ActivityList: React.FC<Props> = ({
 
     return (
       <ActivityTile
-        selectable={selectable}
-        selected={selectable && isSelected}
+        selectable={!readOnly}
+        selected={!readOnly && isSelected}
         show={isSelected && show}
         group={group}
         index={i}
         key={i}
         activity={a}
         handleSelect={() => {
-          if (selectable && !isSelected) {
+          if (!readOnly && !isSelected) {
             setSelected({ group, index: i });
             setShow(false);
           }
         }}
         handleOpen={() => {
-          if (selectable && isSelected) {
+          if (!readOnly && isSelected) {
             setShow(!show);
           }
         }}
@@ -110,6 +111,8 @@ const ActivityList: React.FC<Props> = ({
       >
         <Ul>{stretchTiles}</Ul>
       </ActivityListHeading>
+
+      {!readOnly && <FinishWorkoutButton />}
 
       <BottomEmptySpace
         stickyTop={stickyTop}

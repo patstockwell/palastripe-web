@@ -2,9 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { } from '../helpers/constants';
+import { ButtonStyle } from './SharedStyles';
 import {
-  purple,
   workoutWindowViewport,
   SET_ACTIVE_WORKOUT,
 } from '../helpers/constants';
@@ -61,17 +60,8 @@ const Time = styled.p`
   z-index: 1;
 `;
 
-const Start = styled(Link)`
-  color: white;
-  border: none;
-  font-size: 16px;
-  border-radius: 30px;
-  background-color: ${purple};
-  text-transform: uppercase;
-  font-weight: 800;
-  z-index: 1;
-  text-decoration: none;
-  padding: 15px 25px;
+const LinkButton = styled(Link)`
+  ${ButtonStyle}
 `;
 
 interface Props {
@@ -83,12 +73,12 @@ const ViewWorkoutHero = ({ setActiveWorkout, workout, workout: { imageUrl, name 
   <Window imageUrl={imageUrl}>
     <Title>{name}</Title>
     <Time>{formatMinutes(calculateWorkoutTime(workout))}</Time>
-    <Start
+    <LinkButton
       to={{ pathname: '/active-workout/', state: { immediate: false } }}
       onClick={() => setActiveWorkout(workout)}
     >
       start
-    </Start>
+    </LinkButton>
   </Window>
 );
 

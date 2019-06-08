@@ -55,7 +55,7 @@ const ActiveWorkout: React.FC<Props> = ({
 
   return (
     <AnimatedSlidingPageBase style={{ top: animationStyles.top }}>
-      <ActivityList selectable workout={workout} />
+      <ActivityList workout={workout} />
     </AnimatedSlidingPageBase>
   );
 };

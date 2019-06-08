@@ -7,19 +7,8 @@ import {
   Activity, // eslint-disable-line no-unused-vars
 } from '../../helpers/types';
 import {
-  lightLightGrey,
-  superLightGrey,
   tileMinHeight,
 } from '../../helpers/constants';
-
-export const Tile = styled.li`
-  position: relative;
-  color: ${({ selected }) => selected ? 'black' : '#444'};
-  border: none;
-  border-bottom: 1px solid ${lightLightGrey};
-  background-color: ${({ selected }) => selected ? 'white' : superLightGrey};
-  cursor: pointer;
-`;
 
 export const SelectionArea = styled.div`
   order: 3;

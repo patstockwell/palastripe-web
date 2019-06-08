@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import styled, { keyframes } from 'styled-components';
 import ToggleSetCompleteButton from './ToggleSetCompleteButton';
+import { TileStyle } from '../SharedStyles';
 import {
   ReduxAction, // eslint-disable-line no-unused-vars
   SingleSetAction, // eslint-disable-line no-unused-vars
@@ -14,12 +15,15 @@ import {
   TOGGLE_SET_COMPLETE,
 } from '../../helpers/constants';
 import {
-  Tile,
   Details,
   Title,
   Duration,
   VisibleArea,
 } from './index';
+
+const Tile = styled.li`
+  ${TileStyle}
+`;
 
 const grow = keyframes`
   from { width: 0%; }
@@ -92,7 +96,7 @@ const ActivityTileWithTimer: React.FC<Props> = ({
   });
 
   return (
-    <Tile selected={selected} onClick={handleSelect}>
+    <Tile selectable={selectable} selected={selected} onClick={handleSelect}>
       {selected && !completed && (count < timedExerciseWaitPeriod
         ? <PreparationTimer />
         : <ActiveTimer timer={timerInSeconds} />

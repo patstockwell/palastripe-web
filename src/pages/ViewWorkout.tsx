@@ -41,6 +41,7 @@ const ViewWorkout: React.FC<Props> = ({
       <ActivityList
         stickyTop={bannerHeight}
         workout={workoutWithAllActivityData}
+        readOnly
       />
     </AnimatedSlidingPage>
   );
