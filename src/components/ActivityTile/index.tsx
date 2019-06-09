@@ -11,6 +11,7 @@ import {
 } from '../../helpers/constants';
 
 export const SelectionArea = styled.button`
+  padding: 0;
   order: 3;
   width: 48px;
   display: flex;
