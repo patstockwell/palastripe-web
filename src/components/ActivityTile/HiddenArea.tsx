@@ -1,5 +1,10 @@
-import React from 'react';
+import React, {
+  ReactText, // eslint-disable-line no-unused-vars
+} from 'react';
 import { connect } from 'react-redux';
+import { animated,
+  AnimatedValue, // eslint-disable-line no-unused-vars
+} from 'react-spring';
 import styled from 'styled-components';
 import {
   SingleSetAction, // eslint-disable-line no-unused-vars
@@ -18,11 +23,13 @@ interface OwnProps {
   activity: WeightedActivity;
   group: string;
   index: number;
+  animatedStyles: AnimatedValue<{ height: ReactText }>;
 }
 
 type Props = DispatchProps & OwnProps;
 
 const HiddenArea: React.FC<Props> = ({
+  animatedStyles,
   changeReps,
   changeWeight,
   activity: {
@@ -34,7 +41,10 @@ const HiddenArea: React.FC<Props> = ({
   const reps = repsAchieved !== undefined ? repsAchieved : repsGoal;
 
   return (
-    <React.Fragment>
+    <animated.div style={{
+      height: animatedStyles.height,
+      cursor: 'default',
+    }}>
       <IncrementDecrementPanel
         handleDecrement={() => changeWeight(-2.5)}
         handleIncrement={() => changeWeight(2.5)}
@@ -54,7 +64,7 @@ const HiddenArea: React.FC<Props> = ({
         </p>
         <p>Reps</p>
       </IncrementDecrementPanel>
-    </React.Fragment>
+    </animated.div>
   );
 };
 

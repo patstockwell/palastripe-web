@@ -23,7 +23,9 @@ const Tile = styled.li`
   ${TileStyle}
 `;
 
-const SeeMoreArrowWrapper = styled(animated.div)`
+const SeeMoreArrowWrapper = styled(animated.button)`
+  border: none;
+  background: none;
   position: absolute;
   bottom: 0px;
   left: 50%;
@@ -66,7 +68,12 @@ const ActivityTileWithReps: React.FC<Props> = ({
   });
 
   return (
-    <Tile selectable={selectable} selected={selected} onClick={handleSelect}>
+    <Tile
+      aria-expanded={show}
+      selectable={selectable}
+      selected={selected}
+      onClick={handleSelect}
+    >
       <VisibleArea>
         <Details onClick={handleOpen}>
           <Title>{activity.name}</Title>
@@ -82,18 +89,12 @@ const ActivityTileWithReps: React.FC<Props> = ({
           />
         }
       </VisibleArea>
-
-      <animated.div style={{
-        height: animatedStyles.height,
-        opacity: animatedStyles.opacity,
-      }}>
-        <HiddenArea
-          activity={activity}
-          group={group}
-          index={index}
-        />
-      </animated.div>
-
+      <HiddenArea
+        activity={activity}
+        group={group}
+        index={index}
+        animatedStyles={animatedStyles}
+      />
       {selected &&
         <SeeMoreArrowWrapper
           onClick={handleOpen}

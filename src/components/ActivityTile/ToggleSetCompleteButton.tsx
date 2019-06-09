@@ -20,8 +20,8 @@ const ToggleSetCompleteButton: React.FC<Props> = ({
   toggleSetComplete,
   completed,
 }) => (
-  <SelectionArea>
-    <SelectComplete onClick={toggleSetComplete}>
+  <SelectionArea onClick={toggleSetComplete}>
+    <SelectComplete>
       {completed && <CircleTick />}
     </SelectComplete>
   </SelectionArea>

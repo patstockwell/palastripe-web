@@ -10,16 +10,18 @@ import {
   tileMinHeight,
 } from '../../helpers/constants';
 
-export const SelectionArea = styled.div`
+export const SelectionArea = styled.button`
   order: 3;
   width: 48px;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+  border: none;
+  background: none;
 `;
 
-export const SelectComplete = styled.button`
+export const SelectComplete = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -44,8 +46,11 @@ export const Details = styled.div`
 `;
 
 export const Title = styled.h3`
-  font-size: 16px;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
   white-space: nowrap;
+  font-size: 16px;
 `;
 
 export const SubTitle = styled.p`
