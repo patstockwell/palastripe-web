@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Redirect } from 'react-router';
 import { connect } from 'react-redux';
-import styled from 'styled-components';
+import styled, { createGlobalStyle } from 'styled-components';
 import { animated } from 'react-spring';
 import AlertConfirm, { LinkButton, Button } from '../components/AlertConfirm';
 import ActivityList from '../components/ActivityList';
@@ -25,6 +25,13 @@ export const AnimatedSlidingPage = styled(AnimatedSlidingPageBase)`
   width: 100%;
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch; // enables momentum scolling
+`;
+const GlobalStyle = createGlobalStyle`
+  body {
+    // used for when the modal is displayed
+    // to avoid background scrolling
+    overflow: ${({ hidden }) => hidden ? 'hidden' : 'visible'};
+  }
 `;
 
 interface OwnProps {
@@ -61,13 +68,12 @@ const ActiveWorkout: React.FC<Props> = ({
   } // else we have a workout and should render normally
 
   return (
-    <React.Fragment>
-      <AnimatedSlidingPageBase style={{ top: animationStyles.top }}>
-        <ActivityList
-          workout={workout}
-          finishWorkoutClickHandler={() => setShowEndWorkoutAlert(true)}
-        />
-      </AnimatedSlidingPageBase>
+    <AnimatedSlidingPageBase style={{ top: animationStyles.top }}>
+      <GlobalStyle hidden={showEndWorkoutAlert} />
+      <ActivityList
+        workout={workout}
+        finishWorkoutClickHandler={() => setShowEndWorkoutAlert(true)}
+      />
 
       <AlertConfirm
         cancelAlert={() => setShowEndWorkoutAlert(false)}
@@ -82,7 +88,7 @@ const ActiveWorkout: React.FC<Props> = ({
           onClick={() => finishWorkout(workout)}
           background={purple}>Yes</LinkButton>
       </AlertConfirm>
-    </React.Fragment>
+    </AnimatedSlidingPageBase>
   );
 };
 
