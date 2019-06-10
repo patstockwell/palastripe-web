@@ -96,7 +96,11 @@ export const getLocalStorage = (name: string, defaultValue: any) => {
   return defaultValue;
 };
 
-export const formatDate = (time: number) => {
+export const formatDate = (time: number): {
+  day: string;
+  date: number;
+  month: string;
+} => {
   const date = new Date(time);
   return {
     day: DAYS_OF_THE_WEEK[date.getUTCDay()],
@@ -105,7 +109,7 @@ export const formatDate = (time: number) => {
   };
 };
 
-export const getDiff = (start: number, finish: number) => {
+export const getDiffInMinutes = (start: number, finish: number): number => {
   // create date object first because we can't guarantee that it is in
   // the unix epoc time format
   const startTime = new Date(start);
