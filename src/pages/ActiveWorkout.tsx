@@ -13,12 +13,8 @@ import {
 } from '../helpers/types';
 import { FINISH_WORKOUT, purple } from '../helpers/constants';
 
-const AnimatedSlidingPageBase = styled(animated.div)`
-  position: relative;
+export const AnimatedSlidingPage = styled(animated.div)`
   z-index: 10;
-`;
-
-export const AnimatedSlidingPage = styled(AnimatedSlidingPageBase)`
   position: fixed;
   top: 0;
   bottom: 0;
@@ -26,6 +22,7 @@ export const AnimatedSlidingPage = styled(AnimatedSlidingPageBase)`
   overflow-y: scroll;
   -webkit-overflow-scrolling: touch; // enables momentum scolling
 `;
+
 const GlobalStyle = createGlobalStyle`
   body {
     // used for when the modal is displayed
@@ -67,8 +64,13 @@ const ActiveWorkout: React.FC<Props> = ({
     return null;
   } // else we have a workout and should render normally
 
+  const finishWorkoutWithAlertTransition = () => {
+    finishWorkout(workout);
+    setShowEndWorkoutAlert(false);
+  };
+
   return (
-    <AnimatedSlidingPageBase style={{ top: animationStyles.top }}>
+    <AnimatedSlidingPage style={{ top: animationStyles.top }}>
       <GlobalStyle hidden={showEndWorkoutAlert} />
       <ActivityList
         workout={workout}
@@ -84,11 +86,11 @@ const ActiveWorkout: React.FC<Props> = ({
           onClick={() => setShowEndWorkoutAlert(false)}
           background={'grey'}>No</Button>
         <LinkButton
-          to="/home/"
-          onClick={() => finishWorkout(workout)}
+          to={{ pathname: '/home/', state: { immediate: false } }}
+          onClick={finishWorkoutWithAlertTransition}
           background={purple}>Yes</LinkButton>
       </AlertConfirm>
-    </AnimatedSlidingPageBase>
+    </AnimatedSlidingPage>
   );
 };
 
