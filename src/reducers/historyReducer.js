@@ -1,9 +1,9 @@
-import { END_WORKOUT } from '../helpers/constants';
+import { FINISH_WORKOUT } from '../helpers/constants';
 
 const historyReducer = (state, action) => {
   switch (action.type) {
-    case END_WORKOUT: {
-      return endWorkout(state, action);
+    case FINISH_WORKOUT: {
+      return finishWorkout(state, action);
     }
     default: {
       return state;
@@ -11,10 +11,10 @@ const historyReducer = (state, action) => {
   }
 };
 
-const endWorkout = (state, action) => {
+const finishWorkout = (state, action) => {
   return [
     {
-      ...action.payload.activeWorkout,
+      ...action.payload,
       finishTime: Date.now(),
     },
     ...state,

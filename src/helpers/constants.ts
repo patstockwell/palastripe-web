@@ -52,6 +52,7 @@ export const lightLightGrey = '#dedede';
 export const superLightGrey = '#f4f4f4';
 
 // action types
+export const FINISH_WORKOUT: string = 'FINISH_WORKOUT';
 export const SET_ACTIVE_WORKOUT: string = 'SET_ACTIVE_WORKOUT';
 export const TOGGLE_SET_COMPLETE: string = 'TOGGLE_SET_COMPLETE';
 export const SET_WINDOW_SCROLL: string = 'SET_WINDOW_SCROLL';

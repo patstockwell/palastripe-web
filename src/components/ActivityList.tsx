@@ -44,6 +44,7 @@ interface Props {
 const ActivityList: React.FC<Props> = ({
   readOnly,
   stickyTop,
+  workout,
   workout: {
     exercises: {
       warmUp,
@@ -112,7 +113,7 @@ const ActivityList: React.FC<Props> = ({
         <Ul>{stretchTiles}</Ul>
       </ActivityListHeading>
 
-      {!readOnly && <FinishWorkoutButton />}
+      {!readOnly && <FinishWorkoutButton workout={workout} />}
 
       <BottomEmptySpace
         stickyTop={stickyTop}
