@@ -1,14 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Redirect } from 'react-router';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { animated } from 'react-spring';
+import AlertConfirm, { LinkButton, Button } from '../components/AlertConfirm';
 import ActivityList from '../components/ActivityList';
 import {
   Entities, // eslint-disable-line no-unused-vars
+  ReduxAction, // eslint-disable-line no-unused-vars
   State, // eslint-disable-line no-unused-vars
   Workout, // eslint-disable-line no-unused-vars
 } from '../helpers/types';
+import { FINISH_WORKOUT, purple } from '../helpers/constants';
 
 const AnimatedSlidingPageBase = styled(animated.div)`
   position: relative;
@@ -24,17 +27,21 @@ export const AnimatedSlidingPage = styled(AnimatedSlidingPageBase)`
   -webkit-overflow-scrolling: touch; // enables momentum scolling
 `;
 
-interface Props {
+interface OwnProps {
   animationStyles: any;
   workout: Workout;
   pathname: String;
 }
 
+type Props = OwnProps & DispatchProps & StateProps;
+
 const ActiveWorkout: React.FC<Props> = ({
   animationStyles,
+  finishWorkout,
   pathname,
   workout,
 }) => {
+  const [ showEndWorkoutAlert, setShowEndWorkoutAlert ] = useState(false);
   /*
     An animated component will be matched to a route. React-spring is using the
     url as a key. It will hold both urls and both components while animating
@@ -54,14 +61,51 @@ const ActiveWorkout: React.FC<Props> = ({
   } // else we have a workout and should render normally
 
   return (
-    <AnimatedSlidingPageBase style={{ top: animationStyles.top }}>
-      <ActivityList workout={workout} />
-    </AnimatedSlidingPageBase>
+    <React.Fragment>
+      <AnimatedSlidingPageBase style={{ top: animationStyles.top }}>
+        <ActivityList
+          workout={workout}
+          finishWorkoutClickHandler={() => setShowEndWorkoutAlert(true)}
+        />
+      </AnimatedSlidingPageBase>
+
+      <AlertConfirm
+        cancelAlert={() => setShowEndWorkoutAlert(false)}
+        showAlert={showEndWorkoutAlert}
+        message={'Are you sure you want to finish the workout?'}
+      >
+        <Button
+          onClick={() => setShowEndWorkoutAlert(false)}
+          background={'grey'}>No</Button>
+        <LinkButton
+          to="/home/"
+          onClick={() => finishWorkout(workout)}
+          background={purple}>Yes</LinkButton>
+      </AlertConfirm>
+    </React.Fragment>
   );
+};
+
+interface DispatchProps {
+  finishWorkout: (w: Workout) => ReduxAction<{}>;
+}
+
+interface StateProps {
+  workout: Workout;
+}
+
+const mapDispatchToProps = {
+  finishWorkout: (workout: Workout) => ({
+    type: FINISH_WORKOUT,
+    payload: workout,
+  }),
 };
 
 const mapStateToProps = (state: State) => ({
   workout: state.activeWorkout,
 });
 
-export default connect(mapStateToProps)(ActiveWorkout);
+export default connect<StateProps, DispatchProps, void>(
+  mapStateToProps,
+  mapDispatchToProps
+)(ActiveWorkout);

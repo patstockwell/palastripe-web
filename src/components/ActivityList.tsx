@@ -39,9 +39,11 @@ interface Props {
   workout: Workout;
   stickyTop?: number;
   readOnly?: boolean;
+  finishWorkoutClickHandler?: () => void;
 }
 
 const ActivityList: React.FC<Props> = ({
+  finishWorkoutClickHandler,
   readOnly,
   stickyTop,
   workout,
@@ -113,7 +115,9 @@ const ActivityList: React.FC<Props> = ({
         <Ul>{stretchTiles}</Ul>
       </ActivityListHeading>
 
-      {!readOnly && <FinishWorkoutButton workout={workout} />}
+      {!readOnly &&
+        <FinishWorkoutButton clickHandler={finishWorkoutClickHandler} />
+      }
 
       <BottomEmptySpace
         stickyTop={stickyTop}

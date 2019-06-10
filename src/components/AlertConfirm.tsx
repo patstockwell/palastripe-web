@@ -22,13 +22,9 @@ export const LinkButton = styled(Link)`
 `;
 
 const Background = styled.div`
-  position: absolute;
-  top: 0;
-  left: 0;
   width: 100vw;
   height: calc(100vh + ${popUpHeight}px);
   transform: translateY(-${popUpHeight - bounceSpace}px);
-  z-index: 5;
   background-color: rgba(0, 0, 0, 0.4);
 `;
 
@@ -50,7 +46,7 @@ const ClickableSpace = styled.div`
 const ButtonWrapper = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 300px;
+  width: 280px;
   margin: 0 auto;
 `;
 
@@ -61,7 +57,13 @@ const Message = styled.p`
   margin-bottom: 15px;
 `;
 
-const AlertConfirm = ({
+interface Props {
+  showAlert: boolean;
+  cancelAlert: () => void;
+  message: string;
+}
+
+const AlertConfirm: React.FC<Props> = ({
   children,
   showAlert,
   cancelAlert,
@@ -70,7 +72,7 @@ const AlertConfirm = ({
   const transitions = useTransition(showAlert, null, {
     from: {
       transform: `translateY(${popUpHeight}px)`,
-      position: 'absolute',
+      position: 'fixed',
       top: 0,
       left: 0,
       opacity: 0,
@@ -81,21 +83,25 @@ const AlertConfirm = ({
     config: { mass: 1, tension: 710, friction: 40 }
   });
 
-  return transitions.map(({ item, props }) => {
-    return item ?
-      <animated.div key={'unique'} style={props}>
-        <Background>
-          <ClickableSpace onClick={cancelAlert}/>
-          <Dialog>
-            <Message>{message}</Message>
-            <ButtonWrapper>
-              {children}
-            </ButtonWrapper>
-          </Dialog>
-        </Background>
-      </animated.div>
-      : null;
-  });
+  return (
+    <React.Fragment>
+      {transitions.map(({ item, props }) => {
+        return item ?
+          <animated.div key={'unique'} style={props}>
+            <Background>
+              <ClickableSpace onClick={cancelAlert}/>
+              <Dialog>
+                <Message>{message}</Message>
+                <ButtonWrapper>
+                  {children}
+                </ButtonWrapper>
+              </Dialog>
+            </Background>
+          </animated.div>
+          : null;
+      })}
+    </React.Fragment>
+  );
 };
 
 export default AlertConfirm;
