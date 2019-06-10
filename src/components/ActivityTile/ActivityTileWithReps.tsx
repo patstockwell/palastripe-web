@@ -80,7 +80,7 @@ const ActivityTileWithReps: React.FC<Props> = ({
           <SubTitle>Weight: {activity.weightInKilos}kg</SubTitle>
         </Details>
         <Duration>
-          <p>{activity.repsGoal}</p>
+          <p>{activity.repsGoal} x</p>
         </Duration>
         {selectable &&
           <ToggleSetCompleteButton
