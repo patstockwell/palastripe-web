@@ -3,7 +3,7 @@ import { useSpring, animated } from 'react-spring';
 import styled from 'styled-components';
 import HiddenArea from './HiddenArea';
 import ToggleSetCompleteButton from './ToggleSetCompleteButton';
-import { TileStyle } from '../SharedStyles';
+import { tileStyle } from '../SharedStyles';
 import DownArrow from '../../assets/svg/DownArrow';
 import {
   ReduxAction, // eslint-disable-line no-unused-vars
@@ -20,7 +20,7 @@ import {
 } from './index';
 
 const Tile = styled.li`
-  ${TileStyle}
+  ${tileStyle}
 `;
 
 const SeeMoreArrowWrapper = styled(animated.button)`

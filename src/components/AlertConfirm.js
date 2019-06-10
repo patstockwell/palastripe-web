@@ -2,19 +2,10 @@ import React from 'react';
 import { useTransition, animated } from 'react-spring';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import { buttonStyle } from './SharedStyles';
 
 const bounceSpace = 7;
 const popUpHeight = 253 + bounceSpace;
-
-export const buttonStyle = `
-  color: white;
-  border: none;
-  border-radius: 25px;
-  height: 50px;
-  width: 100px;
-  font-size: 16px;
-  margin: 0 15px;
-`;
 
 export const Button = styled.button`
   ${buttonStyle}

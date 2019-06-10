@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import styled, { keyframes } from 'styled-components';
 import ToggleSetCompleteButton from './ToggleSetCompleteButton';
-import { TileStyle } from '../SharedStyles';
+import { tileStyle } from '../SharedStyles';
 import {
   ReduxAction, // eslint-disable-line no-unused-vars
   SingleSetAction, // eslint-disable-line no-unused-vars
@@ -22,7 +22,7 @@ import {
 } from './index';
 
 const Tile = styled.li`
-  ${TileStyle}
+  ${tileStyle}
 `;
 
 const grow = keyframes`

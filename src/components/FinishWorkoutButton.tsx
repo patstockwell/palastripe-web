@@ -1,15 +1,16 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { ButtonStyle } from './SharedStyles';
+import { buttonStyle } from './SharedStyles';
 import { FINISH_WORKOUT, tileMinHeight } from '../helpers/constants';
 import {
   ReduxAction, // eslint-disable-line no-unused-vars
   Workout, // eslint-disable-line no-unused-vars
 } from '../helpers/types';
 
-const FinishButton = styled.button`
-  ${ButtonStyle}
+const FinishButton = styled(Link)`
+  ${buttonStyle}
 `;
 
 const FlexWrapper = styled.div`
@@ -30,7 +31,10 @@ const FinishWorkoutButton: React.FC<Props> = ({
   workout,
 }) => (
   <FlexWrapper>
-    <FinishButton onClick={() => finishWorkout(workout)}>
+    <FinishButton
+      onClick={() => finishWorkout(workout)}
+      to="/home/"
+    >
       Finish Workout
     </FinishButton>
   </FlexWrapper>

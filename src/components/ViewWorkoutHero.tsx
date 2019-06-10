@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { ButtonStyle } from './SharedStyles';
+import { buttonStyle } from './SharedStyles';
 import {
   workoutWindowViewport,
   SET_ACTIVE_WORKOUT,
@@ -61,7 +61,7 @@ const Time = styled.p`
 `;
 
 const LinkButton = styled(Link)`
-  ${ButtonStyle}
+  ${buttonStyle}
 `;
 
 interface Props {

@@ -6,7 +6,7 @@ import {
   tileMinHeight,
 } from '../helpers/constants';
 
-export const TileStyle = css`
+export const tileStyle = css`
   position: relative;
   color: ${({ selected }) => selected ? 'black' : '#444'};
   border: none;
@@ -17,7 +17,7 @@ export const TileStyle = css`
   touch-action: manipulation; // stops double-tap-to-zoom
 `;
 
-export const ButtonStyle = `
+export const buttonStyle = `
   color: white;
   border: none;
   font-size: 12px;
