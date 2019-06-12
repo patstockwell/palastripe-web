@@ -33,7 +33,12 @@ const ViewWorkout: React.FC<Props> = ({
     combineDataForAllExercises(workout, entities.exercises);
 
   return (
-    <AnimatedSlidingPage style={{ left: animationStyles.left }}>
+    <AnimatedSlidingPage
+      style={{
+        position: animationStyles.position,
+        left: animationStyles.left,
+      }}
+    >
       <BannerForActiveWorkout />
       <ViewWorkoutHero
         workout={workoutWithAllActivityData}

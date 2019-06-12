@@ -15,11 +15,8 @@ import { FINISH_WORKOUT, purple } from '../helpers/constants';
 
 export const AnimatedSlidingPage = styled(animated.div)`
   z-index: 10;
-  position: fixed;
   top: 0;
-  bottom: 0;
   width: 100%;
-  overflow-y: scroll;
   -webkit-overflow-scrolling: touch; // enables momentum scolling
 `;
 
@@ -70,7 +67,12 @@ const ActiveWorkout: React.FC<Props> = ({
   };
 
   return (
-    <AnimatedSlidingPage style={{ top: animationStyles.top }}>
+    <AnimatedSlidingPage
+      style={{
+        position: animationStyles.position,
+        top: animationStyles.top,
+      }}
+    >
       <GlobalStyle hidden={showEndWorkoutAlert} />
       <ActivityList
         workout={workout}

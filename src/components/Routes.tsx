@@ -13,11 +13,13 @@ const Routes = () => {
   const { location } = useRouter();
   const { state = { immediate: true } } = location;
 
-  const transitions = useTransition(location, location => location.key, {
+  const anyUseTransition = useTransition as any;
+
+  const transitions = anyUseTransition(location, location => location.key, {
     immediate: state.immediate,
-    from: { left: '100%', top: '100vh' },
-    enter: { left: '0%', top: '0vh' },
-    leave: { left: '100%', top: '100vh' },
+    from: { left: '100%', top: '100vh', position: 'fixed' },
+    enter: [{ left: '0%', top: '0vh' }, { position: 'relative' }],
+    leave: [{ position : 'fixed' }, { left: '100%', top: '100vh' }],
     config: { tension: 410, friction: 40 },
   });
 
