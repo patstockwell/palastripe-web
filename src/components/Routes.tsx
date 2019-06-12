@@ -6,6 +6,7 @@ import ViewWorkout from '../pages/ViewWorkout';
 import ActiveWorkout from '../pages/ActiveWorkout';
 import Home from '../pages/Home';
 import Me from '../pages/Me';
+import EditWorkout from '../pages/EditWorkout';
 import FourZeroFour from '../pages/FourZeroFour';
 import { useRouter } from '../helpers/functions';
 
@@ -29,9 +30,10 @@ const Routes = () => {
       <Route path="/home/" component={Home} />
       <Route path="/me/" component={Me} />
       <Route path="/workouts/" exact component={Workouts} />
+      <Route path="/edit-workout/" render={() =>
+        <EditWorkout animationStyles={props} />} />
       <Route path="/workouts/:id/" render={({ match }) =>
-        <ViewWorkout match={match} animationStyles={props} />}
-      />
+        <ViewWorkout match={match} animationStyles={props} />} />
       <Route path="/active-workout/" render={() =>
         <ActiveWorkout pathname={location.pathname} animationStyles={props} />} />
       <Route component={FourZeroFour} />

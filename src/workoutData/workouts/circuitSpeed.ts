@@ -1,7 +1,7 @@
 import {
   Workout, // eslint-disable-line no-unused-vars
-} from '../helpers/types';
-import Image from '../assets/images/active-body-crossfit-1533897.jpg';
+} from '../../helpers/types';
+import Image from '../../assets/images/active-body-crossfit-1533897.jpg';
 
 const circuitSpeed: Workout = {
   id: 'circuit-speed',

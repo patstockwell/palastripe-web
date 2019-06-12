@@ -1,4 +1,5 @@
 import React, { Fragment } from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import Navigation from '../components/Navigation';
@@ -31,6 +32,11 @@ const Workouts = ({ location, workouts}: Props) => {
   return (
     <Fragment>
       <Banner heading={'Workouts'}/>
+      Create your own workout
+      <Link to={{
+        pathname: '/edit-workout/',
+        state: { immediate: false },
+      }}>+</Link>
       {workoutTiles}
       <Big />
       <EmptySpace />

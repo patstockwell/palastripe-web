@@ -1,5 +1,7 @@
-import { Workout } from '../helpers/types';
-import Image from '../assets/images/bicep-workout-1851820.jpg';
+import {
+  Workout, // eslint-disable-line no-unused-vars
+} from '../../helpers/types';
+import Image from '../../assets/images/bicep-workout-1851820.jpg';
 
 const fullBodyDumbbellStrength: Workout = {
   id: 'full-body-dumbbell-strength',
