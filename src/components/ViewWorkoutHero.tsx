@@ -17,7 +17,7 @@ import {
 } from '../helpers/types';
 
 const Window = styled.div`
-  height: ${workoutWindowViewport}vh;
+  min-height: ${workoutWindowViewport}vh;
   position: relative;
   background-color: black;
   color: white;
@@ -26,7 +26,7 @@ const Window = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 0 16px;
+  padding: 16px;
 
   // put the image in an 'after' pseudo element. Set it behind the original
   // element which has opacity giving it the dark filter look

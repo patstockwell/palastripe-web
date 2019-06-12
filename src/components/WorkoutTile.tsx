@@ -7,6 +7,7 @@ import {
   Workout, // eslint-disable-line no-unused-vars
 } from '../helpers/types';
 import {
+  gutterWidth,
   superLightGrey,
   tileMinHeight,
   WORKOUTS,
@@ -16,15 +17,16 @@ import { calculateWorkoutTime, formatMinutes } from '../helpers/functions';
 
 const Tile = styled.section`
   height: ${tileMinHeight}px;
+  padding: 0 ${gutterWidth}px;
   display: flex;
   align-items: center;
   border-bottom: solid 1px ${superLightGrey};
+  overflow: hidden;
 `;
 
 const Square = styled.div`
   height: 70px
   width: 70px
-  margin: 10px;
   background-color: black;
   flex-shrink: 0;
   position: relative;
@@ -50,8 +52,9 @@ const Square = styled.div`
 `;
 
 const Name = styled.h3`
-  font-size: 14px;
+  font-size: 16px;
   font-weight: 400;
+  margin-left: 10px;
 `;
 
 const Minutes = styled.p`
@@ -91,11 +94,9 @@ const WorkoutTile = ({ setWindowScroll, scrollY = 0, workout }: Props) => {
         <Square image={workout.imageUrl}>
           <Minutes>{formatMinutes(calculateWorkoutTime(workout))}</Minutes>
         </Square>
-        <div>
-          <Name>
-            {workout.name}
-          </Name>
-        </div>
+        <Name>
+          {workout.name}
+        </Name>
       </Tile>
     </StyledLink>
   );

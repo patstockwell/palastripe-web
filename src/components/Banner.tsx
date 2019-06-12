@@ -43,13 +43,14 @@ const CollapsableHeader = styled.div`
 `;
 
 const PageHeading = styled(animated.h1)`
-  padding: 0 ${gutterWidth}px;
   display: inline-block;
 `;
 
 const VisibleHeader = styled.div`
   min-height: ${bannerHeight}px;
   width: 100%;
+  padding: 0 ${gutterWidth}px;
+  box-sizing: border-box;
 `;
 
 interface Props {
