@@ -11,6 +11,7 @@ import {
 import { formatSeconds } from '../../helpers/functions';
 import {
   green,
+  superLightGrey,
   timedExerciseWaitPeriod,
   TOGGLE_SET_COMPLETE,
 } from '../../helpers/constants';
@@ -30,18 +31,27 @@ const grow = keyframes`
   to { width: 100%; }
 `;
 
+const colourPulse = keyframes`
+  0% { background-color: ${superLightGrey}; }
+  20% { background-color: darkgrey; }
+  100% { background-color: ${superLightGrey}; }
+`;
+
 const PreparationTimer = styled.div`
   position: absolute;
-  top: 90%;
+  top: 80%;
   bottom: 0;
   left: 0;
+  width: 100%;
   background-color: lightgrey;
-  animation: ${grow} ${timedExerciseWaitPeriod}s linear;
+  animation:
+    ${grow} ${timedExerciseWaitPeriod}s linear,
+    ${colourPulse} 2s linear infinite;
 `;
 
 const ActiveTimer = styled.div`
   position: absolute;
-  top: 90%;
+  top: 80%;
   bottom: 0;
   left: 0;
   background-color: ${green};
