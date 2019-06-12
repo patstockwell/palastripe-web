@@ -31,8 +31,8 @@ const Ul = styled.ul`
 `;
 
 const BottomEmptySpace = styled.div`
-  height: calc(100vh - ${({ stickyTop = 0 }) =>
-    activityHeadingHeight + (2 * tileMinHeight) + stickyTop}px);
+  height: calc(100vh - ${({ offset, stickyTop = 0 }) =>
+    activityHeadingHeight + tileMinHeight + stickyTop + offset}px);
 `;
 
 interface Props {
@@ -46,7 +46,6 @@ const ActivityList: React.FC<Props> = ({
   finishWorkoutClickHandler,
   readOnly,
   stickyTop,
-  workout,
   workout: {
     exercises: {
       warmUp,
@@ -121,6 +120,7 @@ const ActivityList: React.FC<Props> = ({
 
       <BottomEmptySpace
         stickyTop={stickyTop}
+        offset={readOnly ? 0 : tileMinHeight}
       />
     </Ul>
   );
