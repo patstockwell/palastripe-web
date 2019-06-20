@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import SearchSuggestionTile from '../components/SearchSuggestionTile';
 import { AnimatedSlidingPage } from './ActiveWorkout';
 import {
   Exercises, // eslint-disable-line no-unused-vars
@@ -16,6 +17,8 @@ interface WordSlices {
   end: string;
 }
 
+type SlicesWithId = WordSlices & { id: string };
+
 export const sliceWord = (
   word: string, index: number, length: number
 ): WordSlices => ({
@@ -26,7 +29,7 @@ export const sliceWord = (
 
 
 export const accumulateMatches =
-  (searchTerm: string, list: WordSlices[], e: Exercise) => {
+  (searchTerm: string, list: SlicesWithId[], e: Exercise): SlicesWithId[] => {
     const name = e ? e.name : '';
     const matchingIndex = name
       .toLowerCase()
@@ -34,7 +37,10 @@ export const accumulateMatches =
 
     return matchingIndex === -1 ? list : [
       ...list,
-      sliceWord(name, matchingIndex, searchTerm.length),
+      {
+        id: e.id,
+        ...sliceWord(name, matchingIndex, searchTerm.length),
+      },
     ];
   };
 
@@ -56,13 +62,13 @@ const EditWorkout: React.FC<Props> = ({
   const matches: JSX.Element[] = inputValue.length >= 3 &&
     exercises.allIds
       .map((id: string): Exercise => exercises.byId[id])
-      .reduce((acc: WordSlices[], curr: Exercise): WordSlices[] => (
+      .reduce((acc: SlicesWithId[], curr: Exercise): SlicesWithId[] => (
         accumulateMatches(inputValue, acc, curr)
       ), [])
-      .map(({ start, highlight, end }: WordSlices) => (
-        <div key={start + highlight + end}>
+      .map(({ id, start, highlight, end }: SlicesWithId) => (
+        <SearchSuggestionTile id={id} key={start + highlight + end}>
           {start}<strong>{highlight}</strong>{end}
-        </div>
+        </SearchSuggestionTile>
       ));
 
   return (
