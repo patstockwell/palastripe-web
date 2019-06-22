@@ -80,7 +80,7 @@ export const VisibleArea = styled.div`
 
 interface Props {
   activity: Activity;
-  group: string;
+  groupId: string;
   index: number;
   handleSelect: any;
   handleOpen: any;
@@ -91,7 +91,7 @@ interface Props {
 
 const ActivityTile: React.FC<Props> = ({
   activity,
-  group,
+  groupId,
   index,
   handleSelect,
   handleOpen,
@@ -104,7 +104,7 @@ const ActivityTile: React.FC<Props> = ({
       <ActivityTileWithTimer
         selectable={selectable}
         selected={selected}
-        group={group}
+        groupId={groupId}
         index={index}
         activity={activity}
         handleSelect={handleSelect}
@@ -114,7 +114,7 @@ const ActivityTile: React.FC<Props> = ({
         selectable={selectable}
         selected={selected}
         show={show}
-        group={group}
+        groupId={groupId}
         index={index}
         activity={activity}
         handleSelect={handleSelect}

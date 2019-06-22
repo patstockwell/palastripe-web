@@ -50,9 +50,11 @@ const Panel = styled.div`
   padding: 12px 0;
 `;
 
+type DispatchFunction = () => ReduxAction<SingleSetAction & { value: number }>;
+
 interface Props {
-  handleDecrement: () => ReduxAction<SingleSetAction & { value: number }>;
-  handleIncrement: () => ReduxAction<SingleSetAction & { value: number }>;
+  handleDecrement: DispatchFunction;
+  handleIncrement: DispatchFunction;
 }
 
 const IncrementDecrementPanel: React.FC<Props> = ({

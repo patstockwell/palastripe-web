@@ -45,24 +45,24 @@ const ActivityList: React.FC<Props> = ({
   stickyTop,
   workout: { exerciseGroups },
 }) => {
-  const [ selected, setSelected ] = useState({ group: undefined, index: undefined });
+  const [ selected, setSelected ] = useState({ groupId: undefined, index: undefined });
   const [ show, setShow ] = useState(false);
 
-  const createTile = (group: string) => (a: Activity, i) => {
-    const isSelected = selected.group === group && selected.index === i;
+  const createTile = (id: string) => (a: Activity, i) => {
+    const isSelected = selected.groupId === id && selected.index === i;
 
     return (
       <ActivityTile
         selectable={!readOnly}
         selected={!readOnly && isSelected}
         show={isSelected && show}
-        group={group}
+        groupId={id}
         index={i}
         key={i}
         activity={a}
         handleSelect={() => {
           if (!readOnly && !isSelected) {
-            setSelected({ group, index: i });
+            setSelected({ groupId: id, index: i });
             setShow(false);
           }
         }}

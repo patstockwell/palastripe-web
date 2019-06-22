@@ -4,7 +4,7 @@ export interface ReduxAction<P> {
 }
 
 export interface SingleSetAction {
-  group: string;
+  groupId: string;
   index: number;
 }
 

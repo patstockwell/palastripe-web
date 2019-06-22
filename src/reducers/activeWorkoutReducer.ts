@@ -33,16 +33,16 @@ const activeWorkoutReducer = (state: Workout, action: ReduxAction<any>) => {
   }
 };
 
-const changeWeight = (state: Workout, action: ReduxAction<SingleSetAction & {
-  value: number,
-}>): Workout => {
-  const { payload: { value: w, group, index } } = action;
+type ChangeSetAction = ReduxAction<SingleSetAction & { value: number }>;
+
+const changeWeight = (state: Workout, action: ChangeSetAction): Workout => {
+  const { payload: { value: w, groupId, index } } = action;
   const { exerciseGroups } = state;
 
   return {
     ...state,
     exerciseGroups: exerciseGroups.map(g => (
-      g.id !== group ? g : {
+      g.id !== groupId ? g : {
         ...g,
         exercises: g.exercises.map((wa: WeightedActivity, i) => (i === index ? {
           ...wa,
@@ -53,18 +53,14 @@ const changeWeight = (state: Workout, action: ReduxAction<SingleSetAction & {
   };
 };
 
-const changeReps = (state: Workout, action: ReduxAction<{
-  group: string,
-  index: number,
-  value: number,
-}>): Workout => {
-  const { payload: { value, group, index } } = action;
+const changeReps = (state: Workout, action: ChangeSetAction): Workout => {
+  const { payload: { value, groupId, index } } = action;
   const { exerciseGroups } = state;
 
   return {
     ...state,
     exerciseGroups: exerciseGroups.map(g => (
-      g.id !== group ? g : {
+      g.id !== groupId ? g : {
         ...g,
         exercises: g.exercises.map((wa: WeightedActivity, i) => {
           if (i === index) {
@@ -84,18 +80,17 @@ const changeReps = (state: Workout, action: ReduxAction<{
   };
 };
 
-const toggleSetComplete = (state: Workout, action: ReduxAction<{
-  group: string,
-  index: number,
-  completed: boolean,
-}>): Workout => {
-  const { payload: { completed: done, group, index } } = action;
+const toggleSetComplete = (
+  state: Workout,
+  action: ReduxAction< SingleSetAction & { completed: boolean, }>
+): Workout => {
+  const { payload: { completed: done, groupId, index } } = action;
   const { exerciseGroups } = state;
 
   return {
     ...state,
     exerciseGroups: exerciseGroups.map(g => (
-      g.id !== group ? g : {
+      g.id !== groupId ? g : {
         ...g,
         exercises: g.exercises.map((a: Activity, i) => (i === index ? {
           ...a,

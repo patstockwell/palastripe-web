@@ -4,6 +4,9 @@ import styled, { keyframes } from 'styled-components';
 import ToggleSetCompleteButton from './ToggleSetCompleteButton';
 import { tileStyle } from '../SharedStyles';
 import {
+  Dispatch, // eslint-disable-line no-unused-vars
+} from 'redux';
+import {
   ReduxAction, // eslint-disable-line no-unused-vars
   SingleSetAction, // eslint-disable-line no-unused-vars
   TimedActivity, // eslint-disable-line no-unused-vars
@@ -60,17 +63,11 @@ const ActiveTimer = styled.div`
 
 interface OwnProps {
   activity: TimedActivity;
-  group: string;
+  groupId: string;
   index: number;
   handleSelect: any;
   selectable: boolean;
   selected: boolean;
-}
-
-interface DispatchProps {
-  toggleSetComplete: (completed?: boolean) => ReduxAction<SingleSetAction & {
-    completed: boolean
-  }>;
 }
 
 type Props = OwnProps & DispatchProps;
@@ -137,21 +134,29 @@ const areEqual = (prevProps, nextProps) => {
     && prevProps.activity.completed === nextProps.activity.completed;
 };
 
-const mapDispatchToProps = (dispatch, ownProps: OwnProps) => {
-  const { selected, group, index } = ownProps;
+type ToggleSetAction = ReduxAction<SingleSetAction & { completed: boolean }>;
+type ToggleSetDispatch = Dispatch<ToggleSetAction>;
+
+const mapDispatchToProps = (
+  dispatch: ToggleSetDispatch,
+  ownProps: OwnProps
+): DispatchProps => {
+  const { selected, groupId, index } = ownProps;
 
   return {
-    toggleSetComplete: (completed?: boolean): ReduxAction<SingleSetAction & {
-      completed: boolean,
-    }> => dispatch({
+    toggleSetComplete: (completed?: boolean): ToggleSetAction => dispatch({
       // only set the action type correctly if this tile is selected
       type: selected && TOGGLE_SET_COMPLETE,
-      payload: { completed, group, index },
+      payload: { completed, groupId, index },
     }),
   };
 };
 
-export default connect(
+interface DispatchProps {
+  toggleSetComplete: (completed?: boolean) => ToggleSetAction;
+}
+
+export default connect<void, DispatchProps, OwnProps>(
   null,
   mapDispatchToProps
 )(React.memo(ActivityTileWithTimer, areEqual));

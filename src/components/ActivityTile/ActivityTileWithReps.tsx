@@ -1,6 +1,9 @@
 import React from 'react'; import { connect } from 'react-redux';
 import { useSpring, animated } from 'react-spring';
 import styled from 'styled-components';
+import {
+  Dispatch, // eslint-disable-line no-unused-vars
+} from 'redux';
 import HiddenArea from './HiddenArea';
 import ToggleSetCompleteButton from './ToggleSetCompleteButton';
 import { tileStyle } from '../SharedStyles';
@@ -34,7 +37,7 @@ const SeeMoreArrowWrapper = styled(animated.button)`
 
 interface OwnProps {
   activity: WeightedActivity;
-  group: string;
+  groupId: string;
   handleOpen: any;
   handleSelect: any;
   index: number;
@@ -43,15 +46,11 @@ interface OwnProps {
   show: boolean;
 }
 
-interface DispatchProps {
-  toggleSetComplete: () => ReduxAction<SingleSetAction>;
-}
-
 type Props = DispatchProps & OwnProps;
 
 const ActivityTileWithReps: React.FC<Props> = ({
   activity,
-  group,
+  groupId,
   index,
   handleSelect,
   handleOpen,
@@ -91,7 +90,7 @@ const ActivityTileWithReps: React.FC<Props> = ({
       </VisibleArea>
       <HiddenArea
         activity={activity}
-        group={group}
+        groupId={groupId}
         index={index}
         animatedStyles={animatedStyles}
       />
@@ -109,17 +108,24 @@ const ActivityTileWithReps: React.FC<Props> = ({
   );
 };
 
-const mapDispatchToProps = (dispatch, ownProps: Props) => {
-  const { selected, group, index } = ownProps;
+const mapDispatchToProps = (
+  dispatch: Dispatch<ReduxAction<SingleSetAction>>,
+  ownProps: Props
+) => {
+  const { selected, groupId, index } = ownProps;
 
   return {
     toggleSetComplete: (): ReduxAction<SingleSetAction> => dispatch({
       // only set the type correctly if this tile is selected
       type: selected && TOGGLE_SET_COMPLETE,
-      payload: { group, index },
+      payload: { groupId, index },
     }),
   };
 };
+
+interface DispatchProps {
+  toggleSetComplete: () => ReduxAction<SingleSetAction>;
+}
 
 export default connect<void, DispatchProps, OwnProps>(
   null,

@@ -2,6 +2,9 @@ import React, {
   ReactText, // eslint-disable-line no-unused-vars
 } from 'react';
 import { connect } from 'react-redux';
+import {
+  Dispatch, // eslint-disable-line no-unused-vars
+} from 'redux';
 import { animated,
   AnimatedValue, // eslint-disable-line no-unused-vars
 } from 'react-spring';
@@ -21,7 +24,7 @@ const MainValue = styled.span`
 
 interface OwnProps {
   activity: WeightedActivity;
-  group: string;
+  groupId: string;
   index: number;
   animatedStyles: AnimatedValue<{ height: ReactText }>;
 }
@@ -68,11 +71,17 @@ const HiddenArea: React.FC<Props> = ({
   );
 };
 
-const mapDispatchToProps = (dispatch, ownProps: OwnProps) => ({
-  changeWeight: (weight: number) => dispatch ({
+type ChangeSetAction = ReduxAction<SingleSetAction & { value: number }>;
+type ChangeSetDispatch = Dispatch<ChangeSetAction>;
+
+const mapDispatchToProps = (
+  dispatch: ChangeSetDispatch,
+  ownProps: OwnProps
+): DispatchProps => ({
+  changeWeight: (weight: number) => dispatch({
     type: CHANGE_WEIGHT,
     payload: {
-      group: ownProps.group,
+      groupId: ownProps.groupId,
       index: ownProps.index,
       value: weight,
     },
@@ -80,7 +89,7 @@ const mapDispatchToProps = (dispatch, ownProps: OwnProps) => ({
   changeReps: (increment: number) => dispatch({
     type: CHANGE_REPS,
     payload: {
-      group: ownProps.group,
+      groupId: ownProps.groupId,
       index: ownProps.index,
       value: increment,
     },
@@ -88,8 +97,8 @@ const mapDispatchToProps = (dispatch, ownProps: OwnProps) => ({
 });
 
 interface DispatchProps {
-  changeWeight: (weight: number) => ReduxAction<SingleSetAction & { value: number }>;
-  changeReps: (increment: number) => ReduxAction<SingleSetAction & { value: number }>;
+  changeWeight: (weight: number) => ChangeSetAction;
+  changeReps: (increment: number) => ChangeSetAction;
 }
 
 export default connect<void, DispatchProps, OwnProps>(
