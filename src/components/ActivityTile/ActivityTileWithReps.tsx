@@ -50,6 +50,9 @@ type Props = DispatchProps & OwnProps;
 
 const ActivityTileWithReps: React.FC<Props> = ({
   activity,
+  activity: {
+    name, repsAchieved, repsGoal, weightInKilos, completed
+  },
   groupId,
   index,
   handleSelect,
@@ -75,16 +78,16 @@ const ActivityTileWithReps: React.FC<Props> = ({
     >
       <VisibleArea>
         <Details onClick={handleOpen}>
-          <Title>{activity.name}</Title>
-          <SubTitle>Weight: {activity.weightInKilos}kg</SubTitle>
+          <Title>{name}</Title>
+          <SubTitle>Weight: {weightInKilos}kg</SubTitle>
         </Details>
         <Duration>
-          <p>{activity.repsGoal} x</p>
+          <p>{repsAchieved === undefined ? repsGoal : repsAchieved} x</p>
         </Duration>
         {selectable &&
           <ToggleSetCompleteButton
             toggleSetComplete={toggleSetComplete}
-            completed={activity.completed}
+            completed={completed}
           />
         }
       </VisibleArea>
