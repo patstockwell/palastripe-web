@@ -15,7 +15,7 @@ const createWorkoutReducer = (state, action: ReduxAction<string>) => {
 };
 
 const addExerciseToEditWorkout = (state, action: ReduxAction<string>) => {
-  console.log('Exercise button was clicked: ', action.payload);
+  // console.log('Exercise button was clicked: ', action.payload);
 };
 
 export default createWorkoutReducer;

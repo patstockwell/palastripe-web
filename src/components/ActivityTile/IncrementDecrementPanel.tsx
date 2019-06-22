@@ -37,10 +37,16 @@ const OuterCircle = styled.div`
   position: relative;
   width: 108px;
   height: 108px;
-  background-color: ${purple};
+  background-color: ${({ lessThanHalf }) => lessThanHalf ? pink : purple};
   background-image:
-      linear-gradient(-100deg, transparent 50%, ${purple} 50%),
-      linear-gradient(90deg, ${pink} 50%, transparent 50%);
+      linear-gradient(
+        ${({ degrees }) => degrees}deg,
+        transparent 50%,
+        ${({ lessThanHalf }) => lessThanHalf ? pink : purple} 50%),
+      linear-gradient(
+        ${({ lessThanHalf }) => lessThanHalf ? 90 : 270}deg,
+        transparent 50%,
+        ${({ lessThanHalf }) => lessThanHalf ? purple : pink} 50%);
 `;
 
 const Panel = styled.div`
@@ -55,26 +61,36 @@ type DispatchFunction = () => ReduxAction<SingleSetAction & { value: number }>;
 interface Props {
   handleDecrement: DispatchFunction;
   handleIncrement: DispatchFunction;
+  percentageComplete?: number;
 }
 
 const IncrementDecrementPanel: React.FC<Props> = ({
   children,
   handleDecrement,
   handleIncrement,
-}) => (
-  <Panel>
-    <Button onClick={handleDecrement}>
-      <SubtractionSymbol fill={'white'} />
-    </Button>
-    <OuterCircle>
-      <InnerCircle>
-        {children}
-      </InnerCircle>
-    </OuterCircle>
-    <Button onClick={handleIncrement}>
-      <AdditionSymbol fill={'white'} />
-    </Button>
-  </Panel>
-);
+  percentageComplete: c,
+}) => {
+  const lessThanHalf = c < 0.5;
+  const degrees = c > 1 ? 270 : (360 * (c)) - 90;
+
+  return (
+    <Panel>
+      <Button onClick={handleDecrement}>
+        <SubtractionSymbol fill={'white'} />
+      </Button>
+      <OuterCircle
+        lessThanHalf={lessThanHalf}
+        degrees={lessThanHalf ? degrees - 180 : degrees}
+      >
+        <InnerCircle>
+          {children}
+        </InnerCircle>
+      </OuterCircle>
+      <Button onClick={handleIncrement}>
+        <AdditionSymbol fill={'white'} />
+      </Button>
+    </Panel>
+  );
+};
 
 export default IncrementDecrementPanel;

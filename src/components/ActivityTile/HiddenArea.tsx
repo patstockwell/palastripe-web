@@ -51,6 +51,7 @@ const HiddenArea: React.FC<Props> = ({
       <IncrementDecrementPanel
         handleDecrement={() => changeWeight(-2.5)}
         handleIncrement={() => changeWeight(2.5)}
+        percentageComplete={1}
       >
         <p>
           <MainValue>{weightInKilos}</MainValue>
@@ -60,6 +61,7 @@ const HiddenArea: React.FC<Props> = ({
       <IncrementDecrementPanel
         handleDecrement={() => changeReps(-1)}
         handleIncrement={() => changeReps(1)}
+        percentageComplete={reps / repsGoal}
       >
         <p>
           <MainValue>{reps}</MainValue>
