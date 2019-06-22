@@ -7,9 +7,6 @@ import ActivityListHeading from './ActivityListHeading';
 import {
   activityHeadingHeight,
   tileMinHeight,
-  STRETCH,
-  WARM_UP,
-  WORKING_SETS,
 } from '../helpers/constants';
 import {
   Activity, // eslint-disable-line no-unused-vars
@@ -46,13 +43,7 @@ const ActivityList: React.FC<Props> = ({
   finishWorkoutClickHandler,
   readOnly,
   stickyTop,
-  workout: {
-    exercises: {
-      warmUp,
-      workingSets,
-      stretch,
-    },
-  },
+  workout: { exerciseGroups },
 }) => {
   const [ selected, setSelected ] = useState({ group: undefined, index: undefined });
   const [ show, setShow ] = useState(false);
@@ -84,35 +75,24 @@ const ActivityList: React.FC<Props> = ({
     );
   };
 
-  const warmUpTiles = warmUp.map(createTile(WARM_UP));
-  const exercisesTiles = workingSets.map(createTile(WORKING_SETS));
-  const stretchTiles = stretch.map(createTile(STRETCH));
+  const activityListTiles = exerciseGroups.map(group => {
+    const tiles = group.exercises.map(createTile(group.id));
+
+    return (
+      <ActivityListHeading
+        key={group.id}
+        stickyTop={stickyTop}
+        heading={group.name}
+        activityTotal={tiles.length}
+      >
+        <Ul>{tiles}</Ul>
+      </ActivityListHeading>
+    );
+  });
 
   return (
     <Ul>
-      <ActivityListHeading
-        stickyTop={stickyTop}
-        heading={'warm up'}
-        activityTotal={warmUpTiles.length}
-      >
-        <Ul>{warmUpTiles}</Ul>
-      </ActivityListHeading>
-
-      <ActivityListHeading
-        stickyTop={stickyTop}
-        heading={'exercises'}
-        activityTotal={exercisesTiles.length}
-      >
-        <Ul>{exercisesTiles}</Ul>
-      </ActivityListHeading>
-
-      <ActivityListHeading
-        stickyTop={stickyTop}
-        heading={'stretch'}
-        activityTotal={stretchTiles.length}
-      >
-        <Ul>{stretchTiles}</Ul>
-      </ActivityListHeading>
+      {activityListTiles}
 
       {!readOnly &&
         <FinishWorkoutButton clickHandler={finishWorkoutClickHandler} />

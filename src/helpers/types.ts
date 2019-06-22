@@ -45,7 +45,7 @@ export interface Workout {
   startTime?: number;
   finishTime?: number;
   name: string;
-  exercises: WorkoutActivities;
+  exerciseGroups: WorkoutActivityGroup[];
   version?: string;
 }
 
@@ -53,15 +53,14 @@ export interface NewWorkout {
   id?: string;
   imageUrl?: string;
   name?: string;
-  exercises?: WorkoutActivities;
+  exerciseGroups: WorkoutActivityGroup[];
   version?: string;
 }
 
-export interface WorkoutActivities {
-  warmUp?: Activity[];
-  workingSets: Activity[];
-  stretch?: Activity[];
-  allExerciseIds: string[];
+export interface WorkoutActivityGroup {
+  id: string;
+  name: string;
+  exercises: Activity[];
 }
 
 export interface TimedActivity {

@@ -37,17 +37,19 @@ const changeWeight = (state: Workout, action: ReduxAction<SingleSetAction & {
   value: number,
 }>): Workout => {
   const { payload: { value: w, group, index } } = action;
-  const { exercises } = state;
+  const { exerciseGroups } = state;
 
   return {
     ...state,
-    exercises: {
-      ...exercises,
-      [group]: exercises[group].map((wa: WeightedActivity, i) => (i === index ? {
-        ...wa,
-        weightInKilos: wa.weightInKilos + w < 0 ? 0 : wa.weightInKilos + w,
-      } : wa)),
-    },
+    exerciseGroups: exerciseGroups.map(g => (
+      g.id !== group ? g : {
+        ...g,
+        exercises: g.exercises.map((wa: WeightedActivity, i) => (i === index ? {
+          ...wa,
+          weightInKilos: wa.weightInKilos + w < 0 ? 0 : wa.weightInKilos + w,
+        } : wa)),
+      }
+    )),
   };
 };
 
@@ -57,26 +59,28 @@ const changeReps = (state: Workout, action: ReduxAction<{
   value: number,
 }>): Workout => {
   const { payload: { value, group, index } } = action;
-  const { exercises } = state;
+  const { exerciseGroups } = state;
 
   return {
     ...state,
-    exercises: {
-      ...exercises,
-      [group]: exercises[group].map((wa: WeightedActivity, i) => {
-        if (i === index) {
-          const { repsGoal: g, repsAchieved: a } = wa;
-          const newRepsAchieved = a !== undefined ? a + value : g + value;
+    exerciseGroups: exerciseGroups.map(g => (
+      g.id !== group ? g : {
+        ...g,
+        exercises: g.exercises.map((wa: WeightedActivity, i) => {
+          if (i === index) {
+            const { repsGoal: g, repsAchieved: a } = wa;
+            const newRepsAchieved = a !== undefined ? a + value : g + value;
 
-          return {
-            ...wa,
-            // check first for negative reps and set to zero
-            repsAchieved: newRepsAchieved < 0 ? 0 : newRepsAchieved,
-          };
-        }
-        return wa;
-      }),
-    },
+            return {
+              ...wa,
+              // check first for negative reps and set to zero
+              repsAchieved: newRepsAchieved < 0 ? 0 : newRepsAchieved,
+            };
+          }
+          return wa;
+        }),
+      }
+    )),
   };
 };
 
@@ -86,17 +90,19 @@ const toggleSetComplete = (state: Workout, action: ReduxAction<{
   completed: boolean,
 }>): Workout => {
   const { payload: { completed: done, group, index } } = action;
-  const { exercises } = state;
+  const { exerciseGroups } = state;
 
   return {
     ...state,
-    exercises: {
-      ...exercises,
-      [group]: exercises[group].map((s: Activity, i) => (i === index ? {
-        ...s,
-        completed: done ? done : !s.completed,
-      } : s)),
-    },
+    exerciseGroups: exerciseGroups.map(g => (
+      g.id !== group ? g : {
+        ...g,
+        exercises: g.exercises.map((a: Activity, i) => (i === index ? {
+          ...a,
+          completed: done ? done : !a.completed,
+        } : a)),
+      }
+    )),
   };
 };
 

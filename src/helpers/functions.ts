@@ -66,17 +66,14 @@ const combineExerciseData =
   });
 
 export const combineDataForAllExercises = (workout: Workout, exercisesList: Exercises): Workout => {
-  const { exercises: { warmUp, workingSets, stretch } } = workout;
   const addExerciseData = combineExerciseData(exercisesList);
 
   return {
     ...workout,
-    exercises: {
-      ...workout.exercises,
-      warmUp: warmUp.map(addExerciseData),
-      workingSets: workingSets.map(addExerciseData),
-      stretch: stretch.map(addExerciseData),
-    },
+    exerciseGroups: workout.exerciseGroups.map(group => ({
+      ...group,
+      exercises: group.exercises.map(addExerciseData),
+    })),
   };
 };
 
@@ -138,22 +135,18 @@ export const formatMinutes = (minutes: number): string => {
 
 const ONE_REP_IN_SECONDS = 3;
 
-const getReps = (a: Activity): number =>
-  isTimed(a) ? 0 : (a.repsGoal * ONE_REP_IN_SECONDS);
-
-const getTimer = (a: Activity): number =>
-  isTimed(a) ? a.timerInSeconds : 0;
+const getActivityTime = (a: Activity): number =>
+  isTimed(a) ? a.timerInSeconds : (a.repsGoal * ONE_REP_IN_SECONDS);
 
 const getRestTime = (a: Activity): number =>
   a.restPeriodInSeconds || 0;
 
 const getTotalActivityTime = (a: Activity): number =>
-  getRestTime(a) + (getTimer(a) || getReps(a));
+  getRestTime(a) + getActivityTime(a);
 
 export const calculateWorkoutTime = (w: Workout): number => {
-  const { exercises : { warmUp, workingSets, stretch } } = w;
-  const allActivities = warmUp.concat(workingSets).concat(stretch);
-  const total = allActivities
+  const total = w.exerciseGroups
+    .flatMap(group => group.exercises)
     .map(getTotalActivityTime)
     .reduce((acc, curr) => acc + curr, 0);
   return Math.round(total / SECONDS_IN_A_MINUTE);
