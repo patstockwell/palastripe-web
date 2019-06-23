@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import SearchSuggestionTile from '../components/SearchSuggestionTile';
+import SearchBar from '../components/SearchBar';
+import EditIconPencil from '../assets/svg/EditIconPencil';
+import BackLinkBanner from '../components/BackLinkBanner';
 import { AnimatedSlidingPage } from './ActiveWorkout';
 import {
   Exercises, // eslint-disable-line no-unused-vars
@@ -37,10 +40,7 @@ export const accumulateMatches =
 
     return matchingIndex === -1 ? list : [
       ...list,
-      {
-        id: e.id,
-        ...sliceWord(name, matchingIndex, searchTerm.length),
-      },
+      { id: e.id, ...sliceWord(name, matchingIndex, searchTerm.length) },
     ];
   };
 
@@ -73,8 +73,12 @@ const EditWorkout: React.FC<Props> = ({
 
   return (
     <AnimatedSlidingPage style={{ position, left }}>
-      the edit workout screen
-      <input type="text" value={inputValue} onChange={handleInputChange} />
+      <BackLinkBanner linkTo={'/workouts/'} />
+      <p>
+        <EditIconPencil width={16} height={16} />
+        the edit workout screen
+      </p>
+      <SearchBar inputValue={inputValue} changeHandler={handleInputChange} />
       {matches}
     </AnimatedSlidingPage>
   );
