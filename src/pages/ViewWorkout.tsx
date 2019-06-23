@@ -8,20 +8,32 @@ import { AnimatedSlidingPage } from './ActiveWorkout';
 import { combineDataForAllExercises } from '../helpers/functions';
 import { bannerHeight } from '../helpers/constants';
 import {
+  calculateWorkoutTime,
+  formatMinutes,
+} from '../helpers/functions';
+import {
   Entities, // eslint-disable-line no-unused-vars
+  State, // eslint-disable-line no-unused-vars
+  ReduxAction, // eslint-disable-line no-unused-vars
   Workout, // eslint-disable-line no-unused-vars
 } from '../helpers/types';
+import {
+  SET_ACTIVE_WORKOUT,
+} from '../helpers/constants';
 
-interface Props {
+interface OwnProps {
   animationStyles: any;
   entities: Entities;
   match: any;
 }
 
+type Props = OwnProps & StateProps & DispatchProps;
+
 const ViewWorkout: React.FC<Props> = ({
   animationStyles,
   entities,
   match,
+  setActiveWorkout,
 }) => {
   const { id }: { id: string } = match.params;
   const workout: Workout = entities.workouts.byId[id];
@@ -41,7 +53,10 @@ const ViewWorkout: React.FC<Props> = ({
     >
       <BackLinkBanner linkTo={'/workouts/'}/>
       <ViewWorkoutHero
-        workout={workoutWithAllActivityData}
+        name={workout.name}
+        imageUrl={workout.imageUrl}
+        setActiveWorkout={() => setActiveWorkout(workoutWithAllActivityData)}
+        time={formatMinutes(calculateWorkoutTime(workout))}
       />
       <ActivityList
         stickyTop={bannerHeight}
@@ -52,8 +67,26 @@ const ViewWorkout: React.FC<Props> = ({
   );
 };
 
+interface StateProps {
+  entities: Entities;
+}
+
 const mapStateToProps = ({ entities }) => ({
   entities,
 });
 
-export default connect(mapStateToProps)(ViewWorkout);
+interface DispatchProps {
+  setActiveWorkout: (workout: Workout) => ReduxAction<Workout>;
+}
+
+const mapDispatchToProps = {
+  setActiveWorkout: (workout: Workout): ReduxAction<Workout> => ({
+    type: SET_ACTIVE_WORKOUT,
+    payload: workout,
+  }),
+};
+
+export default connect<StateProps, DispatchProps, void>(
+  mapStateToProps,
+  mapDispatchToProps
+)(ViewWorkout);

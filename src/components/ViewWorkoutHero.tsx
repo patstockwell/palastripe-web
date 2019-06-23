@@ -1,16 +1,10 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { buttonStyle } from './SharedStyles';
 import {
   workoutWindowViewport,
-  SET_ACTIVE_WORKOUT,
 } from '../helpers/constants';
-import {
-  calculateWorkoutTime,
-  formatMinutes,
-} from '../helpers/functions';
 import {
   ReduxAction, // eslint-disable-line no-unused-vars
   Workout, // eslint-disable-line no-unused-vars
@@ -65,28 +59,23 @@ const LinkButton = styled(Link)`
 `;
 
 interface Props {
-  workout: Workout;
-  setActiveWorkout: (workout: Workout) => ReduxAction<Workout>;
+  name: string;
+  imageUrl: string;
+  time: string;
+  setActiveWorkout: () => ReduxAction<Workout>;
 }
 
-const ViewWorkoutHero = ({ setActiveWorkout, workout, workout: { imageUrl, name }}: Props) => (
+const ViewWorkoutHero = ({ time, setActiveWorkout, imageUrl, name }: Props) => (
   <Window imageUrl={imageUrl}>
     <Title>{name}</Title>
-    <Time>{formatMinutes(calculateWorkoutTime(workout))}</Time>
+    <Time>{time}</Time>
     <LinkButton
       to={{ pathname: '/active-workout/', state: { immediate: false } }}
-      onClick={() => setActiveWorkout(workout)}
+      onClick={setActiveWorkout}
     >
       start
     </LinkButton>
   </Window>
 );
 
-const mapDispatchToProps = {
-  setActiveWorkout: (workout: Workout): ReduxAction<Workout> => ({
-    type: SET_ACTIVE_WORKOUT,
-    payload: workout,
-  }),
-};
-
-export default connect(null, mapDispatchToProps)(ViewWorkoutHero);
+export default ViewWorkoutHero;
