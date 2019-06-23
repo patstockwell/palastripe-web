@@ -11,7 +11,7 @@ const rootReducer = (state = initialState, action) => ({
   scrollY: scrollYReducer(state.scrollY, action),
   settings: settingsReducer(state.settings, action),
   history: historyReducer(state.history, action),
-  newWorkout: createWorkoutReducer(state.newWorkout, action),
+  editableWorkout: createWorkoutReducer(state.editableWorkout, action),
 });
 
 export default rootReducer;

@@ -1,5 +1,6 @@
+import uuidv4 from 'uuid/v4';
 import { getLocalStorage } from '../helpers/functions';
-import { LOCAL_STORAGE_HISTORY, LOCAL_STORAGE_ACTIVE_WORKOUT } from '../helpers/constants';
+import { VERSION_ONE, LOCAL_STORAGE_HISTORY, LOCAL_STORAGE_ACTIVE_WORKOUT } from '../helpers/constants';
 import {
   State, // eslint-disable-line no-unused-vars
 } from '../helpers/types';
@@ -34,6 +35,28 @@ const initialState: State = {
   },
 
   history: [],
+
+  editableWorkout: {
+    name: '',
+    id: uuidv4(),
+    version: VERSION_ONE,
+    exerciseGroups: [
+      {
+        id: uuidv4(),
+        name: 'Exercises',
+        exercises: [
+          {
+            id: uuidv4(),
+            name: 'Push ups',
+            repsGoal: 10,
+            weightInKilos: 10,
+            autoIncrement: 0,
+            completed: false,
+          },
+        ],
+      },
+    ],
+  },
 };
 
 export default {

@@ -8,6 +8,13 @@ import {
   tileMinHeight,
 } from '../helpers/constants';
 
+export const unorderedListStyle = `
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  list-style: none;
+`;
+
 export const tileStyle = css`
   position: relative;
   color: ${({ selected }) => selected ? 'black' : '#444'};

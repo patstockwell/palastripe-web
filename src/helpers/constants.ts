@@ -1,3 +1,6 @@
+// Never remove versions, simply add new ones as needed
+export const VERSION_ONE = 'Version 1';
+
 export const tileGap: number = 16;
 export const tileMinHeight: number = 100;
 export const navBarHeight: number = 48;

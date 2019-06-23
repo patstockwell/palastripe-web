@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
+import styled from 'styled-components';
 import { connect } from 'react-redux';
-import SearchSuggestionTile from '../components/SearchSuggestionTile';
+import EditableActivityList from '../components/EditableActivityList';
 import EditWorkoutHero from '../components/EditWorkoutHero';
-import SearchBar from '../components/SearchBar';
-import EditIconPencil from '../assets/svg/EditIconPencil';
 import BackLinkBanner from '../components/BackLinkBanner';
 import { AnimatedSlidingPage } from './ActiveWorkout';
 import {
@@ -49,15 +48,14 @@ type Props = OwnProps & StateProps;
 
 const EditWorkout: React.FC<Props> = ({
   animationStyles: { position, left },
-  exercises,
 }) => {
-  const [ searchQuery, setSearchQuery ] = useState('');
+  // const [ searchQuery, setSearchQuery ] = useState('');
   const [ workoutName, setWorkoutName ] = useState('');
 
-  const handleSearchChange = e => {
-    e.preventDefault();
-    setSearchQuery(e.target.value);
-  };
+  // const handleSearchChange = e => {
+  //   e.preventDefault();
+  //   setSearchQuery(e.target.value);
+  // };
 
   const handleEditNameChange = e => {
     e.preventDefault();
@@ -66,17 +64,17 @@ const EditWorkout: React.FC<Props> = ({
 
   // Can I match more than one word?
   // A search for `cur bicep` should match `Bicep Curl`
-  const matches: JSX.Element[] = searchQuery.length >= 3 &&
-    exercises.allIds
-      .map((id: string): Exercise => exercises.byId[id])
-      .reduce((acc: SlicesWithId[], curr: Exercise): SlicesWithId[] => (
-        accumulateMatches(searchQuery, acc, curr)
-      ), [])
-      .map(({ id, start, highlight, end }: SlicesWithId) => (
-        <SearchSuggestionTile id={id} key={start + highlight + end}>
-          {start}<strong>{highlight}</strong>{end}
-        </SearchSuggestionTile>
-      ));
+  // const matches: JSX.Element[] = searchQuery.length >= 3 &&
+  //   exercises.allIds
+  //     .map((id: string): Exercise => exercises.byId[id])
+  //     .reduce((acc: SlicesWithId[], curr: Exercise): SlicesWithId[] => (
+  //       accumulateMatches(searchQuery, acc, curr)
+  //     ), [])
+  //     .map(({ id, start, highlight, end }: SlicesWithId) => (
+  //       <SearchSuggestionTile id={id} key={start + highlight + end}>
+  //         {start}<strong>{highlight}</strong>{end}
+  //       </SearchSuggestionTile>
+  //     ));
 
   return (
     <AnimatedSlidingPage style={{ position, left }}>
@@ -85,12 +83,7 @@ const EditWorkout: React.FC<Props> = ({
         name={workoutName}
         handleInputChange={handleEditNameChange}
       />
-      <p>
-        <EditIconPencil width={16} height={16} />
-        the edit workout screen
-      </p>
-      <SearchBar inputValue={searchQuery} changeHandler={handleSearchChange} />
-      {matches}
+      <EditableActivityList />
     </AnimatedSlidingPage>
   );
 };

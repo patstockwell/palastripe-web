@@ -14,6 +14,7 @@ import {
   State, // eslint-disable-line no-unused-vars
   Workout,  // eslint-disable-line no-unused-vars
 } from '../helpers/types';
+import { unorderedListStyle } from './SharedStyles';
 
 interface Props {
   workout: Workout;
@@ -21,10 +22,7 @@ interface Props {
 }
 
 const Ul = styled.ul`
-  margin: 0;
-  padding: 0;
-  list-style-type: none;
-  list-style: none;
+  ${unorderedListStyle}
 `;
 
 const BottomEmptySpace = styled.div`

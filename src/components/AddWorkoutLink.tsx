@@ -17,7 +17,8 @@ const Wrapper = styled.div`
   justify-content: flex-end;
   position: sticky;
   background-color: white;
-  top: ${navBarHeight - 1}px;
+  top: ${navBarHeight - 2}px;
+  padding: 4px;
 `;
 
 const Message = styled.p`

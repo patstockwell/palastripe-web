@@ -16,7 +16,7 @@ export interface State {
   settings: Settings;
   entities: Entities;
   history: Workout[];
-  newWorkout?: NewWorkout;
+  editableWorkout?: Workout;
 }
 
 export interface ScrollY {
@@ -45,14 +45,6 @@ export interface Workout {
   startTime?: number;
   finishTime?: number;
   name: string;
-  exerciseGroups: WorkoutActivityGroup[];
-  version?: string;
-}
-
-export interface NewWorkout {
-  id?: string;
-  imageUrl?: string;
-  name?: string;
   exerciseGroups: WorkoutActivityGroup[];
   version?: string;
 }

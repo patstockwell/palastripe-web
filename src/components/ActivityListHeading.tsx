@@ -5,12 +5,6 @@ import {
   lightLightGrey,
 } from '../helpers/constants';
 
-interface Props {
-  activityTotal?: number;
-  heading: string;
-  stickyTop?: number;
-}
-
 const HeadingPanel = styled.div`
   height: ${activityHeadingHeight}px;
   background-color: white;
@@ -36,6 +30,12 @@ const Sets = styled.p`
   margin: 0 12px;
 `;
 
+interface Props {
+  activityTotal?: number;
+  heading: string;
+  stickyTop?: number;
+}
+
 const ActivityListHeading: React.FC<Props> = ({
   activityTotal,
   children,
@@ -45,7 +45,7 @@ const ActivityListHeading: React.FC<Props> = ({
   <li key={heading}>
     <HeadingPanel top={stickyTop}>
       <Heading>{heading}</Heading>
-      {activityTotal &&
+      {activityTotal !== undefined &&
         <Sets>{activityTotal} {activityTotal === 1 ? 'set' : 'sets'}</Sets>
       }
     </HeadingPanel>
