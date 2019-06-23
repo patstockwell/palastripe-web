@@ -1,5 +1,5 @@
 import { getLocalStorage } from '../helpers/functions';
-import { LOCAL_STORAGE_ACTIVE_WORKOUT } from '../helpers/constants';
+import { LOCAL_STORAGE_HISTORY, LOCAL_STORAGE_ACTIVE_WORKOUT } from '../helpers/constants';
 import {
   State, // eslint-disable-line no-unused-vars
 } from '../helpers/types';
@@ -39,5 +39,6 @@ const initialState: State = {
 export default {
   ...initialState,
   activeWorkout: getLocalStorage(LOCAL_STORAGE_ACTIVE_WORKOUT, undefined),
+  history: getLocalStorage(LOCAL_STORAGE_HISTORY, []),
 };
 
