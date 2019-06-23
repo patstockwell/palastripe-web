@@ -52,7 +52,7 @@ const EditWorkout: React.FC<Props> = ({
   exercises,
 }) => {
   const [ searchQuery, setSearchQuery ] = useState('');
-  const [ workoutName, setWorkoutName ] = useState('Your workout name');
+  const [ workoutName, setWorkoutName ] = useState('');
 
   const handleSearchChange = e => {
     e.preventDefault();
