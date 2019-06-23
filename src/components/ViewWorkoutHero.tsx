@@ -1,26 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { buttonStyle } from './SharedStyles';
 import {
-  workoutWindowViewport,
-} from '../helpers/constants';
+  workoutTitleStyle,
+  buttonStyle,
+  workoutHeroWindowStyle,
+} from './SharedStyles';
 import {
   ReduxAction, // eslint-disable-line no-unused-vars
   Workout, // eslint-disable-line no-unused-vars
 } from '../helpers/types';
 
-const Window = styled.div`
-  min-height: ${workoutWindowViewport}vh;
-  position: relative;
-  background-color: black;
-  color: white;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 16px;
+export const Window = styled.div`
+  ${workoutHeroWindowStyle}
 
   // put the image in an 'after' pseudo element. Set it behind the original
   // element which has opacity giving it the dark filter look
@@ -38,15 +30,12 @@ const Window = styled.div`
   }
 `;
 
-const Title = styled.h1`
-  font-size: 24px;
-  text-transform: uppercase;
-  font-family: 'Muli','Helvetica Neue',Helvetica,Arial,sans-serif;
-  font-style: italic;
+export const Title = styled.h1`
+  ${workoutTitleStyle}
   z-index: 1;
 `;
 
-const Time = styled.p`
+export const Time = styled.p`
   color: white;
   size: 16px;
   font-weight: 400;
@@ -60,9 +49,9 @@ const LinkButton = styled(Link)`
 
 interface Props {
   name: string;
-  imageUrl: string;
-  time: string;
-  setActiveWorkout: () => ReduxAction<Workout>;
+  imageUrl?: string;
+  time?: string;
+  setActiveWorkout?: () => ReduxAction<Workout>;
 }
 
 const ViewWorkoutHero = ({ time, setActiveWorkout, imageUrl, name }: Props) => (

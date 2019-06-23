@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import SearchSuggestionTile from '../components/SearchSuggestionTile';
+import EditWorkoutHero from '../components/EditWorkoutHero';
 import SearchBar from '../components/SearchBar';
 import EditIconPencil from '../assets/svg/EditIconPencil';
 import BackLinkBanner from '../components/BackLinkBanner';
@@ -50,20 +51,26 @@ const EditWorkout: React.FC<Props> = ({
   animationStyles: { position, left },
   exercises,
 }) => {
-  const [ inputValue, setInputValue ] = useState('');
+  const [ searchQuery, setSearchQuery ] = useState('');
+  const [ workoutName, setWorkoutName ] = useState('Your workout name');
 
-  const handleInputChange = e => {
+  const handleSearchChange = e => {
     e.preventDefault();
-    setInputValue(e.target.value);
+    setSearchQuery(e.target.value);
+  };
+
+  const handleEditNameChange = e => {
+    e.preventDefault();
+    setWorkoutName(e.target.value);
   };
 
   // Can I match more than one word?
   // A search for `cur bicep` should match `Bicep Curl`
-  const matches: JSX.Element[] = inputValue.length >= 3 &&
+  const matches: JSX.Element[] = searchQuery.length >= 3 &&
     exercises.allIds
       .map((id: string): Exercise => exercises.byId[id])
       .reduce((acc: SlicesWithId[], curr: Exercise): SlicesWithId[] => (
-        accumulateMatches(inputValue, acc, curr)
+        accumulateMatches(searchQuery, acc, curr)
       ), [])
       .map(({ id, start, highlight, end }: SlicesWithId) => (
         <SearchSuggestionTile id={id} key={start + highlight + end}>
@@ -74,11 +81,15 @@ const EditWorkout: React.FC<Props> = ({
   return (
     <AnimatedSlidingPage style={{ position, left }}>
       <BackLinkBanner linkTo={'/workouts/'} />
+      <EditWorkoutHero
+        name={workoutName}
+        handleInputChange={handleEditNameChange}
+      />
       <p>
         <EditIconPencil width={16} height={16} />
         the edit workout screen
       </p>
-      <SearchBar inputValue={inputValue} changeHandler={handleInputChange} />
+      <SearchBar inputValue={searchQuery} changeHandler={handleSearchChange} />
       {matches}
     </AnimatedSlidingPage>
   );

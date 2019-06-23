@@ -1,6 +1,8 @@
 import { css } from 'styled-components';
 import {
   purple,
+  charcoal,
+  workoutWindowViewport,
   lightLightGrey,
   superLightGrey,
   tileMinHeight,
@@ -30,3 +32,22 @@ export const buttonStyle = `
   padding: 15px 25px;
 `;
 
+export const workoutTitleStyle = `
+  font-size: 24px;
+  text-transform: uppercase;
+  font-family: 'Muli','Helvetica Neue',Helvetica,Arial,sans-serif;
+  font-style: italic;
+`;
+
+export const workoutHeroWindowStyle = `
+  min-height: ${workoutWindowViewport}vh;
+  position: relative;
+  background-color: ${charcoal};
+  color: white;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+`;

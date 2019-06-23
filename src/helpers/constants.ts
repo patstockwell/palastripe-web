@@ -50,6 +50,7 @@ export const orange: string = '#f79729';
 export const fadedYellow: string = '#fffd8e';
 export const lightLightGrey = '#dedede';
 export const superLightGrey = '#f4f4f4';
+export const charcoal = '#444444';
 
 // action types
 export const FINISH_WORKOUT: string = 'FINISH_WORKOUT';
