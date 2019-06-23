@@ -25,16 +25,21 @@ const Header = styled.div`
   background-color: white
 `;
 
-const BannerForActiveWorkout = () => {
-  return (
-    <Header>
-      <StyledLink to={{ pathname: '/workouts/', state: { immediate: false } }}>
-        <BackArrow style={{ fill: 'grey', margin: '0 -12px 0 -8px' }} />
-        <BackArrow style={{ fill: 'grey' }} /> Back
-      </StyledLink>
-    </Header>
-  );
-};
+interface Props {
+  linkTo: string;
+}
 
-export default BannerForActiveWorkout;
+const backText = ' Back'; // <-- Leading space
+
+const BackLinkBanner: React.FC<Props> = ({ linkTo }) => (
+  <Header>
+    <StyledLink to={{ pathname: linkTo , state: { immediate: false } }}>
+      <BackArrow style={{ fill: 'grey', margin: '0 -12px 0 -8px' }} />
+      <BackArrow style={{ fill: 'grey' }} />
+      {backText}
+    </StyledLink>
+  </Header>
+);
+
+export default BackLinkBanner;
 

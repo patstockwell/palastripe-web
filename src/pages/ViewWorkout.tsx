@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import FourZeroFour from '../pages/FourZeroFour';
-import BannerForActiveWorkout from '../components/BannerForActiveWorkout';
+import BackLinkBanner from '../components/BackLinkBanner';
 import ViewWorkoutHero from '../components/ViewWorkoutHero';
 import ActivityList from '../components/ActivityList';
 import { AnimatedSlidingPage } from './ActiveWorkout';
@@ -39,7 +39,7 @@ const ViewWorkout: React.FC<Props> = ({
         left: animationStyles.left,
       }}
     >
-      <BannerForActiveWorkout />
+      <BackLinkBanner linkTo={'/workouts/'}/>
       <ViewWorkoutHero
         workout={workoutWithAllActivityData}
       />
