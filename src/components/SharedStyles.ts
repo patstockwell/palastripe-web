@@ -1,7 +1,6 @@
 import { css } from 'styled-components';
 import {
   purple,
-  charcoal,
   workoutWindowViewport,
   lightLightGrey,
   superLightGrey,
@@ -46,10 +45,10 @@ export const workoutTitleStyle = `
   font-style: italic;
 `;
 
-export const workoutHeroWindowStyle = `
+export const workoutHeroWindowStyle = css`
   min-height: ${workoutWindowViewport}vh;
   position: relative;
-  background-color: ${charcoal};
+  background-color: ${({ colour }) => colour ? colour : 'black'};
   color: white;
   text-align: center;
   display: flex;

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import EditIconPencil from '../assets/svg/EditIconPencil';
 import { workoutHeroWindowStyle, workoutTitleStyle } from './SharedStyles';
+import { charcoal } from '../helpers/constants';
 
 const HeightNormalizer = styled.div`
   min-height: 140px;
@@ -46,7 +47,7 @@ const EditWorkoutHero: React.FC<Props> = ({ name, handleInputChange }) => {
   const [ nameIsEditable, setNameIsEditable ] = useState(false);
 
   return (
-    <Window>
+    <Window colour={charcoal}>
       <HeightNormalizer>
         {nameIsEditable ? (
           <Input
