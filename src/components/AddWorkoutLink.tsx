@@ -6,12 +6,18 @@ import { navBarHeight } from '../helpers/constants';
 
 const StyledLink = styled(Link)`
   display: flex;
-  height: 48px;
-  width: 48px;
-  justify-content: center;
+  text-decoration: none;
+  color: darkgrey;
 `;
 
-const Wrapper = styled.div`
+const SymbolWrapper = styled.span`
+  display: flex;
+  justify-content: center;
+  height: 48px;
+  width: 48px;
+`;
+
+const Panel = styled.div`
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -21,20 +27,22 @@ const Wrapper = styled.div`
   padding: 4px;
 `;
 
-const Message = styled.p`
-  color: darkgrey;
+const Message = styled.span`
+  margin-top: 13px;
 `;
 
 const AddWorkoutLink = () => (
-  <Wrapper>
-    <Message>Create workout</Message>
+  <Panel>
     <StyledLink to={{
       pathname: '/edit-workout/',
       state: { immediate: false },
     }}>
-      <SkinnyAdditionSymbol style={{ width: '24px', fill: 'black' }} />
+      <Message>Create workout</Message>
+      <SymbolWrapper>
+        <SkinnyAdditionSymbol style={{ width: '24px', fill: 'black' }} />
+      </SymbolWrapper>
     </StyledLink>
-  </Wrapper>
+  </Panel>
 );
 
 export default AddWorkoutLink;
