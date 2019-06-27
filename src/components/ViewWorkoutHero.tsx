@@ -1,9 +1,7 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import {
   workoutTitleStyle,
-  buttonStyle,
   workoutHeroWindowStyle,
 } from './SharedStyles';
 import {
@@ -43,27 +41,16 @@ export const Time = styled.p`
   z-index: 1;
 `;
 
-const LinkButton = styled(Link)`
-  ${buttonStyle}
-`;
-
 interface Props {
   name: string;
   imageUrl?: string;
   time?: string;
-  setActiveWorkout?: () => ReduxAction<Workout>;
 }
 
-const ViewWorkoutHero = ({ time, setActiveWorkout, imageUrl, name }: Props) => (
+const ViewWorkoutHero = ({ time, imageUrl, name }: Props) => (
   <Window imageUrl={imageUrl}>
     <Title>{name}</Title>
     <Time>{time}</Time>
-    <LinkButton
-      to={{ pathname: '/active-workout/', state: { immediate: false } }}
-      onClick={setActiveWorkout}
-    >
-      start
-    </LinkButton>
   </Window>
 );
 

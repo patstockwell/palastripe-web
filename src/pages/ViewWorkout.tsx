@@ -71,12 +71,12 @@ const ViewWorkout: React.FC<Props> = ({
       <ViewWorkoutHero
         name={workout.name}
         imageUrl={workout.imageUrl}
-        setActiveWorkout={() => setActiveWorkout(workoutWithAllActivityData)}
         time={formatMinutes(calculateWorkoutTime(workout))}
       />
       <ActivityList
         stickyTop={bannerHeight}
         workout={workoutWithAllActivityData}
+        startWorkoutClickHandler={handleStartClick}
         readOnly
       />
     </AnimatedSlidingPage>

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import ActivityTile from './ActivityTile';
-import FinishWorkoutButton from './FinishWorkoutButton';
+import { Button, LinkButton } from './Buttons';
 import ActivityListHeading from './ActivityListHeading';
 import {
   activityHeadingHeight,
@@ -25,9 +25,16 @@ const Ul = styled.ul`
   ${unorderedListStyle}
 `;
 
+const FlexTile = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: ${tileMinHeight}px;
+`;
+
 const BottomEmptySpace = styled.div`
-  height: calc(100vh - ${({ offset, stickyTop = 0 }) =>
-    activityHeadingHeight + tileMinHeight + stickyTop + offset}px);
+  height: calc(100vh - ${({ stickyTop = 0 }) =>
+    activityHeadingHeight + (2 * tileMinHeight) + stickyTop}px);
 `;
 
 interface Props {
@@ -35,10 +42,12 @@ interface Props {
   stickyTop?: number;
   readOnly?: boolean;
   finishWorkoutClickHandler?: () => void;
+  startWorkoutClickHandler?: () => void;
 }
 
 const ActivityList: React.FC<Props> = ({
   finishWorkoutClickHandler,
+  startWorkoutClickHandler,
   readOnly,
   stickyTop,
   workout: { exerciseGroups },
@@ -92,13 +101,24 @@ const ActivityList: React.FC<Props> = ({
     <Ul>
       {activityListTiles}
 
-      {!readOnly &&
-        <FinishWorkoutButton clickHandler={finishWorkoutClickHandler} />
-      }
+      <FlexTile>
+        {readOnly ? (
+          <LinkButton
+            clickHandler={startWorkoutClickHandler}
+            pathname="/active-workout"
+          >
+            Start Workout
+          </LinkButton>
+        ) : (
+          <Button clickHandler={finishWorkoutClickHandler}>
+            Finish Workout
+          </Button>
+        )
+        }
+      </FlexTile>
 
       <BottomEmptySpace
         stickyTop={stickyTop}
-        offset={readOnly ? 0 : tileMinHeight}
       />
     </Ul>
   );
