@@ -30,7 +30,7 @@ const Background = styled.div`
 
 const Dialog = styled.div`
   background-color: white;
-  border-radius: 5px 5px 0 0;
+  border-radius: 24px 24px 0 0;
   height: ${popUpHeight}px;
   position: absolute;
   bottom: 0;
