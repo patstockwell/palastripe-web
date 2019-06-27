@@ -70,7 +70,7 @@ const ActiveWorkout: React.FC<Props> = ({
     <AnimatedSlidingPage
       style={{
         position: animationStyles.position,
-        top: animationStyles.top,
+        left: animationStyles.left,
       }}
     >
       <GlobalStyle hidden={showEndWorkoutAlert} />

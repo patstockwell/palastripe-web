@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
 import { connect } from 'react-redux';
 import EditableActivityList from '../components/EditableActivityList';
 import EditWorkoutHero from '../components/EditWorkoutHero';
@@ -78,7 +77,7 @@ const EditWorkout: React.FC<Props> = ({
 
   return (
     <AnimatedSlidingPage style={{ position, left }}>
-      <BackLinkBanner linkTo={'/workouts/'} />
+      <BackLinkBanner back={{ link: '/workouts/' }} />
       <EditWorkoutHero
         name={workoutName}
         handleInputChange={handleEditNameChange}

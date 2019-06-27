@@ -1,5 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import {
+  RouteProps, // eslint-disable-line no-unused-vars
+} from 'react-router';
 import FourZeroFour from '../pages/FourZeroFour';
 import BackLinkBanner from '../components/BackLinkBanner';
 import ViewWorkoutHero from '../components/ViewWorkoutHero';
@@ -24,10 +27,9 @@ import {
 interface OwnProps {
   animationStyles: any;
   entities: Entities;
-  match: any;
 }
 
-type Props = OwnProps & StateProps & DispatchProps;
+type Props = OwnProps & StateProps & DispatchProps & RouteProps;
 
 const ViewWorkout: React.FC<Props> = ({
   animationStyles,
@@ -35,6 +37,8 @@ const ViewWorkout: React.FC<Props> = ({
   match,
   setActiveWorkout,
 }) => {
+  // direction of the animation when page enters/leaves
+  const [ direction, setDirection ] = useState('left');
   const { id }: { id: string } = match.params;
   const workout: Workout = entities.workouts.byId[id];
   if (!workout) {
@@ -44,14 +48,26 @@ const ViewWorkout: React.FC<Props> = ({
   const workoutWithAllActivityData: Workout =
     combineDataForAllExercises(workout, entities.exercises);
 
+  const handleStartClick = () => {
+    setActiveWorkout(workoutWithAllActivityData);
+    setDirection('right');
+  };
+
   return (
     <AnimatedSlidingPage
       style={{
         position: animationStyles.position,
-        left: animationStyles.left,
+        [direction]: animationStyles.left,
       }}
     >
-      <BackLinkBanner linkTo={'/workouts/'}/>
+      <BackLinkBanner
+        back={{ link: '/workouts/' }}
+        continueTo={{
+          link: '/active-workout/',
+          text: 'Start',
+          handleClick: handleStartClick,
+        }}
+      />
       <ViewWorkoutHero
         name={workout.name}
         imageUrl={workout.imageUrl}
