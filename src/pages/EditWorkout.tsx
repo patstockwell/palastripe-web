@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import EditableActivityList from '../components/EditableActivityList';
+import { EditableActivityList } from '../components/ActivityList';
 import EditWorkoutHero from '../components/EditWorkoutHero';
 import BackLinkBanner from '../components/BackLinkBanner';
 import { AnimatedSlidingPage } from './ActiveWorkout';

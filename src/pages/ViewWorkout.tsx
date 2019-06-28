@@ -6,7 +6,7 @@ import {
 import FourZeroFour from '../pages/FourZeroFour';
 import BackLinkBanner from '../components/BackLinkBanner';
 import ViewWorkoutHero from '../components/ViewWorkoutHero';
-import ActivityList from '../components/ActivityList';
+import ActivityList from '../components/ActivityList/ActivityList';
 import { AnimatedSlidingPage } from './ActiveWorkout';
 import { combineDataForAllExercises } from '../helpers/functions';
 import { bannerHeight } from '../helpers/constants';

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import styled, { createGlobalStyle } from 'styled-components';
 import { animated } from 'react-spring';
 import AlertConfirm, { LinkButton, Button } from '../components/AlertConfirm';
-import ActivityList from '../components/ActivityList';
+import ActivityList from '../components/ActivityList/ActivityList';
 import {
   Entities, // eslint-disable-line no-unused-vars
   ReduxAction, // eslint-disable-line no-unused-vars

@@ -1,17 +1,17 @@
 import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import ActivityListHeading from '../components/ActivityListHeading';
+import ActivityListHeading from './ActivityListHeading';
 import {
   State, // eslint-disable-line no-unused-vars
   Workout,  // eslint-disable-line no-unused-vars
   WorkoutActivityGroup,  // eslint-disable-line no-unused-vars
-} from '../helpers/types';
-import { unorderedListStyle } from './SharedStyles';
+} from '../../helpers/types';
+import { unorderedListStyle } from '../SharedStyles';
 import {
   activityHeadingHeight,
   bannerHeight,
-} from '../helpers/constants';
+} from '../../helpers/constants';
 
 const BottomEmptySpace = styled.div`
   height: calc(100vh - ${activityHeadingHeight + bannerHeight}px);

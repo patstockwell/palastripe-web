@@ -1,20 +1,20 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import ActivityTile from './ActivityTile';
-import { Button, LinkButton } from './Buttons';
+import ActivityTile from '../ActivityTile';
+import { Button, LinkButton } from '../Buttons';
 import ActivityListHeading from './ActivityListHeading';
 import {
   activityHeadingHeight,
   tileMinHeight,
-} from '../helpers/constants';
+} from '../../helpers/constants';
 import {
   Activity, // eslint-disable-line no-unused-vars
   Entities, // eslint-disable-line no-unused-vars
   State, // eslint-disable-line no-unused-vars
   Workout,  // eslint-disable-line no-unused-vars
-} from '../helpers/types';
-import { unorderedListStyle } from './SharedStyles';
+} from '../../helpers/types';
+import { unorderedListStyle } from '../SharedStyles';
 
 interface Props {
   workout: Workout;

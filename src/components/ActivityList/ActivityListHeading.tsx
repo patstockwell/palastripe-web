@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import {
   activityHeadingHeight,
   lightLightGrey,
-} from '../helpers/constants';
+} from '../../helpers/constants';
 
 const HeadingPanel = styled.div`
   height: ${activityHeadingHeight}px;
