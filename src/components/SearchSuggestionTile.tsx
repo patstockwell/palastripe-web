@@ -1,5 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { MapDispatchToPropsFunction, connect } from 'react-redux';
 import styled from 'styled-components';
 import {
   purple,
@@ -42,15 +42,16 @@ const SearchSuggestionTile: React.FC<Props> = ({
 );
 
 interface DispatchProps {
-  addExerciseToEditWorkout: (id: string) => ReduxAction<string>;
+  addExerciseToEditWorkout: () => ReduxAction<string>;
 }
 
-const mapDispatchToProps = (dispatch, { id }: OwnProps) => ({
-  addExerciseToEditWorkout: () => dispatch({
-    type: ADD_EXERCISE_TO_NEW_WORKOUT,
-    payload: id,
-  }),
-});
+const mapDispatchToProps: MapDispatchToPropsFunction<DispatchProps, OwnProps> =
+  (dispatch, { id }) => ({
+    addExerciseToEditWorkout: () => dispatch({
+      type: ADD_EXERCISE_TO_NEW_WORKOUT,
+      payload: id,
+    }),
+  });
 
 export default connect<void, DispatchProps, OwnProps>(
   null,

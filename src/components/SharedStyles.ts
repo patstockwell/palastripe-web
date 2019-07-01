@@ -14,7 +14,7 @@ export const unorderedListStyle = `
   list-style: none;
 `;
 
-export const tileStyle = css`
+export const tileStyle = css<{ selected: boolean, selectable: boolean }>`
   position: relative;
   color: ${({ selected }) => selected ? 'black' : '#444'};
   border: none;
@@ -45,7 +45,7 @@ export const workoutTitleStyle = `
   font-style: italic;
 `;
 
-export const workoutHeroWindowStyle = css`
+export const workoutHeroWindowStyle = css<{ colour?: string }>`
   min-height: ${workoutWindowViewport}vh;
   position: relative;
   background-color: ${({ colour }) => colour ? colour : 'black'};

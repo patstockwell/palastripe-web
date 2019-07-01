@@ -7,12 +7,12 @@ import { buttonStyle } from './SharedStyles';
 const bounceSpace = 7;
 const popUpHeight = 253 + bounceSpace;
 
-export const Button = styled.button`
+export const Button = styled.button<{ background: string }>`
   ${buttonStyle}
   background-color: ${({ background }) => background};
 `;
 
-export const LinkButton = styled(Link)`
+export const LinkButton = styled(Link)<{ background: string }>`
   ${buttonStyle}
   background-color: ${({ background }) => background};
   display: flex;

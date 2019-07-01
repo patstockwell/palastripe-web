@@ -29,7 +29,7 @@ const InnerCircle = styled.div`
   background-color: white;
 `;
 
-const OuterCircle = styled.div`
+const OuterCircle = styled.div<{ lessThanHalf: boolean, degrees: number }>`
   display: flex;
   align-items: center;
   justify-content: center;

@@ -5,7 +5,7 @@ import {
   lightLightGrey,
 } from '../../helpers/constants';
 
-const HeadingPanel = styled.div`
+const HeadingPanel = styled.div<{ top: number }>`
   height: ${activityHeadingHeight}px;
   background-color: white;
   border-bottom: 1px solid ${lightLightGrey};

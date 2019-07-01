@@ -52,7 +52,7 @@ const PreparationTimer = styled.div`
     ${colourPulse} 2s linear infinite;
 `;
 
-const ActiveTimer = styled.div`
+const ActiveTimer = styled.div<{ timer: number }>`
   position: absolute;
   top: 80%;
   bottom: 0;
@@ -126,11 +126,10 @@ const ActivityTileWithTimer: React.FC<Props> = ({
   );
 };
 
-const areEqual = (prevProps, nextProps) => {
+const areEqual = (prevProps: Props, nextProps: Props) => {
   // the props handleSelect and activity should never change
-  // we only care about show and selected
-  return prevProps.show === nextProps.show
-    && prevProps.selected === nextProps.selected
+  // we only care about selected
+  return prevProps.selected === nextProps.selected
     && prevProps.activity.completed === nextProps.activity.completed;
 };
 

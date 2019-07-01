@@ -32,7 +32,7 @@ const Nav = styled.nav`
   align-items: flex-end;
 `;
 
-const NavLink = styled(Link)`
+const NavLink = styled(Link)<{ highlight: string }>`
   color: ${({ highlight }) => highlight};
   fill: ${({ highlight }) => highlight};
   text-decoration: none;

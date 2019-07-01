@@ -32,7 +32,7 @@ const FlexTile = styled.div`
   min-height: ${tileMinHeight}px;
 `;
 
-const BottomEmptySpace = styled.div`
+const BottomEmptySpace = styled.div<{ stickyTop: number }>`
   height: calc(100vh - ${({ stickyTop = 0 }) =>
     activityHeadingHeight + (2 * tileMinHeight) + stickyTop}px);
 `;
@@ -55,7 +55,7 @@ const ActivityList: React.FC<Props> = ({
   const [ selected, setSelected ] = useState({ groupId: undefined, index: undefined });
   const [ show, setShow ] = useState(false);
 
-  const createTile = (id: string) => (a: Activity, i) => {
+  const createTile = (id: string) => (a: Activity, i: number) => {
     const isSelected = selected.groupId === id && selected.index === i;
 
     return (

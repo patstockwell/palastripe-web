@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTransition } from 'react-spring';
-import { Route, Switch } from 'react-router-dom';
+import { RouteProps, Route, Switch } from 'react-router-dom';
 import Workouts from '../pages/Workouts';
 import ViewWorkout from '../pages/ViewWorkout';
 import ActiveWorkout from '../pages/ActiveWorkout';
@@ -16,13 +16,15 @@ const Routes = () => {
 
   const anyUseTransition = useTransition as any;
 
-  const transitions = anyUseTransition(location, location => location.key, {
-    immediate: state.immediate,
-    from: { left: '100%', top: '100vh', position: 'fixed' },
-    enter: [{ left: '0%', top: '0vh' }, { position: 'relative' }],
-    leave: [{ position : 'fixed' }, { left: '100%', top: '100vh' }],
-    config: { tension: 410, friction: 40 },
-  });
+  const transitions = anyUseTransition(location,
+    (location: any) => location.key, {
+      immediate: state.immediate,
+      from: { left: '100%', top: '100vh', position: 'fixed' },
+      enter: [{ left: '0%', top: '0vh' }, { position: 'relative' }],
+      leave: [{ position : 'fixed' }, { left: '100%', top: '100vh' }],
+      config: { tension: 410, friction: 40 },
+    }
+  );
 
   return transitions.map(({ item, props, key }) => (
     <Switch key={key} location={item}>

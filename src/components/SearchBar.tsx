@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import SearchIcon from '../assets/svg/SearchIcon';
 import { lightLightGrey } from '../helpers/constants';
 
-const SearchArea = styled.div`
+const SearchArea = styled.div<{ background: string }>`
   display: flex;
   align-items: center;
   background-color: ${({ background }) => background};

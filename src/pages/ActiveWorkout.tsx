@@ -5,12 +5,7 @@ import styled, { createGlobalStyle } from 'styled-components';
 import { animated } from 'react-spring';
 import AlertConfirm, { LinkButton, Button } from '../components/AlertConfirm';
 import ActivityList from '../components/ActivityList/ActivityList';
-import {
-  Entities, // eslint-disable-line no-unused-vars
-  ReduxAction, // eslint-disable-line no-unused-vars
-  State, // eslint-disable-line no-unused-vars
-  Workout, // eslint-disable-line no-unused-vars
-} from '../helpers/types';
+import { ReduxAction, State, Workout } from '../helpers/types';
 import { FINISH_WORKOUT, purple } from '../helpers/constants';
 
 export const AnimatedSlidingPage = styled(animated.div)`
@@ -20,7 +15,7 @@ export const AnimatedSlidingPage = styled(animated.div)`
   -webkit-overflow-scrolling: touch; // enables momentum scolling
 `;
 
-const GlobalStyle = createGlobalStyle`
+const GlobalStyle = createGlobalStyle<{ hidden: boolean }>`
   body {
     // used for when the modal is displayed
     // to avoid background scrolling

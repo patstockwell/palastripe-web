@@ -24,7 +24,7 @@ const Tile = styled.section`
   overflow: hidden;
 `;
 
-const Square = styled.div`
+const Square = styled.div<{ image: string }>`
   height: 70px
   width: 70px
   background-color: black;
@@ -69,7 +69,7 @@ const StyledLink = styled(Link)`
 
 interface Props {
   workout: Workout;
-  setWindowScroll: (number) => ReduxAction<{ scrollY: number, page: string }>;
+  setWindowScroll: (scrollY: number) => ReduxAction<{ scrollY: number, page: string }>;
   scrollY: number;
 }
 

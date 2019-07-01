@@ -4,12 +4,8 @@ import {
   workoutTitleStyle,
   workoutHeroWindowStyle,
 } from './SharedStyles';
-import {
-  ReduxAction, // eslint-disable-line no-unused-vars
-  Workout, // eslint-disable-line no-unused-vars
-} from '../helpers/types';
 
-export const Window = styled.div`
+export const Window = styled.div<{ colour?: string, imageUrl: string }>`
   ${workoutHeroWindowStyle}
 
   // put the image in an 'after' pseudo element. Set it behind the original

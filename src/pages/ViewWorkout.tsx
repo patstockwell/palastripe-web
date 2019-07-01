@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import {
-  RouteProps, // eslint-disable-line no-unused-vars
-} from 'react-router';
+import { RouteComponentProps } from 'react-router';
 import FourZeroFour from '../pages/FourZeroFour';
 import BackLinkBanner from '../components/BackLinkBanner';
 import ViewWorkoutHero from '../components/ViewWorkoutHero';
@@ -14,12 +12,7 @@ import {
   calculateWorkoutTime,
   formatMinutes,
 } from '../helpers/functions';
-import {
-  Entities, // eslint-disable-line no-unused-vars
-  State, // eslint-disable-line no-unused-vars
-  ReduxAction, // eslint-disable-line no-unused-vars
-  Workout, // eslint-disable-line no-unused-vars
-} from '../helpers/types';
+import { Entities, ReduxAction, Workout } from '../helpers/types';
 import {
   SET_ACTIVE_WORKOUT,
 } from '../helpers/constants';
@@ -29,7 +22,9 @@ interface OwnProps {
   entities: Entities;
 }
 
-type Props = OwnProps & StateProps & DispatchProps & RouteProps;
+type Match = Pick<RouteComponentProps<{ id: string }>, 'match'>
+
+type Props = OwnProps & StateProps & DispatchProps & Match;
 
 const ViewWorkout: React.FC<Props> = ({
   animationStyles,
