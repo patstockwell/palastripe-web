@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import {
   ReduxAction, // eslint-disable-line no-unused-vars
+  State, // eslint-disable-line no-unused-vars
   Workout, // eslint-disable-line no-unused-vars
 } from '../helpers/types';
 import {
@@ -67,11 +68,11 @@ const StyledLink = styled(Link)`
   color: initial;
 `;
 
-interface Props {
+interface OwnProps {
   workout: Workout;
-  setWindowScroll: (scrollY: number) => ReduxAction<{ scrollY: number, page: string }>;
-  scrollY: number;
 }
+
+type Props = OwnProps & StateProps & DispatchProps;
 
 const WorkoutTile = ({ setWindowScroll, scrollY = 0, workout }: Props) => {
   useEffect(() => {
@@ -102,15 +103,23 @@ const WorkoutTile = ({ setWindowScroll, scrollY = 0, workout }: Props) => {
   );
 };
 
-const mapStateToProps = ({ scrollY: { WORKOUTS } }) => ({
-  scrollY: WORKOUTS,
+interface StateProps {
+  scrollY: number;
+}
+
+const mapStateToProps = (state: State): StateProps => ({
+  scrollY: state.scrollY.WORKOUTS,
 });
 
-const mapDispatchToProps = {
-  setWindowScroll: (scrollY: number): ReduxAction<{
+interface DispatchProps {
+  setWindowScroll: (scrollY: number) => ReduxAction<{
     scrollY: number,
     page: string,
-  }> => ({
+  }>;
+}
+
+const mapDispatchToProps: DispatchProps = {
+  setWindowScroll: scrollY => ({
     type: SET_WINDOW_SCROLL,
     payload: {
       scrollY,
@@ -119,4 +128,7 @@ const mapDispatchToProps = {
   }),
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(WorkoutTile);
+export default connect<StateProps, DispatchProps, OwnProps>(
+  mapStateToProps,
+  mapDispatchToProps
+)(WorkoutTile);
