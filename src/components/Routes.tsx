@@ -1,8 +1,7 @@
 import React from 'react';
 import { useTransition } from 'react-spring';
-import { RouteProps, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
 import Workouts from '../pages/Workouts';
-import ViewWorkout from '../pages/ViewWorkout';
 import ActiveWorkout from '../pages/ActiveWorkout';
 import Home from '../pages/Home';
 import Me from '../pages/Me';
@@ -35,9 +34,7 @@ const Routes = () => {
       <Route path="/edit-workout/" render={() =>
         <EditWorkout animationStyles={props} />} />
       <Route path="/workouts/:id/" render={({ match }) =>
-        <ViewWorkout match={match} animationStyles={props} />} />
-      <Route path="/active-workout/" render={() =>
-        <ActiveWorkout pathname={location.pathname} animationStyles={props} />} />
+        <ActiveWorkout animationStyles={props} match={match} />} />
       <Route component={FourZeroFour} />
     </Switch>
   ));

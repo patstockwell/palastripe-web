@@ -1,12 +1,27 @@
 import React, { useState } from 'react';
-import { Redirect } from 'react-router';
 import { connect } from 'react-redux';
+import {
+  RouteComponentProps, // eslint-disable-line no-unused-vars
+} from 'react-router';
 import styled, { createGlobalStyle } from 'styled-components';
 import { animated } from 'react-spring';
 import AlertConfirm, { LinkButton, Button } from '../components/AlertConfirm';
+import BackLinkBanner from '../components/BackLinkBanner';
+import ViewWorkoutHero from '../components/ViewWorkoutHero';
+import FourZeroFour from '../pages/FourZeroFour';
 import ActivityList from '../components/ActivityList/ActivityList';
-import { ReduxAction, State, Workout } from '../helpers/types';
-import { FINISH_WORKOUT, purple } from '../helpers/constants';
+import {
+  ReduxAction, //eslint-disable-line no-unused-vars
+  Entities, //eslint-disable-line no-unused-vars
+  State, //eslint-disable-line no-unused-vars
+  Workout, //eslint-disable-line no-unused-vars
+} from '../helpers/types';
+import {
+  combineDataForAllExercises,
+  formatMinutes,
+  calculateWorkoutTime,
+} from '../helpers/functions';
+import { SET_ACTIVE_WORKOUT, FINISH_WORKOUT, purple } from '../helpers/constants';
 
 export const AnimatedSlidingPage = styled(animated.div)`
   z-index: 10;
@@ -25,52 +40,65 @@ const GlobalStyle = createGlobalStyle<{ hidden: boolean }>`
 
 interface OwnProps {
   animationStyles: any;
-  workout: Workout;
-  pathname: String;
 }
 
-type Props = OwnProps & DispatchProps & StateProps;
+type Match = Pick<RouteComponentProps<{ id: string }>, 'match'>
+
+type Props = OwnProps & DispatchProps & StateProps & Match;
 
 const ActiveWorkout: React.FC<Props> = ({
   animationStyles,
   finishWorkout,
-  pathname,
-  workout,
+  entities,
+  match,
+  activeWorkout,
+  setActiveWorkout,
 }) => {
   const [ showEndWorkoutAlert, setShowEndWorkoutAlert ] = useState(false);
-  /*
-    An animated component will be matched to a route. React-spring is using the
-    url as a key. It will hold both urls and both components while animating
-    between the two states (pages).
-    When we land on this page without a workout, we are redirected immediately.
-    However, react-spring attempts to hold on to this component while the
-    animation executes, resulting in another call to redirect, which results in
-    another animation, where react-spring will then try to hold the redirecting
-    component again. This continues in an infinte loop.
-    Too fix this, we first check if we are transitioning from the correct url
-    as well as checking for a workout prop
-  */
-  if (!workout && pathname === '/active-workout/') {
-    return <Redirect to="/workouts/"/>;
-  } else if (!workout) { // else we must be transitioning
-    return null;
-  } // else we have a workout and should render normally
+  const [ direction, setDirection ] = useState('left');
+
+  // get the workout ID from the URL
+  const { id: workoutId }: { id: string } = match.params;
+  const workoutSetAsActive = activeWorkout && workoutId === activeWorkout.id;
+
+  // if a workout is visited that is not currently the activeWorkout
+  if (!workoutSetAsActive) {
+    // retrieve the workout for this URL
+    const workout = entities.workouts.byId[workoutId];
+
+    if (!workout) {
+      return <FourZeroFour />;
+    }
+
+    const workoutWithAllActivityData: Workout =
+      combineDataForAllExercises(workout, entities.exercises);
+
+    // make it the new activeWorkout
+    setActiveWorkout(workoutWithAllActivityData);
+  }
 
   const finishWorkoutWithAlertTransition = () => {
-    finishWorkout(workout);
+    finishWorkout(activeWorkout);
+    setDirection('top');
     setShowEndWorkoutAlert(false);
   };
 
-  return (
+  return workoutSetAsActive && (
     <AnimatedSlidingPage
       style={{
         position: animationStyles.position,
-        left: animationStyles.left,
+        [direction]: animationStyles.left,
       }}
     >
       <GlobalStyle hidden={showEndWorkoutAlert} />
+      <BackLinkBanner sticky={false} back={{ link: '/workouts/' }} />
+      <ViewWorkoutHero
+        name={activeWorkout.name}
+        imageUrl={activeWorkout.imageUrl}
+        time={formatMinutes(calculateWorkoutTime(activeWorkout))}
+      />
       <ActivityList
-        workout={workout}
+        workout={activeWorkout}
         finishWorkoutClickHandler={() => setShowEndWorkoutAlert(true)}
       />
 
@@ -93,10 +121,12 @@ const ActiveWorkout: React.FC<Props> = ({
 
 interface DispatchProps {
   finishWorkout: (w: Workout) => ReduxAction<{}>;
+  setActiveWorkout: (workout: Workout) => ReduxAction<Workout>;
 }
 
 interface StateProps {
-  workout: Workout;
+  activeWorkout: Workout;
+  entities: Entities;
 }
 
 const mapDispatchToProps = {
@@ -104,10 +134,15 @@ const mapDispatchToProps = {
     type: FINISH_WORKOUT,
     payload: workout,
   }),
+  setActiveWorkout: (workout: Workout): ReduxAction<Workout> => ({
+    type: SET_ACTIVE_WORKOUT,
+    payload: workout,
+  }),
 };
 
 const mapStateToProps = (state: State) => ({
-  workout: state.activeWorkout,
+  activeWorkout: state.activeWorkout,
+  entities: state.entities,
 });
 
 export default connect<StateProps, DispatchProps, void>(

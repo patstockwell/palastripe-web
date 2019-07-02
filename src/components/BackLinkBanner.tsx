@@ -15,9 +15,9 @@ const StyledLink = styled(Link)`
   margin: 16px;
 `;
 
-const Header = styled.div`
+const Header = styled.div<{ sticky: boolean }>`
   display: flex;
-  position: sticky;
+  position: ${({ sticky }) => sticky ? 'sticky' : 'relative'};
   top: 0;
   justify-content: space-between;
   align-items: center;
@@ -27,6 +27,7 @@ const Header = styled.div`
 `;
 
 interface Props {
+  sticky?: boolean;
   back: {
     link: string;
   };
@@ -34,13 +35,14 @@ interface Props {
     link: string;
     text: string;
     handleClick?: () => void;
+    showArrows: boolean;
   };
 }
 
 const backText = ' Back'; // <-- Leading space
 
-const BackLinkBanner: React.FC<Props> = ({ back, continueTo }) => (
-  <Header>
+const BackLinkBanner: React.FC<Props> = ({ sticky = true, back, continueTo }) => (
+  <Header sticky={sticky}>
 
     <StyledLink to={{ pathname: back.link, state: { immediate: false } }}>
       <BackArrow style={{ fill: 'grey', margin: '0 -12px 0 -8px' }} />
@@ -54,8 +56,12 @@ const BackLinkBanner: React.FC<Props> = ({ back, continueTo }) => (
         onClick={continueTo.handleClick}
       >
         {continueTo.text}
-        <ForwardArrow style={{ fill: 'grey', margin: '0 -12px 0 0' }} />
-        <ForwardArrow style={{ fill: 'grey' }} />
+        {continueTo.showArrows &&
+          <React.Fragment>
+            <ForwardArrow style={{ fill: 'grey', margin: '0 -12px 0 0' }} />
+            <ForwardArrow style={{ fill: 'grey' }} />
+          </React.Fragment>
+        }
       </StyledLink>
     }
 

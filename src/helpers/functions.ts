@@ -7,7 +7,12 @@ import {
   MONTHS_OF_THE_YEAR,
   SECONDS_IN_A_MINUTE,
 } from './constants';
-import { isTimed, Activity, Exercises, Workout } from './types';
+import {
+  isTimed,
+  Activity, // eslint-disable-line no-unused-vars
+  Exercises, // eslint-disable-line no-unused-vars
+  Workout, // eslint-disable-line no-unused-vars
+} from './types';
 
 export function useRouter(): any {
   return useContext(__RouterContext);
