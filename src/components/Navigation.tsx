@@ -60,7 +60,7 @@ const getCurrentPage = (pathname: string): string => {
 
 interface Props {
   pathname: string;
-  setWindowScroll: (number, string) => ReduxAction<{
+  setWindowScroll: (scrollY: number, page: string) => ReduxAction<{
     scrollY: number,
     page: string
   }>;
@@ -80,20 +80,20 @@ const Navigation = ({ pathname, setWindowScroll }: Props) => {
   return (
     <Nav>
       <NavLink
-        highlight={isOnPage(HOME) ? pink : 'black'}
-        to="/home/"
-        onClick={handleClick}
-      >
-        <Home />
-        <LinkName>Home</LinkName>
-      </NavLink>
-      <NavLink
         highlight={isOnPage(WORKOUTS) ? pink : 'black'}
         to="/workouts/"
         onClick={handleClick}
       >
         <Calendar />
         <LinkName>Workouts</LinkName>
+      </NavLink>
+      <NavLink
+        highlight={isOnPage(HOME) ? pink : 'black'}
+        to="/home/"
+        onClick={handleClick}
+      >
+        <Home />
+        <LinkName>Home</LinkName>
       </NavLink>
       <NavLink
         highlight={isOnPage(ME) ? pink : 'black'}

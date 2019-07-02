@@ -27,10 +27,10 @@ const Routes = () => {
 
   return transitions.map(({ item, props, key }) => (
     <Switch key={key} location={item}>
-      <Route path="/" exact component={Home} />
+      <Route path="/" exact component={Workouts} />
+      <Route path="/workouts/" exact component={Workouts} />
       <Route path="/home/" component={Home} />
       <Route path="/me/" component={Me} />
-      <Route path="/workouts/" exact component={Workouts} />
       <Route path="/edit-workout/" render={() =>
         <EditWorkout animationStyles={props} />} />
       <Route path="/workouts/:id/" render={({ match }) =>
