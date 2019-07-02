@@ -47,10 +47,10 @@ const LinkName = styled.span`
 `;
 
 const getCurrentPage = (pathname: string): string => {
-  if (pathname === '/' || /\/home*/.test(pathname)) {
-    return HOME;
-  } else if (/\/workouts*/.test(pathname)){
+  if (pathname === '/' || /\/workouts*/.test(pathname)) {
     return WORKOUTS;
+  } else if (/\/home*/.test(pathname)){
+    return HOME;
   } else if (/\/me*/.test(pathname)) {
     return ME;
   } else {
