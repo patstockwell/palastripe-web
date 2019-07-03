@@ -14,8 +14,8 @@ import {
   ReduxAction, // eslint-disable-line no-unused-vars
 } from '../helpers/types';
 import User from '../assets/svg/User';
-import Home from '../assets/svg/Home';
-import Calendar from '../assets/svg/Calendar';
+import ActivityBars from '../assets/svg/ActivityBars';
+import Cardiogram from '../assets/svg/Cardiogram';
 
 const Nav = styled.nav`
   display: flex;
@@ -84,7 +84,7 @@ const Navigation = ({ pathname, setWindowScroll }: Props) => {
         to="/workouts/"
         onClick={handleClick}
       >
-        <Calendar />
+        <Cardiogram />
         <LinkName>Workouts</LinkName>
       </NavLink>
       <NavLink
@@ -92,7 +92,7 @@ const Navigation = ({ pathname, setWindowScroll }: Props) => {
         to="/activity/"
         onClick={handleClick}
       >
-        <Home />
+        <ActivityBars />
         <LinkName>Activity</LinkName>
       </NavLink>
       <NavLink
