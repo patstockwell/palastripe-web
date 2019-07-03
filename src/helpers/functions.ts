@@ -129,7 +129,7 @@ export const formatMinutes = (minutes: number): string => {
   } else {
     const hours = Math.floor(minutes / 60);
     const mins = minutes % 60;
-    return `${hours}:${mins < 9 ? `0${mins}` : mins}min`;
+    return `${hours}hr ${mins < 9 ? `0${mins}` : mins}min`;
   }
 };
 

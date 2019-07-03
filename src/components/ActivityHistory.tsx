@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { gutterWidth } from '../helpers/constants';
 import {
@@ -8,7 +7,6 @@ import {
   formatMinutes,
 } from '../helpers/functions';
 import {
-  State, // eslint-disable-line no-unused-vars
   Workout, // eslint-disable-line no-unused-vars
 } from '../helpers/types';
 
@@ -22,11 +20,11 @@ const Hr = styled.hr`
   background-color: lightgrey;
 `;
 
-interface StateProps {
-  history: Workout[],
+interface Props {
+  history: Workout[];
 }
 
-const RecentActivity: React.FC<StateProps> = ({ history }) => {
+const ActivityHistory: React.FC<Props> = ({ history }) => {
   const historyTiles = history.map(workout => {
     const { name, startTime, finishTime } = workout;
     const { day, date, month } = formatDate(finishTime);
@@ -50,11 +48,4 @@ const RecentActivity: React.FC<StateProps> = ({ history }) => {
   );
 };
 
-const mapStateToProps = (state: State) => ({
-  history: state.history,
-});
-
-export default connect<StateProps, void, void>(
-  mapStateToProps,
-  null
-)(RecentActivity);
+export default ActivityHistory;
