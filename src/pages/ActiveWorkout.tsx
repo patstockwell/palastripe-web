@@ -59,23 +59,25 @@ const ActiveWorkout: React.FC<Props> = ({
 
   // get the workout ID from the URL
   const { id: workoutId }: { id: string } = match.params;
+  const workout = entities.workouts.byId[workoutId];
+
+  if (!workout) {
+    return <FourZeroFour />;
+  }
+
+  const workoutWithAllActivityData: Workout =
+    combineDataForAllExercises(workout, entities.exercises);
+
   const workoutSetAsActive = activeWorkout && workoutId === activeWorkout.id;
 
-  // if a workout is visited that is not currently the activeWorkout
   if (!workoutSetAsActive) {
-    // retrieve the workout for this URL
-    const workout = entities.workouts.byId[workoutId];
-
-    if (!workout) {
-      return <FourZeroFour />;
-    }
-
-    const workoutWithAllActivityData: Workout =
-      combineDataForAllExercises(workout, entities.exercises);
-
-    // make it the new activeWorkout
+    // if a workout is visited that is not currently the activeWorkout, set it
     setActiveWorkout(workoutWithAllActivityData);
   }
+
+  const displayedWorkout = workoutSetAsActive
+    ? activeWorkout
+    : workoutWithAllActivityData;
 
   const finishWorkoutWithAlertTransition = () => {
     finishWorkout(activeWorkout);
@@ -83,7 +85,7 @@ const ActiveWorkout: React.FC<Props> = ({
     setShowEndWorkoutAlert(false);
   };
 
-  return workoutSetAsActive && (
+  return (
     <AnimatedSlidingPage
       style={{
         position: animationStyles.position,
@@ -93,12 +95,12 @@ const ActiveWorkout: React.FC<Props> = ({
       <GlobalStyle hidden={showEndWorkoutAlert} />
       <BackLinkBanner sticky={false} back={{ link: '/workouts/' }} />
       <ViewWorkoutHero
-        name={activeWorkout.name}
-        imageUrl={activeWorkout.imageUrl}
-        time={formatMinutes(calculateWorkoutTime(activeWorkout))}
+        name={displayedWorkout.name}
+        imageUrl={displayedWorkout.imageUrl}
+        time={formatMinutes(calculateWorkoutTime(displayedWorkout))}
       />
       <ActivityList
-        workout={activeWorkout}
+        workout={displayedWorkout}
         finishWorkoutClickHandler={() => setShowEndWorkoutAlert(true)}
       />
 
