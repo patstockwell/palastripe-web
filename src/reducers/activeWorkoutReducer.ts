@@ -1,4 +1,5 @@
 import {
+  FINISH_WORKOUT,
   CHANGE_REPS,
   CHANGE_WEIGHT,
   SET_ACTIVE_WORKOUT,
@@ -18,11 +19,14 @@ const activeWorkoutReducer = (state: Workout, action: ReduxAction<any>) => {
     case CHANGE_WEIGHT: {
       return changeWeight(state, action);
     }
+    case FINISH_WORKOUT: {
+      return finishWorkout();
+    }
     case CHANGE_REPS: {
       return changeReps(state, action);
     }
     case SET_ACTIVE_WORKOUT: {
-      return setActiveWorkout(state, action);
+      return setActiveWorkout(action);
     }
     case TOGGLE_SET_COMPLETE: {
       return toggleSetComplete(state, action);
@@ -80,6 +84,9 @@ const changeReps = (state: Workout, action: ChangeSetAction): Workout => {
   };
 };
 
+// simply set the active workout to undefined when the workout is complete
+const finishWorkout = () => undefined;
+
 const toggleSetComplete = (
   state: Workout,
   action: ReduxAction< SingleSetAction & { completed: boolean, }>
@@ -102,7 +109,6 @@ const toggleSetComplete = (
 };
 
 const setActiveWorkout = (
-  state: Workout,
   action: ReduxAction<Workout>
 ): Workout => ({
   version: WORKOUT_SHAPE_VERSION,
