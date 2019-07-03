@@ -2,20 +2,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Helmet from 'react-helmet';
 import styled from 'styled-components';
-import { purple } from '../helpers/constants';
+import { buttonStyle } from '../components/SharedStyles';
 
 const Button = styled(Link)`
-  background-color: ${purple};
-  color: white;
-  text-decoration: none;
-  padding: 16px;
-  box-sizing: border-box;
-  margin: 16px;
+  ${buttonStyle}
   display: inline-block;
-  border-radius: 25px;
-  font-size: 16px;
-  text-transform: uppercase;
-  font-weight: 800;
+  margin: 16px;
 `;
 
 const FourZeroFour = () => (
