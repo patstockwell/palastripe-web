@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { buttonStyle } from './SharedStyles';
 
 const bounceSpace = 7;
-const popUpHeight = 253 + bounceSpace;
+const popUpHeight = 353 + bounceSpace;
 
 export const Button = styled.button<{ background: string }>`
   ${buttonStyle}
