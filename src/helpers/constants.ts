@@ -67,7 +67,7 @@ export const WORKOUT_SHAPE_VERSION: string = 'v1';
 
 // page names for setting the current scroll height
 export const WORKOUTS: string = 'WORKOUTS';
-export const HOME: string = 'HOME';
+export const ACTIVITY: string = 'ACTIVITY';
 export const ME: string = 'ME';
 
 export const LOCAL_STORAGE_HISTORY: string = 'HBFF_HISTORY';

@@ -8,6 +8,7 @@ import {
   formatMinutes,
 } from '../helpers/functions';
 import {
+  State, // eslint-disable-line no-unused-vars
   Workout, // eslint-disable-line no-unused-vars
 } from '../helpers/types';
 
@@ -43,19 +44,17 @@ const RecentActivity: React.FC<StateProps> = ({ history }) => {
 
   return (
     <Section>
-      <h2>Activity</h2>
-      <Hr />
       {historyTiles}
       {!historyTiles.length && <div>Your workout history will appear here</div>}
     </Section>
   );
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state: State) => ({
   history: state.history,
 });
 
-export default connect<void, StateProps, void>(
+export default connect<StateProps, void, void>(
   mapStateToProps,
   null
 )(RecentActivity);

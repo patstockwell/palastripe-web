@@ -22,7 +22,7 @@ const FourZeroFour = () => (
   <div>
     <Helmet title="404 Page not found" />
     <h2>Uh oh, 404</h2>
-    <Button to="/home/">Home</Button>
+    <Button to="/workouts/">Go to workouts</Button>
   </div>
 );
 

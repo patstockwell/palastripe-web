@@ -3,7 +3,7 @@ import { useTransition } from 'react-spring';
 import { Route, Switch } from 'react-router-dom';
 import Workouts from '../pages/Workouts';
 import ActiveWorkout from '../pages/ActiveWorkout';
-import Home from '../pages/Home';
+import Activity from '../pages/Activity';
 import Me from '../pages/Me';
 import EditWorkout from '../pages/EditWorkout';
 import FourZeroFour from '../pages/FourZeroFour';
@@ -29,7 +29,7 @@ const Routes = () => {
     <Switch key={key} location={item}>
       <Route path="/" exact component={Workouts} />
       <Route path="/workouts/" exact component={Workouts} />
-      <Route path="/home/" component={Home} />
+      <Route path="/activity/" component={Activity} />
       <Route path="/me/" component={Me} />
       <Route path="/edit-workout/" render={() =>
         <EditWorkout animationStyles={props} />} />

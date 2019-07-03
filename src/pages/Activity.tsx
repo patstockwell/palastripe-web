@@ -20,14 +20,14 @@ interface OwnProps {
 
 type Props = OwnProps & StateProps & RouteProps;
 
-const Home: React.FC<Props> = ({ scrollY = 0, animationStyles, location }) => {
+const Activity: React.FC<Props> = ({ scrollY = 0, animationStyles, location }) => {
   useEffect(() => {
     window.scrollTo(0, scrollY);
   });
 
   return (
     <animated.div style={animationStyles}>
-      <Banner heading={'Home'}/>
+      <Banner heading={'Activity'}/>
       <RecentActivity />
       <Navigation pathname={location.pathname} />
     </animated.div>
@@ -39,8 +39,8 @@ interface StateProps {
 }
 
 const mapStateToProps = (state: State) => ({
-  scrollY: state.scrollY.HOME,
+  scrollY: state.scrollY.ACTIVITY,
 });
 
-export default connect<StateProps, void, void>(mapStateToProps)(Home);
+export default connect<StateProps, void, void>(mapStateToProps)(Activity);
 

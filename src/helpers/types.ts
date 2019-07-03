@@ -22,7 +22,7 @@ export interface State {
 export interface ScrollY {
   WORKOUTS?: number;
   ME?: number;
-  HOME?: number;
+  ACTIVITY?: number;
 }
 
 export interface Settings {

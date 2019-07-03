@@ -6,7 +6,7 @@ import {
   pink,
   navBarHeight,
   SET_WINDOW_SCROLL,
-  HOME,
+  ACTIVITY,
   ME,
   WORKOUTS,
 } from '../helpers/constants';
@@ -49,8 +49,8 @@ const LinkName = styled.span`
 const getCurrentPage = (pathname: string): string => {
   if (pathname === '/' || /\/workouts*/.test(pathname)) {
     return WORKOUTS;
-  } else if (/\/home*/.test(pathname)){
-    return HOME;
+  } else if (/\/activity*/.test(pathname)){
+    return ACTIVITY;
   } else if (/\/me*/.test(pathname)) {
     return ME;
   } else {
@@ -88,12 +88,12 @@ const Navigation = ({ pathname, setWindowScroll }: Props) => {
         <LinkName>Workouts</LinkName>
       </NavLink>
       <NavLink
-        highlight={isOnPage(HOME) ? pink : 'black'}
-        to="/home/"
+        highlight={isOnPage(ACTIVITY) ? pink : 'black'}
+        to="/activity/"
         onClick={handleClick}
       >
         <Home />
-        <LinkName>Home</LinkName>
+        <LinkName>Activity</LinkName>
       </NavLink>
       <NavLink
         highlight={isOnPage(ME) ? pink : 'black'}
