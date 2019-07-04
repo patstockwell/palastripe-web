@@ -31,7 +31,7 @@ const ActivityHistory: React.FC<Props> = ({ history }) => {
     const workoutLength = formatMinutes(getDiffInMinutes(startTime, finishTime));
 
     return (
-      <div key={startTime}>
+      <div key={finishTime}>
         <p>{name}</p>
         <p>{`${day}, ${date} ${month}`}</p>
         <p>{workoutLength}</p>
