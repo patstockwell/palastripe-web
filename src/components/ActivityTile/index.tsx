@@ -83,10 +83,10 @@ interface Props {
   groupId: string;
   index: number;
   handleSelect: any;
-  handleOpen: any;
-  selectable: boolean;
-  selected: boolean;
-  show: boolean;
+  handleOpen?: any;
+  selectable?: boolean;
+  selected?: boolean;
+  show?: boolean;
 }
 
 const ActivityTile: React.FC<Props> = ({

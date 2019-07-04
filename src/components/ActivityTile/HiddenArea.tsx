@@ -6,6 +6,8 @@ import {
   Dispatch, // eslint-disable-line no-unused-vars
 } from 'redux';
 import { animated,
+  OpaqueInterpolation,
+
   AnimatedValue, // eslint-disable-line no-unused-vars
 } from 'react-spring';
 import styled from 'styled-components';
@@ -26,7 +28,10 @@ interface OwnProps {
   activity: WeightedActivity;
   groupId: string;
   index: number;
-  animatedStyles: AnimatedValue<{ height: ReactText }>;
+  animatedStyles: AnimatedValue<{
+    height: ReactText,
+    opacity: OpaqueInterpolation<any>,
+  }>;
 }
 
 type Props = DispatchProps & OwnProps;
@@ -46,6 +51,7 @@ const HiddenArea: React.FC<Props> = ({
   return (
     <animated.div style={{
       height: animatedStyles.height,
+      opacity: animatedStyles.opacity,
       cursor: 'default',
     }}>
       <IncrementDecrementPanel

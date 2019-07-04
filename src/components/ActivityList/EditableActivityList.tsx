@@ -2,6 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import ActivityListHeading from './ActivityListHeading';
+import ActivityTile from '../ActivityTile';
 import {
   State, // eslint-disable-line no-unused-vars
   Workout,  // eslint-disable-line no-unused-vars
@@ -27,7 +28,16 @@ const EditableActivityList: React.FC<Props> = ({
   editableWorkout: { exerciseGroups },
 }) => {
   const exerciseGroupTiles = exerciseGroups.map((g: WorkoutActivityGroup) => {
-    const tiles = g.exercises.map(e => <div key={e.id}>{e.name}</div>);
+    const tiles = g.exercises.map((e, i) => (
+      <ActivityTile
+        key={e.id}
+        groupId={g.id}
+        index={i}
+        handleSelect={() => {console.log('clicked')}}
+        selectable={false}
+        activity={e}
+      />
+    ));
 
     return (
       <ActivityListHeading

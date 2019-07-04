@@ -6,6 +6,7 @@ import BackLinkBanner from '../components/BackLinkBanner';
 import { AnimatedSlidingPage } from './ActiveWorkout';
 import {
   Exercises, // eslint-disable-line no-unused-vars
+  State, // eslint-disable-line no-unused-vars
   Exercise, // eslint-disable-line no-unused-vars
 } from '../helpers/types';
 
@@ -56,7 +57,7 @@ const EditWorkout: React.FC<Props> = ({
   //   setSearchQuery(e.target.value);
   // };
 
-  const handleEditNameChange = e => {
+  const handleEditNameChange = (e: any) => {
     e.preventDefault();
     setWorkoutName(e.target.value);
   };
@@ -87,7 +88,7 @@ const EditWorkout: React.FC<Props> = ({
   );
 };
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state: State) => ({
   exercises: state.entities.exercises,
 });
 

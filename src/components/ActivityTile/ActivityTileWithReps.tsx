@@ -22,7 +22,7 @@ import {
   VisibleArea,
 } from './index';
 
-const Tile = styled.li`
+const Tile = styled.li<{ selected: boolean, selectable: boolean }>`
   ${tileStyle}
 `;
 
@@ -91,12 +91,16 @@ const ActivityTileWithReps: React.FC<Props> = ({
           />
         }
       </VisibleArea>
-      <HiddenArea
-        activity={activity}
-        groupId={groupId}
-        index={index}
-        animatedStyles={animatedStyles}
-      />
+
+      {selectable &&
+        <HiddenArea
+          activity={activity}
+          groupId={groupId}
+          index={index}
+          animatedStyles={animatedStyles}
+        />
+      }
+
       {selected &&
         <SeeMoreArrowWrapper
           onClick={handleOpen}
@@ -107,6 +111,7 @@ const ActivityTileWithReps: React.FC<Props> = ({
           <DownArrow style={{ fill: 'grey' }}/>
         </SeeMoreArrowWrapper>
       }
+
     </Tile>
   );
 };
