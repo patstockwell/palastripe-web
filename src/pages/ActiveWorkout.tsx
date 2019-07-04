@@ -7,7 +7,7 @@ import styled, { createGlobalStyle } from 'styled-components';
 import { animated } from 'react-spring';
 import AlertConfirm, { LinkButton, Button } from '../components/AlertConfirm';
 import BackLinkBanner from '../components/BackLinkBanner';
-import ViewWorkoutHero from '../components/ViewWorkoutHero';
+import WorkoutHero from '../components/WorkoutHero';
 import FourZeroFour from '../pages/FourZeroFour';
 import ActivityList from '../components/ActivityList/ActivityList';
 import {
@@ -94,7 +94,7 @@ const ActiveWorkout: React.FC<Props> = ({
     >
       <GlobalStyle hidden={showEndWorkoutAlert} />
       <BackLinkBanner sticky={false} back={{ link: '/workouts/' }} />
-      <ViewWorkoutHero
+      <WorkoutHero
         name={displayedWorkout.name}
         imageUrl={displayedWorkout.imageUrl}
         time={formatMinutes(calculateWorkoutTime(displayedWorkout))}

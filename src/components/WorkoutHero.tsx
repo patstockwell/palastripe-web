@@ -43,11 +43,11 @@ interface Props {
   time?: string;
 }
 
-const ViewWorkoutHero = ({ time, imageUrl, name }: Props) => (
+const WorkoutHero = ({ time, imageUrl, name }: Props) => (
   <Window imageUrl={imageUrl}>
     <Title>{name}</Title>
     <Time>{time}</Time>
   </Window>
 );
 
-export default ViewWorkoutHero;
+export default WorkoutHero;
