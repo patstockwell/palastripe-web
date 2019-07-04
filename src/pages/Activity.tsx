@@ -9,7 +9,7 @@ import {
   State, // eslint-disable-line no-unused-vars
   Workout, // eslint-disable-line no-unused-vars
 } from '../helpers/types';
-import ActivityHistory from '../components/ActivityHistory';
+import ActivityHistoryList from '../components/ActivityHistoryList';
 import { animated } from 'react-spring';
 import { connect } from 'react-redux';
 import Banner from '../components/Banner';
@@ -48,7 +48,7 @@ const Activity: React.FC<Props> = ({
         totalWorkouts={history.length}
         totalMinutes={totalMinutes}
       />
-      <ActivityHistory history={history} />
+      <ActivityHistoryList history={history} />
       <Navigation pathname={location.pathname} />
     </animated.div>
   );

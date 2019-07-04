@@ -68,6 +68,7 @@ const initialState: State = {
 export default {
   ...initialState,
   activeWorkout: getLocalStorage(LOCAL_STORAGE_ACTIVE_WORKOUT, undefined),
+  // Removing this line will destroy users' history. Never remove.
   history: getLocalStorage(LOCAL_STORAGE_HISTORY, []),
 };
 
