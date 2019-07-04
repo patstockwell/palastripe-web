@@ -43,13 +43,19 @@ const initialState: State = {
     exerciseGroups: [
       {
         id: uuidv4(),
-        name: 'Exercises',
+        name: 'Example group',
         exercises: [
           {
             id: uuidv4(),
-            name: 'Push ups',
+            name: 'Exercise with timer',
+            timerInSeconds: 45,
+            completed: false,
+          },
+          {
+            id: uuidv4(),
+            name: 'Exercise with reps',
             repsGoal: 10,
-            weightInKilos: 10,
+            weightInKilos: 20,
             autoIncrement: 0,
             completed: false,
           },
