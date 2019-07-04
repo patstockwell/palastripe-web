@@ -5,6 +5,9 @@ import {
   formatDate,
   formatMinutes,
 } from '../helpers/functions';
+import {
+  Workout, // eslint-disable-line no-unused-vars
+} from '../helpers/types';
 
 const Hr = styled.hr`
   border: none;
@@ -12,16 +15,30 @@ const Hr = styled.hr`
   background-color: lightgrey;
 `;
 
-const ActivityHistoryTile = ({ workout }) => {
-    const { name, startTime, finishTime } = workout;
-    const { day, date, month } = formatDate(finishTime);
-    const workoutLength = formatMinutes(getDiffInMinutes(startTime, finishTime));
+const Image = styled.div<{ url: string }>`
+  width: 60px;
+  height: 60px;
+  background-size: cover;
+  background-image: url(${({ url }) => url});
+`;
+
+interface Props {
+  workout: Workout;
+};
+
+const ActivityHistoryTile: React.FC<Props> = ({ workout }) => {
+  const { name, startTime, finishTime } = workout;
+  const { day, date, month } = formatDate(finishTime);
+  const totalTime = formatMinutes(getDiffInMinutes(startTime, finishTime));
+
+  console.log(workout);
 
   return (
     <div>
+      <Image url={workout.imageUrl} />
       <p>{name}</p>
       <p>{`${day}, ${date} ${month}`}</p>
-      <p>{workoutLength}</p>
+      <p>{totalTime}</p>
       <Hr />
     </div>
   );
