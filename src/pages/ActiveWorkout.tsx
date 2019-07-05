@@ -23,6 +23,10 @@ import {
 } from '../helpers/functions';
 import { SET_ACTIVE_WORKOUT, FINISH_WORKOUT, purple } from '../helpers/constants';
 
+const BlurMask = styled.div<{ blur: boolean }>`
+  filter: blur(${({ blur }) => blur ? 2 : 0 }px);
+`;
+
 export const AnimatedSlidingPage = styled(animated.div)`
   z-index: 10;
   top: 0;
@@ -92,17 +96,19 @@ const ActiveWorkout: React.FC<Props> = ({
         [direction]: animationStyles.left,
       }}
     >
-      <GlobalStyle hidden={showEndWorkoutAlert} />
-      <BackLinkBanner sticky={false} back={{ link: '/workouts/' }} />
-      <WorkoutHero
-        name={displayedWorkout.name}
-        imageUrl={displayedWorkout.imageUrl}
-        time={formatMinutes(calculateWorkoutTime(displayedWorkout))}
-      />
-      <ActivityList
-        workout={displayedWorkout}
-        finishWorkoutClickHandler={() => setShowEndWorkoutAlert(true)}
-      />
+      <BlurMask blur={showEndWorkoutAlert}>
+        <GlobalStyle hidden={showEndWorkoutAlert} />
+        <BackLinkBanner sticky={false} back={{ link: '/workouts/' }} />
+        <WorkoutHero
+          name={displayedWorkout.name}
+          imageUrl={displayedWorkout.imageUrl}
+          time={formatMinutes(calculateWorkoutTime(displayedWorkout))}
+        />
+        <ActivityList
+          workout={displayedWorkout}
+          finishWorkoutClickHandler={() => setShowEndWorkoutAlert(true)}
+        />
+      </BlurMask>
 
       <AlertConfirm
         cancelAlert={() => setShowEndWorkoutAlert(false)}

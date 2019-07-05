@@ -25,7 +25,7 @@ const Background = styled.div`
   width: 100vw;
   height: calc(100vh + ${popUpHeight}px);
   transform: translateY(-${popUpHeight - bounceSpace}px);
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.6);
 `;
 
 const Dialog = styled.div`
