@@ -8,6 +8,7 @@ import {
 import {
   Workout, // eslint-disable-line no-unused-vars
 } from '../helpers/types';
+import { opaqueImageInAfter } from './SharedStyles';
 
 const Hr = styled.hr`
   border: none;
@@ -15,11 +16,16 @@ const Hr = styled.hr`
   background-color: lightgrey;
 `;
 
-const Image = styled.div<{ url: string }>`
-  width: 60px;
-  height: 60px;
-  background-size: cover;
-  background-image: url(${({ url }) => url});
+const Image = styled.div<{ image: string }>`
+  width: 100%;
+  height: 300px;
+  // background-color: black;
+  position: relative;
+  z-index: -2;
+
+  &::after {
+    ${opaqueImageInAfter}
+  }
 `;
 
 interface Props {
@@ -35,7 +41,7 @@ const ActivityHistoryTile: React.FC<Props> = ({ workout }) => {
 
   return (
     <div>
-      <Image url={workout.imageUrl} />
+      <Image image={workout.imageUrl} />
       <p>{name}</p>
       <p>{`${day}, ${date} ${month}`}</p>
       <p>{totalTime}</p>

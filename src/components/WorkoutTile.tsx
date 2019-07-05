@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import { opaqueImageInAfter } from './SharedStyles';
 import {
   ReduxAction, // eslint-disable-line no-unused-vars
   State, // eslint-disable-line no-unused-vars
@@ -39,16 +40,7 @@ const Square = styled.div<{ image: string }>`
   // put the image in an 'after' pseudo element. Set it behind the original
   // element which has opacity giving it the dark filter look
   &::after {
-    content: ' ';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-image: url(${({ image }) => image});
-    background-size: cover;
-    opacity: 0.5;
-    z-index: -1;
+    ${opaqueImageInAfter};
   }
 `;
 

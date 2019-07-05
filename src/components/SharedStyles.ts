@@ -14,6 +14,19 @@ export const unorderedListStyle = `
   list-style: none;
 `;
 
+export const opaqueImageInAfter = css<{ image: string }>`
+  content: ' ';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: url(${({ image }) => image});
+  background-size: cover;
+  opacity: 0.5;
+  z-index: -1;
+`;
+
 export const tileStyle = css<{ selected: boolean, selectable: boolean }>`
   position: relative;
   color: ${({ selected }) => selected ? 'black' : '#444'};
