@@ -92,10 +92,11 @@ const toggleSetComplete = (
   action: ReduxAction< SingleSetAction & { completed: boolean, }>
 ): Workout => {
   const { payload: { completed: done, groupId, index } } = action;
-  const { exerciseGroups } = state;
+  const { startTime, exerciseGroups } = state;
 
   return {
     ...state,
+    startTime: startTime ? startTime : Date.now(),
     exerciseGroups: exerciseGroups.map(g => (
       g.id !== groupId ? g : {
         ...g,
@@ -112,7 +113,6 @@ const setActiveWorkout = (
   action: ReduxAction<Workout>
 ): Workout => ({
   version: WORKOUT_SHAPE_VERSION,
-  startTime: Date.now(),
   ...action.payload,
 });
 
