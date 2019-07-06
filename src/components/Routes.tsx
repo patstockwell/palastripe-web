@@ -4,7 +4,6 @@ import { Route, Switch } from 'react-router-dom';
 import Workouts from '../pages/Workouts';
 import ActiveWorkout from '../pages/ActiveWorkout';
 import Activity from '../pages/Activity';
-import Me from '../pages/Me';
 import EditWorkout from '../pages/EditWorkout';
 import FourZeroFour from '../pages/FourZeroFour';
 import { useRouter } from '../helpers/functions';
@@ -30,7 +29,6 @@ const Routes = () => {
       <Route path="/" exact component={Workouts} />
       <Route path="/workouts/" exact component={Workouts} />
       <Route path="/activity/" component={Activity} />
-      <Route path="/me/" component={Me} />
       <Route path="/edit-workout/" render={() =>
         <EditWorkout animationStyles={props} />} />
       <Route path="/workouts/:id/" render={({ match }) =>

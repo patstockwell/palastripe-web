@@ -13,7 +13,6 @@ import {
 import {
   ReduxAction, // eslint-disable-line no-unused-vars
 } from '../helpers/types';
-import User from '../assets/svg/User';
 import ActivityBars from '../assets/svg/ActivityBars';
 import Cardiogram from '../assets/svg/Cardiogram';
 
@@ -94,14 +93,6 @@ const Navigation = ({ pathname, setWindowScroll }: Props) => {
       >
         <ActivityBars />
         <LinkName>Activity</LinkName>
-      </NavLink>
-      <NavLink
-        highlight={isOnPage(ME) ? pink : 'black'}
-        to="/me/"
-        onClick={handleClick}
-      >
-        <User />
-        <LinkName>Me</LinkName>
       </NavLink>
     </Nav>
   );
