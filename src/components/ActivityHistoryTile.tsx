@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { memo, useState } from 'react';
 import styled from 'styled-components';
 
 import AlertConfirm, { Button } from './AlertConfirm';
@@ -182,4 +182,8 @@ const ActivityHistoryTile: React.FC<Props> = ({
   );
 };
 
-export default ActivityHistoryTile;
+const areEqualProps = (prevProps: Props, nextProps: Props): boolean => (
+  prevProps.showMenu === nextProps.showMenu
+);
+
+export default memo(ActivityHistoryTile, areEqualProps);
