@@ -33,7 +33,7 @@ const EditableActivityList: React.FC<Props> = ({
         key={e.id}
         groupId={g.id}
         index={i}
-        handleSelect={() => {console.log('clicked')}}
+        handleSelect={() => {console.log('clicked');}}
         selectable={false}
         activity={e}
       />

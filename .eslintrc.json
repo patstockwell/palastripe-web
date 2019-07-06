@@ -13,6 +13,20 @@
       "plugin:react/recommended",
       "eslint:recommended"
     ],
+    "settings": {
+    "react": {
+      "version": "detect"
+    },
+    "propWrapperFunctions": [
+        "forbidExtraProps",
+        {"property": "freeze", "object": "Object"},
+        {"property": "myFavoriteWrapper"}
+    ],
+    "linkComponents": [
+      "Hyperlink",
+      {"name": "Link", "linkAttribute": "to"}
+    ]
+  },
     "parser": "@typescript-eslint/parser",
     "parserOptions": {
         "ecmaFeatures": {

@@ -6,8 +6,7 @@ import {
   Dispatch, // eslint-disable-line no-unused-vars
 } from 'redux';
 import { animated,
-  OpaqueInterpolation,
-
+  OpaqueInterpolation, // eslint-disable-line no-unused-vars
   AnimatedValue, // eslint-disable-line no-unused-vars
 } from 'react-spring';
 import styled from 'styled-components';

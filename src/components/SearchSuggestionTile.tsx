@@ -1,5 +1,8 @@
 import React from 'react';
-import { MapDispatchToPropsFunction, connect } from 'react-redux';
+import {
+  MapDispatchToPropsFunction, // eslint-disable-line no-unused-vars
+  connect,
+} from 'react-redux';
 import styled from 'styled-components';
 import {
   purple,
