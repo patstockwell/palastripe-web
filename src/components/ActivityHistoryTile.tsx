@@ -30,7 +30,7 @@ const Image = styled.div<{ image: string }>`
 
 interface Props {
   workout: Workout;
-};
+}
 
 const ActivityHistoryTile: React.FC<Props> = ({ workout }) => {
   const { name, startTime, finishTime } = workout;

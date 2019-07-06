@@ -10,6 +10,10 @@ const NoHistoryMessage = styled.div`
   padding: ${gutterWidth}px;
 `;
 
+const EmptyHistoryTile = styled.div`
+  height: 200px;
+`;
+
 interface Props {
   history: Workout[];
 }
@@ -22,11 +26,13 @@ const ActivityHistoryList: React.FC<Props> = ({ history }) => {
   return (
     <React.Fragment>
       {historyTiles}
-      {!historyTiles.length &&
+      {!historyTiles.length ? (
         <NoHistoryMessage>
           Your workout history will appear here
         </NoHistoryMessage>
-      }
+      ) : (
+        <EmptyHistoryTile />
+      )}
     </React.Fragment>
   );
 };
