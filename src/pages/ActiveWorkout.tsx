@@ -5,6 +5,7 @@ import {
 } from 'react-router';
 import styled, { createGlobalStyle } from 'styled-components';
 import { animated } from 'react-spring';
+
 import AlertConfirm, { LinkButton, Button } from '../components/AlertConfirm';
 import BackLinkBanner from '../components/BackLinkBanner';
 import WorkoutHero from '../components/WorkoutHero';
@@ -22,10 +23,6 @@ import {
   calculateWorkoutTime,
 } from '../helpers/functions';
 import { SET_ACTIVE_WORKOUT, FINISH_WORKOUT, purple } from '../helpers/constants';
-
-const BlurMask = styled.div<{ blur: boolean }>`
-  filter: blur(${({ blur }) => blur ? 2 : 0 }px);
-`;
 
 export const AnimatedSlidingPage = styled(animated.div)`
   z-index: 10;
@@ -96,19 +93,17 @@ const ActiveWorkout: React.FC<Props> = ({
         [direction]: animationStyles.left,
       }}
     >
-      <BlurMask blur={showEndWorkoutAlert}>
-        <GlobalStyle hidden={showEndWorkoutAlert} />
-        <BackLinkBanner sticky={false} back={{ link: '/workouts/' }} />
-        <WorkoutHero
-          name={displayedWorkout.name}
-          imageUrl={displayedWorkout.imageUrl}
-          time={formatMinutes(calculateWorkoutTime(displayedWorkout))}
-        />
-        <ActivityList
-          workout={displayedWorkout}
-          finishWorkoutClickHandler={() => setShowEndWorkoutAlert(true)}
-        />
-      </BlurMask>
+      <GlobalStyle hidden={showEndWorkoutAlert} />
+      <BackLinkBanner sticky={false} back={{ link: '/workouts/' }} />
+      <WorkoutHero
+        name={displayedWorkout.name}
+        imageUrl={displayedWorkout.imageUrl}
+        time={formatMinutes(calculateWorkoutTime(displayedWorkout))}
+      />
+      <ActivityList
+        workout={displayedWorkout}
+        finishWorkoutClickHandler={() => setShowEndWorkoutAlert(true)}
+      />
 
       <AlertConfirm
         cancelAlert={() => setShowEndWorkoutAlert(false)}

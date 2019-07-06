@@ -58,6 +58,7 @@ export const charcoal = '#444444';
 
 // action types
 export const FINISH_WORKOUT: string = 'FINISH_WORKOUT';
+export const DELETE_WORKOUT: string = 'DELETE_WORKOUT';
 export const ADD_EXERCISE_TO_NEW_WORKOUT: string = 'ADD_EXERCISE_TO_NEW_WORKOUT';
 export const SET_ACTIVE_WORKOUT: string = 'SET_ACTIVE_WORKOUT';
 export const TOGGLE_SET_COMPLETE: string = 'TOGGLE_SET_COMPLETE';
