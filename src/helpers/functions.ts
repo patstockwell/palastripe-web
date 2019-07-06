@@ -93,17 +93,21 @@ export const getLocalStorage = (name: string, defaultValue: any) => {
   return defaultValue;
 };
 
-export const formatDate = (time: number): {
+export const formatDate = (unixTime: number): {
   day: string;
   date: number;
   month: string;
+  time: string;
+  historyTileDateFormat: string;
 } => {
-  const date = new Date(time);
-  return {
-    day: DAYS_OF_THE_WEEK[date.getUTCDay()],
-    date: date.getUTCDate(),
-    month: MONTHS_OF_THE_YEAR[date.getMonth()],
-  };
+  const d = new Date(unixTime);
+  const day = DAYS_OF_THE_WEEK[d.getUTCDay()];
+  const date = d.getUTCDate();
+  const month = MONTHS_OF_THE_YEAR[d.getMonth()];
+  const time = `${d.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}`;
+  const historyTileDateFormat = `${day}, ${date} ${month}, at ${time}`;
+
+  return { day, date, month, time: time, historyTileDateFormat };
 };
 
 export const getDiffInMinutes = (start: number, finish: number): number => {

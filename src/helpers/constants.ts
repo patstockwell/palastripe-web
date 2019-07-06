@@ -16,6 +16,7 @@ export const DELAY_BEFORE_SHOWING_TIMER: number = 2;
 export const DEFAULT_REST_PERIOD_IN_SECONDS: number = 120;
 export const ONE_SECOND: number = 1000;
 export const ONE_DAY: number = 86400000;
+export const ONE_WEEK: number = ONE_DAY * 7;
 export const MILLISECONDS_IN_A_SECOND: number = 1000;
 export const SECONDS_IN_A_MINUTE: number = 60;
 export const MILLISECONDS_IN_A_MINUTE: number =

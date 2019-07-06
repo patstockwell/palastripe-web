@@ -34,18 +34,25 @@ const Image = styled.div<{ image: string }>`
 `;
 
 const TileHeader = styled.div`
+  padding: ${gutterWidth}px;
   display: flex;
   justify-content: space-between;
+  align-items: flex-start;
 `;
 
 const Name = styled.p`
-  padding: ${gutterWidth}px;
+`;
+
+const FinishTimeAndDay = styled.p`
+  color: grey;
+  font-size: 12px;
 `;
 
 const OptionsButton = styled.button`
   border: none;
   background: none;
   display: flex;
+  padding: 0;
 `;
 
 interface Props {
@@ -54,7 +61,7 @@ interface Props {
 
 const ActivityHistoryTile: React.FC<Props> = ({ workout }) => {
   const { name, startTime, finishTime } = workout;
-  const { day, date, month } = formatDate(finishTime);
+  const { historyTileDateFormat } = formatDate(finishTime);
   const totalTime = formatMinutes(getDiffInMinutes(startTime, finishTime));
 
   console.log(workout);
@@ -62,13 +69,15 @@ const ActivityHistoryTile: React.FC<Props> = ({ workout }) => {
   return (
     <div>
       <TileHeader>
-        <Name>{name}</Name>
+        <div>
+          <Name>{name}</Name>
+          <FinishTimeAndDay>{historyTileDateFormat}</FinishTimeAndDay>
+        </div>
         <OptionsButton>
           <Dots />
         </OptionsButton>
       </TileHeader>
       <Image image={workout.imageUrl} />
-      <p>{`${day}, ${date} ${month}`}</p>
       <p>{totalTime}</p>
       <Hr />
     </div>
