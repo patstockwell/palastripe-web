@@ -6,7 +6,6 @@ import {
 import styled from 'styled-components';
 import {
   purple,
-  ADD_EXERCISE_TO_NEW_WORKOUT,
 } from '../helpers/constants';
 import {
   ReduxAction, // eslint-disable-line no-unused-vars
@@ -51,7 +50,7 @@ interface DispatchProps {
 const mapDispatchToProps: MapDispatchToPropsFunction<DispatchProps, OwnProps> =
   (dispatch, { id }) => ({
     addExerciseToEditWorkout: () => dispatch({
-      type: ADD_EXERCISE_TO_NEW_WORKOUT,
+      type: undefined,
       payload: id,
     }),
   });

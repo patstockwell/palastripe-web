@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
+import uuidv4 from 'uuid/v4';
+
 import ActivityListHeading from './ActivityListHeading';
 import ActivityTile from '../ActivityTile';
 import {
@@ -9,14 +11,7 @@ import {
   WorkoutActivityGroup,  // eslint-disable-line no-unused-vars
 } from '../../helpers/types';
 import { unorderedListStyle } from '../SharedStyles';
-import {
-  activityHeadingHeight,
-  bannerHeight,
-} from '../../helpers/constants';
-
-const BottomEmptySpace = styled.div`
-  height: calc(100vh - ${activityHeadingHeight + bannerHeight}px);
-`;
+import { bannerHeight } from '../../helpers/constants';
 
 const Ul = styled.ul`
   ${unorderedListStyle}
@@ -30,10 +25,10 @@ const EditableActivityList: React.FC<Props> = ({
   const exerciseGroupTiles = exerciseGroups.map((g: WorkoutActivityGroup) => {
     const tiles = g.exercises.map((e, i) => (
       <ActivityTile
-        key={e.id}
+        key={uuidv4()}
         groupId={g.id}
         index={i}
-        handleSelect={() => {console.log('clicked');}}
+        handleSelect={() => {}}
         selectable={false}
         activity={e}
       />
@@ -54,8 +49,6 @@ const EditableActivityList: React.FC<Props> = ({
   return (
     <Ul>
       {exerciseGroupTiles}
-
-      <BottomEmptySpace />
     </Ul>
   );
 };

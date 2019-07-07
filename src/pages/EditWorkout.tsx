@@ -1,18 +1,37 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import styled from 'styled-components';
+
+import { Button } from '../components/AlertConfirm';
 import { EditableActivityList } from '../components/ActivityList';
 import EditWorkoutHero from '../components/EditWorkoutHero';
 import BackLinkBanner from '../components/BackLinkBanner';
 import { AnimatedSlidingPage } from './ActiveWorkout';
 import {
   Exercises, // eslint-disable-line no-unused-vars
+  ReduxAction, // eslint-disable-line no-unused-vars
   State, // eslint-disable-line no-unused-vars
   Exercise, // eslint-disable-line no-unused-vars
 } from '../helpers/types';
+import {
+  tileMinHeight,
+  purple,
+  activityHeadingHeight,
+  bannerHeight,
+  ADD_SET_TO_NEW_WORKOUT,
+} from '../helpers/constants';
 
-interface OwnProps {
-  animationStyles: any;
-}
+const BottomEmptySpace = styled.div`
+  height: calc(100vh -
+    ${activityHeadingHeight + bannerHeight + (2 * tileMinHeight)}px);
+`;
+
+const Tile = styled.div`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: ${tileMinHeight}px;
+`;
 
 interface WordSlices {
   start: string;
@@ -44,10 +63,15 @@ export const accumulateMatches =
     ];
   };
 
-type Props = OwnProps & StateProps;
+interface OwnProps {
+  animationStyles: any;
+}
+
+type Props = OwnProps & StateProps & DispatchProps;
 
 const EditWorkout: React.FC<Props> = ({
   animationStyles: { position, left },
+  addSet,
 }) => {
   // const [ searchQuery, setSearchQuery ] = useState('');
   const [ workoutName, setWorkoutName ] = useState('');
@@ -84,9 +108,26 @@ const EditWorkout: React.FC<Props> = ({
         handleInputChange={handleEditNameChange}
       />
       <EditableActivityList />
+
+      <Tile>
+        <Button background={'grey'}>Add Group</Button>
+        <Button onClick={addSet} background={purple}>Add Set</Button>
+      </Tile>
+      <BottomEmptySpace />
     </AnimatedSlidingPage>
   );
 };
+
+const mapDispatchToProps: DispatchProps = ({
+  addSet: () => ({
+    type: ADD_SET_TO_NEW_WORKOUT,
+    payload: undefined,
+  }),
+});
+
+interface DispatchProps {
+  addSet: () => ReduxAction<undefined>
+}
 
 const mapStateToProps = (state: State) => ({
   exercises: state.entities.exercises,
@@ -96,8 +137,8 @@ interface StateProps {
   exercises: Exercises;
 }
 
-export default connect<StateProps, void, void>(
+export default connect<StateProps, DispatchProps, OwnProps>(
   mapStateToProps,
-  null
+  mapDispatchToProps
 )(EditWorkout);
 
