@@ -16,12 +16,12 @@ import {
 import { opaqueImageInAfter } from './SharedStyles';
 import { purple, gutterWidth } from '../helpers/constants';
 
-const Hr = styled.hr`
-  border: none;
-  height: 12px;
-  background-color: lightgrey;
-  margin: 0;
-`;
+// const Hr = styled.hr`
+//   border: none;
+//   height: 12px;
+//   background-color: lightgrey;
+//   margin: 0;
+// `;
 
 const Image = styled.div<{ image: string }>`
   width: 100%;
@@ -32,11 +32,10 @@ const Image = styled.div<{ image: string }>`
 
   &::after {
     ${opaqueImageInAfter}
-    opacity: 0.9; // override the opacity set in opaqueImageInAfter
   }
 `;
 
-const TileHeader = styled.div`
+const TilePanel = styled.div`
   position: relative;
   padding: ${gutterWidth}px;
   padding-right: 4px;
@@ -46,6 +45,10 @@ const TileHeader = styled.div`
 `;
 
 const Name = styled.p`
+`;
+
+const TotalTime = styled.p`
+  color: white;
 `;
 
 const FinishTimeAndDay = styled.p`
@@ -138,7 +141,7 @@ const ActivityHistoryTile: React.FC<Props> = ({
 
   return (
     <div>
-      <TileHeader>
+      <TilePanel>
         <div>
           <Name>{name}</Name>
           <FinishTimeAndDay>{historyTileDateFormat}</FinishTimeAndDay>
@@ -161,10 +164,12 @@ const ActivityHistoryTile: React.FC<Props> = ({
             </Menu>
           </DropDownMenuPanel>
         }
-      </TileHeader>
-      <Image image={workout.imageUrl} />
-      <p>{totalTime}</p>
-      <Hr />
+      </TilePanel>
+      <Image image={workout.imageUrl}>
+        <TilePanel>
+          <TotalTime>{totalTime}</TotalTime>
+        </TilePanel>
+      </Image>
 
       <AlertConfirm
         cancelAlert={() => setShowDeleteWorkoutAlert(false)}
