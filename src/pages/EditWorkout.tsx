@@ -19,6 +19,7 @@ import {
   activityHeadingHeight,
   bannerHeight,
   ADD_SET_TO_NEW_WORKOUT,
+  ADD_GROUP_TO_NEW_WORKOUT,
 } from '../helpers/constants';
 
 const BottomEmptySpace = styled.div`
@@ -72,6 +73,7 @@ type Props = OwnProps & StateProps & DispatchProps;
 const EditWorkout: React.FC<Props> = ({
   animationStyles: { position, left },
   addSet,
+  addGroup,
 }) => {
   // const [ searchQuery, setSearchQuery ] = useState('');
   const [ workoutName, setWorkoutName ] = useState('');
@@ -110,7 +112,7 @@ const EditWorkout: React.FC<Props> = ({
       <EditableActivityList />
 
       <Tile>
-        <Button background={'grey'}>Add Group</Button>
+        <Button onClick={addGroup} background={'grey'}>Add Group</Button>
         <Button onClick={addSet} background={purple}>Add Set</Button>
       </Tile>
       <BottomEmptySpace />
@@ -123,10 +125,15 @@ const mapDispatchToProps: DispatchProps = ({
     type: ADD_SET_TO_NEW_WORKOUT,
     payload: undefined,
   }),
+  addGroup: () => ({
+    type: ADD_GROUP_TO_NEW_WORKOUT,
+    payload: undefined,
+  }),
 });
 
 interface DispatchProps {
-  addSet: () => ReduxAction<undefined>
+  addSet: () => ReduxAction<undefined>;
+  addGroup: () => ReduxAction<undefined>;
 }
 
 const mapStateToProps = (state: State) => ({

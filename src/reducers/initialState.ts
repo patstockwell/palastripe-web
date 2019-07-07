@@ -43,7 +43,7 @@ const initialState: State = {
     exerciseGroups: [
       {
         id: uuidv4(),
-        name: 'Example group',
+        name: 'Group',
         exercises: [
           {
             id: uuidv4(),

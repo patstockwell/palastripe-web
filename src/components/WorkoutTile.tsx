@@ -53,6 +53,7 @@ const Name = styled.h3`
 const Minutes = styled.p`
   color: white;
   font-weight: 800;
+  text-align: center;
 `;
 
 const StyledLink = styled(Link)`
