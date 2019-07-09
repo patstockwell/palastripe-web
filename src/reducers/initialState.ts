@@ -8,6 +8,7 @@ import exercises from '../workoutData/exercises';
 import circuitSpeed from '../workoutData/workouts/circuitSpeed';
 import fullBodyDumbbellStrength from '../workoutData/workouts/fullBodyDumbbellStrength';
 import upperBodyBurner from '../workoutData/workouts/upperBodyBurner';
+import overheadStrength from '../workoutData/workouts/overheadStrength';
 
 const initialState: State = {
   // activeWorkout: undefined
@@ -31,8 +32,14 @@ const initialState: State = {
         'full-body-dumbbell-strength': { ...fullBodyDumbbellStrength },
         'circuit-speed': { ...circuitSpeed },
         'upper_body_burner': { ...upperBodyBurner },
+        'overhead_strength': overheadStrength,
       },
-      allIds: ['full-body-dumbbell-strength', 'circuit-speed', 'upper_body_burner']
+      allIds: [
+        'full-body-dumbbell-strength',
+        'circuit-speed',
+        'upper_body_burner',
+        'overhead_strength',
+      ]
     },
   },
 

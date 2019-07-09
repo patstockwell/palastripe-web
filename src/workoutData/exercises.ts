@@ -73,9 +73,21 @@ const exercises = {
       id: 'face-pulls',
       name: 'Face Pulls',
     },
-    'two-handed-overhead-shoulder-band-rotations': {
+    'overhead-band-chest-stretch': {
       id: 'overhead-band-chest-stretch',
       name: 'Overhead Band Chest Stretch',
+    },
+    'lunges': {
+      id: 'lunges',
+      name: 'Lunges',
+    },
+    'right_leg_hamstring_stretch': {
+      id: 'right_leg_hamstring_stretch',
+      name: 'Right Leg Hamstring stretch',
+    },
+    'left_leg_hamstring_stretch': {
+      id: 'left_leg_hamstring_stretch',
+      name: 'Right Leg Hamstring stretch',
     },
   },
 
@@ -99,6 +111,9 @@ const exercises = {
     'overhead-band-chest-stretch',
     'face-pulls',
     'standing-bicep-hammer-curls',
+    'lunges',
+    'left_leg_hamstring_stretch',
+    'right_leg_hamstring_stretch',
   ],
 };
 
