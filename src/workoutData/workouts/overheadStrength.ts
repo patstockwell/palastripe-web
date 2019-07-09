@@ -168,7 +168,7 @@ const overheadStrength: Workout = {
           timerInSeconds: 60,
         },
         {
-          id: 'two-handed-overhead-shoulder-band-rotations',
+          id: 'overhead-band-chest-stretch',
           timerInSeconds: 60,
         },
       ],

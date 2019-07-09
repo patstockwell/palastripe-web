@@ -89,6 +89,18 @@ const exercises = {
       id: 'left_leg_hamstring_stretch',
       name: 'Right Leg Hamstring stretch',
     },
+    'concentration_curl': {
+      id: 'concentration_curl',
+      name: 'Concentration Curl',
+    },
+    'push_ups': {
+      id: 'push_ups',
+      name: 'Push Ups',
+    },
+    'machine_chest_flys': {
+      id: 'machine_chest_flys',
+      name: 'Machine Chest Flys',
+    },
   },
 
   allIds: [
