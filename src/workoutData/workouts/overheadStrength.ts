@@ -96,7 +96,7 @@ const overheadStrength: Workout = {
       id: 'press_superset_2',
       exercises: [
         {
-          id: 'push-ups',
+          id: 'push_ups',
           weightInKilos: 0,
           repsGoal: 10,
           autoIncrement: 0,
@@ -110,7 +110,7 @@ const overheadStrength: Workout = {
           restPeriodInSeconds: 60,
         },
         {
-          id: 'push-ups',
+          id: 'push_ups',
           weightInKilos: 0,
           repsGoal: 10,
           autoIncrement: 0,
@@ -124,7 +124,7 @@ const overheadStrength: Workout = {
           restPeriodInSeconds: 60,
         },
         {
-          id: 'push-ups',
+          id: 'push_ups',
           weightInKilos: 0,
           repsGoal: 10,
           autoIncrement: 0,
