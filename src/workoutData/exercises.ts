@@ -57,7 +57,28 @@ const exercises = {
       id: 'right-glute-pigeon-pose-stretch',
       name: 'Right Glute Pigeon Pose',
     },
+    'scissor-jumps': {
+      id: 'scissor-jumps',
+      name: 'Scissor Jumps',
+    },
+    'dumbbell-bench-press': {
+      id: 'dumbbell-bench-press',
+      name: 'Dumbbell Bench Press',
+    },
+    'standing-bicep-hammer-curls': {
+      id: 'standing-bicep-hammer-curls',
+      name: 'Standing Bicep Hammer Curls',
+    },
+    'face-pulls': {
+      id: 'face-pulls',
+      name: 'Face Pulls',
+    },
+    'two-handed-overhead-shoulder-band-rotations': {
+      id: 'overhead-band-chest-stretch',
+      name: 'Overhead Band Chest Stretch',
+    },
   },
+
   allIds: [
     'dead-lift',
     'back-squat',
@@ -73,6 +94,11 @@ const exercises = {
     'left-arm-cross-body-stretch',
     'left-glute-pigeon-pose-stretch',
     'right-glute-pigeon-pose-stretch',
+    'scissor-jumps',
+    'dumbbell-bench-press',
+    'overhead-band-chest-stretch',
+    'face-pulls',
+    'standing-bicep-hammer-curls',
   ],
 };
 

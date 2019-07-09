@@ -14,7 +14,6 @@ const circuitSpeed: Workout = {
       exercises: [
         {
           id: 'sit-ups',
-          completed: false,
           timerInSeconds: 60,
         }
       ],
@@ -26,7 +25,6 @@ const circuitSpeed: Workout = {
         {
           id: 'upright-row',
           autoIncrement: 0,
-          completed: false,
           repsGoal: 10,
           weightInKilos: 30,
           restPeriodInSeconds: 60,
@@ -34,7 +32,6 @@ const circuitSpeed: Workout = {
         {
           id: 'upright-row',
           autoIncrement: 0,
-          completed: false,
           repsGoal: 10,
           weightInKilos: 30,
           restPeriodInSeconds: 60,
@@ -42,7 +39,6 @@ const circuitSpeed: Workout = {
         {
           id: 'upright-row',
           autoIncrement: 0,
-          completed: false,
           repsGoal: 10,
           weightInKilos: 30,
           restPeriodInSeconds: 60,
@@ -50,7 +46,6 @@ const circuitSpeed: Workout = {
         {
           id: 'upright-row',
           autoIncrement: 0,
-          completed: false,
           repsGoal: 10,
           weightInKilos: 30,
           restPeriodInSeconds: 60,
@@ -65,22 +60,18 @@ const circuitSpeed: Workout = {
         {
           id: 'right-arm-cross-body-stretch',
           timerInSeconds: 60,
-          completed: false,
         },
         {
           id: 'left-arm-cross-body-stretch',
           timerInSeconds: 60,
-          completed: false,
         },
         {
           id: 'left-glute-pigeon-pose-stretch',
           timerInSeconds: 60,
-          completed: false,
         },
         {
           id: 'right-glute-pigeon-pose-stretch',
           timerInSeconds: 60,
-          completed: false,
         },
       ],
     },
