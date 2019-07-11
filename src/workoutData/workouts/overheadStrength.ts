@@ -2,7 +2,7 @@ import {
   Workout, // eslint-disable-line no-unused-vars
 } from '../../helpers/types';
 import { VERSION_ONE } from '../../helpers/constants';
-import Image from '../../assets/images/athlete-biceps-body-136405.jpg';
+import Image from '../../assets/images/athlete-barbell-body-931321.jpg';
 
 const overheadStrength: Workout = {
   id: 'overhead_strength',
