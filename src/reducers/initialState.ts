@@ -47,6 +47,7 @@ const initialState: State = {
 
   editableWorkout: {
     name: '',
+    urlPathName: '',
     id: uuidv4(),
     version: VERSION_ONE,
     exerciseGroups: [

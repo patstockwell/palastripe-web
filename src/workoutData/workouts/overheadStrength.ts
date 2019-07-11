@@ -6,7 +6,7 @@ import Image from '../../assets/images/athlete-barbell-body-931321.jpg';
 
 const overheadStrength: Workout = {
   id: 'overhead_strength',
-  urlPathName: 'overhead_strength',
+  urlPathName: 'overhead-strength',
   name: 'Overhead Strength',
   imageUrl: Image,
   version: VERSION_ONE,

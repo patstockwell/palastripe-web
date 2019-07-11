@@ -80,7 +80,7 @@ const WorkoutTile = ({ setWindowScroll, scrollY = 0, workout }: Props) => {
     <StyledLink
       onClick={handleClick}
       to={{
-        pathname: `/workouts/${workout.id}/`,
+        pathname: `/workouts/${workout.urlPathName}/`,
         state: { immediate: false },
       }}
     >

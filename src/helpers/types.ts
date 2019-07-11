@@ -43,7 +43,7 @@ export interface Workouts {
 
 export interface Workout {
   id: string;
-  urlPathName?: string;
+  urlPathName: string;
   imageUrl?: string;
   startTime?: number;
   finishTime?: number;
