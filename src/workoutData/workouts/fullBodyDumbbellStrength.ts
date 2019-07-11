@@ -1,12 +1,15 @@
 import {
   Workout, // eslint-disable-line no-unused-vars
 } from '../../helpers/types';
+import { VERSION_ONE } from '../../helpers/constants';
 import Image from '../../assets/images/bicep-workout-1851820.jpg';
 
 const fullBodyDumbbellStrength: Workout = {
   id: 'full-body-dumbbell-strength',
+  urlPathName: 'full-body-dumbbell-strength',
   name: 'Full Body Dumbbell Strength',
   imageUrl: Image,
+  version: VERSION_ONE,
   exerciseGroups: [
     {
       id: 'WARM_UP',
