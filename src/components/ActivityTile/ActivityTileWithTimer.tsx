@@ -72,46 +72,44 @@ interface OwnProps {
 type Props = OwnProps & DispatchProps;
 
 const ActivityTileWithTimer: React.FC<Props> = ({
-  activity: {
-    name,
-    timerInSeconds,
-    completed,
-  },
+  activity: { name, timerInSeconds, completed },
   handleSelect,
   selected,
   toggleSetComplete,
 }) => {
   const [count, setCount] = useState(0);
+  const [preparationComplete, setPreparationComplete] = useState(false);
 
-  const totalExerciseTime = timedExerciseWaitPeriod + timerInSeconds;
+  const inProgress = selected && !completed;
 
   useEffect(() => {
-    if (selected && !completed && count < totalExerciseTime) {
-      // if we're below the count threshold, keep counting
+    if (inProgress && preparationComplete) { // keep counting
       const id = setInterval(() => setCount(count + 1), 1000);
       return () => clearInterval(id);
-    } else if (selected && !completed && count >= totalExerciseTime) {
-      // if we're above the count threshold, toggle the 'completed' button
-      toggleSetComplete(true);
-    } else if (completed) {
-      return; // do nothing
-    } else {
-      setCount(0); // else if not selected and not complete, reset counter
+    } else { // reset
+      setPreparationComplete(false);
+      setCount(0);
     }
   });
 
   return (
     <Tile selected={selected} onClick={handleSelect}>
-      {selected && !completed && (count < timedExerciseWaitPeriod
-        ? <PreparationTimer />
-        : <ActiveTimer timer={timerInSeconds} />
-      )}
+      {inProgress && (preparationComplete ? (
+        <ActiveTimer
+          timer={timerInSeconds + 1} // add 1 to allow for the count to finish
+          onAnimationEnd={() => toggleSetComplete(true)}
+        />
+      ) : (
+        <PreparationTimer
+          onAnimationEnd={() => setPreparationComplete(true)}
+        />
+      ))}
       <VisibleArea>
         <Details>
           <Title>{name}</Title>
         </Details>
         <Duration>
-          <p>{formatSeconds(timerInSeconds)}</p>
+          <p>{formatSeconds(timerInSeconds - count)}</p>
         </Duration>
         <ToggleSetCompleteButton
           toggleSetComplete={() => toggleSetComplete()}
