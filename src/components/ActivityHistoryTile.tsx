@@ -48,6 +48,7 @@ const Name = styled.p`
 `;
 
 const TotalTime = styled.p`
+  font-weight: 800;
   color: white;
 `;
 
