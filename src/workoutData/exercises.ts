@@ -87,7 +87,7 @@ const exercises = {
     },
     'left_leg_hamstring_stretch': {
       id: 'left_leg_hamstring_stretch',
-      name: 'Right Leg Hamstring stretch',
+      name: 'Left Leg Hamstring stretch',
     },
     'concentration_curl': {
       id: 'concentration_curl',

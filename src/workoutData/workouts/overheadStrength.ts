@@ -160,11 +160,11 @@ const overheadStrength: Workout = {
           timerInSeconds: 45,
         },
         {
-          id: 'left-glute-pigeon-pose-stretch',
+          id: 'right-glute-pigeon-pose-stretch',
           timerInSeconds: 60,
         },
         {
-          id: 'right-glute-pigeon-pose-stretch',
+          id: 'left-glute-pigeon-pose-stretch',
           timerInSeconds: 60,
         },
         {

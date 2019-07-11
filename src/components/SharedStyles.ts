@@ -23,6 +23,8 @@ export const opaqueImageInAfter = css<{ image: string }>`
   height: 100%;
   background-image: url(${({ image }) => image});
   background-size: cover;
+  background-position-y: top;
+  background-position-x: center;
   opacity: 0.5;
   z-index: -1;
 `;
