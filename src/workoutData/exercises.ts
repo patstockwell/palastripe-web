@@ -1,80 +1,80 @@
 const exercises = {
   byId: {
-    'dead-lift': {
-      id: 'dead-lift',
+    'dead_lift': {
+      id: 'dead_lift',
       name: 'Dead Lift',
       // mostWeightInKilos: undefined,
     },
-    'back-squat': {
-      id: 'back-squat',
+    'back_squat': {
+      id: 'back_squat',
       name: 'Back Squat',
     },
-    'overhead-press': {
-      id: 'overhead-press',
+    'overhead_press': {
+      id: 'overhead_press',
       name: 'Overhead Press',
     },
-    'chin-up': {
-      id: 'chin-up',
-      name: 'Chin-up',
+    'chin_up': {
+      id: 'chin_up',
+      name: 'Chin Ups',
     },
-    'bench-press': {
-      id: 'bench-press',
+    'bench_press': {
+      id: 'bench_press',
       name: 'Bench Press',
     },
-    'bicep-curl': {
-      id: 'bicep-curl',
+    'bicep_curl': {
+      id: 'bicep_curl',
       name: 'Bicep Curl',
     },
-    'upright-row': {
-      id: 'upright-row',
+    'upright_row': {
+      id: 'upright_row',
       name: 'Upright Row',
     },
-    'straight-leg-dumbbell-deadlift': {
-      id: 'straight-leg-dumbbell-deadlift',
+    'straight_leg_dumbbell_deadlift': {
+      id: 'straight_leg_dumbbell_deadlift',
       name: 'Straight-leg Dumbbell Deadlift',
     },
-    'dumbbell-overhead-press': {
-      id: 'dumbbell-overhead-press',
+    'dumbbell_overhead_press': {
+      id: 'dumbbell_overhead_press',
       name: 'Dumbbell Overhead Press',
     },
-    'sit-ups': {
-      id: 'sit-ups',
-      name: 'Sit-ups',
+    'sit_ups': {
+      id: 'sit_ups',
+      name: 'Sit Ups',
     },
-    'right-arm-cross-body-stretch': {
-      id: 'right-arm-cross-body-stretch',
+    'right_arm_cross_body_stretch': {
+      id: 'right_arm_cross_body_stretch',
       name: 'Right Arm Cross Body',
     },
-    'left-arm-cross-body-stretch': {
-      id: 'left-arm-cross-body-stretch',
+    'left_arm_cross_body_stretch': {
+      id: 'left_arm_cross_body_stretch',
       name: 'Left Arm Cross Body',
     },
-    'left-glute-pigeon-pose-stretch': {
-      id: 'left-glute-pigeon-pose-stretch',
+    'left_glute_pigeon_pose_stretch': {
+      id: 'left_glute_pigeon_pose_stretch',
       name: 'Left Glute Pigeon Pose',
     },
-    'right-glute-pigeon-pose-stretch': {
-      id: 'right-glute-pigeon-pose-stretch',
+    'right_glute_pigeon_pose_stretch': {
+      id: 'right_glute_pigeon_pose_stretch',
       name: 'Right Glute Pigeon Pose',
     },
-    'scissor-jumps': {
-      id: 'scissor-jumps',
+    'scissor_jumps': {
+      id: 'scissor_jumps',
       name: 'Scissor Jumps',
     },
-    'dumbbell-bench-press': {
-      id: 'dumbbell-bench-press',
+    'dumbbell_bench_press': {
+      id: 'dumbbell_bench_press',
       name: 'Dumbbell Bench Press',
     },
-    'standing-bicep-hammer-curls': {
-      id: 'standing-bicep-hammer-curls',
+    'standing_bicep_hammer_curls': {
+      id: 'standing_bicep_hammer_curls',
       name: 'Standing Bicep Hammer Curls',
     },
-    'face-pulls': {
-      id: 'face-pulls',
+    'face_pulls': {
+      id: 'face_pulls',
       name: 'Face Pulls',
     },
-    'overhead-band-chest-stretch': {
-      id: 'overhead-band-chest-stretch',
+    'overhead_band_chest_stretch': {
+      id: 'overhead_band_chest_stretch',
       name: 'Overhead Band Chest Stretch',
     },
     'lunges': {
@@ -104,25 +104,25 @@ const exercises = {
   },
 
   allIds: [
-    'dead-lift',
-    'back-squat',
-    'overhead-press',
-    'chin-up',
-    'bench-press',
-    'bicep-curl',
-    'upright-row',
-    'straight-leg-dumbbell-deadlift',
-    'dumbbell-overhead-press',
-    'sit-ups',
-    'right-arm-cross-body-stretch',
-    'left-arm-cross-body-stretch',
-    'left-glute-pigeon-pose-stretch',
-    'right-glute-pigeon-pose-stretch',
-    'scissor-jumps',
-    'dumbbell-bench-press',
-    'overhead-band-chest-stretch',
-    'face-pulls',
-    'standing-bicep-hammer-curls',
+    'dead_lift',
+    'back_squat',
+    'overhead_press',
+    'chin_up',
+    'bench_press',
+    'bicep_curl',
+    'upright_row',
+    'straight_leg_dumbbell_deadlift',
+    'dumbbell_overhead_press',
+    'sit_ups',
+    'right_arm_cross_body_stretch',
+    'left_arm_cross_body_stretch',
+    'left_glute_pigeon_pose_stretch',
+    'right_glute_pigeon_pose_stretch',
+    'scissor_jumps',
+    'dumbbell_bench_press',
+    'overhead_band_chest_stretch',
+    'face_pulls',
+    'standing_bicep_hammer_curls',
     'lunges',
     'left_leg_hamstring_stretch',
     'right_leg_hamstring_stretch',

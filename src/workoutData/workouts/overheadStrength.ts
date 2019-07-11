@@ -12,11 +12,11 @@ const overheadStrength: Workout = {
   version: VERSION_ONE,
   exerciseGroups: [
     {
-      id: 'warm-up',
+      id: 'warm_up',
       name: 'Warm Up',
       exercises: [
         {
-          id: 'sit-ups',
+          id: 'sit_ups',
           timerInSeconds: 60,
           restPeriodInSeconds: 30,
         },
@@ -32,7 +32,7 @@ const overheadStrength: Workout = {
       name: 'Press Superset 1',
       exercises: [
         {
-          id: 'overhead-press',
+          id: 'overhead_press',
           weightInKilos: 20,
           repsGoal: 12,
           autoIncrement: 0,
@@ -47,7 +47,7 @@ const overheadStrength: Workout = {
         },
 
         {
-          id: 'overhead-press',
+          id: 'overhead_press',
           weightInKilos: 30,
           repsGoal: 8,
           autoIncrement: 0,
@@ -62,7 +62,7 @@ const overheadStrength: Workout = {
         },
 
         {
-          id: 'overhead-press',
+          id: 'overhead_press',
           weightInKilos: 40,
           repsGoal: 4,
           autoIncrement: 0,
@@ -77,7 +77,7 @@ const overheadStrength: Workout = {
         },
 
         {
-          id: 'overhead-press',
+          id: 'overhead_press',
           weightInKilos: 50,
           repsGoal: 1,
           autoIncrement: 0,
@@ -145,11 +145,11 @@ const overheadStrength: Workout = {
       id: 'stretch',
       exercises: [
         {
-          id: 'right-arm-cross-body-stretch',
+          id: 'right_arm_cross_body_stretch',
           timerInSeconds: 60,
         },
         {
-          id: 'left-arm-cross-body-stretch',
+          id: 'left_arm_cross_body_stretch',
           timerInSeconds: 60,
         },
         {
@@ -161,15 +161,15 @@ const overheadStrength: Workout = {
           timerInSeconds: 45,
         },
         {
-          id: 'right-glute-pigeon-pose-stretch',
+          id: 'right_glute_pigeon_pose_stretch',
           timerInSeconds: 60,
         },
         {
-          id: 'left-glute-pigeon-pose-stretch',
+          id: 'left_glute_pigeon_pose_stretch',
           timerInSeconds: 60,
         },
         {
-          id: 'overhead-band-chest-stretch',
+          id: 'overhead_band_chest_stretch',
           timerInSeconds: 60,
         },
       ],

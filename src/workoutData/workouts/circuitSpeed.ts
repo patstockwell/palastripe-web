@@ -5,7 +5,7 @@ import { VERSION_ONE } from '../../helpers/constants';
 import Image from '../../assets/images/active-body-crossfit-1533897.jpg';
 
 const circuitSpeed: Workout = {
-  id: 'circuit-speed',
+  id: 'circuit_speed',
   urlPathName: 'circuit-speed',
   name: 'Circuit Speed',
   imageUrl: Image,
@@ -16,7 +16,7 @@ const circuitSpeed: Workout = {
       name: 'warm up',
       exercises: [
         {
-          id: 'sit-ups',
+          id: 'sit_ups',
           timerInSeconds: 60,
         }
       ],
@@ -26,28 +26,28 @@ const circuitSpeed: Workout = {
       name: 'working sets',
       exercises: [
         {
-          id: 'upright-row',
+          id: 'upright_row',
           autoIncrement: 0,
           repsGoal: 10,
           weightInKilos: 30,
           restPeriodInSeconds: 60,
         },
         {
-          id: 'upright-row',
+          id: 'upright_row',
           autoIncrement: 0,
           repsGoal: 10,
           weightInKilos: 30,
           restPeriodInSeconds: 60,
         },
         {
-          id: 'upright-row',
+          id: 'upright_row',
           autoIncrement: 0,
           repsGoal: 10,
           weightInKilos: 30,
           restPeriodInSeconds: 60,
         },
         {
-          id: 'upright-row',
+          id: 'upright_row',
           autoIncrement: 0,
           repsGoal: 10,
           weightInKilos: 30,
@@ -61,19 +61,19 @@ const circuitSpeed: Workout = {
       name: 'stretch',
       exercises: [
         {
-          id: 'right-arm-cross-body-stretch',
+          id: 'right_arm_cross_body_stretch',
           timerInSeconds: 60,
         },
         {
-          id: 'left-arm-cross-body-stretch',
+          id: 'left_arm_cross_body_stretch',
           timerInSeconds: 60,
         },
         {
-          id: 'left-glute-pigeon-pose-stretch',
+          id: 'left_glute_pigeon_pose_stretch',
           timerInSeconds: 60,
         },
         {
-          id: 'right-glute-pigeon-pose-stretch',
+          id: 'right_glute_pigeon_pose_stretch',
           timerInSeconds: 60,
         },
       ],

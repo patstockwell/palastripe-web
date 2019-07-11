@@ -29,14 +29,14 @@ const initialState: State = {
 
     workouts: {
       byId: {
-        'full-body-dumbbell-strength': { ...fullBodyDumbbellStrength },
-        'circuit-speed': { ...circuitSpeed },
+        'full_body_dumbbell_strength': { ...fullBodyDumbbellStrength },
+        'circuit_speed': { ...circuitSpeed },
         'upper_body_burner': { ...upperBodyBurner },
         'overhead_strength': overheadStrength,
       },
       allIds: [
-        'full-body-dumbbell-strength',
-        'circuit-speed',
+        'full_body_dumbbell_strength',
+        'circuit_speed',
         'upper_body_burner',
         'overhead_strength',
       ]

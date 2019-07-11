@@ -5,7 +5,7 @@ import { VERSION_ONE } from '../../helpers/constants';
 import Image from '../../assets/images/bicep-workout-1851820.jpg';
 
 const fullBodyDumbbellStrength: Workout = {
-  id: 'full-body-dumbbell-strength',
+  id: 'full_body_dumbbell_strength',
   urlPathName: 'full-body-dumbbell-strength',
   name: 'Full Body Dumbbell Strength',
   imageUrl: Image,
@@ -16,7 +16,7 @@ const fullBodyDumbbellStrength: Workout = {
       name: 'Warm Up',
       exercises: [
         {
-          id: 'sit-ups',
+          id: 'sit_ups',
           timerInSeconds: 60,
         },
       ],
@@ -27,63 +27,63 @@ const fullBodyDumbbellStrength: Workout = {
       name: 'exercises',
       exercises: [
         {
-          id: 'straight-leg-dumbbell-deadlift',
+          id: 'straight_leg_dumbbell_deadlift',
           weightInKilos: 15,
           repsGoal: 8,
           autoIncrement: 2.5,
           restPeriodInSeconds: 60,
         },
         {
-          id: 'straight-leg-dumbbell-deadlift',
+          id: 'straight_leg_dumbbell_deadlift',
           weightInKilos: 15,
           repsGoal: 10,
           autoIncrement: 2.5,
           restPeriodInSeconds: 60,
         },
         {
-          id: 'straight-leg-dumbbell-deadlift',
+          id: 'straight_leg_dumbbell_deadlift',
           weightInKilos: 15,
           repsGoal: 12,
           autoIncrement: 2.5,
           restPeriodInSeconds: 60,
         },
         {
-          id: 'dumbbell-overhead-press',
+          id: 'dumbbell_overhead_press',
           weightInKilos: 15,
           repsGoal: 12,
           autoIncrement: 2.5,
           restPeriodInSeconds: 60,
         },
         {
-          id: 'dumbbell-overhead-press',
+          id: 'dumbbell_overhead_press',
           weightInKilos: 15,
           repsGoal: 12,
           autoIncrement: 2.5,
           restPeriodInSeconds: 60,
         },
         {
-          id: 'dumbbell-overhead-press',
+          id: 'dumbbell_overhead_press',
           weightInKilos: 15,
           repsGoal: 12,
           autoIncrement: 2.5,
           restPeriodInSeconds: 60,
         },
         {
-          id: 'bicep-curl',
+          id: 'bicep_curl',
           weightInKilos: 15,
           repsGoal: 6,
           autoIncrement: 2.5,
           restPeriodInSeconds: 60,
         },
         {
-          id: 'bicep-curl',
+          id: 'bicep_curl',
           weightInKilos: 15,
           repsGoal: 6,
           autoIncrement: 2.5,
           restPeriodInSeconds: 60,
         },
         {
-          id: 'bicep-curl',
+          id: 'bicep_curl',
           weightInKilos: 15,
           repsGoal: 6,
           autoIncrement: 2.5,
@@ -96,19 +96,19 @@ const fullBodyDumbbellStrength: Workout = {
       name: 'stretch',
       exercises: [
         {
-          id: 'right-arm-cross-body-stretch',
+          id: 'right_arm_cross_body_stretch',
           timerInSeconds: 60,
         },
         {
-          id: 'left-arm-cross-body-stretch',
+          id: 'left_arm_cross_body_stretch',
           timerInSeconds: 60,
         },
         {
-          id: 'left-glute-pigeon-pose-stretch',
+          id: 'left_glute_pigeon_pose_stretch',
           timerInSeconds: 60,
         },
         {
-          id: 'right-glute-pigeon-pose-stretch',
+          id: 'right_glute_pigeon_pose_stretch',
           timerInSeconds: 60,
         },
       ],
