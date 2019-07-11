@@ -84,7 +84,6 @@ interface Props {
   index: number;
   handleSelect: any;
   handleOpen?: any;
-  selectable?: boolean;
   selected?: boolean;
   show?: boolean;
 }
@@ -95,14 +94,12 @@ const ActivityTile: React.FC<Props> = ({
   index,
   handleSelect,
   handleOpen,
-  selectable,
   selected,
   show,
 }) => (
   isTimed(activity)
     ? (
       <ActivityTileWithTimer
-        selectable={selectable}
         selected={selected}
         groupId={groupId}
         index={index}
@@ -111,7 +108,6 @@ const ActivityTile: React.FC<Props> = ({
       />
     ) : (
       <ActivityTileWithReps
-        selectable={selectable}
         selected={selected}
         show={show}
         groupId={groupId}

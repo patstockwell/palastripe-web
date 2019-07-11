@@ -48,7 +48,6 @@ interface Props {
 const ActivityList: React.FC<Props> = ({
   finishWorkoutClickHandler,
   startWorkoutClickHandler,
-  readOnly,
   stickyTop,
   workout: { exerciseGroups },
 }) => {
@@ -60,21 +59,20 @@ const ActivityList: React.FC<Props> = ({
 
     return (
       <ActivityTile
-        selectable={!readOnly}
-        selected={!readOnly && isSelected}
+        selected={isSelected}
         show={isSelected && show}
         groupId={id}
         index={i}
         key={i}
         activity={a}
         handleSelect={() => {
-          if (!readOnly && !isSelected) {
+          if (!isSelected) {
             setSelected({ groupId: id, index: i });
             setShow(false);
           }
         }}
         handleOpen={() => {
-          if (!readOnly && isSelected) {
+          if (isSelected) {
             setShow(!show);
           }
         }}
@@ -102,19 +100,9 @@ const ActivityList: React.FC<Props> = ({
       {activityListTiles}
 
       <FlexTile>
-        {readOnly ? (
-          <LinkButton
-            clickHandler={startWorkoutClickHandler}
-            pathname="/active-workout"
-          >
-            Start Workout
-          </LinkButton>
-        ) : (
-          <Button clickHandler={finishWorkoutClickHandler}>
-            Finish Workout
-          </Button>
-        )
-        }
+        <Button clickHandler={finishWorkoutClickHandler}>
+          Finish Workout
+        </Button>
       </FlexTile>
 
       <BottomEmptySpace

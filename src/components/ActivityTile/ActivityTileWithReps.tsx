@@ -22,7 +22,7 @@ import {
   VisibleArea,
 } from './index';
 
-const Tile = styled.li<{ selected: boolean, selectable: boolean }>`
+const Tile = styled.li<{ selected: boolean }>`
   ${tileStyle}
 `;
 
@@ -41,7 +41,6 @@ interface OwnProps {
   handleOpen: any;
   handleSelect: any;
   index: number;
-  selectable: boolean;
   selected: boolean;
   show: boolean;
 }
@@ -57,7 +56,6 @@ const ActivityTileWithReps: React.FC<Props> = ({
   index,
   handleSelect,
   handleOpen,
-  selectable,
   selected,
   show,
   toggleSetComplete,
@@ -72,7 +70,6 @@ const ActivityTileWithReps: React.FC<Props> = ({
   return (
     <Tile
       aria-expanded={show}
-      selectable={selectable}
       selected={selected}
       onClick={handleSelect}
     >
@@ -84,22 +81,18 @@ const ActivityTileWithReps: React.FC<Props> = ({
         <Duration>
           <p>{repsAchieved === undefined ? repsGoal : repsAchieved} x</p>
         </Duration>
-        {selectable &&
-          <ToggleSetCompleteButton
-            toggleSetComplete={toggleSetComplete}
-            completed={completed}
-          />
-        }
+        <ToggleSetCompleteButton
+          toggleSetComplete={toggleSetComplete}
+          completed={completed}
+        />
       </VisibleArea>
 
-      {selectable &&
-        <HiddenArea
-          activity={activity}
-          groupId={groupId}
-          index={index}
-          animatedStyles={animatedStyles}
-        />
-      }
+      <HiddenArea
+        activity={activity}
+        groupId={groupId}
+        index={index}
+        animatedStyles={animatedStyles}
+      />
 
       {selected &&
         <SeeMoreArrowWrapper

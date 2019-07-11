@@ -66,7 +66,6 @@ interface OwnProps {
   groupId: string;
   index: number;
   handleSelect: any;
-  selectable: boolean;
   selected: boolean;
 }
 
@@ -78,7 +77,6 @@ const ActivityTileWithTimer: React.FC<Props> = ({
     timerInSeconds,
     completed,
   },
-  selectable,
   handleSelect,
   selected,
   toggleSetComplete,
@@ -103,7 +101,7 @@ const ActivityTileWithTimer: React.FC<Props> = ({
   });
 
   return (
-    <Tile selectable={selectable} selected={selected} onClick={handleSelect}>
+    <Tile selected={selected} onClick={handleSelect}>
       {selected && !completed && (count < timedExerciseWaitPeriod
         ? <PreparationTimer />
         : <ActiveTimer timer={timerInSeconds} />
@@ -115,12 +113,10 @@ const ActivityTileWithTimer: React.FC<Props> = ({
         <Duration>
           <p>{formatSeconds(timerInSeconds)}</p>
         </Duration>
-        {selectable &&
-          <ToggleSetCompleteButton
-            toggleSetComplete={() => toggleSetComplete()}
-            completed={completed}
-          />
-        }
+        <ToggleSetCompleteButton
+          toggleSetComplete={() => toggleSetComplete()}
+          completed={completed}
+        />
       </VisibleArea>
     </Tile>
   );

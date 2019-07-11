@@ -29,7 +29,6 @@ const EditableActivityList: React.FC<Props> = ({
         groupId={g.id}
         index={i}
         handleSelect={() => {}}
-        selectable={false}
         activity={e}
       />
     ));

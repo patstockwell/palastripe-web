@@ -22,6 +22,10 @@ import {
   ADD_GROUP_TO_NEW_WORKOUT,
 } from '../helpers/constants';
 
+const AddItemButton = styled(Button)`
+  min-width: 130px;
+`;
+
 const BottomEmptySpace = styled.div`
   height: calc(100vh -
     ${activityHeadingHeight + bannerHeight + (2 * tileMinHeight)}px);
@@ -112,8 +116,8 @@ const EditWorkout: React.FC<Props> = ({
       <EditableActivityList />
 
       <Tile>
-        <Button onClick={addGroup} background={'grey'}>Add Group</Button>
-        <Button onClick={addSet} background={purple}>Add Set</Button>
+        <AddItemButton onClick={addGroup} background={'grey'}>Add Group</AddItemButton>
+        <AddItemButton onClick={addSet} background={purple}>Add Set</AddItemButton>
       </Tile>
       <BottomEmptySpace />
     </AnimatedSlidingPage>

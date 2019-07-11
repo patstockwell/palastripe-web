@@ -29,13 +29,13 @@ export const opaqueImageInAfter = css<{ image: string }>`
   z-index: -1;
 `;
 
-export const tileStyle = css<{ selected: boolean, selectable: boolean }>`
+export const tileStyle = css<{ selected: boolean }>`
   position: relative;
   color: ${({ selected }) => selected ? 'black' : '#444'};
   border: none;
   border-bottom: 1px solid ${lightLightGrey};
   background-color: ${({ selected }) => selected ? 'white' : superLightGrey};
-  cursor: ${({ selectable }) => selectable ? 'pointer' : 'default'};
+  cursor: pointer;
   min-height: ${tileMinHeight}px;
   touch-action: manipulation; // stops double-tap-to-zoom
 `;
