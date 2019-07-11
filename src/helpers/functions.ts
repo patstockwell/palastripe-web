@@ -124,7 +124,7 @@ export const getDiffInMinutes = (start: number, finish: number): number => {
 export const formatSeconds = (seconds: number): string => {
   const mins = Math.floor(seconds / 60);
   const secs = seconds % 60;
-  return `${mins}:${secs < 9 ? `0${secs}` : secs}`;
+  return `${mins}:${secs <= 9 ? `0${secs}` : secs}`;
 };
 
 export const formatMinutes = (minutes: number): string => {
