@@ -101,6 +101,14 @@ const exercises = {
       id: 'machine_chest_flys',
       name: 'Machine Chest Flys',
     },
+    'stationary_bike': {
+      id: 'stationary_bike',
+      name: 'Stationary Bike',
+    },
+    'ring_rows': {
+      id: 'ring_rows',
+      name: 'Ring Rows',
+    },
   },
 
   allIds: [
@@ -126,6 +134,7 @@ const exercises = {
     'lunges',
     'left_leg_hamstring_stretch',
     'right_leg_hamstring_stretch',
+    'stationary_bike',
   ],
 };
 
