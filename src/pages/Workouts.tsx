@@ -9,14 +9,10 @@ import {
   State, // eslint-disable-line no-unused-vars
   Workout, // eslint-disable-line no-unused-vars
 } from '../helpers/types';
-import { tileMinHeight } from '../helpers/constants';
+import { tileMinHeight, bannerHeight } from '../helpers/constants';
 
 const EmptySpace = styled.div`
-  height: ${tileMinHeight}px;
-`;
-
-const Big = styled.div`
-  height: 500px;
+  height: calc(100vh - ${tileMinHeight + (2 * bannerHeight)}px);
 `;
 
 interface Props {
@@ -34,7 +30,6 @@ const Workouts = ({ location, workouts}: Props) => {
       <Banner heading={'Workouts'}/>
       <AddWorkoutLink />
       {workoutTiles}
-      <Big />
       <EmptySpace />
       <Navigation pathname={location.pathname}/>
     </Fragment>
