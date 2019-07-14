@@ -5,8 +5,7 @@ import { VERSION_ONE } from '../../helpers/constants';
 import Image from '../../assets/images/active-adult-aerobics-206573.jpg';
 
 const fullBodyPower: Workout = {
-  id: 'full_body_power',
-  urlPathName: 'full-body-power',
+  id: 'full-body-power',
   name: 'Full Body Power',
   imageUrl: Image,
   version: VERSION_ONE,

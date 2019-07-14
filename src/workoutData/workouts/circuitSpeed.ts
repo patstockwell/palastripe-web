@@ -5,8 +5,7 @@ import { VERSION_ONE } from '../../helpers/constants';
 import Image from '../../assets/images/active-body-crossfit-1533897.jpg';
 
 const circuitSpeed: Workout = {
-  id: 'circuit_speed',
-  urlPathName: 'circuit-speed',
+  id: 'circuit-speed',
   name: 'Circuit Speed',
   imageUrl: Image,
   version: VERSION_ONE,

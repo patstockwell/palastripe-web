@@ -30,18 +30,18 @@ const initialState: State = {
 
     workouts: {
       byId: {
-        'full_body_dumbbell_strength': { ...fullBodyDumbbellStrength },
-        'circuit_speed': { ...circuitSpeed },
-        'upper_body_burner': { ...upperBodyBurner },
-        'overhead_strength': overheadStrength,
-        'full_body_power': fullBodyPower,
+        'full-body-dumbbell-strength': { ...fullBodyDumbbellStrength },
+        'circuit-speed': { ...circuitSpeed },
+        'upper-body-burner': { ...upperBodyBurner },
+        'overhead-strength': overheadStrength,
+        'full-body-power': fullBodyPower,
       },
       allIds: [
-        'full_body_dumbbell_strength',
-        'circuit_speed',
-        'upper_body_burner',
-        'overhead_strength',
-        'full_body_power',
+        'full-body-dumbbell-strength',
+        'circuit-speed',
+        'upper-body-burner',
+        'overhead-strength',
+        'full-body-power',
       ]
     },
   },
@@ -50,7 +50,6 @@ const initialState: State = {
 
   editableWorkout: {
     name: '',
-    urlPathName: '',
     id: uuidv4(),
     version: VERSION_ONE,
     exerciseGroups: [

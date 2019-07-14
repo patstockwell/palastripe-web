@@ -5,8 +5,7 @@ import { VERSION_ONE } from '../../helpers/constants';
 import Image from '../../assets/images/athlete-biceps-body-136405.jpg';
 
 const topHalfBurner: Workout = {
-  id: 'upper_body_burner',
-  urlPathName: 'upper-body-burner',
+  id: 'upper-body-burner',
   name: 'Upper Body Burner',
   imageUrl: Image,
   version: VERSION_ONE,
