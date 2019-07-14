@@ -31,7 +31,6 @@ const fullBodyPower: Workout = {
       id: 'exercises',
       name: 'Exercises',
       exercises: [
-        // 3 x 5 back_squat 40kg
         {
           id: 'back_squat',
           weightInKilos: 40,
@@ -56,7 +55,6 @@ const fullBodyPower: Workout = {
           autoIncrement: 2.5,
           restPeriodInSeconds: 90,
         },
-        // 3 x 5 deadlifts 80kg
         {
           id: 'dead_lift',
           weightInKilos: 80,
@@ -81,7 +79,6 @@ const fullBodyPower: Workout = {
           autoIncrement: 0,
           restPeriodInSeconds: 90,
         },
-        // 3 x 5 chin ups
         {
           id: 'chin_up',
           weightInKilos: 0,
@@ -106,7 +103,6 @@ const fullBodyPower: Workout = {
           autoIncrement: 0,
           restPeriodInSeconds: 90,
         },
-        // 3 x 5 overhead press 30kg
         {
           id: 'overhead_press',
           weightInKilos: 30,
@@ -131,7 +127,6 @@ const fullBodyPower: Workout = {
           autoIncrement: 2.5,
           restPeriodInSeconds: 90,
         },
-        // 3  x 20 push ups
         {
           id: 'push_ups',
           weightInKilos: 0,
@@ -156,7 +151,6 @@ const fullBodyPower: Workout = {
           autoIncrement: 0,
           restPeriodInSeconds: 60,
         },
-        // 3 x 12 lying ring rows
         {
           id: 'ring_rows',
           weightInKilos: 0,
