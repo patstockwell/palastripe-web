@@ -66,6 +66,8 @@ export const TOGGLE_SET_COMPLETE: string = 'TOGGLE_SET_COMPLETE';
 export const SET_WINDOW_SCROLL: string = 'SET_WINDOW_SCROLL';
 export const CHANGE_REPS: string = 'CHANGE_REPS';
 export const CHANGE_WEIGHT: string = 'CHANGE_WEIGHT';
+export const INCREMENT_WEIGHT: string = 'INCREMENT_WEIGHT';
+export const DECREMENT_WEIGHT: string = 'DECREMENT_WEIGHT';
 export const WORKOUT_SHAPE_VERSION: string = 'v1';
 
 // page names for setting the current scroll height

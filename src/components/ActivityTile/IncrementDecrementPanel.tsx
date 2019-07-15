@@ -56,7 +56,8 @@ const Panel = styled.div`
   padding: 12px 0;
 `;
 
-type DispatchFunction = () => ReduxAction<SingleSetAction & { value: number }>;
+// need to use a type defined in an action creator instead of redifining it here
+type DispatchFunction = () => ReduxAction<SingleSetAction & any>;
 
 interface Props {
   handleDecrement: DispatchFunction;

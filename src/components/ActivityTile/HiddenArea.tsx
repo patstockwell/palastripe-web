@@ -15,7 +15,11 @@ import {
   ReduxAction, // eslint-disable-line no-unused-vars
   WeightedActivity, // eslint-disable-line no-unused-vars
 } from '../../helpers/types';
-import { CHANGE_WEIGHT, CHANGE_REPS } from '../../helpers/constants';
+import {
+  DECREMENT_WEIGHT,
+  INCREMENT_WEIGHT,
+  CHANGE_REPS,
+} from '../../helpers/constants';
 import IncrementDecrementPanel from './IncrementDecrementPanel';
 
 const MainValue = styled.span`
@@ -36,9 +40,10 @@ interface OwnProps {
 type Props = DispatchProps & OwnProps;
 
 const HiddenArea: React.FC<Props> = ({
+  incrementWeight,
+  decrementWeight,
   animatedStyles,
   changeReps,
-  changeWeight,
   activity: {
     repsGoal,
     weightInKilos,
@@ -54,8 +59,8 @@ const HiddenArea: React.FC<Props> = ({
       cursor: 'default',
     }}>
       <IncrementDecrementPanel
-        handleDecrement={() => changeWeight(-2.5)}
-        handleIncrement={() => changeWeight(2.5)}
+        handleDecrement={decrementWeight}
+        handleIncrement={incrementWeight}
         percentageComplete={1}
       >
         <p>
@@ -78,19 +83,25 @@ const HiddenArea: React.FC<Props> = ({
   );
 };
 
-type ChangeSetAction = ReduxAction<SingleSetAction & { value: number }>;
+type ChangeSetAction = ReduxAction<SingleSetAction & any>;
 type ChangeSetDispatch = Dispatch<ChangeSetAction>;
 
 const mapDispatchToProps = (
   dispatch: ChangeSetDispatch,
   ownProps: OwnProps
 ): DispatchProps => ({
-  changeWeight: (weight: number) => dispatch({
-    type: CHANGE_WEIGHT,
+  decrementWeight: () => dispatch({
+    type: DECREMENT_WEIGHT,
     payload: {
       groupId: ownProps.groupId,
       index: ownProps.index,
-      value: weight,
+    },
+  }),
+  incrementWeight: () => dispatch({
+    type: INCREMENT_WEIGHT,
+    payload: {
+      groupId: ownProps.groupId,
+      index: ownProps.index,
     },
   }),
   changeReps: (increment: number) => dispatch({
@@ -104,8 +115,9 @@ const mapDispatchToProps = (
 });
 
 interface DispatchProps {
-  changeWeight: (weight: number) => ChangeSetAction;
   changeReps: (increment: number) => ChangeSetAction;
+  incrementWeight: () => ReduxAction<SingleSetAction>;
+  decrementWeight: () => ReduxAction<SingleSetAction>;
 }
 
 export default connect<void, DispatchProps, OwnProps>(

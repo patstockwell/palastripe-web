@@ -1,10 +1,11 @@
 import {
   FINISH_WORKOUT,
   CHANGE_REPS,
-  CHANGE_WEIGHT,
   SET_ACTIVE_WORKOUT,
   WORKOUT_SHAPE_VERSION,
   TOGGLE_SET_COMPLETE,
+  INCREMENT_WEIGHT,
+  DECREMENT_WEIGHT,
 } from '../helpers/constants';
 import {
   Activity, // eslint-disable-line no-unused-vars
@@ -16,7 +17,10 @@ import {
 
 const activeWorkoutReducer = (state: Workout, action: ReduxAction<any>) => {
   switch (action.type) {
-    case CHANGE_WEIGHT: {
+    case INCREMENT_WEIGHT: {
+      return changeWeight(state, action);
+    }
+    case DECREMENT_WEIGHT: {
       return changeWeight(state, action);
     }
     case FINISH_WORKOUT: {
@@ -39,9 +43,17 @@ const activeWorkoutReducer = (state: Workout, action: ReduxAction<any>) => {
 
 type ChangeSetAction = ReduxAction<SingleSetAction & { value: number }>;
 
-const changeWeight = (state: Workout, action: ChangeSetAction): Workout => {
-  const { payload: { value: w, groupId, index } } = action;
+const changeWeight = (state: Workout, action: ReduxAction<SingleSetAction>) => {
+  const { payload: { groupId, index } } = action;
   const { exerciseGroups } = state;
+  const group = exerciseGroups.find(g => g.id === groupId);
+  const weight = (group.exercises[index] as WeightedActivity).weightInKilos;
+  // check if the increment should be 0.5 or 2.5
+  const increment = weight < 20 ? 0.5 : 2.5;
+  // should we increment or decrement?
+  const newWeight = action.type === 'DECREMENT_WEIGHT'
+    ? weight - increment
+    : weight + increment;
 
   return {
     ...state,
@@ -50,7 +62,7 @@ const changeWeight = (state: Workout, action: ChangeSetAction): Workout => {
         ...g,
         exercises: g.exercises.map((wa: WeightedActivity, i) => (i === index ? {
           ...wa,
-          weightInKilos: wa.weightInKilos + w < 0 ? 0 : wa.weightInKilos + w,
+          weightInKilos: newWeight < 0 ? 0 : newWeight,
         } : wa)),
       }
     )),
