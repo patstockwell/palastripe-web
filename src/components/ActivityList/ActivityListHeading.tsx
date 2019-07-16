@@ -30,6 +30,8 @@ const Input = styled.input`
   border: none;
   width: 90%;
   max-width: 400px;
+  font-size: 12px;
+  text-transform: uppercase;
 
   &::placeholder {
     color: darkgrey;
