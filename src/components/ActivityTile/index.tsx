@@ -86,6 +86,7 @@ interface Props {
   handleOpen?: any;
   selected?: boolean;
   show?: boolean;
+  editable?: boolean;
 }
 
 const ActivityTile: React.FC<Props> = ({
@@ -96,6 +97,7 @@ const ActivityTile: React.FC<Props> = ({
   handleOpen,
   selected,
   show,
+  editable,
 }) => (
   isTimed(activity)
     ? (
@@ -105,6 +107,7 @@ const ActivityTile: React.FC<Props> = ({
         index={index}
         activity={activity}
         handleSelect={handleSelect}
+        editable={editable}
       />
     ) : (
       <ActivityTileWithReps
@@ -115,6 +118,7 @@ const ActivityTile: React.FC<Props> = ({
         activity={activity}
         handleSelect={handleSelect}
         handleOpen={handleOpen}
+        editable={editable}
       />
     )
 );

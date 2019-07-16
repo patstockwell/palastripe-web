@@ -67,6 +67,7 @@ interface OwnProps {
   index: number;
   handleSelect: any;
   selected: boolean;
+  editable: boolean;
 }
 
 type Props = OwnProps & DispatchProps;

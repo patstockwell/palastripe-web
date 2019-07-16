@@ -29,6 +29,7 @@ const EditableActivityList: React.FC<Props> = ({
         groupId={g.id}
         index={i}
         activity={e}
+        editable
       />
     ));
 

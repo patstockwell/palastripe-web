@@ -8,6 +8,7 @@ import HiddenArea from './HiddenArea';
 import ToggleSetCompleteButton from './ToggleSetCompleteButton';
 import { tileStyle } from '../SharedStyles';
 import DownArrow from '../../assets/svg/DownArrow';
+import ForwardArrow from '../../assets/svg/ForwardArrow';
 import {
   ReduxAction, // eslint-disable-line no-unused-vars
   SingleSetAction, // eslint-disable-line no-unused-vars
@@ -26,7 +27,15 @@ const Tile = styled.li<{ selected: boolean }>`
   ${tileStyle}
 `;
 
-const SeeMoreArrowWrapper = styled(animated.button)`
+const ShowEditArrowWrapper = styled.div`
+  order: 3;
+  flex-basis: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+
+const ShowHiddenAreaArrowWrapper = styled(animated.button)`
   border: none;
   background: none;
   position: absolute;
@@ -43,6 +52,7 @@ interface OwnProps {
   index: number;
   selected: boolean;
   show: boolean;
+  editable: boolean;
 }
 
 type Props = DispatchProps & OwnProps;
@@ -50,7 +60,7 @@ type Props = DispatchProps & OwnProps;
 const ActivityTileWithReps: React.FC<Props> = ({
   activity,
   activity: {
-    name, repsAchieved, repsGoal, weightInKilos, completed
+    name, repsAchieved, repsGoal, weightInKilos, completed,
   },
   groupId,
   index,
@@ -59,6 +69,7 @@ const ActivityTileWithReps: React.FC<Props> = ({
   selected,
   show,
   toggleSetComplete,
+  editable,
 }) => {
   const animatedStyles = useSpring({
     height: show ? 300 : 0,
@@ -81,10 +92,16 @@ const ActivityTileWithReps: React.FC<Props> = ({
         <Duration>
           <p>{repsAchieved === undefined ? repsGoal : repsAchieved} x</p>
         </Duration>
-        <ToggleSetCompleteButton
-          toggleSetComplete={toggleSetComplete}
-          completed={completed}
-        />
+        {editable ? (
+          <ShowEditArrowWrapper>
+            <ForwardArrow style={{ fill: 'grey' }}/>
+          </ShowEditArrowWrapper>
+        ) : (
+          <ToggleSetCompleteButton
+            toggleSetComplete={toggleSetComplete}
+            completed={completed}
+          />
+        )}
       </VisibleArea>
 
       <HiddenArea
@@ -95,14 +112,14 @@ const ActivityTileWithReps: React.FC<Props> = ({
       />
 
       {selected &&
-        <SeeMoreArrowWrapper
+        <ShowHiddenAreaArrowWrapper
           onClick={handleOpen}
           style={{
             transform: animatedStyles.x.interpolate(x =>
               `translateX(-50%) rotate(${x}deg`),
           }}>
           <DownArrow style={{ fill: 'grey' }}/>
-        </SeeMoreArrowWrapper>
+        </ShowHiddenAreaArrowWrapper>
       }
 
     </Tile>
