@@ -41,6 +41,7 @@ const Heading = styled.h2`
   text-transform: uppercase;
   font-weight: 500;
   margin: 0 12px;
+  text-align: left;
 `;
 
 const Sets = styled.p`
@@ -56,6 +57,7 @@ const Button = styled.button`
   padding: 0;
   font-size: inherit;
   font-weight: inherit;
+  text-align: left;
 `;
 
 interface OwnProps {
@@ -78,8 +80,10 @@ const ActivityListHeading: React.FC<Props> = ({
   id,
 }) => {
   const [showInput, setShowInput] = useState(false);
-  const handleClick = () => {
-    setShowInput(true);
+  const handleKeyPress = (e: any) => {
+    if (e.which === 13) { // if enter key is pressed
+      setShowInput(false);
+    }
   };
 
   const handleInputChange = (e: any) => {
@@ -96,11 +100,12 @@ const ActivityListHeading: React.FC<Props> = ({
             value={heading}
             onChange={handleInputChange}
             placeholder={heading}
+            onKeyDown={handleKeyPress}
           />
         ) : (
           <Heading>
             {editable ? (
-              <Button onClick={handleClick}>
+              <Button onClick={() => setShowInput(true)}>
                 <EditIconPencil
                   width={12}
                   height={12}

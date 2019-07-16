@@ -32,7 +32,7 @@ const updateNameForEditWorkout = (
   action: ReduxAction<{ id: string, name: string }>
 ) => {
   const { name, id } = action.payload;
-  console.log('updateNameForEditWorkout', action);
+
   return {
     ...state,
     exerciseGroups: state.exerciseGroups.map((g: WorkoutActivityGroup) =>

@@ -44,21 +44,27 @@ interface Props {
 const placeholder = 'Workout name';
 
 const EditWorkoutHero: React.FC<Props> = ({ name, handleInputChange }) => {
-  const [ nameIsEditable, setNameIsEditable ] = useState(false);
+  const [ showInput, setShowInput ] = useState(false);
+  const handleKeyPress = (e: any) => {
+    if (e.which === 13) { // if enter key is pressed
+      setShowInput(false);
+    }
+  };
 
   return (
     <Window colour={charcoal}>
       <HeightNormalizer>
-        {nameIsEditable ? (
+        {showInput ? (
           <Input
-            onBlur={() => setNameIsEditable(false)}
+            onBlur={() => setShowInput(false)}
             autoFocus
             value={name}
             onChange={handleInputChange}
             placeholder={placeholder}
+            onKeyPress={handleKeyPress}
           />
         ) : (
-          <WorkoutName onClick={() => setNameIsEditable(true)}>
+          <WorkoutName onClick={() => setShowInput(true)}>
             <Button>
               <EditIconPencil
                 style={{ fill: 'white', marginRight: '8px' }}
