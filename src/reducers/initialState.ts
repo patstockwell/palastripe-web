@@ -42,7 +42,7 @@ const initialState: State = {
         'upper-body-burner',
         'overhead-strength',
         'full-body-power',
-      ]
+      ],
     },
   },
 
@@ -83,4 +83,3 @@ export default {
   // Removing this line will destroy users' history. Never remove.
   history: getLocalStorage(LOCAL_STORAGE_HISTORY, []),
 };
-

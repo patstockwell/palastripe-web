@@ -52,7 +52,8 @@ const EditWorkoutHero: React.FC<Props> = ({ name, handleInputChange }) => {
         {nameIsEditable ? (
           <Input
             onBlur={() => setNameIsEditable(false)}
-            autoFocus value={name}
+            autoFocus
+            value={name}
             onChange={handleInputChange}
             placeholder={placeholder}
           />

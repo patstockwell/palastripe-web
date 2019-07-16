@@ -28,7 +28,6 @@ const EditableActivityList: React.FC<Props> = ({
         key={uuidv4()}
         groupId={g.id}
         index={i}
-        handleSelect={() => {}}
         activity={e}
       />
     ));
@@ -38,7 +37,9 @@ const EditableActivityList: React.FC<Props> = ({
         key={g.id}
         stickyTop={bannerHeight}
         heading={g.name}
+        id={g.id}
         activityTotal={tiles.length}
+        editable
       >
         <Ul>{tiles}</Ul>
       </ActivityListHeading>

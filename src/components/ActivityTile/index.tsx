@@ -82,7 +82,7 @@ interface Props {
   activity: Activity;
   groupId: string;
   index: number;
-  handleSelect: any;
+  handleSelect?: any;
   handleOpen?: any;
   selected?: boolean;
   show?: boolean;

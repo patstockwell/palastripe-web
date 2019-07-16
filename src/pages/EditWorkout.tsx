@@ -18,8 +18,8 @@ import {
   purple,
   activityHeadingHeight,
   bannerHeight,
-  ADD_SET_TO_NEW_WORKOUT,
-  ADD_GROUP_TO_NEW_WORKOUT,
+  EDIT_WORKOUT_ADD_SET,
+  EDIT_WORKOUT_ADD_GROUP,
 } from '../helpers/constants';
 
 const AddItemButton = styled(Button)`
@@ -126,11 +126,11 @@ const EditWorkout: React.FC<Props> = ({
 
 const mapDispatchToProps: DispatchProps = ({
   addSet: () => ({
-    type: ADD_SET_TO_NEW_WORKOUT,
+    type: EDIT_WORKOUT_ADD_SET,
     payload: undefined,
   }),
   addGroup: () => ({
-    type: ADD_GROUP_TO_NEW_WORKOUT,
+    type: EDIT_WORKOUT_ADD_GROUP,
     payload: undefined,
   }),
 });

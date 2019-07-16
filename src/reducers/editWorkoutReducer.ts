@@ -4,20 +4,41 @@ import {
   WorkoutActivityGroup, // eslint-disable-line no-unused-vars
   Workout, // eslint-disable-line no-unused-vars
 } from '../helpers/types';
-import { ADD_SET_TO_NEW_WORKOUT, ADD_GROUP_TO_NEW_WORKOUT } from '../helpers/constants';
+import {
+  EDIT_WORKOUT_ADD_SET,
+  EDIT_WORKOUT_ADD_GROUP,
+  EDIT_WORKOUT_UPDATE_GROUP_NAME,
+} from '../helpers/constants';
 
-const editWorkoutReducer = (state: Workout, action: ReduxAction<string>) => {
+const editWorkoutReducer = (state: Workout, action: ReduxAction<any>) => {
   switch (action.type) {
-    case ADD_SET_TO_NEW_WORKOUT: {
+    case EDIT_WORKOUT_ADD_SET: {
       return addSetToEditWorkout(state);
     }
-    case ADD_GROUP_TO_NEW_WORKOUT: {
+    case EDIT_WORKOUT_UPDATE_GROUP_NAME: {
+      return updateNameForEditWorkout(state, action);
+    }
+    case EDIT_WORKOUT_ADD_GROUP: {
       return addGroupToNewWorkout(state);
     }
     default: {
       return state;
     }
   }
+};
+
+const updateNameForEditWorkout = (
+  state: Workout,
+  action: ReduxAction<{ id: string, name: string }>
+) => {
+  const { name, id } = action.payload;
+  console.log('updateNameForEditWorkout', action);
+  return {
+    ...state,
+    exerciseGroups: state.exerciseGroups.map((g: WorkoutActivityGroup) =>
+      (g.id === id) ? { ...g, name } : g
+    ),
+  };
 };
 
 const addGroupToNewWorkout = (state: Workout) => {

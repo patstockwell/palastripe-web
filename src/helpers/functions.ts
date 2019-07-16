@@ -104,10 +104,10 @@ export const formatDate = (unixTime: number): {
   const day = DAYS_OF_THE_WEEK[d.getUTCDay()];
   const date = d.getUTCDate();
   const month = MONTHS_OF_THE_YEAR[d.getMonth()];
-  const time = `${d.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}`;
+  const time = `${d.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})}`;
   const historyTileDateFormat = `${day}, ${date} ${month}, at ${time}`;
 
-  return { day, date, month, time: time, historyTileDateFormat };
+  return { day, date, month, time, historyTileDateFormat };
 };
 
 export const getDiffInMinutes = (start: number, finish: number): number => {
@@ -155,4 +155,3 @@ export const calculateWorkoutTime = (w: Workout): number => {
     .reduce((acc, curr) => acc + curr, 0);
   return Math.round(total / SECONDS_IN_A_MINUTE);
 };
-

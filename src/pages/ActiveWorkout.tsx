@@ -12,10 +12,10 @@ import WorkoutHero from '../components/WorkoutHero';
 import FourZeroFour from '../pages/FourZeroFour';
 import ActivityList from '../components/ActivityList/ActivityList';
 import {
-  ReduxAction, //eslint-disable-line no-unused-vars
-  Entities, //eslint-disable-line no-unused-vars
-  State, //eslint-disable-line no-unused-vars
-  Workout, //eslint-disable-line no-unused-vars
+  ReduxAction, // eslint-disable-line no-unused-vars
+  Entities, // eslint-disable-line no-unused-vars
+  State, // eslint-disable-line no-unused-vars
+  Workout, // eslint-disable-line no-unused-vars
 } from '../helpers/types';
 import {
   combineDataForAllExercises,
@@ -43,7 +43,7 @@ interface OwnProps {
   animationStyles: any;
 }
 
-type Match = Pick<RouteComponentProps<{ id: string }>, 'match'>
+type Match = Pick<RouteComponentProps<{ id: string }>, 'match'>;
 
 type Props = OwnProps & DispatchProps & StateProps & Match;
 
