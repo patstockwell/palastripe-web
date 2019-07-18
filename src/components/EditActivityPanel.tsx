@@ -23,7 +23,7 @@ const ButtonRightHalf = styled.button<{ background?: string }>`
   border-radius: 0 30px 30px 0;
 `;
 
-const Background = styled.div`
+const Background = styled(animated.div)`
   position: absolute;
   right: 0;
   width: 200vw;
@@ -67,7 +67,10 @@ const EditActivityPanel: React.FC<Props> = ({
     },
     enter: { opacity: 1, transform: 'translateX(6%)' },
     leave: { opacity: 0, transform: `translateX(100%)` },
+    // This is the animation style for AlertConfirm popup
     config: { mass: 1, tension: 710, friction: 40 },
+    // This is the animation style for a page transition
+    // config: { tension: 410, friction: 40 },
   });
 
   const repsColour = isTimed(activity) ? 'grey' : purple;
@@ -77,8 +80,8 @@ const EditActivityPanel: React.FC<Props> = ({
     <React.Fragment>
       {transitions.map(({ item, props }) => {
         return item ?
-          <animated.div key={'unique'} style={props}>
-            <Background />
+          <animated.div key={'unique'} style={{ ...props, opacity: 1 }}>
+            <Background style={{ opacity: props.opacity }}/>
             <Dialog>
               <h2>{activity.name}</h2>
               <ButtonLeftHalf background={repsColour}>With Reps</ButtonLeftHalf>

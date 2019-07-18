@@ -15,7 +15,7 @@ const Routes = () => {
   const anyUseTransition = useTransition as any;
 
   const transitions = anyUseTransition(location,
-    (location: any) => location.key, {
+    (loc: any) => loc.key, {
       immediate: state.immediate,
       from: { left: '100%', top: '100vh', position: 'fixed' },
       enter: [{ left: '0%', top: '0vh' }, { position: 'relative' }],
