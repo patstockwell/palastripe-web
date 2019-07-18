@@ -80,7 +80,7 @@ const AlertConfirm: React.FC<Props> = ({
     },
     enter: { opacity: 1, transform: 'translateY(0px)' },
     leave: { opacity: 0, transform: `translateY(${popUpHeight}px)` },
-    config: { mass: 1, tension: 710, friction: 40 }
+    config: { mass: 1, tension: 710, friction: 40 },
   });
 
   return (
@@ -105,4 +105,3 @@ const AlertConfirm: React.FC<Props> = ({
 };
 
 export default AlertConfirm;
-

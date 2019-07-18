@@ -54,7 +54,6 @@ export const sliceWord = (
   end: word.slice(index + length),
 });
 
-
 export const accumulateMatches =
   (searchTerm: string, list: SlicesWithId[], e: Exercise): SlicesWithId[] => {
     const name = e ? e.name : '';
@@ -152,4 +151,3 @@ export default connect<StateProps, DispatchProps, OwnProps>(
   mapStateToProps,
   mapDispatchToProps
 )(EditWorkout);
-

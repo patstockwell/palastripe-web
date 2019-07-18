@@ -2,10 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { buttonStyle } from './SharedStyles';
-import {
-  ReduxAction, // eslint-disable-line no-unused-vars
-  Workout, // eslint-disable-line no-unused-vars
-} from '../helpers/types';
 
 const ButtonWithStyle = styled.button`
   ${buttonStyle}

@@ -1,11 +1,14 @@
-import React from 'react'; import { connect } from 'react-redux';
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
 import { useSpring, animated } from 'react-spring';
 import styled from 'styled-components';
 import {
   Dispatch, // eslint-disable-line no-unused-vars
 } from 'redux';
+
 import HiddenArea from './HiddenArea';
 import ToggleSetCompleteButton from './ToggleSetCompleteButton';
+import EditActivityPanel from '../EditActivityPanel';
 import { tileStyle } from '../SharedStyles';
 import DownArrow from '../../assets/svg/DownArrow';
 import ForwardArrow from '../../assets/svg/ForwardArrow';
@@ -27,7 +30,7 @@ const Tile = styled.li<{ selected: boolean }>`
   ${tileStyle}
 `;
 
-const ShowEditArrowWrapper = styled.div`
+export const ShowEditArrowWrapper = styled.div`
   order: 3;
   flex-basis: 48px;
   display: flex;
@@ -51,7 +54,7 @@ interface OwnProps {
   handleSelect: any;
   index: number;
   selected: boolean;
-  show: boolean;
+  showHiddenArea: boolean;
   editable: boolean;
 }
 
@@ -67,22 +70,24 @@ const ActivityTileWithReps: React.FC<Props> = ({
   handleSelect,
   handleOpen,
   selected,
-  show,
+  showHiddenArea,
   toggleSetComplete,
   editable,
 }) => {
+  const [showEdit, setShowEdit] = useState(false);
+
   const animatedStyles = useSpring({
-    height: show ? 300 : 0,
-    opacity: show ? 1 : 0,
-    x: show ? -180 : 0,
+    height: showHiddenArea ? 300 : 0,
+    opacity: showHiddenArea ? 1 : 0,
+    x: showHiddenArea ? -180 : 0,
     config: { tension: 410, friction: 40 },
   });
 
   return (
     <Tile
-      aria-expanded={show}
+      aria-expanded={showHiddenArea}
       selected={selected}
-      onClick={handleSelect}
+      onClick={() => !editable && handleSelect()}
     >
       <VisibleArea>
         <Details onClick={handleOpen}>
@@ -93,7 +98,7 @@ const ActivityTileWithReps: React.FC<Props> = ({
           <p>{repsAchieved === undefined ? repsGoal : repsAchieved} x</p>
         </Duration>
         {editable ? (
-          <ShowEditArrowWrapper>
+          <ShowEditArrowWrapper onClick={() => setShowEdit(true)}>
             <ForwardArrow style={{ fill: 'grey' }}/>
           </ShowEditArrowWrapper>
         ) : (
@@ -121,6 +126,14 @@ const ActivityTileWithReps: React.FC<Props> = ({
           <DownArrow style={{ fill: 'grey' }}/>
         </ShowHiddenAreaArrowWrapper>
       }
+
+      <EditActivityPanel
+        show={showEdit}
+        activity={activity}
+        groupId={groupId}
+        index={index}
+        hide={() => setShowEdit(false)}
+      />
 
     </Tile>
   );

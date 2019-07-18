@@ -1,7 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import styled, { keyframes } from 'styled-components';
+
+import EditActivityPanel from '../EditActivityPanel';
 import ToggleSetCompleteButton from './ToggleSetCompleteButton';
+import { ShowEditArrowWrapper } from './ActivityTileWithReps';
+import ForwardArrow from '../../assets/svg/ForwardArrow';
 import { tileStyle } from '../SharedStyles';
 import {
   Dispatch, // eslint-disable-line no-unused-vars
@@ -73,13 +77,18 @@ interface OwnProps {
 type Props = OwnProps & DispatchProps;
 
 const ActivityTileWithTimer: React.FC<Props> = ({
+  activity,
   activity: { name, timerInSeconds, completed },
+  groupId,
+  index,
   handleSelect,
   selected,
   toggleSetComplete,
+  editable,
 }) => {
   const [count, setCount] = useState(0);
   const [preparationComplete, setPreparationComplete] = useState(false);
+  const [showEdit, setShowEdit] = useState(false);
 
   const inProgress = selected && !completed;
 
@@ -112,11 +121,26 @@ const ActivityTileWithTimer: React.FC<Props> = ({
         <Duration>
           <p>{formatSeconds(timerInSeconds - count)}</p>
         </Duration>
-        <ToggleSetCompleteButton
-          toggleSetComplete={() => toggleSetComplete()}
-          completed={completed}
-        />
+        {editable ? (
+          <ShowEditArrowWrapper onClick={() => setShowEdit(true)}>
+            <ForwardArrow style={{ fill: 'grey' }}/>
+          </ShowEditArrowWrapper>
+        ) : (
+          <ToggleSetCompleteButton
+            toggleSetComplete={toggleSetComplete}
+            completed={completed}
+          />
+        )}
       </VisibleArea>
+
+      <EditActivityPanel
+        show={showEdit}
+        activity={activity}
+        groupId={groupId}
+        index={index}
+        hide={() => setShowEdit(false)}
+      />
+
     </Tile>
   );
 };

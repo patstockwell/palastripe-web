@@ -85,7 +85,7 @@ interface Props {
   handleSelect?: any;
   handleOpen?: any;
   selected?: boolean;
-  show?: boolean;
+  showHiddenArea?: boolean;
   editable?: boolean;
 }
 
@@ -96,7 +96,7 @@ const ActivityTile: React.FC<Props> = ({
   handleSelect,
   handleOpen,
   selected,
-  show,
+  showHiddenArea,
   editable,
 }) => (
   isTimed(activity)
@@ -112,7 +112,7 @@ const ActivityTile: React.FC<Props> = ({
     ) : (
       <ActivityTileWithReps
         selected={selected}
-        show={show}
+        showHiddenArea={showHiddenArea}
         groupId={groupId}
         index={index}
         activity={activity}

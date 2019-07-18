@@ -40,12 +40,12 @@ export const tileStyle = css<{ selected: boolean }>`
   touch-action: manipulation; // stops double-tap-to-zoom
 `;
 
-export const buttonStyle = `
+export const buttonStyle = css<{ background?: string }>`
   color: white;
   border: none;
   font-size: 12px;
   border-radius: 30px;
-  background-color: ${purple};
+  background-color: ${({ background }) => background || purple};
   text-transform: uppercase;
   font-weight: 800;
   z-index: 1;

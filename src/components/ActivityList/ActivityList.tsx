@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import ActivityTile from '../ActivityTile';
-import { Button, LinkButton } from '../Buttons';
+import { Button } from '../Buttons';
 import ActivityListHeading from './ActivityListHeading';
 import {
   activityHeadingHeight,
@@ -47,12 +47,11 @@ interface Props {
 
 const ActivityList: React.FC<Props> = ({
   finishWorkoutClickHandler,
-  startWorkoutClickHandler,
   stickyTop,
   workout: { exerciseGroups },
 }) => {
   const [ selected, setSelected ] = useState({ groupId: undefined, index: undefined });
-  const [ show, setShow ] = useState(false);
+  const [ showHiddenArea, setShowHiddenArea ] = useState(false);
 
   const createTile = (id: string) => (a: Activity, i: number) => {
     const isSelected = selected.groupId === id && selected.index === i;
@@ -60,7 +59,7 @@ const ActivityList: React.FC<Props> = ({
     return (
       <ActivityTile
         selected={isSelected}
-        show={isSelected && show}
+        showHiddenArea={isSelected && showHiddenArea}
         groupId={id}
         index={i}
         key={i}
@@ -68,12 +67,12 @@ const ActivityList: React.FC<Props> = ({
         handleSelect={() => {
           if (!isSelected) {
             setSelected({ groupId: id, index: i });
-            setShow(false);
+            setShowHiddenArea(false);
           }
         }}
         handleOpen={() => {
           if (isSelected) {
-            setShow(!show);
+            setShowHiddenArea(!showHiddenArea);
           }
         }}
       />
