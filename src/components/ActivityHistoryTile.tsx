@@ -16,13 +16,6 @@ import {
 import { opaqueImageInAfter } from './SharedStyles';
 import { purple, gutterWidth } from '../helpers/constants';
 
-// const Hr = styled.hr`
-//   border: none;
-//   height: 12px;
-//   background-color: lightgrey;
-//   margin: 0;
-// `;
-
 const Image = styled.div<{ image: string }>`
   width: 100%;
   height: 300px;

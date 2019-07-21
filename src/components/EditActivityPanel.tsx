@@ -57,7 +57,7 @@ const EditActivityPanel: React.FC<Props> = ({
 }) => {
   const transitions = useTransition(show, null, {
     from: {
-      transform: `translateX(100%)`,
+      transform: 'translateX(100%)',
       position: 'fixed',
       top: 0,
       left: 0,
@@ -66,7 +66,7 @@ const EditActivityPanel: React.FC<Props> = ({
       opacity: 0,
     },
     enter: { opacity: 1, transform: 'translateX(6%)' },
-    leave: { opacity: 0, transform: `translateX(100%)` },
+    leave: { opacity: 0, transform: 'translateX(100%)' },
     // This is the animation style for AlertConfirm popup
     config: { mass: 1, tension: 710, friction: 40 },
     // This is the animation style for a page transition
