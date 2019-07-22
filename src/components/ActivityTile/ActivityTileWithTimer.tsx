@@ -89,6 +89,7 @@ const ActivityTileWithTimer: React.FC<Props> = ({
   const [count, setCount] = useState(0);
   const [preparationComplete, setPreparationComplete] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
+  const [showAnimation, setShowAnimation] = useState(false);
 
   const inProgress = selected && !completed;
 
@@ -101,6 +102,11 @@ const ActivityTileWithTimer: React.FC<Props> = ({
       setCount(0);
     }
   });
+
+  const handleShowEditClick = () => {
+    setShowEdit(true);
+    setShowAnimation(true);
+  };
 
   return (
     <Tile selected={selected} onClick={handleSelect}>
@@ -122,7 +128,7 @@ const ActivityTileWithTimer: React.FC<Props> = ({
           <p>{formatSeconds(timerInSeconds - count)}</p>
         </Duration>
         {editable ? (
-          <ShowEditArrowWrapper onClick={() => setShowEdit(true)}>
+          <ShowEditArrowWrapper onClick={handleShowEditClick}>
             <ForwardArrow style={{ fill: 'grey' }}/>
           </ShowEditArrowWrapper>
         ) : (
@@ -133,13 +139,16 @@ const ActivityTileWithTimer: React.FC<Props> = ({
         )}
       </VisibleArea>
 
-      <EditActivityPanel
-        show={showEdit}
-        activity={activity}
-        groupId={groupId}
-        index={index}
-        hide={() => setShowEdit(false)}
-      />
+      {showEdit &&
+        <EditActivityPanel
+          show={showAnimation}
+          activity={activity}
+          groupId={groupId}
+          index={index}
+          onDestroyed={() => setShowEdit(false)}
+          hide={() => setShowAnimation(false)}
+        />
+      }
 
     </Tile>
   );

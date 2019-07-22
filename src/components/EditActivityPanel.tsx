@@ -44,6 +44,7 @@ const Dialog = styled.div`
 
 interface Props {
   hide: () => void;
+  onDestroyed?: () => void;
   show: boolean;
   activity: Activity;
   groupId: string;
@@ -52,6 +53,7 @@ interface Props {
 
 const EditActivityPanel: React.FC<Props> = ({
   show,
+  onDestroyed,
   hide,
   activity,
 }) => {
@@ -65,6 +67,7 @@ const EditActivityPanel: React.FC<Props> = ({
       width: '100%',
       opacity: 0,
     },
+    onDestroyed,
     enter: { opacity: 1, transform: 'translateX(6%)' },
     leave: { opacity: 0, transform: 'translateX(100%)' },
     // This is the animation style for AlertConfirm popup

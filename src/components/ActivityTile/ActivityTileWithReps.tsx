@@ -75,6 +75,7 @@ const ActivityTileWithReps: React.FC<Props> = ({
   editable,
 }) => {
   const [showEdit, setShowEdit] = useState(false);
+  const [showAnimation, setShowAnimation] = useState(false);
 
   const animatedStyles = useSpring({
     height: showHiddenArea ? 300 : 0,
@@ -82,6 +83,11 @@ const ActivityTileWithReps: React.FC<Props> = ({
     x: showHiddenArea ? -180 : 0,
     config: { tension: 410, friction: 40 },
   });
+
+  const handleShowEditClick = () => {
+    setShowEdit(true);
+    setShowAnimation(true);
+  };
 
   return (
     <Tile
@@ -98,7 +104,7 @@ const ActivityTileWithReps: React.FC<Props> = ({
           <p>{repsAchieved === undefined ? repsGoal : repsAchieved} x</p>
         </Duration>
         {editable ? (
-          <ShowEditArrowWrapper onClick={() => setShowEdit(true)}>
+          <ShowEditArrowWrapper onClick={handleShowEditClick}>
             <ForwardArrow style={{ fill: 'grey' }}/>
           </ShowEditArrowWrapper>
         ) : (
@@ -127,13 +133,16 @@ const ActivityTileWithReps: React.FC<Props> = ({
         </ShowHiddenAreaArrowWrapper>
       }
 
-      <EditActivityPanel
-        show={showEdit}
-        activity={activity}
-        groupId={groupId}
-        index={index}
-        hide={() => setShowEdit(false)}
-      />
+      {showEdit &&
+        <EditActivityPanel
+          show={showAnimation}
+          activity={activity}
+          groupId={groupId}
+          index={index}
+          onDestroyed={() => setShowEdit(false)}
+          hide={() => setShowAnimation(false)}
+        />
+      }
 
     </Tile>
   );
