@@ -17,6 +17,7 @@ export interface State {
   entities: Entities;
   history: Workout[];
   editableWorkout?: Workout;
+  editableActivity?: WeightedActivity & TimedActivity;
 }
 
 export interface ScrollY {
@@ -58,21 +59,25 @@ export interface WorkoutActivityGroup {
 }
 
 export interface TimedActivity {
+  // common
   id: string;
   name?: string;
   restPeriodInSeconds?: number;
-  timerInSeconds: number;
   completed?: boolean;
+  // unique
+  timerInSeconds: number;
 }
 
 export interface WeightedActivity {
+  // common
   id: string;
   name?: string;
   restPeriodInSeconds?: number;
+  completed?: boolean;
+  // unique
   weightInKilos: number;
   repsGoal: number;
   repsAchieved?: number;
-  completed?: boolean;
   autoIncrement: number;
 }
 
@@ -81,17 +86,16 @@ export type Activity = WeightedActivity | TimedActivity;
 export interface Exercises {
   byId: {
     [propName: string]: Exercise,
-  },
-  allIds: string[],
+  };
+  allIds: string[];
 }
 
 export interface Exercise {
-  id: string,
-  name: string,
-  mostWeightInKilos?: number,
+  id: string;
+  name: string;
+  mostWeightInKilos?: number;
 }
 
 export const isTimed = (activity: Activity): activity is TimedActivity => {
-  return (<TimedActivity>activity).timerInSeconds !== undefined;
+  return (activity as TimedActivity).timerInSeconds !== undefined;
 };
-
