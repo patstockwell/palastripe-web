@@ -9,7 +9,7 @@ import {
 import HiddenArea from './HiddenArea';
 import ToggleSetCompleteButton from './ToggleSetCompleteButton';
 import EditActivityPanel from '../EditActivityPanel';
-import { tileStyle } from '../SharedStyles';
+import { GlobalOverFlowHiddenStyle, tileStyle } from '../SharedStyles';
 import DownArrow from '../../assets/svg/DownArrow';
 import ForwardArrow from '../../assets/svg/ForwardArrow';
 import {
@@ -95,6 +95,9 @@ const ActivityTileWithReps: React.FC<Props> = ({
       selected={selected}
       onClick={() => !editable && handleSelect()}
     >
+      {showEdit &&
+        <GlobalOverFlowHiddenStyle />
+      }
       <VisibleArea>
         <Details onClick={handleOpen}>
           <Title>{name}</Title>

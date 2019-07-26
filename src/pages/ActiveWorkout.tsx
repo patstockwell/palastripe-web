@@ -3,8 +3,9 @@ import { connect } from 'react-redux';
 import {
   RouteComponentProps, // eslint-disable-line no-unused-vars
 } from 'react-router';
-import styled, { createGlobalStyle } from 'styled-components';
+import styled from 'styled-components';
 import { animated } from 'react-spring';
+import { GlobalOverFlowHiddenStyle } from '../components/SharedStyles';
 
 import AlertConfirm, { LinkButton, Button } from '../components/AlertConfirm';
 import BackLinkBanner from '../components/BackLinkBanner';
@@ -30,14 +31,6 @@ export const AnimatedSlidingPage = styled(animated.div)<{ position?: string }>`
   width: 100%;
   -webkit-overflow-scrolling: touch; // enables momentum scolling
   position: ${({ position }) => position};
-`;
-
-const GlobalStyle = createGlobalStyle<{ hidden: boolean }>`
-  body {
-    // used for when the modal is displayed
-    // to avoid background scrolling
-    overflow: ${({ hidden }) => hidden ? 'hidden' : 'visible'};
-  }
 `;
 
 interface OwnProps {
@@ -107,7 +100,9 @@ const ActiveWorkout: React.FC<Props> = ({
         [direction]: animationStyles.left,
       }}
     >
-      <GlobalStyle hidden={showEndWorkoutAlert} />
+      {showEndWorkoutAlert &&
+        <GlobalOverFlowHiddenStyle />
+      }
       <BackLinkBanner
         sticky={false}
         back={{

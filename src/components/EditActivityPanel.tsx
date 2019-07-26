@@ -7,9 +7,6 @@ import {
 import { buttonStyle } from './SharedStyles';
 import { gutterWidth, purple } from '../helpers/constants';
 
-const TRANSLATE_X_SIZE = 6;
-const BOUNCE_SPACE = 9;
-
 const Button = styled.button<{ fontColour?: string, background?: string }>`
   ${buttonStyle}
   width: 120px;
@@ -47,14 +44,10 @@ const Background = styled(animated.div)`
 const Dialog = styled.div`
   cursor: default;
   background-color: white;
-  border-radius: 24px 0 0 24px;
   position: relative;
-  top: 0;
-  left: 0;
   height: 100vh;
-  width: calc(${100 - TRANSLATE_X_SIZE}vw + ${BOUNCE_SPACE}px);
-  padding-right: ${BOUNCE_SPACE + gutterWidth}px;
-  padding-left: ${gutterWidth}px;
+  width: 100%;
+  padding: 0 ${gutterWidth}px;
   box-sizing: border-box;
 `;
 
@@ -64,11 +57,9 @@ const DisplayArea = styled.div`
 `;
 
 const ConfirmPanel = styled.div`
-  position: absolute;
-  bottom: 72px;
   display: flex;
   justify-content: space-around;
-  width: 100%;
+  margin: 8px;
 `;
 
 const IsTimedPanel = styled.div`
@@ -102,15 +93,15 @@ const EditActivityPanel: React.FC<Props> = ({
       opacity: 0,
     },
     onDestroyed,
-    enter: { opacity: 1, transform: `translateX(${TRANSLATE_X_SIZE}%)` },
+    enter: { opacity: 1, transform: `translateX(0%)` },
     leave: { opacity: 0, transform: 'translateX(100%)' },
     // This is the animation style for AlertConfirm popup
-    config: { mass: 1, tension: 710, friction: 40 },
+    // config: { mass: 1, tension: 710, friction: 40 },
     // This is the animation style for a page transition
-    // config: { tension: 410, friction: 40 },
+    config: { tension: 410, friction: 40 },
   });
 
-  const displayedActivity = activity; // || editableActivity;
+  // const displayedActivity = activity; // || editableActivity;
 
   const repsBackground = isTimed ? 'white' : purple;
   const repsFontColour = isTimed ? 'grey' : 'white';

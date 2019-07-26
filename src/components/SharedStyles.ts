@@ -1,4 +1,4 @@
-import { css } from 'styled-components';
+import { createGlobalStyle, css } from 'styled-components';
 import {
   purple,
   workoutWindowViewport,
@@ -6,6 +6,14 @@ import {
   superLightGrey,
   tileMinHeight,
 } from '../helpers/constants';
+
+export const GlobalOverFlowHiddenStyle = createGlobalStyle`
+  html, body {
+    // used for when the modal is displayed
+    // to avoid background scrolling
+    overflow: hidden;
+  }
+`;
 
 export const unorderedListStyle = `
   margin: 0;

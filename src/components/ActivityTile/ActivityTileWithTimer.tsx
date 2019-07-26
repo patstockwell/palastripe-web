@@ -6,7 +6,7 @@ import EditActivityPanel from '../EditActivityPanel';
 import ToggleSetCompleteButton from './ToggleSetCompleteButton';
 import { ShowEditArrowWrapper } from './ActivityTileWithReps';
 import ForwardArrow from '../../assets/svg/ForwardArrow';
-import { tileStyle } from '../SharedStyles';
+import { GlobalOverFlowHiddenStyle, tileStyle } from '../SharedStyles';
 import {
   Dispatch, // eslint-disable-line no-unused-vars
 } from 'redux';
@@ -110,6 +110,10 @@ const ActivityTileWithTimer: React.FC<Props> = ({
 
   return (
     <Tile selected={selected} onClick={handleSelect}>
+      {showEdit &&
+        <GlobalOverFlowHiddenStyle />
+      }
+
       {inProgress && (preparationComplete ? (
         <ActiveTimer
           timer={timerInSeconds + 1} // add 1 to allow for the count to finish
