@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import {
   Activity, // eslint-disable-line no-unused-vars
 } from '../helpers/types';
-import { buttonStyle } from './SharedStyles';
+import { GlobalOverFlowHiddenStyle, buttonStyle } from './SharedStyles';
 import { gutterWidth, purple } from '../helpers/constants';
 
 const Button = styled.button<{ fontColour?: string, background?: string }>`
@@ -68,7 +68,6 @@ const IsTimedPanel = styled.div`
 
 interface Props {
   hide: () => void;
-  onDestroyed?: () => void;
   show: boolean;
   activity: Activity;
   groupId: string;
@@ -77,11 +76,12 @@ interface Props {
 
 const EditActivityPanel: React.FC<Props> = ({
   show,
-  onDestroyed,
   hide,
   activity,
 }) => {
   const [isTimed, setIsTimed] = useState(true);
+  const [addGlobalStyle, setAddGlobalStyle] = useState(false);
+
   const transitions = useTransition(show, null, {
     from: {
       transform: 'translateX(100%)',
@@ -92,7 +92,9 @@ const EditActivityPanel: React.FC<Props> = ({
       width: '100%',
       opacity: 0,
     },
-    onDestroyed,
+    // when the animation transition is complete and at rest ('destroyed'), set
+    // the overflow style on the body to stop background scrolling.
+    onDestroyed: () => setAddGlobalStyle(show),
     enter: { opacity: 1, transform: `translateX(0%)` },
     leave: { opacity: 0, transform: 'translateX(100%)' },
     // This is the animation style for AlertConfirm popup
@@ -114,7 +116,10 @@ const EditActivityPanel: React.FC<Props> = ({
       {transitions.map(({ item, props }) => {
         return item ?
           <animated.div key={'unique'} style={{ ...props, opacity: 1 }}>
+
+            <GlobalOverFlowHiddenStyle hidden={addGlobalStyle} />
             <Background style={{ opacity: props.opacity }}/>
+
             <Dialog>
               <DisplayArea>
                 <h2>{activity.name}</h2>
@@ -130,11 +135,17 @@ const EditActivityPanel: React.FC<Props> = ({
                 </IsTimedPanel>
 
                 <ConfirmPanel>
-                  <Button background={'grey'} onClick={hide}>Cancel</Button>
+                  <Button
+                    background={'grey'}
+                    onClick={() => {
+                      hide();
+                      setAddGlobalStyle(false);
+                    }}>Cancel</Button>
                   <Button background={purple}>Save</Button>
                 </ConfirmPanel>
               </DisplayArea>
             </Dialog>
+
           </animated.div>
           : null;
       })}

@@ -6,7 +6,7 @@ import EditActivityPanel from '../EditActivityPanel';
 import ToggleSetCompleteButton from './ToggleSetCompleteButton';
 import { ShowEditArrowWrapper } from './ActivityTileWithReps';
 import ForwardArrow from '../../assets/svg/ForwardArrow';
-import { GlobalOverFlowHiddenStyle, tileStyle } from '../SharedStyles';
+import { tileStyle } from '../SharedStyles';
 import {
   Dispatch, // eslint-disable-line no-unused-vars
 } from 'redux';
@@ -88,7 +88,6 @@ const ActivityTileWithTimer: React.FC<Props> = ({
 }) => {
   const [count, setCount] = useState(0);
   const [preparationComplete, setPreparationComplete] = useState(false);
-  const [showEdit, setShowEdit] = useState(false);
   const [showAnimation, setShowAnimation] = useState(false);
 
   const inProgress = selected && !completed;
@@ -103,16 +102,8 @@ const ActivityTileWithTimer: React.FC<Props> = ({
     }
   });
 
-  const handleShowEditClick = () => {
-    setShowEdit(true);
-    setShowAnimation(true);
-  };
-
   return (
     <Tile selected={selected} onClick={handleSelect}>
-      {showEdit &&
-        <GlobalOverFlowHiddenStyle />
-      }
 
       {inProgress && (preparationComplete ? (
         <ActiveTimer
@@ -132,7 +123,7 @@ const ActivityTileWithTimer: React.FC<Props> = ({
           <p>{formatSeconds(timerInSeconds - count)}</p>
         </Duration>
         {editable ? (
-          <ShowEditArrowWrapper onClick={handleShowEditClick}>
+          <ShowEditArrowWrapper onClick={() => setShowAnimation(true)}>
             <ForwardArrow style={{ fill: 'grey' }}/>
           </ShowEditArrowWrapper>
         ) : (
@@ -143,16 +134,13 @@ const ActivityTileWithTimer: React.FC<Props> = ({
         )}
       </VisibleArea>
 
-      {showEdit &&
-        <EditActivityPanel
-          show={showAnimation}
-          activity={activity}
-          groupId={groupId}
-          index={index}
-          onDestroyed={() => setShowEdit(false)}
-          hide={() => setShowAnimation(false)}
-        />
-      }
+      <EditActivityPanel
+        show={showAnimation}
+        activity={activity}
+        groupId={groupId}
+        index={index}
+        hide={() => setShowAnimation(false)}
+      />
 
     </Tile>
   );

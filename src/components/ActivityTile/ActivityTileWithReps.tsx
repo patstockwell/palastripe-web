@@ -9,7 +9,7 @@ import {
 import HiddenArea from './HiddenArea';
 import ToggleSetCompleteButton from './ToggleSetCompleteButton';
 import EditActivityPanel from '../EditActivityPanel';
-import { GlobalOverFlowHiddenStyle, tileStyle } from '../SharedStyles';
+import { tileStyle } from '../SharedStyles';
 import DownArrow from '../../assets/svg/DownArrow';
 import ForwardArrow from '../../assets/svg/ForwardArrow';
 import {
@@ -74,7 +74,6 @@ const ActivityTileWithReps: React.FC<Props> = ({
   toggleSetComplete,
   editable,
 }) => {
-  const [showEdit, setShowEdit] = useState(false);
   const [showAnimation, setShowAnimation] = useState(false);
 
   const animatedStyles = useSpring({
@@ -84,20 +83,12 @@ const ActivityTileWithReps: React.FC<Props> = ({
     config: { tension: 410, friction: 40 },
   });
 
-  const handleShowEditClick = () => {
-    setShowEdit(true);
-    setShowAnimation(true);
-  };
-
   return (
     <Tile
       aria-expanded={showHiddenArea}
       selected={selected}
       onClick={() => !editable && handleSelect()}
     >
-      {showEdit &&
-        <GlobalOverFlowHiddenStyle />
-      }
       <VisibleArea>
         <Details onClick={handleOpen}>
           <Title>{name}</Title>
@@ -107,7 +98,7 @@ const ActivityTileWithReps: React.FC<Props> = ({
           <p>{repsAchieved === undefined ? repsGoal : repsAchieved} x</p>
         </Duration>
         {editable ? (
-          <ShowEditArrowWrapper onClick={handleShowEditClick}>
+          <ShowEditArrowWrapper onClick={() => setShowAnimation(true)}>
             <ForwardArrow style={{ fill: 'grey' }}/>
           </ShowEditArrowWrapper>
         ) : (
@@ -136,16 +127,13 @@ const ActivityTileWithReps: React.FC<Props> = ({
         </ShowHiddenAreaArrowWrapper>
       }
 
-      {showEdit &&
-        <EditActivityPanel
-          show={showAnimation}
-          activity={activity}
-          groupId={groupId}
-          index={index}
-          onDestroyed={() => setShowEdit(false)}
-          hide={() => setShowAnimation(false)}
-        />
-      }
+      <EditActivityPanel
+        show={showAnimation}
+        activity={activity}
+        groupId={groupId}
+        index={index}
+        hide={() => setShowAnimation(false)}
+      />
 
     </Tile>
   );

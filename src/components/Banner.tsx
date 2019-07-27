@@ -64,7 +64,7 @@ const Banner = ({ heading }: Props) => {
     marginLeft,
     marginTop,
     transformHeading,
-    transformLogo
+    transformLogo,
   } = useSpring({
     fontSize: `${scrolled ? 1.1 : 2}em`,
     marginLeft: `${scrolled ? 50 : 0}%`,
@@ -81,7 +81,7 @@ const Banner = ({ heading }: Props) => {
           fontSize,
           marginLeft,
           marginTop,
-          transform: transformHeading
+          transform: transformHeading,
         }}>
           {heading}
         </PageHeading>

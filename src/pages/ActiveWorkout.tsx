@@ -100,9 +100,7 @@ const ActiveWorkout: React.FC<Props> = ({
         [direction]: animationStyles.left,
       }}
     >
-      {showEndWorkoutAlert &&
-        <GlobalOverFlowHiddenStyle />
-      }
+      <GlobalOverFlowHiddenStyle hidden={showEndWorkoutAlert} />
       <BackLinkBanner
         sticky={false}
         back={{

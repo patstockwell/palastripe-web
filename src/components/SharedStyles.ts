@@ -7,11 +7,11 @@ import {
   tileMinHeight,
 } from '../helpers/constants';
 
-export const GlobalOverFlowHiddenStyle = createGlobalStyle`
+export const GlobalOverFlowHiddenStyle = createGlobalStyle<{ hidden: boolean }>`
   html, body {
     // used for when the modal is displayed
     // to avoid background scrolling
-    overflow: hidden;
+    overflow: ${({ hidden }) => hidden && 'hidden'};
   }
 `;
 
