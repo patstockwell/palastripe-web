@@ -11,25 +11,27 @@ import { useRouter } from '../helpers/functions';
 const Routes = () => {
   const [ destroyed, setDestroyed ] = useState(false);
   const { location } = useRouter();
-  const { state = { immediate: true } } = location;
+  const { state = { immediate: true } }: {
+    state: {
+      immediate: boolean,
+    },
+  } = location;
 
-  const transitions = useTransition(location,
-    (loc: any) => loc.key, {
-      immediate: state.immediate,
-      from: { left: '100%', top: '100vh', position: 'fixed' },
-      enter: { left: '0%', top: '0vh' },
-      leave: { left: '100%', top: '100vh' },
-      config: { tension: 410, friction: 40 },
-      onDestroyed: () => {
-        if (location.pathname !== '/workouts/'
-          && /\/workouts*/.test(location.pathname)) {
-          setDestroyed(true);
-        } else {
-          setDestroyed(false);
-        }
-      },
-    }
-  );
+  const transitions = useTransition(location, (loc: any) => loc.key, {
+    immediate: state.immediate,
+    from: { opacity: 0, left: '100%', top: '100vh', position: 'fixed' },
+    enter: { opacity: 1, left: '0%', top: '0vh' },
+    leave: { opacity: 0, left: '100%', top: '100vh' },
+    config: { tension: 410, friction: 40 },
+    onDestroyed: () => {
+      if (location.pathname !== '/workouts/'
+        && /\/workouts*/.test(location.pathname)) {
+        setDestroyed(true);
+      } else {
+        setDestroyed(false);
+      }
+    },
+  });
 
   return transitions.map(({ item, props, key }) => (
     <Switch key={key} location={item}>

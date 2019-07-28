@@ -42,4 +42,3 @@ const mapStateToProps = ({ entities: { workouts: { allIds, byId }}}: State) => {
 };
 
 export default connect(mapStateToProps)(Workouts);
-
