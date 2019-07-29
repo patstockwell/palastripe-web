@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useTransition } from 'react-spring';
 import { Route, Switch } from 'react-router-dom';
 import Workouts from '../pages/Workouts';
@@ -9,18 +9,25 @@ import FourZeroFour from '../pages/FourZeroFour';
 import { useRouter } from '../helpers/functions';
 
 const Routes = () => {
+  const [ destroyed, setDestroyed ] = useState(false);
   const { location } = useRouter();
   const { state = { immediate: true } } = location;
 
-  const anyUseTransition = useTransition as any;
-
-  const transitions = anyUseTransition(location,
+  const transitions = useTransition(location,
     (loc: any) => loc.key, {
       immediate: state.immediate,
       from: { left: '100%', top: '100vh', position: 'fixed' },
-      enter: [{ left: '0%', top: '0vh' }, { position: 'relative' }],
-      leave: [{ position : 'fixed' }, { left: '100%', top: '100vh' }],
+      enter: { left: '0%', top: '0vh' },
+      leave: { left: '100%', top: '100vh' },
       config: { tension: 410, friction: 40 },
+      onDestroyed: () => {
+        if (location.pathname !== '/workouts/'
+          && /\/workouts*/.test(location.pathname)) {
+          setDestroyed(true);
+        } else {
+          setDestroyed(false);
+        }
+      },
     }
   );
 
@@ -32,7 +39,7 @@ const Routes = () => {
       <Route path="/edit-workout/" render={() =>
         <EditWorkout animationStyles={props} />} />
       <Route path="/workouts/:id/" render={({ match }) =>
-        <ActiveWorkout animationStyles={props} match={match} />} />
+        <ActiveWorkout destroyed={destroyed} animationStyles={props} match={match} />} />
       <Route component={FourZeroFour} />
     </Switch>
   ));

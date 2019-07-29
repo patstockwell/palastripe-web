@@ -30,6 +30,7 @@ interface Props {
   sticky?: boolean;
   back: {
     link: string;
+    handleClick?: () => void;
   };
   continueTo?: {
     link: string;
@@ -44,7 +45,10 @@ const backText = ' Back'; // <-- Leading space
 const BackLinkBanner: React.FC<Props> = ({ sticky = true, back, continueTo }) => (
   <Header sticky={sticky}>
 
-    <StyledLink to={{ pathname: back.link, state: { immediate: false } }}>
+    <StyledLink
+      to={{ pathname: back.link, state: { immediate: false } }}
+      onClick={back.handleClick}
+    >
       <BackArrow style={{ fill: 'grey', margin: '0 -12px 0 -8px' }} />
       <BackArrow style={{ fill: 'grey' }} />
       {backText}

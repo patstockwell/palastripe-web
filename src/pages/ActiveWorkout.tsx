@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import {
   RouteComponentProps, // eslint-disable-line no-unused-vars
@@ -24,11 +24,12 @@ import {
 } from '../helpers/functions';
 import { SET_ACTIVE_WORKOUT, FINISH_WORKOUT, purple } from '../helpers/constants';
 
-export const AnimatedSlidingPage = styled(animated.div)`
+export const AnimatedSlidingPage = styled(animated.div)<{ position?: string }>`
   z-index: 10;
   top: 0;
   width: 100%;
   -webkit-overflow-scrolling: touch; // enables momentum scolling
+  position: ${({ position }) => position};
 `;
 
 const GlobalStyle = createGlobalStyle<{ hidden: boolean }>`
@@ -41,6 +42,7 @@ const GlobalStyle = createGlobalStyle<{ hidden: boolean }>`
 
 interface OwnProps {
   animationStyles: any;
+  destroyed: boolean;
 }
 
 type Match = Pick<RouteComponentProps<{ id: string }>, 'match'>;
@@ -54,9 +56,18 @@ const ActiveWorkout: React.FC<Props> = ({
   match,
   activeWorkout,
   setActiveWorkout,
+  destroyed,
 }) => {
   const [ showEndWorkoutAlert, setShowEndWorkoutAlert ] = useState(false);
+  const [ isRelativePosition, setIsRelativePosition ] = useState(false);
+  const [ isAbsolutePosition, setIsAbsolutePosition ] = useState(false);
   const [ direction, setDirection ] = useState('left');
+  useEffect(() => {
+    if (destroyed) {
+      window.scrollTo(0, 0);
+      setIsRelativePosition(true);
+    }
+  });
 
   // get the workout ID from the URL
   const { id: workoutId }: { id: string } = match.params;
@@ -85,16 +96,25 @@ const ActiveWorkout: React.FC<Props> = ({
     setDirection('top');
     setShowEndWorkoutAlert(false);
   };
+  const position = isRelativePosition && !isAbsolutePosition
+    ? 'relative'
+    : 'fixed';
 
   return (
     <AnimatedSlidingPage
+      position={position}
       style={{
-        position: animationStyles.position,
         [direction]: animationStyles.left,
       }}
     >
       <GlobalStyle hidden={showEndWorkoutAlert} />
-      <BackLinkBanner sticky={false} back={{ link: '/workouts/' }} />
+      <BackLinkBanner
+        sticky={false}
+        back={{
+          handleClick: () => setIsAbsolutePosition(true),
+          link: '/workouts/',
+        }}
+      />
       <WorkoutHero
         name={displayedWorkout.name}
         imageUrl={displayedWorkout.imageUrl}
