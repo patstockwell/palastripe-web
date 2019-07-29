@@ -1,5 +1,33 @@
 const exercises = {
   byId: {
+    'kneeling_right_hip_flexor_stretch': {
+      id: 'kneeling_right_hip_flexor_stretch',
+      name: 'Kneeling Right Hip-Flexor Stretch',
+    },
+    'kneeling_left_hip_flexor_stretch': {
+      id: 'kneeling_left_hip_flexor_stretch',
+      name: 'Kneeling Left Hip-Flexor Stretch'
+    },
+    'ab_crunch_machine': {
+      id: 'ab_crunch_machine',
+      name: 'Ab Crunch Machine',
+    },
+    'lying_leg_curls': {
+      id: 'lying_leg_curls',
+      name: 'Lying Leg Curls',
+    },
+    'leg_press': {
+      id: 'leg_press',
+      name: 'Leg Press',
+    },
+    'standing_calf_raises': {
+      id: 'standing_calf_raises',
+      name: 'Standing Calf Raises',
+    },
+    'calf_press_on_leg_press': {
+      id: 'calf_press_on_leg_press',
+      name: 'Calf Press on Leg Press',
+    },
     'dead_lift': {
       id: 'dead_lift',
       name: 'Dead Lift',
@@ -67,7 +95,7 @@ const exercises = {
     },
     'standing_bicep_hammer_curls': {
       id: 'standing_bicep_hammer_curls',
-      name: 'Standing Bicep Hammer Curls',
+      name: 'Standing Dumbbell Hammer Curls',
     },
     'face_pulls': {
       id: 'face_pulls',
@@ -112,6 +140,8 @@ const exercises = {
   },
 
   allIds: [
+    'standing_calf_raises',
+    'calf_press_on_leg_press',
     'dead_lift',
     'back_squat',
     'overhead_press',
@@ -135,6 +165,11 @@ const exercises = {
     'left_leg_hamstring_stretch',
     'right_leg_hamstring_stretch',
     'stationary_bike',
+    'leg_press',
+    'lying_leg_curls',
+    'ab_crunch_machine',
+    'kneeling_left_hip_flexor_stretch',
+    'kneeling_right_hip_flexor_stretch',
   ],
 };
 

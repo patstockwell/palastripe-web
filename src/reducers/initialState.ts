@@ -10,6 +10,7 @@ import fullBodyDumbbellStrength from '../workoutData/workouts/fullBodyDumbbellSt
 import upperBodyBurner from '../workoutData/workouts/upperBodyBurner';
 import overheadStrength from '../workoutData/workouts/overheadStrength';
 import fullBodyPower from '../workoutData/workouts/fullBodyPower';
+import glutesAndGlory from '../workoutData/workouts/glutesAndGlory';
 
 const initialState: State = {
   // activeWorkout: undefined
@@ -35,10 +36,12 @@ const initialState: State = {
         'upper-body-burner': { ...upperBodyBurner },
         'overhead-strength': overheadStrength,
         'full-body-power': fullBodyPower,
+        'glutes-and-glory': glutesAndGlory,
       },
       allIds: [
         'full-body-dumbbell-strength',
         'circuit-speed',
+        'glutes-and-glory',
         'upper-body-burner',
         'overhead-strength',
         'full-body-power',
