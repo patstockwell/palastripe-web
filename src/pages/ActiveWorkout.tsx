@@ -50,14 +50,23 @@ const ActiveWorkout: React.FC<Props> = ({
   activeWorkout,
   setActiveWorkout,
   destroyed,
+  isFirstRender,
 }) => {
   const [ showEndWorkoutAlert, setShowEndWorkoutAlert ] = useState(false);
   const [ isRelativePosition, setIsRelativePosition ] = useState(false);
   const [ isAbsolutePosition, setIsAbsolutePosition ] = useState(false);
+  const [ scrollNotReset, setScrollNotReset ] = useState(true);
   const [ direction, setDirection ] = useState('left');
+
   useEffect(() => {
-    if (destroyed) {
+    if (destroyed && scrollNotReset) {
       window.scrollTo(0, 0);
+      setIsRelativePosition(true);
+      setScrollNotReset(false);
+    }
+
+    // if we have landed on the page without a transition (static render)
+    if (isFirstRender) {
       setIsRelativePosition(true);
     }
   });
@@ -89,6 +98,7 @@ const ActiveWorkout: React.FC<Props> = ({
     setDirection('top');
     setShowEndWorkoutAlert(false);
   };
+
   const position = isRelativePosition && !isAbsolutePosition
     ? 'relative'
     : 'fixed';
@@ -143,6 +153,7 @@ interface DispatchProps {
 interface StateProps {
   activeWorkout: Workout;
   entities: Entities;
+  isFirstRender: boolean;
 }
 
 const mapDispatchToProps = {
@@ -156,9 +167,10 @@ const mapDispatchToProps = {
   }),
 };
 
-const mapStateToProps = (state: State) => ({
+const mapStateToProps = (state: State): StateProps => ({
   activeWorkout: state.activeWorkout,
   entities: state.entities,
+  isFirstRender: state.isFirstRender,
 });
 
 export default connect<StateProps, DispatchProps, void>(

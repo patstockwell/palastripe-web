@@ -1,6 +1,6 @@
 export interface ReduxAction<P> {
   type: string;
-  payload: P;
+  payload?: P;
 }
 
 export interface SingleSetAction {
@@ -10,6 +10,7 @@ export interface SingleSetAction {
 
 // State shape
 export interface State {
+  isFirstRender: boolean;
   activeWorkout?: Workout;
   immediate: boolean;
   scrollY: ScrollY;

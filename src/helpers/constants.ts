@@ -57,6 +57,7 @@ export const superLightGrey = '#f4f4f4';
 export const charcoal = '#444444';
 
 // action types
+export const SET_FIRST_RENDER_FLAG: string = 'SET_FIRST_RENDER_FLAG';
 export const FINISH_WORKOUT: string = 'FINISH_WORKOUT';
 export const DELETE_WORKOUT: string = 'DELETE_WORKOUT';
 export const EDIT_WORKOUT_ADD_SET: string = 'EDIT_WORKOUT_ADD_SET';

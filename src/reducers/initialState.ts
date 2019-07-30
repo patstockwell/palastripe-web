@@ -13,8 +13,10 @@ import fullBodyPower from '../workoutData/workouts/fullBodyPower';
 import glutesAndGlory from '../workoutData/workouts/glutesAndGlory';
 
 const initialState: State = {
-  // activeWorkout: undefined
+  // flag to know if we're viewing a statically generated page
+  isFirstRender: true,
 
+  // activeWorkout: undefined
   immediate: true,
   scrollY: {
     WORKOUTS: 0,
