@@ -54,7 +54,7 @@ const ActiveWorkout: React.FC<Props> = ({
 }) => {
   const [ showEndWorkoutAlert, setShowEndWorkoutAlert ] = useState(false);
   const [ isRelativePosition, setIsRelativePosition ] = useState(false);
-  const [ isAbsolutePosition, setIsAbsolutePosition ] = useState(false);
+  const [ isFixedPostion, setIsFixedPostion ] = useState(false);
   const [ scrollNotReset, setScrollNotReset ] = useState(true);
   const [ direction, setDirection ] = useState('left');
 
@@ -94,12 +94,13 @@ const ActiveWorkout: React.FC<Props> = ({
     : workoutWithAllActivityData;
 
   const finishWorkoutWithAlertTransition = () => {
+    setIsFixedPostion(true);
     finishWorkout(activeWorkout);
     setDirection('top');
     setShowEndWorkoutAlert(false);
   };
 
-  const position = isRelativePosition && !isAbsolutePosition
+  const position = isRelativePosition && !isFixedPostion
     ? 'relative'
     : 'fixed';
 
@@ -114,7 +115,7 @@ const ActiveWorkout: React.FC<Props> = ({
       <BackLinkBanner
         sticky={false}
         back={{
-          handleClick: () => setIsAbsolutePosition(true),
+          handleClick: () => setIsFixedPostion(true),
           link: '/workouts/',
         }}
       />
