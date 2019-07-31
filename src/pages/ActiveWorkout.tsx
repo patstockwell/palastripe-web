@@ -5,8 +5,10 @@ import {
 } from 'react-router';
 import styled from 'styled-components';
 import { animated } from 'react-spring';
-import { GlobalOverFlowHiddenStyle } from '../components/SharedStyles';
 
+import { useInterval } from '../helpers/functions';
+import { GlobalOverFlowHiddenStyle } from '../components/SharedStyles';
+import Timer from '../components/Timer';
 import AlertConfirm, { LinkButton, Button } from '../components/AlertConfirm';
 import BackLinkBanner from '../components/BackLinkBanner';
 import WorkoutHero from '../components/WorkoutHero';
@@ -23,7 +25,13 @@ import {
   formatMinutes,
   calculateWorkoutTime,
 } from '../helpers/functions';
-import { SET_ACTIVE_WORKOUT, FINISH_WORKOUT, purple } from '../helpers/constants';
+import {
+  SET_ACTIVE_WORKOUT,
+  FINISH_WORKOUT,
+  purple,
+  ONE_SECOND,
+  ONE_DAY,
+} from '../helpers/constants';
 
 export const AnimatedSlidingPage = styled(animated.div)<{ position?: string }>`
   z-index: 10;
@@ -57,6 +65,13 @@ const ActiveWorkout: React.FC<Props> = ({
   const [ isFixedPostion, setIsFixedPostion ] = useState(false);
   const [ scrollNotReset, setScrollNotReset ] = useState(true);
   const [ direction, setDirection ] = useState('left');
+  const [ showRestTimer, setShowRestTimer ] = useState(true);
+  const [ count, setCount ] = useState(0);
+
+  useInterval(() => {
+    setCount(count + 1);
+  }, showRestTimer ? ONE_SECOND : ONE_DAY);
+  // try showRestTimer && ONE_SECOND
 
   useEffect(() => {
     if (destroyed && scrollNotReset) {
@@ -70,6 +85,17 @@ const ActiveWorkout: React.FC<Props> = ({
       setIsRelativePosition(true);
     }
   });
+
+  const resetTimer = () => {
+    setShowRestTimer(false);
+    setCount(0);
+  };
+
+  const setTimer = (show = true) => {
+    resetTimer();
+    // Have a small pause after finishing the exercise before showing the timer
+    setTimeout(() => setShowRestTimer(show), 400);
+  };
 
   // get the workout ID from the URL
   const { id: workoutId }: { id: string } = match.params;
@@ -128,6 +154,14 @@ const ActiveWorkout: React.FC<Props> = ({
         workout={displayedWorkout}
         finishWorkoutClickHandler={() => setShowEndWorkoutAlert(true)}
       />
+
+      {showRestTimer && count > 0 &&
+        <Timer
+          restPeriod={90}
+          resetTimer={resetTimer}
+          count={count - 1}
+        />
+      }
 
       <AlertConfirm
         cancelAlert={() => setShowEndWorkoutAlert(false)}

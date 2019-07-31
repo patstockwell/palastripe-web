@@ -10,31 +10,6 @@ import {
   tileMinHeight,
 } from '../../helpers/constants';
 
-export const SelectionArea = styled.button`
-  padding: 0;
-  order: 3;
-  width: 48px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  border: none;
-  background: none;
-`;
-
-export const SelectComplete = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 2px solid white;
-  background-color: lightgrey;
-  height: 28px;
-  width: 28px;
-  border-radius: 50%;
-  color: white;
-  padding: 0;
-`;
-
 export const Details = styled.div`
   display: flex;
   align-items: flex-start;

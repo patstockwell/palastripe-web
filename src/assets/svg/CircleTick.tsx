@@ -54,8 +54,16 @@ const Path = styled.path`
   animation: ${stroke} 0.2s cubic-bezier(0.65, 0, 0.45, 1) 0.5s forwards;
 `;
 
-const CircleTick = () => (
-  <Svg className="checkmark" viewBox="0 0 52 52">
+interface Props {
+  onAnimationEnd?: () => void;
+}
+
+const CircleTick: React.FC<Props> = ({ onAnimationEnd }) => (
+  <Svg
+    className="checkmark"
+    viewBox="0 0 52 52"
+    onAnimationEnd={onAnimationEnd}
+  >
     <Circle className="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
     <Path className="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
   </Svg>

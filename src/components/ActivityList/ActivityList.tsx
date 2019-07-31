@@ -50,8 +50,11 @@ const ActivityList: React.FC<Props> = ({
   stickyTop,
   workout: { exerciseGroups },
 }) => {
-  const [ selected, setSelected ] = useState({ groupId: undefined, index: undefined });
   const [ showHiddenArea, setShowHiddenArea ] = useState(false);
+  const [ selected, setSelected ] = useState({
+    groupId: undefined,
+    index: undefined,
+  });
 
   const createTile = (id: string) => (a: Activity, i: number) => {
     const isSelected = selected.groupId === id && selected.index === i;

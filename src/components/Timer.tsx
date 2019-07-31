@@ -7,7 +7,7 @@ const countDownSize = 130;
 const TimerBackground = styled(animated.div)`
   display: flex;
   background-color: rgba(0, 0, 0, 0.8);
-  position: absolute;
+  position: fixed;
   bottom: 0;
   right: 0;
   left: 0;
@@ -15,6 +15,7 @@ const TimerBackground = styled(animated.div)`
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  z-index: 5;
 `;
 
 const Number = styled(animated.p)`
@@ -35,7 +36,13 @@ const Message = styled(animated.p)`
   font-size: 17px;
 `;
 
-const Timer = ({ resetTimer, count, restPeriod }) => {
+interface Props {
+  resetTimer: () => void;
+  count: number;
+  restPeriod: number;
+}
+
+const Timer: React.FC<Props> = ({ resetTimer, count, restPeriod }) => {
   // animation config
   const config = { mass: 1, tension: 470, friction: 40 };
   const [ divStyle, setDivStyle ] = useSpring(() => ({
@@ -80,4 +87,3 @@ const Timer = ({ resetTimer, count, restPeriod }) => {
 };
 
 export default Timer;
-
