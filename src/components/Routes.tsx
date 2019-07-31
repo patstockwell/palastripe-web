@@ -16,9 +16,9 @@ import { SET_FIRST_RENDER_FLAG } from '../helpers/constants';
 
 type Props = DispatchProps & StateProps;
 
-const Routes: React.FC<Props> = ({ isFirstRender, setFirstRenderFlag }) => {
+const Routes: React.FC<Props> = ({ isFirstRender, setIsFirstRender }) => {
   const [ destroyed, setDestroyed ] = useState(false);
-  // a flag to know if the user is arriving from a statically generated page
+  const [ transitionsHaveStarted, setTransitionsHaveStarted ] = useState(false);
   const { location } = useRouter();
   const { state = { immediate: true } }: {
     state: {
@@ -32,11 +32,15 @@ const Routes: React.FC<Props> = ({ isFirstRender, setFirstRenderFlag }) => {
     enter: { opacity: 1, left: '0%', top: '0vh' },
     leave: { opacity: 0, left: '100%', top: '100vh' },
     config: { tension: 410, friction: 40 },
+    onStart: () => !transitionsHaveStarted && setTransitionsHaveStarted(true),
     onDestroyed: () => {
+      console.log(isFirstRender, transitionsHaveStarted);
       // as soon as we complete our first transition, it is no longer the first
       // render. Set the flag to false.
       // We use this value to determine page styling (position for animation)
-      isFirstRender && setFirstRenderFlag();
+      if (isFirstRender) {
+        setIsFirstRender();
+      }
 
       if (location.pathname !== '/workouts/'
         && /\/workouts*/.test(location.pathname)) {
@@ -58,6 +62,7 @@ const Routes: React.FC<Props> = ({ isFirstRender, setFirstRenderFlag }) => {
             <EditWorkout animationStyles={props} />} />
           <Route path="/workouts/:id/" render={({ match }) =>
             <ActiveWorkout
+              transitionsHaveStarted={transitionsHaveStarted}
               destroyed={destroyed}
               animationStyles={props}
               match={match}
@@ -79,16 +84,16 @@ const mapStateToProps = (state: State) => ({
 });
 
 interface DispatchProps {
-  setFirstRenderFlag: () => ReduxAction<undefined>;
+  setIsFirstRender: () => ReduxAction<undefined>;
 }
 
 const mapDispatchToProps: DispatchProps = {
-  setFirstRenderFlag: () => ({
+  setIsFirstRender: () => ({
     type: SET_FIRST_RENDER_FLAG,
   }),
 };
 
 export default connect<StateProps, DispatchProps, void>(
   mapStateToProps,
-  mapDispatchToProps,
+  mapDispatchToProps
 )(Routes);
