@@ -16,9 +16,8 @@ import { SET_FIRST_RENDER_FLAG } from '../helpers/constants';
 
 type Props = DispatchProps & StateProps;
 
-const Routes: React.FC<Props> = ({ isFirstRender, setIsFirstRender }) => {
+const Routes: React.FC<Props> = ({ isFirstRender, removeIsFirstRender }) => {
   const [ destroyed, setDestroyed ] = useState(false);
-  const [ transitionsHaveStarted, setTransitionsHaveStarted ] = useState(false);
   const { location } = useRouter();
   const { state = { immediate: true } }: {
     state: {
@@ -32,14 +31,12 @@ const Routes: React.FC<Props> = ({ isFirstRender, setIsFirstRender }) => {
     enter: { opacity: 1, left: '0%', top: '0vh' },
     leave: { opacity: 0, left: '100%', top: '100vh' },
     config: { tension: 410, friction: 40 },
-    onStart: () => !transitionsHaveStarted && setTransitionsHaveStarted(true),
     onDestroyed: () => {
-      console.log(isFirstRender, transitionsHaveStarted);
       // as soon as we complete our first transition, it is no longer the first
       // render. Set the flag to false.
       // We use this value to determine page styling (position for animation)
       if (isFirstRender) {
-        setIsFirstRender();
+        removeIsFirstRender();
       }
 
       if (location.pathname !== '/workouts/'
@@ -62,7 +59,6 @@ const Routes: React.FC<Props> = ({ isFirstRender, setIsFirstRender }) => {
             <EditWorkout animationStyles={props} />} />
           <Route path="/workouts/:id/" render={({ match }) =>
             <ActiveWorkout
-              transitionsHaveStarted={transitionsHaveStarted}
               destroyed={destroyed}
               animationStyles={props}
               match={match}
@@ -84,11 +80,11 @@ const mapStateToProps = (state: State) => ({
 });
 
 interface DispatchProps {
-  setIsFirstRender: () => ReduxAction<undefined>;
+  removeIsFirstRender: () => ReduxAction<undefined>;
 }
 
 const mapDispatchToProps: DispatchProps = {
-  setIsFirstRender: () => ({
+  removeIsFirstRender: () => ({
     type: SET_FIRST_RENDER_FLAG,
   }),
 };

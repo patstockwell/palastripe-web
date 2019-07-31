@@ -44,7 +44,6 @@ export const AnimatedSlidingPage = styled(animated.div)<{ position?: string }>`
 interface OwnProps {
   animationStyles: any;
   destroyed: boolean;
-  transitionsHaveStarted: boolean;
 }
 
 type Match = Pick<RouteComponentProps<{ id: string }>, 'match'>;
@@ -60,7 +59,6 @@ const ActiveWorkout: React.FC<Props> = ({
   setActiveWorkout,
   destroyed,
   isFirstRender,
-  transitionsHaveStarted,
 }) => {
   const [ showEndWorkoutAlert, setShowEndWorkoutAlert ] = useState(false);
   const [ isRelativePosition, setIsRelativePosition ] = useState(false);
@@ -83,7 +81,7 @@ const ActiveWorkout: React.FC<Props> = ({
     }
 
     // if we have landed on the page without a transition (static render)
-    if (isFirstRender && !transitionsHaveStarted) {
+    if (isFirstRender) {
       setIsRelativePosition(true);
     }
   });
