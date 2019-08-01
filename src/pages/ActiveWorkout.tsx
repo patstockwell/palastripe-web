@@ -32,6 +32,8 @@ import {
   ONE_SECOND,
   ONE_DAY,
   DEFAULT_REST_PERIOD_IN_SECONDS,
+  SET_WINDOW_SCROLL,
+  ACTIVITY_PAGE,
 } from '../helpers/constants';
 
 export const TimerContext = createContext({ showTimer: () => {/* do nothing */}});
@@ -62,6 +64,7 @@ const ActiveWorkout: React.FC<Props> = ({
   setActiveWorkout,
   destroyed,
   isFirstRender,
+  setWindowScroll,
 }) => {
   const [ showEndWorkoutAlert, setShowEndWorkoutAlert ] = useState(false);
   const [ isRelativePosition, setIsRelativePosition ] = useState(false);
@@ -82,7 +85,6 @@ const ActiveWorkout: React.FC<Props> = ({
       setIsRelativePosition(true);
       setScrollNotReset(false);
     }
-
     // if we have landed on the page without a transition (static render)
     if (isFirstRender) {
       setIsRelativePosition(true);
@@ -126,6 +128,7 @@ const ActiveWorkout: React.FC<Props> = ({
     finishWorkout(activeWorkout);
     setDirection('top');
     setShowEndWorkoutAlert(false);
+    setWindowScroll(0);
   };
 
   const position = isRelativePosition && !isFixedPostion
@@ -187,6 +190,10 @@ const ActiveWorkout: React.FC<Props> = ({
 interface DispatchProps {
   finishWorkout: (w: Workout) => ReduxAction<{}>;
   setActiveWorkout: (workout: Workout) => ReduxAction<Workout>;
+  setWindowScroll: (scrollY: number) => ReduxAction<{
+    scrollY: number,
+    page: string
+  }>;
 }
 
 interface StateProps {
@@ -195,7 +202,14 @@ interface StateProps {
   isFirstRender: boolean;
 }
 
-const mapDispatchToProps = {
+const mapDispatchToProps: DispatchProps = {
+  setWindowScroll: scrollY => ({
+    type: SET_WINDOW_SCROLL,
+    payload: {
+      scrollY,
+      page: ACTIVITY_PAGE,
+    },
+  }),
   finishWorkout: (workout: Workout) => ({
     type: FINISH_WORKOUT,
     payload: workout,
