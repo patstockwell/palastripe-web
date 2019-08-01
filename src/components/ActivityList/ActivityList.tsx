@@ -50,7 +50,7 @@ const ActivityList: React.FC<Props> = ({
   stickyTop,
   workout: { exerciseGroups },
 }) => {
-  const [ showHiddenArea, setShowHiddenArea ] = useState(false);
+  const [ showHiddenArea, setShowHiddenArea ] = useState(true);
   const [ selected, setSelected ] = useState({
     groupId: undefined,
     index: undefined,
@@ -70,7 +70,6 @@ const ActivityList: React.FC<Props> = ({
         handleSelect={() => {
           if (!isSelected) {
             setSelected({ groupId: id, index: i });
-            setShowHiddenArea(false);
           }
         }}
         handleOpen={() => {
