@@ -1,6 +1,7 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
 import { green } from '../../helpers/constants';
+import { TimerContext } from '../../pages/ActiveWorkout';
 
 const stroke = keyframes `
   100% {
@@ -55,18 +56,22 @@ const Path = styled.path`
 `;
 
 interface Props {
-  onAnimationEnd?: () => void;
+  shouldDisplay: boolean;
 }
 
-const CircleTick: React.FC<Props> = ({ onAnimationEnd }) => (
-  <Svg
-    className="checkmark"
-    viewBox="0 0 52 52"
-    onAnimationEnd={onAnimationEnd}
-  >
-    <Circle className="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
-    <Path className="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
-  </Svg>
+const CircleTick: React.FC<Props> = ({ shouldDisplay }) => (
+  <TimerContext.Consumer>
+    {({ showTimer }) => (
+      <Svg
+        className="checkmark"
+        viewBox="0 0 52 52"
+        onAnimationEnd={() => shouldDisplay && showTimer()}
+      >
+        <Circle className="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
+        <Path className="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+      </Svg>
+    )}
+  </TimerContext.Consumer>
 );
 
 export default CircleTick;

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { createContext, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import {
   RouteComponentProps, // eslint-disable-line no-unused-vars
@@ -31,7 +31,10 @@ import {
   purple,
   ONE_SECOND,
   ONE_DAY,
+  DEFAULT_REST_PERIOD_IN_SECONDS,
 } from '../helpers/constants';
+
+export const TimerContext = createContext({ showTimer: () => {/* do nothing */}});
 
 export const AnimatedSlidingPage = styled(animated.div)<{ position?: string }>`
   z-index: 10;
@@ -91,10 +94,9 @@ const ActiveWorkout: React.FC<Props> = ({
     setCount(0);
   };
 
-  const setTimer = (show = true) => {
+  const showTimer = (show: boolean = true) => {
     resetTimer();
-    // Have a small pause after finishing the exercise before showing the timer
-    setTimeout(() => setShowRestTimer(show), 400);
+    setShowRestTimer(show);
   };
 
   // get the workout ID from the URL
@@ -150,14 +152,16 @@ const ActiveWorkout: React.FC<Props> = ({
         imageUrl={displayedWorkout.imageUrl}
         time={formatMinutes(calculateWorkoutTime(displayedWorkout))}
       />
-      <ActivityList
-        workout={displayedWorkout}
-        finishWorkoutClickHandler={() => setShowEndWorkoutAlert(true)}
-      />
+      <TimerContext.Provider value={{ showTimer }} >
+        <ActivityList
+          workout={displayedWorkout}
+          finishWorkoutClickHandler={() => setShowEndWorkoutAlert(true)}
+        />
+      </TimerContext.Provider>
 
       {showRestTimer && count > 0 &&
         <Timer
-          restPeriod={90}
+          restPeriod={DEFAULT_REST_PERIOD_IN_SECONDS}
           resetTimer={resetTimer}
           count={count - 1}
         />

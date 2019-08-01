@@ -12,8 +12,7 @@ export const workoutWindowViewport: number = 50;
 export const gutterWidth: number = 12;
 export const timedExerciseWaitPeriod: number = 10;
 
-export const DELAY_BEFORE_SHOWING_TIMER: number = 2;
-export const DEFAULT_REST_PERIOD_IN_SECONDS: number = 120;
+export const DEFAULT_REST_PERIOD_IN_SECONDS: number = 30;
 export const ONE_SECOND: number = 1000;
 export const ONE_DAY: number = 86400000;
 export const ONE_WEEK: number = ONE_DAY * 7;
