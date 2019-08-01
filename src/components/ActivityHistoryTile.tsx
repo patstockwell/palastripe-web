@@ -14,7 +14,7 @@ import {
   Workout, // eslint-disable-line no-unused-vars
 } from '../helpers/types';
 import { opaqueImageInAfter } from './SharedStyles';
-import { purple, gutterWidth } from '../helpers/constants';
+import { superLightGrey, purple, gutterWidth } from '../helpers/constants';
 
 const Image = styled.div<{ image: string }>`
   width: 100%;
@@ -35,6 +35,10 @@ const TilePanel = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+`;
+
+const TopTilePanel = styled(TilePanel)`
+  background-color: ${superLightGrey};
 `;
 
 const Name = styled.p`
@@ -104,6 +108,12 @@ const Pointer = styled.div`
   transform: rotate(45deg);
 `;
 
+const Tile = styled.div`
+  margin: 8px;
+  border-radius: 8px;
+  overflow: hidden;
+`;
+
 interface Props {
   workout: Workout;
   showMenu: boolean;
@@ -135,8 +145,8 @@ const ActivityHistoryTile: React.FC<Props> = ({
   };
 
   return (
-    <div>
-      <TilePanel>
+    <Tile>
+      <TopTilePanel>
         <div>
           <Name>{name}</Name>
           <FinishTimeAndDay>{historyTileDateFormat}</FinishTimeAndDay>
@@ -159,7 +169,7 @@ const ActivityHistoryTile: React.FC<Props> = ({
             </Menu>
           </DropDownMenuPanel>
         }
-      </TilePanel>
+      </TopTilePanel>
       <Image image={workout.imageUrl}>
         <TilePanel>
           <TotalTime>{totalTime}</TotalTime>
@@ -178,7 +188,7 @@ const ActivityHistoryTile: React.FC<Props> = ({
           onClick={handleConfirmationClick}
           background={purple}>Yes</Button>
       </AlertConfirm>
-    </div>
+    </Tile>
   );
 };
 
