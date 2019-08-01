@@ -2,18 +2,14 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 
-import { DELETE_WORKOUT, gutterWidth } from '../helpers/constants';
+import { DELETE_WORKOUT } from '../helpers/constants';
 import ActivityHistoryTile from './ActivityHistoryTile';
 import {
   ReduxAction, // eslint-disable-line no-unused-vars
   Workout, // eslint-disable-line no-unused-vars
 } from '../helpers/types';
 
-const NoHistoryMessage = styled.div`
-  padding: ${gutterWidth}px;
-`;
-
-const EmptyHistoryTile = styled.div`
+const BottomSpace = styled.div`
   height: 200px;
 `;
 
@@ -24,15 +20,15 @@ interface OwnProps {
 type Props = OwnProps & DispatchProps;
 
 const ActivityHistoryList: React.FC<Props> = ({ history, deleteWorkout }) => {
-  // -1 is used to denote no tile in list is selected
-  const [ showMenu, setShowMenu ] = useState(-1);
+  // undefined is used to denote no tile in list is selected
+  const [ showMenuIndex, setShowMenuIndex ] = useState(undefined);
 
   const historyTiles = history.map((w, i) => (
     <ActivityHistoryTile
       key={w.finishTime}
       workout={w}
-      showMenu={showMenu === i}
-      toggleMenu={() => setShowMenu(showMenu === i ? -1 : i)}
+      showMenu={showMenuIndex === i}
+      toggleMenu={() => setShowMenuIndex(showMenuIndex === i ? undefined : i)}
       deleteWorkout={() => deleteWorkout(i)}
     />
   ));
@@ -40,13 +36,7 @@ const ActivityHistoryList: React.FC<Props> = ({ history, deleteWorkout }) => {
   return (
     <React.Fragment>
       {historyTiles}
-      {!historyTiles.length ? (
-        <NoHistoryMessage>
-          Your workout history will appear here
-        </NoHistoryMessage>
-      ) : (
-        <EmptyHistoryTile />
-      )}
+      <BottomSpace />
     </React.Fragment>
   );
 };
