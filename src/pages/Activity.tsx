@@ -60,7 +60,7 @@ interface StateProps {
 }
 
 const mapStateToProps = (state: State): StateProps => ({
-  scrollY: state.scrollY.ACTIVITY,
+  scrollY: state.scrollY.ACTIVITY_PAGE,
   history: state.history,
 });
 

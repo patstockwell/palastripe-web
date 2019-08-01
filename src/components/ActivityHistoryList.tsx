@@ -2,7 +2,11 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 
-import { DELETE_WORKOUT } from '../helpers/constants';
+import {
+  ACTIVITY_PAGE,
+  SET_WINDOW_SCROLL,
+  DELETE_WORKOUT,
+} from '../helpers/constants';
 import ActivityHistoryTile from './ActivityHistoryTile';
 import {
   ReduxAction, // eslint-disable-line no-unused-vars
@@ -19,7 +23,11 @@ interface OwnProps {
 
 type Props = OwnProps & DispatchProps;
 
-const ActivityHistoryList: React.FC<Props> = ({ history, deleteWorkout }) => {
+const ActivityHistoryList: React.FC<Props> = ({
+  history,
+  deleteWorkout,
+  setWindowScroll,
+}) => {
   // undefined is used to denote no tile in list is selected
   const [ showMenuIndex, setShowMenuIndex ] = useState(undefined);
 
@@ -28,7 +36,11 @@ const ActivityHistoryList: React.FC<Props> = ({ history, deleteWorkout }) => {
       key={w.finishTime}
       workout={w}
       showMenu={showMenuIndex === i}
-      toggleMenu={() => setShowMenuIndex(showMenuIndex === i ? undefined : i)}
+      position={i}
+      toggleMenu={() => {
+        setShowMenuIndex(showMenuIndex === i ? undefined : i);
+        setWindowScroll(window.scrollY);
+      }}
       deleteWorkout={() => deleteWorkout(i)}
     />
   ));
@@ -42,10 +54,21 @@ const ActivityHistoryList: React.FC<Props> = ({ history, deleteWorkout }) => {
 };
 
 interface DispatchProps {
-  deleteWorkout: (i: number) => ReduxAction<number>
+  deleteWorkout: (i: number) => ReduxAction<number>;
+  setWindowScroll: (scrollY: number) => ReduxAction<{
+    scrollY: number,
+    page: string
+  }>;
 }
 
 const mapDispatchToProps: DispatchProps = ({
+  setWindowScroll: scrollY => ({
+    type: SET_WINDOW_SCROLL,
+    payload: {
+      scrollY,
+      page: ACTIVITY_PAGE,
+    },
+  }),
   deleteWorkout: index => ({
     type: DELETE_WORKOUT,
     payload: index,

@@ -19,7 +19,7 @@ const initialState: State = {
   // activeWorkout: undefined
   immediate: true,
   scrollY: {
-    WORKOUTS: 0,
+    WORKOUTS_PAGE: 0,
   },
 
   settings: {

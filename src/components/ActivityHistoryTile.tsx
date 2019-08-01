@@ -109,6 +109,7 @@ interface Props {
   showMenu: boolean;
   toggleMenu: () => void;
   deleteWorkout: () => ReduxAction<number>;
+  position: number;
 }
 
 const ActivityHistoryTile: React.FC<Props> = ({
@@ -183,6 +184,7 @@ const ActivityHistoryTile: React.FC<Props> = ({
 
 const areEqualProps = (prevProps: Props, nextProps: Props): boolean => (
   prevProps.showMenu === nextProps.showMenu
+  && prevProps.position === nextProps.position
 );
 
 export default memo(ActivityHistoryTile, areEqualProps);

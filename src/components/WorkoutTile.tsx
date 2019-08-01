@@ -12,7 +12,7 @@ import {
   gutterWidth,
   superLightGrey,
   tileMinHeight,
-  WORKOUTS,
+  WORKOUTS_PAGE,
   SET_WINDOW_SCROLL,
 } from '../helpers/constants';
 import { calculateWorkoutTime, formatMinutes } from '../helpers/functions';
@@ -101,7 +101,7 @@ interface StateProps {
 }
 
 const mapStateToProps = (state: State): StateProps => ({
-  scrollY: state.scrollY.WORKOUTS,
+  scrollY: state.scrollY.WORKOUTS_PAGE,
 });
 
 interface DispatchProps {
@@ -116,7 +116,7 @@ const mapDispatchToProps: DispatchProps = {
     type: SET_WINDOW_SCROLL,
     payload: {
       scrollY,
-      page: WORKOUTS,
+      page: WORKOUTS_PAGE,
     },
   }),
 };

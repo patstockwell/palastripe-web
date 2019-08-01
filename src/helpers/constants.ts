@@ -72,9 +72,8 @@ export const DECREMENT_WEIGHT: string = 'DECREMENT_WEIGHT';
 export const WORKOUT_SHAPE_VERSION: string = 'v1';
 
 // page names for setting the current scroll height
-export const WORKOUTS: string = 'WORKOUTS';
-export const ACTIVITY: string = 'ACTIVITY';
-export const ME: string = 'ME';
+export const WORKOUTS_PAGE: string = 'WORKOUTS_PAGE';
+export const ACTIVITY_PAGE: string = 'ACTIVITY_PAGE';
 
 export const LOCAL_STORAGE_HISTORY: string = 'HBFF_HISTORY';
 export const LOCAL_STORAGE_SETTINGS: string = 'HBFF_SETTINGS';

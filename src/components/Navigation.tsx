@@ -6,9 +6,8 @@ import {
   pink,
   navBarHeight,
   SET_WINDOW_SCROLL,
-  ACTIVITY,
-  ME,
-  WORKOUTS,
+  ACTIVITY_PAGE,
+  WORKOUTS_PAGE,
 } from '../helpers/constants';
 import {
   ReduxAction, // eslint-disable-line no-unused-vars
@@ -47,11 +46,9 @@ const LinkName = styled.span`
 
 const getCurrentPage = (pathname: string): string => {
   if (pathname === '/' || /\/workouts*/.test(pathname)) {
-    return WORKOUTS;
+    return WORKOUTS_PAGE;
   } else if (/\/activity*/.test(pathname)){
-    return ACTIVITY;
-  } else if (/\/me*/.test(pathname)) {
-    return ME;
+    return ACTIVITY_PAGE;
   } else {
     return '';
   }
@@ -79,7 +76,7 @@ const Navigation = ({ pathname, setWindowScroll }: Props) => {
   return (
     <Nav>
       <NavLink
-        highlight={isOnPage(WORKOUTS) ? pink : 'black'}
+        highlight={isOnPage(WORKOUTS_PAGE) ? pink : 'black'}
         to="/workouts/"
         onClick={handleClick}
       >
@@ -87,7 +84,7 @@ const Navigation = ({ pathname, setWindowScroll }: Props) => {
         <LinkName>Workouts</LinkName>
       </NavLink>
       <NavLink
-        highlight={isOnPage(ACTIVITY) ? pink : 'black'}
+        highlight={isOnPage(ACTIVITY_PAGE) ? pink : 'black'}
         to="/activity/"
         onClick={handleClick}
       >
