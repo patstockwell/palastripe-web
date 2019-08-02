@@ -17,6 +17,10 @@ const initialState: State = {
   isFirstRender: true,
 
   // activeWorkout: undefined
+  activeWorkoutSelectedExercise: {
+    index: null,
+    groupId: null,
+  },
   immediate: true,
   scrollY: {
     WORKOUTS_PAGE: 0,

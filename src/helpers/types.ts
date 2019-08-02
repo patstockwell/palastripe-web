@@ -8,10 +8,16 @@ export interface SingleSetAction {
   index: number;
 }
 
+export interface SelectedExercise {
+  groupId: string | null;
+  index: number | null;
+}
+
 // State shape
 export interface State {
   isFirstRender: boolean;
   activeWorkout?: Workout;
+  activeWorkoutSelectedExercise: SelectedExercise;
   immediate: boolean;
   scrollY: ScrollY;
   settings: Settings;

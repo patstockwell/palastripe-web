@@ -7,19 +7,16 @@ import ActivityListHeading from './ActivityListHeading';
 import {
   activityHeadingHeight,
   tileMinHeight,
+  SET_SELECTED_EXERCISE,
 } from '../../helpers/constants';
 import {
   Activity, // eslint-disable-line no-unused-vars
-  Entities, // eslint-disable-line no-unused-vars
+  ReduxAction, // eslint-disable-line no-unused-vars
+  SelectedExercise, // eslint-disable-line no-unused-vars
   State, // eslint-disable-line no-unused-vars
   Workout,  // eslint-disable-line no-unused-vars
 } from '../../helpers/types';
 import { unorderedListStyle } from '../SharedStyles';
-
-interface Props {
-  workout: Workout;
-  entities: Entities;
-}
 
 const Ul = styled.ul`
   ${unorderedListStyle}
@@ -32,29 +29,25 @@ const FlexTile = styled.div`
   min-height: ${tileMinHeight}px;
 `;
 
-const BottomEmptySpace = styled.div<{ stickyTop: number }>`
+const BottomEmptySpace = styled.div<{ stickyTop?: number}>`
   height: calc(100vh - ${({ stickyTop = 0 }) =>
     activityHeadingHeight + (2 * tileMinHeight) + stickyTop}px);
 `;
 
-interface Props {
+interface OwnProps {
   workout: Workout;
-  stickyTop?: number;
-  readOnly?: boolean;
   finishWorkoutClickHandler?: () => void;
-  startWorkoutClickHandler?: () => void;
 }
+
+type Props = OwnProps & StateProps & DispatchProps;
 
 const ActivityList: React.FC<Props> = ({
   finishWorkoutClickHandler,
-  stickyTop,
   workout: { exerciseGroups },
+  selected,
+  setSelected,
 }) => {
   const [ showHiddenArea, setShowHiddenArea ] = useState(true);
-  const [ selected, setSelected ] = useState({
-    groupId: undefined,
-    index: undefined,
-  });
 
   const createTile = (id: string) => (a: Activity, i: number) => {
     const isSelected = selected.groupId === id && selected.index === i;
@@ -87,7 +80,6 @@ const ActivityList: React.FC<Props> = ({
     return (
       <ActivityListHeading
         key={group.id}
-        stickyTop={stickyTop}
         heading={group.name}
         activityTotal={tiles.length}
       >
@@ -106,15 +98,32 @@ const ActivityList: React.FC<Props> = ({
         </Button>
       </FlexTile>
 
-      <BottomEmptySpace
-        stickyTop={stickyTop}
-      />
+      <BottomEmptySpace />
     </Ul>
   );
 };
 
-const mapStateToProps = (state: State) => ({
-  entities: state.entities,
+interface DispatchProps {
+  setSelected: ({ groupId, index }: SelectedExercise) =>
+    ReduxAction<SelectedExercise>;
+}
+
+const mapDispatchToProps: DispatchProps = {
+  setSelected: ({ index, groupId }) => ({
+    type: SET_SELECTED_EXERCISE,
+    payload: { groupId, index },
+  }),
+};
+
+interface StateProps {
+  selected: SelectedExercise;
+}
+
+const mapStateToProps = (state: State): StateProps => ({
+  selected: state.activeWorkoutSelectedExercise,
 });
 
-export default connect(mapStateToProps)(ActivityList);
+export default connect<StateProps, DispatchProps, OwnProps>(
+  mapStateToProps,
+  mapDispatchToProps
+)(ActivityList);

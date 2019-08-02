@@ -9,11 +9,14 @@ import activeWorkoutReducer from './activeWorkoutReducer';
 import historyReducer from './historyReducer';
 import editWorkoutReducer from './editWorkoutReducer';
 import firstRenderReducer from './firstRenderReducer';
+import selectedExerciseReducer from './selectedExerciseReducer';
 
 const rootReducer = (state = initialState, action: ReduxAction<any>): State => ({
   ...state,
   isFirstRender: firstRenderReducer(state.isFirstRender, action),
   activeWorkout: activeWorkoutReducer(state.activeWorkout, action),
+  activeWorkoutSelectedExercise: selectedExerciseReducer(
+    state.activeWorkoutSelectedExercise, action),
   scrollY: scrollYReducer(state.scrollY, action),
   settings: settingsReducer(state.settings, action),
   history: historyReducer(state.history, action),
@@ -21,4 +24,3 @@ const rootReducer = (state = initialState, action: ReduxAction<any>): State => (
 });
 
 export default rootReducer;
-
