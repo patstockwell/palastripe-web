@@ -16,7 +16,10 @@ const rootReducer = (state = initialState, action: ReduxAction<any>): State => (
   isFirstRender: firstRenderReducer(state.isFirstRender, action),
   activeWorkout: activeWorkoutReducer(state.activeWorkout, action),
   activeWorkoutSelectedExercise: selectedExerciseReducer(
-    state.activeWorkoutSelectedExercise, action),
+    state.activeWorkoutSelectedExercise,
+    action,
+    state.activeWorkout
+  ),
   scrollY: scrollYReducer(state.scrollY, action),
   settings: settingsReducer(state.settings, action),
   history: historyReducer(state.history, action),

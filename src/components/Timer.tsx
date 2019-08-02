@@ -6,7 +6,7 @@ const countDownSize = 130;
 
 const TimerBackground = styled(animated.div)`
   display: flex;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.85);
   position: fixed;
   bottom: 0;
   right: 0;
@@ -18,7 +18,7 @@ const TimerBackground = styled(animated.div)`
   z-index: 5;
 `;
 
-const Number = styled(animated.p)`
+const Count = styled(animated.p)`
   color: white;
   font-size: ${countDownSize}px;
   overflow: hidden;
@@ -75,9 +75,9 @@ const Timer: React.FC<Props> = ({ resetTimer, count, restPeriod }) => {
   return (
     <TimerBackground style={divStyle} onClick={fadeAndReset} >
       <NumberWrapper>
-        <Number style={pStyle}>
+        <Count style={pStyle}>
           {timerMinutes}{timerSeconds > 9 ? ':' : ':0'}{timerSeconds}
-        </Number>
+        </Count>
       </NumberWrapper>
       <Message>
         {'You\'re doing great, take a rest'}
