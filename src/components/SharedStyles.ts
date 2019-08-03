@@ -2,9 +2,6 @@ import { createGlobalStyle, css } from 'styled-components';
 import {
   purple,
   workoutWindowViewport,
-  lightLightGrey,
-  superLightGrey,
-  tileMinHeight,
 } from '../helpers/constants';
 
 export const GlobalOverFlowHiddenStyle = createGlobalStyle<{ hidden: boolean }>`
@@ -37,21 +34,8 @@ export const opaqueImageInAfter = css<{ image: string }>`
   z-index: -1;
 `;
 
-export const tileStyle = css<{ selected: boolean }>`
-  position: relative;
-  color: ${({ selected }) => selected ? 'black' : '#444'};
-  border: none;
-  border-bottom: 1px solid ${lightLightGrey};
-  background-color: ${({ selected }) => selected ? 'white' : superLightGrey};
-  cursor: pointer;
-  min-height: ${tileMinHeight}px;
-  touch-action: manipulation; // stops double-tap-to-zoom
-`;
-
-export const buttonStyle = css<{
-  background?: string,
-  fontColour?: string,
-}>`
+interface ButtonProps { background?: string; fontColour?: string; }
+export const buttonStyle = css<ButtonProps>`
   color: ${({ fontColour }) => fontColour || 'white'};
   border: none;
   font-size: 12px;

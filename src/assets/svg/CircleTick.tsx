@@ -60,12 +60,12 @@ const Path = styled.path`
 `;
 
 interface OwnProps {
-  shouldDisplay: boolean;
+  wasClicked: boolean;
 }
 
 type Props = OwnProps & DispatchProps;
 
-const CircleTick: React.FC<Props> = ({ selectNextExercise, shouldDisplay }) => (
+const CircleTick: React.FC<Props> = ({ selectNextExercise, wasClicked }) => (
   <TimerContext.Consumer>
     {({ showTimer }) => (
       <Svg
@@ -80,7 +80,8 @@ const CircleTick: React.FC<Props> = ({ selectNextExercise, shouldDisplay }) => (
         */}
         <Path
           onAnimationEnd={() => {
-            if (shouldDisplay) {
+            // check the animation was triggered via click and not reload
+            if (wasClicked) {
               showTimer();
               selectNextExercise();
             }

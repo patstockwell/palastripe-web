@@ -5,41 +5,27 @@ import {
   ReduxAction, // eslint-disable-line no-unused-vars
   SingleSetAction, // eslint-disable-line no-unused-vars
 } from '../../helpers/types';
+import {
+  selectCompleteButtonStyle,
+  iconWrapperStyle,
+} from './ActivityTileSharedStyles';
 
-const SelectComplete = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 2px solid white;
-  background-color: lightgrey;
-  height: 28px;
-  width: 28px;
-  border-radius: 50%;
-  color: white;
-  padding: 0;
+const IconWrapper = styled.div`
+  ${iconWrapperStyle}
 `;
 
-const SelectionArea = styled.button`
-  padding: 0;
-  order: 3;
-  width: 48px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  border: none;
-  background: none;
+const SelectCompleteButton = styled.button`
+  ${selectCompleteButtonStyle}
 `;
 
 interface Props {
-  toggleSetComplete: (completed?: boolean) => ReduxAction<SingleSetAction & {
-    completed?: boolean,
-  }>;
+  handleClick: (completed?: boolean) => (
+    ReduxAction<SingleSetAction & { completed?: boolean, }>);
   completed: boolean;
 }
 
 const ToggleSetCompleteButton: React.FC<Props> = ({
-  toggleSetComplete,
+  handleClick,
   completed,
 }) => {
   // animation will run when a click event happens, also when the page reloads
@@ -48,14 +34,14 @@ const ToggleSetCompleteButton: React.FC<Props> = ({
   const [ clicked, setClicked ] = useState(false);
 
   return (
-    <SelectionArea onClick={() => {
-      toggleSetComplete();
+    <SelectCompleteButton onClick={() => {
+      handleClick();
       setClicked(true);
     }}>
-      <SelectComplete>
-        {completed && <CircleTick shouldDisplay={clicked} />}
-      </SelectComplete>
-    </SelectionArea>
+      <IconWrapper>
+        {completed && <CircleTick wasClicked={clicked} />}
+      </IconWrapper>
+    </SelectCompleteButton>
   );
 };
 

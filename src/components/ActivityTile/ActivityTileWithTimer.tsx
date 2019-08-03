@@ -6,8 +6,8 @@ import EditActivityPanel from '../EditActivityPanel';
 import ToggleSetCompleteButton from './ToggleSetCompleteButton';
 import { ShowEditArrowWrapper } from './ActivityTileWithReps';
 import ForwardArrow from '../../assets/svg/ForwardArrow';
-import Play from '../../assets/svg/Play';
-import { tileStyle } from '../SharedStyles';
+import StartTimedExerciseButton from './StartTimedExerciseButton';
+import { tileStyle } from './ActivityTileSharedStyles';
 import {
   Dispatch, // eslint-disable-line no-unused-vars
 } from 'redux';
@@ -104,6 +104,10 @@ const ActivityTileWithTimer: React.FC<Props> = ({
     }
   });
 
+  if (!selected && started) { // if another tile is selected, reset this one
+    setStarted(false);
+  }
+
   return (
     <Tile selected={selected} onClick={handleSelect}>
 
@@ -117,6 +121,7 @@ const ActivityTileWithTimer: React.FC<Props> = ({
           onAnimationEnd={() => setPreparationComplete(true)}
         />
       ))}
+
       <VisibleArea>
         <Details>
           <Title>{name}</Title>
@@ -124,16 +129,25 @@ const ActivityTileWithTimer: React.FC<Props> = ({
         <Duration>
           <p>{formatSeconds(timerInSeconds - count)}</p>
         </Duration>
-        {editable ? (
+        {editable &&
           <ShowEditArrowWrapper onClick={() => setShowEditPanel(true)}>
             <ForwardArrow style={{ fill: 'grey' }}/>
           </ShowEditArrowWrapper>
-        ) : selected && !completed ? (
-          <Play style={{ width: 20, height: 20, order: 3 }} />
-        ) : (
+        }
+
+        {!editable && (started || completed) ? (
           <ToggleSetCompleteButton
-            toggleSetComplete={toggleSetComplete}
+            handleClick={toggleSetComplete}
             completed={completed}
+          />
+        ) : (
+          <StartTimedExerciseButton
+            handleClick={() => {
+              if (selected) {
+                setStarted(true);
+              }
+            }}
+            showIcon={selected}
           />
         )}
       </VisibleArea>

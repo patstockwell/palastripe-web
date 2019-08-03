@@ -9,7 +9,7 @@ import {
 import HiddenArea from './HiddenArea';
 import ToggleSetCompleteButton from './ToggleSetCompleteButton';
 import EditActivityPanel from '../EditActivityPanel';
-import { tileStyle } from '../SharedStyles';
+import { tileStyle } from './ActivityTileSharedStyles';
 import DownArrow from '../../assets/svg/DownArrow';
 import ForwardArrow from '../../assets/svg/ForwardArrow';
 import {
@@ -103,7 +103,7 @@ const ActivityTileWithReps: React.FC<Props> = ({
           </ShowEditArrowWrapper>
         ) : (
           <ToggleSetCompleteButton
-            toggleSetComplete={toggleSetComplete}
+            handleClick={toggleSetComplete}
             completed={completed}
           />
         )}
