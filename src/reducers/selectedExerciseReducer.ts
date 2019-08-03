@@ -30,7 +30,6 @@ const selectNextExercise = (
   { index, groupId }: SelectedExercise,
   { exerciseGroups }: Workout
 ): SelectedExercise => {
-  console.log('yeah', exerciseGroups);
   const groupIndex = exerciseGroups.findIndex(g => g.id === groupId);
   const group = exerciseGroups[groupIndex];
 

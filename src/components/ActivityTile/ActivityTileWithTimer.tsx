@@ -6,6 +6,7 @@ import EditActivityPanel from '../EditActivityPanel';
 import ToggleSetCompleteButton from './ToggleSetCompleteButton';
 import { ShowEditArrowWrapper } from './ActivityTileWithReps';
 import ForwardArrow from '../../assets/svg/ForwardArrow';
+import Play from '../../assets/svg/Play';
 import { tileStyle } from '../SharedStyles';
 import {
   Dispatch, // eslint-disable-line no-unused-vars
@@ -88,9 +89,10 @@ const ActivityTileWithTimer: React.FC<Props> = ({
 }) => {
   const [count, setCount] = useState(0);
   const [preparationComplete, setPreparationComplete] = useState(false);
-  const [showAnimation, setShowAnimation] = useState(false);
+  const [showEditPanel, setShowEditPanel] = useState(false);
+  const [started, setStarted] = useState(false);
 
-  const inProgress = selected && !completed;
+  const inProgress = selected && !completed && started;
 
   useEffect(() => {
     if (inProgress && preparationComplete) { // keep counting
@@ -123,9 +125,11 @@ const ActivityTileWithTimer: React.FC<Props> = ({
           <p>{formatSeconds(timerInSeconds - count)}</p>
         </Duration>
         {editable ? (
-          <ShowEditArrowWrapper onClick={() => setShowAnimation(true)}>
+          <ShowEditArrowWrapper onClick={() => setShowEditPanel(true)}>
             <ForwardArrow style={{ fill: 'grey' }}/>
           </ShowEditArrowWrapper>
+        ) : selected && !completed ? (
+          <Play style={{ width: 20, height: 20, order: 3 }} />
         ) : (
           <ToggleSetCompleteButton
             toggleSetComplete={toggleSetComplete}
@@ -135,11 +139,11 @@ const ActivityTileWithTimer: React.FC<Props> = ({
       </VisibleArea>
 
       <EditActivityPanel
-        show={showAnimation}
+        show={showEditPanel}
         activity={activity}
         groupId={groupId}
         index={index}
-        hide={() => setShowAnimation(false)}
+        hide={() => setShowEditPanel(false)}
       />
 
     </Tile>
@@ -154,16 +158,15 @@ const areEqual = (prevProps: Props, nextProps: Props) => {
 };
 
 type ToggleSetAction = ReduxAction<SingleSetAction & { completed: boolean }>;
-type ToggleSetDispatch = Dispatch<ToggleSetAction>;
 
 const mapDispatchToProps = (
-  dispatch: ToggleSetDispatch,
+  dispatch: Dispatch<ToggleSetAction>,
   ownProps: OwnProps
 ): DispatchProps => {
   const { selected, groupId, index } = ownProps;
 
   return {
-    toggleSetComplete: (completed?: boolean): ToggleSetAction => dispatch({
+    toggleSetComplete: completed => dispatch({
       // only set the action type correctly if this tile is selected
       type: selected && TOGGLE_SET_COMPLETE,
       payload: { completed, groupId, index },
