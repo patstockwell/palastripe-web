@@ -68,6 +68,7 @@ interface OwnProps {
   stickyTop?: number;
   editable?: boolean;
   id?: string;
+  completedActivities?: number;
 }
 
 type Props = OwnProps & DispatchProps;
@@ -75,6 +76,7 @@ type Props = OwnProps & DispatchProps;
 const ActivityListHeading: React.FC<Props> = ({
   updateName,
   activityTotal,
+  completedActivities,
   children,
   heading,
   stickyTop,
@@ -122,9 +124,10 @@ const ActivityListHeading: React.FC<Props> = ({
             )}
           </Heading>
         )}
-        {activityTotal !== undefined &&
-          <Sets>{activityTotal} {activityTotal === 1 ? 'set' : 'sets'}</Sets>
-        }
+        <Sets>
+          {completedActivities !== undefined && `${completedActivities}/`}
+          {activityTotal || 0} {activityTotal === 1 ? 'set' : 'sets'}
+        </Sets>
       </HeadingPanel>
       {children}
     </li>
@@ -132,8 +135,8 @@ const ActivityListHeading: React.FC<Props> = ({
 };
 
 interface DispatchProps {
-  updateName: (id: string, name: string) =>
-    ReduxAction<{ id: string, name: string }>;
+  updateName: (id: string, name: string) => (
+    ReduxAction<{ id: string, name: string }>);
 }
 
 const mapDispatchToProps: DispatchProps = ({

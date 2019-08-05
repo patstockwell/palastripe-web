@@ -76,12 +76,14 @@ const ActivityList: React.FC<Props> = ({
 
   const activityListTiles = exerciseGroups.map(group => {
     const tiles = group.exercises.map(createTile(group.id));
+    const completedActivities = group.exercises.filter(e => e.completed);
 
     return (
       <ActivityListHeading
         key={group.id}
         heading={group.name}
         activityTotal={tiles.length}
+        completedActivities={completedActivities.length}
       >
         <Ul>{tiles}</Ul>
       </ActivityListHeading>
