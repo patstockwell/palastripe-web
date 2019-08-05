@@ -78,7 +78,6 @@ const ActiveWorkout: React.FC<Props> = ({
   useInterval(() => {
     setCount(count + 1);
   }, showRestTimer ? ONE_SECOND : ONE_DAY);
-  // try showRestTimer && ONE_SECOND
 
   useEffect(() => {
     if (destroyed && scrollNotReset) {
@@ -95,11 +94,6 @@ const ActiveWorkout: React.FC<Props> = ({
   const resetTimer = () => {
     setShowRestTimer(false);
     setCount(0);
-  };
-
-  const showTimer = (show: boolean = true) => {
-    resetTimer();
-    setShowRestTimer(show);
   };
 
   // get the workout ID from the URL
@@ -170,7 +164,9 @@ const ActiveWorkout: React.FC<Props> = ({
         imageUrl={displayedWorkout.imageUrl}
         time={formatMinutes(calculateWorkoutTime(displayedWorkout))}
       />
-      <TimerContext.Provider value={{ showTimer }} >
+      <TimerContext.Provider value={{
+        showTimer: (show: boolean = true) => setShowRestTimer(show),
+      }} >
         <ActivityList
           workout={displayedWorkout}
           finishWorkoutClickHandler={() => setShowEndWorkoutAlert(true)}
