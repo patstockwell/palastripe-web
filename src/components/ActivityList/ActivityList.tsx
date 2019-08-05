@@ -104,8 +104,8 @@ const ActivityList: React.FC<Props> = ({
 };
 
 interface DispatchProps {
-  setSelected: ({ groupId, index }: SelectedExercise) =>
-    ReduxAction<SelectedExercise>;
+  setSelected: ({ groupId, index }: SelectedExercise) => (
+    ReduxAction<SelectedExercise>);
 }
 
 const mapDispatchToProps: DispatchProps = {

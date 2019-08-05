@@ -139,14 +139,11 @@ const ActivityTileWithTimer: React.FC<Props> = ({
           <ToggleSetCompleteButton
             handleClick={toggleSetComplete}
             completed={completed}
+            timerIsRunning={started}
           />
         ) : (
           <StartTimedExerciseButton
-            handleClick={() => {
-              if (selected) {
-                setStarted(true);
-              }
-            }}
+            handleClick={() => selected && setStarted(true)}
             showIcon={selected}
           />
         )}
