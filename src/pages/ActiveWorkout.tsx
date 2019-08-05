@@ -1,5 +1,6 @@
 import React, { createContext, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
+import Helmet from 'react-helmet';
 import {
   RouteComponentProps, // eslint-disable-line no-unused-vars
 } from 'react-router';
@@ -142,6 +143,19 @@ const ActiveWorkout: React.FC<Props> = ({
         [direction]: animationStyles.left,
       }}
     >
+      <Helmet>
+        <meta property="og:title" content={`HBFF Workout - ${workout.name}`}/>
+        {/*
+        Use these when/if a workout gets a description
+        <meta property="og:description" content={workout.description} />
+        <meta name="twitter:description" content={workout.description} />
+        */}
+        <meta property="og:image" content={workout.imageUrl}/>
+        <meta property="og:url" content={`https://harderbetterfasterfitter.com/${workout.id}/`} />
+        <meta name="twitter:url" content={`https://harderbetterfasterfitter.com/${workout.id}/`} />
+        <meta name="twitter:title" content={`HBFF Workout - ${workout.name}`} />
+        <meta name="twitter:image" content={workout.imageUrl}/>
+      </Helmet>
       <GlobalOverFlowHiddenStyle hidden={showEndWorkoutAlert} />
       <BackLinkBanner
         sticky={false}
