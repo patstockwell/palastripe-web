@@ -137,20 +137,6 @@ const ActiveWorkout: React.FC<Props> = ({
         [direction]: animationStyles.left,
       }}
     >
-      <Helmet>
-        {/* need to declare these outside of the animation. how? */}
-        {/* <meta property="og:title" content={`HBFF Workout - ${workout.name}`}/> */}
-        {/*
-        Use these when/if a workout gets a description
-        <meta property="og:description" content={workout.description} />
-        <meta name="twitter:description" content={workout.description} />
-        */}
-        {/* <meta property="og:image" content={workout.imageUrl}/> */}
-        {/* <meta property="og:url" content={`https://harderbetterfasterfitter.com/${workout.id}/`} /> */}
-        {/* <meta name="twitter:url" content={`https://harderbetterfasterfitter.com/${workout.id}/`} /> */}
-        {/* <meta name="twitter:title" content={`HBFF Workout - ${workout.name}`} /> */}
-        {/* <meta name="twitter:image" content={workout.imageUrl}/> */}
-      </Helmet>
       <GlobalOverFlowHiddenStyle hidden={showEndWorkoutAlert} />
       <BackLinkBanner
         sticky={false}

@@ -7,6 +7,7 @@ import rootReducer from './reducers';
 import { GlobalStyle } from './components/GlobalStyle';
 import LocalStorageSetter from './components/LocalStorageSetter';
 import Routes from './components/Routes';
+import HeadTags from './components/HeadTags';
 
 const store = createStore(rootReducer);
 
@@ -14,6 +15,7 @@ const App = () => (
   <Provider store={store}>
     <GlobalStyle />
     <LocalStorageSetter />
+    <HeadTags />
     <Router>
       <Routes />
     </Router>
