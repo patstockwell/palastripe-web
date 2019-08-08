@@ -1,6 +1,5 @@
 import React, { createContext, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import Helmet from 'react-helmet';
 import {
   RouteComponentProps, // eslint-disable-line no-unused-vars
 } from 'react-router';
