@@ -2,16 +2,12 @@ import React from 'react';
 import styled from 'styled-components';
 import { useSpring, animated } from 'react-spring';
 
-const countDownSize = 130;
-
 const TimerBackground = styled(animated.div)`
   display: flex;
   background-color: rgba(0, 0, 0, 0.85);
   position: fixed;
   bottom: 0;
-  right: 0;
-  left: 0;
-  top: 0;
+  width: 100%;
   align-items: center;
   justify-content: center;
   flex-direction: column;
@@ -19,21 +15,13 @@ const TimerBackground = styled(animated.div)`
 `;
 
 const Count = styled(animated.p)`
+  font-size: 1.5em;
+  font-weight: 800;
   color: white;
-  font-size: ${countDownSize}px;
-  overflow: hidden;
-`;
-
-const NumberWrapper = styled.div`
-  height: ${countDownSize}px;
-  margin: 40px;
-  display: flex;
-  align-items: flex-end;
 `;
 
 const Message = styled(animated.p)`
   color: white;
-  font-size: 17px;
 `;
 
 interface Props {
@@ -50,15 +38,9 @@ const Timer: React.FC<Props> = ({ resetTimer, count, restPeriod }) => {
     from: { opacity: 0, },
     config,
   }));
-  const [ pStyle, setPStyle ] = useSpring(() => ({
-    height: `${countDownSize}px`,
-    from: { height: '0px' },
-    config,
-  }));
 
   // graceful way to unmount
   const fadeAndReset = () => {
-    setPStyle({ height: '0px' });
     setDivStyle({ opacity: 0, onRest: resetTimer });
   };
 
@@ -74,11 +56,9 @@ const Timer: React.FC<Props> = ({ resetTimer, count, restPeriod }) => {
 
   return (
     <TimerBackground style={divStyle} onClick={fadeAndReset} >
-      <NumberWrapper>
-        <Count style={pStyle}>
-          {timerMinutes}{timerSeconds > 9 ? ':' : ':0'}{timerSeconds}
-        </Count>
-      </NumberWrapper>
+      <Count>
+        {timerMinutes}{timerSeconds > 9 ? ':' : ':0'}{timerSeconds}
+      </Count>
       <Message>
         {'You\'re doing great, take a rest'}
       </Message>
