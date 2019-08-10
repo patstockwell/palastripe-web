@@ -41,8 +41,8 @@ const MetaTags: React.FC<StateProps> = ({ entities, activeWorkout }) => {
         <Helmet>
           <meta property="og:title" content="Get fit and strong. Get a gym plan. Use Harder Better Faster Fitter" />
           <meta property="og:url" content="https://harderbetterfasterfitter.com" />
-          <meta property="og:image" content="/og-image.jpg" />
-          <meta name="twitter:image" content="/og-image.jpg" />
+          <meta property="og:image" content="og-image.jpg" />
+          <meta name="twitter:image" content="og-image.jpg" />
           <meta name="twitter:url" content="https://harderbetterfasterfitter.com" />
           <meta name="twitter:title" content="Get fit and strong. Get a gym plan. Use Harder Better Faster Fitter" />
         </Helmet>
