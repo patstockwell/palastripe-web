@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import styled, { keyframes } from 'styled-components';
+import { useSpring } from 'react-spring';
 
+import HiddenTimerArea from './HiddenTimerArea';
 import EditActivityPanel from '../EditActivityPanel';
+import { ShowHiddenAreaArrowWrapper } from './ActivityTileWithReps';
 import ToggleSetCompleteButton from './ToggleSetCompleteButton';
 import { ShowEditArrowWrapper } from './ActivityTileWithReps';
 import ForwardArrow from '../../assets/svg/ForwardArrow';
 import StartTimedExerciseButton from './StartTimedExerciseButton';
 import { tileStyle } from './ActivityTileSharedStyles';
+import DownArrow from '../../assets/svg/DownArrow';
 import {
   Dispatch, // eslint-disable-line no-unused-vars
 } from 'redux';
@@ -22,6 +26,7 @@ import {
   superLightGrey,
   timedExerciseWaitPeriod,
   TOGGLE_SET_COMPLETE,
+  tileMinHeight,
 } from '../../helpers/constants';
 import {
   Details,
@@ -45,12 +50,15 @@ const colourPulse = keyframes`
   100% { background-color: ${superLightGrey}; }
 `;
 
-const PreparationTimer = styled.div`
+const timerStyle = `
   position: absolute;
-  top: 80%;
-  bottom: 0;
+  height: ${tileMinHeight}px;
+  bottom: calc(5px - ${tileMinHeight}px);
   left: 0;
-  width: 100%;
+`;
+
+const PreparationTimer = styled.div`
+  ${timerStyle}
   background-color: lightgrey;
   animation:
     ${grow} ${timedExerciseWaitPeriod}s linear,
@@ -58,10 +66,7 @@ const PreparationTimer = styled.div`
 `;
 
 const ActiveTimer = styled.div<{ timer: number }>`
-  position: absolute;
-  top: 80%;
-  bottom: 0;
-  left: 0;
+  ${timerStyle}
   background-color: ${green};
   animation: ${grow} ${({timer}) => timer}s linear;
 `;
@@ -70,9 +75,11 @@ interface OwnProps {
   activity: TimedActivity;
   groupId: string;
   index: number;
-  handleSelect: any;
   selected: boolean;
   editable: boolean;
+  showHiddenArea: boolean;
+  handleOpen: () => void;
+  handleSelect: () => void;
 }
 
 type Props = OwnProps & DispatchProps;
@@ -84,6 +91,8 @@ const ActivityTileWithTimer: React.FC<Props> = ({
   index,
   handleSelect,
   selected,
+  handleOpen,
+  showHiddenArea,
   toggleSetComplete,
   editable,
 }) => {
@@ -91,6 +100,13 @@ const ActivityTileWithTimer: React.FC<Props> = ({
   const [preparationComplete, setPreparationComplete] = useState(false);
   const [showEditPanel, setShowEditPanel] = useState(false);
   const [started, setStarted] = useState(false);
+
+  const animatedStyles = useSpring({
+    height: showHiddenArea ? 300 : 0,
+    opacity: showHiddenArea ? 1 : 0,
+    x: showHiddenArea ? -180 : 0,
+    config: { tension: 410, friction: 40 },
+  });
 
   const inProgress = selected && !completed && started;
 
@@ -108,26 +124,28 @@ const ActivityTileWithTimer: React.FC<Props> = ({
     setStarted(false);
   }
 
+  const time: string = formatSeconds(timerInSeconds - count);
+
   return (
     <Tile selected={selected} onClick={handleSelect}>
-
-      {inProgress && (preparationComplete ? (
-        <ActiveTimer
-          timer={timerInSeconds + 1} // add 1 to allow for the count to finish
-          onAnimationEnd={() => toggleSetComplete(true)}
-        />
-      ) : (
-        <PreparationTimer
-          onAnimationEnd={() => setPreparationComplete(true)}
-        />
-      ))}
-
       <VisibleArea>
-        <Details>
+
+        {inProgress && (preparationComplete ? (
+          <ActiveTimer
+            timer={timerInSeconds + 1} // add 1 to allow for the count to finish
+            onAnimationEnd={() => toggleSetComplete(true)}
+          />
+        ) : (
+          <PreparationTimer
+            onAnimationEnd={() => setPreparationComplete(true)}
+          />
+        ))}
+
+        <Details onClick={handleOpen}>
           <Title>{name}</Title>
         </Details>
         <Duration>
-          <p>{formatSeconds(timerInSeconds - count)}</p>
+          <p>{time}</p>
         </Duration>
         {editable &&
           <ShowEditArrowWrapper onClick={() => setShowEditPanel(true)}>
@@ -149,6 +167,22 @@ const ActivityTileWithTimer: React.FC<Props> = ({
         )}
       </VisibleArea>
 
+      <HiddenTimerArea
+        time={time}
+        animatedStyles={animatedStyles}
+      />
+
+      {selected &&
+        <ShowHiddenAreaArrowWrapper
+          onClick={handleOpen}
+          style={{
+            transform: animatedStyles.x.interpolate(x =>
+              `translateX(-50%) rotate(${x}deg`),
+          }}>
+          <DownArrow style={{ fill: 'grey' }}/>
+        </ShowHiddenAreaArrowWrapper>
+      }
+
       <EditActivityPanel
         show={showEditPanel}
         activity={activity}
@@ -165,7 +199,8 @@ const areEqual = (prevProps: Props, nextProps: Props) => {
   // the props handleSelect and activity should never change
   // we only care about selected
   return prevProps.selected === nextProps.selected
-    && prevProps.activity.completed === nextProps.activity.completed;
+    && prevProps.activity.completed === nextProps.activity.completed
+    && prevProps.showHiddenArea === nextProps.showHiddenArea;
 };
 
 type ToggleSetAction = ReduxAction<SingleSetAction & { completed: boolean }>;

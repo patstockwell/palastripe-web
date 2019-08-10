@@ -38,7 +38,7 @@ export const ShowEditArrowWrapper = styled.div`
   justify-content: center;
 `;
 
-const ShowHiddenAreaArrowWrapper = styled(animated.button)`
+export const ShowHiddenAreaArrowWrapper = styled(animated.button)`
   border: none;
   background: none;
   position: absolute;
@@ -50,8 +50,8 @@ const ShowHiddenAreaArrowWrapper = styled(animated.button)`
 interface OwnProps {
   activity: WeightedActivity;
   groupId: string;
-  handleOpen: any;
-  handleSelect: any;
+  handleOpen: () => void;
+  handleSelect: () => void;
   index: number;
   selected: boolean;
   showHiddenArea: boolean;
