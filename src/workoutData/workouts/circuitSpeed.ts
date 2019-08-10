@@ -17,7 +17,7 @@ const circuitSpeed: Workout = {
         {
           id: 'sit_ups',
           timerInSeconds: 60,
-        }
+        },
       ],
     },
     {

@@ -11,6 +11,7 @@ import upperBodyBurner from '../workoutData/workouts/upperBodyBurner';
 import overheadStrength from '../workoutData/workouts/overheadStrength';
 import fullBodyPower from '../workoutData/workouts/fullBodyPower';
 import glutesAndGlory from '../workoutData/workouts/glutesAndGlory';
+import squatAndBench from '../workoutData/workouts/squatAndBench';
 
 const initialState: State = {
   // flag to know if we're viewing a statically generated page
@@ -37,15 +38,17 @@ const initialState: State = {
 
     workouts: {
       byId: {
-        'full-body-dumbbell-strength': { ...fullBodyDumbbellStrength },
-        'circuit-speed': { ...circuitSpeed },
-        'upper-body-burner': { ...upperBodyBurner },
+        'full-body-dumbbell-strength': fullBodyDumbbellStrength,
+        'circuit-speed': circuitSpeed,
+        'upper-body-burner': upperBodyBurner,
         'overhead-strength': overheadStrength,
         'full-body-power': fullBodyPower,
         'glutes-and-glory': glutesAndGlory,
+        'squat-and-bench': squatAndBench,
       },
       allIds: [
         'full-body-dumbbell-strength',
+        'squat-and-bench',
         'circuit-speed',
         'glutes-and-glory',
         'upper-body-burner',

@@ -1,12 +1,16 @@
 const exercises = {
   byId: {
+    'skull_crushers': {
+      id: 'skull_crushers',
+      name: 'Skull Crushers',
+    },
     'kneeling_right_hip_flexor_stretch': {
       id: 'kneeling_right_hip_flexor_stretch',
       name: 'Kneeling Right Hip-Flexor Stretch',
     },
     'kneeling_left_hip_flexor_stretch': {
       id: 'kneeling_left_hip_flexor_stretch',
-      name: 'Kneeling Left Hip-Flexor Stretch'
+      name: 'Kneeling Left Hip-Flexor Stretch',
     },
     'ab_crunch_machine': {
       id: 'ab_crunch_machine',
@@ -170,6 +174,7 @@ const exercises = {
     'ab_crunch_machine',
     'kneeling_left_hip_flexor_stretch',
     'kneeling_right_hip_flexor_stretch',
+    'skull_crushers',
   ],
 };
 
