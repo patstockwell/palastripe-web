@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { memo, useState } from 'react';
 import { connect } from 'react-redux';
 import { useSpring, animated } from 'react-spring';
 import styled from 'styled-components';
@@ -158,7 +158,11 @@ interface DispatchProps {
   toggleSetComplete: () => ReduxAction<SingleSetAction>;
 }
 
+const areEqual = (prevProps: Props, nextProps: Props) => {
+  return !nextProps.selected && prevProps.selected === nextProps.selected;
+};
+
 export default connect<void, DispatchProps, OwnProps>(
   null,
   mapDispatchToProps
-)(ActivityTileWithReps);
+)(memo(ActivityTileWithReps, areEqual));

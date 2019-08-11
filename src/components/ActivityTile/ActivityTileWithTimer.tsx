@@ -196,11 +196,7 @@ const ActivityTileWithTimer: React.FC<Props> = ({
 };
 
 const areEqual = (prevProps: Props, nextProps: Props) => {
-  // the props handleSelect and activity should never change
-  // we only care about selected
-  return prevProps.selected === nextProps.selected
-    && prevProps.activity.completed === nextProps.activity.completed
-    && prevProps.showHiddenArea === nextProps.showHiddenArea;
+  return prevProps.selected === nextProps.selected && !nextProps.selected;
 };
 
 type ToggleSetAction = ReduxAction<SingleSetAction & { completed: boolean }>;

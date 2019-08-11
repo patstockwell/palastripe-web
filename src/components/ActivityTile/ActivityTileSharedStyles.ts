@@ -14,6 +14,7 @@ export const tileStyle = css<{ selected: boolean }>`
   cursor: pointer;
   min-height: ${tileMinHeight}px;
   touch-action: manipulation; // stops double-tap-to-zoom
+  overflow: hidden;
 `;
 
 export const iconWrapperStyle = css<{ background?: string }>`
