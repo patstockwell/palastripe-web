@@ -3,9 +3,9 @@ import {
   SET_SELECTED_EXERCISE,
 } from '../helpers/constants';
 import {
-  Workout,
-  SelectedExercise,
-  ReduxAction,
+  ReduxAction, // eslint-disable-line no-unused-vars
+  SelectedExercise, // eslint-disable-line no-unused-vars
+  Workout, // eslint-disable-line no-unused-vars
 } from '../helpers/types';
 
 const selectedExerciseReducer = (
@@ -13,18 +13,18 @@ const selectedExerciseReducer = (
   action: ReduxAction<SelectedExercise>,
   activeWorkout: Workout
 ): SelectedExercise => {
-    switch (action.type) {
-      case SET_SELECTED_EXERCISE: {
-        return action.payload;
-      }
-      case SELECT_NEXT_EXERCISE: {
-        return selectNextExercise(state, activeWorkout);
-      }
-      default: {
-        return state;
-      }
+  switch (action.type) {
+    case SET_SELECTED_EXERCISE: {
+      return action.payload;
     }
-  };
+    case SELECT_NEXT_EXERCISE: {
+      return selectNextExercise(state, activeWorkout);
+    }
+    default: {
+      return state;
+    }
+  }
+};
 
 const selectNextExercise = (
   { index, groupId }: SelectedExercise,

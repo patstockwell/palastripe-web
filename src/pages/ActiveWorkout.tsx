@@ -31,12 +31,14 @@ import {
   purple,
   ONE_SECOND,
   ONE_DAY,
-  DEFAULT_REST_PERIOD_IN_SECONDS,
   SET_WINDOW_SCROLL,
   ACTIVITY_PAGE,
 } from '../helpers/constants';
 
-export const TimerContext = createContext({ showTimer: () => {/* do nothing */}});
+export const TimerContext = createContext({
+  showTimer: () => {/* do nothing */},
+  setRestTime: (_: number) => {/* do nothing */}, // eslint-disable-line
+});
 
 export const AnimatedSlidingPage = styled(animated.div)<{ position?: string }>`
   z-index: 10;
@@ -73,6 +75,7 @@ const ActiveWorkout: React.FC<Props> = ({
   const [ direction, setDirection ] = useState('left');
   const [ showRestTimer, setShowRestTimer ] = useState(false);
   const [ count, setCount ] = useState(0);
+  const [ restTime, setRestTime ] = useState(0);
 
   useInterval(() => {
     setCount(count + 1);
@@ -151,6 +154,7 @@ const ActiveWorkout: React.FC<Props> = ({
       />
       <TimerContext.Provider value={{
         showTimer: (show: boolean = true) => setShowRestTimer(show),
+        setRestTime,
       }} >
         <ActivityList
           workout={displayedWorkout}
@@ -160,7 +164,7 @@ const ActiveWorkout: React.FC<Props> = ({
 
       {showRestTimer && count > 0 &&
         <Timer
-          restPeriod={DEFAULT_REST_PERIOD_IN_SECONDS}
+          restPeriod={restTime}
           resetTimer={resetTimer}
           count={count - 1}
         />

@@ -86,7 +86,7 @@ type Props = OwnProps & DispatchProps;
 
 const ActivityTileWithTimer: React.FC<Props> = ({
   activity,
-  activity: { name, timerInSeconds, completed },
+  activity: { name, timerInSeconds, completed, restPeriodInSeconds },
   groupId,
   index,
   handleSelect,
@@ -155,6 +155,7 @@ const ActivityTileWithTimer: React.FC<Props> = ({
 
         {!editable && (started || completed) ? (
           <ToggleSetCompleteButton
+            restPeriodInSeconds={restPeriodInSeconds}
             handleClick={toggleSetComplete}
             completed={completed}
             timerIsRunning={started}

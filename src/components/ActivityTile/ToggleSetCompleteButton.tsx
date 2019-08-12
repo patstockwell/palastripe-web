@@ -26,11 +26,13 @@ interface OwnProps {
     ReduxAction<SingleSetAction & { completed?: boolean, }>);
   completed: boolean;
   timerIsRunning?: boolean;
+  restPeriodInSeconds: number;
 }
 
 type Props = OwnProps & DispatchProps;
 
 const ToggleSetCompleteButton: React.FC<Props> = ({
+  restPeriodInSeconds,
   handleClick,
   completed,
   selectNextExercise,
@@ -43,8 +45,9 @@ const ToggleSetCompleteButton: React.FC<Props> = ({
 
   return (
     <TimerContext.Consumer>
-      {({ showTimer }) => (
+      {({ showTimer, setRestTime }) => (
         <SelectCompleteButton onClick={() => {
+          setRestTime(restPeriodInSeconds);
           handleClick();
           setClicked(true);
         }}>

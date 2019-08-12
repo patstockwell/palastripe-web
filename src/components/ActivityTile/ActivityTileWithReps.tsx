@@ -63,7 +63,7 @@ type Props = DispatchProps & OwnProps;
 const ActivityTileWithReps: React.FC<Props> = ({
   activity,
   activity: {
-    name, repsAchieved, repsGoal, weightInKilos, completed,
+    name, repsAchieved, repsGoal, weightInKilos, completed, restPeriodInSeconds,
   },
   groupId,
   index,
@@ -103,6 +103,7 @@ const ActivityTileWithReps: React.FC<Props> = ({
           </ShowEditArrowWrapper>
         ) : (
           <ToggleSetCompleteButton
+            restPeriodInSeconds={restPeriodInSeconds}
             handleClick={toggleSetComplete}
             completed={completed}
           />
