@@ -39,23 +39,29 @@ const ToggleSetCompleteButton: React.FC<Props> = ({
   timerIsRunning,
 }) => {
   // animation will run when a click event happens, also when the page reloads
-  // and the item is complete. To avoid calling 'showTimer' when reloading the
+  // and the item is complete. To avoid calling 'setShowTimer' when reloading the
   // page, we can set a flag to ensure the animation was triggered via click.
   const [ clicked, setClicked ] = useState(false);
 
   return (
     <TimerContext.Consumer>
-      {({ showTimer, setRestTime }) => (
+      {({ setCount, setShowTimer, setRestTime }) => (
         <SelectCompleteButton onClick={() => {
+          // if the rest timer is still running from the last exercise, hide it.
+          setShowTimer(false);
+          // set the rest time for this completed exercise
           setRestTime(restPeriodInSeconds);
+          // run any handlers
           handleClick();
+          // set clicked for child animation render checks
           setClicked(true);
         }}>
           <IconWrapper>
             {completed && <CircleTick onAnimationEnd={() => {
               // check the animation was triggered via click and not reload
               if (timerIsRunning || clicked) {
-                showTimer();
+                setCount(0);
+                setShowTimer(true);
                 selectNextExercise();
               }
             }} />}

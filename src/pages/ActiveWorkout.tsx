@@ -36,8 +36,9 @@ import {
 } from '../helpers/constants';
 
 export const TimerContext = createContext({
-  showTimer: () => {/* do nothing */},
+  setShowTimer: (_: boolean) => {/* do nothing */}, // eslint-disable-line
   setRestTime: (_: number) => {/* do nothing */}, // eslint-disable-line
+  setCount: (_: number) => {/* do nothing */}, // eslint-disable-line
 });
 
 export const AnimatedSlidingPage = styled(animated.div)<{ position?: string }>`
@@ -153,8 +154,9 @@ const ActiveWorkout: React.FC<Props> = ({
         time={formatMinutes(calculateWorkoutTime(displayedWorkout))}
       />
       <TimerContext.Provider value={{
-        showTimer: (show: boolean = true) => setShowRestTimer(show),
+        setShowTimer: setShowRestTimer,
         setRestTime,
+        setCount,
       }} >
         <ActivityList
           workout={displayedWorkout}
