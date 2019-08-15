@@ -15,7 +15,7 @@
       "jsx-alignment": [false],
       "jsx-no-multiline-js": [false],
       "object-literal-sort-keys": [false],
-      "quotemark": [true, "single"],
+      "quotemark": [false],
       "object-literal-key-quotes": false,
       "trailing-comma": [
         true,

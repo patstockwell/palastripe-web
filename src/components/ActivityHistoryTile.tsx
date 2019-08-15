@@ -10,6 +10,7 @@ import {
   formatMinutes,
 } from '../helpers/functions';
 import {
+  Activity, // eslint-disable-line no-unused-vars
   ReduxAction, // eslint-disable-line no-unused-vars
   Workout, // eslint-disable-line no-unused-vars
 } from '../helpers/types';
@@ -110,7 +111,7 @@ const Pointer = styled.div`
 
 const Tile = styled.div`
   margin: 8px;
-  border-radius: 8px;
+  border-radius: 5px;
   overflow: hidden;
 `;
 
@@ -129,6 +130,18 @@ const ActivityHistoryTile: React.FC<Props> = ({
   deleteWorkout,
 }) => {
   const [ showDeleteWorkoutAlert, setShowDeleteWorkoutAlert ] = useState(false);
+
+  const exercisesInGroups = workout.exerciseGroups
+    .reduce((acc, curr) => [...acc, ...curr.exercises], [])
+    .reduce((acc, curr: Activity) => {
+      const arrayOfExercises = acc[curr.id] ? [...acc[curr.id], curr] : [curr];
+      return {
+        ...acc,
+        [curr.id]: arrayOfExercises,
+      };
+    }, {});
+  const exerciseStats = Object.keys(exercisesInGroups);
+
   const { name, startTime, finishTime } = workout;
   const { historyTileDateFormat } = formatDate(finishTime);
   const totalTime = formatMinutes(getDiffInMinutes(startTime, finishTime));
