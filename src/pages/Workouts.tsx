@@ -2,7 +2,6 @@ import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import Navigation from '../components/Navigation';
-import AddWorkoutLink from '../components/AddWorkoutLink';
 import Banner from '../components/Banner';
 import WorkoutTile from '../components/WorkoutTile';
 import {
@@ -12,12 +11,11 @@ import {
 } from '../helpers/types';
 import {
   SET_FIRST_RENDER_FLAG,
-  tileMinHeight,
-  bannerHeight,
+  navBarHeight,
 } from '../helpers/constants';
 
 const EmptySpace = styled.div`
-  height: calc(100vh - ${tileMinHeight + (2 * bannerHeight)}px);
+  height: ${navBarHeight}px;
 `;
 
 interface OwnProps {
@@ -40,7 +38,6 @@ const Workouts = ({ isFirstRender, removeIsFirstRender, location, workouts}: Pro
   return (
     <Fragment>
       <Banner heading={'Workouts'}/>
-      <AddWorkoutLink />
       {workoutTiles}
       <EmptySpace />
       <Navigation pathname={location.pathname}/>
