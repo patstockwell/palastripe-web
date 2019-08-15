@@ -43,51 +43,70 @@ export interface Entities {
 
 export interface Workouts {
   byId: {
-    [propName: string]: Workout,
+    [propName: string]: WorkoutOutline,
   };
   allIds: string[];
 }
 
-export interface Workout {
+interface WorkoutBase {
   id: string;
   imageUrl?: string;
   startTime?: number;
   finishTime?: number;
   name: string;
-  exerciseGroups: WorkoutActivityGroup[];
   version?: string;
 }
 
-export interface WorkoutActivityGroup {
+export interface Workout extends WorkoutBase {
+  exerciseGroups: ActivityGroup[];
+}
+
+export interface WorkoutOutline extends WorkoutBase {
+  exerciseGroups: ActivityOutlineGroup[];
+}
+
+export interface ActivityGroup {
   id: string;
   name: string;
   exercises: Activity[];
 }
 
-export interface TimedActivity {
-  // common
+export interface ActivityOutlineGroup {
   id: string;
-  name?: string;
+  name: string;
+  exercises: ActivityOutline[];
+}
+
+// Activity stuff
+
+interface ActivityBase {
+  id: string;
   restPeriodInSeconds?: number;
   completed?: boolean;
-  // unique
+}
+
+interface TimedActivityOutline extends ActivityBase {
   timerInSeconds: number;
 }
 
-export interface WeightedActivity {
-  // common
-  id: string;
-  name?: string;
-  restPeriodInSeconds?: number;
-  completed?: boolean;
-  // unique
+interface WeightedActivityOutline extends ActivityBase {
   weightInKilos: number;
   repsGoal: number;
   repsAchieved?: number;
   autoIncrement: number;
 }
 
+export interface ExerciseDetail {
+  id: string;
+  name: string;
+  tags: string[];
+}
+
+export type TimedActivity = TimedActivityOutline & ExerciseDetail;
+export type WeightedActivity = WeightedActivityOutline & ExerciseDetail;
+
 export type Activity = WeightedActivity | TimedActivity;
+export type ActivityOutline = WeightedActivityOutline | TimedActivityOutline;
 
 export interface Exercises {
   byId: {

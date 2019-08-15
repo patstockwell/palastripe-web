@@ -1,10 +1,10 @@
 import {
-  Workout, // eslint-disable-line no-unused-vars
+  WorkoutOutline, // eslint-disable-line no-unused-vars
 } from '../../helpers/types';
 import { VERSION_ONE } from '../../helpers/constants';
 import Image from '../../assets/images/active-adult-aerobics-206573.jpg';
 
-const fullBodyPower: Workout = {
+const fullBodyPower: WorkoutOutline = {
   id: 'full-body-power',
   name: 'Full Body Power',
   imageUrl: Image,

@@ -60,33 +60,33 @@ const initialState: State = {
 
   history: [],
 
-  editableWorkout: {
-    name: '',
-    id: uuidv4(),
-    version: VERSION_ONE,
-    exerciseGroups: [
-      {
-        id: uuidv4(),
-        name: 'Group',
-        exercises: [
-          {
-            id: uuidv4(),
-            name: 'Exercise with timer',
-            timerInSeconds: 45,
-            completed: false,
-          },
-          {
-            id: uuidv4(),
-            name: 'Exercise with reps',
-            repsGoal: 10,
-            weightInKilos: 20,
-            autoIncrement: 0,
-            completed: false,
-          },
-        ],
-      },
-    ],
-  },
+  // editableWorkout: {
+  //   name: '',
+  //   id: uuidv4(),
+  //   version: VERSION_ONE,
+  //   exerciseGroups: [
+  //     {
+  //       id: uuidv4(),
+  //       name: 'Group',
+  //       exercises: [
+  //         {
+  //           id: uuidv4(),
+  //           name: 'Exercise with timer',
+  //           timerInSeconds: 45,
+  //           completed: false,
+  //         },
+  //         {
+  //           id: uuidv4(),
+  //           name: 'Exercise with reps',
+  //           repsGoal: 10,
+  //           weightInKilos: 20,
+  //           autoIncrement: 0,
+  //           completed: false,
+  //         },
+  //       ],
+  //     },
+  //   ],
+  // },
 
 };
 

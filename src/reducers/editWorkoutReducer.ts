@@ -1,7 +1,7 @@
 import uuidv4 from 'uuid/v4';
 import {
   ReduxAction, // eslint-disable-line no-unused-vars
-  WorkoutActivityGroup, // eslint-disable-line no-unused-vars
+  ActivityGroup, // eslint-disable-line no-unused-vars
   Workout, // eslint-disable-line no-unused-vars
 } from '../helpers/types';
 import {
@@ -35,14 +35,14 @@ const updateNameForEditWorkout = (
 
   return {
     ...state,
-    exerciseGroups: state.exerciseGroups.map((g: WorkoutActivityGroup) =>
+    exerciseGroups: state.exerciseGroups.map((g: ActivityGroup) =>
       (g.id === id) ? { ...g, name } : g
     ),
   };
 };
 
 const addGroupToNewWorkout = (state: Workout) => {
-  const newGroup: WorkoutActivityGroup = {
+  const newGroup: ActivityGroup = {
     id: uuidv4(),
     name: 'Group',
     exercises: [],
@@ -72,7 +72,7 @@ const addSetToEditWorkout = (state: Workout) => {
 
   return {
     ...state,
-    exerciseGroups: exerciseGroups.map((g: WorkoutActivityGroup, i: number) => (
+    exerciseGroups: exerciseGroups.map((g: ActivityGroup, i: number) => (
       lastGroupIndex === i ? {
         ...g,
         exercises: [

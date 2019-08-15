@@ -8,7 +8,7 @@ import ActivityTile from '../ActivityTile';
 import {
   State, // eslint-disable-line no-unused-vars
   Workout,  // eslint-disable-line no-unused-vars
-  WorkoutActivityGroup,  // eslint-disable-line no-unused-vars
+  ActivityGroup,  // eslint-disable-line no-unused-vars
 } from '../../helpers/types';
 import { unorderedListStyle } from '../SharedStyles';
 import { bannerHeight } from '../../helpers/constants';
@@ -22,7 +22,7 @@ type Props = StateProps;
 const EditableActivityList: React.FC<Props> = ({
   editableWorkout: { exerciseGroups },
 }) => {
-  const exerciseGroupTiles = exerciseGroups.map((g: WorkoutActivityGroup) => {
+  const exerciseGroupTiles = exerciseGroups.map((g: ActivityGroup) => {
     const tiles = g.exercises.map((e, i) => (
       <ActivityTile
         key={uuidv4()}

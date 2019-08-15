@@ -1,10 +1,10 @@
 import {
-  Workout, // eslint-disable-line no-unused-vars
+  WorkoutOutline, // eslint-disable-line no-unused-vars
 } from '../../helpers/types';
 import { VERSION_ONE } from '../../helpers/constants';
 import Image from '../../assets/images/athlete-barbell-biceps-497934.jpg';
 
-const squatAndBench: Workout = {
+const squatAndBench: WorkoutOutline = {
   id: 'squat-and-bench',
   name: 'Squat And Bench',
   imageUrl: Image,

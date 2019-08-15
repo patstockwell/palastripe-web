@@ -1,10 +1,10 @@
 import {
-  Workout, // eslint-disable-line no-unused-vars
+  WorkoutOutline, // eslint-disable-line no-unused-vars
 } from '../../helpers/types';
 import { VERSION_ONE } from '../../helpers/constants';
 import Image from '../../assets/images/active-athlete-barbell-2261482.jpg';
 
-const glutesAndGlory: Workout = {
+const glutesAndGlory: WorkoutOutline = {
   id: 'glutes-and-glory',
   name: 'Glutes & Glory',
   imageUrl: Image,

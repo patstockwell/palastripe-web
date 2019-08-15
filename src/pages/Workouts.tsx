@@ -7,7 +7,7 @@ import WorkoutTile from '../components/WorkoutTile';
 import {
   ReduxAction, // eslint-disable-line no-unused-vars
   State, // eslint-disable-line no-unused-vars
-  Workout, // eslint-disable-line no-unused-vars
+  WorkoutOutline, // eslint-disable-line no-unused-vars
 } from '../helpers/types';
 import {
   SET_FIRST_RENDER_FLAG,
@@ -20,7 +20,6 @@ const EmptySpace = styled.div`
 
 interface OwnProps {
   location: any;
-  workouts: Workout[];
 }
 
 type Props = OwnProps & DispatchProps & StateProps;
@@ -31,7 +30,7 @@ const Workouts = ({ isFirstRender, removeIsFirstRender, location, workouts}: Pro
     removeIsFirstRender();
   }
 
-  const workoutTiles = workouts.map((w: Workout) =>
+  const workoutTiles = workouts.map((w: WorkoutOutline) =>
     <WorkoutTile key={w.id} workout={w} />
   );
 
@@ -46,7 +45,7 @@ const Workouts = ({ isFirstRender, removeIsFirstRender, location, workouts}: Pro
 };
 
 interface StateProps {
-  workouts: Workout[];
+  workouts: WorkoutOutline[];
   isFirstRender: boolean;
 }
 

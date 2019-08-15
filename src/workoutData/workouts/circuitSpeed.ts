@@ -1,10 +1,10 @@
 import {
-  Workout, // eslint-disable-line no-unused-vars
+  WorkoutOutline, // eslint-disable-line no-unused-vars
 } from '../../helpers/types';
 import { VERSION_ONE } from '../../helpers/constants';
 import Image from '../../assets/images/active-body-crossfit-1533897.jpg';
 
-const circuitSpeed: Workout = {
+const circuitSpeed: WorkoutOutline = {
   id: 'circuit-speed',
   name: 'Circuit Speed',
   imageUrl: Image,

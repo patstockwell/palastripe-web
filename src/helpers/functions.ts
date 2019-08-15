@@ -12,6 +12,7 @@ import {
   Activity, // eslint-disable-line no-unused-vars
   Exercises, // eslint-disable-line no-unused-vars
   Workout, // eslint-disable-line no-unused-vars
+  WorkoutOutline, // eslint-disable-line no-unused-vars
 } from './types';
 
 export function useRouter(): any {
@@ -65,7 +66,7 @@ const combineExerciseData =
     ...exercises.byId[activity.id] || {},
   });
 
-export const combineDataForAllExercises = (workout: Workout, exercisesList: Exercises): Workout => {
+export const combineDataForAllExercises = (workout: WorkoutOutline, exercisesList: Exercises): Workout => {
   const addExerciseData = combineExerciseData(exercisesList);
 
   return {
@@ -148,7 +149,7 @@ const getRestTime = (a: Activity): number =>
 const getTotalActivityTime = (a: Activity): number =>
   getRestTime(a) + getActivityTime(a);
 
-export const calculateWorkoutTime = (w: Workout): number => {
+export const calculateWorkoutTime = (w: WorkoutOutline): number => {
   const total = w.exerciseGroups
     .flatMap(group => group.exercises)
     .map(getTotalActivityTime)

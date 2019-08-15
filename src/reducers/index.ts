@@ -7,7 +7,7 @@ import settingsReducer from './settingsReducer';
 import scrollYReducer from './scrollYReducer';
 import activeWorkoutReducer from './activeWorkoutReducer';
 import historyReducer from './historyReducer';
-import editWorkoutReducer from './editWorkoutReducer';
+// import editWorkoutReducer from './editWorkoutReducer';
 import firstRenderReducer from './firstRenderReducer';
 import selectedExerciseReducer from './selectedExerciseReducer';
 
@@ -23,7 +23,7 @@ const rootReducer = (state = initialState, action: ReduxAction<any>): State => (
   scrollY: scrollYReducer(state.scrollY, action),
   settings: settingsReducer(state.settings, action),
   history: historyReducer(state.history, action),
-  editableWorkout: editWorkoutReducer(state.editableWorkout, action),
+  // editableWorkout: editWorkoutReducer(state.editableWorkout, action),
 });
 
 export default rootReducer;
