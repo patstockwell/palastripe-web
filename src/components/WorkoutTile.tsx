@@ -6,7 +6,7 @@ import { opaqueImageInAfter } from './SharedStyles';
 import {
   ReduxAction, // eslint-disable-line no-unused-vars
   State, // eslint-disable-line no-unused-vars
-  WorkoutOutline, // eslint-disable-line no-unused-vars
+  Workout, // eslint-disable-line no-unused-vars
 } from '../helpers/types';
 import {
   gutterWidth,
@@ -62,7 +62,7 @@ const StyledLink = styled(Link)`
 `;
 
 interface OwnProps {
-  workout: WorkoutOutline;
+  workout: Workout;
 }
 
 type Props = OwnProps & StateProps & DispatchProps;

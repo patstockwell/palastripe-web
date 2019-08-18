@@ -1,6 +1,5 @@
-import uuidv4 from 'uuid/v4';
 import { getLocalStorage } from '../helpers/functions';
-import { VERSION_ONE, LOCAL_STORAGE_HISTORY, LOCAL_STORAGE_ACTIVE_WORKOUT } from '../helpers/constants';
+import { LOCAL_STORAGE_HISTORY, LOCAL_STORAGE_ACTIVE_WORKOUT } from '../helpers/constants';
 import {
   State, // eslint-disable-line no-unused-vars
 } from '../helpers/types';
@@ -12,6 +11,7 @@ import overheadStrength from '../workoutData/workouts/overheadStrength';
 import fullBodyPower from '../workoutData/workouts/fullBodyPower';
 import glutesAndGlory from '../workoutData/workouts/glutesAndGlory';
 import squatAndBench from '../workoutData/workouts/squatAndBench';
+import { combineDataForAllExercises as combine } from '../helpers/functions';
 
 const initialState: State = {
   // flag to know if we're viewing a statically generated page
@@ -38,13 +38,13 @@ const initialState: State = {
 
     workouts: {
       byId: {
-        'full-body-dumbbell-strength': fullBodyDumbbellStrength,
-        'circuit-speed': circuitSpeed,
-        'upper-body-burner': upperBodyBurner,
-        'overhead-strength': overheadStrength,
-        'full-body-power': fullBodyPower,
-        'glutes-and-glory': glutesAndGlory,
-        'squat-and-bench': squatAndBench,
+        'full-body-dumbbell-strength': combine(fullBodyDumbbellStrength, exercises),
+        'circuit-speed': combine(circuitSpeed, exercises),
+        'upper-body-burner': combine(upperBodyBurner, exercises),
+        'overhead-strength': combine(overheadStrength, exercises),
+        'full-body-power': combine(fullBodyPower, exercises),
+        'glutes-and-glory': combine(glutesAndGlory, exercises),
+        'squat-and-bench': combine(squatAndBench, exercises),
       },
       allIds: [
         'full-body-dumbbell-strength',

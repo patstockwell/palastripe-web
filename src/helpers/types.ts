@@ -43,7 +43,7 @@ export interface Entities {
 
 export interface Workouts {
   byId: {
-    [propName: string]: WorkoutOutline,
+    [propName: string]: Workout,
   };
   allIds: string[];
 }
