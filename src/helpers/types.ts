@@ -114,6 +114,7 @@ export interface Exercises {
     [propName: string]: Exercise,
   };
   allIds: string[];
+  stretchExerciseIds: string[];
 }
 
 export const isTimed = (activity: Activity): activity is TimedActivity => {

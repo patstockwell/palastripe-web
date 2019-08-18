@@ -1,4 +1,5 @@
 import React, { memo, useState } from 'react';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 
 import AlertConfirm, { Button } from './AlertConfirm';
@@ -11,7 +12,9 @@ import {
 } from '../helpers/functions';
 import {
   Activity, // eslint-disable-line no-unused-vars
+  Exercise, // eslint-disable-line no-unused-vars
   ReduxAction, // eslint-disable-line no-unused-vars
+  State, // eslint-disable-line no-unused-vars
   Workout, // eslint-disable-line no-unused-vars
 } from '../helpers/types';
 import { opaqueImageInAfter } from './SharedStyles';
@@ -115,7 +118,7 @@ const Tile = styled.div`
   overflow: hidden;
 `;
 
-interface Props {
+interface OwnProps {
   workout: Workout;
   showMenu: boolean;
   toggleMenu: () => void;
@@ -123,23 +126,43 @@ interface Props {
   position: number;
 }
 
+type Props = OwnProps & StateProps;
+
 const ActivityHistoryTile: React.FC<Props> = ({
   workout,
   toggleMenu,
   showMenu,
   deleteWorkout,
+  stretchIds,
 }) => {
   const [ showDeleteWorkoutAlert, setShowDeleteWorkoutAlert ] = useState(false);
 
-  const exercisesInGroups = workout.exerciseGroups
+  const exercisesInGroups: {
+    [id: string]: {
+      exercises: Exercise[];
+      name: string;
+    }
+  } = workout.exerciseGroups
+    // combine all exercises into a single array
     .reduce((acc, curr) => [...acc, ...curr.exercises], [])
+    // remove stretch exercises
+    .filter((e: Exercise): boolean => !stretchIds.includes(e.id))
+    // map them to an object keyed by id
     .reduce((acc, curr: Activity) => {
-      const arrayOfExercises = acc[curr.id] ? [...acc[curr.id], curr] : [curr];
+      // for each exercise, check if we have seen it already, put it in an array
+      const arrayOfExercises = acc[curr.id]
+        ? [...acc[curr.id].exercises, curr]
+        : [curr];
+
       return {
         ...acc,
-        [curr.id]: arrayOfExercises,
+        [curr.id]: {
+          exercises: arrayOfExercises,
+          name: curr.name,
+        },
       };
     }, {});
+
   const exerciseStats = Object.keys(exercisesInGroups);
 
   const { name, startTime, finishTime } = workout;
@@ -156,6 +179,7 @@ const ActivityHistoryTile: React.FC<Props> = ({
     toggleMenu();
     setShowDeleteWorkoutAlert(false);
   };
+  console.log(exercisesInGroups);
 
   return (
     <Tile>
@@ -210,4 +234,15 @@ const areEqualProps = (prevProps: Props, nextProps: Props): boolean => (
   && prevProps.position === nextProps.position
 );
 
-export default memo(ActivityHistoryTile, areEqualProps);
+interface StateProps {
+  stretchIds: string[];
+}
+
+const mapStateToProps = (state: State): StateProps => ({
+  stretchIds: state.entities.exercises.stretchExerciseIds,
+});
+
+export default connect<StateProps, void, void>(
+  mapStateToProps,
+  null
+)(memo(ActivityHistoryTile, areEqualProps));

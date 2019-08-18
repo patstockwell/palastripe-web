@@ -10,6 +10,7 @@ import {
 import {
   isTimed,
   Activity, // eslint-disable-line no-unused-vars
+  Exercise, // eslint-disable-line no-unused-vars
   Exercises, // eslint-disable-line no-unused-vars
   Workout, // eslint-disable-line no-unused-vars
   WorkoutOutline, // eslint-disable-line no-unused-vars
@@ -59,6 +60,19 @@ export function useInterval(callback: () => any, delay: number) {
     }
   }, [delay]);
 }
+
+export const getIdsForStretchExercises = (
+  byId: { [propName: string]: Exercise },
+  allIds: string[]
+): string[] => (
+  allIds
+    // get all the exercises into an array
+    .map((id: string): Exercise => byId[id])
+    // keep only those exercises with the tag 'stretch'
+    .filter((e: Exercise): boolean => e.tags.includes('stretch'))
+    // map their ids into an array
+    .map((e: Exercise): string => e.id)
+);
 
 const combineExerciseData =
   (exercises: Exercises) => (activity: Activity): Activity => ({
