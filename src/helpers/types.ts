@@ -96,14 +96,15 @@ interface WeightedActivityOutline extends ActivityBase {
   autoIncrement: number;
 }
 
-export interface ExerciseDetail {
+export interface Exercise {
   id: string;
   name: string;
+  mostWeightInKilos?: number;
   tags: string[];
 }
 
-export type TimedActivity = TimedActivityOutline & ExerciseDetail;
-export type WeightedActivity = WeightedActivityOutline & ExerciseDetail;
+export type TimedActivity = TimedActivityOutline & Exercise;
+export type WeightedActivity = WeightedActivityOutline & Exercise;
 
 export type Activity = WeightedActivity | TimedActivity;
 export type ActivityOutline = WeightedActivityOutline | TimedActivityOutline;
@@ -113,12 +114,6 @@ export interface Exercises {
     [propName: string]: Exercise,
   };
   allIds: string[];
-}
-
-export interface Exercise {
-  id: string;
-  name: string;
-  mostWeightInKilos?: number;
 }
 
 export const isTimed = (activity: Activity): activity is TimedActivity => {
