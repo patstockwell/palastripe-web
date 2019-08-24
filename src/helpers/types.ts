@@ -117,6 +117,11 @@ export interface Exercises {
   stretchExerciseIds: string[];
 }
 
+export interface ActivityStats {
+  name: string;
+  exercises: Activity[];
+}
+
 export const isTimed = (activity: Activity): activity is TimedActivity => {
   return (activity as TimedActivity).timerInSeconds !== undefined;
 };

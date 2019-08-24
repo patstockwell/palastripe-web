@@ -2,6 +2,7 @@ import React, { memo, useState } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 
+import ActivityHistoryTileStats from './ActivityHistoryTileStats';
 import AlertConfirm, { Button } from './AlertConfirm';
 import TrashCan from '../assets/svg/TrashCan';
 import Dots from '../assets/svg/Dots';
@@ -12,7 +13,6 @@ import {
 } from '../helpers/functions';
 import {
   Activity, // eslint-disable-line no-unused-vars
-  Exercise, // eslint-disable-line no-unused-vars
   ReduxAction, // eslint-disable-line no-unused-vars
   State, // eslint-disable-line no-unused-vars
   Workout, // eslint-disable-line no-unused-vars
@@ -36,13 +36,13 @@ const TilePanel = styled.div`
   position: relative;
   padding: ${gutterWidth}px;
   padding-right: 4px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 `;
 
 const TopTilePanel = styled(TilePanel)`
   background-color: ${superLightGrey};
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 const Name = styled.p`
@@ -139,17 +139,17 @@ const ActivityHistoryTile: React.FC<Props> = ({
 
   const exercisesInGroups: {
     [id: string]: {
-      exercises: Exercise[];
+      exercises: Activity[];
       name: string;
     }
   } = workout.exerciseGroups
     // combine all exercises into a single array
     .reduce((acc, curr) => [...acc, ...curr.exercises], [])
     // remove stretch exercises
-    .filter((e: Exercise): boolean => !stretchIds.includes(e.id))
+    .filter((e: Activity): boolean => !stretchIds.includes(e.id))
     // map them to an object keyed by id
     .reduce((acc, curr: Activity) => {
-      // for each exercise, check if we have seen it already, put it in an array
+      // for each Activity, check if we have seen it already, put it in an array
       const arrayOfExercises = acc[curr.id]
         ? [...acc[curr.id].exercises, curr]
         : [curr];
@@ -163,7 +163,12 @@ const ActivityHistoryTile: React.FC<Props> = ({
       };
     }, {});
 
-  const exerciseStats = Object.keys(exercisesInGroups);
+  const exercisesStats = Object.entries(exercisesInGroups)
+    .map(e => {
+      const [id, statistics] = e;
+
+      return <ActivityHistoryTileStats key={id} statistics={statistics} />;
+    });
 
   const { name, startTime, finishTime } = workout;
   const { historyTileDateFormat } = formatDate(finishTime);
@@ -179,7 +184,6 @@ const ActivityHistoryTile: React.FC<Props> = ({
     toggleMenu();
     setShowDeleteWorkoutAlert(false);
   };
-  console.log(exercisesInGroups);
 
   return (
     <Tile>
@@ -210,6 +214,7 @@ const ActivityHistoryTile: React.FC<Props> = ({
       <Image image={workout.imageUrl}>
         <TilePanel>
           <TotalTime>{totalTime}</TotalTime>
+          {exercisesStats}
         </TilePanel>
       </Image>
 
