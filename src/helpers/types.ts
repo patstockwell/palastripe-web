@@ -92,7 +92,7 @@ interface TimedActivityOutline extends ActivityBase {
 interface WeightedActivityOutline extends ActivityBase {
   weightInKilos: number;
   repsGoal: number;
-  repsAchieved?: number;
+  repsAchieved: number;
   autoIncrement: number;
 }
 

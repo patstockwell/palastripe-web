@@ -2,6 +2,7 @@ import uuidv4 from 'uuid/v4';
 import {
   ReduxAction, // eslint-disable-line no-unused-vars
   ActivityGroup, // eslint-disable-line no-unused-vars
+  Activity, // eslint-disable-line no-unused-vars
   Workout, // eslint-disable-line no-unused-vars
 } from '../helpers/types';
 import {
@@ -59,12 +60,14 @@ const addGroupToNewWorkout = (state: Workout) => {
 
 const addSetToEditWorkout = (state: Workout) => {
   const { exerciseGroups } = state;
-  const lastGroupIndex = exerciseGroups.length - 1;
-  const { exercises } = exerciseGroups[lastGroupIndex];
-  const lastExercise = exercises[exercises.length - 1] || {
+  const lastGroupIndex: number = exerciseGroups.length - 1;
+  const { exercises }: ActivityGroup = exerciseGroups[lastGroupIndex];
+  const lastExercise: Activity = exercises[exercises.length - 1] || {
     id: uuidv4(),
     name: 'Exercise with reps',
     repsGoal: 12,
+    repsAchieved: 12,
+    tags: [],
     weightInKilos: 20,
     autoIncrement: 0,
     completed: false,

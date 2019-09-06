@@ -80,8 +80,7 @@ const changeReps = (state: Workout, action: ChangeSetAction): Workout => {
         ...g,
         exercises: g.exercises.map((wa: WeightedActivity, i) => {
           if (i === index) {
-            const { repsGoal: g, repsAchieved: a } = wa;
-            const newRepsAchieved = a !== undefined ? a + value : g + value;
+            const newRepsAchieved: number = value + wa.repsAchieved;
 
             return {
               ...wa,

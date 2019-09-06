@@ -49,39 +49,35 @@ const HiddenArea: React.FC<Props> = ({
     weightInKilos,
     repsAchieved,
   },
-}) => {
-  const reps = repsAchieved !== undefined ? repsAchieved : repsGoal;
-
-  return (
-    <animated.div style={{
-      height: animatedStyles.height,
-      opacity: animatedStyles.opacity,
-      cursor: 'default',
-    }}>
-      <IncrementDecrementPanel
-        handleDecrement={decrementWeight}
-        handleIncrement={incrementWeight}
-        percentageComplete={1}
-      >
-        <p>
-          <MainValue>{weightInKilos}</MainValue>
-        </p>
-        <p>kg</p>
-      </IncrementDecrementPanel>
-      <IncrementDecrementPanel
-        handleDecrement={() => changeReps(-1)}
-        handleIncrement={() => changeReps(1)}
-        percentageComplete={reps / repsGoal}
-      >
-        <p>
-          <MainValue>{reps}</MainValue>
-          {`/${repsGoal}`}
-        </p>
-        <p>Reps</p>
-      </IncrementDecrementPanel>
-    </animated.div>
-  );
-};
+}) => (
+  <animated.div style={{
+    height: animatedStyles.height,
+    opacity: animatedStyles.opacity,
+    cursor: 'default',
+  }}>
+    <IncrementDecrementPanel
+      handleDecrement={decrementWeight}
+      handleIncrement={incrementWeight}
+      percentageComplete={1}
+    >
+      <p>
+        <MainValue>{weightInKilos}</MainValue>
+      </p>
+      <p>kg</p>
+    </IncrementDecrementPanel>
+    <IncrementDecrementPanel
+      handleDecrement={() => changeReps(-1)}
+      handleIncrement={() => changeReps(1)}
+      percentageComplete={repsAchieved / repsGoal}
+    >
+      <p>
+        <MainValue>{repsAchieved}</MainValue>
+        {`/${repsGoal}`}
+      </p>
+      <p>Reps</p>
+    </IncrementDecrementPanel>
+  </animated.div>
+);
 
 type ChangeSetAction = ReduxAction<SingleSetAction & any>;
 type ChangeSetDispatch = Dispatch<ChangeSetAction>;

@@ -63,7 +63,7 @@ type Props = DispatchProps & OwnProps;
 const ActivityTileWithReps: React.FC<Props> = ({
   activity,
   activity: {
-    name, repsAchieved, repsGoal, weightInKilos, completed, restPeriodInSeconds,
+    name, repsAchieved, weightInKilos, completed, restPeriodInSeconds,
   },
   groupId,
   index,
@@ -95,7 +95,7 @@ const ActivityTileWithReps: React.FC<Props> = ({
           <SubTitle>Weight: {weightInKilos}kg</SubTitle>
         </Details>
         <Duration>
-          <p>{repsAchieved === undefined ? repsGoal : repsAchieved} x</p>
+          <p>{repsAchieved} x</p>
         </Duration>
         {editable ? (
           <ShowEditArrowWrapper onClick={() => setShowAnimation(true)}>
