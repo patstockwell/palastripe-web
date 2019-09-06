@@ -8,8 +8,8 @@ import TrashCan from '../assets/svg/TrashCan';
 import Dots from '../assets/svg/Dots';
 import {
   getDiffInMinutes,
-  formatDate,
   formatMinutes,
+  getTimeSince,
 } from '../helpers/functions';
 import {
   Activity, // eslint-disable-line no-unused-vars
@@ -171,7 +171,7 @@ const ActivityHistoryTile: React.FC<Props> = ({
     });
 
   const { name, startTime, finishTime } = workout;
-  const { historyTileDateFormat } = formatDate(finishTime);
+  const { unitOfMeasurement, value } = getTimeSince(finishTime);
   const totalTime = formatMinutes(getDiffInMinutes(startTime, finishTime));
 
   const handleMenuClick = (e: any) => {
@@ -190,7 +190,7 @@ const ActivityHistoryTile: React.FC<Props> = ({
       <TopTilePanel>
         <div>
           <Name>{name}</Name>
-          <FinishTimeAndDay>{historyTileDateFormat}</FinishTimeAndDay>
+          <FinishTimeAndDay>{value} {unitOfMeasurement} ago</FinishTimeAndDay>
         </div>
         <OptionsButton onClick={handleMenuClick}>
           <Dots />
