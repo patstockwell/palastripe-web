@@ -10,6 +10,7 @@ import {
 import {
   isTimed,
   Activity, // eslint-disable-line no-unused-vars
+  ActivityGroup, // eslint-disable-line no-unused-vars
   Exercise, // eslint-disable-line no-unused-vars
   Exercises, // eslint-disable-line no-unused-vars
   Workout, // eslint-disable-line no-unused-vars
@@ -108,6 +109,18 @@ export const getLocalStorage = (name: string, defaultValue: any) => {
   return defaultValue;
 };
 
+export const getTotalWeightLifted = (workout: Workout): number => (
+  workout.exerciseGroups.reduce((ac: number, ag: ActivityGroup): number => (
+    ac + ag.exercises.reduce((acc: number, a: Activity): number => {
+      if (!a.completed || isTimed(a)) {
+        return acc;
+      } else {
+        return acc + (a.repsAchieved * a.weightInKilos);
+      }
+    }, 0)
+  ), 0)
+);
+
 export const formatDate = (unixTime: number): {
   day: string;
   date: number;
@@ -173,6 +186,15 @@ export const formatMinutes = (minutes: number): string => {
     return `${hours}hr ${mins < 9 ? `0${mins}` : mins}min`;
   }
 };
+
+export const getHoursAndMinutes = (minutes: number): {
+  hours: number, mins: number, hoursLabel: string, minsLabel: string,
+} => ({
+  hours: Math.floor(minutes / 60),
+  mins: minutes % 60,
+  hoursLabel: 'hr',
+  minsLabel: minutes % 60 === 1 ? 'min' : 'mins',
+});
 
 const ONE_REP_IN_SECONDS = 3;
 

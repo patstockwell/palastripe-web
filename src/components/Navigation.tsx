@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import {
-  pink,
+  purple,
   navBarHeight,
   SET_WINDOW_SCROLL,
   ACTIVITY_PAGE,
@@ -47,7 +47,7 @@ const LinkName = styled.span`
 const getCurrentPage = (pathname: string): string => {
   if (pathname === '/' || /\/workouts*/.test(pathname)) {
     return WORKOUTS_PAGE;
-  } else if (/\/activity*/.test(pathname)){
+  } else if (/\/activity*/.test(pathname)) {
     return ACTIVITY_PAGE;
   } else {
     return '';
@@ -69,14 +69,14 @@ const Navigation = ({ pathname, setWindowScroll }: Props) => {
   const handleClick = () => {
     setWindowScroll(
       window.scrollY,
-      getCurrentPage(pathname),
+      getCurrentPage(pathname)
     );
   };
 
   return (
     <Nav>
       <NavLink
-        highlight={isOnPage(WORKOUTS_PAGE) ? pink : 'black'}
+        highlight={isOnPage(WORKOUTS_PAGE) ? purple : 'black'}
         to="/workouts/"
         onClick={handleClick}
       >
@@ -84,7 +84,7 @@ const Navigation = ({ pathname, setWindowScroll }: Props) => {
         <LinkName>Workouts</LinkName>
       </NavLink>
       <NavLink
-        highlight={isOnPage(ACTIVITY_PAGE) ? pink : 'black'}
+        highlight={isOnPage(ACTIVITY_PAGE) ? purple : 'black'}
         to="/activity/"
         onClick={handleClick}
       >
@@ -109,4 +109,3 @@ const mapDispatchToProps = {
 };
 
 export default connect(null, mapDispatchToProps)(Navigation);
-

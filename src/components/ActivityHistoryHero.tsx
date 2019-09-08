@@ -10,12 +10,12 @@ const Window = styled.div`
 
 const Heading = styled.h3`
   color: grey;
-  font-size: 12px;
+  font-size: 0.75em;
   text-transform: uppercase;
 `;
 
 const TotalWorkouts = styled.p`
-  font-size: 76px;
+  font-size: 5em;
 `;
 
 const FlexWrapper = styled.div`
@@ -24,8 +24,9 @@ const FlexWrapper = styled.div`
   align-items: center;
 `;
 
-const TotalMinutes = styled.h3`
-  font-size: 24px;
+const TotalMinutes = styled.p`
+  font-weight: 800;
+  font-size: 1.5em;
 `;
 
 interface Props {
