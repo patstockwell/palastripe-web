@@ -112,10 +112,10 @@ export const getLocalStorage = (name: string, defaultValue: any) => {
 export const getTotalWeightLifted = (workout: Workout): number => (
   workout.exerciseGroups.reduce((ac: number, ag: ActivityGroup): number => (
     ac + ag.exercises.reduce((acc: number, a: Activity): number => {
-      if (!a.completed || isTimed(a)) {
-        return acc;
-      } else {
+      if (a.completed && !isTimed(a) && typeof a.repsAchieved === 'number') {
         return acc + (a.repsAchieved * a.weightInKilos);
+      } else {
+        return acc;
       }
     }, 0)
   ), 0)
