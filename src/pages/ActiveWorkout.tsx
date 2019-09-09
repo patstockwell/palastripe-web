@@ -164,7 +164,7 @@ const ActiveWorkout: React.FC<Props> = ({
         />
       </TimerContext.Provider>
 
-      {showRestTimer && count > 0 &&
+      {showRestTimer && count > 0 && restTime >= 0 &&
         <Timer
           restPeriod={restTime}
           resetTimer={resetTimer}
