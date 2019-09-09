@@ -17,6 +17,13 @@ const BottomSpace = styled.div`
   height: 200px;
 `;
 
+const RoundCorneredTop = styled.div`
+  border-radius: 24px 24px 0 0;
+  overflow: hidden;
+  background-color: white;
+  padding-top: 24px;
+`;
+
 interface OwnProps {
   history: Workout[];
 }
@@ -46,10 +53,10 @@ const ActivityHistoryList: React.FC<Props> = ({
   ));
 
   return (
-    <React.Fragment>
+    <RoundCorneredTop>
       {historyTiles}
       <BottomSpace />
-    </React.Fragment>
+    </RoundCorneredTop>
   );
 };
 

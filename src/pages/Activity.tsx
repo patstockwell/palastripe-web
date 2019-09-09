@@ -15,7 +15,7 @@ import { connect } from 'react-redux';
 import Banner from '../components/Banner';
 import Navigation from '../components/Navigation';
 import ActivityHistoryHero from '../components/ActivityHistoryHero';
-import { formatMinutes, getDiffInMinutes } from '../helpers/functions';
+import { getTotalWeightLifted, getDiffInMinutes } from '../helpers/functions';
 
 interface OwnProps {
   animationStyles: CSSProperties;
@@ -25,6 +25,10 @@ const getTotalMinutes = (history: Workout[]): number => (
   history.reduce((acc, curr) => (
     getDiffInMinutes(curr.startTime, curr.finishTime) + acc
   ), 0)
+);
+
+const getTotalWeight = (history: Workout[]): number => (
+  history.reduce((acc, curr) => getTotalWeightLifted(curr) + acc, 0)
 );
 
 type Props = OwnProps & StateProps & RouteProps;
@@ -39,7 +43,8 @@ const Activity: React.FC<Props> = ({
     window.scrollTo(0, scrollY);
   });
 
-  const totalMinutes = formatMinutes(getTotalMinutes(history));
+  const totalMinutes = getTotalMinutes(history);
+  const totalWeight = getTotalWeight(history);
 
   return (
     <animated.div style={animationStyles}>
@@ -47,6 +52,7 @@ const Activity: React.FC<Props> = ({
       <ActivityHistoryHero
         totalWorkouts={history.length}
         totalMinutes={totalMinutes}
+        totalWeight={totalWeight}
       />
       <ActivityHistoryList history={history} />
       <Navigation pathname={location.pathname} />
@@ -65,4 +71,3 @@ const mapStateToProps = (state: State): StateProps => ({
 });
 
 export default connect<StateProps, void, void>(mapStateToProps)(Activity);
-
