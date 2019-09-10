@@ -1,4 +1,4 @@
-import React, { memo, useState } from 'react';
+import React, { memo, useRef, useState } from 'react';
 import { connect } from 'react-redux';
 import { useSpring, animated } from 'react-spring';
 import styled from 'styled-components';
@@ -17,7 +17,11 @@ import {
   SingleSetAction, // eslint-disable-line no-unused-vars
   WeightedActivity, // eslint-disable-line no-unused-vars
 } from '../../helpers/types';
-import { TOGGLE_SET_COMPLETE } from '../../helpers/constants';
+import {
+  TOGGLE_SET_COMPLETE,
+  activeWorkoutWindowHeight,
+} from '../../helpers/constants';
+import { useScrollElementToTop } from '../../helpers/functions';
 import {
   Details,
   Title,
@@ -75,9 +79,11 @@ const ActivityTileWithReps: React.FC<Props> = ({
   editable,
 }) => {
   const [showAnimation, setShowAnimation] = useState(false);
+  const listElement = useRef(null);
+  useScrollElementToTop(listElement, selected, showHiddenArea);
 
   const animatedStyles = useSpring({
-    height: showHiddenArea ? 300 : 0,
+    height: showHiddenArea ? activeWorkoutWindowHeight : 0,
     opacity: showHiddenArea ? 1 : 0,
     x: showHiddenArea ? -180 : 0,
     config: { tension: 410, friction: 40 },
@@ -88,6 +94,7 @@ const ActivityTileWithReps: React.FC<Props> = ({
       aria-expanded={showHiddenArea}
       selected={selected}
       onClick={() => !editable && handleSelect()}
+      ref={listElement}
     >
       <VisibleArea>
         <Details onClick={handleOpen}>

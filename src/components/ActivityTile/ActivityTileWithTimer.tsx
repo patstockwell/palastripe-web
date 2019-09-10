@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import styled, { keyframes } from 'styled-components';
 import { useSpring } from 'react-spring';
@@ -20,13 +20,17 @@ import {
   SingleSetAction, // eslint-disable-line no-unused-vars
   TimedActivity, // eslint-disable-line no-unused-vars
 } from '../../helpers/types';
-import { formatSeconds } from '../../helpers/functions';
+import {
+  formatSeconds,
+  useScrollElementToTop,
+} from '../../helpers/functions';
 import {
   green,
   superLightGrey,
   timedExerciseWaitPeriod,
   TOGGLE_SET_COMPLETE,
   tileMinHeight,
+  activeWorkoutWindowHeight,
 } from '../../helpers/constants';
 import {
   Details,
@@ -100,9 +104,11 @@ const ActivityTileWithTimer: React.FC<Props> = ({
   const [preparationComplete, setPreparationComplete] = useState(false);
   const [showEditPanel, setShowEditPanel] = useState(false);
   const [started, setStarted] = useState(false);
+  const listElement = useRef(null);
+  useScrollElementToTop(listElement, selected, showHiddenArea);
 
   const animatedStyles = useSpring({
-    height: showHiddenArea ? 300 : 0,
+    height: showHiddenArea ? activeWorkoutWindowHeight : 0,
     opacity: showHiddenArea ? 1 : 0,
     x: showHiddenArea ? -180 : 0,
     config: { tension: 410, friction: 40 },
@@ -127,7 +133,7 @@ const ActivityTileWithTimer: React.FC<Props> = ({
   const time: string = formatSeconds(timerInSeconds - count);
 
   return (
-    <Tile selected={selected} onClick={handleSelect}>
+    <Tile ref={listElement} selected={selected} onClick={handleSelect}>
       <VisibleArea>
 
         {inProgress && (preparationComplete ? (

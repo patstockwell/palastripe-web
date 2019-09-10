@@ -53,7 +53,6 @@ const WorkoutImage = styled.div<{ image: string }>`
   background-image: url(${({ image }) => image});
   background-size: cover;
   background-position: center;
-  filter: grayscale(1);
   opacity: 0.3;
 `;
 

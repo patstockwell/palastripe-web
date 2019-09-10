@@ -36,6 +36,8 @@ const Square = styled.div<{ image: string }>`
   display: flex;
   align-items: center;
   justify-content: center;
+  border-radius: 8px;
+  overflow: hidden;
 
   // put the image in an 'after' pseudo element. Set it behind the original
   // element which has opacity giving it the dark filter look

@@ -6,6 +6,7 @@ import {
   MILLISECONDS_IN_A_MINUTE,
   MONTHS_OF_THE_YEAR,
   SECONDS_IN_A_MINUTE,
+  activityHeadingHeight,
 } from './constants';
 import {
   isTimed,
@@ -20,6 +21,21 @@ import {
 export function useRouter(): any {
   return useContext(__RouterContext);
 }
+
+export const useScrollElementToTop =
+  (e: React.MutableRefObject<any>, selected: boolean, show: boolean) => {
+    useEffect(() => {
+      if (selected) {
+        window.setTimeout(() => {
+          window.scrollTo({
+            top: e.current.offsetTop - activityHeadingHeight,
+            left: 0,
+            behavior: 'smooth',
+          });
+        }, 300);
+      }
+    }, [ show, selected ]);
+  };
 
 export const useHasScrolled = () => {
   const [scrolled, setScrolled] = useState(false);
