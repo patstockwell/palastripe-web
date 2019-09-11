@@ -3,6 +3,7 @@ import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 import smoothscroll from 'smoothscroll-polyfill';
+import 'core-js/stable';
 
 import rootReducer from './reducers';
 import { GlobalStyle } from './components/GlobalStyle';
