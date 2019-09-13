@@ -14,6 +14,7 @@ import {
 } from '../helpers/types';
 import ActivityBars from '../assets/svg/ActivityBars';
 import Cardiogram from '../assets/svg/Cardiogram';
+import { getCurrentPage } from '../helpers/functions';
 
 const Nav = styled.nav`
   display: flex;
@@ -43,16 +44,6 @@ const NavLink = styled(Link)<{ highlight: string }>`
 const LinkName = styled.span`
   margin-top: 4px;
 `;
-
-const getCurrentPage = (pathname: string): string => {
-  if (pathname === '/' || /\/workouts*/.test(pathname)) {
-    return WORKOUTS_PAGE;
-  } else if (/\/activity*/.test(pathname)) {
-    return ACTIVITY_PAGE;
-  } else {
-    return '';
-  }
-};
 
 interface Props {
   pathname: string;

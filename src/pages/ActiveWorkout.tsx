@@ -6,6 +6,7 @@ import {
 import styled from 'styled-components';
 import { animated } from 'react-spring';
 
+import { AnimatedSlidingPageStyle } from '../components/SharedStyles';
 import { useInterval } from '../helpers/functions';
 import { GlobalOverFlowHiddenStyle } from '../components/SharedStyles';
 import Timer from '../components/Timer';
@@ -41,12 +42,8 @@ export const TimerContext = createContext({
   setCount: (_: number) => {/* do nothing */}, // eslint-disable-line
 });
 
-export const AnimatedSlidingPage = styled(animated.div)<{ position?: string }>`
-  z-index: 10;
-  top: 0;
-  width: 100%;
-  -webkit-overflow-scrolling: touch; // enables momentum scolling
-  position: ${({ position }) => position};
+const AnimatedSlidingPage = styled(animated.div)<{ position?: string }>`
+  ${AnimatedSlidingPageStyle}
 `;
 
 interface OwnProps {
@@ -144,6 +141,7 @@ const ActiveWorkout: React.FC<Props> = ({
       <BackLinkBanner
         sticky={false}
         back={{
+          showArrows: true,
           handleClick: () => setIsFixedPostion(true),
           link: '/workouts/',
         }}

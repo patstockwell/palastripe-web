@@ -15,7 +15,11 @@ import {
   getTimeSince,
   getTotalWeightLifted,
 } from '../helpers/functions';
-import { purple, pink, superLightGrey } from '../helpers/constants';
+import {
+  purple,
+  superLightGrey,
+  avatarCircleDiameter,
+} from '../helpers/constants';
 
 const Tile = styled.div`
   position: relative;
@@ -57,21 +61,21 @@ const WorkoutImage = styled.div<{ image: string }>`
 `;
 
 const AvatarCircle = styled.div`
+  display: flex;
+  justify-content: center;
   position: absolute;
   top: 16px;
   right: -8px;
-  width: 40px;
-  height: 40px;
+  width: ${avatarCircleDiameter}px;
+  height: ${avatarCircleDiameter}px;
   background-color: ${purple};
   border: 2px solid white;
   border-radius: 50%;
   overflow: hidden;
-  padding: 8px;
-  box-sizing: border-box;
-  // background-image: linear-gradient( 140deg, ${pink}, ${purple});
 
   & svg {
     fill: white;
+    width: 20px;
   }
 `;
 
@@ -113,8 +117,9 @@ const OptionsButton = styled.button`
   border: none;
   background: none;
   display: flex;
-  padding: 0 14px;
+  padding: 15px;
   float: right;
+  margin: -15px -10px 0 0;
 `;
 
 const DropDownMenuPanel = styled.div`

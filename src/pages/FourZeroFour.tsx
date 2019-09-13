@@ -10,7 +10,7 @@ const Button = styled(Link)`
   margin: 16px;
 `;
 
-const FourZeroFour = () => (
+const FourZeroFour: React.FC<{}> = () => (
   <div>
     <Helmet title="404 Page not found" />
     <h2>Uh oh, 404</h2>
@@ -19,4 +19,3 @@ const FourZeroFour = () => (
 );
 
 export default FourZeroFour;
-

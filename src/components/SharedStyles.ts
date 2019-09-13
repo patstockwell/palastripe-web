@@ -4,6 +4,14 @@ import {
   workoutWindowViewport,
 } from '../helpers/constants';
 
+export const AnimatedSlidingPageStyle = css<{ position?: string }>`
+  z-index: 10;
+  top: 0;
+  width: 100%;
+  -webkit-overflow-scrolling: touch; // enables momentum scolling
+  position: ${({ position }) => position};
+`;
+
 export const GlobalOverFlowHiddenStyle = createGlobalStyle<{ hidden: boolean }>`
   html, body {
     // used for when the modal is displayed

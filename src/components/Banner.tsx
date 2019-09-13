@@ -1,10 +1,26 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { animated, useSpring } from 'react-spring';
 import styled from 'styled-components';
-import { bannerHeight, gutterWidth, pink, purple } from '../helpers/constants';
-import { useHasScrolled } from '../helpers/functions';
+import { Link } from 'react-router-dom';
 
-const AppLogo = styled(animated.p)`
+import Avatar from '../assets/svg/Avatar';
+import {
+  bannerHeight,
+  gutterWidth,
+  pink,
+  purple,
+  avatarCircleDiameter,
+  lightLightGrey,
+  SET_WINDOW_SCROLL,
+} from '../helpers/constants';
+import { getCurrentPage, useHasScrolled } from '../helpers/functions';
+import {
+  ReduxAction, // eslint-disable-line no-unused-vars
+  RouteState, // eslint-disable-line no-unused-vars
+} from '../helpers/types';
+
+const AppLogo = styled.p`
   font-family: 'Muli', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   color: white;
   text-align: center;
@@ -15,6 +31,21 @@ const AppLogo = styled(animated.p)`
   padding: 3px 9px;
   background-color: ${purple};
   background-image: linear-gradient( 140deg, ${pink}, ${purple});
+`;
+
+const AvatarCircle = styled(Link)`
+  display: flex;
+  justify-content: center;
+  width: ${avatarCircleDiameter}px;
+  height: ${avatarCircleDiameter}px;
+  background-color: ${lightLightGrey};
+  border-radius: 50%;
+  overflow: hidden;
+
+  & svg {
+    fill: white;
+    width: 20px;
+  }
 `;
 
 export const Header = styled(animated.header)`
@@ -28,18 +59,18 @@ export const Header = styled(animated.header)`
   overflow: hidden;
   min-height: ${bannerHeight}px;
   position: sticky;
-  top: -${bannerHeight + 2}px;
+  top: -${bannerHeight}px;
 `;
 
-const CollapsableHeader = styled.div`
+const CollapsableHeader = styled(animated.div)`
   padding: 0 ${gutterWidth}px;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: space-between;
   height: ${bannerHeight}px;
   width: 100%;
   box-sizing: border-box;
-  background-color: white;
+  background-color: transparent;
 `;
 
 const PageHeading = styled(animated.h1)`
@@ -53,11 +84,14 @@ const VisibleHeader = styled.div`
   box-sizing: border-box;
 `;
 
-interface Props {
+interface OwnProps {
   heading: string;
+  pathname: string;
 }
 
-const Banner = ({ heading }: Props) => {
+type Props = OwnProps & DispatchProps;
+
+const Banner: React.FC<Props> = ({ setWindowScroll, heading, pathname }) => {
   const scrolled: boolean = useHasScrolled();
   const {
     fontSize,
@@ -73,6 +107,14 @@ const Banner = ({ heading }: Props) => {
     marginTop: `${scrolled ? 13 : 0}px`,
     config: { mass: 1, tension: 570, friction: 40 },
   });
+  const routeState: RouteState = { immediate: false, backPath: pathname };
+
+  const handleClick = () => {
+    setWindowScroll(
+      window.scrollY,
+      getCurrentPage(pathname)
+    );
+  };
 
   return (
     <Header>
@@ -86,11 +128,40 @@ const Banner = ({ heading }: Props) => {
           {heading}
         </PageHeading>
       </VisibleHeader>
-      <CollapsableHeader>
-        <AppLogo style={{ transform: transformLogo }}>hbff</AppLogo>
+      <CollapsableHeader style={{ transform: transformLogo }}>
+        <AppLogo>hbff</AppLogo>
+        <AvatarCircle
+          onClick={handleClick}
+          to={{
+            pathname: '/profile/',
+            state: routeState,
+          }}
+        >
+          <Avatar />
+        </AvatarCircle>
       </CollapsableHeader>
     </Header>
   );
 };
 
-export default Banner;
+interface DispatchProps {
+  setWindowScroll: (scrollY: number, page: string) => ReduxAction<{
+    scrollY: number,
+    page: string
+  }>;
+}
+
+const mapDispatchToProps: DispatchProps = {
+  setWindowScroll: (scrollY, page) => ({
+    type: SET_WINDOW_SCROLL,
+    payload: {
+      scrollY,
+      page,
+    },
+  }),
+};
+
+export default connect<void, DispatchProps, void>(
+  null,
+  mapDispatchToProps
+)(Banner);

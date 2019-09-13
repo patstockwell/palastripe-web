@@ -1,12 +1,16 @@
-import React, { useState } from 'react';
+import React, {
+  CSSProperties, // eslint-disable-line no-unused-vars
+  useState,
+} from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
+import { animated } from 'react-spring';
 
+import { AnimatedSlidingPageStyle } from '../components/SharedStyles';
 import { Button } from '../components/AlertConfirm';
 import { EditableActivityList } from '../components/ActivityList';
 import EditWorkoutHero from '../components/EditWorkoutHero';
 import BackLinkBanner from '../components/BackLinkBanner';
-import { AnimatedSlidingPage } from './ActiveWorkout';
 import {
   Exercises, // eslint-disable-line no-unused-vars
   ReduxAction, // eslint-disable-line no-unused-vars
@@ -21,6 +25,10 @@ import {
   EDIT_WORKOUT_ADD_SET,
   EDIT_WORKOUT_ADD_GROUP,
 } from '../helpers/constants';
+
+const AnimatedSlidingPage = styled(animated.div)<{ position?: string }>`
+  ${AnimatedSlidingPageStyle}
+`;
 
 const AddItemButton = styled(Button)`
   min-width: 130px;
@@ -68,7 +76,7 @@ export const accumulateMatches =
   };
 
 interface OwnProps {
-  animationStyles: any;
+  animationStyles: CSSProperties;
 }
 
 type Props = OwnProps & StateProps & DispatchProps;
@@ -107,7 +115,7 @@ const EditWorkout: React.FC<Props> = ({
 
   return (
     <AnimatedSlidingPage style={{ position, left }}>
-      <BackLinkBanner back={{ link: '/workouts/' }} />
+      <BackLinkBanner back={{ showArrows: true, link: '/workouts/' }} />
       <EditWorkoutHero
         name={workoutName}
         handleInputChange={handleEditNameChange}

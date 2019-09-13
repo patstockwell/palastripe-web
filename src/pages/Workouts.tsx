@@ -1,4 +1,7 @@
-import React, { Fragment } from 'react';
+import React, { useEffect, Fragment } from 'react';
+import {
+  RouteProps, // eslint-disable-line no-unused-vars
+} from 'react-router-dom';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import Navigation from '../components/Navigation';
@@ -18,13 +21,21 @@ const EmptySpace = styled.div`
   height: ${navBarHeight}px;
 `;
 
-interface OwnProps {
-  location: any;
-}
+type Props = RouteProps & DispatchProps & StateProps;
 
-type Props = OwnProps & DispatchProps & StateProps;
+const Workouts: React.FC<Props> = ({
+  isFirstRender,
+  removeIsFirstRender,
+  location,
+  workouts,
+  scrollY,
+}) => {
+  useEffect(() => {
+    if (typeof scrollY === 'number') {
+      window.scrollTo(0, scrollY);
+    }
+  });
 
-const Workouts = ({ isFirstRender, removeIsFirstRender, location, workouts}: Props) => {
   if (isFirstRender) {
     // remove the flag to identify first page load when static rendering
     removeIsFirstRender();
@@ -36,7 +47,7 @@ const Workouts = ({ isFirstRender, removeIsFirstRender, location, workouts}: Pro
 
   return (
     <Fragment>
-      <Banner heading={'Workouts'}/>
+      <Banner pathname={location.pathname} heading={'Workouts'}/>
       {workoutTiles}
       <EmptySpace />
       <Navigation pathname={location.pathname}/>
@@ -45,6 +56,7 @@ const Workouts = ({ isFirstRender, removeIsFirstRender, location, workouts}: Pro
 };
 
 interface StateProps {
+  scrollY: number;
   workouts: Workout[];
   isFirstRender: boolean;
 }
@@ -54,9 +66,10 @@ const mapStateToProps = ({
   entities: {
     workouts: { allIds, byId },
   },
+  scrollY: { WORKOUTS_PAGE },
 }: State): StateProps => {
   const workouts = allIds.map(id => byId[id]);
-  return { workouts, isFirstRender };
+  return { scrollY: WORKOUTS_PAGE, workouts, isFirstRender };
 };
 
 interface DispatchProps {
@@ -69,7 +82,7 @@ const mapDispatchToProps: DispatchProps = {
   }),
 };
 
-export default connect<StateProps, DispatchProps, OwnProps>(
+export default connect<StateProps, DispatchProps, void>(
   mapStateToProps,
   mapDispatchToProps
 )(Workouts);

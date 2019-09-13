@@ -1,11 +1,10 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { opaqueImageInAfter } from './SharedStyles';
 import {
   ReduxAction, // eslint-disable-line no-unused-vars
-  State, // eslint-disable-line no-unused-vars
   Workout, // eslint-disable-line no-unused-vars
 } from '../helpers/types';
 import {
@@ -67,13 +66,9 @@ interface OwnProps {
   workout: Workout;
 }
 
-type Props = OwnProps & StateProps & DispatchProps;
+type Props = OwnProps & DispatchProps;
 
-const WorkoutTile = ({ setWindowScroll, scrollY = 0, workout }: Props) => {
-  useEffect(() => {
-    window.scrollTo(0, scrollY);
-  });
-
+const WorkoutTile = ({ setWindowScroll, workout }: Props) => {
   const handleClick = () => {
     setWindowScroll(window.scrollY);
   };
@@ -98,14 +93,6 @@ const WorkoutTile = ({ setWindowScroll, scrollY = 0, workout }: Props) => {
   );
 };
 
-interface StateProps {
-  scrollY: number;
-}
-
-const mapStateToProps = (state: State): StateProps => ({
-  scrollY: state.scrollY.WORKOUTS_PAGE,
-});
-
 interface DispatchProps {
   setWindowScroll: (scrollY: number) => ReduxAction<{
     scrollY: number,
@@ -123,7 +110,7 @@ const mapDispatchToProps: DispatchProps = {
   }),
 };
 
-export default connect<StateProps, DispatchProps, OwnProps>(
-  mapStateToProps,
+export default connect<void, DispatchProps, OwnProps>(
+  null,
   mapDispatchToProps
 )(WorkoutTile);

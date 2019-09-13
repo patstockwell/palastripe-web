@@ -7,6 +7,8 @@ import {
   MONTHS_OF_THE_YEAR,
   SECONDS_IN_A_MINUTE,
   activityHeadingHeight,
+  WORKOUTS_PAGE,
+  ACTIVITY_PAGE,
 } from './constants';
 import {
   isTimed,
@@ -77,6 +79,16 @@ export function useInterval(callback: () => any, delay: number) {
     }
   }, [delay]);
 }
+
+export const getCurrentPage = (pathname: string): string => {
+  if (pathname === '/' || /\/workouts*/.test(pathname)) {
+    return WORKOUTS_PAGE;
+  } else if (/\/activity*/.test(pathname)) {
+    return ACTIVITY_PAGE;
+  } else {
+    return '';
+  }
+};
 
 export const getIdsForStretchExercises = (
   byId: { [propName: string]: Exercise },

@@ -13,6 +13,11 @@ export interface SelectedExercise {
   index: number | null;
 }
 
+export interface RouteState {
+  immediate: boolean;
+  backPath: string;
+}
+
 // State shape
 export interface State {
   isFirstRender: boolean;

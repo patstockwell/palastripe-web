@@ -7,9 +7,11 @@ import ActiveWorkout from '../pages/ActiveWorkout';
 import Activity from '../pages/Activity';
 import EditWorkout from '../pages/EditWorkout';
 import FourZeroFour from '../pages/FourZeroFour';
+import Profile from '../pages/Profile';
 import { useRouter } from '../helpers/functions';
 import {
   ReduxAction, // eslint-disable-line no-unused-vars
+  RouteState, // eslint-disable-line no-unused-vars
   State, // eslint-disable-line no-unused-vars
 } from '../helpers/types';
 import { SET_FIRST_RENDER_FLAG } from '../helpers/constants';
@@ -19,14 +21,14 @@ type Props = DispatchProps & StateProps;
 const Routes: React.FC<Props> = ({ isFirstRender, removeIsFirstRender }) => {
   const [ destroyed, setDestroyed ] = useState(false);
   const { location } = useRouter();
-  const { state = { immediate: true } }: {
-    state: {
-      immediate: boolean,
-    },
-  } = location;
+  const {
+    // set default value in case none is passed
+    state = { immediate: true, backPath: '/workouts/' },
+  }: { state: RouteState } = location;
+  const { immediate, backPath } = state;
 
   const transitions = useTransition(location, (loc: any) => loc.key, {
-    immediate: state.immediate,
+    immediate,
     from: { opacity: 0, left: '100%', top: '100vh', position: 'fixed' },
     enter: { opacity: 1, left: '0%', top: '0vh' },
     leave: { opacity: 0, left: '100%', top: '100vh' },
@@ -55,15 +57,17 @@ const Routes: React.FC<Props> = ({ isFirstRender, removeIsFirstRender }) => {
           <Route path="/" exact component={Workouts} />
           <Route path="/workouts/" exact component={Workouts} />
           <Route path="/activity/" component={Activity} />
+          <Route path="/profile/" exact render={() =>
+            <Profile
+              backPath={backPath}
+              animationStyles={props} />} />
           <Route path="/edit-workout/" render={() =>
             <EditWorkout animationStyles={props} />} />
           <Route path="/workouts/:id/" render={({ match }) =>
             <ActiveWorkout
               destroyed={destroyed}
               animationStyles={props}
-              match={match}
-            />}
-          />
+              match={match} />} />
           <Route component={FourZeroFour} />
         </Switch>
       ))}

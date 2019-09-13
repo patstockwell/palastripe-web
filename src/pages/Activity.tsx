@@ -1,5 +1,5 @@
 import React, {
-  CSSProperties, // eslint-disable-line no-unused-vars
+  Fragment,
   useEffect,
 } from 'react';
 import {
@@ -10,16 +10,11 @@ import {
   Workout, // eslint-disable-line no-unused-vars
 } from '../helpers/types';
 import ActivityHistoryList from '../components/ActivityHistoryList';
-import { animated } from 'react-spring';
 import { connect } from 'react-redux';
 import Banner from '../components/Banner';
 import Navigation from '../components/Navigation';
 import ActivityHistoryHero from '../components/ActivityHistoryHero';
 import { getTotalWeightLifted, getDiffInMinutes } from '../helpers/functions';
-
-interface OwnProps {
-  animationStyles: CSSProperties;
-}
 
 const getTotalMinutes = (history: Workout[]): number => (
   history.reduce((acc, curr) => (
@@ -31,24 +26,25 @@ const getTotalWeight = (history: Workout[]): number => (
   history.reduce((acc, curr) => getTotalWeightLifted(curr) + acc, 0)
 );
 
-type Props = OwnProps & StateProps & RouteProps;
+type Props = StateProps & RouteProps;
 
 const Activity: React.FC<Props> = ({
-  scrollY = 0,
-  animationStyles,
+  scrollY,
   location,
   history,
 }) => {
   useEffect(() => {
-    window.scrollTo(0, scrollY);
+    if (typeof scrollY === 'number') {
+      window.scrollTo(0, scrollY);
+    }
   });
 
   const totalMinutes = getTotalMinutes(history);
   const totalWeight = getTotalWeight(history);
 
   return (
-    <animated.div style={animationStyles}>
-      <Banner heading={'Activity'}/>
+    <Fragment>
+      <Banner pathname={location.pathname} heading={'Activity'}/>
       <ActivityHistoryHero
         totalWorkouts={history.length}
         totalMinutes={totalMinutes}
@@ -56,7 +52,7 @@ const Activity: React.FC<Props> = ({
       />
       <ActivityHistoryList history={history} />
       <Navigation pathname={location.pathname} />
-    </animated.div>
+    </Fragment>
   );
 };
 
