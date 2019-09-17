@@ -30,14 +30,14 @@ interface Props {
   sticky?: boolean;
   back: {
     link: string;
-    handleClick?: () => void;
+    handleClick?: (e?: React.MouseEvent) => void;
     showArrows: boolean;
     text?: string;
   };
   continueTo?: {
     link: string;
     text: string;
-    handleClick?: () => void;
+    handleClick?: (e?: React.MouseEvent) => void;
     showArrows: boolean;
   };
 }

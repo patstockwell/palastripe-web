@@ -48,7 +48,7 @@ const AnimatedSlidingPage = styled(animated.div)<{ position?: string }>`
 
 interface OwnProps {
   animationStyles: any;
-  destroyed: boolean;
+  atRest: boolean;
 }
 
 type Match = Pick<RouteComponentProps<{ id: string }>, 'match'>;
@@ -62,7 +62,7 @@ const ActiveWorkout: React.FC<Props> = ({
   match,
   activeWorkout,
   setActiveWorkout,
-  destroyed,
+  atRest,
   isFirstRender,
   setWindowScroll,
 }) => {
@@ -80,7 +80,7 @@ const ActiveWorkout: React.FC<Props> = ({
   }, showRestTimer ? ONE_SECOND : ONE_DAY);
 
   useEffect(() => {
-    if (destroyed && scrollNotReset) {
+    if (atRest && scrollNotReset) {
       window.scrollTo(0, 0);
       setIsRelativePosition(true);
       setScrollNotReset(false);

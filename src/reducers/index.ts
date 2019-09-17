@@ -4,6 +4,7 @@ import {
 } from '../helpers/types';
 import initialState from './initialState';
 import settingsReducer from './settingsReducer';
+import profileReducer from './profileReducer';
 import scrollYReducer from './scrollYReducer';
 import activeWorkoutReducer from './activeWorkoutReducer';
 import historyReducer from './historyReducer';
@@ -22,6 +23,7 @@ const rootReducer = (state = initialState, action: ReduxAction<any>): State => (
   ),
   scrollY: scrollYReducer(state.scrollY, action),
   settings: settingsReducer(state.settings, action),
+  profile: profileReducer(state.profile, action),
   history: historyReducer(state.history, action),
   // editableWorkout: editWorkoutReducer(state.editableWorkout, action),
 });

@@ -94,9 +94,10 @@ const EditWorkout: React.FC<Props> = ({
   //   setSearchQuery(e.target.value);
   // };
 
-  const handleEditNameChange = (e: any) => {
+  const handleEditNameChange = (e: React.ChangeEvent) => {
     e.preventDefault();
-    setWorkoutName(e.target.value);
+    const target = e.target as HTMLTextAreaElement;
+    setWorkoutName(target.value);
   };
 
   // Can I match more than one word?

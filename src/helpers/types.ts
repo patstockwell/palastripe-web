@@ -23,8 +23,8 @@ export interface State {
   isFirstRender: boolean;
   activeWorkout?: Workout;
   activeWorkoutSelectedExercise: SelectedExercise;
-  immediate: boolean;
   scrollY: ScrollY;
+  profile: Profile;
   settings: Settings;
   entities: Entities;
   history: Workout[];
@@ -35,6 +35,11 @@ export interface State {
 export interface ScrollY {
   WORKOUTS_PAGE?: number;
   ACTIVITY_PAGE?: number;
+}
+
+export interface Profile {
+  firstName: string;
+  lastName: string;
 }
 
 export interface Settings {

@@ -84,14 +84,15 @@ const ActivityListHeading: React.FC<Props> = ({
   id,
 }) => {
   const [showInput, setShowInput] = useState(false);
-  const handleKeyPress = (e: any) => {
+  const handleKeyPress = (e: React.KeyboardEvent) => {
     if (e.which === 13) { // if enter key is pressed
       setShowInput(false);
     }
   };
 
-  const handleInputChange = (e: any) => {
-    updateName(id, e.target.value);
+  const handleInputChange = (e: React.ChangeEvent) => {
+    const target = e.target as HTMLTextAreaElement;
+    updateName(id, target.value);
   };
 
   return (

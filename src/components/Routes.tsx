@@ -19,7 +19,8 @@ import { SET_FIRST_RENDER_FLAG } from '../helpers/constants';
 type Props = DispatchProps & StateProps;
 
 const Routes: React.FC<Props> = ({ isFirstRender, removeIsFirstRender }) => {
-  const [ destroyed, setDestroyed ] = useState(false);
+  const [ activeWorkoutPageAtRest, setActiveWorkoutPageAtRest ] = useState(false);
+  const [ profilePageAtRest, setProfilePageAtRest ] = useState(false);
   const { location } = useRouter();
   const {
     // set default value in case none is passed
@@ -40,13 +41,9 @@ const Routes: React.FC<Props> = ({ isFirstRender, removeIsFirstRender }) => {
       if (isFirstRender) {
         removeIsFirstRender();
       }
-
-      if (location.pathname !== '/workouts/'
-        && /\/workouts*/.test(location.pathname)) {
-        setDestroyed(true);
-      } else {
-        setDestroyed(false);
-      }
+      const { pathname: path } = location;
+      setActiveWorkoutPageAtRest(path !== '/workouts/' && /\/workouts*/.test(path));
+      setProfilePageAtRest(path === '/profile/');
     },
   });
 
@@ -60,12 +57,13 @@ const Routes: React.FC<Props> = ({ isFirstRender, removeIsFirstRender }) => {
           <Route path="/profile/" exact render={() =>
             <Profile
               backPath={backPath}
+              atRest={profilePageAtRest || isFirstRender}
               animationStyles={props} />} />
           <Route path="/edit-workout/" render={() =>
             <EditWorkout animationStyles={props} />} />
           <Route path="/workouts/:id/" render={({ match }) =>
             <ActiveWorkout
-              destroyed={destroyed}
+              atRest={activeWorkoutPageAtRest}
               animationStyles={props}
               match={match} />} />
           <Route component={FourZeroFour} />

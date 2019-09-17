@@ -45,7 +45,7 @@ const placeholder = 'Workout name';
 
 const EditWorkoutHero: React.FC<Props> = ({ name, handleInputChange }) => {
   const [ showInput, setShowInput ] = useState(false);
-  const handleKeyPress = (e: any) => {
+  const handleKeyPress = (e: React.KeyboardEvent) => {
     if (e.which === 13) { // if enter key is pressed
       setShowInput(false);
     }
