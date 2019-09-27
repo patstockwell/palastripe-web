@@ -58,6 +58,7 @@ export const charcoal = '#444444';
 
 // action types
 export const SET_FIRST_RENDER_FLAG: string = 'SET_FIRST_RENDER_FLAG';
+export const UPDATE_NAME: string = 'UPDATE_NAME';
 export const SET_SELECTED_EXERCISE: string = 'SET_SELECTED_EXERCISE';
 export const SELECT_NEXT_EXERCISE: string = 'SELECT_NEXT_EXERCISE';
 export const FINISH_WORKOUT: string = 'FINISH_WORKOUT';

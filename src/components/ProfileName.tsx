@@ -5,7 +5,9 @@ import styled from 'styled-components';
 
 import BackLinkBanner from './BackLinkBanner';
 import EditIconPencil from '../assets/svg/EditIconPencil';
+import { superLightGrey, gutterWidth, UPDATE_NAME } from '../helpers/constants';
 import {
+  ReduxAction, // eslint-disable-line
   State, // eslint-disable-line
 } from '../helpers/types';
 import Avatar from '../assets/svg/Avatar';
@@ -65,26 +67,50 @@ const EditPage = styled(animated.div)`
   position: fixed;
   height: 100vh;
   width: 100vw;
-  background-color: red;
+  background-color: ${superLightGrey};
   z-index: 3;
 `;
 
 const Input = styled.input`
   background-color: white;
   border: 1px solid grey;
-  border-radius: 8px;
+  box-shadow: none;
   width: 90%;
   max-width: 400px;
+  padding: 16px;
+  font-size: 0.75em;
+  font-size: 1em;
+  margin: 0px ${gutterWidth}px;
+  box-sizing: border-box;
 
   &::placeholder {
     color: darkgrey;
   }
 `;
 
-const ProfileName: React.FC<StateProps> = ({ firstName, lastName }) => {
+const TopInput = styled(Input)`
+  border-bottom: none;
+  border-radius: 8px 8px 0 0;
+`;
+
+const BottomInput = styled(Input)`
+  border-radius: 0 0 8px 8px;
+`;
+
+const InputWrapper = styled.div`
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+`;
+
+type Props = StateProps & DispatchProps;
+
+const ProfileName: React.FC<Props> = ({ updateName, firstName, lastName }) => {
   const [showEdit, setShowEdit] = useState(false);
-  const [inputValue, setInputValue] = useState('');
-  const emptyName = !firstName && !lastName;
+  const [firstNameInput, setFirstNameInput] = useState('');
+  const [lastNameInput, setLastNameInput] = useState('');
+  const hasName = firstName || lastName;
   const transitions = useTransition(showEdit, null, {
     from: { left: '100%' },
     enter: { left: '0%' },
@@ -99,35 +125,56 @@ const ProfileName: React.FC<StateProps> = ({ firstName, lastName }) => {
       </AvatarCircle>
       <NameAndEditIcon onClick={() => setShowEdit(true)} >
         <EditIconPencil height={12} width={12} style={{ fill: 'grey' }} />
-        {emptyName ?
-          <EmptyName>Add your name</EmptyName>
-          :
+        {hasName ?
           <Name>{firstName} {lastName}</Name>
+          :
+          <EmptyName>Add your name</EmptyName>
         }
       </NameAndEditIcon>
 
       {transitions.map(({ item, props }) => {
         return item ?
           <EditPage key={'unique'} style={props}>
-            <BackLinkBanner back={{
-              showArrows: true,
-              text: 'Back',
-              link: '', // don't supply a link as the URL is not changing
-              handleClick: (e: React.MouseEvent) => {
-                e.preventDefault();
-                setShowEdit(false);
-              },
-            }}/>
-            Slide in
-            <Input
-              autoFocus
-              value={inputValue}
-              onChange={(e: any) => {
-                console.log('asdf');
-                setInputValue(e.target.value);
+            <BackLinkBanner
+              back={{
+                showArrows: false,
+                text: 'Cancel',
+                link: '', // don't supply a link as the URL is not changing
+                handleClick: (e: React.MouseEvent) => {
+                  e.preventDefault();
+                  setFirstNameInput(firstName);
+                  setLastNameInput(lastName);
+                  setShowEdit(false);
+                },
               }}
-              placeholder={'First Name'}
+              continueTo={{
+                text: 'Save',
+                showArrows: false,
+                link: '', // don't supply a link as the URL is not changing
+                handleClick: (e: React.MouseEvent) => {
+                  e.preventDefault();
+                  updateName({ firstName: firstNameInput, lastName: lastNameInput });
+                  setShowEdit(false);
+                },
+              }}
             />
+            <InputWrapper>
+              <TopInput
+                autoFocus
+                value={firstNameInput || firstName}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  setFirstNameInput(e.target.value)
+                }
+                placeholder={'First Name'}
+              />
+              <BottomInput
+                value={lastNameInput || lastName}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  setLastNameInput(e.target.value)
+                }
+                placeholder={'Last Name'}
+              />
+            </InputWrapper>
           </EditPage>
           : null;
       })}
@@ -136,14 +183,33 @@ const ProfileName: React.FC<StateProps> = ({ firstName, lastName }) => {
   );
 };
 
-interface StateProps {
+interface Names {
   firstName: string;
   lastName: string;
 }
+
+type StateProps = Names;
+
+interface DispatchProps {
+  updateName: (names: Names) => ReduxAction<Names>;
+}
+
+const mapDispatchToProps: DispatchProps = {
+  updateName: ({ firstName, lastName }) => ({
+    type: UPDATE_NAME,
+    payload: {
+      firstName,
+      lastName,
+    },
+  }),
+};
 
 const mapStateToProps = (state: State): StateProps => ({
   firstName: state.profile.firstName,
   lastName: state.profile.lastName,
 });
 
-export default connect<StateProps, void, void>(mapStateToProps)(ProfileName);
+export default connect<StateProps, DispatchProps, void>(
+  mapStateToProps,
+  mapDispatchToProps
+)(ProfileName);

@@ -28,8 +28,8 @@ const initialState: State = {
   },
 
   profile: {
-    firstName: null,
-    lastName: null,
+    firstName: '',
+    lastName: '',
   },
 
   settings: {
