@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import BackLinkBanner from './BackLinkBanner';
 import EditIconPencil from '../assets/svg/EditIconPencil';
 import { superLightGrey, gutterWidth, UPDATE_NAME } from '../helpers/constants';
+import { getInitials } from '../helpers/functions';
 import {
   ReduxAction, // eslint-disable-line
   State, // eslint-disable-line
@@ -21,6 +22,7 @@ const FlexWrapper = styled.div`
 const AvatarCircle = styled.div`
   display: flex;
   justify-content: center;
+  align-items: center;
   width: 80px;
   height: 80px;
   background-color: lightgrey;
@@ -28,6 +30,12 @@ const AvatarCircle = styled.div`
   border-radius: 50%;
   overflow: hidden;
   margin: 24px;
+
+  & p {
+    font-weight: 800;
+    color: white;
+    font-size: 1.5em;
+  }
 
   & svg {
     fill: white;
@@ -121,7 +129,11 @@ const ProfileName: React.FC<Props> = ({ updateName, firstName, lastName }) => {
   return (
     <FlexWrapper>
       <AvatarCircle>
-        <Avatar />
+        {hasName ?
+          <p>{getInitials(firstName, lastName)}</p>
+          :
+          <Avatar />
+        }
       </AvatarCircle>
       <NameAndEditIcon onClick={() => setShowEdit(true)} >
         <EditIconPencil height={12} width={12} style={{ fill: 'grey' }} />

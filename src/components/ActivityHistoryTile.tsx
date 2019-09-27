@@ -63,6 +63,7 @@ const WorkoutImage = styled.div<{ image: string }>`
 const AvatarCircle = styled.div`
   display: flex;
   justify-content: center;
+  align-items: center;
   position: absolute;
   top: 16px;
   right: -8px;
@@ -72,6 +73,12 @@ const AvatarCircle = styled.div`
   border: 2px solid white;
   border-radius: 50%;
   overflow: hidden;
+
+  & p {
+    font-weight: 800;
+    color: white;
+    font-size: 0.8em;
+  }
 
   & svg {
     fill: white;
@@ -171,6 +178,7 @@ interface Props {
   toggleMenu: () => void;
   deleteWorkout: () => ReduxAction<number>;
   position: number; // useful for memoizing the result of this component
+  initials: string;
 }
 
 const ActivityHistoryTile: React.FC<Props> = ({
@@ -178,6 +186,7 @@ const ActivityHistoryTile: React.FC<Props> = ({
   toggleMenu,
   showMenu,
   deleteWorkout,
+  initials,
 }) => {
   const [ showDeleteWorkoutAlert, setShowDeleteWorkoutAlert ] = useState(false);
 
@@ -199,7 +208,11 @@ const ActivityHistoryTile: React.FC<Props> = ({
       <Left>
         <WorkoutImage image={workout.imageUrl} />
         <AvatarCircle>
-          <Avatar />
+          {initials ?
+            <p>{initials}</p>
+            :
+            <Avatar />
+          }
         </AvatarCircle>
       </Left>
       <Right>

@@ -80,6 +80,10 @@ export function useInterval(callback: () => any, delay: number) {
   }, [delay]);
 }
 
+export const getInitials = (firstName: string, lastName: string): string => (
+  `${firstName.slice(0, 1)}${lastName.slice(0, 1)}`.toUpperCase()
+);
+
 export const getCurrentPage = (pathname: string): string => {
   if (pathname === '/' || /\/workouts*/.test(pathname)) {
     return WORKOUTS_PAGE;

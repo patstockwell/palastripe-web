@@ -7,9 +7,11 @@ import {
   SET_WINDOW_SCROLL,
   DELETE_WORKOUT,
 } from '../helpers/constants';
+import { getInitials } from '../helpers/functions';
 import ActivityHistoryTile from './ActivityHistoryTile';
 import {
   ReduxAction, // eslint-disable-line no-unused-vars
+  State, // eslint-disable-line no-unused-vars
   Workout, // eslint-disable-line no-unused-vars
 } from '../helpers/types';
 
@@ -28,18 +30,21 @@ interface OwnProps {
   history: Workout[];
 }
 
-type Props = OwnProps & DispatchProps;
+type Props = OwnProps & DispatchProps & StateProps;
 
 const ActivityHistoryList: React.FC<Props> = ({
   history,
   deleteWorkout,
   setWindowScroll,
+  firstName,
+  lastName,
 }) => {
   // undefined is used to denote no tile in list is selected
   const [ showMenuIndex, setShowMenuIndex ] = useState(undefined);
 
   const historyTiles = history.map((w, i) => (
     <ActivityHistoryTile
+      initials={getInitials(firstName, lastName)}
       key={w.finishTime}
       workout={w}
       showMenu={showMenuIndex === i}
@@ -60,6 +65,11 @@ const ActivityHistoryList: React.FC<Props> = ({
   );
 };
 
+interface StateProps {
+  firstName: string;
+  lastName: string;
+}
+
 interface DispatchProps {
   deleteWorkout: (i: number) => ReduxAction<number>;
   setWindowScroll: (scrollY: number) => ReduxAction<{
@@ -67,6 +77,11 @@ interface DispatchProps {
     page: string
   }>;
 }
+
+const mapStateToProps = (state: State): StateProps => ({
+  firstName: state.profile.firstName,
+  lastName: state.profile.lastName,
+});
 
 const mapDispatchToProps: DispatchProps = ({
   setWindowScroll: scrollY => ({
@@ -82,7 +97,7 @@ const mapDispatchToProps: DispatchProps = ({
   }),
 });
 
-export default connect<void, DispatchProps, OwnProps>(
-  null,
+export default connect<StateProps, DispatchProps, OwnProps>(
+  mapStateToProps,
   mapDispatchToProps
 )(ActivityHistoryList);

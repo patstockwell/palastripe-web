@@ -18,12 +18,9 @@ const profileReducer = (state: Profile, action: ReduxAction<any>) => {
 const updateName = ({ firstName, lastName }: {
   firstName: string,
   lastName: string,
-}): Profile => {
-  console.log(firstName, lastName);
-  return {
-    firstName,
-    lastName,
-  };
-};
+}): Profile => ({
+  firstName,
+  lastName,
+});
 
 export default profileReducer;

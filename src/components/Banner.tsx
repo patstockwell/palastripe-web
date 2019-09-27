@@ -14,10 +14,15 @@ import {
   lightLightGrey,
   SET_WINDOW_SCROLL,
 } from '../helpers/constants';
-import { getCurrentPage, useHasScrolled } from '../helpers/functions';
+import {
+  getInitials,
+  getCurrentPage,
+  useHasScrolled,
+} from '../helpers/functions';
 import {
   ReduxAction, // eslint-disable-line no-unused-vars
   RouteState, // eslint-disable-line no-unused-vars
+  State, // eslint-disable-line no-unused-vars
 } from '../helpers/types';
 
 const AppLogo = styled.p`
@@ -36,11 +41,17 @@ const AppLogo = styled.p`
 const AvatarCircle = styled(Link)`
   display: flex;
   justify-content: center;
+  align-items: center;
   width: ${avatarCircleDiameter}px;
   height: ${avatarCircleDiameter}px;
   background-color: ${lightLightGrey};
   border-radius: 50%;
   overflow: hidden;
+
+  text-decoration: none;
+  font-size: 0.8em;
+  font-weight: 800;
+  color: white;
 
   & svg {
     fill: white;
@@ -89,9 +100,15 @@ interface OwnProps {
   pathname: string;
 }
 
-type Props = OwnProps & DispatchProps;
+type Props = OwnProps & DispatchProps & StateProps;
 
-const Banner: React.FC<Props> = ({ setWindowScroll, heading, pathname }) => {
+const Banner: React.FC<Props> = ({
+  setWindowScroll,
+  heading,
+  pathname,
+  firstName,
+  lastName,
+}) => {
   const scrolled: boolean = useHasScrolled();
   const {
     fontSize,
@@ -137,12 +154,21 @@ const Banner: React.FC<Props> = ({ setWindowScroll, heading, pathname }) => {
             state: routeState,
           }}
         >
-          <Avatar />
+          {firstName || lastName ?
+            getInitials(firstName, lastName)
+            :
+            <Avatar />
+          }
         </AvatarCircle>
       </CollapsableHeader>
     </Header>
   );
 };
+
+interface StateProps {
+  firstName: string;
+  lastName: string;
+}
 
 interface DispatchProps {
   setWindowScroll: (scrollY: number, page: string) => ReduxAction<{
@@ -150,6 +176,11 @@ interface DispatchProps {
     page: string
   }>;
 }
+
+const mapStateToProps = (state: State): StateProps => ({
+  firstName: state.profile.firstName,
+  lastName: state.profile.lastName,
+});
 
 const mapDispatchToProps: DispatchProps = {
   setWindowScroll: (scrollY, page) => ({
@@ -161,7 +192,7 @@ const mapDispatchToProps: DispatchProps = {
   }),
 };
 
-export default connect<void, DispatchProps, void>(
-  null,
+export default connect<StateProps, DispatchProps, OwnProps>(
+  mapStateToProps,
   mapDispatchToProps
 )(Banner);
