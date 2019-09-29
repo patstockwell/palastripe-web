@@ -3,44 +3,19 @@ import { useTransition, animated } from 'react-spring';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 
+import Avatar from './Avatar';
 import BackLinkBanner from './BackLinkBanner';
 import EditIconPencil from '../assets/svg/EditIconPencil';
 import { superLightGrey, gutterWidth, UPDATE_NAME } from '../helpers/constants';
-import { getInitials } from '../helpers/functions';
 import {
   ReduxAction, // eslint-disable-line
   State, // eslint-disable-line
 } from '../helpers/types';
-import Avatar from '../assets/svg/Avatar';
 
 const FlexWrapper = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
-`;
-
-const AvatarCircle = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 80px;
-  height: 80px;
-  background-color: lightgrey;
-  border: 2px solid white;
-  border-radius: 50%;
-  overflow: hidden;
-  margin: 24px;
-
-  & p {
-    font-weight: 800;
-    color: white;
-    font-size: 1.5em;
-  }
-
-  & svg {
-    fill: white;
-    width: 40px;
-  }
 `;
 
 const NameAndEditIcon = styled.button`
@@ -118,6 +93,7 @@ const ProfileName: React.FC<Props> = ({ updateName, firstName, lastName }) => {
   const [showEdit, setShowEdit] = useState(false);
   const [firstNameInput, setFirstNameInput] = useState('');
   const [lastNameInput, setLastNameInput] = useState('');
+  const [nameHasChanged, setNameHasChanged] = useState(false);
   const hasName = firstName || lastName;
   const transitions = useTransition(showEdit, null, {
     from: { left: '100%' },
@@ -128,13 +104,7 @@ const ProfileName: React.FC<Props> = ({ updateName, firstName, lastName }) => {
 
   return (
     <FlexWrapper>
-      <AvatarCircle>
-        {hasName ?
-          <p>{getInitials(firstName, lastName)}</p>
-          :
-          <Avatar />
-        }
-      </AvatarCircle>
+      <Avatar isLargeSize />
       <NameAndEditIcon onClick={() => setShowEdit(true)} >
         <EditIconPencil height={12} width={12} style={{ fill: 'grey' }} />
         {hasName ?
@@ -165,7 +135,12 @@ const ProfileName: React.FC<Props> = ({ updateName, firstName, lastName }) => {
                 link: '', // don't supply a link as the URL is not changing
                 handleClick: (e: React.MouseEvent) => {
                   e.preventDefault();
-                  updateName({ firstName: firstNameInput, lastName: lastNameInput });
+                  if (nameHasChanged) {
+                    updateName({
+                      firstName: firstNameInput,
+                      lastName: lastNameInput,
+                    });
+                  }
                   setShowEdit(false);
                 },
               }}
@@ -174,16 +149,18 @@ const ProfileName: React.FC<Props> = ({ updateName, firstName, lastName }) => {
               <TopInput
                 autoFocus
                 value={firstNameInput || firstName}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  setFirstNameInput(e.target.value)
-                }
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                  setFirstNameInput(e.target.value);
+                  setNameHasChanged(true);
+                }}
                 placeholder={'First Name'}
               />
               <BottomInput
                 value={lastNameInput || lastName}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  setLastNameInput(e.target.value)
-                }
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                  setLastNameInput(e.target.value);
+                  setNameHasChanged(true);
+                }}
                 placeholder={'Last Name'}
               />
             </InputWrapper>

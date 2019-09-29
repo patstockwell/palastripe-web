@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import AlertConfirm, { Button } from './AlertConfirm';
 import TrashCan from '../assets/svg/TrashCan';
 import Dots from '../assets/svg/Dots';
-import Avatar from '../assets/svg/Avatar';
+import Avatar from './Avatar';
 import {
   ReduxAction, // eslint-disable-line no-unused-vars
   Workout, // eslint-disable-line no-unused-vars
@@ -18,7 +18,6 @@ import {
 import {
   purple,
   superLightGrey,
-  avatarCircleDiameter,
 } from '../helpers/constants';
 
 const Tile = styled.div`
@@ -60,30 +59,10 @@ const WorkoutImage = styled.div<{ image: string }>`
   opacity: 0.3;
 `;
 
-const AvatarCircle = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
+const AvatarWrapper = styled.div`
   position: absolute;
   top: 16px;
   right: -8px;
-  width: ${avatarCircleDiameter}px;
-  height: ${avatarCircleDiameter}px;
-  background-color: ${purple};
-  border: 2px solid white;
-  border-radius: 50%;
-  overflow: hidden;
-
-  & p {
-    font-weight: 800;
-    color: white;
-    font-size: 0.8em;
-  }
-
-  & svg {
-    fill: white;
-    width: 20px;
-  }
 `;
 
 const Name = styled.p`
@@ -186,7 +165,6 @@ const ActivityHistoryTile: React.FC<Props> = ({
   toggleMenu,
   showMenu,
   deleteWorkout,
-  initials,
 }) => {
   const [ showDeleteWorkoutAlert, setShowDeleteWorkoutAlert ] = useState(false);
 
@@ -207,13 +185,9 @@ const ActivityHistoryTile: React.FC<Props> = ({
     <Tile>
       <Left>
         <WorkoutImage image={workout.imageUrl} />
-        <AvatarCircle>
-          {initials ?
-            <p>{initials}</p>
-            :
-            <Avatar />
-          }
-        </AvatarCircle>
+        <AvatarWrapper>
+          <Avatar backgroundColour={purple} />
+        </AvatarWrapper>
       </Left>
       <Right>
         <div>

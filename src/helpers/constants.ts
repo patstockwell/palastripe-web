@@ -11,7 +11,6 @@ export const activityHeadingHeight: number = 40;
 export const workoutWindowViewport: number = 50;
 export const gutterWidth: number = 12;
 export const timedExerciseWaitPeriod: number = 10;
-export const avatarCircleDiameter = 28;
 
 export const DEFAULT_REST_PERIOD_IN_SECONDS: number = 30;
 export const ONE_SECOND: number = 1000;

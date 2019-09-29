@@ -4,25 +4,21 @@ import { animated, useSpring } from 'react-spring';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-import Avatar from '../assets/svg/Avatar';
+import Avatar from './Avatar';
 import {
   bannerHeight,
   gutterWidth,
   pink,
   purple,
-  avatarCircleDiameter,
-  lightLightGrey,
   SET_WINDOW_SCROLL,
 } from '../helpers/constants';
 import {
-  getInitials,
   getCurrentPage,
   useHasScrolled,
 } from '../helpers/functions';
 import {
   ReduxAction, // eslint-disable-line no-unused-vars
   RouteState, // eslint-disable-line no-unused-vars
-  State, // eslint-disable-line no-unused-vars
 } from '../helpers/types';
 
 const AppLogo = styled.p`
@@ -38,25 +34,8 @@ const AppLogo = styled.p`
   background-image: linear-gradient( 140deg, ${pink}, ${purple});
 `;
 
-const AvatarCircle = styled(Link)`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: ${avatarCircleDiameter}px;
-  height: ${avatarCircleDiameter}px;
-  background-color: ${lightLightGrey};
-  border-radius: 50%;
-  overflow: hidden;
-
+const AvatarLink = styled(Link)`
   text-decoration: none;
-  font-size: 0.8em;
-  font-weight: 800;
-  color: white;
-
-  & svg {
-    fill: white;
-    width: 20px;
-  }
 `;
 
 export const Header = styled(animated.header)`
@@ -100,14 +79,12 @@ interface OwnProps {
   pathname: string;
 }
 
-type Props = OwnProps & DispatchProps & StateProps;
+type Props = OwnProps & DispatchProps;
 
 const Banner: React.FC<Props> = ({
   setWindowScroll,
   heading,
   pathname,
-  firstName,
-  lastName,
 }) => {
   const scrolled: boolean = useHasScrolled();
   const {
@@ -147,28 +124,19 @@ const Banner: React.FC<Props> = ({
       </VisibleHeader>
       <CollapsableHeader style={{ transform: transformLogo }}>
         <AppLogo>hbff</AppLogo>
-        <AvatarCircle
+        <AvatarLink
           onClick={handleClick}
           to={{
             pathname: '/profile/',
             state: routeState,
           }}
         >
-          {firstName || lastName ?
-            getInitials(firstName, lastName)
-            :
-            <Avatar />
-          }
-        </AvatarCircle>
+          <Avatar />
+        </AvatarLink>
       </CollapsableHeader>
     </Header>
   );
 };
-
-interface StateProps {
-  firstName: string;
-  lastName: string;
-}
 
 interface DispatchProps {
   setWindowScroll: (scrollY: number, page: string) => ReduxAction<{
@@ -176,11 +144,6 @@ interface DispatchProps {
     page: string
   }>;
 }
-
-const mapStateToProps = (state: State): StateProps => ({
-  firstName: state.profile.firstName,
-  lastName: state.profile.lastName,
-});
 
 const mapDispatchToProps: DispatchProps = {
   setWindowScroll: (scrollY, page) => ({
@@ -192,7 +155,7 @@ const mapDispatchToProps: DispatchProps = {
   }),
 };
 
-export default connect<StateProps, DispatchProps, OwnProps>(
-  mapStateToProps,
+export default connect<void, DispatchProps, OwnProps>(
+  null,
   mapDispatchToProps
 )(Banner);
