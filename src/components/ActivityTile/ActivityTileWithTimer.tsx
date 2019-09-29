@@ -177,6 +177,7 @@ const ActivityTileWithTimer: React.FC<Props> = ({
       <HiddenTimerArea
         time={time}
         animatedStyles={animatedStyles}
+        preparing={inProgress && !preparationComplete}
       />
 
       {selected &&
