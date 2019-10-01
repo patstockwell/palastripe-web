@@ -5,6 +5,7 @@ import React, {
 import styled from 'styled-components';
 import { animated } from 'react-spring';
 
+import SettingUnitOfMeasurement from '../components/SettingUnitOfMeasurement';
 import ProfileName from '../components/ProfileName';
 import { AnimatedSlidingPageStyle } from '../components/SharedStyles';
 import BackLinkBanner from '../components/BackLinkBanner';
@@ -19,6 +20,7 @@ const Panel = styled.div`
   background-color: white;
   margin-bottom: 8px;
   padding: 12px;
+  position: relative;
 `;
 
 interface Props {
@@ -48,6 +50,9 @@ const Profile: React.FC<Props> = ({ atRest, backPath, animationStyles }) => {
       }}/>
       <Panel>
         <ProfileName />
+      </Panel>
+      <Panel>
+        <SettingUnitOfMeasurement />
       </Panel>
     </AnimatedSlidingPage>
   );

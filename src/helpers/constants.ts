@@ -57,6 +57,7 @@ export const charcoal = '#444444';
 
 // action types
 export const SET_FIRST_RENDER_FLAG: string = 'SET_FIRST_RENDER_FLAG';
+export const CHANGE_UNIT_OF_MEASUREMENT: string = 'CHANGE_UNIT_OF_MEASUREMENT';
 export const UPDATE_NAME: string = 'UPDATE_NAME';
 export const SET_SELECTED_EXERCISE: string = 'SET_SELECTED_EXERCISE';
 export const SELECT_NEXT_EXERCISE: string = 'SELECT_NEXT_EXERCISE';
