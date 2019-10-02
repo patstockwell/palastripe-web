@@ -12,7 +12,7 @@ import historyReducer from './historyReducer';
 import firstRenderReducer from './firstRenderReducer';
 import selectedExerciseReducer from './selectedExerciseReducer';
 
-const rootReducer = (state = initialState, action: ReduxAction<any>): State => ({
+const rootReducer = (state: State = initialState, action: ReduxAction<any>): State => ({
   ...state,
   isFirstRender: firstRenderReducer(state.isFirstRender, action),
   activeWorkout: activeWorkoutReducer(state.activeWorkout, action),

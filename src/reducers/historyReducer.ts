@@ -1,6 +1,10 @@
 import { FINISH_WORKOUT, DELETE_WORKOUT } from '../helpers/constants';
+import {
+  Workout, // eslint-disable-line no-unused-vars
+  ReduxAction, // eslint-disable-line no-unused-vars
+} from '../helpers/types';
 
-const historyReducer = (state, action) => {
+const historyReducer = (state: Workout[], action: ReduxAction<any>) => {
   switch (action.type) {
     case FINISH_WORKOUT: {
       return finishWorkout(state, action);
@@ -14,11 +18,11 @@ const historyReducer = (state, action) => {
   }
 };
 
-const deleteWorkout = (state, action) => {
-  return state.filter((w, i) => i !== action.payload);
+const deleteWorkout = (state: Workout[], action: ReduxAction<number>) => {
+  return state.filter((_: any, i) => i !== action.payload);
 };
 
-const finishWorkout = (state, action) => {
+const finishWorkout = (state: Workout[], action: ReduxAction<Workout>) => {
   return [
     {
       ...action.payload,
@@ -29,4 +33,3 @@ const finishWorkout = (state, action) => {
 };
 
 export default historyReducer;
-
