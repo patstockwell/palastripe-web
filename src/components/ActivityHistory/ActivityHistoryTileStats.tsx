@@ -5,9 +5,9 @@ import {
   Activity, // eslint-disable-line no-unused-vars
   ActivityStats, // eslint-disable-line no-unused-vars
   isTimed,
-} from '../helpers/types';
-import { formatSeconds } from '../helpers/functions';
-import { pink, green } from '../helpers/constants';
+} from '../../helpers/types';
+import { formatSeconds } from '../../helpers/functions';
+import { pink, green } from '../../helpers/constants';
 
 const Panel = styled.div`
   color: white;

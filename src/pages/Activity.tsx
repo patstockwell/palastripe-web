@@ -9,11 +9,11 @@ import {
   State, // eslint-disable-line no-unused-vars
   Workout, // eslint-disable-line no-unused-vars
 } from '../helpers/types';
-import ActivityHistoryList from '../components/ActivityHistoryList';
+import ActivityHistoryList from '../components/ActivityHistory/ActivityHistoryList';
 import { connect } from 'react-redux';
 import Banner from '../components/Banner';
 import Navigation from '../components/Navigation';
-import ActivityHistoryHero from '../components/ActivityHistoryHero';
+import ActivityHistoryHero from '../components/ActivityHistory/ActivityHistoryHero';
 import { getTotalWeightLifted, getDiffInMinutes } from '../helpers/functions';
 
 const getTotalMinutes = (history: Workout[]): number => (

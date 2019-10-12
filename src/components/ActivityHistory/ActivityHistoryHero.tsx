@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import styled from 'styled-components';
-import { pink, purple } from '../helpers/constants';
-import { getHoursAndMinutes } from '../helpers/functions';
+import { pink, purple } from '../../helpers/constants';
+import { getHoursAndMinutes } from '../../helpers/functions';
 
 const Heading = styled.h3`
   color: grey;

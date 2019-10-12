@@ -6,14 +6,14 @@ import {
   ACTIVITY_PAGE,
   SET_WINDOW_SCROLL,
   DELETE_WORKOUT,
-} from '../helpers/constants';
-import { getInitials } from '../helpers/functions';
+} from '../../helpers/constants';
+import { getInitials } from '../../helpers/functions';
 import ActivityHistoryTile from './ActivityHistoryTile';
 import {
   ReduxAction, // eslint-disable-line no-unused-vars
   State, // eslint-disable-line no-unused-vars
   Workout, // eslint-disable-line no-unused-vars
-} from '../helpers/types';
+} from '../../helpers/types';
 
 const BottomSpace = styled.div`
   height: 200px;

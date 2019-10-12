@@ -1,25 +1,25 @@
 import React, { memo, useState } from 'react';
 import styled from 'styled-components';
 
-import AlertConfirm from './AlertConfirm';
-import TrashCan from '../assets/svg/TrashCan';
-import Dots from '../assets/svg/Dots';
-import Avatar from './Avatar';
+import AlertConfirm from '../AlertConfirm';
+import TrashCan from '../../assets/svg/TrashCan';
+import Dots from '../../assets/svg/Dots';
+import Avatar from '../Avatar';
 import {
   ReduxAction, // eslint-disable-line no-unused-vars
   Workout, // eslint-disable-line no-unused-vars
-} from '../helpers/types';
+} from '../../helpers/types';
 import {
   getDiffInMinutes,
   getHoursAndMinutes,
   getTimeSince,
   getTotalWeightLifted,
-} from '../helpers/functions';
+} from '../../helpers/functions';
 import {
   purple,
   superLightGrey,
-} from '../helpers/constants';
-import { buttonStyle } from './SharedStyles';
+} from '../../helpers/constants';
+import { buttonStyle } from '../SharedStyles';
 
 const Button = styled.button<{ background?: string }>`
   ${buttonStyle}
