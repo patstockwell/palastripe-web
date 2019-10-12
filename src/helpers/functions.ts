@@ -1,6 +1,7 @@
 import { useContext, useEffect, useRef, useState} from 'react';
 // @ts-ignore
 import { __RouterContext } from 'react-router-dom';
+import { useSpring } from 'react-spring';
 import {
   DAYS_OF_THE_WEEK,
   MILLISECONDS_IN_A_MINUTE,
@@ -9,6 +10,7 @@ import {
   activityHeadingHeight,
   WORKOUTS_PAGE,
   ACTIVITY_PAGE,
+  activeWorkoutWindowHeight,
 } from './constants';
 import {
   isTimed,
@@ -24,6 +26,14 @@ export function useRouter(): any {
   return useContext(__RouterContext);
 }
 
+export const useHiddenAreaAnimation = (showHiddenArea: boolean) =>
+  useSpring({
+    height: showHiddenArea ? activeWorkoutWindowHeight : 0,
+    opacity: showHiddenArea ? 1 : 0,
+    x: showHiddenArea ? -180 : 0,
+    config: { tension: 410, friction: 35 },
+  });
+
 export const useScrollElementToTop =
   (e: React.MutableRefObject<any>, selected: boolean, show: boolean) => {
     useEffect(() => {
@@ -34,7 +44,7 @@ export const useScrollElementToTop =
             left: 0,
             behavior: 'smooth',
           });
-        }, 300);
+        }, 240);
       }
     }, [ show, selected ]);
   };

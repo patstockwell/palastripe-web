@@ -1,7 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import styled, { keyframes } from 'styled-components';
-import { useSpring } from 'react-spring';
 
 import HiddenTimerArea from './HiddenTimerArea';
 import EditActivityPanel from '../EditActivityPanel';
@@ -23,6 +22,7 @@ import {
 import {
   formatSeconds,
   useScrollElementToTop,
+  useHiddenAreaAnimation,
 } from '../../helpers/functions';
 import {
   green,
@@ -30,7 +30,6 @@ import {
   timedExerciseWaitPeriod,
   TOGGLE_SET_COMPLETE,
   tileMinHeight,
-  activeWorkoutWindowHeight,
 } from '../../helpers/constants';
 import {
   Details,
@@ -107,12 +106,7 @@ const ActivityTileWithTimer: React.FC<Props> = ({
   const listElement = useRef(null);
   useScrollElementToTop(listElement, selected, showHiddenArea);
 
-  const animatedStyles = useSpring({
-    height: showHiddenArea ? activeWorkoutWindowHeight : 0,
-    opacity: showHiddenArea ? 1 : 0,
-    x: showHiddenArea ? -180 : 0,
-    config: { tension: 410, friction: 40 },
-  });
+  const animatedStyles = useHiddenAreaAnimation(showHiddenArea);
 
   const inProgress = selected && !completed && started;
 

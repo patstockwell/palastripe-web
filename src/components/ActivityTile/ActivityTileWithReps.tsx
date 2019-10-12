@@ -1,6 +1,6 @@
 import React, { memo, useRef, useState } from 'react';
 import { connect } from 'react-redux';
-import { useSpring, animated } from 'react-spring';
+import { animated } from 'react-spring';
 import styled from 'styled-components';
 import {
   Dispatch, // eslint-disable-line no-unused-vars
@@ -19,9 +19,11 @@ import {
 } from '../../helpers/types';
 import {
   TOGGLE_SET_COMPLETE,
-  activeWorkoutWindowHeight,
 } from '../../helpers/constants';
-import { useScrollElementToTop } from '../../helpers/functions';
+import {
+  useScrollElementToTop,
+  useHiddenAreaAnimation,
+} from '../../helpers/functions';
 import {
   Details,
   Title,
@@ -82,12 +84,7 @@ const ActivityTileWithReps: React.FC<Props> = ({
   const listElement = useRef(null);
   useScrollElementToTop(listElement, selected, showHiddenArea);
 
-  const animatedStyles = useSpring({
-    height: showHiddenArea ? activeWorkoutWindowHeight : 0,
-    opacity: showHiddenArea ? 1 : 0,
-    x: showHiddenArea ? -180 : 0,
-    config: { tension: 410, friction: 40 },
-  });
+  const animatedStyles = useHiddenAreaAnimation(showHiddenArea);
 
   return (
     <Tile
