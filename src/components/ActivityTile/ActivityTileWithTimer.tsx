@@ -61,7 +61,7 @@ const timerStyle = `
   left: 0;
 `;
 
-const PreparationTimer = styled.div`
+const PreparationTimerBar = styled.div`
   ${timerStyle}
   background-color: lightgrey;
   animation:
@@ -69,7 +69,7 @@ const PreparationTimer = styled.div`
     ${colourPulse} 2s linear infinite;
 `;
 
-const ActiveTimer = styled.div<{ timer: number }>`
+const ActiveTimerBar = styled.div<{ timer: number }>`
   ${timerStyle}
   background-color: ${green};
   animation: ${grow} ${({timer}) => timer}s linear;
@@ -130,19 +130,19 @@ const ActivityTileWithTimer: React.FC<Props> = ({
     setStarted(false);
   }
 
-  const time: string = formatSeconds(timerInSeconds - count);
+  const formattedTime: string = formatSeconds(timerInSeconds - count);
 
   return (
     <Tile ref={listElement} selected={selected} onClick={handleSelect}>
       <VisibleArea>
 
         {inProgress && (preparationComplete ? (
-          <ActiveTimer
+          <ActiveTimerBar
             timer={timerInSeconds + 1} // add 1 to allow for the count to finish
             onAnimationEnd={() => toggleSetComplete(true)}
           />
         ) : (
-          <PreparationTimer
+          <PreparationTimerBar
             onAnimationEnd={() => setPreparationComplete(true)}
           />
         ))}
@@ -151,7 +151,7 @@ const ActivityTileWithTimer: React.FC<Props> = ({
           <Title>{name}</Title>
         </Details>
         <Duration>
-          <p>{time}</p>
+          <p>{formattedTime}</p>
         </Duration>
         {editable &&
           <ShowEditArrowWrapper onClick={() => setShowEditPanel(true)}>
@@ -175,7 +175,7 @@ const ActivityTileWithTimer: React.FC<Props> = ({
       </VisibleArea>
 
       <HiddenTimerArea
-        time={time}
+        time={formattedTime}
         animatedStyles={animatedStyles}
         preparing={inProgress && !preparationComplete}
       />

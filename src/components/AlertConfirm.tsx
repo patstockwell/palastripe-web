@@ -1,25 +1,9 @@
 import React from 'react';
 import { useTransition, animated } from 'react-spring';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
-import { buttonStyle } from './SharedStyles';
 
 const bounceSpace = 9;
 const popUpHeight = 353 + bounceSpace;
-
-export const Button = styled.button<{ background: string }>`
-  ${buttonStyle}
-  background-color: ${({ background }) => background};
-`;
-
-export const LinkButton = styled(Link)<{ background: string }>`
-  ${buttonStyle}
-  background-color: ${({ background }) => background};
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-`;
 
 const Background = styled.div`
   width: 100vw;

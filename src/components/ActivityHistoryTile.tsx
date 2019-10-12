@@ -1,7 +1,7 @@
 import React, { memo, useState } from 'react';
 import styled from 'styled-components';
 
-import AlertConfirm, { Button } from './AlertConfirm';
+import AlertConfirm from './AlertConfirm';
 import TrashCan from '../assets/svg/TrashCan';
 import Dots from '../assets/svg/Dots';
 import Avatar from './Avatar';
@@ -19,6 +19,11 @@ import {
   purple,
   superLightGrey,
 } from '../helpers/constants';
+import { buttonStyle } from './SharedStyles';
+
+const Button = styled.button<{ background?: string }>`
+  ${buttonStyle}
+`;
 
 const Tile = styled.div`
   position: relative;
@@ -236,9 +241,7 @@ const ActivityHistoryTile: React.FC<Props> = ({
         <Button
           onClick={() => setShowDeleteWorkoutAlert(false)}
           background={'grey'}>No</Button>
-        <Button
-          onClick={handleConfirmationClick}
-          background={purple}>Yes</Button>
+        <Button onClick={handleConfirmationClick}>Yes</Button>
       </AlertConfirm>
     </Tile>
   );

@@ -6,8 +6,8 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { animated } from 'react-spring';
 
+import { buttonStyle } from '../components/SharedStyles';
 import { AnimatedSlidingPageStyle } from '../components/SharedStyles';
-import { Button } from '../components/AlertConfirm';
 import { EditableActivityList } from '../components/ActivityList';
 import EditWorkoutHero from '../components/EditWorkoutHero';
 import BackLinkBanner from '../components/BackLinkBanner';
@@ -19,7 +19,6 @@ import {
 } from '../helpers/types';
 import {
   tileMinHeight,
-  purple,
   activityHeadingHeight,
   bannerHeight,
   EDIT_WORKOUT_ADD_SET,
@@ -30,7 +29,8 @@ const AnimatedSlidingPage = styled(animated.div)<{ position?: string }>`
   ${AnimatedSlidingPageStyle}
 `;
 
-const AddItemButton = styled(Button)`
+const AddItemButton = styled.button<{ background?: string }>`
+  ${buttonStyle}
   min-width: 130px;
 `;
 
@@ -125,7 +125,7 @@ const EditWorkout: React.FC<Props> = ({
 
       <Tile>
         <AddItemButton onClick={addGroup} background={'grey'}>Add Group</AddItemButton>
-        <AddItemButton onClick={addSet} background={purple}>Add Set</AddItemButton>
+        <AddItemButton onClick={addSet}>Add Set</AddItemButton>
       </Tile>
       <BottomEmptySpace />
     </AnimatedSlidingPage>

@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import ActivityTile from '../ActivityTile';
-import { Button } from '../Buttons';
 import ActivityListHeading from './ActivityListHeading';
 import {
   activityHeadingHeight,
@@ -16,10 +15,14 @@ import {
   State, // eslint-disable-line no-unused-vars
   Workout,  // eslint-disable-line no-unused-vars
 } from '../../helpers/types';
-import { unorderedListStyle } from '../SharedStyles';
+import { buttonStyle, unorderedListStyle } from '../SharedStyles';
 
 const Ul = styled.ul`
   ${unorderedListStyle}
+`;
+
+const Button = styled.button`
+  ${buttonStyle}
 `;
 
 const FlexTile = styled.div`
@@ -95,7 +98,7 @@ const ActivityList: React.FC<Props> = ({
       {activityListTiles}
 
       <FlexTile>
-        <Button clickHandler={finishWorkoutClickHandler}>
+        <Button onClick={finishWorkoutClickHandler}>
           Finish Workout
         </Button>
       </FlexTile>

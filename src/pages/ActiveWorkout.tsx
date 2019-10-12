@@ -6,11 +6,13 @@ import {
 import styled from 'styled-components';
 import { animated } from 'react-spring';
 
+import { Link } from 'react-router-dom';
+import { buttonStyle } from '../components/SharedStyles';
 import { AnimatedSlidingPageStyle } from '../components/SharedStyles';
 import { useInterval } from '../helpers/functions';
 import { GlobalOverFlowHiddenStyle } from '../components/SharedStyles';
 import Timer from '../components/Timer';
-import AlertConfirm, { LinkButton, Button } from '../components/AlertConfirm';
+import AlertConfirm from '../components/AlertConfirm';
 import BackLinkBanner from '../components/BackLinkBanner';
 import WorkoutHero from '../components/WorkoutHero';
 import FourZeroFour from '../pages/FourZeroFour';
@@ -29,12 +31,23 @@ import {
 import {
   SET_ACTIVE_WORKOUT,
   FINISH_WORKOUT,
-  purple,
   ONE_SECOND,
   ONE_DAY,
   SET_WINDOW_SCROLL,
   ACTIVITY_PAGE,
 } from '../helpers/constants';
+
+const Button = styled.button<{ background?: string }>`
+  ${buttonStyle}
+`;
+
+const LinkButton = styled(Link)<{ background?: string }>`
+  ${buttonStyle}
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+`;
 
 export const TimerContext = createContext({
   setShowTimer: (_: boolean) => {/* do nothing */}, // eslint-disable-line
@@ -181,7 +194,7 @@ const ActiveWorkout: React.FC<Props> = ({
         <LinkButton
           to={{ pathname: '/activity/', state: { immediate: false } }}
           onClick={finishWorkoutWithAlertTransition}
-          background={purple}>Yes</LinkButton>
+        >Yes</LinkButton>
       </AlertConfirm>
     </AnimatedSlidingPage>
   );
