@@ -11,6 +11,7 @@ import {
   WORKOUTS_PAGE,
   ACTIVITY_PAGE,
   activeWorkoutWindowHeight,
+  poundsInAKilo,
 } from './constants';
 import {
   isTimed,
@@ -25,6 +26,27 @@ import {
 export function useRouter(): any {
   return useContext(__RouterContext);
 }
+
+export const convertWeight = (weightInKilos: number, useKilos: boolean): number => {
+  if (useKilos) {
+    // round to the nearest 0.5
+    return Math.round(weightInKilos / 0.5) * 0.5;
+  } else {
+    const exactWeightInPounds = weightInKilos * poundsInAKilo;
+    if (exactWeightInPounds < 20) {
+      // round to the nearest 0.5
+      return Math.round(exactWeightInPounds / 0.5) * 0.5;
+    } else {
+      // round to the nearest 2.5
+      return Math.round(exactWeightInPounds / 2.5) * 2.5;
+    }
+  }
+};
+
+export const formatWeight = (weightInKilos: number, useKilos: boolean): string => {
+  const weight = convertWeight(weightInKilos, useKilos);
+  return `${weight} ${useKilos ? 'kg' : 'lbs'}`;
+};
 
 export const useHiddenAreaAnimation = (showHiddenArea: boolean) =>
   useSpring({

@@ -6,7 +6,10 @@ import {
   TOGGLE_SET_COMPLETE,
   INCREMENT_WEIGHT,
   DECREMENT_WEIGHT,
+  twoAndAHalfPoundsInKilos,
+  halfAPoundInKilos,
 } from '../helpers/constants';
+import { convertWeight } from '../helpers/functions';
 import {
   Activity, // eslint-disable-line no-unused-vars
   ReduxAction, // eslint-disable-line no-unused-vars
@@ -15,13 +18,17 @@ import {
   SingleSetAction, // eslint-disable-line no-unused-vars
 } from '../helpers/types';
 
-const activeWorkoutReducer = (state: Workout, action: ReduxAction<any>) => {
+const activeWorkoutReducer = (
+  state: Workout,
+  action: ReduxAction<any>,
+  useKilos: boolean,
+) => {
   switch (action.type) {
     case INCREMENT_WEIGHT: {
-      return changeWeight(state, action);
+      return changeWeight(state, action, useKilos);
     }
     case DECREMENT_WEIGHT: {
-      return changeWeight(state, action);
+      return changeWeight(state, action, useKilos);
     }
     case FINISH_WORKOUT: {
       return finishWorkout();
@@ -43,15 +50,28 @@ const activeWorkoutReducer = (state: Workout, action: ReduxAction<any>) => {
 
 type ChangeSetAction = ReduxAction<SingleSetAction & { value: number }>;
 
-const changeWeight = (state: Workout, action: ReduxAction<SingleSetAction>) => {
+const changeWeight = (
+  state: Workout,
+  action: ReduxAction<SingleSetAction>,
+  useKilos: boolean,
+) => {
   const { payload: { groupId, index } } = action;
   const { exerciseGroups } = state;
   const group = exerciseGroups.find(g => g.id === groupId);
   const weight = (group.exercises[index] as WeightedActivity).weightInKilos;
+
+  // calculate increments for pounds or kilos
+  const smallIncrement = useKilos ? 0.5 : halfAPoundInKilos;
+  const largeIncrement = useKilos ? 2.5 : twoAndAHalfPoundsInKilos;
+
   // check if the increment should be 0.5 or 2.5
-  const increment = weight < 20 ? 0.5 : 2.5;
+  const useSmallIncrement: boolean = convertWeight(weight, useKilos) < 20
+    || convertWeight(weight, useKilos) === 20
+    && action.type === DECREMENT_WEIGHT;
+  const increment: number = useSmallIncrement ? smallIncrement : largeIncrement;
+
   // should we increment or decrement?
-  const newWeight = action.type === 'DECREMENT_WEIGHT'
+  const newWeight = action.type === DECREMENT_WEIGHT
     ? weight - increment
     : weight + increment;
 

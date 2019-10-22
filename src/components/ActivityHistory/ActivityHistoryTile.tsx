@@ -14,6 +14,7 @@ import {
   getHoursAndMinutes,
   getTimeSince,
   getTotalWeightLifted,
+  convertWeight,
 } from '../../helpers/functions';
 import {
   purple,
@@ -163,6 +164,7 @@ interface Props {
   deleteWorkout: () => ReduxAction<number>;
   position: number; // useful for memoizing the result of this component
   initials: string;
+  useKilos: boolean;
 }
 
 const ActivityHistoryTile: React.FC<Props> = ({
@@ -170,6 +172,7 @@ const ActivityHistoryTile: React.FC<Props> = ({
   toggleMenu,
   showMenu,
   deleteWorkout,
+  useKilos,
 }) => {
   const [ showDeleteWorkoutAlert, setShowDeleteWorkoutAlert ] = useState(false);
 
@@ -214,7 +217,9 @@ const ActivityHistoryTile: React.FC<Props> = ({
             <TextLabel>Workout Time</TextLabel>
           </StatsBox>
           <StatsBox>
-            <Statistic>{totalWeightLifted} <UnitLabel>kg</UnitLabel></Statistic>
+            <Statistic>
+              {convertWeight(totalWeightLifted, useKilos)} <UnitLabel>{useKilos ? 'kg' : 'lbs'}</UnitLabel>
+            </Statistic>
             <TextLabel>Total Weight</TextLabel>
           </StatsBox>
         </StatsPanel>

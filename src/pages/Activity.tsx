@@ -14,7 +14,11 @@ import { connect } from 'react-redux';
 import Banner from '../components/Banner';
 import Navigation from '../components/Navigation';
 import ActivityHistoryHero from '../components/ActivityHistory/ActivityHistoryHero';
-import { getTotalWeightLifted, getDiffInMinutes } from '../helpers/functions';
+import {
+  getTotalWeightLifted,
+  getDiffInMinutes,
+  convertWeight,
+} from '../helpers/functions';
 
 const getTotalMinutes = (history: Workout[]): number => (
   history.reduce((acc, curr) => (
@@ -32,6 +36,7 @@ const Activity: React.FC<Props> = ({
   scrollY,
   location,
   history,
+  useKilos,
 }) => {
   useEffect(() => {
     if (typeof scrollY === 'number') {
@@ -41,6 +46,7 @@ const Activity: React.FC<Props> = ({
 
   const totalMinutes = getTotalMinutes(history);
   const totalWeight = getTotalWeight(history);
+  const convertedWeight = convertWeight(totalWeight, useKilos);
 
   return (
     <Fragment>
@@ -48,7 +54,8 @@ const Activity: React.FC<Props> = ({
       <ActivityHistoryHero
         totalWorkouts={history.length}
         totalMinutes={totalMinutes}
-        totalWeight={totalWeight}
+        totalWeight={convertedWeight}
+        unitOfWeight={useKilos ? 'kg' : 'lbs'}
       />
       <ActivityHistoryList history={history} />
       <Navigation pathname={location.pathname} />
@@ -59,11 +66,13 @@ const Activity: React.FC<Props> = ({
 interface StateProps {
   scrollY: number;
   history: Workout[];
+  useKilos: boolean;
 }
 
 const mapStateToProps = (state: State): StateProps => ({
   scrollY: state.scrollY.ACTIVITY_PAGE,
   history: state.history,
+  useKilos: state.settings.useKilos,
 });
 
 export default connect<StateProps, void, void>(mapStateToProps)(Activity);

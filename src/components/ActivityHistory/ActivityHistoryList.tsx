@@ -38,6 +38,7 @@ const ActivityHistoryList: React.FC<Props> = ({
   setWindowScroll,
   firstName,
   lastName,
+  useKilos,
 }) => {
   // undefined is used to denote no tile in list is selected
   const [ showMenuIndex, setShowMenuIndex ] = useState(undefined);
@@ -54,6 +55,7 @@ const ActivityHistoryList: React.FC<Props> = ({
         setWindowScroll(window.scrollY);
       }}
       deleteWorkout={() => deleteWorkout(i)}
+      useKilos={useKilos}
     />
   ));
 
@@ -68,6 +70,7 @@ const ActivityHistoryList: React.FC<Props> = ({
 interface StateProps {
   firstName: string;
   lastName: string;
+  useKilos: boolean;
 }
 
 interface DispatchProps {
@@ -81,6 +84,7 @@ interface DispatchProps {
 const mapStateToProps = (state: State): StateProps => ({
   firstName: state.profile.firstName,
   lastName: state.profile.lastName,
+  useKilos: state.settings.useKilos,
 });
 
 const mapDispatchToProps: DispatchProps = ({

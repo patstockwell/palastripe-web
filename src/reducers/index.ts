@@ -15,7 +15,7 @@ import selectedExerciseReducer from './selectedExerciseReducer';
 const rootReducer = (state: State = initialState, action: ReduxAction<any>): State => ({
   ...state,
   isFirstRender: firstRenderReducer(state.isFirstRender, action),
-  activeWorkout: activeWorkoutReducer(state.activeWorkout, action),
+  activeWorkout: activeWorkoutReducer(state.activeWorkout, action, state.settings.useKilos),
   activeWorkoutSelectedExercise: selectedExerciseReducer(
     state.activeWorkoutSelectedExercise,
     action,

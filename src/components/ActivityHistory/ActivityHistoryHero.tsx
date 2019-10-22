@@ -54,10 +54,11 @@ interface Props {
   totalWeight: number;
   totalMinutes: number;
   totalWorkouts: number;
+  unitOfWeight: string;
 }
 
 const ActivityHistoryHero: React.FC<Props> = ({
-  totalMinutes, totalWorkouts, totalWeight,
+  totalMinutes, totalWorkouts, totalWeight, unitOfWeight,
 }) => {
   const { mins, hours, minsLabel, hoursLabel } = getHoursAndMinutes(totalMinutes);
 
@@ -85,7 +86,7 @@ const ActivityHistoryHero: React.FC<Props> = ({
         <Statistic>
           <Heading>Total Weight</Heading>
           <Total>
-            <span>{totalWeight} <UnitLabel>{'kg'}</UnitLabel></span>
+            <span>{totalWeight} <UnitLabel>{unitOfWeight}</UnitLabel></span>
           </Total>
         </Statistic>
       </TimesAndWeights>

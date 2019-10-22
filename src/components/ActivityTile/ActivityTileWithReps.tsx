@@ -14,6 +14,7 @@ import DownArrow from '../../assets/svg/DownArrow';
 import ForwardArrow from '../../assets/svg/ForwardArrow';
 import {
   ReduxAction, // eslint-disable-line no-unused-vars
+  State, // eslint-disable-line no-unused-vars
   SingleSetAction, // eslint-disable-line no-unused-vars
   WeightedActivity, // eslint-disable-line no-unused-vars
 } from '../../helpers/types';
@@ -23,6 +24,7 @@ import {
 import {
   useScrollElementToTop,
   useHiddenAreaAnimation,
+  formatWeight,
 } from '../../helpers/functions';
 import {
   Details,
@@ -64,7 +66,7 @@ interface OwnProps {
   editable: boolean;
 }
 
-type Props = DispatchProps & OwnProps;
+type Props = DispatchProps & OwnProps & StateProps;
 
 const ActivityTileWithReps: React.FC<Props> = ({
   activity,
@@ -79,6 +81,7 @@ const ActivityTileWithReps: React.FC<Props> = ({
   showHiddenArea,
   toggleSetComplete,
   editable,
+  useKilos,
 }) => {
   const [showAnimation, setShowAnimation] = useState(false);
   const listElement = useRef(null);
@@ -96,7 +99,9 @@ const ActivityTileWithReps: React.FC<Props> = ({
       <VisibleArea>
         <Details onClick={handleOpen}>
           <Title>{name}</Title>
-          <SubTitle>Weight: {weightInKilos}kg</SubTitle>
+          <SubTitle>
+            Weight: {formatWeight(weightInKilos, useKilos)}
+          </SubTitle>
         </Details>
         <Duration>
           <p>{repsAchieved} x</p>
@@ -144,6 +149,18 @@ const ActivityTileWithReps: React.FC<Props> = ({
   );
 };
 
+interface StateProps {
+  useKilos: boolean;
+}
+
+interface DispatchProps {
+  toggleSetComplete: () => ReduxAction<SingleSetAction>;
+}
+
+const mapStateToProps = (state: State): StateProps => ({
+  useKilos: state.settings.useKilos,
+});
+
 const mapDispatchToProps = (
   dispatch: Dispatch<ReduxAction<SingleSetAction>>,
   ownProps: Props
@@ -159,15 +176,11 @@ const mapDispatchToProps = (
   };
 };
 
-interface DispatchProps {
-  toggleSetComplete: () => ReduxAction<SingleSetAction>;
-}
-
 const areEqual = (prevProps: Props, nextProps: Props) => {
   return !nextProps.selected && prevProps.selected === nextProps.selected;
 };
 
-export default connect<void, DispatchProps, OwnProps>(
-  null,
+export default connect<StateProps, DispatchProps, OwnProps>(
+  mapStateToProps,
   mapDispatchToProps
 )(memo(ActivityTileWithReps, areEqual));

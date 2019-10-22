@@ -12,9 +12,11 @@ import { animated,
 import styled from 'styled-components';
 import {
   SingleSetAction, // eslint-disable-line no-unused-vars
+  State, // eslint-disable-line no-unused-vars
   ReduxAction, // eslint-disable-line no-unused-vars
   WeightedActivity, // eslint-disable-line no-unused-vars
 } from '../../helpers/types';
+import { convertWeight } from '../../helpers/functions';
 import {
   DECREMENT_WEIGHT,
   INCREMENT_WEIGHT,
@@ -37,7 +39,7 @@ interface OwnProps {
   }>;
 }
 
-type Props = DispatchProps & OwnProps;
+type Props = DispatchProps & OwnProps & StateProps;
 
 const HiddenArea: React.FC<Props> = ({
   incrementWeight,
@@ -49,6 +51,7 @@ const HiddenArea: React.FC<Props> = ({
     weightInKilos,
     repsAchieved,
   },
+  useKilos,
 }) => (
   <animated.div style={{
     height: animatedStyles.height,
@@ -61,9 +64,9 @@ const HiddenArea: React.FC<Props> = ({
       percentageComplete={1}
     >
       <p>
-        <MainValue>{weightInKilos}</MainValue>
+        <MainValue>{convertWeight(weightInKilos, useKilos)}</MainValue>
       </p>
-      <p>kg</p>
+      <p>{useKilos ? 'kg' : 'lbs'}</p>
     </IncrementDecrementPanel>
     <IncrementDecrementPanel
       handleDecrement={() => changeReps(-1)}
@@ -81,6 +84,20 @@ const HiddenArea: React.FC<Props> = ({
 
 type ChangeSetAction = ReduxAction<SingleSetAction & any>;
 type ChangeSetDispatch = Dispatch<ChangeSetAction>;
+
+interface StateProps {
+  useKilos: boolean;
+}
+
+interface DispatchProps {
+  changeReps: (increment: number) => ChangeSetAction;
+  incrementWeight: () => ReduxAction<SingleSetAction>;
+  decrementWeight: () => ReduxAction<SingleSetAction>;
+}
+
+const mapStateToProps = (state: State): StateProps => ({
+  useKilos: state.settings.useKilos,
+});
 
 const mapDispatchToProps = (
   dispatch: ChangeSetDispatch,
@@ -110,13 +127,7 @@ const mapDispatchToProps = (
   }),
 });
 
-interface DispatchProps {
-  changeReps: (increment: number) => ChangeSetAction;
-  incrementWeight: () => ReduxAction<SingleSetAction>;
-  decrementWeight: () => ReduxAction<SingleSetAction>;
-}
-
-export default connect<void, DispatchProps, OwnProps>(
-  null,
+export default connect<StateProps, DispatchProps, OwnProps>(
+  mapStateToProps,
   mapDispatchToProps
 )(HiddenArea);
