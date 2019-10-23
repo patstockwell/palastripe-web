@@ -5,6 +5,7 @@ import {
   ReduxAction, // eslint-disable-line no-unused-vars
   Workout, // eslint-disable-line no-unused-vars
   Workouts, // eslint-disable-line no-unused-vars
+  isTimed,
 } from '../helpers/types';
 
 const workoutsReducer = (
@@ -21,27 +22,64 @@ const workoutsReducer = (
   }
 };
 
-// find all exercises that were completed and increment the weight
-const finishWorkout = (allWorkouts: Workouts, workout: Workout): Workouts => {
-  // create a hash of each exercise.
-  // exerciseName: boolean (didComplete)
-  interface BoolHash {
-    [exerciseName: string]: boolean;
-  }
+// create a hash of all exercises and their completion
+interface BoolHash {
+  [exerciseName: string]: boolean;
+}
 
-  const completedExercises: BoolHash = workout.exerciseGroups
+const reduceCompletedExercises = (workout: Workout): BoolHash => {
+  // find all exercises that were completed
+  return workout.exerciseGroups
     .flatMap((g: ActivityGroup): Activity[] => g.exercises)
-    .reduce((acc: BoolHash, { id, completed }: Activity) => {
+    .reduce((acc: BoolHash, curr: Activity) => {
+      if (isTimed(curr)) {
+        return acc;
+      }
+      const { id, completed, repsGoal, repsAchieved } = curr;
       const newKey = acc[id] === undefined;
-      const done = newKey ? completed : completed && acc[id];
+      // completed may be undefined so we cast it to boolean with `!!`
+      const success = !!completed && repsAchieved >= repsGoal;
+      const done = newKey ? success : success && acc[id];
 
       return {
         ...acc,
         [id]: done,
       };
     }, {});
-  console.log(completedExercises);
-  return allWorkouts;
+};
+
+const finishWorkout = (allWorkouts: Workouts, workout: Workout): Workouts => {
+  const completedExercises: BoolHash = reduceCompletedExercises(workout);
+  const { id: wId } = workout;
+  const { exerciseGroups } = allWorkouts.byId[wId];
+  const newExerciseGroups = exerciseGroups.map((g: ActivityGroup) => {
+    const newExercises = g.exercises.map((a: Activity) => {
+      if (isTimed(a)) {
+        return a; // timed exercises don't have weight so can't be incremented
+      }
+
+      const newWeight = completedExercises[a.id]
+        ? a.weightInKilos + a.autoIncrement
+        : a.weightInKilos;
+
+      return { ...a, weightInKilos: newWeight };
+    });
+
+    return { ...g, exercises: newExercises };
+  });
+
+  return {
+    ...allWorkouts,
+    byId: {
+      ...allWorkouts.byId,
+      [wId]: {
+        ...workout,
+        startTime: undefined, // active workouts will set their own startTime
+        finishTime: undefined, // active workouts will set their own finishTime
+        exerciseGroups: newExerciseGroups,
+      },
+    },
+  };
 };
 
 export default workoutsReducer;
