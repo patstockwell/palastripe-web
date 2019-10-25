@@ -1,12 +1,11 @@
-import React, { useEffect, Fragment } from 'react';
+import React, { useEffect } from 'react';
 import {
   RouteProps, // eslint-disable-line no-unused-vars
 } from 'react-router-dom';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import Navigation from '../components/Navigation';
-import Banner from '../components/Banner';
 import WorkoutTile from '../components/WorkoutTile';
+import Page from '../components/Page';
 import {
   ReduxAction, // eslint-disable-line no-unused-vars
   State, // eslint-disable-line no-unused-vars
@@ -46,12 +45,10 @@ const Workouts: React.FC<Props> = ({
   );
 
   return (
-    <Fragment>
-      <Banner pathname={location.pathname} heading={'Workouts'}/>
+    <Page pathname={location.pathname} heading={'Workouts'}>
       {workoutTiles}
       <EmptySpace />
-      <Navigation pathname={location.pathname}/>
-    </Fragment>
+    </Page>
   );
 };
 

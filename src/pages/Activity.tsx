@@ -1,5 +1,4 @@
 import React, {
-  Fragment,
   useEffect,
 } from 'react';
 import {
@@ -11,8 +10,7 @@ import {
 } from '../helpers/types';
 import ActivityHistoryList from '../components/ActivityHistory/ActivityHistoryList';
 import { connect } from 'react-redux';
-import Banner from '../components/Banner';
-import Navigation from '../components/Navigation';
+import Page from '../components/Page';
 import ActivityHistoryHero from '../components/ActivityHistory/ActivityHistoryHero';
 import {
   getTotalWeightLifted,
@@ -49,8 +47,7 @@ const Activity: React.FC<Props> = ({
   const convertedWeight = convertWeight(totalWeight, useKilos);
 
   return (
-    <Fragment>
-      <Banner pathname={location.pathname} heading={'Activity'}/>
+    <Page heading={'Activity'} pathname={location.pathname} >
       <ActivityHistoryHero
         totalWorkouts={history.length}
         totalMinutes={totalMinutes}
@@ -58,8 +55,7 @@ const Activity: React.FC<Props> = ({
         unitOfWeight={useKilos ? 'kg' : 'lbs'}
       />
       <ActivityHistoryList history={history} />
-      <Navigation pathname={location.pathname} />
-    </Fragment>
+    </Page>
   );
 };
 
