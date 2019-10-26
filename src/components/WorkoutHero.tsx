@@ -1,5 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
+
+import ShareIcon from '../assets/svg/Share';
 import {
   workoutTitleStyle,
   workoutHeroWindowStyle,
@@ -37,17 +39,36 @@ export const Time = styled.p`
   z-index: 1;
 `;
 
+const ShareButton = styled.button`
+  z-index: 1;
+  position: absolute;
+  right: 16px;
+  top: 16px;
+  background: none;
+  border: none;
+  padding: 10px;
+`;
+
 interface Props {
   name: string;
   imageUrl?: string;
   time?: string;
 }
 
-const WorkoutHero = ({ time, imageUrl, name }: Props) => (
-  <Window imageUrl={imageUrl}>
-    <Title>{name}</Title>
-    <Time>{time}</Time>
-  </Window>
-);
+const WorkoutHero = ({ time, imageUrl, name }: Props) => {
+  const handleShare = () => {
+    // need to do something here. Show alertconfirm with info?
+  };
+
+  return (
+    <Window imageUrl={imageUrl}>
+      <ShareButton onClick={handleShare}>
+        <ShareIcon />
+      </ShareButton>
+      <Title>{name}</Title>
+      <Time>{time}</Time>
+    </Window>
+  );
+};
 
 export default WorkoutHero;
