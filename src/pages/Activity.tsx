@@ -8,6 +8,7 @@ import {
   State, // eslint-disable-line no-unused-vars
   Workout, // eslint-disable-line no-unused-vars
 } from '../helpers/types';
+
 import ActivityHistoryList from '../components/ActivityHistory/ActivityHistoryList';
 import { connect } from 'react-redux';
 import Page from '../components/Page';

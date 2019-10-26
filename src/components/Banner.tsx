@@ -1,27 +1,16 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { animated, useSpring } from 'react-spring';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 
-import Avatar from './Avatar';
 import {
   bannerHeight,
   gutterWidth,
   pink,
   purple,
-  SET_WINDOW_SCROLL,
 } from '../helpers/constants';
-import {
-  getCurrentPage,
-  useHasScrolled,
-} from '../helpers/functions';
-import {
-  ReduxAction, // eslint-disable-line no-unused-vars
-  RouteState, // eslint-disable-line no-unused-vars
-} from '../helpers/types';
 
 const AppLogo = styled.p`
+  position: absolute;
+  left: ${gutterWidth}px;
   font-family: 'Muli', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   color: white;
   text-align: center;
@@ -34,128 +23,36 @@ const AppLogo = styled.p`
   background-image: linear-gradient( 140deg, ${pink}, ${purple});
 `;
 
-const AvatarLink = styled(Link)`
-  text-decoration: none;
-`;
-
-export const Header = styled(animated.header)`
+export const Header = styled.header`
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  flex-direction: column-reverse;
+  align-items: center;
+  justify-content: center;
   background-color: white;
-  border-bottom: solid 0.5px lightgrey;
+  // border-bottom: solid 0.5px lightgrey;
   z-index: 3;
   overflow: hidden;
   min-height: ${bannerHeight}px;
   position: sticky;
-  top: -${bannerHeight}px;
-`;
-
-const CollapsableHeader = styled(animated.div)`
+  top: 0;
   padding: 0 ${gutterWidth}px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: ${bannerHeight}px;
-  width: 100%;
-  box-sizing: border-box;
-  background-color: transparent;
 `;
 
-const PageHeading = styled(animated.h1)`
-  display: inline-block;
+const Heading = styled.p`
+  font-weight: 800;
 `;
 
-const VisibleHeader = styled.div`
-  min-height: ${bannerHeight}px;
-  width: 100%;
-  padding: 0 ${gutterWidth}px;
-  box-sizing: border-box;
-`;
-
-interface OwnProps {
-  heading: string;
-  pathname: string;
+interface Props {
+  heading?: string;
 }
 
-type Props = OwnProps & DispatchProps;
-
-const Banner: React.FC<Props> = ({
-  setWindowScroll,
-  heading,
-  pathname,
-}) => {
-  const scrolled: boolean = useHasScrolled();
-  const {
-    fontSize,
-    marginLeft,
-    marginTop,
-    transformHeading,
-    transformLogo,
-  } = useSpring({
-    fontSize: `${scrolled ? 1.1 : 2}em`,
-    marginLeft: `${scrolled ? 50 : 0}%`,
-    transformHeading: `translateX(-${scrolled ? 50 : 0}%)`,
-    transformLogo: `translateY(${scrolled ? bannerHeight : 0}px)`,
-    marginTop: `${scrolled ? 13 : 0}px`,
-    config: { mass: 1, tension: 570, friction: 40 },
-  });
-  const routeState: RouteState = { immediate: false, backPath: pathname };
-
-  const handleClick = () => {
-    setWindowScroll(
-      window.scrollY,
-      getCurrentPage(pathname)
-    );
-  };
+const Banner: React.FC<Props> = ({ heading }) => {
 
   return (
     <Header>
-      <VisibleHeader>
-        <PageHeading style={{
-          fontSize,
-          marginLeft,
-          marginTop,
-          transform: transformHeading,
-        }}>
-          {heading}
-        </PageHeading>
-      </VisibleHeader>
-      <CollapsableHeader style={{ transform: transformLogo }}>
-        <AppLogo>hbff</AppLogo>
-        <AvatarLink
-          onClick={handleClick}
-          to={{
-            pathname: '/profile/',
-            state: routeState,
-          }}
-        >
-          <Avatar />
-        </AvatarLink>
-      </CollapsableHeader>
+      <AppLogo>hbff</AppLogo>
+      <Heading>{heading}</Heading>
     </Header>
   );
 };
 
-interface DispatchProps {
-  setWindowScroll: (scrollY: number, page: string) => ReduxAction<{
-    scrollY: number,
-    page: string
-  }>;
-}
-
-const mapDispatchToProps: DispatchProps = {
-  setWindowScroll: (scrollY, page) => ({
-    type: SET_WINDOW_SCROLL,
-    payload: {
-      scrollY,
-      page,
-    },
-  }),
-};
-
-export default connect<void, DispatchProps, OwnProps>(
-  null,
-  mapDispatchToProps
-)(Banner);
+export default Banner;

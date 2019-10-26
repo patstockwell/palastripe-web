@@ -45,7 +45,7 @@ const Workouts: React.FC<Props> = ({
   );
 
   return (
-    <Page pathname={location.pathname} heading={'Workouts'}>
+    <Page heading={'Workouts'} pathname={location.pathname} >
       {workoutTiles}
       <EmptySpace />
     </Page>
