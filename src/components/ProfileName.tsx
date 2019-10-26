@@ -18,10 +18,7 @@ const FlexWrapper = styled.div`
   flex-direction: column;
 `;
 
-const NameAndEditIcon = styled.button`
-  border: none;
-  background: none;
-  font-size: initial;
+const NameAndEditIcon = styled.div`
   position: relative;
   padding: 16px 0;
 
@@ -65,6 +62,11 @@ const Input = styled.input`
   font-size: 1em;
   margin: 0px ${gutterWidth}px;
   box-sizing: border-box;
+  outline: none;
+
+  &:focus: {
+    outline: none;
+  }
 
   &::placeholder {
     color: darkgrey;
@@ -103,9 +105,9 @@ const ProfileName: React.FC<Props> = ({ updateName, firstName, lastName }) => {
   });
 
   return (
-    <FlexWrapper>
+    <FlexWrapper onClick={() => !showEdit && setShowEdit(true)} >
       <Avatar isLargeSize />
-      <NameAndEditIcon onClick={() => setShowEdit(true)} >
+      <NameAndEditIcon>
         <EditIconPencil height={12} width={12} style={{ fill: 'grey' }} />
         {hasName ?
           <Name>{firstName} {lastName}</Name>
