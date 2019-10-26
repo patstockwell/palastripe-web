@@ -76,7 +76,12 @@ const IncrementDecrementPanel: React.FC<Props> = ({
 
   return (
     <Panel>
-      <Button onClick={handleDecrement}>
+      <Button
+        onClick={handleDecrement}
+        // This fixes a strange bug where fast clicks on the button don't work.
+        // When a double click handler is added, fast clicks respond again.
+        onDoubleClick={() => null}
+      >
         <SubtractionSymbol fill={'white'} />
       </Button>
       <OuterCircle
