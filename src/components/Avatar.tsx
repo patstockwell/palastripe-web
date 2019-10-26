@@ -7,7 +7,7 @@ import { getInitials } from '../helpers/functions';
 import {
   State, // eslint-disable-line no-unused-vars
 } from '../helpers/types';
-import AvatarIcon from '../assets/svg/Avatar';
+import ProfileIcon from '../assets/svg/ProfileIcon';
 
 interface OwnProps {
   isLargeSize?: boolean;
@@ -49,6 +49,11 @@ const Avatar: React.FC<Props> = ({
   isLargeSize,
   colour,
 }) => {
+  const style = {
+    width: isLargeSize ? '50%' : '60%',
+    height: isLargeSize ? '50%' : '60%',
+  };
+
   return (
     <AvatarCircle
       isLargeSize={isLargeSize}
@@ -58,7 +63,7 @@ const Avatar: React.FC<Props> = ({
       {firstName || lastName ?
         <span>{getInitials(firstName, lastName)}</span>
         :
-        <AvatarIcon />
+        <ProfileIcon style={style} />
       }
     </AvatarCircle>
   );

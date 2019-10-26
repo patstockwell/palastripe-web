@@ -17,7 +17,7 @@ import {
 } from '../helpers/constants';
 
 const EmptySpace = styled.div`
-  height: ${navBarHeight}px;
+  height: ${2 * navBarHeight}px;
 `;
 
 type Props = RouteProps & DispatchProps & StateProps;

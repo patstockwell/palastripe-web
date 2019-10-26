@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+
+import ProfileIcon from '../assets/svg/ProfileIcon';
 import {
   purple,
   navBarHeight,
@@ -28,7 +30,7 @@ const Nav = styled.nav`
   padding: 3px;
   box-sizing: border-box;
   border-top: solid 0.5px lightgrey;
-  align-items: flex-end;
+  align-items: center;
 `;
 
 const NavLink = styled(Link)<{ highlight: string }>`
@@ -39,10 +41,6 @@ const NavLink = styled(Link)<{ highlight: string }>`
   flex-direction: column;
   align-items: center;
   font-size: 12px;
-`;
-
-const LinkName = styled.span`
-  margin-top: 4px;
 `;
 
 interface Props {
@@ -72,7 +70,6 @@ const Navigation = ({ pathname, setWindowScroll }: Props) => {
         onClick={handleClick}
       >
         <Cardiogram />
-        <LinkName>Workouts</LinkName>
       </NavLink>
       <NavLink
         highlight={isOnPage(ACTIVITY_PAGE) ? purple : 'black'}
@@ -80,7 +77,16 @@ const Navigation = ({ pathname, setWindowScroll }: Props) => {
         onClick={handleClick}
       >
         <ActivityBars />
-        <LinkName>Activity</LinkName>
+      </NavLink>
+      <NavLink
+        highlight={'black'}
+        onClick={handleClick}
+        to={{
+          pathname: '/profile/',
+          state: { immediate: false, backPath: pathname },
+        }}
+      >
+        <ProfileIcon />
       </NavLink>
     </Nav>
   );
