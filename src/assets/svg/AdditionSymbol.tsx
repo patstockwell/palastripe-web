@@ -14,4 +14,3 @@ const AdditionSymbol = ({ fill }) => (
 );
 
 export default AdditionSymbol;
-
