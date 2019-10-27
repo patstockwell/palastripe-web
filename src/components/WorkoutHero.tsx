@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { useLocation } from 'react-router-dom';
+import * as clipboard from 'clipboard-polyfill';
 
 import AlertConfirm from '../components/AlertConfirm';
 import ShareIcon from '../assets/svg/Share';
@@ -86,11 +87,8 @@ const WorkoutHero = ({ time, imageUrl, name }: Props) => {
   const { pathname } = useLocation();
 
   const handleShare = () => {
-    const nav = navigator as any;
     setShowShareMessage(true);
-    if (nav && nav.clipboard) {
-      nav.clipboard.writeText(APP_URL + pathname);
-    }
+    clipboard.writeText(APP_URL + pathname);
   };
 
   return (

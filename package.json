@@ -6,6 +6,7 @@
   "dependencies": {
     "@types/smoothscroll-polyfill": "^0.3.1",
     "@types/uuid": "^3.4.5",
+    "clipboard-polyfill": "^2.8.6",
     "core-js": "^3.2.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
