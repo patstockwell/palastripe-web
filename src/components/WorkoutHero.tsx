@@ -10,6 +10,7 @@ import {
   workoutHeroWindowStyle,
 } from './SharedStyles';
 import { iconWrapperStyle } from './ActivityTile/ActivityTileSharedStyles';
+import { APP_URL } from '../helpers/constants';
 
 export const Window = styled.div<{ colour?: string, imageUrl: string }>`
   ${workoutHeroWindowStyle}
@@ -48,9 +49,14 @@ const ShareButton = styled.button`
   position: absolute;
   right: 16px;
   top: 16px;
-  background: none;
   border: none;
   padding: 10px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  background-color: rgba(256, 256, 256, 0.3);
 `;
 
 const scale = keyframes `
@@ -83,8 +89,7 @@ const WorkoutHero = ({ time, imageUrl, name }: Props) => {
     const nav = navigator as any;
     setShowShareMessage(true);
     if (nav && nav.clipboard) {
-      const appUrl = 'https://harderbetterfasterfitter.com';
-      nav.clipboard.writeText(appUrl + pathname);
+      nav.clipboard.writeText(APP_URL + pathname);
     }
   };
 

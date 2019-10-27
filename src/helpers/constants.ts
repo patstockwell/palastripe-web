@@ -47,6 +47,8 @@ export const MONTHS_OF_THE_YEAR: string[] = [
   'December',
 ];
 
+export const APP_URL = 'https://harderbetterfasterfitter.com';
+
 export const pink: string = '#ff02c8';
 export const purple: string = '#6702ff';
 export const blue: string = '#198FE3';
