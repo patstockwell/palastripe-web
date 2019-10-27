@@ -4,6 +4,31 @@ import {
 import { getIdsForStretchExercises } from '../helpers/functions';
 
 const byId = {
+  'band_pass_through' : {
+    tags: ['shoulders', 'warm up', 'warmup', 'warm-up'],
+    id: 'band_pass_through',
+    name: 'Band Pass Through',
+  },
+  'ez_bar_curl' : {
+    tags: ['arms', 'bicep', 'biceps', 'curl', 'bar'],
+    id: 'ez_bar_curl',
+    name: 'EZ Bar Curl',
+  },
+  'butterfly' : {
+    tags: ['arms', 'chest', 'machine'],
+    id: 'butterfly',
+    name: 'Butterfly',
+  },
+  'hanging_leg_raises' : {
+    tags: ['core'],
+    id: 'hanging_leg_raises',
+    name: 'Hanging Leg Raises',
+  },
+  'toe_touches': {
+    tags: ['abs', 'core'],
+    id: 'toe_touches',
+    name: 'Toe Touches',
+  },
   'skull_crushers': {
     tags: [],
     id: 'skull_crushers',
@@ -66,9 +91,14 @@ const byId = {
     name: 'Chin Ups',
   },
   'bench_press': {
-    tags: [],
+    tags: ['chest', 'compound', 'barbell'],
     id: 'bench_press',
     name: 'Bench Press',
+  },
+  'standing_bicep_curls': {
+    tags: [],
+    id: 'standing_bicep_curls',
+    name: 'Standing Bicep Curls',
   },
   'bicep_curl': {
     tags: [],
@@ -180,6 +210,11 @@ const byId = {
     id: 'ring_rows',
     name: 'Ring Rows',
   },
+  'chest_dips': {
+    tags: ['chest'],
+    id: 'chest_dips',
+    name: 'Chest Dips',
+  },
 };
 
 const allIds = [
@@ -214,6 +249,12 @@ const allIds = [
   'kneeling_left_hip_flexor_stretch',
   'kneeling_right_hip_flexor_stretch',
   'skull_crushers',
+  'toe_touches',
+  'hanging_leg_raises',
+  'butterfly',
+  'band_pass_through',
+  'ez_bar_curl',
+  'chest_dips',
 ];
 
 export const stretchExerciseIds = getIdsForStretchExercises(byId, allIds);

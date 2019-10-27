@@ -29,7 +29,6 @@ export const Header = styled.header`
   align-items: center;
   justify-content: center;
   background-color: white;
-  // border-bottom: solid 0.5px lightgrey;
   z-index: 3;
   overflow: hidden;
   min-height: ${bannerHeight}px;

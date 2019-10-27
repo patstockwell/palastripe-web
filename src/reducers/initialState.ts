@@ -15,6 +15,9 @@ import overheadStrength from '../workoutData/workouts/overheadStrength';
 import fullBodyPower from '../workoutData/workouts/fullBodyPower';
 import glutesAndGlory from '../workoutData/workouts/glutesAndGlory';
 import squatAndBench from '../workoutData/workouts/squatAndBench';
+import shapeAndStrength from '../workoutData/workouts/shapeAndStrength';
+import pushAndPull from '../workoutData/workouts/pushAndPull';
+import legPower from '../workoutData/workouts/legPower';
 import { combineDataForAllExercises as combine } from '../helpers/functions';
 
 const initialState: State = {
@@ -54,8 +57,14 @@ const initialState: State = {
         'full-body-power': combine(fullBodyPower, exercises),
         'glutes-and-glory': combine(glutesAndGlory, exercises),
         'squat-and-bench': combine(squatAndBench, exercises),
+        'shape-and-strength': combine(shapeAndStrength, exercises),
+        'push-and-pull': combine(pushAndPull, exercises),
+        'leg-power': combine(legPower, exercises),
       },
       allIds: [
+        'shape-and-strength',
+        'push-and-pull',
+        'leg-power',
         'full-body-dumbbell-strength',
         'squat-and-bench',
         'circuit-speed',
