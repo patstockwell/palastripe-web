@@ -1,6 +1,5 @@
-import { useContext, useEffect, useRef, useState} from 'react';
+import { useEffect, useRef, useState} from 'react';
 // @ts-ignore
-import { __RouterContext } from 'react-router-dom';
 import { useSpring } from 'react-spring';
 import {
   DAYS_OF_THE_WEEK,
@@ -22,10 +21,6 @@ import {
   Workout, // eslint-disable-line no-unused-vars
   WorkoutOutline, // eslint-disable-line no-unused-vars
 } from './types';
-
-export function useRouter(): any {
-  return useContext(__RouterContext);
-}
 
 export const convertWeight = (weightInKilos: number, useKilos: boolean): number => {
   if (useKilos) {

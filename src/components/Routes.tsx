@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { useTransition } from 'react-spring';
-import { Route, Switch } from 'react-router-dom';
+import { useLocation, Route, Switch } from 'react-router-dom';
 import Workouts from '../pages/Workouts';
 import ActiveWorkout from '../pages/ActiveWorkout';
 import Activity from '../pages/Activity';
 import EditWorkout from '../pages/EditWorkout';
 import FourZeroFour from '../pages/FourZeroFour';
 import Profile from '../pages/Profile';
-import { useRouter } from '../helpers/functions';
 import {
   ReduxAction, // eslint-disable-line no-unused-vars
   RouteState, // eslint-disable-line no-unused-vars
@@ -21,7 +20,7 @@ type Props = DispatchProps & StateProps;
 const Routes: React.FC<Props> = ({ isFirstRender, removeIsFirstRender }) => {
   const [ activeWorkoutPageAtRest, setActiveWorkoutPageAtRest ] = useState(false);
   const [ profilePageAtRest, setProfilePageAtRest ] = useState(false);
-  const { location } = useRouter();
+  const location = useLocation();
   const {
     // set default value in case none is passed
     state = { immediate: true, backPath: '/workouts/' },

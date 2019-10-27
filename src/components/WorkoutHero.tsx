@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import styled, { keyframes } from 'styled-components';
+import { useLocation } from 'react-router-dom';
 
 import AlertConfirm from '../components/AlertConfirm';
 import ShareIcon from '../assets/svg/Share';
@@ -76,12 +77,14 @@ interface Props {
 const WorkoutHero = ({ time, imageUrl, name }: Props) => {
   const [ showShareMessage, setShowShareMessage ] = useState(false);
   const [ showCircleTick, setShowCircleTick ] = useState(false);
+  const { pathname } = useLocation();
 
   const handleShare = () => {
     const nav = navigator as any;
     setShowShareMessage(true);
     if (nav && nav.clipboard) {
-      nav.clipboard.writeText('sample copy text');
+      const appUrl = 'https://harderbetterfasterfitter.com';
+      nav.clipboard.writeText(appUrl + pathname);
     }
   };
 
