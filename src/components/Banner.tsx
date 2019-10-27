@@ -11,6 +11,7 @@ import {
 const AppLogo = styled.p`
   position: absolute;
   left: ${gutterWidth}px;
+  top: 11px;
   font-family: 'Muli', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   color: white;
   text-align: center;
