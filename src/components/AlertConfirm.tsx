@@ -45,6 +45,7 @@ interface Props {
   showAlert: boolean;
   cancelAlert: () => void;
   message: string;
+  onClose?: () => void;
 }
 
 const AlertConfirm: React.FC<Props> = ({
@@ -52,6 +53,7 @@ const AlertConfirm: React.FC<Props> = ({
   showAlert,
   cancelAlert,
   message,
+  onClose,
 }) => {
   const transitions = useTransition(showAlert, null, {
     from: {
@@ -65,6 +67,7 @@ const AlertConfirm: React.FC<Props> = ({
     enter: { opacity: 1, transform: 'translateY(0px)' },
     leave: { opacity: 0, transform: `translateY(${popUpHeight}px)` },
     config: { mass: 1, tension: 710, friction: 40 },
+    onDestroyed: () => { if (onClose) { onClose(); } },
   });
 
   return (

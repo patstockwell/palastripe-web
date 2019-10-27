@@ -1,11 +1,14 @@
-import React from 'react';
-import styled from 'styled-components';
+import React, { useState } from 'react';
+import styled, { keyframes } from 'styled-components';
 
+import AlertConfirm from '../components/AlertConfirm';
 import ShareIcon from '../assets/svg/Share';
+import CircleTick from '../assets/svg/CircleTick';
 import {
   workoutTitleStyle,
   workoutHeroWindowStyle,
 } from './SharedStyles';
+import { iconWrapperStyle } from './ActivityTile/ActivityTileSharedStyles';
 
 export const Window = styled.div<{ colour?: string, imageUrl: string }>`
   ${workoutHeroWindowStyle}
@@ -49,6 +52,21 @@ const ShareButton = styled.button`
   padding: 10px;
 `;
 
+const scale = keyframes `
+  0%, 100% {
+    transform: none;
+  }
+  50% {
+    transform: scale3d(1.1, 1.1, 1);
+  }
+`;
+
+const IconWrapper = styled.div`
+  ${iconWrapperStyle};
+  margin: 0 auto;
+  animation: ${scale} 0.5s linear;
+`;
+
 interface Props {
   name: string;
   imageUrl?: string;
@@ -56,8 +74,15 @@ interface Props {
 }
 
 const WorkoutHero = ({ time, imageUrl, name }: Props) => {
+  const [ showShareMessage, setShowShareMessage ] = useState(false);
+  const [ showCircleTick, setShowCircleTick ] = useState(false);
+
   const handleShare = () => {
-    // need to do something here. Show alertconfirm with info?
+    const nav = navigator as any;
+    setShowShareMessage(true);
+    if (nav && nav.clipboard) {
+      nav.clipboard.writeText('sample copy text');
+    }
   };
 
   return (
@@ -67,6 +92,19 @@ const WorkoutHero = ({ time, imageUrl, name }: Props) => {
       </ShareButton>
       <Title>{name}</Title>
       <Time>{time}</Time>
+
+      <AlertConfirm
+        cancelAlert={() => setShowShareMessage(false)}
+        showAlert={showShareMessage}
+        message={'Share link copied to clipboard'}
+        onClose={() => setShowCircleTick(false)}
+      >
+        <IconWrapper onAnimationEnd={() => setShowCircleTick(true)}>
+          {showCircleTick &&
+            <CircleTick onAnimationEnd={() => setShowShareMessage(false)} />
+          }
+        </IconWrapper>
+      </AlertConfirm>
     </Window>
   );
 };
