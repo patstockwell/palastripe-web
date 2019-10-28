@@ -4,6 +4,7 @@ import {
   ActivityGroup, // eslint-disable-line no-unused-vars
   ReduxAction, // eslint-disable-line no-unused-vars
   Workout, // eslint-disable-line no-unused-vars
+  WeightedActivity, // eslint-disable-line no-unused-vars
   Workouts, // eslint-disable-line no-unused-vars
   isTimed,
 } from '../helpers/types';
@@ -27,17 +28,19 @@ interface BoolHash {
   [exerciseName: string]: boolean;
 }
 
-const reduceCompletedExercises = (workout: Workout): BoolHash => {
+export const reduceCompletedExercises = (workout: Workout): BoolHash => {
   // find all exercises that were completed
   return workout.exerciseGroups
-    .flatMap((g: ActivityGroup): Activity[] => g.exercises)
+    .reduce((acc, g: ActivityGroup): Activity[] => (
+      [ ...acc, ...g.exercises ]
+    ), [])
     .reduce((acc: BoolHash, curr: Activity) => {
       if (isTimed(curr)) {
         return acc;
       }
       const { id, completed, repsGoal, repsAchieved } = curr;
       const newKey = acc[id] === undefined;
-      // completed may be undefined so we cast it to boolean with `!!`
+      // completed may be undefined so it's cast to boolean with `!!`
       const success = !!completed && repsAchieved >= repsGoal;
       const done = newKey ? success : success && acc[id];
 
@@ -48,22 +51,44 @@ const reduceCompletedExercises = (workout: Workout): BoolHash => {
     }, {});
 };
 
+export const adjustWeight = (w: Workout, groupIndex: number) =>
+  (a: Activity, i: number): Activity => {
+    if (isTimed(a)) {
+      return a;
+    }
+
+    // find the matching exercise in the completed activeWorkout and use the
+    // weightInKilos to update the workout template
+    const completedActivity =
+      w.exerciseGroups[groupIndex].exercises[i] as WeightedActivity;
+
+    return {
+      ...a,
+      weightInKilos: completedActivity.weightInKilos,
+    };
+  };
+
+const updateCompleted = (e: BoolHash) => (a: Activity) => {
+  if (isTimed(a)) {
+    return a;
+  }
+
+  return {
+    ...a,
+    weightInKilos: e[a.id]
+      ? a.weightInKilos + a.autoIncrement
+      : a.weightInKilos,
+  };
+};
+
 const finishWorkout = (allWorkouts: Workouts, workout: Workout): Workouts => {
-  const completedExercises: BoolHash = reduceCompletedExercises(workout);
+  const completed: BoolHash = reduceCompletedExercises(workout);
   const { id: wId } = workout;
   const { exerciseGroups } = allWorkouts.byId[wId];
-  const newExerciseGroups = exerciseGroups.map((g: ActivityGroup) => {
-    const newExercises = g.exercises.map((a: Activity) => {
-      if (isTimed(a)) {
-        return a; // timed exercises don't have weight so can't be incremented
-      }
-
-      const newWeight = completedExercises[a.id]
-        ? a.weightInKilos + a.autoIncrement
-        : a.weightInKilos;
-
-      return { ...a, weightInKilos: newWeight };
-    });
+  const newExerciseGroups = exerciseGroups.map((g: ActivityGroup, i) => {
+    const newExercises = g.exercises
+      .map(adjustWeight(workout, i))
+      .map(updateCompleted(completed));
 
     return { ...g, exercises: newExercises };
   });
@@ -73,9 +98,7 @@ const finishWorkout = (allWorkouts: Workouts, workout: Workout): Workouts => {
     byId: {
       ...allWorkouts.byId,
       [wId]: {
-        ...workout,
-        startTime: undefined, // active workouts will set their own startTime
-        finishTime: undefined, // active workouts will set their own finishTime
+        ...allWorkouts.byId[wId],
         exerciseGroups: newExerciseGroups,
       },
     },
