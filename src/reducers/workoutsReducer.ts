@@ -28,8 +28,12 @@ interface BoolHash {
   [exerciseName: string]: boolean;
 }
 
+/**
+ * This function turns a workout into an object hash. Each key is an exercise id
+ * and the value is a boolean, which represents if all sets of an exercise were
+ * completed successfully
+ */
 export const reduceCompletedExercises = (workout: Workout): BoolHash => {
-  // find all exercises that were completed
   return workout.exerciseGroups
     .reduce((acc, g: ActivityGroup): Activity[] => (
       [ ...acc, ...g.exercises ]
@@ -51,14 +55,17 @@ export const reduceCompletedExercises = (workout: Workout): BoolHash => {
     }, {});
 };
 
+/**
+ * This function ensures that if the user has adjusted a weight during a
+ * workout, that it gets remembered for next time. We do this by taking the
+ * weight from the completed workout and assigning it to the workout template.
+ */
 export const adjustWeight = (w: Workout, groupIndex: number) =>
   (a: Activity, i: number): Activity => {
     if (isTimed(a)) {
       return a;
     }
 
-    // find the matching exercise in the completed activeWorkout and use the
-    // weightInKilos to update the workout template
     const completedActivity =
       w.exerciseGroups[groupIndex].exercises[i] as WeightedActivity;
 
@@ -68,6 +75,12 @@ export const adjustWeight = (w: Workout, groupIndex: number) =>
     };
   };
 
+/**
+ * This function ensures that if all sets for an exercise were completed
+ * successfully, then the weight is incremented. Each _set_ detirmines it own
+ * increment. That means that if 4 sets of bench press are completed
+ * successfully, none, some, or all may get an increment.
+ */
 const updateCompleted = (e: BoolHash) => (a: Activity) => {
   if (isTimed(a)) {
     return a;
