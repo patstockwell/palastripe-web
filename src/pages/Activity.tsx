@@ -1,6 +1,4 @@
-import React, {
-  useEffect,
-} from 'react';
+import React from 'react';
 import {
   RouteProps, // eslint-disable-line no-unused-vars
 } from 'react-router-dom';
@@ -32,17 +30,10 @@ const getTotalWeight = (history: Workout[]): number => (
 type Props = StateProps & RouteProps;
 
 const Activity: React.FC<Props> = ({
-  scrollY,
   location,
   history,
   useKilos,
 }) => {
-  useEffect(() => {
-    if (typeof scrollY === 'number') {
-      window.scrollTo(0, scrollY);
-    }
-  });
-
   const totalMinutes = getTotalMinutes(history);
   const totalWeight = getTotalWeight(history);
   const convertedWeight = convertWeight(totalWeight, useKilos);
@@ -61,13 +52,11 @@ const Activity: React.FC<Props> = ({
 };
 
 interface StateProps {
-  scrollY: number;
   history: Workout[];
   useKilos: boolean;
 }
 
 const mapStateToProps = (state: State): StateProps => ({
-  scrollY: state.scrollY.ACTIVITY_PAGE,
   history: state.history,
   useKilos: state.settings.useKilos,
 });

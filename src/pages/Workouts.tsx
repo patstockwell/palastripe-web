@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import {
   RouteProps, // eslint-disable-line no-unused-vars
 } from 'react-router-dom';
@@ -27,14 +27,7 @@ const Workouts: React.FC<Props> = ({
   removeIsFirstRender,
   location,
   workouts,
-  scrollY,
 }) => {
-  useEffect(() => {
-    if (typeof scrollY === 'number') {
-      window.scrollTo(0, scrollY);
-    }
-  });
-
   if (isFirstRender) {
     // remove the flag to identify first page load when static rendering
     removeIsFirstRender();
@@ -53,7 +46,6 @@ const Workouts: React.FC<Props> = ({
 };
 
 interface StateProps {
-  scrollY: number;
   workouts: Workout[];
   isFirstRender: boolean;
 }
@@ -63,10 +55,9 @@ const mapStateToProps = ({
   entities: {
     workouts: { allIds, byId },
   },
-  scrollY: { WORKOUTS_PAGE },
 }: State): StateProps => {
   const workouts = allIds.map(id => byId[id]);
-  return { scrollY: WORKOUTS_PAGE, workouts, isFirstRender };
+  return { workouts, isFirstRender };
 };
 
 interface DispatchProps {

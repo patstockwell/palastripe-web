@@ -1,9 +1,14 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 
+import { PageRefProvider } from '../context/pageRef';
 import Banner from './Banner';
 import Navigation from './Navigation';
 import { gutterWidth, bannerHeight } from '../helpers/constants';
+import {
+  State, // eslint-disable-line no-unused-vars
+} from '../helpers/types';
 
 const PageWindow = styled.div`
   height: calc(100vh - (2 * ${bannerHeight}px));
@@ -25,13 +30,15 @@ const Hr = styled.hr`
   border-bottom: solid 0.5px lightgrey;
 `;
 
-interface Props {
+interface OwnProps {
   pathname: string;
   heading?: string;
 }
 
-const Page: React.FC<Props> = ({ heading, pathname, children }) => {
-  const observerRoot = useRef(null);
+type Props = OwnProps & StateProps;
+
+const Page: React.FC<Props> = ({ scrollY, heading, pathname, children }) => {
+  const pageRef: React.MutableRefObject<HTMLDivElement> = useRef(null);
   const observerTarget = useRef(null);
   const [hasScrolled, setHasScrolled] = useState(false);
 
@@ -40,8 +47,15 @@ const Page: React.FC<Props> = ({ heading, pathname, children }) => {
   };
 
   useEffect(() => {
+    if (
+      typeof scrollY === 'number'
+      && scrollY > 0
+      && pageRef.current.scrollTop <= 0
+    ) {
+      pageRef.current.scrollTo(0, scrollY);
+    }
     const observer = new IntersectionObserver(callback, {
-      root: observerRoot.current,
+      root: pageRef.current,
       threshold: 0,
     });
 
@@ -51,9 +65,9 @@ const Page: React.FC<Props> = ({ heading, pathname, children }) => {
   });
 
   return (
-    <React.Fragment>
+    <PageRefProvider value={pageRef}>
       <Banner heading={hasScrolled && heading}/>
-      <PageWindow ref={observerRoot} >
+      <PageWindow ref={pageRef} >
         {heading &&
           <React.Fragment>
             <Heading ref={observerTarget} >{heading}</Heading>
@@ -62,9 +76,26 @@ const Page: React.FC<Props> = ({ heading, pathname, children }) => {
         }
         {children}
       </PageWindow>
-      <Navigation pathname={pathname} />
-    </React.Fragment>
+      <Navigation pageRef={pageRef} pathname={pathname} />
+    </PageRefProvider>
   );
 };
 
-export default Page;
+interface StateProps {
+  scrollY: number;
+}
+
+const mapStateToProps = (state: State, ownProps: OwnProps): StateProps => {
+  const pathToScrollYMap = {
+    '/activity/': state.scrollY.ACTIVITY_PAGE,
+    '/workouts/': state.scrollY.WORKOUTS_PAGE,
+  };
+
+  return {
+    scrollY: pathToScrollYMap[ownProps.pathname],
+  };
+};
+
+export default connect<StateProps, void, OwnProps>(
+  mapStateToProps
+)(Page);
