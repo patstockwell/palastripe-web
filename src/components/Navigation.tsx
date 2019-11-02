@@ -41,6 +41,7 @@ const NavLink = styled(Link)<{ highlight: string }>`
   flex-direction: column;
   align-items: center;
   font-size: 12px;
+  padding: 14px;
 `;
 
 interface Props {
