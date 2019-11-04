@@ -22,7 +22,10 @@ import {
   WorkoutOutline, // eslint-disable-line no-unused-vars
 } from './types';
 
-export const convertWeight = (weightInKilos: number, useKilos: boolean): number => {
+export const convertWeight = (
+  weightInKilos: number,
+  useKilos: boolean,
+): number => {
   if (useKilos) {
     // round to the nearest 0.5
     return Math.round(weightInKilos / 0.5) * 0.5;
@@ -38,7 +41,10 @@ export const convertWeight = (weightInKilos: number, useKilos: boolean): number 
   }
 };
 
-export const formatWeight = (weightInKilos: number, useKilos: boolean): string => {
+export const formatWeight = (
+  weightInKilos: number,
+  useKilos: boolean,
+): string => {
   const weight = convertWeight(weightInKilos, useKilos);
   return `${weight} ${useKilos ? 'kg' : 'lbs'}`;
 };
@@ -140,7 +146,10 @@ const combineExerciseData =
     ...exercises.byId[activity.id] || {},
   });
 
-export const combineDataForAllExercises = (workout: WorkoutOutline, exercisesList: Exercises): Workout => {
+export const combineDataForAllExercises = (
+  workout: WorkoutOutline,
+  exercisesList: Exercises,
+): Workout => {
   const addExerciseData = combineExerciseData(exercisesList);
 
   return {
@@ -208,7 +217,10 @@ export const getDiffInMinutes = (start: number, finish: number): number => {
   ) : 0;
 };
 
-export const getTimeSince = (date: number): { value: number, unitOfMeasurement: string } => {
+export const getTimeSince = (date: number): {
+  value: number;
+  unitOfMeasurement: string;
+} => {
   const diff = getDiffInMinutes(date, Date.now());
   const ONE_HOUR = 60; // in minutes
   const ONE_DAY = ONE_HOUR * 24;
