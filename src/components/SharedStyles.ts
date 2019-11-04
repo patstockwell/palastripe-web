@@ -1,15 +1,22 @@
 import { createGlobalStyle, css } from 'styled-components';
+
 import {
   purple,
   workoutWindowViewport,
 } from '../helpers/constants';
 
-export const AnimatedSlidingPageStyle = css<{ position?: string }>`
-  z-index: 10;
-  top: 0;
+export const PageStyle = `
   width: 100%;
   -webkit-overflow-scrolling: touch; // enables momentum scolling
-  position: ${({ position }) => position};
+  position: fixed;
+  overflow: scroll;
+`;
+
+export const AnimatedSlidingPageStyle = `
+  z-index: 10;
+  top: 0;
+  height: 100vh;
+  ${PageStyle}
 `;
 
 export const GlobalOverFlowHiddenStyle = createGlobalStyle<{ hidden: boolean }>`

@@ -1,5 +1,4 @@
 import React, {
-  useState,
   CSSProperties, // eslint-disable-line no-unused-vars
 } from 'react';
 import styled from 'styled-components';
@@ -24,38 +23,24 @@ const Panel = styled.div`
 `;
 
 interface Props {
-  atRest: boolean;
   backPath: string;
   animationStyles: CSSProperties;
 }
 
-const Profile: React.FC<Props> = ({ atRest, backPath, animationStyles }) => {
-  const [exiting, setExiting] = useState(false);
-  const position = atRest && !exiting
-    ? 'relative'
-    : 'fixed';
-
-  return (
-    <AnimatedSlidingPage
-      position={position}
-      style={{
-        top: animationStyles.left,
-      }}
-    >
-      <BackLinkBanner back={{
-        link: backPath || '/',
-        showArrows: false,
-        text: 'Done',
-        handleClick: () => setExiting(true),
-      }}/>
-      <Panel>
-        <ProfileName />
-      </Panel>
-      <Panel>
-        <SettingUnitOfMeasurement />
-      </Panel>
-    </AnimatedSlidingPage>
-  );
-};
+const Profile: React.FC<Props> = ({ backPath, animationStyles }) => (
+  <AnimatedSlidingPage style={{ top: animationStyles.left }} >
+    <BackLinkBanner back={{
+      link: backPath || '/',
+      showArrows: false,
+      text: 'Done',
+    }}/>
+    <Panel>
+      <ProfileName />
+    </Panel>
+    <Panel>
+      <SettingUnitOfMeasurement />
+    </Panel>
+  </AnimatedSlidingPage>
+);
 
 export default Profile;

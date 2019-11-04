@@ -1,12 +1,13 @@
-import React, { createContext, useEffect, useState } from 'react';
+import React, { useEffect, useRef, createContext, useState } from 'react';
 import { connect } from 'react-redux';
 import {
   RouteComponentProps, // eslint-disable-line no-unused-vars
 } from 'react-router';
 import styled from 'styled-components';
 import { animated } from 'react-spring';
-
 import { Link } from 'react-router-dom';
+
+import { PageRefProvider } from '../context/pageRef';
 import { buttonStyle } from '../components/SharedStyles';
 import { AnimatedSlidingPageStyle } from '../components/SharedStyles';
 import { useInterval } from '../helpers/functions';
@@ -55,13 +56,12 @@ export const TimerContext = createContext({
   setCount: (_: number) => {/* do nothing */}, // eslint-disable-line
 });
 
-const AnimatedSlidingPage = styled(animated.div)<{ position?: string }>`
+const AnimatedSlidingPage = styled(animated.div)`
   ${AnimatedSlidingPageStyle}
 `;
 
 interface OwnProps {
   animationStyles: any;
-  atRest: boolean;
 }
 
 type Match = Pick<RouteComponentProps<{ id: string }>, 'match'>;
@@ -75,34 +75,18 @@ const ActiveWorkout: React.FC<Props> = ({
   match,
   activeWorkout,
   setActiveWorkout,
-  atRest,
-  isFirstRender,
   setWindowScroll,
 }) => {
   const [ showEndWorkoutAlert, setShowEndWorkoutAlert ] = useState(false);
-  const [ isRelativePosition, setIsRelativePosition ] = useState(false);
-  const [ isFixedPostion, setIsFixedPostion ] = useState(false);
-  const [ scrollNotReset, setScrollNotReset ] = useState(true);
   const [ direction, setDirection ] = useState('left');
   const [ showRestTimer, setShowRestTimer ] = useState(false);
   const [ count, setCount ] = useState(0);
   const [ restTime, setRestTime ] = useState(0);
+  const pageRef = useRef(null);
 
   useInterval(() => {
     setCount(count + 1);
   }, showRestTimer ? ONE_SECOND : ONE_DAY);
-
-  useEffect(() => {
-    if (atRest && scrollNotReset) {
-      window.scrollTo(0, 0);
-      setIsRelativePosition(true);
-      setScrollNotReset(false);
-    }
-    // if we have landed on the page without a transition (static render)
-    if (isFirstRender) {
-      setIsRelativePosition(true);
-    }
-  });
 
   const resetTimer = () => {
     setShowRestTimer(false);
@@ -132,71 +116,65 @@ const ActiveWorkout: React.FC<Props> = ({
     : workoutWithAllActivityData;
 
   const finishWorkoutWithAlertTransition = () => {
-    setIsFixedPostion(true);
     finishWorkout(activeWorkout);
     setDirection('top');
     setShowEndWorkoutAlert(false);
     setWindowScroll(0);
   };
 
-  const position = isRelativePosition && !isFixedPostion
-    ? 'relative'
-    : 'fixed';
-
   return (
-    <AnimatedSlidingPage
-      position={position}
-      style={{
-        [direction]: animationStyles.left,
-      }}
-    >
-      <GlobalOverFlowHiddenStyle hidden={showEndWorkoutAlert} />
-      <BackLinkBanner
-        sticky={false}
-        back={{
-          showArrows: true,
-          handleClick: () => setIsFixedPostion(true),
-          link: '/workouts/',
-        }}
-      />
-      <WorkoutHero
-        name={displayedWorkout.name}
-        imageUrl={displayedWorkout.imageUrl}
-        time={formatMinutes(calculateWorkoutTime(displayedWorkout))}
-      />
-      <TimerContext.Provider value={{
-        setShowTimer: setShowRestTimer,
-        setRestTime,
-        setCount,
-      }} >
-        <ActivityList
-          workout={displayedWorkout}
-          finishWorkoutClickHandler={() => setShowEndWorkoutAlert(true)}
-        />
-      </TimerContext.Provider>
-
-      {showRestTimer && count > 0 && restTime >= 0 &&
-        <Timer
-          restPeriod={restTime}
-          resetTimer={resetTimer}
-          count={count - 1}
-        />
-      }
-
-      <AlertConfirm
-        cancelAlert={() => setShowEndWorkoutAlert(false)}
-        showAlert={showEndWorkoutAlert}
-        message={'Are you sure you want to finish the workout?'}
+    <PageRefProvider value={pageRef}>
+      <AnimatedSlidingPage
+        style={{ [direction]: animationStyles.left }}
+        ref={pageRef}
       >
-        <Button
-          onClick={() => setShowEndWorkoutAlert(false)}
-          background={'grey'}>No</Button>
-        <LinkButton
-          to={{ pathname: '/activity/', state: { immediate: false } }}
-          onClick={finishWorkoutWithAlertTransition}
-        >Yes</LinkButton>
-      </AlertConfirm>
-    </AnimatedSlidingPage>
+        <GlobalOverFlowHiddenStyle hidden={showEndWorkoutAlert} />
+        <BackLinkBanner
+          sticky={false}
+          back={{
+            showArrows: true,
+            link: '/workouts/',
+          }}
+        />
+        <WorkoutHero
+          name={displayedWorkout.name}
+          imageUrl={displayedWorkout.imageUrl}
+          time={formatMinutes(calculateWorkoutTime(displayedWorkout))}
+        />
+        <TimerContext.Provider value={{
+          setShowTimer: setShowRestTimer,
+          setRestTime,
+          setCount,
+        }} >
+          <ActivityList
+            workout={displayedWorkout}
+            finishWorkoutClickHandler={() => setShowEndWorkoutAlert(true)}
+          />
+        </TimerContext.Provider>
+
+        {showRestTimer && count > 0 && restTime >= 0 &&
+          <Timer
+            restPeriod={restTime}
+            resetTimer={resetTimer}
+            count={count - 1}
+          />
+        }
+
+        <AlertConfirm
+          cancelAlert={() => setShowEndWorkoutAlert(false)}
+          showAlert={showEndWorkoutAlert}
+          message={'Are you sure you want to finish the workout?'}
+        >
+          <Button
+            onClick={() => setShowEndWorkoutAlert(false)}
+            background={'grey'}>No</Button>
+          <LinkButton
+            to={{ pathname: '/activity/', state: { immediate: false } }}
+            onClick={finishWorkoutWithAlertTransition}
+          >Yes</LinkButton>
+        </AlertConfirm>
+      </AnimatedSlidingPage>
+    </PageRefProvider>
   );
 };
 
@@ -212,7 +190,6 @@ interface DispatchProps {
 interface StateProps {
   activeWorkout: Workout;
   entities: Entities;
-  isFirstRender: boolean;
 }
 
 const mapDispatchToProps: DispatchProps = {
@@ -236,7 +213,6 @@ const mapDispatchToProps: DispatchProps = {
 const mapStateToProps = (state: State): StateProps => ({
   activeWorkout: state.activeWorkout,
   entities: state.entities,
-  isFirstRender: state.isFirstRender,
 });
 
 export default connect<StateProps, DispatchProps, void>(

@@ -2,6 +2,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import styled, { keyframes } from 'styled-components';
 
+import { usePageRef } from '../../context/pageRef';
 import HiddenTimerArea from './HiddenTimerArea';
 import EditActivityPanel from '../EditActivityPanel';
 import { ShowHiddenAreaArrowWrapper } from './ActivityTileWithReps';
@@ -104,7 +105,8 @@ const ActivityTileWithTimer: React.FC<Props> = ({
   const [showEditPanel, setShowEditPanel] = useState(false);
   const [started, setStarted] = useState(false);
   const listElement = useRef(null);
-  useScrollElementToTop(listElement, selected, showHiddenArea);
+  const pageRef = usePageRef();
+  useScrollElementToTop(pageRef, listElement, selected, showHiddenArea);
 
   const animatedStyles = useHiddenAreaAnimation(showHiddenArea);
 

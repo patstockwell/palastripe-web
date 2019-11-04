@@ -7,12 +7,10 @@ import styled from 'styled-components';
 import WorkoutTile from '../components/WorkoutTile';
 import Page from '../components/Page';
 import {
-  ReduxAction, // eslint-disable-line no-unused-vars
   State, // eslint-disable-line no-unused-vars
   Workout, // eslint-disable-line no-unused-vars
 } from '../helpers/types';
 import {
-  SET_FIRST_RENDER_FLAG,
   navBarHeight,
 } from '../helpers/constants';
 
@@ -20,19 +18,12 @@ const EmptySpace = styled.div`
   height: ${2 * navBarHeight}px;
 `;
 
-type Props = RouteProps & DispatchProps & StateProps;
+type Props = RouteProps & StateProps;
 
 const Workouts: React.FC<Props> = ({
-  isFirstRender,
-  removeIsFirstRender,
   location,
   workouts,
 }) => {
-  if (isFirstRender) {
-    // remove the flag to identify first page load when static rendering
-    removeIsFirstRender();
-  }
-
   const workoutTiles = workouts.map((w: Workout) =>
     <WorkoutTile key={w.id} workout={w} />
   );
@@ -47,30 +38,15 @@ const Workouts: React.FC<Props> = ({
 
 interface StateProps {
   workouts: Workout[];
-  isFirstRender: boolean;
 }
 
 const mapStateToProps = ({
-  isFirstRender,
   entities: {
     workouts: { allIds, byId },
   },
 }: State): StateProps => {
   const workouts = allIds.map(id => byId[id]);
-  return { workouts, isFirstRender };
+  return { workouts };
 };
 
-interface DispatchProps {
-  removeIsFirstRender: () => ReduxAction<undefined>;
-}
-
-const mapDispatchToProps: DispatchProps = {
-  removeIsFirstRender: () => ({
-    type: SET_FIRST_RENDER_FLAG,
-  }),
-};
-
-export default connect<StateProps, DispatchProps, void>(
-  mapStateToProps,
-  mapDispatchToProps
-)(Workouts);
+export default connect<StateProps, void, void>(mapStateToProps)(Workouts);

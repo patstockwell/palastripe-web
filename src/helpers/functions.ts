@@ -57,20 +57,24 @@ export const useHiddenAreaAnimation = (showHiddenArea: boolean) =>
     config: { tension: 410, friction: 35 },
   });
 
-export const useScrollElementToTop =
-  (e: React.MutableRefObject<any>, selected: boolean, show: boolean) => {
-    useEffect(() => {
-      if (selected) {
-        window.setTimeout(() => {
-          window.scrollTo({
-            top: e.current.offsetTop - activityHeadingHeight,
-            left: 0,
-            behavior: 'smooth',
-          });
-        }, 240);
-      }
-    }, [ show, selected ]);
-  };
+export const useScrollElementToTop = (
+  p: React.MutableRefObject<HTMLDivElement>,
+  e: React.MutableRefObject<any>,
+  selected: boolean,
+  show: boolean,
+) => {
+  useEffect(() => {
+    if (selected) {
+      window.setTimeout(() => {
+        p.current.scrollTo({
+          top: e.current.offsetTop - activityHeadingHeight,
+          left: 0,
+          behavior: 'smooth',
+        });
+      }, 240);
+    }
+  }, [ show, selected ]);
+};
 
 export const useHasScrolled = () => {
   const [scrolled, setScrolled] = useState(false);

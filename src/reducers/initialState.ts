@@ -21,9 +21,6 @@ import legPower from '../workoutData/workouts/legPower';
 import { combineDataForAllExercises as combine } from '../helpers/functions';
 
 const initialState: State = {
-  // flag to know if we're viewing a statically generated page
-  isFirstRender: true,
-
   // activeWorkout: undefined
 
   activeWorkoutSelectedExercise: {

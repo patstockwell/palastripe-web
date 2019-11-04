@@ -6,6 +6,7 @@ import {
   Dispatch, // eslint-disable-line no-unused-vars
 } from 'redux';
 
+import { usePageRef } from '../../context/pageRef';
 import HiddenArea from './HiddenArea';
 import ToggleSetCompleteButton from './ToggleSetCompleteButton';
 import EditActivityPanel from '../EditActivityPanel';
@@ -85,7 +86,8 @@ const ActivityTileWithReps: React.FC<Props> = ({
 }) => {
   const [showAnimation, setShowAnimation] = useState(false);
   const listElement = useRef(null);
-  useScrollElementToTop(listElement, selected, showHiddenArea);
+  const pageRef = usePageRef();
+  useScrollElementToTop(pageRef, listElement, selected, showHiddenArea);
 
   const animatedStyles = useHiddenAreaAnimation(showHiddenArea);
 

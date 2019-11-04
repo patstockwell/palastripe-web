@@ -45,6 +45,7 @@ const NavLink = styled(Link)<{ highlight: string }>`
 `;
 
 interface Props {
+  onNavigation: () => void;
   pageRef: React.MutableRefObject<HTMLDivElement>;
   pathname: string;
   setWindowScroll: (scrollY: number, page: string) => ReduxAction<{
@@ -53,11 +54,17 @@ interface Props {
   }>;
 }
 
-const Navigation = ({ pathname, setWindowScroll, pageRef }: Props) => {
+const Navigation: React.FC<Props> = ({
+  pathname,
+  setWindowScroll,
+  pageRef,
+  onNavigation,
+}) => {
   const isOnPage = (page: string): boolean =>
     getCurrentPage(pathname) === page;
 
   const handleClick = () => {
+    onNavigation();
     setWindowScroll(
       pageRef.current.scrollTop,
       getCurrentPage(pathname)

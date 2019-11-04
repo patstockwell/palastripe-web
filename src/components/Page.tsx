@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 
+import { PageStyle } from './SharedStyles';
 import { PageRefProvider } from '../context/pageRef';
 import Banner from './Banner';
 import Navigation from './Navigation';
@@ -11,11 +12,8 @@ import {
 } from '../helpers/types';
 
 const PageWindow = styled.div`
-  height: calc(100vh - (2 * ${bannerHeight}px));
-  overflow: scroll;
-  -webkit-overflow-scrolling:·touch;·//·enables·momentum·scolling
-  position: fixed;
-  top: 0;
+  ${PageStyle}
+  height: calc(100vh - (${2 * bannerHeight}px));
 `;
 
 const Heading = styled.h1`
@@ -40,20 +38,19 @@ type Props = OwnProps & StateProps;
 const Page: React.FC<Props> = ({ scrollY, heading, pathname, children }) => {
   const pageRef: React.MutableRefObject<HTMLDivElement> = useRef(null);
   const observerTarget = useRef(null);
-  const [hasScrolled, setHasScrolled] = useState(false);
+  const [headingHidden, setHeadingHidden] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
   const callback = ([entry]: IntersectionObserverEntry[]) => {
-    setHasScrolled(!entry.isIntersecting);
+    setHeadingHidden(!entry.isIntersecting);
   };
 
   useEffect(() => {
-    if (
-      typeof scrollY === 'number'
-      && scrollY > 0
-      && pageRef.current.scrollTop <= 0
-    ) {
+    if (!scrolled && scrollY && scrollY > 0) {
       pageRef.current.scrollTo(0, scrollY);
+      setScrolled(true);
     }
+
     const observer = new IntersectionObserver(callback, {
       root: pageRef.current,
       threshold: 0,
@@ -66,7 +63,7 @@ const Page: React.FC<Props> = ({ scrollY, heading, pathname, children }) => {
 
   return (
     <PageRefProvider value={pageRef}>
-      <Banner heading={hasScrolled && heading}/>
+      <Banner heading={headingHidden && heading}/>
       <PageWindow ref={pageRef} >
         {heading &&
           <React.Fragment>
@@ -76,7 +73,11 @@ const Page: React.FC<Props> = ({ scrollY, heading, pathname, children }) => {
         }
         {children}
       </PageWindow>
-      <Navigation pageRef={pageRef} pathname={pathname} />
+      <Navigation
+        onNavigation={() => setScrolled(false)}
+        pageRef={pageRef}
+        pathname={pathname}
+      />
     </PageRefProvider>
   );
 };

@@ -15,12 +15,11 @@ export interface SelectedExercise {
 
 export interface RouteState {
   immediate: boolean;
-  backPath: string;
+  backPath?: string;
 }
 
 // State shape
 export interface State {
-  isFirstRender: boolean;
   activeWorkout?: Workout;
   activeWorkoutSelectedExercise: SelectedExercise;
   scrollY: ScrollY;
