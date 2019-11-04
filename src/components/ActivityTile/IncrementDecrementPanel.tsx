@@ -8,14 +8,15 @@ import {
   ReduxAction, // eslint-disable-line no-unused-vars
 } from '../../helpers/types';
 
+const IconWrapper = styled.div`
+  height: 20px;
+  width: 20px;
+`;
+
 const Button = styled.button`
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  padding: 14px;
   border-radius: 50%;
   border: none;
-  height: 48px;
-  width: 48px
   margin: 16px;
   background-color: ${purple};
   touch-action: manipulation; // stops double-tap-to-zoom
@@ -85,7 +86,9 @@ const IncrementDecrementPanel: React.FC<Props> = ({
         // When a double click handler is added, fast clicks respond again.
         onDoubleClick={() => null}
       >
-        <SubtractionSymbol fill={'white'} />
+        <IconWrapper>
+          <SubtractionSymbol fill={'white'} />
+        </IconWrapper>
       </Button>
       <OuterCircle
         lessThanHalf={lessThanHalf}
@@ -96,7 +99,13 @@ const IncrementDecrementPanel: React.FC<Props> = ({
         </InnerCircle>
       </OuterCircle>
       <Button onClick={handleIncrement}>
-        <AdditionSymbol fill={'white'} />
+        <IconWrapper>
+          <AdditionSymbol style={{
+            padding: 0,
+            margin: 0,
+            fill: 'white',
+          }} />
+        </IconWrapper>
       </Button>
     </Panel>
   );
