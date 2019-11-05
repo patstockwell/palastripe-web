@@ -3,6 +3,7 @@ import {
   LOCAL_STORAGE_HISTORY,
   LOCAL_STORAGE_ACTIVE_WORKOUT,
   LOCAL_STORAGE_SETTINGS,
+  LOCAL_STORAGE_ENTITIES,
 } from '../helpers/constants';
 import {
   State, // eslint-disable-line no-unused-vars
@@ -107,8 +108,9 @@ const initialState: State = {
 
 export default {
   ...initialState,
-  activeWorkout: getLocalStorage(LOCAL_STORAGE_ACTIVE_WORKOUT, undefined),
-  settings: getLocalStorage(LOCAL_STORAGE_SETTINGS, []),
+  activeWorkout: getLocalStorage(LOCAL_STORAGE_ACTIVE_WORKOUT, initialState.activeWorkout),
+  settings: getLocalStorage(LOCAL_STORAGE_SETTINGS, initialState.settings),
+  entities: getLocalStorage(LOCAL_STORAGE_ENTITIES, initialState.entities),
   // Removing this line will destroy users' history. Never remove.
   history: getLocalStorage(LOCAL_STORAGE_HISTORY, []),
-};
+} as State;

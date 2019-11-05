@@ -46,6 +46,11 @@ const Page: React.FC<Props> = ({ scrollY, heading, pathname, children }) => {
   };
 
   useEffect(() => {
+    // When the component mounts, it is hard to tell if we have just navigated
+    // from another page or updated due to state change. In order to stop
+    // scrolling on every update, we use the `scrolled` flag to ensure we only
+    // call it once per page visit.
+    // We pass a callback to the nav component to reset the value.
     if (!scrolled && scrollY && scrollY > 0) {
       pageRef.current.scrollTo(0, scrollY);
       setScrolled(true);
