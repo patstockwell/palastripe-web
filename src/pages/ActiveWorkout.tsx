@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, createContext, useState } from 'react';
+import React, { useRef, createContext, useState } from 'react';
 import { connect } from 'react-redux';
 import {
   RouteComponentProps, // eslint-disable-line no-unused-vars
@@ -26,8 +26,6 @@ import {
 } from '../helpers/types';
 import {
   combineDataForAllExercises,
-  formatMinutes,
-  calculateWorkoutTime,
 } from '../helpers/functions';
 import {
   SET_ACTIVE_WORKOUT,
@@ -136,11 +134,7 @@ const ActiveWorkout: React.FC<Props> = ({
             link: '/workouts/',
           }}
         />
-        <WorkoutHero
-          name={displayedWorkout.name}
-          imageUrl={displayedWorkout.imageUrl}
-          time={formatMinutes(calculateWorkoutTime(displayedWorkout))}
-        />
+        <WorkoutHero workout={displayedWorkout} />
         <TimerContext.Provider value={{
           setShowTimer: setShowRestTimer,
           setRestTime,

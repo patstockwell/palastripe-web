@@ -1,17 +1,33 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import {
+  Dispatch, // eslint-disable-line no-unused-vars
+} from 'redux';
 import styled, { keyframes } from 'styled-components';
 import { useLocation } from 'react-router-dom';
 import * as clipboard from 'clipboard-polyfill';
 
 import AlertConfirm from '../components/AlertConfirm';
+import ColouredDot from '../assets/svg/ColouredDot';
 import ShareIcon from '../assets/svg/Share';
 import CircleTick from '../assets/svg/CircleTick';
 import {
+  buttonStyle,
   workoutTitleStyle,
   workoutHeroWindowStyle,
 } from './SharedStyles';
+import {
+  formatMinutes,
+  calculateWorkoutTime,
+} from '../helpers/functions';
+import {
+  ReduxAction, // eslint-disable-line no-unused-vars
+  SelectedExercise, // eslint-disable-line no-unused-vars
+  SingleSetAction, // eslint-disable-line no-unused-vars
+  Workout, // eslint-disable-line no-unused-vars
+} from '../helpers/types';
 import { iconWrapperStyle } from './ActivityTile/ActivityTileSharedStyles';
-import { APP_URL } from '../helpers/constants';
+import { SET_SELECTED_EXERCISE, green, APP_URL } from '../helpers/constants';
 
 export const Window = styled.div<{ colour?: string, imageUrl: string }>`
   ${workoutHeroWindowStyle}
@@ -69,22 +85,48 @@ const scale = keyframes `
   }
 `;
 
+const slide = keyframes `
+  0%, 80%, 100% {
+    transform: translateX(-8px);
+  }
+  90% {
+    transform: translateX(0px);
+  }
+`;
+
 const IconWrapper = styled.div`
   ${iconWrapperStyle};
   margin: 0 auto;
   animation: ${scale} 0.5s linear;
 `;
 
-interface Props {
-  name: string;
-  imageUrl?: string;
-  time?: string;
+const StartButton = styled.button`
+  ${buttonStyle}
+  margin-top: 32px;
+  color: black;
+  background: white;
+
+  & svg {
+    transform: translateX(-8px);
+    animation: ${slide} 2s ease-in-out;
+  }
+`;
+
+interface OwnProps {
+  workout: Workout;
 }
 
-const WorkoutHero = ({ time, imageUrl, name }: Props) => {
+type Props = OwnProps & DispatchProps;
+
+const WorkoutHero: React.FC<Props> = ({
+  workout,
+  workout: { imageUrl, name },
+  setSelected,
+}) => {
   const [ showShareMessage, setShowShareMessage ] = useState(false);
   const [ showCircleTick, setShowCircleTick ] = useState(false);
   const { pathname } = useLocation();
+  const time = formatMinutes(calculateWorkoutTime(workout));
 
   const handleShare = () => {
     setShowShareMessage(true);
@@ -98,6 +140,10 @@ const WorkoutHero = ({ time, imageUrl, name }: Props) => {
       </ShareButton>
       <Title>{name}</Title>
       <Time>{time}</Time>
+      <StartButton onClick={setSelected}>
+        <ColouredDot fill={green} />
+        Start Workout
+      </StartButton>
 
       <AlertConfirm
         cancelAlert={() => setShowShareMessage(false)}
@@ -115,4 +161,31 @@ const WorkoutHero = ({ time, imageUrl, name }: Props) => {
   );
 };
 
-export default WorkoutHero;
+interface DispatchProps {
+  setSelected: () => ReduxAction<SelectedExercise>;
+}
+
+const mapDispatchToProps = (
+  dispatch: Dispatch<ReduxAction<SingleSetAction>>,
+  ownProps: OwnProps
+): DispatchProps => {
+  const {
+    workout: {
+      exerciseGroups: [ firstGroup ],
+    },
+  } = ownProps;
+  const groupId = firstGroup.id;
+  const index = 0;
+
+  return {
+    setSelected: () => dispatch({
+      type: SET_SELECTED_EXERCISE,
+      payload: { groupId, index },
+    }),
+  };
+};
+
+export default connect<void, DispatchProps, OwnProps>(
+  null,
+  mapDispatchToProps,
+)(WorkoutHero);
