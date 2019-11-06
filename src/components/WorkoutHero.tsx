@@ -10,6 +10,8 @@ import * as clipboard from 'clipboard-polyfill';
 import AlertConfirm from '../components/AlertConfirm';
 import ColouredDot from '../assets/svg/ColouredDot';
 import ShareIcon from '../assets/svg/Share';
+import SoundOn from '../assets/svg/SoundOn';
+import SoundOff from '../assets/svg/SoundOff';
 import CircleTick from '../assets/svg/CircleTick';
 import {
   buttonStyle,
@@ -24,10 +26,16 @@ import {
   ReduxAction, // eslint-disable-line no-unused-vars
   SelectedExercise, // eslint-disable-line no-unused-vars
   SingleSetAction, // eslint-disable-line no-unused-vars
+  State, // eslint-disable-line no-unused-vars
   Workout, // eslint-disable-line no-unused-vars
 } from '../helpers/types';
 import { iconWrapperStyle } from './ActivityTile/ActivityTileSharedStyles';
-import { SET_SELECTED_EXERCISE, green, APP_URL } from '../helpers/constants';
+import {
+  SET_SELECTED_EXERCISE,
+  green,
+  APP_URL,
+  TOGGLE_SOUND,
+} from '../helpers/constants';
 
 export const Window = styled.div<{ colour?: string, imageUrl: string }>`
   ${workoutHeroWindowStyle}
@@ -61,13 +69,18 @@ export const Time = styled.p`
   z-index: 1;
 `;
 
-const ShareButton = styled.button`
-  z-index: 1;
+const ButtonGroup = styled.div`
   position: absolute;
   right: 16px;
   top: 16px;
+  display: flex;
+`;
+
+const Button = styled.button`
+  z-index: 1;
   border: none;
   padding: 10px;
+  margin-left: 10px;
 
   display: flex;
   justify-content: center;
@@ -116,12 +129,14 @@ interface OwnProps {
   workout: Workout;
 }
 
-type Props = OwnProps & DispatchProps;
+type Props = OwnProps & DispatchProps & StateProps;
 
 const WorkoutHero: React.FC<Props> = ({
   workout,
   workout: { imageUrl, name },
   setSelected,
+  soundOn,
+  toggleSound,
 }) => {
   const [ showShareMessage, setShowShareMessage ] = useState(false);
   const [ showCircleTick, setShowCircleTick ] = useState(false);
@@ -135,9 +150,14 @@ const WorkoutHero: React.FC<Props> = ({
 
   return (
     <Window imageUrl={imageUrl}>
-      <ShareButton onClick={handleShare}>
-        <ShareIcon />
-      </ShareButton>
+      <ButtonGroup>
+        <Button onClick={() => toggleSound(!soundOn)}>
+          {soundOn ? <SoundOn /> : <SoundOff />}
+        </Button>
+        <Button onClick={handleShare}>
+          <ShareIcon />
+        </Button>
+      </ButtonGroup>
       <Title>{name}</Title>
       <Time>{time}</Time>
       <StartButton onClick={setSelected}>
@@ -161,12 +181,21 @@ const WorkoutHero: React.FC<Props> = ({
   );
 };
 
-interface DispatchProps {
-  setSelected: () => ReduxAction<SelectedExercise>;
+interface StateProps {
+  soundOn: boolean;
 }
 
+interface DispatchProps {
+  setSelected: () => ReduxAction<SelectedExercise>;
+  toggleSound: (soundOn: boolean) => ReduxAction<boolean>;
+}
+
+const mapStateToProps = (state: State): StateProps => ({
+  soundOn: state.settings.soundOn,
+});
+
 const mapDispatchToProps = (
-  dispatch: Dispatch<ReduxAction<SingleSetAction>>,
+  dispatch: Dispatch<ReduxAction<SingleSetAction | boolean>>,
   ownProps: OwnProps
 ): DispatchProps => {
   const {
@@ -178,6 +207,10 @@ const mapDispatchToProps = (
   const index = 0;
 
   return {
+    toggleSound: soundOn => dispatch({
+      type: TOGGLE_SOUND,
+      payload: soundOn,
+    }),
     setSelected: () => dispatch({
       type: SET_SELECTED_EXERCISE,
       payload: { groupId, index },
@@ -185,7 +218,7 @@ const mapDispatchToProps = (
   };
 };
 
-export default connect<void, DispatchProps, OwnProps>(
-  null,
+export default connect<StateProps, DispatchProps, OwnProps>(
+  mapStateToProps,
   mapDispatchToProps,
 )(WorkoutHero);

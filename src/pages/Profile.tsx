@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import { animated } from 'react-spring';
 
 import SettingUnitOfMeasurement from '../components/SettingUnitOfMeasurement';
+import SettingAudio from '../components/SettingAudio';
 import ProfileName from '../components/ProfileName';
 import { AnimatedSlidingPageStyle } from '../components/SharedStyles';
 import BackLinkBanner from '../components/BackLinkBanner';
@@ -39,6 +40,9 @@ const Profile: React.FC<Props> = ({ backPath, animationStyles }) => (
     </Panel>
     <Panel>
       <SettingUnitOfMeasurement />
+    </Panel>
+    <Panel>
+      <SettingAudio />
     </Panel>
   </AnimatedSlidingPage>
 );

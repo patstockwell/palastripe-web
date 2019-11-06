@@ -31,7 +31,6 @@ import {
   SET_ACTIVE_WORKOUT,
   FINISH_WORKOUT,
   ONE_SECOND,
-  ONE_DAY,
   SET_WINDOW_SCROLL,
   ACTIVITY_PAGE,
 } from '../helpers/constants';
@@ -84,7 +83,7 @@ const ActiveWorkout: React.FC<Props> = ({
 
   useInterval(() => {
     setCount(count + 1);
-  }, showRestTimer ? ONE_SECOND : ONE_DAY);
+  }, showRestTimer ? ONE_SECOND : null);
 
   const resetTimer = () => {
     setShowRestTimer(false);

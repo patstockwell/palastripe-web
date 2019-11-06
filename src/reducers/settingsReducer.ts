@@ -1,4 +1,7 @@
-import { CHANGE_UNIT_OF_MEASUREMENT } from '../helpers/constants';
+import {
+  CHANGE_UNIT_OF_MEASUREMENT,
+  TOGGLE_SOUND,
+} from '../helpers/constants';
 import {
   Settings, // eslint-disable-line no-unused-vars
   ReduxAction, // eslint-disable-line no-unused-vars
@@ -11,7 +14,14 @@ const settingsReducer = (
   switch (action.type) {
     case CHANGE_UNIT_OF_MEASUREMENT: {
       return {
+        ...state,
         useKilos: action.payload,
+      };
+    }
+    case TOGGLE_SOUND: {
+      return {
+        ...state,
+        soundOn: action.payload,
       };
     }
     default: {

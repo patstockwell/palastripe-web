@@ -43,6 +43,7 @@ export interface Profile {
 
 export interface Settings {
   useKilos: boolean;
+  soundOn: boolean;
 }
 
 export interface Entities {

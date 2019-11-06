@@ -96,7 +96,7 @@ export const useHasScrolled = () => {
   return scrolled;
 };
 
-export function useInterval(callback: () => any, delay: number) {
+export function useInterval(callback: () => any, delay?: number) {
   // https://overreacted.io/making-setinterval-declarative-with-react-hooks/
   const savedCallback: any = useRef();
 

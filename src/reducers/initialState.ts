@@ -39,6 +39,7 @@ const initialState: State = {
 
   settings: {
     useKilos: true,
+    soundOn: false,
   },
 
   entities: {
@@ -109,7 +110,10 @@ const initialState: State = {
 export default {
   ...initialState,
   activeWorkout: getLocalStorage(LOCAL_STORAGE_ACTIVE_WORKOUT, initialState.activeWorkout),
-  settings: getLocalStorage(LOCAL_STORAGE_SETTINGS, initialState.settings),
+  settings: {
+    ...initialState.settings,
+    ...getLocalStorage(LOCAL_STORAGE_SETTINGS, initialState.settings),
+  },
   entities: getLocalStorage(LOCAL_STORAGE_ENTITIES, initialState.entities),
   // Removing this line will destroy users' history. Never remove.
   history: getLocalStorage(LOCAL_STORAGE_HISTORY, []),

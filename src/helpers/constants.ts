@@ -61,6 +61,7 @@ export const superLightGrey = '#f4f4f4';
 export const charcoal = '#444444';
 
 // action types
+export const TOGGLE_SOUND: string = 'TOGGLE_SOUND';
 export const CHANGE_UNIT_OF_MEASUREMENT: string = 'CHANGE_UNIT_OF_MEASUREMENT';
 export const UPDATE_NAME: string = 'UPDATE_NAME';
 export const SET_SELECTED_EXERCISE: string = 'SET_SELECTED_EXERCISE';

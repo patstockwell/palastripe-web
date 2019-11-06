@@ -2,6 +2,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import styled, { keyframes } from 'styled-components';
 
+import audioBell from '../../assets/complete.mp3';
 import { usePageRef } from '../../context/pageRef';
 import HiddenTimerArea from './HiddenTimerArea';
 import EditActivityPanel from '../EditActivityPanel';
@@ -18,6 +19,7 @@ import {
 import {
   ReduxAction, // eslint-disable-line no-unused-vars
   SingleSetAction, // eslint-disable-line no-unused-vars
+  State, // eslint-disable-line no-unused-vars
   TimedActivity, // eslint-disable-line no-unused-vars
 } from '../../helpers/types';
 import {
@@ -86,7 +88,7 @@ interface OwnProps {
   handleSelect: () => void;
 }
 
-type Props = OwnProps & DispatchProps;
+type Props = OwnProps & DispatchProps & StateProps;
 
 const ActivityTileWithTimer: React.FC<Props> = ({
   activity,
@@ -99,6 +101,7 @@ const ActivityTileWithTimer: React.FC<Props> = ({
   showHiddenArea,
   toggleSetComplete,
   editable,
+  soundOn,
 }) => {
   const [count, setCount] = useState(0);
   const [preparationComplete, setPreparationComplete] = useState(false);
@@ -126,6 +129,14 @@ const ActivityTileWithTimer: React.FC<Props> = ({
     setStarted(false);
   }
 
+  let playAudio = () => undefined;
+  if (soundOn) {
+    const audio = new Audio(audioBell);
+    audio.load();
+
+    playAudio = () => audio.play();
+  }
+
   const formattedTime: string = formatSeconds(timerInSeconds - count);
 
   return (
@@ -139,7 +150,10 @@ const ActivityTileWithTimer: React.FC<Props> = ({
           />
         ) : (
           <PreparationTimerBar
-            onAnimationEnd={() => setPreparationComplete(true)}
+            onAnimationEnd={() => {
+              setPreparationComplete(true);
+              playAudio();
+            }}
           />
         ))}
 
@@ -220,11 +234,19 @@ const mapDispatchToProps = (
   };
 };
 
+const mapStateToProps = (state: State): StateProps => ({
+  soundOn: state.settings.soundOn,
+});
+
 interface DispatchProps {
   toggleSetComplete: (completed?: boolean) => ToggleSetAction;
 }
 
-export default connect<void, DispatchProps, OwnProps>(
-  null,
+interface StateProps {
+  soundOn: boolean;
+}
+
+export default connect<StateProps, DispatchProps, OwnProps>(
+  mapStateToProps,
   mapDispatchToProps
 )(React.memo(ActivityTileWithTimer, areEqual));
