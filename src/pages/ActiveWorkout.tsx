@@ -121,14 +121,8 @@ const ActiveWorkout: React.FC<Props> = ({
     setWindowScroll(0);
   };
 
-  // Have to instantiate it here and pass it to the provider. When trying to do
-  // the same thing in the provider it throws and error?? ->
-  // Cannot use 'new' with an expression whose type lacks a call or construct
-  // signature.
-  const audioContext = new AudioContext();
-
   return (
-    <AudioProvider audioContext={audioContext} soundOn={soundOn}>
+    <AudioProvider soundOn={soundOn}>
       <PageRefProvider value={pageRef}>
         <AnimatedSlidingPage
           style={{ [direction]: animationStyles.left }}
