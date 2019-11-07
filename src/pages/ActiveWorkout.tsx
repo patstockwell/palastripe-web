@@ -8,6 +8,7 @@ import { animated } from 'react-spring';
 import { Link } from 'react-router-dom';
 
 import { PageRefProvider } from '../context/pageRef';
+import { AudioProvider } from '../context/audio';
 import { buttonStyle } from '../components/SharedStyles';
 import { AnimatedSlidingPageStyle } from '../components/SharedStyles';
 import { useInterval } from '../helpers/functions';
@@ -73,6 +74,7 @@ const ActiveWorkout: React.FC<Props> = ({
   activeWorkout,
   setActiveWorkout,
   setWindowScroll,
+  soundOn,
 }) => {
   const [ showEndWorkoutAlert, setShowEndWorkoutAlert ] = useState(false);
   const [ direction, setDirection ] = useState('left');
@@ -119,55 +121,63 @@ const ActiveWorkout: React.FC<Props> = ({
     setWindowScroll(0);
   };
 
+  // Have to instantiate it here and pass it to the provider. When trying to do
+  // the same thing in the provider it throws and error?? ->
+  // Cannot use 'new' with an expression whose type lacks a call or construct
+  // signature.
+  const audioContext = new AudioContext();
+
   return (
-    <PageRefProvider value={pageRef}>
-      <AnimatedSlidingPage
-        style={{ [direction]: animationStyles.left }}
-        ref={pageRef}
-      >
-        <GlobalOverFlowHiddenStyle hidden={showEndWorkoutAlert} />
-        <BackLinkBanner
-          sticky={false}
-          back={{
-            showArrows: true,
-            link: '/workouts/',
-          }}
-        />
-        <WorkoutHero workout={displayedWorkout} />
-        <TimerContext.Provider value={{
-          setShowTimer: setShowRestTimer,
-          setRestTime,
-          setCount,
-        }} >
-          <ActivityList
-            workout={displayedWorkout}
-            finishWorkoutClickHandler={() => setShowEndWorkoutAlert(true)}
-          />
-        </TimerContext.Provider>
-
-        {showRestTimer && count > 0 && restTime >= 0 &&
-          <Timer
-            restPeriod={restTime}
-            resetTimer={resetTimer}
-            count={count - 1}
-          />
-        }
-
-        <AlertConfirm
-          cancelAlert={() => setShowEndWorkoutAlert(false)}
-          showAlert={showEndWorkoutAlert}
-          message={'Are you sure you want to finish the workout?'}
+    <AudioProvider audioContext={audioContext} soundOn={soundOn}>
+      <PageRefProvider value={pageRef}>
+        <AnimatedSlidingPage
+          style={{ [direction]: animationStyles.left }}
+          ref={pageRef}
         >
-          <Button
-            onClick={() => setShowEndWorkoutAlert(false)}
-            background={'grey'}>No</Button>
-          <LinkButton
-            to={{ pathname: '/activity/', state: { immediate: false } }}
-            onClick={finishWorkoutWithAlertTransition}
-          >Yes</LinkButton>
-        </AlertConfirm>
-      </AnimatedSlidingPage>
-    </PageRefProvider>
+          <GlobalOverFlowHiddenStyle hidden={showEndWorkoutAlert} />
+          <BackLinkBanner
+            sticky={false}
+            back={{
+              showArrows: true,
+              link: '/workouts/',
+            }}
+          />
+          <WorkoutHero workout={displayedWorkout} />
+          <TimerContext.Provider value={{
+            setShowTimer: setShowRestTimer,
+            setRestTime,
+            setCount,
+          }} >
+            <ActivityList
+              workout={displayedWorkout}
+              finishWorkoutClickHandler={() => setShowEndWorkoutAlert(true)}
+            />
+          </TimerContext.Provider>
+
+          {showRestTimer && count > 0 && restTime >= 0 &&
+            <Timer
+              restPeriod={restTime}
+              resetTimer={resetTimer}
+              count={count - 1}
+            />
+          }
+
+          <AlertConfirm
+            cancelAlert={() => setShowEndWorkoutAlert(false)}
+            showAlert={showEndWorkoutAlert}
+            message={'Are you sure you want to finish the workout?'}
+          >
+            <Button
+              onClick={() => setShowEndWorkoutAlert(false)}
+              background={'grey'}>No</Button>
+            <LinkButton
+              to={{ pathname: '/activity/', state: { immediate: false } }}
+              onClick={finishWorkoutWithAlertTransition}
+            >Yes</LinkButton>
+          </AlertConfirm>
+        </AnimatedSlidingPage>
+      </PageRefProvider>
+    </AudioProvider>
   );
 };
 
@@ -183,6 +193,7 @@ interface DispatchProps {
 interface StateProps {
   activeWorkout: Workout;
   entities: Entities;
+  soundOn: boolean;
 }
 
 const mapDispatchToProps: DispatchProps = {
@@ -206,6 +217,7 @@ const mapDispatchToProps: DispatchProps = {
 const mapStateToProps = (state: State): StateProps => ({
   activeWorkout: state.activeWorkout,
   entities: state.entities,
+  soundOn: state.settings.soundOn,
 });
 
 export default connect<StateProps, DispatchProps, void>(

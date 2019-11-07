@@ -2,7 +2,7 @@ import React, { useRef, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import styled, { keyframes } from 'styled-components';
 
-import audioBell from '../../assets/complete.mp3';
+import { useAudio } from '../../context/audio';
 import { usePageRef } from '../../context/pageRef';
 import HiddenTimerArea from './HiddenTimerArea';
 import EditActivityPanel from '../EditActivityPanel';
@@ -19,7 +19,6 @@ import {
 import {
   ReduxAction, // eslint-disable-line no-unused-vars
   SingleSetAction, // eslint-disable-line no-unused-vars
-  State, // eslint-disable-line no-unused-vars
   TimedActivity, // eslint-disable-line no-unused-vars
 } from '../../helpers/types';
 import {
@@ -88,7 +87,7 @@ interface OwnProps {
   handleSelect: () => void;
 }
 
-type Props = OwnProps & DispatchProps & StateProps;
+type Props = OwnProps & DispatchProps;
 
 const ActivityTileWithTimer: React.FC<Props> = ({
   activity,
@@ -101,7 +100,6 @@ const ActivityTileWithTimer: React.FC<Props> = ({
   showHiddenArea,
   toggleSetComplete,
   editable,
-  soundOn,
 }) => {
   const [count, setCount] = useState(0);
   const [preparationComplete, setPreparationComplete] = useState(false);
@@ -109,6 +107,7 @@ const ActivityTileWithTimer: React.FC<Props> = ({
   const [started, setStarted] = useState(false);
   const listElement = useRef(null);
   const pageRef = usePageRef();
+  const playAudio = useAudio();
   useScrollElementToTop(pageRef, listElement, selected, showHiddenArea);
 
   const animatedStyles = useHiddenAreaAnimation(showHiddenArea);
@@ -127,14 +126,6 @@ const ActivityTileWithTimer: React.FC<Props> = ({
 
   if (!selected && started) { // if another tile is selected, reset this one
     setStarted(false);
-  }
-
-  let playAudio = () => undefined;
-  if (soundOn) {
-    const audio = new Audio(audioBell);
-    audio.load();
-
-    playAudio = () => audio.play();
   }
 
   const formattedTime: string = formatSeconds(timerInSeconds - count);
@@ -234,19 +225,11 @@ const mapDispatchToProps = (
   };
 };
 
-const mapStateToProps = (state: State): StateProps => ({
-  soundOn: state.settings.soundOn,
-});
-
 interface DispatchProps {
   toggleSetComplete: (completed?: boolean) => ToggleSetAction;
 }
 
-interface StateProps {
-  soundOn: boolean;
-}
-
-export default connect<StateProps, DispatchProps, OwnProps>(
-  mapStateToProps,
+export default connect<void, DispatchProps, OwnProps>(
+  null,
   mapDispatchToProps
 )(React.memo(ActivityTileWithTimer, areEqual));
