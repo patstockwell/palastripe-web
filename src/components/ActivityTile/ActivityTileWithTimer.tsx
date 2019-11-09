@@ -57,23 +57,25 @@ const colourPulse = keyframes`
 
 const timerStyle = `
   position: absolute;
-  height: ${tileMinHeight}px;
-  bottom: calc(5px - ${tileMinHeight}px);
+  height: ${tileMinHeight / 2}px;
+  bottom: calc(5px - ${tileMinHeight / 2}px);
   left: 0;
 `;
 
-const PreparationTimerBar = styled.div`
+const PreparationTimerBar = styled.div<{ paused: boolean }>`
   ${timerStyle}
   background-color: lightgrey;
   animation:
     ${grow} ${timedExerciseWaitPeriod}s linear,
     ${colourPulse} 2s linear infinite;
+  animation-play-state: ${({ paused }) => paused ? 'paused' : 'running'};
 `;
 
-const ActiveTimerBar = styled.div<{ timer: number }>`
+const ActiveTimerBar = styled.div<{ timer: number, paused: boolean }>`
   ${timerStyle}
   background-color: ${green};
   animation: ${grow} ${({timer}) => timer}s linear;
+  animation-play-state: ${({ paused }) => paused ? 'paused' : 'running'};
 `;
 
 interface OwnProps {
@@ -105,6 +107,7 @@ const ActivityTileWithTimer: React.FC<Props> = ({
   const [preparationComplete, setPreparationComplete] = useState(false);
   const [showEditPanel, setShowEditPanel] = useState(false);
   const [started, setStarted] = useState(false);
+  const [paused, setPaused] = useState(false);
   const listElement = useRef(null);
   const pageRef = usePageRef();
   const playAudio = useAudio();
@@ -115,18 +118,17 @@ const ActivityTileWithTimer: React.FC<Props> = ({
   const inProgress = selected && !completed && started;
 
   useEffect(() => {
-    if (inProgress && preparationComplete) { // keep counting
+    if (inProgress && preparationComplete && !paused) { // keep counting
       const id = setInterval(() => setCount(count + 1), 1000);
       return () => clearInterval(id);
-    } else { // reset
+    }
+
+    if (completed || !selected) { // reset
       setPreparationComplete(false);
       setCount(0);
+      setStarted(false);
     }
   });
-
-  if (!selected && started) { // if another tile is selected, reset this one
-    setStarted(false);
-  }
 
   const formattedTime: string = formatSeconds(timerInSeconds - count);
 
@@ -136,11 +138,13 @@ const ActivityTileWithTimer: React.FC<Props> = ({
 
         {inProgress && (preparationComplete ? (
           <ActiveTimerBar
+            paused={paused}
             timer={timerInSeconds + 1} // add 1 to allow for the count to finish
             onAnimationEnd={() => toggleSetComplete(true)}
           />
         ) : (
           <PreparationTimerBar
+            paused={paused}
             onAnimationEnd={() => {
               setPreparationComplete(true);
               playAudio();
@@ -163,7 +167,11 @@ const ActivityTileWithTimer: React.FC<Props> = ({
         {!editable && (started || completed) ? (
           <ToggleSetCompleteButton
             restPeriodInSeconds={restPeriodInSeconds}
-            handleClick={toggleSetComplete}
+            handleClick={() => {
+              setStarted(false);
+              setPaused(false);
+              toggleSetComplete();
+            }}
             completed={completed}
             timerIsRunning={started}
           />
@@ -176,9 +184,15 @@ const ActivityTileWithTimer: React.FC<Props> = ({
       </VisibleArea>
 
       <HiddenTimerArea
+        completed={completed}
         time={formattedTime}
         animatedStyles={animatedStyles}
         preparing={inProgress && !preparationComplete}
+        started={started}
+        paused={paused}
+        handleButtonClick={() => {
+          !started ? setStarted(true) : setPaused(!paused);
+        }}
       />
 
       {selected &&

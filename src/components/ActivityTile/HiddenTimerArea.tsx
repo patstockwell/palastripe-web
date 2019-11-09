@@ -7,21 +7,24 @@ import {
   OpaqueInterpolation, // eslint-disable-line no-unused-vars
 } from 'react-spring';
 import styled, { keyframes } from 'styled-components';
-
+import { buttonStyle } from '../SharedStyles';
 import {
   timedExerciseWaitPeriod,
-  tileMinHeight,
+  lightLightGrey,
+  green,
+  purple,
 } from '../../helpers/constants';
 
 const Time = styled.p`
   font-size: 4em;
   font-weight: 800;
-  margin-top: ${tileMinHeight}px;
 `;
 
 const Area = styled(animated.div)`
   display: flex;
   justify-content: center;
+  flex-direction: column;
+  align-items: center;
   cursor: default;
 `;
 
@@ -34,33 +37,56 @@ const Message = styled.p`
   position: absolute;
   font-size: 1.5em;
   font-weight: 800;
-  bottom: 80px;
+  bottom: 40px;
   left: 50%;
   transform: translateX(-50%);
   animation: ${fade} ${timedExerciseWaitPeriod / 2}s ease-out;
   opacity: 0;
 `;
 
+const StartButton = styled.button<{ disabled: boolean, background: string }>`
+  ${buttonStyle}
+  margin-top: 30px;
+  background-color: ${({ background }) => background};
+  background-color: ${({ disabled }) => disabled && lightLightGrey};
+`;
+
 interface Props {
   time: string;
   preparing: boolean;
+  completed: boolean;
+  paused: boolean;
+  started: boolean;
   animatedStyles: AnimatedValue<{
     height: ReactText,
     opacity: OpaqueInterpolation<any>,
   }>;
+  handleButtonClick: () => void;
 }
 
 const HiddenTimerArea: React.FC<Props> = ({
   preparing,
   animatedStyles,
   time,
+  started,
+  paused,
+  handleButtonClick,
+  completed,
 }) => {
+  const label = !started ? 'start' : paused ? 'resume' : 'pause';
+  const background = !started ? purple : paused ? green : 'grey';
+
   return (
     <Area style={{
       height: animatedStyles.height,
       opacity: animatedStyles.opacity,
     }}>
       <Time>{time}</Time>
+      <StartButton
+        onClick={handleButtonClick}
+        disabled={completed}
+        background={background}
+      >{label}</StartButton>
       {preparing &&
         <Message>Get ready</Message>
       }

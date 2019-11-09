@@ -51,6 +51,7 @@ export const VisibleArea = styled.div`
   justify-content: flex-start;
   min-height: ${tileMinHeight}px;
   background-color: transparent;
+  z-index: 1;
 `;
 
 interface Props {

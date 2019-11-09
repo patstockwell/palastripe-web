@@ -4,7 +4,6 @@ import styled from 'styled-components';
 import CircleTick from '../../assets/svg/CircleTick';
 import {
   ReduxAction, // eslint-disable-line no-unused-vars
-  SingleSetAction, // eslint-disable-line no-unused-vars
 } from '../../helpers/types';
 import { SELECT_NEXT_EXERCISE } from '../../helpers/constants';
 import {
@@ -22,8 +21,7 @@ const SelectCompleteButton = styled.button`
 `;
 
 interface OwnProps {
-  handleClick: (completed?: boolean) => (
-    ReduxAction<SingleSetAction & { completed?: boolean, }>);
+  handleClick: () => void;
   completed: boolean;
   timerIsRunning?: boolean;
   restPeriodInSeconds: number;
