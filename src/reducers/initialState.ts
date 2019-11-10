@@ -6,7 +6,9 @@ import {
   LOCAL_STORAGE_ENTITIES,
 } from '../helpers/constants';
 import {
+  Entities, // eslint-disable-line no-unused-vars
   State, // eslint-disable-line no-unused-vars
+  Workouts, // eslint-disable-line no-unused-vars
 } from '../helpers/types';
 import exercises from '../workoutData/exercises';
 import circuitSpeed from '../workoutData/workouts/circuitSpeed';
@@ -107,6 +109,28 @@ const initialState: State = {
 
 };
 
+const mergeWorkouts = (
+  initial: Workouts,
+  localStorage: Workouts,
+): Workouts => {
+  const { allIds: localIds, byId } = localStorage;
+  const { allIds: initialIds, byId: initialWorkouts } = initial;
+  const missingIds = initialIds.filter(id => !localIds.includes(id));
+  const missingWorkouts = missingIds
+    .map(id => initialWorkouts[id])
+    .reduce ((acc, w) => ({ ...acc, [w.id]: w }), {});
+
+  return {
+    byId: { ...byId, ...missingWorkouts },
+    allIds: [ ...localIds, ...missingIds ],
+  };
+};
+
+const entities: Entities =
+  getLocalStorage(LOCAL_STORAGE_ENTITIES, initialState.entities);
+
+const workouts = mergeWorkouts(initialState.entities.workouts, entities.workouts);
+
 export default {
   ...initialState,
   activeWorkout: getLocalStorage(LOCAL_STORAGE_ACTIVE_WORKOUT, initialState.activeWorkout),
@@ -114,7 +138,10 @@ export default {
     ...initialState.settings,
     ...getLocalStorage(LOCAL_STORAGE_SETTINGS, initialState.settings),
   },
-  entities: getLocalStorage(LOCAL_STORAGE_ENTITIES, initialState.entities),
+  entities: {
+    ...entities,
+    workouts,
+  },
   // Removing this line will destroy users' history. Never remove.
   history: getLocalStorage(LOCAL_STORAGE_HISTORY, []),
 } as State;
