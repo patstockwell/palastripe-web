@@ -220,7 +220,7 @@ const ActivityHistoryTile: React.FC<Props> = ({
             <Statistic>
               {convertWeight(totalWeightLifted, useKilos)} <UnitLabel>{useKilos ? 'kg' : 'lbs'}</UnitLabel>
             </Statistic>
-            <TextLabel>Total Weight</TextLabel>
+            <TextLabel>Workout Volume</TextLabel>
           </StatsBox>
         </StatsPanel>
       </Right>

@@ -84,7 +84,7 @@ const ActivityHistoryHero: React.FC<Props> = ({
         </Statistic>
 
         <Statistic>
-          <Heading>Total Weight</Heading>
+          <Heading>Total Volume</Heading>
           <Total>
             <span>{totalWeight} <UnitLabel>{unitOfWeight}</UnitLabel></span>
           </Total>
