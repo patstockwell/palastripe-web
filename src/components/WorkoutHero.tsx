@@ -59,6 +59,7 @@ export const Window = styled.div<{ colour?: string, imageUrl: string }>`
 export const Title = styled.h1`
   ${workoutTitleStyle}
   z-index: 1;
+  margin-top: 16px;
 `;
 
 export const Time = styled.p`
@@ -70,10 +71,9 @@ export const Time = styled.p`
 `;
 
 const ButtonGroup = styled.div`
-  position: absolute;
-  right: 16px;
-  top: 16px;
   display: flex;
+  justify-content: flex-end;
+  width: 100%;
 `;
 
 const Button = styled.button`
@@ -115,7 +115,7 @@ const IconWrapper = styled.div`
 
 const StartButton = styled.button`
   ${buttonStyle}
-  margin-top: 32px;
+  margin: 32px 0;
   color: black;
   background: white;
 

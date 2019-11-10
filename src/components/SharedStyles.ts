@@ -79,6 +79,5 @@ export const workoutHeroWindowStyle = css<{ colour?: string }>`
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   padding: 16px;
 `;
