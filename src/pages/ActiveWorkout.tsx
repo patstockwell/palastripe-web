@@ -1,4 +1,4 @@
-import React, { useRef, createContext, useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { connect } from 'react-redux';
 import {
   RouteComponentProps, // eslint-disable-line no-unused-vars
@@ -9,10 +9,10 @@ import { Link } from 'react-router-dom';
 
 import { PageRefProvider } from '../context/pageRef';
 import { AudioProvider } from '../context/audio';
+import { RestTimerProvider } from '../context/restTimer';
 import { buttonStyle } from '../components/SharedStyles';
 import { AnimatedSlidingPageStyle } from '../components/SharedStyles';
 import { useInterval } from '../helpers/functions';
-import { GlobalOverFlowHiddenStyle } from '../components/SharedStyles';
 import Timer from '../components/Timer';
 import AlertConfirm from '../components/AlertConfirm';
 import BackLinkBanner from '../components/BackLinkBanner';
@@ -47,12 +47,6 @@ const LinkButton = styled(Link)<{ background?: string }>`
   justify-content: center;
   text-decoration: none;
 `;
-
-export const TimerContext = createContext({
-  setShowTimer: (_: boolean) => {/* do nothing */}, // eslint-disable-line
-  setRestTime: (_: number) => {/* do nothing */}, // eslint-disable-line
-  setCount: (_: number) => {/* do nothing */}, // eslint-disable-line
-});
 
 const AnimatedSlidingPage = styled(animated.div)`
   ${AnimatedSlidingPageStyle}
@@ -124,52 +118,51 @@ const ActiveWorkout: React.FC<Props> = ({
   return (
     <AudioProvider soundOn={soundOn}>
       <PageRefProvider value={pageRef}>
-        <AnimatedSlidingPage
-          style={{ [direction]: animationStyles.left }}
-          ref={pageRef}
-        >
-          <GlobalOverFlowHiddenStyle hidden={showEndWorkoutAlert} />
-          <BackLinkBanner
-            sticky={false}
-            back={{
-              showArrows: true,
-              link: '/workouts/',
-            }}
-          />
-          <WorkoutHero workout={displayedWorkout} />
-          <TimerContext.Provider value={{
-            setShowTimer: setShowRestTimer,
-            setRestTime,
-            setCount,
-          }} >
+        <RestTimerProvider value={{
+          setShowTimer: setShowRestTimer,
+          setRestTime,
+          setCount,
+        }} >
+          <AnimatedSlidingPage
+            style={{ [direction]: animationStyles.left }}
+            ref={pageRef}
+          >
+            <BackLinkBanner
+              sticky={false}
+              back={{
+                showArrows: true,
+                link: '/workouts/',
+              }}
+            />
+            <WorkoutHero workout={displayedWorkout} />
             <ActivityList
               workout={displayedWorkout}
               finishWorkoutClickHandler={() => setShowEndWorkoutAlert(true)}
             />
-          </TimerContext.Provider>
 
-          {showRestTimer && count > 0 && restTime >= 0 &&
-            <Timer
-              restPeriod={restTime}
-              resetTimer={resetTimer}
-              count={count - 1}
-            />
-          }
+            {showRestTimer && count > 0 && restTime >= 0 &&
+              <Timer
+                restPeriod={restTime}
+                resetTimer={resetTimer}
+                count={count - 1}
+              />
+            }
 
-          <AlertConfirm
-            cancelAlert={() => setShowEndWorkoutAlert(false)}
-            showAlert={showEndWorkoutAlert}
-            message={'Are you sure you want to finish the workout?'}
-          >
-            <Button
-              onClick={() => setShowEndWorkoutAlert(false)}
-              background={'grey'}>No</Button>
-            <LinkButton
-              to={{ pathname: '/activity/', state: { immediate: false } }}
-              onClick={finishWorkoutWithAlertTransition}
-            >Yes</LinkButton>
-          </AlertConfirm>
-        </AnimatedSlidingPage>
+            <AlertConfirm
+              cancelAlert={() => setShowEndWorkoutAlert(false)}
+              showAlert={showEndWorkoutAlert}
+              message={'Are you sure you want to finish the workout?'}
+            >
+              <Button
+                onClick={() => setShowEndWorkoutAlert(false)}
+                background={'grey'}>No</Button>
+              <LinkButton
+                to={{ pathname: '/activity/', state: { immediate: false } }}
+                onClick={finishWorkoutWithAlertTransition}
+              >Yes</LinkButton>
+            </AlertConfirm>
+          </AnimatedSlidingPage>
+        </RestTimerProvider>
       </PageRefProvider>
     </AudioProvider>
   );

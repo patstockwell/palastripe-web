@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { TimerContext } from '../../pages/ActiveWorkout';
+import { useRestTimer } from '../../context/restTimer';
 import { purple } from '../../helpers/constants';
 import Play from '../../assets/svg/Play';
 import {
@@ -27,19 +27,17 @@ const StartTimedExerciseButton: React.FC<Props> = ({
   showIcon,
   handleClick,
 }) => {
+  const { setShowTimer } = useRestTimer();
+
   return (
-    <TimerContext.Consumer>
-      {({ setShowTimer }) => (
-        <SelectCompleteButton onClick={() => {
-          handleClick();
-          setShowTimer(false);
-        }}>
-          <IconWrapper background={showIcon && 'white'}>
-            {showIcon && <Play style={{ height: 28, width: 28, fill: purple }}/>}
-          </IconWrapper>
-        </SelectCompleteButton>
-      )}
-    </TimerContext.Consumer>
+    <SelectCompleteButton onClick={() => {
+      handleClick();
+      setShowTimer(false);
+    }}>
+      <IconWrapper background={showIcon && 'white'}>
+        {showIcon && <Play style={{ height: 28, width: 28, fill: purple }}/>}
+      </IconWrapper>
+    </SelectCompleteButton>
   );
 };
 

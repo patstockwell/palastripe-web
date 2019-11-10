@@ -14,6 +14,7 @@ import {
   green,
   purple,
 } from '../../helpers/constants';
+import { useRestTimer } from '../../context/restTimer';
 
 const Time = styled.p`
   font-size: 4em;
@@ -75,6 +76,7 @@ const HiddenTimerArea: React.FC<Props> = ({
 }) => {
   const label = !started ? 'start' : paused ? 'resume' : 'pause';
   const background = !started ? purple : paused ? green : 'grey';
+  const { setShowTimer } = useRestTimer();
 
   return (
     <Area style={{
@@ -83,7 +85,10 @@ const HiddenTimerArea: React.FC<Props> = ({
     }}>
       <Time>{time}</Time>
       <StartButton
-        onClick={handleButtonClick}
+        onClick={() => {
+          handleButtonClick();
+          setShowTimer(false);
+        }}
         disabled={completed}
         background={background}
       >{label}</StartButton>

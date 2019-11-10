@@ -1,6 +1,7 @@
 import React from 'react';
 import { useTransition, animated } from 'react-spring';
 import styled from 'styled-components';
+import { GlobalOverFlowHiddenStyle } from '../components/SharedStyles';
 
 const bounceSpace = 9;
 const popUpHeight = 353 + bounceSpace;
@@ -75,6 +76,7 @@ const AlertConfirm: React.FC<Props> = ({
       {transitions.map(({ item, props }) => {
         return item ?
           <animated.div key={'unique'} style={props}>
+            <GlobalOverFlowHiddenStyle hidden={showAlert} />
             <Background>
               <ClickableSpace onClick={cancelAlert}/>
               <Dialog>

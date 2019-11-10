@@ -10,7 +10,7 @@ import {
   selectCompleteButtonStyle,
   iconWrapperStyle,
 } from './ActivityTileSharedStyles';
-import { TimerContext } from '../../pages/ActiveWorkout';
+import { useRestTimer } from '../../context/restTimer';
 
 const IconWrapper = styled.div`
   ${iconWrapperStyle}
@@ -40,33 +40,30 @@ const ToggleSetCompleteButton: React.FC<Props> = ({
   // and the item is complete. To avoid calling 'setShowTimer' when reloading the
   // page, we can set a flag to ensure the animation was triggered via click.
   const [ clicked, setClicked ] = useState(false);
+  const { setShowTimer, setRestTime, setCount } = useRestTimer();
 
   return (
-    <TimerContext.Consumer>
-      {({ setCount, setShowTimer, setRestTime }) => (
-        <SelectCompleteButton onClick={() => {
-          // if the rest timer is still running from the last exercise, hide it.
-          setShowTimer(false);
-          // set the rest time for this completed exercise
-          setRestTime(restPeriodInSeconds);
-          // run any handlers
-          handleClick();
-          // set clicked for child animation render checks
-          setClicked(true);
-        }}>
-          <IconWrapper>
-            {completed && <CircleTick onAnimationEnd={() => {
-              // check the animation was triggered via click and not reload
-              if (timerIsRunning || clicked) {
-                setCount(0);
-                setShowTimer(true);
-                selectNextExercise();
-              }
-            }} />}
-          </IconWrapper>
-        </SelectCompleteButton>
-      )}
-    </TimerContext.Consumer>
+    <SelectCompleteButton onClick={() => {
+      // if the rest timer is still running from the last exercise, hide it.
+      setShowTimer(false);
+      // set the rest time for this completed exercise
+      setRestTime(restPeriodInSeconds);
+      // run any handlers
+      handleClick();
+      // set clicked for child animation render checks
+      setClicked(true);
+    }}>
+      <IconWrapper>
+        {completed && <CircleTick onAnimationEnd={() => {
+          // check the animation was triggered via click and not reload
+          if (timerIsRunning || clicked) {
+            setCount(0);
+            setShowTimer(true);
+            selectNextExercise();
+          }
+        }} />}
+      </IconWrapper>
+    </SelectCompleteButton>
   );
 };
 
