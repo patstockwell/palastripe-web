@@ -123,10 +123,11 @@ const ActivityTileWithTimer: React.FC<Props> = ({
       return () => clearInterval(id);
     }
 
-    if (completed || !selected) { // reset
+    if (!selected && completed || !selected && started) { // reset
       setPreparationComplete(false);
       setCount(0);
       setStarted(false);
+      setPaused(false);
     }
   });
 
@@ -167,11 +168,7 @@ const ActivityTileWithTimer: React.FC<Props> = ({
         {!editable && (started || completed) ? (
           <ToggleSetCompleteButton
             restPeriodInSeconds={restPeriodInSeconds}
-            handleClick={() => {
-              setStarted(false);
-              setPaused(false);
-              toggleSetComplete();
-            }}
+            handleClick={() => toggleSetComplete()}
             completed={completed}
             timerIsRunning={started}
           />
