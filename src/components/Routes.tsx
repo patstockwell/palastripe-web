@@ -17,7 +17,7 @@ const Routes: React.FC<{}> = () => {
     // set default value in case none is passed
     state = { immediate: true },
   }: { state: RouteState } = location;
-  const { immediate, backPath } = state;
+  const { immediate } = state;
 
   const transitions = useTransition(location, (loc: any) => loc.key, {
     immediate,
@@ -34,10 +34,7 @@ const Routes: React.FC<{}> = () => {
           <Route path="/" exact component={Workouts} />
           <Route path="/workouts/" exact component={Workouts} />
           <Route path="/activity/" component={Activity} />
-          <Route path="/profile/" exact render={() =>
-            <Profile
-              backPath={backPath}
-              animationStyles={props} />} />
+          <Route path="/profile/" exact component={Profile} />
           <Route path="/edit-workout/" render={() =>
             <EditWorkout animationStyles={props} />} />
           <Route path="/workouts/:id/" render={({ match }) =>

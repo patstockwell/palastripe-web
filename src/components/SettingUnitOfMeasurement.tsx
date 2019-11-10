@@ -16,7 +16,7 @@ import {
 } from '../helpers/constants';
 
 const EditPage = styled(animated.div)`
-  top: 0;
+  top: 48px;
   position: fixed;
   height: 100vh;
   width: 100vw;

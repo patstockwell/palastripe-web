@@ -1,20 +1,10 @@
-import React, {
-  CSSProperties, // eslint-disable-line no-unused-vars
-} from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { animated } from 'react-spring';
 
 import SettingUnitOfMeasurement from '../components/SettingUnitOfMeasurement';
 import SettingAudio from '../components/SettingAudio';
 import ProfileName from '../components/ProfileName';
-import { AnimatedSlidingPageStyle } from '../components/SharedStyles';
-import BackLinkBanner from '../components/BackLinkBanner';
-
-const AnimatedSlidingPage = styled(animated.div)<{ position?: string }>`
-  ${AnimatedSlidingPageStyle}
-  min-height: 100vh;
-  background-color: lightgrey;
-`;
+import Page from '../components/Page';
 
 const Panel = styled.div`
   background-color: white;
@@ -23,18 +13,8 @@ const Panel = styled.div`
   position: relative;
 `;
 
-interface Props {
-  backPath: string;
-  animationStyles: CSSProperties;
-}
-
-const Profile: React.FC<Props> = ({ backPath, animationStyles }) => (
-  <AnimatedSlidingPage style={{ top: animationStyles.left }} >
-    <BackLinkBanner back={{
-      link: backPath || '/',
-      showArrows: false,
-      text: 'Done',
-    }}/>
+const Profile: React.FC<{}> = () => (
+  <Page heading={'Profile'} pathname={location.pathname}>
     <Panel>
       <ProfileName />
     </Panel>
@@ -44,7 +24,7 @@ const Profile: React.FC<Props> = ({ backPath, animationStyles }) => (
     <Panel>
       <SettingAudio />
     </Panel>
-  </AnimatedSlidingPage>
+  </Page>
 );
 
 export default Profile;

@@ -16,6 +16,7 @@ const FlexWrapper = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
+  cursor: pointer;
 `;
 
 const NameAndEditIcon = styled.div`
@@ -43,7 +44,7 @@ const Name = styled.span`
 `;
 
 const EditPage = styled(animated.div)`
-  top: 0;
+  top: 48px;
   position: fixed;
   height: 100vh;
   width: 100vw;

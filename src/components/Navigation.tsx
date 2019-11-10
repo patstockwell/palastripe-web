@@ -90,10 +90,7 @@ const Navigation: React.FC<Props> = ({
       <NavLink
         highlight={'black'}
         onClick={handleClick}
-        to={{
-          pathname: '/profile/',
-          state: { immediate: false, backPath: pathname },
-        }}
+        to="/profile/"
       >
         <ProfileIcon />
       </NavLink>
