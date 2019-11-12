@@ -114,6 +114,7 @@ const ActivityTileWithReps: React.FC<Props> = ({
           </ShowEditArrowWrapper>
         ) : (
           <ToggleSetCompleteButton
+            selected={selected}
             restPeriodInSeconds={restPeriodInSeconds}
             handleClick={toggleSetComplete}
             completed={completed}
@@ -135,7 +136,7 @@ const ActivityTileWithReps: React.FC<Props> = ({
             transform: animatedStyles.x.interpolate(x =>
               `translateX(-50%) rotate(${x}deg`),
           }}>
-          <DownArrow style={{ fill: 'grey' }}/>
+          <DownArrow style={{ fill: 'lightgrey' }}/>
         </ShowHiddenAreaArrowWrapper>
       }
 

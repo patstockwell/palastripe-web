@@ -167,10 +167,10 @@ const ActivityTileWithTimer: React.FC<Props> = ({
 
         {!editable && (started || completed) ? (
           <ToggleSetCompleteButton
+            selected={selected}
             restPeriodInSeconds={restPeriodInSeconds}
             handleClick={() => toggleSetComplete()}
             completed={completed}
-            timerIsRunning={started}
           />
         ) : (
           <StartTimedExerciseButton
@@ -199,7 +199,7 @@ const ActivityTileWithTimer: React.FC<Props> = ({
             transform: animatedStyles.x.interpolate(x =>
               `translateX(-50%) rotate(${x}deg`),
           }}>
-          <DownArrow style={{ fill: 'grey' }}/>
+          <DownArrow style={{ fill: 'lightgrey' }}/>
         </ShowHiddenAreaArrowWrapper>
       }
 

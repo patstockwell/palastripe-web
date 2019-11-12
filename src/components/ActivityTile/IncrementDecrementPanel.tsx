@@ -18,8 +18,13 @@ const Button = styled.button`
   border-radius: 50%;
   border: none;
   margin: 16px;
-  background-color: ${purple};
+  background-color: white;
+  border: 4px solid grey;
   touch-action: manipulation; // stops double-tap-to-zoom
+
+  &:active, &:focus {
+    background: blue;
+  }
 `;
 
 const InnerCircle = styled.div`
@@ -57,7 +62,7 @@ const Panel = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 12px 0;
+  margin-bottom: 12px;
 `;
 
 // need to use a type defined in an action creator instead of redifining it here
@@ -87,7 +92,7 @@ const IncrementDecrementPanel: React.FC<Props> = ({
         onDoubleClick={() => null}
       >
         <IconWrapper>
-          <SubtractionSymbol fill={'white'} />
+          <SubtractionSymbol fill={'grey'} />
         </IconWrapper>
       </Button>
       <OuterCircle
@@ -103,7 +108,7 @@ const IncrementDecrementPanel: React.FC<Props> = ({
           <AdditionSymbol style={{
             padding: 0,
             margin: 0,
-            fill: 'white',
+            fill: 'grey',
           }} />
         </IconWrapper>
       </Button>

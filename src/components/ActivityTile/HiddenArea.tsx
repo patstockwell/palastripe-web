@@ -21,12 +21,20 @@ import {
   DECREMENT_WEIGHT,
   INCREMENT_WEIGHT,
   CHANGE_REPS,
+  TOGGLE_SET_COMPLETE,
 } from '../../helpers/constants';
 import IncrementDecrementPanel from './IncrementDecrementPanel';
+import { buttonStyle } from '../SharedStyles';
 
 const MainValue = styled.span`
   font-size: 32px;
   font-weight: 800;
+`;
+
+const Button = styled.button`
+  ${buttonStyle}
+  display: block;
+  margin: 16px auto 0;
 `;
 
 interface OwnProps {
@@ -50,8 +58,10 @@ const HiddenArea: React.FC<Props> = ({
     repsGoal,
     weightInKilos,
     repsAchieved,
+    completed,
   },
   useKilos,
+  finishSet,
 }) => (
   <animated.div style={{
     height: animatedStyles.height,
@@ -79,6 +89,11 @@ const HiddenArea: React.FC<Props> = ({
       </p>
       <p>Reps</p>
     </IncrementDecrementPanel>
+
+    <Button
+      onClick={finishSet}
+      background={completed && 'grey'}
+    >{completed ? 'Completed' : 'Finish set & rest'}</Button>
   </animated.div>
 );
 
@@ -93,6 +108,7 @@ interface DispatchProps {
   changeReps: (increment: number) => ChangeSetAction;
   incrementWeight: () => ReduxAction<SingleSetAction>;
   decrementWeight: () => ReduxAction<SingleSetAction>;
+  finishSet: () => ReduxAction<SingleSetAction>;
 }
 
 const mapStateToProps = (state: State): StateProps => ({
@@ -123,6 +139,14 @@ const mapDispatchToProps = (
       groupId: ownProps.groupId,
       index: ownProps.index,
       value: increment,
+    },
+  }),
+  finishSet: (): ReduxAction<SingleSetAction> => dispatch({
+    type: TOGGLE_SET_COMPLETE,
+    payload: {
+      groupId: ownProps.groupId,
+      index: ownProps.index,
+      completed: true,
     },
   }),
 });

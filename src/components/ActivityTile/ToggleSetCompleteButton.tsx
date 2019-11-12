@@ -21,20 +21,20 @@ const SelectCompleteButton = styled.button`
 `;
 
 interface OwnProps {
+  restPeriodInSeconds: number;
   handleClick: () => void;
   completed: boolean;
-  timerIsRunning?: boolean;
-  restPeriodInSeconds: number;
+  selected: boolean;
 }
 
 type Props = OwnProps & DispatchProps;
 
 const ToggleSetCompleteButton: React.FC<Props> = ({
+  selectNextExercise,
   restPeriodInSeconds,
   handleClick,
   completed,
-  selectNextExercise,
-  timerIsRunning,
+  selected,
 }) => {
   // animation will run when a click event happens, also when the page reloads
   // and the item is complete. To avoid calling 'setShowTimer' when reloading the
@@ -56,7 +56,7 @@ const ToggleSetCompleteButton: React.FC<Props> = ({
       <IconWrapper>
         {completed && <CircleTick onAnimationEnd={() => {
           // check the animation was triggered via click and not reload
-          if (timerIsRunning || clicked) {
+          if (selected || clicked) {
             setCount(0);
             setShowTimer(true);
             selectNextExercise();

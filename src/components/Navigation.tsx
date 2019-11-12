@@ -26,12 +26,13 @@ const Nav = styled.nav`
   bottom: 0;
   width: 100vw;
   justify-content: space-around;
-  height: ${navBarHeight}px;
+  // add an extra 0.5 to the height to account for the 0.5px border
+  height: ${navBarHeight}.5px;
+  border-top: solid 0.5px lightgrey;
   background-color: white;
   color: black;
   padding: 3px;
   box-sizing: border-box;
-  border-top: solid 0.5px lightgrey;
   align-items: center;
 `;
 
@@ -57,7 +58,7 @@ const NavLink = styled(Link)<{ selected: boolean, x: number }>`
     height: 4px;
     width: 48px;
     background-color: ${purple};
-    top: 0;
+    top: -0.5px;
     position: absolute;
     animation: ${home} 200ms ease-in-out forwards;
   }

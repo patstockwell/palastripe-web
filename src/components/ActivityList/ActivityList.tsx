@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
 import ActivityTile from '../ActivityTile';
+import ColouredDot from '../../assets/svg/ColouredDot';
 import ActivityListHeading from './ActivityListHeading';
 import {
   activityHeadingHeight,
+  orange,
   tileMinHeight,
   SET_SELECTED_EXERCISE,
 } from '../../helpers/constants';
@@ -23,6 +25,11 @@ const Ul = styled.ul`
 
 const Button = styled.button`
   ${buttonStyle}
+  background-color: black;
+
+  & svg {
+    transform: translateX(-8px);
+  }
 `;
 
 const FlexTile = styled.div`
@@ -99,6 +106,7 @@ const ActivityList: React.FC<Props> = ({
 
       <FlexTile>
         <Button onClick={finishWorkoutClickHandler}>
+          <ColouredDot fill={orange} />
           Finish Workout
         </Button>
       </FlexTile>

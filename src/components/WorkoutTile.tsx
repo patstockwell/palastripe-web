@@ -12,14 +12,14 @@ import {
 import {
   gutterWidth,
   superLightGrey,
-  tileMinHeight,
+  workoutTileMinHeight,
   WORKOUTS_PAGE,
   SET_WINDOW_SCROLL,
 } from '../helpers/constants';
 import { calculateWorkoutTime, formatMinutes } from '../helpers/functions';
 
 const Tile = styled.section`
-  height: ${tileMinHeight}px;
+  height: ${workoutTileMinHeight}px;
   padding: 0 ${gutterWidth}px;
   display: flex;
   align-items: center;
