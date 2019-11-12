@@ -79,6 +79,7 @@ const initialState: State = {
 
   history: [],
 
+  navAnimation: 0,
   // editableWorkout: {
   //   name: '',
   //   id: uuidv4(),

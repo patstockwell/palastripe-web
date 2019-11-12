@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useRef } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styled, { css, keyframes } from 'styled-components';
@@ -7,13 +7,14 @@ import ProfileIcon from '../assets/svg/ProfileIcon';
 import {
   purple,
   navBarHeight,
-  SET_WINDOW_SCROLL,
   ACTIVITY_PAGE,
   WORKOUTS_PAGE,
   PROFILE_PAGE,
+  SET_NAV_ANIMATION,
 } from '../helpers/constants';
 import {
   ReduxAction, // eslint-disable-line no-unused-vars
+  State, // eslint-disable-line no-unused-vars
 } from '../helpers/types';
 import ActivityBars from '../assets/svg/ActivityBars';
 import Cardiogram from '../assets/svg/Cardiogram';
@@ -58,28 +59,24 @@ const NavLink = styled(Link)<{ selected: boolean, x: number }>`
     background-color: ${purple};
     top: 0;
     position: absolute;
-    animation: ${home} 1s ease-in-out forwards;
+    animation: ${home} 200ms ease-in-out forwards;
   }
   `}
 `;
 
-interface Props {
+type Props = OwnProps & DispatchProps & StateProps;
+
+interface OwnProps {
   onNavigation: () => void;
-  pageRef: React.MutableRefObject<HTMLDivElement>;
   pathname: string;
-  setWindowScroll: (scrollY: number, page: string) => ReduxAction<{
-    scrollY: number,
-    page: string
-  }>;
 }
 
 const Navigation: React.FC<Props> = ({
   pathname,
-  setWindowScroll,
-  pageRef,
   onNavigation,
+  setNavAnimation,
+  navAnimation,
 }) => {
-  const [x, setTranslateX] = useState(0);
   const workoutsRef = useRef<HTMLAnchorElement>();
   const activityRef = useRef<HTMLAnchorElement>();
   const profileRef = useRef<HTMLAnchorElement>();
@@ -102,16 +99,9 @@ const Navigation: React.FC<Props> = ({
     getCurrentPage(pathname) === page;
 
   const handleClick = (page: string) => {
-    console.log(page);
-    setTranslateX(getTranslationDistance(page));
+    setNavAnimation(getTranslationDistance(page));
     onNavigation();
-    setWindowScroll(
-      pageRef.current.scrollTop,
-      getCurrentPage(pathname)
-    );
   };
-
-  console.log(x);
 
   return (
     <Nav>
@@ -120,7 +110,7 @@ const Navigation: React.FC<Props> = ({
         to="/workouts/"
         onClick={() => handleClick(WORKOUTS_PAGE)}
         innerRef={workoutsRef}
-        x={x}
+        x={navAnimation}
       >
         <Cardiogram />
       </NavLink>
@@ -129,7 +119,7 @@ const Navigation: React.FC<Props> = ({
         to="/activity/"
         onClick={() => handleClick(ACTIVITY_PAGE)}
         innerRef={activityRef}
-        x={x}
+        x={navAnimation}
       >
         <ActivityBars />
       </NavLink>
@@ -138,7 +128,7 @@ const Navigation: React.FC<Props> = ({
         onClick={() => handleClick(PROFILE_PAGE)}
         to="/profile/"
         innerRef={profileRef}
-        x={x}
+        x={navAnimation}
       >
         <ProfileIcon />
       </NavLink>
@@ -146,17 +136,26 @@ const Navigation: React.FC<Props> = ({
   );
 };
 
-const mapDispatchToProps = {
-  setWindowScroll: (scrollY: number, page: string): ReduxAction<{
-    scrollY: number,
-    page: string
-  }> => ({
-    type: SET_WINDOW_SCROLL,
-    payload: {
-      scrollY,
-      page,
-    },
+interface StateProps {
+  navAnimation: number;
+}
+
+const mapStateToProps = (state: State): StateProps => ({
+  navAnimation: state.navAnimation,
+});
+
+interface DispatchProps {
+  setNavAnimation: (x: number) => ReduxAction<number>;
+}
+
+const mapDispatchToProps: DispatchProps = {
+  setNavAnimation: (x) => ({
+    type: SET_NAV_ANIMATION,
+    payload: x,
   }),
 };
 
-export default connect(null, mapDispatchToProps)(Navigation);
+export default connect<StateProps, DispatchProps, OwnProps>(
+  mapStateToProps,
+  mapDispatchToProps
+)(Navigation);

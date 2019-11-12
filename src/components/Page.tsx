@@ -6,10 +6,16 @@ import { PageStyle } from './SharedStyles';
 import { PageRefProvider } from '../context/pageRef';
 import Banner from './Banner';
 import Navigation from './Navigation';
-import { gutterWidth, bannerHeight } from '../helpers/constants';
 import {
+  gutterWidth,
+  bannerHeight,
+  SET_WINDOW_SCROLL,
+} from '../helpers/constants';
+import {
+  ReduxAction, // eslint-disable-line no-unused-vars
   State, // eslint-disable-line no-unused-vars
 } from '../helpers/types';
+import { getCurrentPage } from '../helpers/functions';
 
 const PageWindow = styled.div`
   ${PageStyle}
@@ -33,9 +39,15 @@ interface OwnProps {
   heading?: string;
 }
 
-type Props = OwnProps & StateProps;
+type Props = OwnProps & StateProps & DispatchProps;
 
-const Page: React.FC<Props> = ({ scrollY, heading, pathname, children }) => {
+const Page: React.FC<Props> = ({
+  scrollY,
+  heading,
+  pathname,
+  children,
+  setWindowScroll,
+}) => {
   const pageRef: React.MutableRefObject<HTMLDivElement> = useRef(null);
   const observerTarget = useRef(null);
   const [headingHidden, setHeadingHidden] = useState(false);
@@ -66,6 +78,14 @@ const Page: React.FC<Props> = ({ scrollY, heading, pathname, children }) => {
     return () => observer.disconnect();
   });
 
+  const onNavigation = () => {
+    setScrolled(false);
+    setWindowScroll(
+      pageRef.current.scrollTop,
+      getCurrentPage(pathname)
+    );
+  };
+
   return (
     <PageRefProvider value={pageRef}>
       <Banner heading={headingHidden && heading}/>
@@ -79,8 +99,7 @@ const Page: React.FC<Props> = ({ scrollY, heading, pathname, children }) => {
         {children}
       </PageWindow>
       <Navigation
-        onNavigation={() => setScrolled(false)}
-        pageRef={pageRef}
+        onNavigation={onNavigation}
         pathname={pathname}
       />
     </PageRefProvider>
@@ -89,6 +108,13 @@ const Page: React.FC<Props> = ({ scrollY, heading, pathname, children }) => {
 
 interface StateProps {
   scrollY: number;
+}
+
+interface DispatchProps {
+  setWindowScroll: (scrollY: number, page: string) => ReduxAction<{
+    scrollY: number,
+    page: string
+  }>;
 }
 
 const mapStateToProps = (state: State, ownProps: OwnProps): StateProps => {
@@ -102,6 +128,17 @@ const mapStateToProps = (state: State, ownProps: OwnProps): StateProps => {
   };
 };
 
-export default connect<StateProps, void, OwnProps>(
-  mapStateToProps
+const mapDispatchToProps: DispatchProps = {
+  setWindowScroll: (scrollY, page) => ({
+    type: SET_WINDOW_SCROLL,
+    payload: {
+      scrollY,
+      page,
+    },
+  }),
+};
+
+export default connect<StateProps, DispatchProps, OwnProps>(
+  mapStateToProps,
+  mapDispatchToProps
 )(Page);
