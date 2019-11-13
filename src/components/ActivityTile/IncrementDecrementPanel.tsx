@@ -21,10 +21,6 @@ const Button = styled.button`
   background-color: white;
   border: 4px solid grey;
   touch-action: manipulation; // stops double-tap-to-zoom
-
-  &:active, &:focus {
-    background: blue;
-  }
 `;
 
 const InnerCircle = styled.div`
