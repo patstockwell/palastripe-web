@@ -53,7 +53,7 @@ const AnimatedSlidingPage = styled(animated.div)`
 `;
 
 interface OwnProps {
-  animationStyles: any;
+  animationStyles: React.CSSProperties;
 }
 
 type Match = Pick<RouteComponentProps<{ id: string }>, 'match'>;

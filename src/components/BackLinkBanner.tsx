@@ -12,7 +12,7 @@ const StyledLink = styled(Link)`
   height: 20px;
   display: flex;
   align-items: center;
-  margin: 16px;
+  padding: 16px;
 `;
 
 const Header = styled.div<{ sticky: boolean }>`
@@ -43,9 +43,6 @@ interface Props {
 }
 
 const BackLinkBanner: React.FC<Props> = ({ sticky = true, back, continueTo }) => {
-  const leadingSpace = ' ';
-  const backText = leadingSpace + (back.text ? back.text : 'Back');
-
   return (
     <Header sticky={sticky}>
 
@@ -57,9 +54,10 @@ const BackLinkBanner: React.FC<Props> = ({ sticky = true, back, continueTo }) =>
           <React.Fragment>
             <BackArrow style={{ fill: 'grey', margin: '0 -12px 0 -8px' }} />
             <BackArrow style={{ fill: 'grey' }} />
+            <BackArrow style={{ fill: 'grey', margin: '0 0 0 -12px' }} />
           </React.Fragment>
         }
-        {backText}
+        {` ${back.text ? back.text : ''}`}
       </StyledLink>
 
       {continueTo &&

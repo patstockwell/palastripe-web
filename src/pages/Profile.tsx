@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import SettingUnitOfMeasurement from '../components/SettingUnitOfMeasurement';
 import SettingAudio from '../components/SettingAudio';
-import ProfileName from '../components/ProfileName';
+import ProfileNameLink from '../components/ProfileNameLink';
 import Page from '../components/Page';
 
 const Panel = styled.div`
@@ -16,7 +16,7 @@ const Panel = styled.div`
 const Profile: React.FC<{}> = () => (
   <Page heading={'Profile'} pathname={location.pathname}>
     <Panel>
-      <ProfileName />
+      <ProfileNameLink />
     </Panel>
     <Panel>
       <SettingUnitOfMeasurement />

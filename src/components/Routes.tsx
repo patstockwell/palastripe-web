@@ -7,6 +7,7 @@ import Activity from '../pages/Activity';
 import EditWorkout from '../pages/EditWorkout';
 import FourZeroFour from '../pages/FourZeroFour';
 import Profile from '../pages/Profile';
+import ProfileName from '../pages/ProfileName';
 import {
   RouteState, // eslint-disable-line no-unused-vars
 } from '../helpers/types';
@@ -35,6 +36,8 @@ const Routes: React.FC<{}> = () => {
           <Route path="/workouts/" exact component={Workouts} />
           <Route path="/activity/" component={Activity} />
           <Route path="/profile/" exact component={Profile} />
+          <Route path="/profile/name" render={() =>
+            <ProfileName animationStyles={props} />} />
           <Route path="/edit-workout/" render={() =>
             <EditWorkout animationStyles={props} />} />
           <Route path="/workouts/:id/" render={({ match }) =>
