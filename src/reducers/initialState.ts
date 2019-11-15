@@ -114,9 +114,12 @@ const mergeWorkouts = (
   initial: Workouts,
   localStorage: Workouts,
 ): Workouts => {
+  // TODO: remove all the workouts from localStorage that don't meet version1
   const { allIds: localIds, byId } = localStorage;
   const { allIds: initialIds, byId: initialWorkouts } = initial;
+  // find all the ids not in localStorage
   const missingIds = initialIds.filter(id => !localIds.includes(id));
+  // get each of the workouts for those ids
   const missingWorkouts = missingIds
     .map(id => initialWorkouts[id])
     .reduce ((acc, w) => ({ ...acc, [w.id]: w }), {});
