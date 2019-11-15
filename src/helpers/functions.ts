@@ -50,31 +50,44 @@ export const formatWeight = (
   return `${weight} ${useKilos ? 'kg' : 'lbs'}`;
 };
 
-export const useHiddenAreaAnimation = (showHiddenArea: boolean) =>
+export const useHiddenAreaAnimation = ({
+  showHiddenArea,
+  onRest,
+  selected,
+}: {
+  showHiddenArea: boolean;
+  onRest: any;
+  selected: boolean;
+}) =>
   useSpring({
     height: showHiddenArea ? activeWorkoutWindowHeight : 0,
     opacity: showHiddenArea ? 1 : 0,
     x: showHiddenArea ? -180 : 0,
-    config: { tension: 410, friction: 35 },
+    config: { clamp: true, mass: 1, tension: 510, friction: 34 },
+    onRest: () => {
+      if (selected) {
+        onRest();
+      }
+    },
   });
 
-export const useScrollElementToTop = (
-  p: React.MutableRefObject<HTMLDivElement>,
-  e: React.MutableRefObject<any>,
-  selected: boolean,
+export const useScrollElementToTop = ({
+  page, li, shouldScroll, show,
+}: {
+  page: React.MutableRefObject<HTMLDivElement>,
+  li: React.MutableRefObject<HTMLLIElement>,
+  shouldScroll: boolean,
   show: boolean,
-) => {
+}) => {
   useEffect(() => {
-    if (selected) {
-      window.setTimeout(() => {
-        p.current.scrollTo({
-          top: e.current.offsetTop - activityHeadingHeight,
-          left: 0,
-          behavior: 'smooth',
-        });
-      }, 240);
+    if (shouldScroll) {
+      page.current.scrollTo({
+        top: li.current.offsetTop - activityHeadingHeight,
+        left: 0,
+        behavior: 'smooth',
+      });
     }
-  }, [ show, selected ]);
+  }, [ show, shouldScroll ]);
 };
 
 export const useHasScrolled = () => {

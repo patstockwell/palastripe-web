@@ -85,7 +85,7 @@ interface OwnProps {
   selected: boolean;
   editable: boolean;
   showHiddenArea: boolean;
-  handleOpen: () => void;
+  toggleShowHiddenArea: () => void;
   handleSelect: () => void;
 }
 
@@ -98,7 +98,7 @@ const ActivityTileWithTimer: React.FC<Props> = ({
   index,
   handleSelect,
   selected,
-  handleOpen,
+  toggleShowHiddenArea,
   showHiddenArea,
   toggleSetComplete,
   editable,
@@ -106,14 +106,24 @@ const ActivityTileWithTimer: React.FC<Props> = ({
   const [count, setCount] = useState(0);
   const [preparationComplete, setPreparationComplete] = useState(false);
   const [showEditPanel, setShowEditPanel] = useState(false);
+  const [ finishedAnimating, setFinishedAnimating ] = useState(false);
   const [started, setStarted] = useState(false);
   const [paused, setPaused] = useState(false);
   const listElement = useRef(null);
   const pageRef = usePageRef();
   const playAudio = useAudio();
-  useScrollElementToTop(pageRef, listElement, selected, showHiddenArea);
+  const animatedStyles = useHiddenAreaAnimation({
+    showHiddenArea,
+    onRest: () => setFinishedAnimating(true),
+    selected,
+  });
 
-  const animatedStyles = useHiddenAreaAnimation(showHiddenArea);
+  useScrollElementToTop({
+    page: pageRef,
+    li: listElement,
+    shouldScroll: selected && finishedAnimating,
+    show: showHiddenArea,
+  });
 
   const inProgress = selected && !completed && started;
 
@@ -153,7 +163,7 @@ const ActivityTileWithTimer: React.FC<Props> = ({
           />
         ))}
 
-        <Details onClick={handleOpen}>
+        <Details onClick={toggleShowHiddenArea}>
           <Title>{name}</Title>
         </Details>
         <Duration>
@@ -194,7 +204,7 @@ const ActivityTileWithTimer: React.FC<Props> = ({
 
       {selected &&
         <ShowHiddenAreaArrowWrapper
-          onClick={handleOpen}
+          onClick={toggleShowHiddenArea}
           style={{
             transform: animatedStyles.x.interpolate(x =>
               `translateX(-50%) rotate(${x}deg`),

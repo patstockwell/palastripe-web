@@ -59,7 +59,7 @@ export const ShowHiddenAreaArrowWrapper = styled(animated.button)`
 interface OwnProps {
   activity: WeightedActivity;
   groupId: string;
-  handleOpen: () => void;
+  toggleShowHiddenArea: () => void;
   handleSelect: () => void;
   index: number;
   selected: boolean;
@@ -77,19 +77,29 @@ const ActivityTileWithReps: React.FC<Props> = ({
   groupId,
   index,
   handleSelect,
-  handleOpen,
+  toggleShowHiddenArea,
   selected,
   showHiddenArea,
   toggleSetComplete,
   editable,
   useKilos,
 }) => {
-  const [showAnimation, setShowAnimation] = useState(false);
-  const listElement = useRef(null);
+  const [ showAnimation, setShowAnimation ] = useState(false);
+  const [ finishedAnimating, setFinishedAnimating ] = useState(false);
+  const listElement = useRef<HTMLLIElement>(null);
   const pageRef = usePageRef();
-  useScrollElementToTop(pageRef, listElement, selected, showHiddenArea);
+  const animatedStyles = useHiddenAreaAnimation({
+    showHiddenArea,
+    onRest: () => setFinishedAnimating(true),
+    selected,
+  });
 
-  const animatedStyles = useHiddenAreaAnimation(showHiddenArea);
+  useScrollElementToTop({
+    page: pageRef,
+    li: listElement,
+    shouldScroll: selected && finishedAnimating,
+    show: showHiddenArea,
+  });
 
   return (
     <Tile
@@ -99,7 +109,7 @@ const ActivityTileWithReps: React.FC<Props> = ({
       ref={listElement}
     >
       <VisibleArea>
-        <Details onClick={handleOpen}>
+        <Details onClick={toggleShowHiddenArea}>
           <Title>{name}</Title>
           <SubTitle>
             Weight: {formatWeight(weightInKilos, useKilos)}
@@ -131,7 +141,7 @@ const ActivityTileWithReps: React.FC<Props> = ({
 
       {selected &&
         <ShowHiddenAreaArrowWrapper
-          onClick={handleOpen}
+          onClick={toggleShowHiddenArea}
           style={{
             transform: animatedStyles.x.interpolate(x =>
               `translateX(-50%) rotate(${x}deg`),

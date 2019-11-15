@@ -75,7 +75,7 @@ const ActivityList: React.FC<Props> = ({
             setSelected({ groupId: id, index: i });
           }
         }}
-        handleOpen={() => {
+        toggleShowHiddenArea={() => {
           if (isSelected) {
             setShowHiddenArea(!showHiddenArea);
           }

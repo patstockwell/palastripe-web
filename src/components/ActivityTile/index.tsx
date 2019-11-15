@@ -59,7 +59,7 @@ interface Props {
   groupId: string;
   index: number;
   handleSelect?: () => void;
-  handleOpen?: () => void;
+  toggleShowHiddenArea?: () => void;
   selected?: boolean;
   showHiddenArea?: boolean;
   editable?: boolean;
@@ -70,7 +70,7 @@ const ActivityTile: React.FC<Props> = ({
   groupId,
   index,
   handleSelect,
-  handleOpen,
+  toggleShowHiddenArea,
   selected,
   showHiddenArea,
   editable,
@@ -84,7 +84,7 @@ const ActivityTile: React.FC<Props> = ({
         index={index}
         activity={activity}
         handleSelect={handleSelect}
-        handleOpen={handleOpen}
+        toggleShowHiddenArea={toggleShowHiddenArea}
         editable={editable}
       />
     ) : (
@@ -95,7 +95,7 @@ const ActivityTile: React.FC<Props> = ({
         index={index}
         activity={activity}
         handleSelect={handleSelect}
-        handleOpen={handleOpen}
+        toggleShowHiddenArea={toggleShowHiddenArea}
         editable={editable}
       />
     )
