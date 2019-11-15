@@ -1,9 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import SettingUnitOfMeasurement from '../components/SettingUnitOfMeasurement';
-import SettingAudio from '../components/SettingAudio';
-import ProfileNameLink from '../components/ProfileNameLink';
+import {
+  ProfileNameLink,
+  AudioLink,
+  UnitOfMeasurementLink,
+} from '../components/Profile';
 import Page from '../components/Page';
 
 const Panel = styled.div`
@@ -19,10 +21,10 @@ const Profile: React.FC<{}> = () => (
       <ProfileNameLink />
     </Panel>
     <Panel>
-      <SettingUnitOfMeasurement />
+      <UnitOfMeasurementLink />
     </Panel>
     <Panel>
-      <SettingAudio />
+      <AudioLink />
     </Panel>
   </Page>
 );

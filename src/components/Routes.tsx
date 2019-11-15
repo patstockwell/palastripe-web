@@ -8,6 +8,8 @@ import EditWorkout from '../pages/EditWorkout';
 import FourZeroFour from '../pages/FourZeroFour';
 import Profile from '../pages/Profile';
 import ProfileName from '../pages/ProfileName';
+import SettingAudio from '../pages/SettingAudio';
+import SettingUnitOfMeasurement from '../pages/SettingUnitOfMeasurement';
 import {
   RouteState, // eslint-disable-line no-unused-vars
 } from '../helpers/types';
@@ -38,6 +40,10 @@ const Routes: React.FC<{}> = () => {
           <Route path="/profile/" exact component={Profile} />
           <Route path="/profile/name" render={() =>
             <ProfileName animationStyles={props} />} />
+          <Route path="/profile/audio" render={() =>
+            <SettingAudio animationStyles={props} />} />
+          <Route path="/profile/unit-of-measurement" render={() =>
+            <SettingUnitOfMeasurement animationStyles={props} />} />
           <Route path="/edit-workout/" render={() =>
             <EditWorkout animationStyles={props} />} />
           <Route path="/workouts/:id/" render={({ match }) =>
