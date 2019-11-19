@@ -1,6 +1,6 @@
 import React from 'react';
 import { useTransition } from 'react-spring';
-import { useLocation, Route, Switch } from 'react-router-dom';
+import { useHistory, useLocation, Route, Switch } from 'react-router-dom';
 import Workouts from '../pages/Workouts';
 import ActiveWorkout from '../pages/ActiveWorkout';
 import Activity from '../pages/Activity';
@@ -16,17 +16,20 @@ import {
 
 const Routes: React.FC<{}> = () => {
   const location = useLocation();
+  const history = useHistory();
+
   const {
     // set default value in case none is passed
     state = { immediate: true },
   }: { state: RouteState } = location;
-  const { immediate } = state;
+  const immediate = state.immediate
+    || history.action === 'POP'; // way to determine if 'back' was used in the browser
 
   const transitions = useTransition(location, (loc: any) => loc.key, {
     immediate,
-    from: { opacity: 0, left: '100%', top: '100vh', position: 'fixed' },
-    enter: { opacity: 1, left: '0%', top: '0vh' },
-    leave: { opacity: 0, left: '100%', top: '100vh' },
+    from: { opacity: 0, right: '-50%', left: '100%', top: '100vh', position: 'fixed' },
+    enter: { opacity: 1, right: '0%', left: '0%', top: '0vh' },
+    leave: { opacity: 0, right: '-50%', left: '100%', top: '100vh' },
     config: { tension: 410, friction: 40 },
   });
 
@@ -35,7 +38,8 @@ const Routes: React.FC<{}> = () => {
       {transitions.map(({ item, props, key }) => (
         <Switch key={key} location={item}>
           <Route path="/" exact component={Workouts} />
-          <Route path="/workouts/" exact component={Workouts} />
+          <Route path="/workouts/" exact render={() =>
+            <Workouts animationStyles={props} location={location} />} />
           <Route path="/activity/" component={Activity} />
           <Route path="/profile/" exact component={Profile} />
           <Route path="/profile/name" render={() =>

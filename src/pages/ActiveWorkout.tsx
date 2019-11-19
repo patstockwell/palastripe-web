@@ -124,7 +124,7 @@ const ActiveWorkout: React.FC<Props> = ({
           setCount,
         }} >
           <AnimatedSlidingPage
-            style={{ [direction]: animationStyles.left }}
+            style={{ zIndex: 12, [direction]: animationStyles.left }}
             ref={pageRef}
           >
             <BackLinkBanner
