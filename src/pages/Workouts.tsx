@@ -22,6 +22,7 @@ const EmptySpace = styled.div`
 
 const AnimatedSlidingPage = styled(animated.div)`
   ${AnimatedSlidingPageStyle}
+  z-index: 0;
 `;
 
 interface OwnProps {

@@ -23,6 +23,8 @@ import { getCurrentPage } from '../helpers/functions';
 const Nav = styled.nav`
   display: flex;
   position: fixed;
+  // TODO: Replace this with an animated value to make it slide on/off the page?
+  left: 0;
   bottom: 0;
   width: 100vw;
   justify-content: space-around;

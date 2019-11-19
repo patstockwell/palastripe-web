@@ -30,18 +30,20 @@ const Routes: React.FC<{}> = () => {
     from: { opacity: 0, right: '-50%', left: '100%', top: '100vh', position: 'fixed' },
     enter: { opacity: 1, right: '0%', left: '0%', top: '0vh' },
     leave: { opacity: 0, right: '-50%', left: '100%', top: '100vh' },
-    config: { tension: 410, friction: 40 },
+    config: { tension: 410, friction: 43 },
   });
 
   return (
     <React.Fragment>
       {transitions.map(({ item, props, key }) => (
         <Switch key={key} location={item}>
-          <Route path="/" exact component={Workouts} />
+          <Route path="/" exact render={() =>
+            <Workouts animationStyles={props} location={location} />} />
           <Route path="/workouts/" exact render={() =>
             <Workouts animationStyles={props} location={location} />} />
           <Route path="/activity/" component={Activity} />
-          <Route path="/profile/" exact component={Profile} />
+          <Route path="/profile/" exact render={() =>
+            <Profile animationStyles={props} location={location} />} />
           <Route path="/profile/name" render={() =>
             <ProfileName animationStyles={props} />} />
           <Route path="/profile/audio" render={() =>
