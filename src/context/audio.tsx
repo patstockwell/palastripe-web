@@ -16,6 +16,7 @@ const AudioProvider: React.FC<Props> = ({ soundOn, children }) => {
 
   const playAudio = () => {
     if (soundOn && audio.current) {
+      audio.current.currentTime = 0;
       audio.current.play();
     }
   };
