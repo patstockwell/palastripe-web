@@ -27,9 +27,9 @@ const Routes: React.FC<{}> = () => {
 
   const transitions = useTransition(location, (loc: any) => loc.key, {
     immediate,
-    from: { opacity: 0, right: '-50%', left: '100%', top: '100vh', position: 'fixed' },
+    from: { opacity: 0, right: '-30%', left: '100%', top: '100vh', position: 'fixed' },
     enter: { opacity: 1, right: '0%', left: '0%', top: '0vh' },
-    leave: { opacity: 0, right: '-50%', left: '100%', top: '100vh' },
+    leave: { opacity: 0, right: '-30%', left: '100%', top: '100vh' },
     config: { tension: 410, friction: 43 },
   });
 
