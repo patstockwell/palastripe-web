@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import audioBell from '../assets/complete.mp3';
 
 const AudioContext = React.createContext<() => void>(null);
@@ -8,16 +8,12 @@ interface Props {
 }
 
 const AudioProvider: React.FC<Props> = ({ soundOn, children }) => {
-  const audio: React.MutableRefObject<HTMLAudioElement> = useRef();
-
-  if (!audio.current) {
-    audio.current = new Audio(audioBell);
-  }
+  const audio = new Audio(audioBell);
 
   const playAudio = () => {
-    if (soundOn && audio.current) {
-      audio.current.currentTime = 0;
-      audio.current.play();
+    if (soundOn) {
+      audio.currentTime = 0;
+      audio.play();
     }
   };
 
