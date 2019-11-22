@@ -54,6 +54,7 @@ const AnimatedSlidingPage = styled(animated.div)`
 
 interface OwnProps {
   animationStyles: React.CSSProperties;
+  workout?: Workout;
 }
 
 type Match = Pick<RouteComponentProps<{ id: string }>, 'match'>;
@@ -69,6 +70,7 @@ const ActiveWorkout: React.FC<Props> = ({
   setActiveWorkout,
   setWindowScroll,
   soundOn,
+  workout,
 }) => {
   const [ showEndWorkoutAlert, setShowEndWorkoutAlert ] = useState(false);
   const [ direction, setDirection ] = useState('left');
@@ -81,16 +83,15 @@ const ActiveWorkout: React.FC<Props> = ({
     setCount(count + 1);
   }, showRestTimer ? ONE_SECOND : null);
 
-  const resetTimer = () => {
-    setShowRestTimer(false);
-    setCount(0);
-  };
-
-  // get the workout ID from the URL
   const { id: workoutId }: { id: string } = match.params;
-  const workout = entities.workouts.byId[workoutId];
 
   if (!workout) {
+    console.info('Workout not found in props. Using ID from URL');
+    workout = entities.workouts.byId[workoutId];
+  }
+
+  if (!workout) {
+    console.error('404. Workout not found.');
     return <FourZeroFour />;
   }
 
@@ -113,6 +114,11 @@ const ActiveWorkout: React.FC<Props> = ({
     setDirection('top');
     setShowEndWorkoutAlert(false);
     setWindowScroll(0);
+  };
+
+  const resetTimer = () => {
+    setShowRestTimer(false);
+    setCount(0);
   };
 
   return (

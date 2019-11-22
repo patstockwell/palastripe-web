@@ -24,13 +24,15 @@ const Routes: React.FC<{}> = () => {
   }: { state: RouteState } = location;
   const immediate = state.immediate
     || history.action === 'POP'; // way to determine if 'back' was used in the browser
+  const { workout } = state;
 
   const transitions = useTransition(location, (loc: any) => loc.key, {
     immediate,
     from: { opacity: 0, right: '-30%', left: '100%', top: '100vh', position: 'fixed' },
     enter: { opacity: 1, right: '0%', left: '0%', top: '0vh' },
     leave: { opacity: 0, right: '-30%', left: '100%', top: '100vh' },
-    config: { tension: 410, friction: 43 },
+    // config: { tension: 410, friction: 43 },
+    config: { tension: 250, friction: 36, mass: 1, clamp: true },
   });
 
   return (
@@ -54,6 +56,7 @@ const Routes: React.FC<{}> = () => {
             <EditWorkout animationStyles={props} />} />
           <Route path="/workouts/:id/" render={({ match }) =>
             <ActiveWorkout
+              workout={workout}
               animationStyles={props}
               match={match} />} />
           <Route component={FourZeroFour} />

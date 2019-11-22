@@ -55,6 +55,10 @@
             "error",
             "single"
         ],
+        "no-console": [
+          "error",
+          { "allow": ["info", "warn", "error"] }
+        ],
         "semi": [
             "error",
             "always"
