@@ -111,7 +111,7 @@ const ActivityTileWithTimer: React.FC<Props> = ({
   const [paused, setPaused] = useState(false);
   const listElement = useRef(null);
   const pageRef = usePageRef();
-  const playAudio = useAudio();
+  const { playStart, playComplete } = useAudio();
   const animatedStyles = useHiddenAreaAnimation({
     showHiddenArea,
     onRest: () => setFinishedAnimating(true),
@@ -151,14 +151,17 @@ const ActivityTileWithTimer: React.FC<Props> = ({
           <ActiveTimerBar
             paused={paused}
             timer={timerInSeconds + 1} // add 1 to allow for the count to finish
-            onAnimationEnd={() => toggleSetComplete(true)}
+            onAnimationEnd={() => {
+              playComplete();
+              toggleSetComplete(true);
+            }}
           />
         ) : (
           <PreparationTimerBar
             paused={paused}
             onAnimationEnd={() => {
               setPreparationComplete(true);
-              playAudio();
+              playStart();
             }}
           />
         ))}

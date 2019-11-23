@@ -1,24 +1,38 @@
 import React from 'react';
-import audioBell from '../assets/complete.mp3';
+import completeAudio from '../assets/activityEnd.mp3';
+import startAudio from '../assets/activityStart.mp3';
 
-const AudioContext = React.createContext<() => void>(null);
+interface AudioFunctions {
+  playStart: () => void;
+  playComplete: () => void;
+}
 
 interface Props {
   soundOn: boolean;
 }
 
-const AudioProvider: React.FC<Props> = ({ soundOn, children }) => {
-  const audio = new Audio(audioBell);
+const AudioContext = React.createContext<AudioFunctions>(null);
 
-  const playAudio = () => {
+const AudioProvider: React.FC<Props> = ({ soundOn, children }) => {
+  const start = new Audio(startAudio);
+  const complete = new Audio(completeAudio);
+
+  const playStart = () => {
     if (soundOn) {
-      audio.currentTime = 0;
-      audio.play();
+      start.currentTime = 0;
+      start.play();
+    }
+  };
+
+  const playComplete = () => {
+    if (soundOn) {
+      complete.currentTime = 0;
+      complete.play();
     }
   };
 
   return (
-    <AudioContext.Provider value={playAudio}>
+    <AudioContext.Provider value={{ playStart, playComplete }}>
       {children}
     </AudioContext.Provider>
   );
