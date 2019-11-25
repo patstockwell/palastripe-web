@@ -40,8 +40,8 @@ const FlexTile = styled.div`
 `;
 
 const BottomEmptySpace = styled.div<{ stickyTop?: number}>`
-  height: calc(100vh - ${({ stickyTop = 0 }) =>
-    activityHeadingHeight + (2 * tileMinHeight) + stickyTop}px);
+  // height: calc(100vh - ${({ stickyTop = 0 }) => activityHeadingHeight + (2 * tileMinHeight) + stickyTop}px);
+  height: ${tileMinHeight}px;
 `;
 
 interface OwnProps {
