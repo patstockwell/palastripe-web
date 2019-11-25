@@ -29,13 +29,14 @@ const Nav = styled.nav`
   width: 100vw;
   justify-content: space-around;
   // add an extra 0.5 to the height to account for the 0.5px border
-  height: ${navBarHeight}.5px;
+  min-height: ${navBarHeight}.5px;
   border-top: solid 0.5px lightgrey;
   background-color: white;
   color: black;
-  padding: 3px;
   box-sizing: border-box;
   align-items: center;
+  padding: 3px;
+  padding-bottom: env(safe-area-inset-bottom); // this is for the IPhoneX notch
 `;
 
 const home = keyframes `

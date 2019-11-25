@@ -15,7 +15,7 @@ export const PageStyle = `
 export const AnimatedSlidingPageStyle = `
   z-index: 10;
   top: 0;
-  height: 100vh;
+  min-height: 100vh;
   ${PageStyle}
 `;
 

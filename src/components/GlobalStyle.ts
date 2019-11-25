@@ -14,6 +14,7 @@ export const GlobalStyle = createGlobalStyle`
     user-select: none;
     -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
+    -webkit-tap-highlight-color: transparent;
   }
 
   body::-webkit-scrollbar {
