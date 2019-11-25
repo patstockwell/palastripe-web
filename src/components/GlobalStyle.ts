@@ -11,6 +11,9 @@ export const GlobalStyle = createGlobalStyle`
     font-variant: normal;
     -moz-osx-font-smoothing: grayscale;
     -webkit-font-smoothing: antialiased;
+    user-select: none;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
   }
 
   body::-webkit-scrollbar {
