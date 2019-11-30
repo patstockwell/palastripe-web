@@ -24,7 +24,7 @@ const WorkoutName = styled.p`
   ${workoutTitleStyle}
 `;
 
-const Window = styled.div`
+const Window = styled.div<{ colour?: string }>`
   ${workoutHeroWindowStyle}
 `;
 

@@ -40,7 +40,7 @@ import {
   VisibleArea,
 } from './index';
 
-const Tile = styled.li`
+const Tile = styled.li<{ selected: boolean }>`
   ${tileStyle}
 `;
 

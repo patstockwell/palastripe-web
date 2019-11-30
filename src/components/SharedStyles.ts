@@ -50,7 +50,8 @@ export const opaqueImageInAfter = css<{ image: string }>`
 `;
 
 interface ButtonProps { background?: string; fontColour?: string; }
-export const buttonStyle = css<ButtonProps>`
+
+export const buttonStyle = css<ButtonProps | any>`
   color: ${({ fontColour }) => fontColour || 'white'};
   border: none;
   font-size: 12px;
@@ -70,7 +71,7 @@ export const workoutTitleStyle = `
   font-style: italic;
 `;
 
-export const workoutHeroWindowStyle = css<{ colour?: string }>`
+export const workoutHeroWindowStyle = css<{ colour?: string; imageUrl?: string }>`
   min-height: ${workoutWindowViewport}vh;
   position: relative;
   background-color: ${({ colour }) => colour ? colour : 'black'};

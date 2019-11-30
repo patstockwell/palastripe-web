@@ -45,7 +45,7 @@ const Message = styled.p`
   opacity: 0;
 `;
 
-const StartButton = styled.button<{ disabled: boolean, background: string }>`
+const StartButton = styled.button<{ background?: string; fontColour?: string; }>`
   ${buttonStyle}
   margin-top: 30px;
   background-color: ${({ background }) => background};

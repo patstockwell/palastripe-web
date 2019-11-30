@@ -31,7 +31,7 @@ const MainValue = styled.span`
   font-weight: 800;
 `;
 
-const Button = styled.button`
+const Button = styled.button<{  background?: string; fontColour?: string; }>`
   ${buttonStyle}
   display: block;
   margin: 16px auto 0;

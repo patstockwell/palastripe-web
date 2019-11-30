@@ -40,7 +40,7 @@ const Button = styled.button<{ background?: string }>`
   ${buttonStyle}
 `;
 
-const LinkButton = styled(Link)<{ background?: string }>`
+const LinkButton = styled(Link)<{ background?: string; fontColour?: string; }>`
   ${buttonStyle}
   display: flex;
   align-items: center;

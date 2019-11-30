@@ -37,7 +37,7 @@ import {
   TOGGLE_SOUND,
 } from '../helpers/constants';
 
-export const Window = styled.div<{ colour?: string, imageUrl: string }>`
+export const Window = styled.div<{ colour?: string, imageUrl?: string }>`
   ${workoutHeroWindowStyle}
 
   // put the image in an 'after' pseudo element. Set it behind the original
