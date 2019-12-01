@@ -23,8 +23,8 @@
     "scope_url_host": "harderbetterfasterfitter.com",
     "scope_url_path": "/"
   },
-  "scope_url": "https://harderbetterfasterfitter.com/",
-  "start_url": "https://harderbetterfasterfitter.com/",
+  "scope_url": "/",
+  "start_url": "/",
   "scope": "/",
   "display": "standalone",
   "orientation": "portrait",
