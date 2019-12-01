@@ -17,7 +17,7 @@ export const tileStyle = css<{ selected: boolean }>`
   overflow: hidden;
 `;
 
-export const iconWrapperStyle = css<{ background?: string }>`
+export const checkboxWrapperStyle = `
   display: flex;
   justify-content: center;
   align-items: center;

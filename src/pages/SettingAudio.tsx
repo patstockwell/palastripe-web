@@ -1,26 +1,16 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import styled from 'styled-components';
-import { animated } from 'react-spring';
 
+import CheckboxTick from '../components/CheckboxTick';
+import { EditPage, Label, HiddenInput } from './SettingUnitOfMeasurement';
 import {
   State, // eslint-disable-line no-unused-vars
   ReduxAction, // eslint-disable-line no-unused-vars
 } from '../helpers/types';
 import {
   TOGGLE_SOUND,
-  superLightGrey,
 } from '../helpers/constants';
 import BackLinkBanner from '../components/BackLinkBanner';
-
-const EditPage = styled(animated.div)`
-  top: 0px;
-  position: fixed;
-  height: 100vh;
-  width: 100vw;
-  background-color: ${superLightGrey};
-  z-index: 3;
-`;
 
 interface OwnProps {
   animationStyles: React.CSSProperties;
@@ -29,16 +19,18 @@ interface OwnProps {
 type Props = StateProps & DispatchProps & OwnProps;
 
 const SettingAudio: React.FC<Props> = ({
-  soundOn,
+  soundOn: soundOnRedux,
   toggleSound,
   animationStyles,
 }) => {
   const [soundOnLocal, setSoundOnLocal] = useState(true);
   const [settingHasChanged, setSettingHasChanged] = useState(false);
+  const soundOn = settingHasChanged ? soundOnLocal : soundOnRedux;
 
   return (
     <EditPage key={'unique'} style={{ left: animationStyles.left }}>
       <BackLinkBanner
+        heading={'Audio'}
         back={{
           showArrows: true,
           link: '/profile/',
@@ -49,9 +41,10 @@ const SettingAudio: React.FC<Props> = ({
           },
         }}
       />
-      <label>
-        <input
-          checked={settingHasChanged ? soundOnLocal : soundOn}
+      <Label>
+        <CheckboxTick checked={soundOn} animate={false} />
+        <HiddenInput
+          checked={soundOn}
           type="radio"
           onChange={() => {
             if (!settingHasChanged) {
@@ -61,10 +54,11 @@ const SettingAudio: React.FC<Props> = ({
           }}
         />
         on
-      </label>
-      <label>
-        <input
-          checked={settingHasChanged ? !soundOnLocal : !soundOn}
+      </Label>
+      <Label>
+        <CheckboxTick checked={!soundOn} animate={false} />
+        <HiddenInput
+          checked={!soundOn}
           type="radio"
           onChange={() => {
             if (!settingHasChanged) {
@@ -74,7 +68,7 @@ const SettingAudio: React.FC<Props> = ({
           }}
         />
         off
-      </label>
+      </Label>
     </EditPage>
   );
 };

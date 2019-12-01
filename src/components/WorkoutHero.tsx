@@ -7,12 +7,12 @@ import styled, { keyframes } from 'styled-components';
 import { useLocation } from 'react-router-dom';
 import * as clipboard from 'clipboard-polyfill';
 
+import CheckboxTick from '../components/CheckboxTick';
 import AlertConfirm from '../components/AlertConfirm';
 import ColouredDot from '../assets/svg/ColouredDot';
 import ShareIcon from '../assets/svg/Share';
 import SoundOn from '../assets/svg/SoundOn';
 import SoundOff from '../assets/svg/SoundOff';
-import CircleTick from '../assets/svg/CircleTick';
 import {
   buttonStyle,
   workoutTitleStyle,
@@ -29,7 +29,6 @@ import {
   State, // eslint-disable-line no-unused-vars
   Workout, // eslint-disable-line no-unused-vars
 } from '../helpers/types';
-import { iconWrapperStyle } from './ActivityTile/ActivityTileSharedStyles';
 import {
   SET_SELECTED_EXERCISE,
   green,
@@ -108,7 +107,6 @@ const slide = keyframes `
 `;
 
 const IconWrapper = styled.div`
-  ${iconWrapperStyle};
   margin: 0 auto;
   animation: ${scale} 0.5s linear;
 `;
@@ -172,9 +170,10 @@ const WorkoutHero: React.FC<Props> = ({
         onClose={() => setShowCircleTick(false)}
       >
         <IconWrapper onAnimationEnd={() => setShowCircleTick(true)}>
-          {showCircleTick &&
-            <CircleTick onAnimationEnd={() => setShowShareMessage(false)} />
-          }
+          <CheckboxTick
+            checked={showCircleTick}
+            onAnimationEnd={() => setShowShareMessage(false)}
+          />
         </IconWrapper>
       </AlertConfirm>
     </Window>

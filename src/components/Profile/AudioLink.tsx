@@ -57,7 +57,7 @@ const AudioLink: React.FC<StateProps> = ({ soundOn }) => (
         pathname: '/profile/audio/',
         state: { immediate: false },
       }}
-    >Sound</Label>
+    >Audio</Label>
     <Value>{soundOn ? 'on' : 'off'}</Value>
   </Section>
 );

@@ -1,20 +1,15 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import CircleTick from '../../assets/svg/CircleTick';
+import CheckboxTick from '../CheckboxTick';
 import {
   ReduxAction, // eslint-disable-line no-unused-vars
 } from '../../helpers/types';
 import { SELECT_NEXT_EXERCISE } from '../../helpers/constants';
 import {
   selectCompleteButtonStyle,
-  iconWrapperStyle,
 } from './ActivityTileSharedStyles';
 import { useRestTimer } from '../../context/restTimer';
-
-const IconWrapper = styled.div`
-  ${iconWrapperStyle}
-`;
 
 const SelectCompleteButton = styled.button`
   ${selectCompleteButtonStyle}
@@ -53,16 +48,17 @@ const ToggleSetCompleteButton: React.FC<Props> = ({
       // set clicked for child animation render checks
       setClicked(true);
     }}>
-      <IconWrapper>
-        {completed && <CircleTick onAnimationEnd={() => {
+      <CheckboxTick
+        checked={completed}
+        onAnimationEnd={() => {
           // check the animation was triggered via click and not reload
           if (selected || clicked) {
             setCount(0);
             setShowTimer(true);
             selectNextExercise();
           }
-        }} />}
-      </IconWrapper>
+        }}
+      />
     </SelectCompleteButton>
   );
 };

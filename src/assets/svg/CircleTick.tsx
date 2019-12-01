@@ -61,7 +61,7 @@ const Path = styled.path<{ animate: boolean }>`
 `;
 
 interface Props {
-  onAnimationEnd: () => void;
+  onAnimationEnd?: () => void;
   animate?: boolean;
 }
 

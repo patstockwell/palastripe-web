@@ -13,6 +13,7 @@ const StyledLink = styled(Link)`
   display: flex;
   align-items: center;
   padding: 16px;
+  z-index: 1;
 `;
 
 const Header = styled.div<{ sticky: boolean }>`
@@ -26,8 +27,17 @@ const Header = styled.div<{ sticky: boolean }>`
   background-color: white
 `;
 
+const Heading = styled.h1`
+  position: absolute;
+  font-size: 1em;
+  font-weight: 800;
+  width: 100%;
+  text-align: center;
+`;
+
 interface Props {
   sticky?: boolean;
+  heading?: string;
   back: {
     link: string;
     handleClick?: (e?: React.MouseEvent) => void;
@@ -42,7 +52,12 @@ interface Props {
   };
 }
 
-const BackLinkBanner: React.FC<Props> = ({ sticky = true, back, continueTo }) => {
+const BackLinkBanner: React.FC<Props> = ({
+  sticky = true,
+  back,
+  continueTo,
+  heading,
+}) => {
   return (
     <Header sticky={sticky}>
 
@@ -59,6 +74,8 @@ const BackLinkBanner: React.FC<Props> = ({ sticky = true, back, continueTo }) =>
         }
         {` ${back.text ? back.text : ''}`}
       </StyledLink>
+
+      {heading && <Heading>{heading}</Heading>}
 
       {continueTo &&
         <StyledLink

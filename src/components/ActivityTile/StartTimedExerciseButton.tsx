@@ -6,11 +6,11 @@ import { purple } from '../../helpers/constants';
 import Play from '../../assets/svg/Play';
 import {
   selectCompleteButtonStyle,
-  iconWrapperStyle,
+  checkboxWrapperStyle,
 } from './ActivityTileSharedStyles';
 
 const IconWrapper = styled.div<{ background?: string }>`
-  ${iconWrapperStyle}
+  ${checkboxWrapperStyle}
   background: ${({ background }) => background};
 `;
 
