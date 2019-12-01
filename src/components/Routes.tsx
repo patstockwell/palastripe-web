@@ -52,10 +52,8 @@ const Routes: React.FC<{}> = () => {
             <SettingUnitOfMeasurement animationStyles={props} />} />
           <Route path="/edit-workout/" render={() =>
             <EditWorkout animationStyles={props} />} />
-          <Route path="/workouts/:id/" render={({ match }) =>
-            <ActiveWorkout
-              animationStyles={props}
-              match={match} />} />
+          <Route path="/workouts/:id/" render={() =>
+            <ActiveWorkout animationStyles={props} />} />
           <Route component={FourZeroFour} />
         </Switch>
       ))}

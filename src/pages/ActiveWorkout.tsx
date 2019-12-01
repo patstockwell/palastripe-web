@@ -1,11 +1,8 @@
 import React, { useRef, useState } from 'react';
 import { connect } from 'react-redux';
-import {
-  RouteComponentProps, // eslint-disable-line no-unused-vars
-} from 'react-router';
 import styled from 'styled-components';
 import { animated } from 'react-spring';
-import { Link } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 
 import { PageRefProvider } from '../context/pageRef';
 import { AudioProvider } from '../context/audio';
@@ -56,15 +53,12 @@ interface OwnProps {
   animationStyles: React.CSSProperties;
 }
 
-type Match = Pick<RouteComponentProps<{ id: string }>, 'match'>;
-
-type Props = OwnProps & DispatchProps & StateProps & Match;
+type Props = OwnProps & DispatchProps & StateProps;
 
 const ActiveWorkout: React.FC<Props> = ({
   animationStyles,
   finishWorkout,
   entities,
-  match,
   activeWorkout,
   setActiveWorkout,
   setWindowScroll,
@@ -85,9 +79,8 @@ const ActiveWorkout: React.FC<Props> = ({
     setShowRestTimer(false);
     setCount(0);
   };
-
   // get the workout ID from the URL
-  const { id: workoutId }: { id: string } = match.params;
+  const { id: workoutId }: { id: string } = useParams();
   const workout = entities.workouts.byId[workoutId];
 
   if (!workout) {
