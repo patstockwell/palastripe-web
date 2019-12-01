@@ -106,7 +106,6 @@ const ActivityTileWithTimer: React.FC<Props> = ({
   const [count, setCount] = useState(0);
   const [preparationComplete, setPreparationComplete] = useState(false);
   const [showEditPanel, setShowEditPanel] = useState(false);
-  const [ finishedAnimating, setFinishedAnimating ] = useState(false);
   const [started, setStarted] = useState(false);
   const [paused, setPaused] = useState(false);
   const listElement = useRef(null);
@@ -114,15 +113,14 @@ const ActivityTileWithTimer: React.FC<Props> = ({
   const { playStart, playComplete } = useAudio();
   const animatedStyles = useHiddenAreaAnimation({
     showHiddenArea,
-    onRest: () => setFinishedAnimating(true),
+    onRest: () => {
+      useScrollElementToTop({
+        page: pageRef,
+        li: listElement,
+        shouldScroll: selected,
+      });
+    },
     selected,
-  });
-
-  useScrollElementToTop({
-    page: pageRef,
-    li: listElement,
-    shouldScroll: selected && finishedAnimating,
-    show: showHiddenArea,
   });
 
   const inProgress = selected && !completed && started;
