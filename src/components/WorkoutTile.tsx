@@ -81,7 +81,7 @@ const WorkoutTile = ({ setWindowScroll, workout }: Props) => {
       onClick={handleClick}
       to={{
         pathname: `/workouts/${workout.id}/`,
-        state: { immediate: false, workout },
+        state: { immediate: false },
       }}
     >
       <Tile>

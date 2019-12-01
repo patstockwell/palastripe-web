@@ -15,7 +15,6 @@ export interface SelectedExercise {
 
 export interface RouteState {
   immediate: boolean;
-  workout?: Workout;
 }
 
 // State shape
