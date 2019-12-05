@@ -7,6 +7,7 @@ import Activity from '../pages/Activity';
 import EditWorkout from '../pages/EditWorkout';
 import FourZeroFour from '../pages/FourZeroFour';
 import Profile from '../pages/Profile';
+import WorkoutSummary from '../pages/WorkoutSummary';
 import ProfileName from '../pages/ProfileName';
 import SettingAudio from '../pages/SettingAudio';
 import SettingUnitOfMeasurement from '../pages/SettingUnitOfMeasurement';
@@ -41,7 +42,8 @@ const Routes: React.FC<{}> = () => {
             <Workouts animationStyles={props} location={location} />} />
           <Route path="/workouts/" exact render={() =>
             <Workouts animationStyles={props} location={location} />} />
-          <Route path="/activity/" component={Activity} />
+          <Route path="/activity/" exact component={Activity} />
+          <Route path="/activity/:index/" component={WorkoutSummary} />
           <Route path="/profile/" exact render={() =>
             <Profile animationStyles={props} location={location} />} />
           <Route path="/profile/name" render={() =>

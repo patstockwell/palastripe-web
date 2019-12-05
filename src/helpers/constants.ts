@@ -60,6 +60,7 @@ export const fadedYellow: string = '#fffd8e';
 export const lightLightGrey = '#dedede';
 export const superLightGrey = '#f4f4f4';
 export const charcoal = '#444444';
+export const darkPurple = '#291c3d';
 
 // action types
 export const SET_NAV_ANIMATION: string = 'SET_NAV_ANIMATION';
