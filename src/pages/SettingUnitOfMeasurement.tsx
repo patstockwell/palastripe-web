@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { animated } from 'react-spring';
 
 import {
   State, // eslint-disable-line no-unused-vars
@@ -15,13 +14,9 @@ import {
 } from '../helpers/constants';
 import CheckboxTick from '../components/CheckboxTick';
 
-export const EditPage = styled(animated.div)`
-  top: 0px;
-  position: fixed;
+export const EditPage = styled.div`
   height: 100vh;
-  width: 100vw;
   background-color: ${superLightGrey};
-  z-index: 3;
 `;
 
 export const Label = styled.label`
@@ -45,23 +40,18 @@ export const HiddenInput = styled.input`
   left: -9999px;
 `;
 
-interface OwnProps {
-  animationStyles: React.CSSProperties;
-}
-
-type Props = StateProps & DispatchProps & OwnProps;
+type Props = StateProps & DispatchProps;
 
 const SettingUnitOfMeasurement: React.FC<Props> = ({
   useKilos: useKilosRedux,
   useKilosAsUnitOfMeasurement,
-  animationStyles,
 }) => {
   const [useKilosLocal, setUseKilosLocal] = useState(true);
   const [measurementHasChanged, setMeasurementHasChanged] = useState(false);
   const useKilos = measurementHasChanged ? useKilosLocal : useKilosRedux;
 
   return (
-    <EditPage key={'unique'} style={{ left: animationStyles.left }}>
+    <EditPage>
       <BackLinkBanner
         heading={'Unit Of Measurement'}
         back={{

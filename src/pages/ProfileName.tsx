@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { animated } from 'react-spring';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 
@@ -10,13 +9,9 @@ import {
   State, // eslint-disable-line
 } from '../helpers/types';
 
-const EditPage = styled(animated.div)`
-  position: fixed;
-  top: 0;
+const EditPage = styled.div`
   height: 100vh;
-  width: 100vw;
   background-color: ${superLightGrey};
-  z-index: 3;
 `;
 
 const Input = styled.input`
@@ -57,17 +52,12 @@ const InputWrapper = styled.div`
   align-items: center;
 `;
 
-interface OwnProps {
-  animationStyles: React.CSSProperties;
-}
-
-type Props = OwnProps & StateProps & DispatchProps;
+type Props = StateProps & DispatchProps;
 
 const ProfileName: React.FC<Props> = ({
   updateName,
   firstName,
   lastName,
-  animationStyles,
 }) => {
   const [firstNameInput, setFirstNameInput] = useState('');
   const [lastNameInput, setLastNameInput] = useState('');
@@ -75,7 +65,7 @@ const ProfileName: React.FC<Props> = ({
   const [lastNameHasChanged, setLastNameHasChanged] = useState(false);
 
   return (
-    <EditPage key={'unique'} style={{ left: animationStyles.left }}>
+    <EditPage>
       <BackLinkBanner
         back={{
           showArrows: true,

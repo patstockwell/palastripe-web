@@ -8,15 +8,9 @@ import {
 export const PageStyle = `
   width: 100%;
   -webkit-overflow-scrolling: touch; // enables momentum scolling
-  position: fixed;
+  // position: fixed;
   overflow: scroll;
-`;
-
-export const AnimatedSlidingPageStyle = `
-  z-index: 10;
-  top: 0;
   height: 100vh;
-  ${PageStyle}
 `;
 
 export const GlobalOverFlowHiddenStyle = createGlobalStyle<{ hidden: boolean }>`

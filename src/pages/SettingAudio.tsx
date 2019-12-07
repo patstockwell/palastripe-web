@@ -12,23 +12,18 @@ import {
 } from '../helpers/constants';
 import BackLinkBanner from '../components/BackLinkBanner';
 
-interface OwnProps {
-  animationStyles: React.CSSProperties;
-}
-
-type Props = StateProps & DispatchProps & OwnProps;
+type Props = StateProps & DispatchProps;
 
 const SettingAudio: React.FC<Props> = ({
   soundOn: soundOnRedux,
   toggleSound,
-  animationStyles,
 }) => {
   const [soundOnLocal, setSoundOnLocal] = useState(true);
   const [settingHasChanged, setSettingHasChanged] = useState(false);
   const soundOn = settingHasChanged ? soundOnLocal : soundOnRedux;
 
   return (
-    <EditPage key={'unique'} style={{ left: animationStyles.left }}>
+    <EditPage>
       <BackLinkBanner
         heading={'Audio'}
         back={{

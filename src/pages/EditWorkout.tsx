@@ -1,13 +1,10 @@
 import React, {
-  CSSProperties, // eslint-disable-line no-unused-vars
   useState,
 } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { animated } from 'react-spring';
 
 import { buttonStyle } from '../components/SharedStyles';
-import { AnimatedSlidingPageStyle } from '../components/SharedStyles';
 import { EditableActivityList } from '../components/ActivityList';
 import EditWorkoutHero from '../components/EditWorkoutHero';
 import BackLinkBanner from '../components/BackLinkBanner';
@@ -24,10 +21,6 @@ import {
   EDIT_WORKOUT_ADD_SET,
   EDIT_WORKOUT_ADD_GROUP,
 } from '../helpers/constants';
-
-const AnimatedSlidingPage = styled(animated.div)<{ position?: string }>`
-  ${AnimatedSlidingPageStyle}
-`;
 
 const AddItemButton = styled.button<{ background?: string }>`
   ${buttonStyle}
@@ -75,14 +68,9 @@ export const accumulateMatches =
     ];
   };
 
-interface OwnProps {
-  animationStyles: CSSProperties;
-}
-
-type Props = OwnProps & StateProps & DispatchProps;
+type Props = StateProps & DispatchProps;
 
 const EditWorkout: React.FC<Props> = ({
-  animationStyles: { position, left },
   addSet,
   addGroup,
 }) => {
@@ -115,7 +103,7 @@ const EditWorkout: React.FC<Props> = ({
   //     ));
 
   return (
-    <AnimatedSlidingPage style={{ position, left }}>
+    <React.Fragment>
       <BackLinkBanner back={{ showArrows: true, link: '/workouts/' }} />
       <EditWorkoutHero
         name={workoutName}
@@ -128,7 +116,7 @@ const EditWorkout: React.FC<Props> = ({
         <AddItemButton onClick={addSet}>Add Set</AddItemButton>
       </Tile>
       <BottomEmptySpace />
-    </AnimatedSlidingPage>
+    </React.Fragment>
   );
 };
 
@@ -156,7 +144,7 @@ interface StateProps {
   exercises: Exercises;
 }
 
-export default connect<StateProps, DispatchProps, OwnProps>(
+export default connect<StateProps, DispatchProps, void>(
   mapStateToProps,
   mapDispatchToProps
 )(EditWorkout);

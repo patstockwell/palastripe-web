@@ -13,10 +13,6 @@ export interface SelectedExercise {
   index: number | null;
 }
 
-export interface RouteState {
-  immediate: boolean;
-}
-
 // State shape
 export interface State {
   activeWorkout?: Workout;
