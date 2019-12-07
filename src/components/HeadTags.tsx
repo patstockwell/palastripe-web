@@ -22,12 +22,12 @@ const MetaTags: React.FC<StateProps> = ({ entities, activeWorkout }) => {
 
         return (
           <Helmet>
-            {/* need to declare these outside of the animation. how? */}
             {/*
             Use these when/if a workout gets a description
             <meta property="og:description" content={workout.description} />
             <meta name="twitter:description" content={workout.description} />
             */}
+            <title>HBFF Workout - {workout.name}</title>
             <meta property="og:title" content={`HBFF Workout - ${workout.name}`}/>
             <meta property="og:image" content={workout.imageUrl}/>
             <meta property="og:url" content={`https://harderbetterfasterfitter.com/${workout.id}/`} />
@@ -39,6 +39,7 @@ const MetaTags: React.FC<StateProps> = ({ entities, activeWorkout }) => {
       }}/>
       <Route path="/workouts/" exact render={() => (
         <Helmet>
+          <title>Harder Better Faster Fitter</title>
           <meta property="og:title" content="Get fit and strong. Get a gym plan. Use Harder Better Faster Fitter" />
           <meta property="og:url" content="https://harderbetterfasterfitter.com" />
           <meta property="og:image" content="og-image.jpg" />
