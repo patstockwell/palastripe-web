@@ -11,6 +11,7 @@ import {
   WORKOUTS_PAGE,
   PROFILE_PAGE,
   SET_NAV_ANIMATION,
+  appMaxWidth,
 } from '../helpers/constants';
 import {
   ReduxAction, // eslint-disable-line no-unused-vars
@@ -24,9 +25,9 @@ const Nav = styled.nav`
   display: flex;
   position: fixed;
   // TODO: Replace this with an animated value to make it slide on/off the page?
-  left: 0;
   bottom: 0;
-  width: 100vw;
+  width: 100%;
+  max-width: ${appMaxWidth}px;
   justify-content: space-around;
   // add an extra 0.5 to the height to account for the 0.5px border
   min-height: ${navBarHeight}.5px;

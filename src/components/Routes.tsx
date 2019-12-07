@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 import { useLocation, Route, Switch } from 'react-router-dom';
 import Workouts from '../pages/Workouts';
 import ActiveWorkout from '../pages/ActiveWorkout';
@@ -10,12 +11,18 @@ import WorkoutSummary from '../pages/WorkoutSummary';
 import ProfileName from '../pages/ProfileName';
 import SettingAudio from '../pages/SettingAudio';
 import SettingUnitOfMeasurement from '../pages/SettingUnitOfMeasurement';
+import { appMaxWidth } from '../helpers/constants';
+
+const MaxWidthContainer = styled.div`
+  max-width: ${appMaxWidth}px;
+  margin: 0 auto;
+`;
 
 const Routes: React.FC<{}> = () => {
   const location = useLocation();
 
   return (
-    <React.Fragment>
+    <MaxWidthContainer>
       <Switch location={location}>
         <Route path="/" exact component={Workouts} />
         <Route path="/workouts/" exact component={Workouts} />
@@ -29,7 +36,7 @@ const Routes: React.FC<{}> = () => {
         <Route path="/workouts/:id/" component={ActiveWorkout} />
         <Route component={FourZeroFour} />
       </Switch>
-    </React.Fragment>
+    </MaxWidthContainer>
   );
 };
 
