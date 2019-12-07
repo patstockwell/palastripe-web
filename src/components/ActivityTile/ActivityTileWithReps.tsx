@@ -85,18 +85,20 @@ const ActivityTileWithReps: React.FC<Props> = ({
   useKilos,
 }) => {
   const [ showAnimation, setShowAnimation ] = useState(false);
+  const [ finishedAnimating, setFinishedAnimating ] = useState(false);
   const listElement = useRef<HTMLLIElement>(null);
   const pageRef = usePageRef();
   const animatedStyles = useHiddenAreaAnimation({
     showHiddenArea,
-    onRest: () => {
-      useScrollElementToTop({
-        page: pageRef,
-        li: listElement,
-        shouldScroll: selected,
-      });
-    },
+    onRest: () => setFinishedAnimating(true),
     selected,
+  });
+
+  useScrollElementToTop({
+    page: pageRef,
+    li: listElement,
+    shouldScroll: selected && finishedAnimating,
+    show: showHiddenArea,
   });
 
   return (
