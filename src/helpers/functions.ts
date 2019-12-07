@@ -71,23 +71,15 @@ export const useHiddenAreaAnimation = ({
     },
   });
 
-export const useScrollElementToTop = ({
-  page, li, shouldScroll, show,
-}: {
+export const scrollElementToTop = ({ page, li }: {
   page: React.MutableRefObject<HTMLDivElement>,
   li: React.MutableRefObject<HTMLLIElement>,
-  shouldScroll: boolean,
-  show: boolean,
 }) => {
-  useEffect(() => {
-    if (shouldScroll) {
-      page.current.scrollTo({
-        top: li.current.offsetTop - activityHeadingHeight,
-        left: 0,
-        behavior: 'smooth',
-      });
-    }
-  }, [ show, shouldScroll ]);
+  page.current.scrollTo({
+    top: li.current.offsetTop - activityHeadingHeight,
+    left: 0,
+    behavior: 'smooth',
+  });
 };
 
 export const useHasScrolled = () => {

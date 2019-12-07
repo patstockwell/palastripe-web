@@ -1,4 +1,4 @@
-import React, { memo, useRef, useState } from 'react';
+import React, { memo, useRef, useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { animated } from 'react-spring';
 import styled from 'styled-components';
@@ -23,7 +23,7 @@ import {
   TOGGLE_SET_COMPLETE,
 } from '../../helpers/constants';
 import {
-  useScrollElementToTop,
+  scrollElementToTop,
   useHiddenAreaAnimation,
   formatWeight,
 } from '../../helpers/functions';
@@ -94,12 +94,15 @@ const ActivityTileWithReps: React.FC<Props> = ({
     selected,
   });
 
-  useScrollElementToTop({
-    page: pageRef,
-    li: listElement,
-    shouldScroll: selected && finishedAnimating,
-    show: showHiddenArea,
-  });
+  useEffect(() => {
+    if (selected && finishedAnimating) {
+      scrollElementToTop({ page: pageRef, li: listElement });
+    }
+
+    if (!selected && finishedAnimating) {
+      setFinishedAnimating(false);
+    }
+  }, [showHiddenArea, selected, finishedAnimating]);
 
   return (
     <Tile

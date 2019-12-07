@@ -23,7 +23,7 @@ import {
 } from '../../helpers/types';
 import {
   formatSeconds,
-  useScrollElementToTop,
+  scrollElementToTop,
   useHiddenAreaAnimation,
 } from '../../helpers/functions';
 import {
@@ -118,12 +118,15 @@ const ActivityTileWithTimer: React.FC<Props> = ({
     selected,
   });
 
-  useScrollElementToTop({
-    page: pageRef,
-    li: listElement,
-    shouldScroll: selected && finishedAnimating,
-    show: showHiddenArea,
-  });
+  useEffect(() => {
+    if (selected && finishedAnimating) {
+      scrollElementToTop({ page: pageRef, li: listElement });
+    }
+
+    if (!selected && finishedAnimating) {
+      setFinishedAnimating(false);
+    }
+  }, [showHiddenArea, selected, finishedAnimating]);
 
   const inProgress = selected && !completed && started;
 
