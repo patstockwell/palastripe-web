@@ -1,3 +1,4 @@
+/build
 serviceWorker.js
 *.jpg
 *.woff2

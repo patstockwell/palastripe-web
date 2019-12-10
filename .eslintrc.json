@@ -7,6 +7,8 @@
         "it": true,
         "describe": true,
         "expect": true,
+        "require": true,
+        "importScripts": true,
         "beforeEach": true
     },
     "extends": [
@@ -55,6 +57,8 @@
             "error",
             "single"
         ],
+        "no-console": "off",
+        "no-useless-escape": "off",
         "semi": [
             "error",
             "always"
