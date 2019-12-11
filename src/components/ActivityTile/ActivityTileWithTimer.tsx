@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import styled, { keyframes } from 'styled-components';
 
 import { useAudio } from '../../context/audio';
-import { usePageRef } from '../../context/pageRef';
 import HiddenTimerArea from './HiddenTimerArea';
 import EditActivityPanel from '../EditActivityPanel';
 import { ShowHiddenAreaArrowWrapper } from './ActivityTileWithReps';
@@ -110,7 +109,6 @@ const ActivityTileWithTimer: React.FC<Props> = ({
   const [started, setStarted] = useState(false);
   const [paused, setPaused] = useState(false);
   const listElement = useRef(null);
-  const pageRef = usePageRef();
   const { playStart, playComplete } = useAudio();
   const animatedStyles = useHiddenAreaAnimation({
     showHiddenArea,
@@ -120,7 +118,7 @@ const ActivityTileWithTimer: React.FC<Props> = ({
 
   useEffect(() => {
     if (selected && finishedAnimating) {
-      scrollElementToTop({ page: pageRef, li: listElement });
+      scrollElementToTop(listElement);
     }
 
     if (!selected && finishedAnimating) {

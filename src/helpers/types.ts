@@ -30,6 +30,7 @@ export interface State {
 export interface ScrollY {
   WORKOUTS_PAGE?: number;
   ACTIVITY_PAGE?: number;
+  PROFILE_PAGE?: number;
 }
 
 export interface Profile {

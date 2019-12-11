@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { usePageRef } from '../context/pageRef';
 import { opaqueImageInAfter } from './SharedStyles';
 import {
   ReduxAction, // eslint-disable-line no-unused-vars
@@ -71,9 +70,8 @@ interface OwnProps {
 type Props = OwnProps & DispatchProps;
 
 const WorkoutTile = ({ setWindowScroll, workout }: Props) => {
-  const pageRef = usePageRef();
   const handleClick = () => {
-    setWindowScroll(pageRef.current.scrollTop);
+    setWindowScroll(window.scrollY);
   };
 
   return (

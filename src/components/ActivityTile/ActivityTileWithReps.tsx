@@ -6,7 +6,6 @@ import {
   Dispatch, // eslint-disable-line no-unused-vars
 } from 'redux';
 
-import { usePageRef } from '../../context/pageRef';
 import HiddenArea from './HiddenArea';
 import ToggleSetCompleteButton from './ToggleSetCompleteButton';
 import EditActivityPanel from '../EditActivityPanel';
@@ -87,7 +86,6 @@ const ActivityTileWithReps: React.FC<Props> = ({
   const [ showAnimation, setShowAnimation ] = useState(false);
   const [ finishedAnimating, setFinishedAnimating ] = useState(false);
   const listElement = useRef<HTMLLIElement>(null);
-  const pageRef = usePageRef();
   const animatedStyles = useHiddenAreaAnimation({
     showHiddenArea,
     onRest: () => setFinishedAnimating(true),
@@ -96,7 +94,7 @@ const ActivityTileWithReps: React.FC<Props> = ({
 
   useEffect(() => {
     if (selected && finishedAnimating) {
-      scrollElementToTop({ page: pageRef, li: listElement });
+      scrollElementToTop(listElement);
     }
 
     if (!selected && finishedAnimating) {

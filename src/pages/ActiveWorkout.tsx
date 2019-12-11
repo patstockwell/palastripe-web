@@ -1,9 +1,8 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { useParams, Link } from 'react-router-dom';
 
-import { PageRefProvider } from '../context/pageRef';
 import { AudioProvider } from '../context/audio';
 import { RestTimerProvider } from '../context/restTimer';
 import { buttonStyle } from '../components/SharedStyles';
@@ -57,7 +56,6 @@ const ActiveWorkout: React.FC<Props> = ({
   const [ showRestTimer, setShowRestTimer ] = useState(false);
   const [ count, setCount ] = useState(0);
   const [ restTime, setRestTime ] = useState(0);
-  const pageRef = useRef(null);
 
   useInterval(() => {
     setCount(count + 1);
@@ -97,48 +95,46 @@ const ActiveWorkout: React.FC<Props> = ({
 
   return (
     <AudioProvider soundOn={soundOn}>
-      <PageRefProvider value={pageRef}>
-        <RestTimerProvider value={{
-          setShowTimer: setShowRestTimer,
-          setRestTime,
-          setCount,
-        }} >
-          <BackLinkBanner
-            sticky={false}
-            back={{
-              showArrows: true,
-              link: '/workouts/',
-            }}
-          />
-          <WorkoutHero workout={displayedWorkout} />
-          <ActivityList
-            workout={displayedWorkout}
-            finishWorkoutClickHandler={() => setShowEndWorkoutAlert(true)}
-          />
+      <RestTimerProvider value={{
+        setShowTimer: setShowRestTimer,
+        setRestTime,
+        setCount,
+      }} >
+        <BackLinkBanner
+          sticky={false}
+          back={{
+            showArrows: true,
+            link: '/workouts/',
+          }}
+        />
+        <WorkoutHero workout={displayedWorkout} />
+        <ActivityList
+          workout={displayedWorkout}
+          finishWorkoutClickHandler={() => setShowEndWorkoutAlert(true)}
+        />
 
-          {showRestTimer && count > 0 && restTime >= 0 &&
-            <Timer
-              restPeriod={restTime}
-              resetTimer={resetTimer}
-              count={count - 1}
-            />
-          }
+        {showRestTimer && count > 0 && restTime >= 0 &&
+          <Timer
+            restPeriod={restTime}
+            resetTimer={resetTimer}
+            count={count - 1}
+          />
+        }
 
-          <AlertConfirm
-            cancelAlert={() => setShowEndWorkoutAlert(false)}
-            showAlert={showEndWorkoutAlert}
-            message={'Are you sure you want to finish the workout?'}
-          >
-            <Button
-              onClick={() => setShowEndWorkoutAlert(false)}
-              background={'grey'}>No</Button>
-            <LinkButton
-              to={{ pathname: '/activity/', state: { immediate: false } }}
-              onClick={finishWorkoutWithAlertTransition}
-            >Yes</LinkButton>
-          </AlertConfirm>
-        </RestTimerProvider>
-      </PageRefProvider>
+        <AlertConfirm
+          cancelAlert={() => setShowEndWorkoutAlert(false)}
+          showAlert={showEndWorkoutAlert}
+          message={'Are you sure you want to finish the workout?'}
+        >
+          <Button
+            onClick={() => setShowEndWorkoutAlert(false)}
+            background={'grey'}>No</Button>
+          <LinkButton
+            to={{ pathname: '/activity/', state: { immediate: false } }}
+            onClick={finishWorkoutWithAlertTransition}
+          >Yes</LinkButton>
+        </AlertConfirm>
+      </RestTimerProvider>
     </AudioProvider>
   );
 };

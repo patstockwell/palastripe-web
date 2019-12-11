@@ -5,14 +5,6 @@ import {
   workoutWindowViewport,
 } from '../helpers/constants';
 
-export const PageStyle = `
-  width: 100%;
-  -webkit-overflow-scrolling: touch; // enables momentum scolling
-  // position: fixed;
-  overflow: scroll;
-  height: 100vh;
-`;
-
 export const GlobalOverFlowHiddenStyle = createGlobalStyle<{ hidden: boolean }>`
   html, body {
     // used for when the modal is displayed

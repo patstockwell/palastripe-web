@@ -12,6 +12,7 @@ import ProfileName from '../pages/ProfileName';
 import SettingAudio from '../pages/SettingAudio';
 import SettingUnitOfMeasurement from '../pages/SettingUnitOfMeasurement';
 import { appMaxWidth } from '../helpers/constants';
+import ScrollToTop from './ScrollToTop';
 
 const MaxWidthContainer = styled.div`
   max-width: ${appMaxWidth}px;
@@ -23,6 +24,7 @@ const Routes: React.FC<{}> = () => {
 
   return (
     <MaxWidthContainer>
+      <ScrollToTop pathname={location.pathname} />
       <Switch location={location}>
         <Route path="/" exact component={Workouts} />
         <Route path="/workouts/" exact component={Workouts} />

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState} from 'react';
+import { useEffect, useRef } from 'react';
 // @ts-ignore
 import { useSpring } from 'react-spring';
 import {
@@ -10,6 +10,7 @@ import {
   WORKOUTS_PAGE,
   ACTIVITY_PAGE,
   PROFILE_PAGE,
+  ACTIVE_WORKOUT_PAGE,
   activeWorkoutWindowHeight,
   poundsInAKilo,
 } from './constants';
@@ -71,36 +72,14 @@ export const useHiddenAreaAnimation = ({
     },
   });
 
-export const scrollElementToTop = ({ page, li }: {
-  page: React.MutableRefObject<HTMLDivElement>,
-  li: React.MutableRefObject<HTMLLIElement>,
-}) => {
-  page.current.scrollTo({
-    top: li.current.offsetTop - activityHeadingHeight,
-    left: 0,
-    behavior: 'smooth',
-  });
-};
-
-export const useHasScrolled = () => {
-  const [scrolled, setScrolled] = useState(false);
-
-  const handleScroll = () => {
-    const top = window.pageYOffset || document.documentElement.scrollTop;
-    // setting 5px here allows a faster reset when scrolling back to the top
-    // as we doesn't have to wait for the window bounce to settle
-    setScrolled(top > 5);
+export const scrollElementToTop =
+  (elementRef: React.MutableRefObject<HTMLLIElement>) => {
+    window.scrollTo({
+      top: elementRef.current.offsetTop - activityHeadingHeight,
+      left: 0,
+      behavior: 'smooth',
+    });
   };
-
-  useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
-
-  return scrolled;
-};
 
 export function useInterval(callback: () => any, delay?: number) {
   // https://overreacted.io/making-setinterval-declarative-with-react-hooks/
@@ -128,8 +107,10 @@ export const getInitials = (firstName: string, lastName: string): string => (
 );
 
 export const getCurrentPage = (pathname: string): string => {
-  if (pathname === '/' || /\/workouts*/.test(pathname)) {
+  if (pathname === '/' || /\/workouts\/$/.test(pathname)) {
     return WORKOUTS_PAGE;
+  } else if (/\/workouts*/.test(pathname)) {
+    return ACTIVE_WORKOUT_PAGE;
   } else if (/\/activity*/.test(pathname)) {
     return ACTIVITY_PAGE;
   } else if (/\/profile*/.test(pathname)) {
