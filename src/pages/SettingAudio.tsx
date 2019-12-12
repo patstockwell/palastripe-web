@@ -5,12 +5,12 @@ import CheckboxTick from '../components/CheckboxTick';
 import { EditPage, Label, HiddenInput } from './SettingUnitOfMeasurement';
 import {
   State, // eslint-disable-line no-unused-vars
-  ReduxAction, // eslint-disable-line no-unused-vars
 } from '../helpers/types';
-import {
-  TOGGLE_SOUND,
-} from '../helpers/constants';
 import BackLinkBanner from '../components/BackLinkBanner';
+import {
+  toggleSound as toggleSoundActionCreator,
+  ToggleSound,
+} from '../reducers/settingsReducer';
 
 type Props = StateProps & DispatchProps;
 
@@ -73,7 +73,7 @@ interface StateProps {
 }
 
 interface DispatchProps {
-  toggleSound: (soundOn: boolean) => ReduxAction<boolean>;
+  toggleSound: ToggleSound;
 }
 
 const mapStateToProps = (state: State): StateProps => ({
@@ -81,10 +81,7 @@ const mapStateToProps = (state: State): StateProps => ({
 });
 
 const mapDispatchToProps: DispatchProps = {
-  toggleSound: soundOn => ({
-    type: TOGGLE_SOUND,
-    payload: soundOn,
-  }),
+  toggleSound: toggleSoundActionCreator,
 };
 
 export default connect<StateProps, DispatchProps, void>(

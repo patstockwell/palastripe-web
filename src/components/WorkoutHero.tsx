@@ -33,8 +33,11 @@ import {
   SET_SELECTED_EXERCISE,
   green,
   APP_URL,
-  TOGGLE_SOUND,
 } from '../helpers/constants';
+import {
+  toggleSound as toggleSoundActionCreator,
+  ToggleSound,
+} from '../reducers/settingsReducer';
 
 export const Window = styled.div<{ colour?: string, imageUrl?: string }>`
   ${workoutHeroWindowStyle}
@@ -186,7 +189,7 @@ interface StateProps {
 
 interface DispatchProps {
   setSelected: () => ReduxAction<SelectedExercise>;
-  toggleSound: (soundOn: boolean) => ReduxAction<boolean>;
+  toggleSound: ToggleSound;
 }
 
 const mapStateToProps = (state: State): StateProps => ({
@@ -206,10 +209,7 @@ const mapDispatchToProps = (
   const index = 0;
 
   return {
-    toggleSound: soundOn => dispatch({
-      type: TOGGLE_SOUND,
-      payload: soundOn,
-    }),
+    toggleSound: toggleSoundActionCreator,
     setSelected: () => dispatch({
       type: SET_SELECTED_EXERCISE,
       payload: { groupId, index },

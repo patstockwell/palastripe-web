@@ -4,15 +4,17 @@ import styled from 'styled-components';
 
 import {
   State, // eslint-disable-line no-unused-vars
-  ReduxAction, // eslint-disable-line no-unused-vars
 } from '../helpers/types';
 import BackLinkBanner from '../components/BackLinkBanner';
 import {
-  CHANGE_UNIT_OF_MEASUREMENT,
   superLightGrey,
   charcoal,
 } from '../helpers/constants';
 import CheckboxTick from '../components/CheckboxTick';
+import {
+  UseKilosAsUnitOfMeasurement,
+  useKilosAsUnitOfMeasurement as useKilosActionCreator,
+} from '../reducers/settingsReducer';
 
 export const EditPage = styled.div`
   height: 100vh;
@@ -101,7 +103,7 @@ interface StateProps {
 }
 
 interface DispatchProps {
-  useKilosAsUnitOfMeasurement: (useKilos: boolean) => ReduxAction<boolean>;
+  useKilosAsUnitOfMeasurement: UseKilosAsUnitOfMeasurement;
 }
 
 const mapStateToProps = (state: State): StateProps => ({
@@ -109,10 +111,7 @@ const mapStateToProps = (state: State): StateProps => ({
 });
 
 const mapDispatchToProps: DispatchProps = {
-  useKilosAsUnitOfMeasurement: (useKilos) => ({
-    type: CHANGE_UNIT_OF_MEASUREMENT,
-    payload: useKilos,
-  }),
+  useKilosAsUnitOfMeasurement: useKilosActionCreator,
 };
 
 export default connect<StateProps, DispatchProps, void>(
