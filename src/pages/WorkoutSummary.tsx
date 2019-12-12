@@ -13,6 +13,7 @@ import {
   Activity,
   isTimed,
 } from '../helpers/types';
+import { getTimeSince } from '../helpers/functions';
 
 const Pink = styled.span`
   color: ${pink};
@@ -22,6 +23,7 @@ const Page = styled.div`
   color: white;
   background-color: ${darkPurple};
   min-height: 100vh;
+  padding: 12px;
 `;
 
 const WorkoutSummary: React.FC<StateProps> = ({ workout }) => {
@@ -78,9 +80,13 @@ const WorkoutSummary: React.FC<StateProps> = ({ workout }) => {
     );
   });
 
+  const { value, unitOfMeasurement } = getTimeSince(workout.finishTime);
+
   return (
     <Page>
-      <h1>Summary - {workout.name}</h1>
+      <h1>Workout Summary</h1>
+      <h2>{workout.name}</h2>
+      <h3>{value} {unitOfMeasurement} ago</h3>
       <ul>
         {exerciseTiles}
       </ul>
