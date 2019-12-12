@@ -2,7 +2,7 @@ import React from 'react';
 
 // https://www.flaticon.com/packs/ui-interface-22
 const Home = () => (
-  <svg x="0px" y="0px" viewBox="0 0 512 512" width='20' height='20'>
+  <svg role="img" x="0px" y="0px" viewBox="0 0 512 512" width='20' height='20'>
     <g>
       <g>
         <path d="M256,11.96L0,234.276l26.206,30.176l23.967-20.814V440.09c0,33.056,26.893,59.95,59.95,59.95h111.906V304.204h69.941

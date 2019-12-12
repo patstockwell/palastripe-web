@@ -5,7 +5,7 @@ interface Props {
 }
 
 const ProfileIcon: React.FC<Props> = ({ style }) => (
-  <svg style={style} viewBox='0 0 512 512' width='20' height='20'>
+  <svg role="img" style={style} viewBox='0 0 512 512' width='20' height='20'>
     <g>
       <path d="M437.02,330.98c-27.883-27.882-61.071-48.523-97.281-61.018C378.521,243.251,404,198.548,404,148
       C404,66.393,337.607,0,256,0S108,66.393,108,148c0,50.548,25.479,95.251,64.262,121.962

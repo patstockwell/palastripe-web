@@ -7,7 +7,7 @@ interface Props {
 
 // https://www.flaticon.com/free-icon/arrows-circle_32220#term=circle%20arrows&page=1&position=92
 const FlipArrows: React.FC<Props> = ({ colour, height }) => (
-  <svg height={height} viewBox="-16 -18 533.33331 533" width={height} fill={colour}>
+  <svg role="img" height={height} viewBox="-16 -18 533.33331 533" width={height} fill={colour}>
     <path d="M479,265.166c0,57.977-25.452,112.68-69.818,150.09l-38.538-45.727c30.854-26.013,48.551-64.055,48.551-104.363
     c0-72.504-56.885-131.795-128.352-136.009h-29.253l24.636,62.368c0.828,2.086,0.154,4.471-1.643,5.822
     c-1.791,1.356-4.268,1.351-6.053-0.024l-122.498-94.185c-1.229-0.952-1.954-2.403-1.954-3.966c0-1.554,0.724-3.021,1.954-3.963

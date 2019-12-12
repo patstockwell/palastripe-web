@@ -70,6 +70,7 @@ const CircleTick: React.FC<Props> = ({ animate = true, onAnimationEnd }) => (
     className="checkmark"
     viewBox="0 0 52 52"
     animate={animate}
+    role="img"
   >
     <Circle
       className="checkmark__circle" cx="26" cy="26" r="25" fill="none"

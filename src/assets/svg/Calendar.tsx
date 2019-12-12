@@ -2,7 +2,7 @@ import React from 'react';
 
 // https://www.flaticon.com/packs/ui-interface-22
 const Calendar = () => (
-  <svg x="0px" y="0px" viewBox="0 0 512 512" width='20' height='20'>
+  <svg role="img" x="0px" y="0px" viewBox="0 0 512 512" width='20' height='20'>
     <g>
       <g>
         <path d="M452,40h-24V0h-40v40H124V0H84v40H60C26.916,40,0,66.916,0,100v352c0,33.084,26.916,60,60,60h392

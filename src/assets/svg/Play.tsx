@@ -1,7 +1,7 @@
 import React from 'react';
 
 export const Play = ({ style }) => (
-  <svg viewBox='0 0 60 60' style={style}>
+  <svg role="img" viewBox='0 0 60 60' style={style}>
     <path d="M30,0C13.458,0,0,13.458,0,30s13.458,30,30,30s30-13.458,
       30-30S46.542,0,30,0z M45.563,30.826l-22,15 C23.394,45.941,23.197,46,23,
       46c-0.16,0-0.321-0.038-0.467-0.116C22.205,45.711,22,45.371,22,

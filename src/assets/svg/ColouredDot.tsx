@@ -13,7 +13,7 @@ interface Props {
 }
 
 const ColouredDot: React.FC<Props> = ({ fill = 'black' }) => (
-  <Svg width='8' height='8' fill={fill}>
+  <Svg role="img" width='8' height='8' fill={fill}>
     <circle cx="4" cy="4" r="4" />
   </Svg>
 );

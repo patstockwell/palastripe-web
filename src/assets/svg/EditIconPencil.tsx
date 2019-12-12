@@ -8,6 +8,7 @@ interface Props {
 
 const EditIconPencil: React.FC<Props> = ({ style, width, height }) => (
   <svg
+    role="img"
     width={`${width}px`}
     style={style}
     height={`${height}px`}

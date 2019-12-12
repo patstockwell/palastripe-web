@@ -1,7 +1,7 @@
 import React from 'react';
 
 const GoldCup = ({ height }) => (
-  <svg viewBox="0 0 512 512" height={height} width={height}>
+  <svg role="img" viewBox="0 0 512 512" height={height} width={height}>
     <g>
       <path style={{fill:'#FFB125'}} d="M43.222,142.462c11.795-12.868,24.155-24.449,37.764-35.199c1.6-1.264,3.904,0.249,3.369,2.217
         c-7.628,28.037-20.956,55.744-41.501,76.342C41.931,171.402,41.917,156.862,43.222,142.462z"/>
