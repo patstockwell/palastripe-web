@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 
 import Badge from '../assets/svg/Badge';
-import { purple } from '../helpers/constants';
+import { purple, orange } from '../helpers/constants';
 import {
   Activity,
   State,
@@ -11,6 +11,7 @@ import {
   WeightedActivity,
 } from '../helpers/types';
 import { formatSeconds, formatWeight } from '../helpers/functions';
+import Flame from '../assets/svg/Flame';
 
 const Ul = styled.ul`
   padding: 0;
@@ -51,6 +52,40 @@ const WeightAndLabel = styled.span`
   }
 `;
 
+const IncrementHighlight = styled.span`
+  padding: 1px 8px;
+  font-size: 0.7em;
+  border-radius: 3px;
+  margin: 1px;
+  display: flex;
+  align-items: center;
+  background-color: ${orange};
+  // color: white;
+  // fill: white;
+
+  & data {
+    margin: 0 1px;
+  }
+
+  & span {
+    font-size: 0.7em;
+  }
+`;
+
+const IncrementBadge: React.FC<{
+  increment: number;
+  useKilos: boolean;
+}> = ({ increment, useKilos }) => (
+  increment > 0 && (
+    <IncrementHighlight>
+      <Flame style={{ height: '12px' }} />
+      <span>+</span>
+      <data>{increment}</data>
+      <span>{useKilos ? 'kg' : 'lbs'}</span>
+    </IncrementHighlight>
+  )
+);
+
 const Weight: React.FC<{
   activity: WeightedActivity;
   useKilos: boolean;
@@ -90,8 +125,8 @@ const ActivitySummary: React.FC<Props> = ({
                 {a.completed ? a.repsAchieved : 0}<span> /{a.repsGoal}</span>
               </Duration>
               <Weight useKilos={useKilos} activity={a} />
-              {allComplete && a.autoIncrement > 0 &&
-                <span>+{a.autoIncrement}</span>
+              {allComplete &&
+                <IncrementBadge increment={a.autoIncrement} useKilos={useKilos} />
               }
             </>
           )}

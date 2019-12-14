@@ -16,9 +16,10 @@ const StyledLink = styled(Link)`
   z-index: 1;
 `;
 
-const Header = styled.div<{ sticky: boolean }>`
+const Header = styled.header<{ sticky: boolean }>`
   display: flex;
   position: ${({ sticky }) => sticky ? 'sticky' : 'relative'};
+  width: 100%;
   top: 0;
   justify-content: space-between;
   align-items: center;

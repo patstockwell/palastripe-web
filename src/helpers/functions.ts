@@ -54,7 +54,7 @@ export const formatWeight = (
   const weight = convertWeight(weightInKilos, useKilos);
   return {
     weight,
-    label: useKilos ? 'kg' : 'lbs',
+    label: useKilos ? 'kg' : 'lb',
   };
 };
 
