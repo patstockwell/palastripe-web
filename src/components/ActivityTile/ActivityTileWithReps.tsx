@@ -102,6 +102,8 @@ const ActivityTileWithReps: React.FC<Props> = ({
     }
   }, [showHiddenArea, selected, finishedAnimating]);
 
+  const { label, weight } = formatWeight(weightInKilos, useKilos);
+
   return (
     <Tile
       aria-expanded={showHiddenArea}
@@ -113,7 +115,7 @@ const ActivityTileWithReps: React.FC<Props> = ({
         <Details onClick={toggleShowHiddenArea}>
           <Title>{name}</Title>
           <SubTitle>
-            Weight: {formatWeight(weightInKilos, useKilos)}
+            Weight: {weight} {label}
           </SubTitle>
         </Details>
         <Duration>

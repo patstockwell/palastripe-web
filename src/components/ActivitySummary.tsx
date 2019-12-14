@@ -8,6 +8,7 @@ import {
   Activity,
   State,
   isTimed,
+  WeightedActivity,
 } from '../helpers/types';
 import { formatSeconds, formatWeight } from '../helpers/functions';
 
@@ -39,7 +40,24 @@ const SetSummary = styled.li`
 const ActivityName = styled.p`
   display: flex;
   position: relative;
+  font-weight: 800;
 `;
+
+const WeightAndLabel = styled.span`
+  flex-basis: 50px;
+
+  & span {
+    font-size: 0.7em;
+  }
+`;
+
+const Weight: React.FC<{
+  activity: WeightedActivity;
+  useKilos: boolean;
+}> = ({ activity, useKilos }) => {
+  const { weight, label } = formatWeight(activity.weightInKilos, useKilos);
+  return <WeightAndLabel>{weight} <span>{label}</span></WeightAndLabel>;
+};
 
 interface OwnProps {
   exerciseSets: [ string, Activity[] ];
@@ -57,23 +75,29 @@ const ActivitySummary: React.FC<Props> = ({
     && s.repsAchieved >= s.repsGoal
   );
 
-  const sets = exerciseSets.map((a, i) => (
-    <SetSummary key={i}>
-      <Colour colour={a.completed ? purple : 'grey'}>
-        {a.completed ? '✓' : '✗'}
-      </Colour>
-        {isTimed(a) ? (
-          <Duration>{formatSeconds(a.timerInSeconds)}</Duration>
-        ) : (
-          <>
-            <Duration>
-              {a.completed ? a.repsAchieved : 0}<span> /{a.repsGoal}</span>
-            </Duration>
-            <span>{formatWeight(a.weightInKilos, useKilos)}</span>
-          </>
-        )}
-    </SetSummary>
-  ));
+  const sets = exerciseSets.map((a, i) => {
+
+    return (
+      <SetSummary key={i}>
+        <Colour colour={a.completed ? purple : 'grey'}>
+          {a.completed ? '✓' : '✗'}
+        </Colour>
+          {isTimed(a) ? (
+            <Duration>{formatSeconds(a.timerInSeconds)}</Duration>
+          ) : (
+            <>
+              <Duration>
+                {a.completed ? a.repsAchieved : 0}<span> /{a.repsGoal}</span>
+              </Duration>
+              <Weight useKilos={useKilos} activity={a} />
+              {allComplete && a.autoIncrement > 0 &&
+                <span>+{a.autoIncrement}</span>
+              }
+            </>
+          )}
+      </SetSummary>
+    );
+  });
 
   const badgeStyle = {
     position: 'absolute',

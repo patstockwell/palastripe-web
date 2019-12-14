@@ -47,9 +47,15 @@ export const convertWeight = (
 export const formatWeight = (
   weightInKilos: number,
   useKilos: boolean,
-): string => {
+): {
+  weight: number;
+  label: string;
+} => {
   const weight = convertWeight(weightInKilos, useKilos);
-  return `${weight} ${useKilos ? 'kg' : 'lbs'}`;
+  return {
+    weight,
+    label: useKilos ? 'kg' : 'lbs',
+  };
 };
 
 export const useHiddenAreaAnimation = ({
