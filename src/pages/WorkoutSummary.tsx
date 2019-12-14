@@ -5,25 +5,39 @@ import {
   Redirect,
 } from 'react-router';
 import styled from 'styled-components';
+import Badge from '../assets/svg/Badge';
 
-import { darkPurple, pink } from '../helpers/constants';
+import BackLinkBanner from '../components/BackLinkBanner';
+import { purple, pink } from '../helpers/constants';
 import {
   State,
   Workout,
   Activity,
   isTimed,
 } from '../helpers/types';
-import { getTimeSince } from '../helpers/functions';
+import { getTimeSince, formatSeconds } from '../helpers/functions';
 
-const Pink = styled.span`
-  color: ${pink};
+const Colour = styled.span<{ colour: string }>`
+  color: ${props => props.colour};
 `;
 
-const Page = styled.div`
-  color: white;
-  background-color: ${darkPurple};
-  min-height: 100vh;
+const Page = styled.ul`
   padding: 12px;
+
+  & ul {
+    list-style: none;
+    padding-left: 40px
+    margin: 16px 0;
+
+    li + li {
+      margin-top: 16px;
+    }
+  }
+`;
+
+const ActivityName = styled.p`
+  display: flex;
+  position: relative;
 `;
 
 const WorkoutSummary: React.FC<StateProps> = ({ workout }) => {
@@ -45,11 +59,9 @@ const WorkoutSummary: React.FC<StateProps> = ({ workout }) => {
         ],
       };
     }, {});
-  console.log(exercises);
 
   const exerciseTiles = Object.keys(exercises).map(key => {
     const sets: Activity[] = exercises[key];
-    const allAttempted = sets.every(s => s.completed);
     const allComplete = sets.every(s =>
       !isTimed(s)
       && s.completed
@@ -58,23 +70,39 @@ const WorkoutSummary: React.FC<StateProps> = ({ workout }) => {
 
     const setElements = sets.map((a, i) => {
       if (isTimed(a)) {
-        return <Pink key={i}>{a.completed ? '✓' : '✗'}</Pink>;
+        return (
+          <span key={i}>
+            <Colour colour={a.completed ? purple : pink} key={i}>
+              {a.completed ? '✓' : '✗'}
+            </Colour>
+            {formatSeconds(a.timerInSeconds)}
+          </span>
+        );
       }
       return (
         <span key={i}>
-          <Pink>{a.completed ? '✓' : '✗'}</Pink>
+          <Colour colour={a.completed ? purple : pink}>
+            {a.completed ? '✓' : '✗'}
+          </Colour>
           {a.completed ? a.repsAchieved : 0}/{a.repsGoal}{' '}
         </span>
       );
     });
 
+    const badgeStyle = {
+      position: 'absolute',
+      left: '-20px',
+      top: '3px',
+      fill: purple,
+      width: '15px',
+    };
+
     return (
       <li key={key}>
-        <p>
-          {allComplete && '💪 '}
-          {allAttempted && '🏆 '}
+        <ActivityName>
+          {allComplete && <Badge style={badgeStyle} />}
           {exercises[key][0].name}
-        </p>
+        </ActivityName>
         <p>{setElements}</p>
       </li>
     );
@@ -83,14 +111,19 @@ const WorkoutSummary: React.FC<StateProps> = ({ workout }) => {
   const { value, unitOfMeasurement } = getTimeSince(workout.finishTime);
 
   return (
-    <Page>
-      <h1>Workout Summary</h1>
-      <h2>{workout.name}</h2>
-      <h3>{value} {unitOfMeasurement} ago</h3>
-      <ul>
-        {exerciseTiles}
-      </ul>
-    </Page>
+    <>
+      <BackLinkBanner heading="Workout Summary" back={{
+        showArrows: true,
+        link: '/activity/',
+      }}/>
+      <Page>
+        <h2>{workout.name}</h2>
+        <h3>{value} {unitOfMeasurement} ago</h3>
+        <ul>
+          {exerciseTiles}
+        </ul>
+      </Page>
+    </>
   );
 };
 

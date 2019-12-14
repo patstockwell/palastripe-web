@@ -11,6 +11,7 @@ import {
   ACTIVITY_PAGE,
   PROFILE_PAGE,
   ACTIVE_WORKOUT_PAGE,
+  WORKOUT_SUMMARY_PAGE,
   activeWorkoutWindowHeight,
   poundsInAKilo,
 } from './constants';
@@ -111,8 +112,10 @@ export const getCurrentPage = (pathname: string): string => {
     return WORKOUTS_PAGE;
   } else if (/\/workouts*/.test(pathname)) {
     return ACTIVE_WORKOUT_PAGE;
-  } else if (/\/activity*/.test(pathname)) {
+  } else if (/\/activity\/$/.test(pathname)) {
     return ACTIVITY_PAGE;
+  } else if (/\/activity*/.test(pathname)) {
+    return WORKOUT_SUMMARY_PAGE;
   } else if (/\/profile*/.test(pathname)) {
     return PROFILE_PAGE;
   } else {

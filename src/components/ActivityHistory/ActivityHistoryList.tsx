@@ -4,7 +4,6 @@ import styled from 'styled-components';
 
 import {
   ACTIVITY_PAGE,
-  SET_WINDOW_SCROLL,
   DELETE_WORKOUT,
 } from '../../helpers/constants';
 import { getInitials } from '../../helpers/functions';
@@ -14,16 +13,23 @@ import {
   State, // eslint-disable-line no-unused-vars
   Workout, // eslint-disable-line no-unused-vars
 } from '../../helpers/types';
+import {
+  setWindowScroll as setWindowScrollActionCreator,
+  SetWindowScroll,
+} from '../../reducers/scrollYReducer';
 
 const BottomSpace = styled.div`
   height: 200px;
 `;
 
-const RoundCorneredTop = styled.div`
+const RoundCorneredTop = styled.ul`
   border-radius: 24px 24px 0 0;
   overflow: hidden;
   background-color: white;
   padding-top: 24px;
+  list-style: none;
+  margin: 0;
+  padding-left: 0;
 `;
 
 interface OwnProps {
@@ -52,10 +58,11 @@ const ActivityHistoryList: React.FC<Props> = ({
       position={i}
       toggleMenu={() => {
         setShowMenuIndex(showMenuIndex === i ? undefined : i);
-        setWindowScroll(window.scrollY);
+        setWindowScroll(window.scrollY, ACTIVITY_PAGE);
       }}
       deleteWorkout={() => deleteWorkout(i)}
       useKilos={useKilos}
+      historyLink={i}
     />
   ));
 
@@ -75,10 +82,7 @@ interface StateProps {
 
 interface DispatchProps {
   deleteWorkout: (i: number) => ReduxAction<number>;
-  setWindowScroll: (scrollY: number) => ReduxAction<{
-    scrollY: number,
-    page: string
-  }>;
+  setWindowScroll: SetWindowScroll;
 }
 
 const mapStateToProps = (state: State): StateProps => ({
@@ -88,13 +92,7 @@ const mapStateToProps = (state: State): StateProps => ({
 });
 
 const mapDispatchToProps: DispatchProps = ({
-  setWindowScroll: scrollY => ({
-    type: SET_WINDOW_SCROLL,
-    payload: {
-      scrollY,
-      page: ACTIVITY_PAGE,
-    },
-  }),
+  setWindowScroll: setWindowScrollActionCreator,
   deleteWorkout: index => ({
     type: DELETE_WORKOUT,
     payload: index,

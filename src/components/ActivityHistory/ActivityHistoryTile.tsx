@@ -1,5 +1,7 @@
 import React, { memo, useState } from 'react';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import AlertConfirm from '../AlertConfirm';
 import TrashCan from '../../assets/svg/TrashCan';
@@ -19,14 +21,19 @@ import {
 import {
   purple,
   superLightGrey,
+  ACTIVITY_PAGE,
 } from '../../helpers/constants';
 import { buttonStyle } from '../SharedStyles';
+import {
+  SetWindowScroll,
+  setWindowScroll as setWindowScrollActionCreator,
+} from '../../reducers/scrollYReducer';
 
 const Button = styled.button<{ background?: string }>`
   ${buttonStyle}
 `;
 
-const Tile = styled.div`
+const Tile = styled.li`
   position: relative;
   padding: 24px 12px;
   border-bottom: 0.5px solid ${superLightGrey};
@@ -71,12 +78,23 @@ const AvatarWrapper = styled.div`
   right: -8px;
 `;
 
-const Name = styled.p`
+const SummaryLink = styled(Link)`
   font-weight: 500;
+  text-decoration: none
+  color: inherit;
 
   & span {
     font-weight: initial;
     // font-size: 0.9em;
+  }
+
+  ::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
   }
 `;
 
@@ -157,7 +175,7 @@ const MenuLink = styled.button`
   }
 `;
 
-interface Props {
+interface OwnProps {
   workout: Workout;
   showMenu: boolean;
   toggleMenu: () => void;
@@ -165,7 +183,10 @@ interface Props {
   position: number; // useful for memoizing the result of this component
   initials: string;
   useKilos: boolean;
+  historyLink: number;
 }
+
+type Props = OwnProps & DispatchProps;
 
 const ActivityHistoryTile: React.FC<Props> = ({
   workout,
@@ -173,6 +194,8 @@ const ActivityHistoryTile: React.FC<Props> = ({
   showMenu,
   deleteWorkout,
   useKilos,
+  historyLink,
+  setWindowScroll,
 }) => {
   const [ showDeleteWorkoutAlert, setShowDeleteWorkoutAlert ] = useState(false);
 
@@ -203,8 +226,13 @@ const ActivityHistoryTile: React.FC<Props> = ({
             <Dots />
           </OptionsButton>
           <TimeSince>{value} {unitOfMeasurement} ago</TimeSince>
-          <Name>You <span>completed</span></Name>
-          <Name>{workoutName}</Name>
+          <SummaryLink
+            onClick={() => setWindowScroll(window.scrollY, ACTIVITY_PAGE)}
+            to={`/activity/${historyLink}`}
+          >
+            <div>You <span>completed</span></div>
+            <div>{workoutName}</div>
+          </SummaryLink>
         </div>
         <StatsPanel>
           <StatsBox>
@@ -257,4 +285,17 @@ const areEqualProps = (prevProps: Props, nextProps: Props): boolean => (
   && prevProps.position === nextProps.position
 );
 
-export default memo(ActivityHistoryTile, areEqualProps);
+interface DispatchProps {
+  setWindowScroll: SetWindowScroll;
+}
+
+const mapDispatchToProps: DispatchProps = ({
+  setWindowScroll: setWindowScrollActionCreator,
+});
+
+export default memo(
+  connect<void, DispatchProps, OwnProps>(
+    null,
+    mapDispatchToProps,
+  )(ActivityHistoryTile),
+areEqualProps);

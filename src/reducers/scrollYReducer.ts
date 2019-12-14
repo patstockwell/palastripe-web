@@ -2,7 +2,21 @@ import {
   ReduxAction, // eslint-disable-line no-unused-vars
   ScrollY, // eslint-disable-line no-unused-vars
 } from '../helpers/types';
-import { SET_WINDOW_SCROLL } from '../helpers/constants';
+
+export const SET_WINDOW_SCROLL: string = 'SET_WINDOW_SCROLL';
+
+export const setWindowScroll: SetWindowScroll = (scrollY, page) => ({
+  type: SET_WINDOW_SCROLL,
+  payload: {
+    scrollY,
+    page,
+  },
+});
+
+export type SetWindowScroll = (scrollY: number, page: string) => ReduxAction<{
+  scrollY: number,
+  page: string,
+}>;
 
 const scrollYReducer = (state: ScrollY, action: ReduxAction<{
   scrollY: number,
@@ -10,7 +24,7 @@ const scrollYReducer = (state: ScrollY, action: ReduxAction<{
 }>) => {
   switch (action.type) {
     case SET_WINDOW_SCROLL: {
-      return setWindowScroll(state, action);
+      return handleSetWindowScroll(state, action);
     }
     default: {
       return state;
@@ -18,7 +32,7 @@ const scrollYReducer = (state: ScrollY, action: ReduxAction<{
   }
 };
 
-const setWindowScroll = (state: ScrollY, action: ReduxAction<{
+const handleSetWindowScroll = (state: ScrollY, action: ReduxAction<{
   scrollY: number,
   page: string,
 }>) => {

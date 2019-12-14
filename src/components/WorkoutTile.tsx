@@ -5,7 +5,6 @@ import styled from 'styled-components';
 
 import { opaqueImageInAfter } from './SharedStyles';
 import {
-  ReduxAction, // eslint-disable-line no-unused-vars
   Workout, // eslint-disable-line no-unused-vars
 } from '../helpers/types';
 import {
@@ -13,9 +12,12 @@ import {
   superLightGrey,
   workoutTileMinHeight,
   WORKOUTS_PAGE,
-  SET_WINDOW_SCROLL,
 } from '../helpers/constants';
 import { calculateWorkoutTime, formatMinutes } from '../helpers/functions';
+import {
+  SetWindowScroll,
+  setWindowScroll as setWindowScrollActionCreator,
+} from '../reducers/scrollYReducer';
 
 const Tile = styled.section`
   height: ${workoutTileMinHeight}px;
@@ -71,7 +73,7 @@ type Props = OwnProps & DispatchProps;
 
 const WorkoutTile = ({ setWindowScroll, workout }: Props) => {
   const handleClick = () => {
-    setWindowScroll(window.scrollY);
+    setWindowScroll(window.scrollY, WORKOUTS_PAGE);
   };
 
   return (
@@ -95,20 +97,11 @@ const WorkoutTile = ({ setWindowScroll, workout }: Props) => {
 };
 
 interface DispatchProps {
-  setWindowScroll: (scrollY: number) => ReduxAction<{
-    scrollY: number,
-    page: string,
-  }>;
+  setWindowScroll: SetWindowScroll;
 }
 
 const mapDispatchToProps: DispatchProps = {
-  setWindowScroll: scrollY => ({
-    type: SET_WINDOW_SCROLL,
-    payload: {
-      scrollY,
-      page: WORKOUTS_PAGE,
-    },
-  }),
+  setWindowScroll: setWindowScrollActionCreator,
 };
 
 export default connect<void, DispatchProps, OwnProps>(

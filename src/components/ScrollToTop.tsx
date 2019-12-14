@@ -9,7 +9,7 @@ interface OwnProps {
 
 type Props = OwnProps & StateProps;
 
-const ScrollToTop: React.FC<Props> = ({ pathname, scrollY }) => {
+const ScrollToTop: React.FC<Props> = ({ pathname, scrollY = 0 }) => {
   useEffect(() => {
     window.scrollTo(0, scrollY);
   }, [pathname]);
@@ -26,7 +26,7 @@ const mapStateToProps = (
   ownProps: OwnProps,
 ): StateProps => {
   const page = getCurrentPage(ownProps.pathname);
-  const scrollY = state.scrollY[page] || 0;
+  const scrollY = state.scrollY[page];
 
   return { scrollY };
 };

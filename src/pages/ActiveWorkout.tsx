@@ -26,9 +26,12 @@ import {
   SET_ACTIVE_WORKOUT,
   FINISH_WORKOUT,
   ONE_SECOND,
-  SET_WINDOW_SCROLL,
   ACTIVITY_PAGE,
 } from '../helpers/constants';
+import {
+  setWindowScroll as setWindowScrollActionCreator,
+  SetWindowScroll,
+} from '../reducers/scrollYReducer';
 
 const Button = styled.button<{ background?: string }>`
   ${buttonStyle}
@@ -90,7 +93,7 @@ const ActiveWorkout: React.FC<Props> = ({
   const finishWorkoutWithAlertTransition = () => {
     finishWorkout(activeWorkout);
     setShowEndWorkoutAlert(false);
-    setWindowScroll(0);
+    setWindowScroll(0, ACTIVITY_PAGE);
   };
 
   return (
@@ -142,10 +145,7 @@ const ActiveWorkout: React.FC<Props> = ({
 interface DispatchProps {
   finishWorkout: (w: Workout) => ReduxAction<{}>;
   setActiveWorkout: (workout: Workout) => ReduxAction<Workout>;
-  setWindowScroll: (scrollY: number) => ReduxAction<{
-    scrollY: number,
-    page: string
-  }>;
+  setWindowScroll: SetWindowScroll;
 }
 
 interface StateProps {
@@ -155,13 +155,7 @@ interface StateProps {
 }
 
 const mapDispatchToProps: DispatchProps = {
-  setWindowScroll: scrollY => ({
-    type: SET_WINDOW_SCROLL,
-    payload: {
-      scrollY,
-      page: ACTIVITY_PAGE,
-    },
-  }),
+  setWindowScroll: setWindowScrollActionCreator,
   finishWorkout: (workout: Workout) => ({
     type: FINISH_WORKOUT,
     payload: workout,

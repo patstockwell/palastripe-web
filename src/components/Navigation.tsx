@@ -94,6 +94,9 @@ const Navigation: React.FC<Props> = ({
   const getTranslationDistance = (page: string): number => {
     const firstRef = refHash[getCurrentPage(pathname)];
     const lastRef = refHash[page];
+    if (!firstRef) {
+      return 0;
+    }
     const { left: leftFirst } = firstRef.current.getBoundingClientRect();
     const { left: leftLast } = lastRef.current.getBoundingClientRect();
     return  leftFirst - leftLast;
