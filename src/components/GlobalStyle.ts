@@ -1,7 +1,10 @@
 import { createGlobalStyle } from 'styled-components';
 import muli from '../assets/muli.woff2';
+import { normalize } from 'styled-normalize';
 
 export const GlobalStyle = createGlobalStyle`
+  ${normalize}
+
   body {
     margin: 0;
     color: black;

@@ -5,51 +5,38 @@ import {
   Redirect,
 } from 'react-router';
 import styled from 'styled-components';
-import Badge from '../assets/svg/Badge';
 
+import ActivitySummary from '../components/ActivitySummary';
 import BackLinkBanner from '../components/BackLinkBanner';
-import { purple, pink } from '../helpers/constants';
 import {
   State,
   Workout,
   Activity,
-  isTimed,
 } from '../helpers/types';
-import { getTimeSince, formatSeconds } from '../helpers/functions';
+import { getTimeSince } from '../helpers/functions';
 
-const Colour = styled.span<{ colour: string }>`
-  color: ${props => props.colour};
-`;
-
-const Page = styled.ul`
+const Page = styled.div`
   padding: 12px;
+`;
 
-  & ul {
-    list-style: none;
-    padding-left: 40px
-    margin: 16px 0;
+const Ul = styled.ul`
+  list-style: none;
+  padding-left: 40px
+  margin: 16px 0;
 
-    li + li {
-      margin-top: 16px;
-    }
+  & > li + li {
+    margin-top: 16px;
   }
 `;
 
-const ActivityName = styled.p`
-  display: flex;
-  position: relative;
-`;
+interface ExerciseHash {
+  [key: string]: Activity[];
+}
 
-const WorkoutSummary: React.FC<StateProps> = ({ workout }) => {
-  if (!workout) {
-    return <Redirect to="/activity/" />;
-  }
-
-  const exercises: {
-    [key: string]: Activity[]
-  } = workout.exerciseGroups
+const createExerciseHash = (workout: Workout): ExerciseHash => {
+  return workout.exerciseGroups
     .flatMap(group => group.exercises)
-    .filter(activity => !activity.tags.includes('stretch'))
+    // .filter(activity => !activity.tags.includes('stretch'))
     .reduce((acc, curr) => {
       return {
         ...acc,
@@ -59,54 +46,18 @@ const WorkoutSummary: React.FC<StateProps> = ({ workout }) => {
         ],
       };
     }, {});
+};
 
-  const exerciseTiles = Object.keys(exercises).map(key => {
-    const sets: Activity[] = exercises[key];
-    const allComplete = sets.every(s =>
-      !isTimed(s)
-      && s.completed
-      && s.repsAchieved >= s.repsGoal
-    );
+const WorkoutSummary: React.FC<StateProps> = ({ workout }) => {
+  if (!workout) {
+    return <Redirect to="/activity/" />;
+  }
 
-    const setElements = sets.map((a, i) => {
-      if (isTimed(a)) {
-        return (
-          <span key={i}>
-            <Colour colour={a.completed ? purple : pink} key={i}>
-              {a.completed ? '✓' : '✗'}
-            </Colour>
-            {formatSeconds(a.timerInSeconds)}
-          </span>
-        );
-      }
-      return (
-        <span key={i}>
-          <Colour colour={a.completed ? purple : pink}>
-            {a.completed ? '✓' : '✗'}
-          </Colour>
-          {a.completed ? a.repsAchieved : 0}/{a.repsGoal}{' '}
-        </span>
-      );
-    });
+  const exercises = createExerciseHash(workout);
 
-    const badgeStyle = {
-      position: 'absolute',
-      left: '-20px',
-      top: '3px',
-      fill: purple,
-      width: '15px',
-    };
-
-    return (
-      <li key={key}>
-        <ActivityName>
-          {allComplete && <Badge style={badgeStyle} />}
-          {exercises[key][0].name}
-        </ActivityName>
-        <p>{setElements}</p>
-      </li>
-    );
-  });
+  const activitySummaryTiles = Object.entries(exercises).map(exerciseSets => (
+    <ActivitySummary key={exerciseSets[0]} exerciseSets={exerciseSets} />
+  ));
 
   const { value, unitOfMeasurement } = getTimeSince(workout.finishTime);
 
@@ -119,9 +70,9 @@ const WorkoutSummary: React.FC<StateProps> = ({ workout }) => {
       <Page>
         <h2>{workout.name}</h2>
         <h3>{value} {unitOfMeasurement} ago</h3>
-        <ul>
-          {exerciseTiles}
-        </ul>
+        <Ul>
+          {activitySummaryTiles}
+        </Ul>
       </Page>
     </>
   );
