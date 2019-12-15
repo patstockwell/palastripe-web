@@ -53,18 +53,17 @@ const WeightAndLabel = styled.span`
 `;
 
 const IncrementHighlight = styled.span`
-  padding: 1px 8px;
+  padding: 1px 4px;
   font-size: 0.7em;
   border-radius: 3px;
   margin: 1px;
   display: flex;
   align-items: center;
   background-color: ${orange};
-  // color: white;
-  // fill: white;
 
   & data {
     margin: 0 1px;
+    font-weight: 600;
   }
 
   & span {
@@ -78,10 +77,10 @@ const IncrementBadge: React.FC<{
 }> = ({ increment, useKilos }) => (
   increment > 0 && (
     <IncrementHighlight>
-      <Flame style={{ height: '12px' }} />
       <span>+</span>
       <data>{increment}</data>
       <span>{useKilos ? 'kg' : 'lbs'}</span>
+      <Flame style={{ height: '10px', width: '10px', 'marginLeft': '4px' }} />
     </IncrementHighlight>
   )
 );
