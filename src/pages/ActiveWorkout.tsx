@@ -133,7 +133,7 @@ const ActiveWorkout: React.FC<Props> = ({
             onClick={() => setShowEndWorkoutAlert(false)}
             background={'grey'}>No</Button>
           <LinkButton
-            to={{ pathname: '/activity/', state: { immediate: false } }}
+            to="/workout-summary/"
             onClick={finishWorkoutWithAlertTransition}
           >Yes</LinkButton>
         </AlertConfirm>

@@ -17,7 +17,6 @@ const LocalStorageSetter: React.FC<State> = ({
   activeWorkout,
   profile,
 }) => {
-  console.log('setting local storage');
   localStorage.setItem(LOCAL_STORAGE_HISTORY, JSON.stringify(history));
   localStorage.setItem(LOCAL_STORAGE_SETTINGS, JSON.stringify(settings));
   localStorage.setItem(LOCAL_STORAGE_ENTITIES, JSON.stringify(entities));

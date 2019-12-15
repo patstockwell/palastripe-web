@@ -4,8 +4,9 @@ import { connect } from 'react-redux';
 import { State, Workout } from '../helpers/types';
 import BackLinkBanner from '../components/BackLinkBanner';
 import GoldCup from '../assets/svg/GoldCup';
-import { workoutTitleStyle } from '../components/SharedStyles';
+import { workoutTitleStyle, buttonStyle } from '../components/SharedStyles';
 import { bannerHeight } from '../helpers/constants';
+import { Link } from 'react-router-dom';
 
 const Page = styled.div`
   text-align: center;
@@ -24,6 +25,13 @@ const Title = styled.p`
   ${workoutTitleStyle};
 `;
 
+const Button = styled(Link)`
+  ${buttonStyle}
+  margin: 40px auto;
+  display: block;
+  max-width: 300px;
+`;
+
 const WorkoutSummary: React.FC<StateProps> = ({ firstName, workout }) => {
   const { name: workoutName } = workout;
   console.log(firstName);
@@ -38,6 +46,7 @@ const WorkoutSummary: React.FC<StateProps> = ({ firstName, workout }) => {
         <Title>{workoutName}</Title>
         <GoldCup height="80px" />
         <p>Workout done! Get some nutritious food and take a well earned rest.</p>
+        <Button to="/activity/">Continue</Button>
       </Page>
     </>
   );
