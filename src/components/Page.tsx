@@ -20,7 +20,7 @@ const Heading = styled.h1`
 
 const Hr = styled.hr`
   position: sticky;
-  top: 0;
+  top: ${bannerHeight}px;
   border: none;
   margin: 0;
   border-bottom: solid 0.5px lightgrey;

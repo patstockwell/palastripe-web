@@ -14,14 +14,30 @@ import {
   Activity,
 } from '../helpers/types';
 import { getTimeSince } from '../helpers/functions';
+import { bannerHeight } from '../helpers/constants';
+
+const Hr = styled.hr`
+  border: none;
+  position: sticky;
+  top: ${bannerHeight}px;
+  border-bottom: solid 0.5px lightgrey;
+`;
 
 const Page = styled.div`
-  padding: 12px;
+  padding: 12px 0;
+
+  h2, h3, & > ul {
+    padding-left: 40px;
+    padding-right: 12px;
+  }
+
+  & h3 {
+    color: grey;
+  }
 `;
 
 const Ul = styled.ul`
   list-style: none;
-  padding-left: 40px
   margin: 16px 0;
 
   & > li + li {
@@ -70,6 +86,7 @@ const WorkoutSummary: React.FC<StateProps> = ({ workout }) => {
       <Page>
         <h2>{workout.name}</h2>
         <h3>{value} {unitOfMeasurement} ago</h3>
+        <Hr />
         <Ul>
           {activitySummaryTiles}
         </Ul>
