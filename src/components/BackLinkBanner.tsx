@@ -39,7 +39,7 @@ const Heading = styled.h1`
 interface Props {
   sticky?: boolean;
   heading?: string;
-  back: {
+  back?: {
     link: string;
     handleClick?: (e?: React.MouseEvent) => void;
     showArrows: boolean;
@@ -62,19 +62,21 @@ const BackLinkBanner: React.FC<Props> = ({
   return (
     <Header sticky={sticky}>
 
-      <StyledLink
-        to={{ pathname: back.link, state: { immediate: false } }}
-        onClick={back.handleClick}
-      >
-        {back.showArrows &&
-          <React.Fragment>
-            <BackArrow style={{ fill: 'grey', margin: '0 -12px 0 -8px' }} />
-            <BackArrow style={{ fill: 'grey' }} />
-            <BackArrow style={{ fill: 'grey', margin: '0 0 0 -12px' }} />
-          </React.Fragment>
-        }
-        {` ${back.text ? back.text : ''}`}
-      </StyledLink>
+      {back &&
+        <StyledLink
+          to={{ pathname: back.link, state: { immediate: false } }}
+          onClick={back.handleClick}
+        >
+          {back.showArrows &&
+            <React.Fragment>
+              <BackArrow style={{ fill: 'grey', margin: '0 -12px 0 -8px' }} />
+              <BackArrow style={{ fill: 'grey' }} />
+              <BackArrow style={{ fill: 'grey', margin: '0 0 0 -12px' }} />
+            </React.Fragment>
+          }
+          {` ${back.text ? back.text : ''}`}
+        </StyledLink>
+      }
 
       {heading && <Heading>{heading}</Heading>}
 

@@ -4,6 +4,7 @@ import {
   LOCAL_STORAGE_ACTIVE_WORKOUT,
   LOCAL_STORAGE_SETTINGS,
   LOCAL_STORAGE_ENTITIES,
+  LOCAL_STORAGE_PROFILE,
 } from '../helpers/constants';
 import {
   Entities, // eslint-disable-line no-unused-vars
@@ -148,4 +149,5 @@ export default {
   },
   // Removing this line will destroy users' history. Never remove.
   history: getLocalStorage(LOCAL_STORAGE_HISTORY, []),
+  profile: getLocalStorage(LOCAL_STORAGE_PROFILE, initialState.profile),
 } as State;

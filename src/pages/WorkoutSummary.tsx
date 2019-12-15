@@ -1,95 +1,43 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import {
-  RouteComponentProps,
-  Redirect,
-} from 'react-router';
 import styled from 'styled-components';
-
-import ActivitySummary from '../components/ActivitySummary';
+import { connect } from 'react-redux';
+import { State, Workout } from '../helpers/types';
 import BackLinkBanner from '../components/BackLinkBanner';
-import {
-  State,
-  Workout,
-  Activity,
-} from '../helpers/types';
-import { getTimeSince } from '../helpers/functions';
+import GoldCup from '../assets/svg/GoldCup';
+import { workoutTitleStyle } from '../components/SharedStyles';
 import { bannerHeight } from '../helpers/constants';
+
+const Page = styled.div`
+  text-align: center;
+  padding: 24px 12px;
+`;
 
 const Hr = styled.hr`
   border: none;
+  border-top: solid 0.5px lightgrey;
   position: sticky;
   top: ${bannerHeight}px;
-  border-bottom: solid 0.5px lightgrey;
+  margin: 0;
 `;
 
-const Page = styled.div`
-  padding: 12px 0;
-
-  h2, h3, & > ul {
-    padding-left: 40px;
-    padding-right: 12px;
-  }
-
-  & h3 {
-    color: grey;
-  }
+const Title = styled.p`
+  ${workoutTitleStyle};
 `;
 
-const Ul = styled.ul`
-  list-style: none;
-  margin: 16px 0;
-
-  & > li + li {
-    margin-top: 16px;
-  }
-`;
-
-interface ExerciseHash {
-  [key: string]: Activity[];
-}
-
-const createExerciseHash = (workout: Workout): ExerciseHash => {
-  return workout.exerciseGroups
-    .flatMap(group => group.exercises)
-    // .filter(activity => !activity.tags.includes('stretch'))
-    .reduce((acc, curr) => {
-      return {
-        ...acc,
-        [curr.id]: [
-          ...(acc[curr.id] || []),
-          curr,
-        ],
-      };
-    }, {});
-};
-
-const WorkoutSummary: React.FC<StateProps> = ({ workout }) => {
-  if (!workout) {
-    return <Redirect to="/activity/" />;
-  }
-
-  const exercises = createExerciseHash(workout);
-
-  const activitySummaryTiles = Object.entries(exercises).map(exerciseSets => (
-    <ActivitySummary key={exerciseSets[0]} exerciseSets={exerciseSets} />
-  ));
-
-  const { value, unitOfMeasurement } = getTimeSince(workout.finishTime);
+const WorkoutSummary: React.FC<StateProps> = ({ firstName, workout }) => {
+  const { name: workoutName } = workout;
+  console.log(firstName);
 
   return (
     <>
-      <BackLinkBanner heading="Workout Summary" back={{
-        showArrows: true,
-        link: '/activity/',
-      }}/>
+      <BackLinkBanner heading="Workout Summary" />
+      <Hr />
       <Page>
-        <h2>{workout.name}</h2>
-        <h3>{value} {unitOfMeasurement} ago</h3>
-        <Hr />
-        <Ul>
-          {activitySummaryTiles}
-        </Ul>
+        <p>Great Job{firstName && `, ${firstName}`}!</p>
+        <p>You just completed</p>
+        <Title>{workoutName}</Title>
+        <GoldCup height="80px" />
+        <p>Workout done! Get some nutritious food and take a well earned rest.</p>
       </Page>
     </>
   );
@@ -97,18 +45,15 @@ const WorkoutSummary: React.FC<StateProps> = ({ workout }) => {
 
 interface StateProps {
   workout: Workout;
+  firstName: string;
 }
 
-const mapStateToProps = (
-  state: State,
-  { match }: RouteComponentProps<{ index?: string }>,
-): StateProps => {
-  const { index } = match.params;
-  return {
-    workout: state.history[index],
-  };
-};
+const mapStateToProps = (state: State): StateProps => ({
+  // take the most recent workout from history
+  workout: state.history[0],
+  firstName: state.profile.firstName,
+});
 
-export default connect<StateProps, void, RouteComponentProps>(
+export default connect<StateProps, void, void>(
   mapStateToProps
 )(WorkoutSummary);
