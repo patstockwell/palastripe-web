@@ -1,14 +1,13 @@
 const workboxBuild = require('workbox-build');
+
 // NOTE: This should be run *AFTER* all the assets are built
 const buildSW = () => {
   // This will return a Promise
   return workboxBuild.injectManifest({
-    swSrc: 'src/sw-template.js', // this is your sw template file
-    swDest: 'build/sw.js', // this will be created in the build step
+    swSrc: 'src/sw-template.js',
+    swDest: 'build/sw.js', // this is the final service worker file output
     globDirectory: 'build',
-    globPatterns: [
-      '**\/*.{js,css,html,png}',
-    ]
+    globPatterns: [],
   }).then(({count, size, warnings}) => {
     // Optionally, log any warnings and details.
     warnings.forEach(console.warn);

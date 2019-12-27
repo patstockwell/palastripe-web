@@ -7,18 +7,10 @@ if ('function' === typeof importScripts) {
   if (workbox) {
     console.log('Workbox is loaded');
 
-    // injection point for manifest files.
-    workbox.precaching.precacheAndRoute([]);
-
-    // custom cache rules
-    workbox.routing.registerNavigationRoute('/index.html', {
-      blacklist: [/^\/_/, /\/[^\/]+\.[^\/]+$/],
-    });
-
     workbox.routing.registerRoute(
-      /\.(?:png|gif|jpg|jpeg)$/,
-      workbox.strategies.cacheFirst({
-        cacheName: 'images',
+      /\.(?:png|gif|jpg|jpeg|mp3|svg|woff2|ico)$/,
+      new workbox.strategies.CacheFirst({
+        cacheName: 'assets',
         plugins: [
           new workbox.expiration.Plugin({
             maxEntries: 60,
@@ -28,6 +20,37 @@ if ('function' === typeof importScripts) {
       })
     );
 
+    workbox.routing.registerRoute(
+      /\.(?:css|js|json|xml)$/,
+      new workbox.strategies.NetworkFirst({
+        cacheName: 'source-files',
+        plugins: [
+          new workbox.expiration.Plugin({
+            maxEntries: 60,
+            maxAgeSeconds: 30 * 24 * 60 * 60, // 30 Days
+          }),
+        ],
+      })
+    );
+
+    // only cache the index page
+    workbox.routing.registerRoute(
+      new RegExp('/'),
+      new workbox.strategies.NetworkFirst({
+        cacheName: 'slash',
+        plugins: [
+          new workbox.expiration.Plugin({
+            maxEntries: 60,
+            maxAgeSeconds: 30 * 24 * 60 * 60, // 30 Days
+          }),
+        ],
+      })
+    );
+
+    workbox.precaching.precacheAndRoute([], {
+      // Ignore all URL parameters for precaching
+      ignoreURLParametersMatching: [/.*/]
+    });
   } else {
     console.log('Workbox could not be loaded. No Offline support');
   }
