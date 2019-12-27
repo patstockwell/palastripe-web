@@ -5,17 +5,17 @@ import {
 import {
   State, // eslint-disable-line no-unused-vars
   Workout, // eslint-disable-line no-unused-vars
-} from '../helpers/types';
+} from '../../helpers/types';
 
-import ActivityHistoryList from '../components/ActivityHistory/ActivityHistoryList';
+import ActivityHistoryList from './ActivityHistoryList';
 import { connect } from 'react-redux';
-import Page from '../components/Page';
-import ActivityHistoryHero from '../components/ActivityHistory/ActivityHistoryHero';
+import Page from '../../components/Page';
+import ActivityHistoryHero from './ActivityHistoryHero';
 import {
   getTotalWeightLifted,
   getDiffInMinutes,
   convertWeight,
-} from '../helpers/functions';
+} from '../../helpers/functions';
 
 const getTotalMinutes = (history: Workout[]): number => (
   history.reduce((acc, curr) => (

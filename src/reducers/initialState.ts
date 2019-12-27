@@ -38,6 +38,7 @@ const initialState: State = {
   profile: {
     firstName: '',
     lastName: '',
+    firstVisitDate: Date.now(),
   },
 
   settings: {

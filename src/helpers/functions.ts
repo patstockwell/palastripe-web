@@ -191,10 +191,11 @@ export const getTotalWeightLifted = (workout: Workout): number => (
   ), 0)
 );
 
-export const formatDate = (unixTime: number): {
+export const formatDate = (unixTime: number | Date): {
   day: string;
   date: number;
   month: string;
+  year: number;
   time: string;
   historyTileDateFormat: string;
 } => {
@@ -202,10 +203,11 @@ export const formatDate = (unixTime: number): {
   const day = DAYS_OF_THE_WEEK[d.getUTCDay()];
   const date = d.getUTCDate();
   const month = MONTHS_OF_THE_YEAR[d.getMonth()];
+  const year = d.getFullYear();
   const time = `${d.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})}`;
   const historyTileDateFormat = `${day}, ${date} ${month}, at ${time}`;
 
-  return { day, date, month, time, historyTileDateFormat };
+  return { day, date, month, year, time, historyTileDateFormat };
 };
 
 export const getDiffInMinutes = (start: number, finish: number): number => {

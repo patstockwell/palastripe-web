@@ -36,6 +36,7 @@ export interface ScrollY {
 export interface Profile {
   firstName: string;
   lastName: string;
+  firstVisitDate: number;
 }
 
 export interface Settings {

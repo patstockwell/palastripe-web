@@ -6,7 +6,7 @@ import {
   ACTIVITY_PAGE,
   DELETE_WORKOUT,
 } from '../../helpers/constants';
-import { getInitials } from '../../helpers/functions';
+import { getInitials, formatDate } from '../../helpers/functions';
 import ActivityHistoryTile from './ActivityHistoryTile';
 import {
   ReduxAction, // eslint-disable-line no-unused-vars
@@ -20,6 +20,19 @@ import {
 
 const BottomSpace = styled.div`
   height: 200px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px;
+  box-sizing: border-box;
+
+  & div {
+    font-weight: 500;
+  }
+
+  & span {
+    color: grey;
+  }
 `;
 
 const RoundCorneredTop = styled.ul`
@@ -45,6 +58,7 @@ const ActivityHistoryList: React.FC<Props> = ({
   firstName,
   lastName,
   useKilos,
+  firstVisitDate,
 }) => {
   // undefined is used to denote no tile in list is selected
   const [ showMenuIndex, setShowMenuIndex ] = useState(undefined);
@@ -65,11 +79,15 @@ const ActivityHistoryList: React.FC<Props> = ({
       historyLink={i}
     />
   ));
+  const { date, month, year } = formatDate(firstVisitDate);
 
   return (
     <RoundCorneredTop>
       {historyTiles}
-      <BottomSpace />
+      <BottomSpace>
+        <div>Joined HBFF 🎉 </div>
+        <span>on {date}, {month}, {year}</span>
+      </BottomSpace>
     </RoundCorneredTop>
   );
 };
@@ -78,6 +96,7 @@ interface StateProps {
   firstName: string;
   lastName: string;
   useKilos: boolean;
+  firstVisitDate: number;
 }
 
 interface DispatchProps {
@@ -89,6 +108,7 @@ const mapStateToProps = (state: State): StateProps => ({
   firstName: state.profile.firstName,
   lastName: state.profile.lastName,
   useKilos: state.settings.useKilos,
+  firstVisitDate: state.profile.firstVisitDate,
 });
 
 const mapDispatchToProps: DispatchProps = ({

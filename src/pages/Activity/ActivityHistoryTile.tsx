@@ -3,10 +3,10 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import AlertConfirm from '../AlertConfirm';
+import AlertConfirm from '../../components/AlertConfirm';
 import TrashCan from '../../assets/svg/TrashCan';
 import Dots from '../../assets/svg/Dots';
-import Avatar from '../Avatar';
+import Avatar from '../../components/Avatar';
 import {
   ReduxAction, // eslint-disable-line no-unused-vars
   Workout, // eslint-disable-line no-unused-vars
@@ -23,7 +23,7 @@ import {
   superLightGrey,
   ACTIVITY_PAGE,
 } from '../../helpers/constants';
-import { buttonStyle } from '../SharedStyles';
+import { buttonStyle } from '../../components/SharedStyles';
 import {
   SetWindowScroll,
   setWindowScroll as setWindowScrollActionCreator,

@@ -3,11 +3,14 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 
 import BackLinkBanner from '../components/BackLinkBanner';
-import { superLightGrey, gutterWidth, UPDATE_NAME } from '../helpers/constants';
+import { superLightGrey, gutterWidth } from '../helpers/constants';
 import {
-  ReduxAction, // eslint-disable-line
   State, // eslint-disable-line
 } from '../helpers/types';
+import {
+  UpdateName,
+  updateName as updateNameActionCreator,
+} from '../reducers/profileReducer';
 
 const EditPage = styled.div`
   height: 100vh;
@@ -102,25 +105,17 @@ const ProfileName: React.FC<Props> = ({
   );
 };
 
-interface Names {
+interface StateProps {
   firstName: string;
   lastName: string;
 }
 
-type StateProps = Names;
-
 interface DispatchProps {
-  updateName: (names: Names) => ReduxAction<Names>;
+  updateName: UpdateName;
 }
 
 const mapDispatchToProps: DispatchProps = {
-  updateName: ({ firstName, lastName }) => ({
-    type: UPDATE_NAME,
-    payload: {
-      firstName,
-      lastName,
-    },
-  }),
+  updateName: updateNameActionCreator,
 };
 
 const mapStateToProps = (state: State): StateProps => ({

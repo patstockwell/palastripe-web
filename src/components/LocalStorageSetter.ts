@@ -9,13 +9,20 @@ import {
 import {
   State, // eslint-disable-line no-unused-vars
 } from '../helpers/types';
+import {
+  setFirstVisitDate as setFirstVisitDateActionCreator,
+  SetFirstVisitDate, // eslint-disable-line no-unused-vars
+} from '../reducers/profileReducer';
 
-const LocalStorageSetter: React.FC<State> = ({
+type Props = DispatchProps & State;
+
+const LocalStorageSetter: React.FC<Props> = ({
   history,
   settings,
   entities,
   activeWorkout,
   profile,
+  setFirstVisitDate,
 }) => {
   localStorage.setItem(LOCAL_STORAGE_HISTORY, JSON.stringify(history));
   localStorage.setItem(LOCAL_STORAGE_SETTINGS, JSON.stringify(settings));
@@ -26,11 +33,24 @@ const LocalStorageSetter: React.FC<State> = ({
     localStorage.setItem(LOCAL_STORAGE_ACTIVE_WORKOUT, JSON.stringify(activeWorkout));
   }
 
+  if (!profile.firstVisitDate) {
+    setFirstVisitDate();
+  }
+
   return null;
 };
 
 const mapStateToProps = (state: State): State => state;
 
-export default connect<State, void, void>(
-  mapStateToProps
+interface DispatchProps {
+  setFirstVisitDate: SetFirstVisitDate;
+}
+
+const mapDispatchToProps: DispatchProps = {
+  setFirstVisitDate: setFirstVisitDateActionCreator,
+};
+
+export default connect<State, DispatchProps, void>(
+  mapStateToProps,
+  mapDispatchToProps
 )(LocalStorageSetter);
