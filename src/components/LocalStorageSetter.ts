@@ -28,10 +28,7 @@ const LocalStorageSetter: React.FC<Props> = ({
   localStorage.setItem(LOCAL_STORAGE_SETTINGS, JSON.stringify(settings));
   localStorage.setItem(LOCAL_STORAGE_ENTITIES, JSON.stringify(entities));
   localStorage.setItem(LOCAL_STORAGE_PROFILE, JSON.stringify(profile));
-  // only try to add the activeWorkout to local storage if it exists.
-  if (activeWorkout) {
-    localStorage.setItem(LOCAL_STORAGE_ACTIVE_WORKOUT, JSON.stringify(activeWorkout));
-  }
+  localStorage.setItem(LOCAL_STORAGE_ACTIVE_WORKOUT, JSON.stringify(activeWorkout));
 
   if (!profile.firstVisitDate) {
     setFirstVisitDate();
