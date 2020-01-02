@@ -22,6 +22,7 @@ import squatAndBench from '../workoutData/workouts/squatAndBench';
 import shapeAndStrength from '../workoutData/workouts/shapeAndStrength';
 import pushAndPull from '../workoutData/workouts/pushAndPull';
 import legPower from '../workoutData/workouts/legPower';
+import compoundPyramids from '../workoutData/workouts/compoundPyramids';
 import { combineDataForAllExercises as combine } from '../helpers/functions';
 
 const initialState: State = {
@@ -63,11 +64,13 @@ const initialState: State = {
         'shape-and-strength': combine(shapeAndStrength, exercises),
         'push-and-pull': combine(pushAndPull, exercises),
         'leg-power': combine(legPower, exercises),
+        'compound-pyramids': combine(compoundPyramids, exercises),
       },
       allIds: [
         'shape-and-strength',
         'push-and-pull',
         'leg-power',
+        'compound-pyramids',
         'full-body-dumbbell-strength',
         'squat-and-bench',
         'circuit-speed',
