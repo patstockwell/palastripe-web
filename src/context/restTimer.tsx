@@ -1,6 +1,6 @@
 import React from 'react';
 
-const RestTimerContext = React.createContext<ProviderValue>(null);
+const RestTimerContext = React.createContext<ConsumerValue>(null);
 
 interface ProviderValue {
   setShowTimer: (_: boolean) => void;
@@ -8,12 +8,28 @@ interface ProviderValue {
   setCount: (_: number) => void;
 }
 
+interface ConsumerValue {
+  showTimer: (restTime: number) => void;
+  hideTimer: () => void;
+}
+
 const RestTimerProvider: React.FC<{ value: ProviderValue }> =
-  ({ value, children }) => (
-    <RestTimerContext.Provider value={value}>
-      {children}
-    </RestTimerContext.Provider>
-  );
+  ({ value: { setShowTimer, setCount, setRestTime }, children }) => {
+    return (
+      <RestTimerContext.Provider value={{
+        hideTimer: () => {
+          setShowTimer(false);
+          setCount(0);
+        },
+        showTimer: (restTime) => {
+          setRestTime(restTime);
+          setShowTimer(true);
+        },
+      }}>
+        {children}
+      </RestTimerContext.Provider>
+    );
+  };
 
 const useRestTimer = () => {
   const context = React.useContext(RestTimerContext);

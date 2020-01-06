@@ -27,12 +27,12 @@ const StartTimedExerciseButton: React.FC<Props> = ({
   showIcon,
   handleClick,
 }) => {
-  const { setShowTimer } = useRestTimer();
+  const { hideTimer } = useRestTimer();
 
   return (
     <SelectCompleteButton onClick={() => {
       handleClick();
-      setShowTimer(false);
+      hideTimer();
     }}>
       <IconWrapper background={showIcon && 'white'}>
         {showIcon && <Play style={{ height: 28, width: 28, fill: purple }}/>}

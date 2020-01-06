@@ -35,14 +35,12 @@ const ToggleSetCompleteButton: React.FC<Props> = ({
   // and the item is complete. To avoid calling 'setShowTimer' when reloading the
   // page, we can set a flag to ensure the animation was triggered via click.
   const [ clicked, setClicked ] = useState(false);
-  const { setShowTimer, setRestTime, setCount } = useRestTimer();
+  const { hideTimer, showTimer } = useRestTimer();
 
   return (
     <SelectCompleteButton onClick={() => {
       // if the rest timer is still running from the last exercise, hide it.
-      setShowTimer(false);
-      // set the rest time for this completed exercise
-      setRestTime(restPeriodInSeconds);
+      hideTimer();
       // run any handlers
       handleClick();
       // set clicked for child animation render checks
@@ -53,8 +51,7 @@ const ToggleSetCompleteButton: React.FC<Props> = ({
         onAnimationEnd={() => {
           // check the animation was triggered via click and not reload
           if (selected || clicked) {
-            setCount(0);
-            setShowTimer(true);
+            showTimer(restPeriodInSeconds);
             selectNextExercise();
           }
         }}

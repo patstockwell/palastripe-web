@@ -76,7 +76,7 @@ const HiddenTimerArea: React.FC<Props> = ({
 }) => {
   const label = !started ? 'start' : paused ? 'resume' : 'pause';
   const background = !started ? purple : paused ? green : 'grey';
-  const { setShowTimer } = useRestTimer();
+  const { hideTimer } = useRestTimer();
 
   return (
     <Area style={{
@@ -87,7 +87,7 @@ const HiddenTimerArea: React.FC<Props> = ({
       <StartButton
         onClick={() => {
           handleButtonClick();
-          setShowTimer(false);
+          hideTimer();
         }}
         disabled={completed}
         background={background}

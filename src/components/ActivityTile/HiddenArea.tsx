@@ -1,20 +1,17 @@
-import React, {
-  ReactText, // eslint-disable-line no-unused-vars
-} from 'react';
+import React, { ReactText } from 'react';
 import { connect } from 'react-redux';
+import { Dispatch } from 'redux';
 import {
-  Dispatch, // eslint-disable-line no-unused-vars
-} from 'redux';
-import { animated,
-  OpaqueInterpolation, // eslint-disable-line no-unused-vars
-  AnimatedValue, // eslint-disable-line no-unused-vars
+  animated,
+  OpaqueInterpolation,
+  AnimatedValue,
 } from 'react-spring';
 import styled from 'styled-components';
 import {
-  SingleSetAction, // eslint-disable-line no-unused-vars
-  State, // eslint-disable-line no-unused-vars
-  ReduxAction, // eslint-disable-line no-unused-vars
-  WeightedActivity, // eslint-disable-line no-unused-vars
+  SingleSetAction,
+  State,
+  ReduxAction,
+  WeightedActivity,
 } from '../../helpers/types';
 import { convertWeight } from '../../helpers/functions';
 import {
@@ -25,6 +22,7 @@ import {
 } from '../../helpers/constants';
 import IncrementDecrementPanel from './IncrementDecrementPanel';
 import { buttonStyle } from '../SharedStyles';
+import { useRestTimer } from '../../context/restTimer';
 
 const MainValue = styled.span`
   font-size: 32px;
@@ -59,43 +57,52 @@ const HiddenArea: React.FC<Props> = ({
     weightInKilos,
     repsAchieved,
     completed,
+    restPeriodInSeconds,
   },
   useKilos,
   finishSet,
-}) => (
-  <animated.div style={{
-    height: animatedStyles.height,
-    opacity: animatedStyles.opacity,
-    cursor: 'default',
-  }}>
-    <IncrementDecrementPanel
-      handleDecrement={decrementWeight}
-      handleIncrement={incrementWeight}
-      percentageComplete={1}
-    >
-      <p>
-        <MainValue>{convertWeight(weightInKilos, useKilos)}</MainValue>
-      </p>
-      <p>{useKilos ? 'kg' : 'lbs'}</p>
-    </IncrementDecrementPanel>
-    <IncrementDecrementPanel
-      handleDecrement={() => changeReps(-1)}
-      handleIncrement={() => changeReps(1)}
-      percentageComplete={repsAchieved / repsGoal}
-    >
-      <p>
-        <MainValue>{repsAchieved}</MainValue>
-        {`/${repsGoal}`}
-      </p>
-      <p>Reps</p>
-    </IncrementDecrementPanel>
+}) => {
+  const { showTimer } = useRestTimer();
+  const handleClick = () => {
+    finishSet();
+    showTimer(restPeriodInSeconds);
+  };
 
-    <Button
-      onClick={finishSet}
-      background={completed && 'grey'}
-    >{completed ? 'Completed' : 'Finish set & rest'}</Button>
-  </animated.div>
-);
+  return (
+    <animated.div style={{
+      height: animatedStyles.height,
+      opacity: animatedStyles.opacity,
+      cursor: 'default',
+    }}>
+      <IncrementDecrementPanel
+        handleDecrement={decrementWeight}
+        handleIncrement={incrementWeight}
+        percentageComplete={1}
+      >
+        <p>
+          <MainValue>{convertWeight(weightInKilos, useKilos)}</MainValue>
+        </p>
+        <p>{useKilos ? 'kg' : 'lbs'}</p>
+      </IncrementDecrementPanel>
+      <IncrementDecrementPanel
+        handleDecrement={() => changeReps(-1)}
+        handleIncrement={() => changeReps(1)}
+        percentageComplete={repsAchieved / repsGoal}
+      >
+        <p>
+          <MainValue>{repsAchieved}</MainValue>
+          {`/${repsGoal}`}
+        </p>
+        <p>Reps</p>
+      </IncrementDecrementPanel>
+
+      <Button
+        onClick={handleClick}
+        background={completed && 'grey'}
+      >{completed ? 'Completed' : 'Finish set & rest'}</Button>
+    </animated.div>
+  );
+};
 
 type ChangeSetAction = ReduxAction<SingleSetAction & any>;
 type ChangeSetDispatch = Dispatch<ChangeSetAction>;
