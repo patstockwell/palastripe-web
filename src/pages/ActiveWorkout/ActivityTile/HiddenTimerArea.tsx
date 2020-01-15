@@ -7,14 +7,14 @@ import {
   OpaqueInterpolation, // eslint-disable-line no-unused-vars
 } from 'react-spring';
 import styled, { keyframes } from 'styled-components';
-import { buttonStyle } from '../SharedStyles';
+import { buttonStyle } from '../../../components/SharedStyles';
 import {
   timedExerciseWaitPeriod,
   lightLightGrey,
   green,
   purple,
-} from '../../helpers/constants';
-import { useRestTimer } from '../../context/restTimer';
+} from '../../../helpers/constants';
+import { useRestTimer } from '../../../context/restTimer';
 
 const Time = styled.p`
   font-size: 4em;

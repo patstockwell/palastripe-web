@@ -3,35 +3,35 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { useParams, Link } from 'react-router-dom';
 
-import { AudioProvider } from '../context/audio';
-import { RestTimerProvider } from '../context/restTimer';
-import { buttonStyle } from '../components/SharedStyles';
-import { useInterval } from '../helpers/functions';
-import Timer from '../components/Timer';
-import AlertConfirm from '../components/AlertConfirm';
-import BackLinkBanner from '../components/BackLinkBanner';
-import WorkoutHero from '../components/WorkoutHero';
-import FourZeroFour from '../pages/FourZeroFour';
-import ActivityList from '../components/ActivityList/ActivityList';
+import { AudioProvider } from '../../context/audio';
+import { RestTimerProvider } from '../../context/restTimer';
+import { buttonStyle } from '../../components/SharedStyles';
+import { useInterval } from '../../helpers/functions';
+import Timer from './Timer';
+import AlertConfirm from '../../components/AlertConfirm';
+import BackLinkBanner from '../../components/BackLinkBanner';
+import WorkoutHero from './WorkoutHero';
+import FourZeroFour from '../../pages/FourZeroFour';
+import { ActivityList } from './ActivityList';
 import {
   ReduxAction, // eslint-disable-line no-unused-vars
   Entities, // eslint-disable-line no-unused-vars
   State, // eslint-disable-line no-unused-vars
   Workout, // eslint-disable-line no-unused-vars
-} from '../helpers/types';
+} from '../../helpers/types';
 import {
   combineDataForAllExercises,
-} from '../helpers/functions';
+} from '../../helpers/functions';
 import {
   SET_ACTIVE_WORKOUT,
   FINISH_WORKOUT,
   ONE_SECOND,
   ACTIVITY_PAGE,
-} from '../helpers/constants';
+} from '../../helpers/constants';
 import {
   setWindowScroll as setWindowScrollActionCreator,
   SetWindowScroll,
-} from '../reducers/scrollYReducer';
+} from '../../reducers/scrollYReducer';
 
 const Button = styled.button<{ background?: string }>`
   ${buttonStyle}

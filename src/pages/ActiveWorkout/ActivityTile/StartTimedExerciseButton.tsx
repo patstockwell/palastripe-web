@@ -1,13 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { useRestTimer } from '../../context/restTimer';
-import { purple } from '../../helpers/constants';
-import Play from '../../assets/svg/Play';
-import {
-  selectCompleteButtonStyle,
-  checkboxWrapperStyle,
-} from './ActivityTileSharedStyles';
+import { useRestTimer } from '../../../context/restTimer';
+import { purple } from '../../../helpers/constants';
+import Play from '../../../assets/svg/Play';
+import { selectCompleteButtonStyle } from './ActivityTileSharedStyles';
+import { checkboxWrapperStyle } from '../../../components/SharedStyles';
 
 const IconWrapper = styled.div<{ background?: string }>`
   ${checkboxWrapperStyle}

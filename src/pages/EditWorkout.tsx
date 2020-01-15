@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 
 import { buttonStyle } from '../components/SharedStyles';
-import { EditableActivityList } from '../components/ActivityList';
+import { EditableActivityList } from './ActiveWorkout/ActivityList';
 import EditWorkoutHero from '../components/EditWorkoutHero';
 import BackLinkBanner from '../components/BackLinkBanner';
 import {

@@ -8,24 +8,22 @@ import {
 
 import HiddenArea from './HiddenArea';
 import ToggleSetCompleteButton from './ToggleSetCompleteButton';
-import EditActivityPanel from '../EditActivityPanel';
 import { tileStyle } from './ActivityTileSharedStyles';
-import DownArrow from '../../assets/svg/DownArrow';
-import ForwardArrow from '../../assets/svg/ForwardArrow';
+import DownArrow from '../../../assets/svg/DownArrow';
 import {
   ReduxAction, // eslint-disable-line no-unused-vars
   State, // eslint-disable-line no-unused-vars
   SingleSetAction, // eslint-disable-line no-unused-vars
   WeightedActivity, // eslint-disable-line no-unused-vars
-} from '../../helpers/types';
+} from '../../../helpers/types';
 import {
   TOGGLE_SET_COMPLETE,
-} from '../../helpers/constants';
+} from '../../../helpers/constants';
 import {
   scrollElementToTop,
   useHiddenAreaAnimation,
   formatWeight,
-} from '../../helpers/functions';
+} from '../../../helpers/functions';
 import {
   Details,
   Title,
@@ -63,7 +61,6 @@ interface OwnProps {
   index: number;
   selected: boolean;
   showHiddenArea: boolean;
-  editable: boolean;
 }
 
 type Props = DispatchProps & OwnProps & StateProps;
@@ -80,10 +77,8 @@ const ActivityTileWithReps: React.FC<Props> = ({
   selected,
   showHiddenArea,
   toggleSetComplete,
-  editable,
   useKilos,
 }) => {
-  const [ showAnimation, setShowAnimation ] = useState(false);
   const [ finishedAnimating, setFinishedAnimating ] = useState(false);
   const listElement = useRef<HTMLLIElement>(null);
   const animatedStyles = useHiddenAreaAnimation({
@@ -108,7 +103,7 @@ const ActivityTileWithReps: React.FC<Props> = ({
     <Tile
       aria-expanded={showHiddenArea}
       selected={selected}
-      onClick={() => !editable && handleSelect()}
+      onClick={() => handleSelect()}
       ref={listElement}
     >
       <VisibleArea>
@@ -121,18 +116,12 @@ const ActivityTileWithReps: React.FC<Props> = ({
         <Duration>
           <p>{repsAchieved} x</p>
         </Duration>
-        {editable ? (
-          <ShowEditArrowWrapper onClick={() => setShowAnimation(true)}>
-            <ForwardArrow style={{ fill: 'grey' }}/>
-          </ShowEditArrowWrapper>
-        ) : (
           <ToggleSetCompleteButton
             selected={selected}
             restPeriodInSeconds={restPeriodInSeconds}
             handleClick={toggleSetComplete}
             completed={completed}
           />
-        )}
       </VisibleArea>
 
       <HiddenArea
@@ -152,15 +141,6 @@ const ActivityTileWithReps: React.FC<Props> = ({
           <DownArrow style={{ fill: 'lightgrey' }}/>
         </ShowHiddenAreaArrowWrapper>
       }
-
-      <EditActivityPanel
-        show={showAnimation}
-        activity={activity}
-        groupId={groupId}
-        index={index}
-        hide={() => setShowAnimation(false)}
-      />
-
     </Tile>
   );
 };

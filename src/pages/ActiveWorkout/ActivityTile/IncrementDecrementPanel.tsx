@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-import AdditionSymbol from '../../assets/svg/AdditionSymbol';
-import SubtractionSymbol from '../../assets/svg/SubtractionSymbol';
-import { pink, purple } from '../../helpers/constants';
+import AdditionSymbol from '../../../assets/svg/AdditionSymbol';
+import SubtractionSymbol from '../../../assets/svg/SubtractionSymbol';
+import { pink, purple } from '../../../helpers/constants';
 import {
   SingleSetAction, // eslint-disable-line no-unused-vars
   ReduxAction, // eslint-disable-line no-unused-vars
-} from '../../helpers/types';
+} from '../../../helpers/types';
 
 const IconWrapper = styled.div`
   height: 20px;

@@ -7,37 +7,37 @@ import styled, { keyframes } from 'styled-components';
 import { useLocation } from 'react-router-dom';
 import * as clipboard from 'clipboard-polyfill';
 
-import CheckboxTick from '../components/CheckboxTick';
-import AlertConfirm from '../components/AlertConfirm';
-import ColouredDot from '../assets/svg/ColouredDot';
-import ShareIcon from '../assets/svg/Share';
-import SoundOn from '../assets/svg/SoundOn';
-import SoundOff from '../assets/svg/SoundOff';
+import CheckboxTick from '../../components/CheckboxTick';
+import AlertConfirm from '../../components/AlertConfirm';
+import ColouredDot from '../../assets/svg/ColouredDot';
+import ShareIcon from '../../assets/svg/Share';
+import SoundOn from '../../assets/svg/SoundOn';
+import SoundOff from '../../assets/svg/SoundOff';
 import {
   buttonStyle,
   workoutTitleStyle,
   workoutHeroWindowStyle,
-} from './SharedStyles';
+} from '../../components/SharedStyles';
 import {
   formatMinutes,
   calculateWorkoutTime,
-} from '../helpers/functions';
+} from '../../helpers/functions';
 import {
   ReduxAction, // eslint-disable-line no-unused-vars
   SelectedExercise, // eslint-disable-line no-unused-vars
   SingleSetAction, // eslint-disable-line no-unused-vars
   State, // eslint-disable-line no-unused-vars
   Workout, // eslint-disable-line no-unused-vars
-} from '../helpers/types';
+} from '../../helpers/types';
 import {
   SET_SELECTED_EXERCISE,
   green,
   APP_URL,
-} from '../helpers/constants';
+} from '../../helpers/constants';
 import {
   toggleSound as toggleSoundActionCreator,
   ToggleSound,
-} from '../reducers/settingsReducer';
+} from '../../reducers/settingsReducer';
 
 export const Window = styled.div<{ colour?: string, imageUrl?: string }>`
   ${workoutHeroWindowStyle}

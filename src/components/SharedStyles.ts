@@ -13,6 +13,19 @@ export const GlobalOverFlowHiddenStyle = createGlobalStyle<{ hidden: boolean }>`
   }
 `;
 
+export const checkboxWrapperStyle = `
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px solid white;
+  background-color: lightgrey;
+  height: 28px;
+  width: 28px;
+  border-radius: 50%;
+  color: white;
+  padding: 0;
+`;
+
 export const unorderedListStyle = `
   margin: 0;
   padding: 0;

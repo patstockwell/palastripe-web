@@ -3,7 +3,7 @@ import {
   lightLightGrey,
   superLightGrey,
   tileMinHeight,
-} from '../../helpers/constants';
+} from '../../../helpers/constants';
 
 export const tileStyle = css<{ selected: boolean }>`
   position: relative;
@@ -15,19 +15,6 @@ export const tileStyle = css<{ selected: boolean }>`
   min-height: ${tileMinHeight}px;
   touch-action: manipulation; // stops double-tap-to-zoom
   overflow: hidden;
-`;
-
-export const checkboxWrapperStyle = `
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 2px solid white;
-  background-color: lightgrey;
-  height: 28px;
-  width: 28px;
-  border-radius: 50%;
-  color: white;
-  padding: 0;
 `;
 
 export const selectCompleteButtonStyle = `

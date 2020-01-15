@@ -1,14 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
-import { isTimed } from '../../helpers/types';
+import { isTimed } from '../../../helpers/types';
 import ActivityTileWithReps from './ActivityTileWithReps';
 import ActivityTileWithTimer from './ActivityTileWithTimer';
 import {
   Activity, // eslint-disable-line no-unused-vars
-} from '../../helpers/types';
+} from '../../../helpers/types';
 import {
   tileMinHeight,
-} from '../../helpers/constants';
+} from '../../../helpers/constants';
 
 export const Details = styled.div`
   display: flex;
@@ -62,7 +62,6 @@ interface Props {
   toggleShowHiddenArea?: () => void;
   selected?: boolean;
   showHiddenArea?: boolean;
-  editable?: boolean;
 }
 
 const ActivityTile: React.FC<Props> = ({
@@ -73,7 +72,6 @@ const ActivityTile: React.FC<Props> = ({
   toggleShowHiddenArea,
   selected,
   showHiddenArea,
-  editable,
 }) => (
   isTimed(activity)
     ? (
@@ -85,7 +83,6 @@ const ActivityTile: React.FC<Props> = ({
         activity={activity}
         handleSelect={handleSelect}
         toggleShowHiddenArea={toggleShowHiddenArea}
-        editable={editable}
       />
     ) : (
       <ActivityTileWithReps
@@ -96,7 +93,6 @@ const ActivityTile: React.FC<Props> = ({
         activity={activity}
         handleSelect={handleSelect}
         toggleShowHiddenArea={toggleShowHiddenArea}
-        editable={editable}
       />
     )
 );

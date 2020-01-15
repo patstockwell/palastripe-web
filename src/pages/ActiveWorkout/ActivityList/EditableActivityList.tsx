@@ -9,9 +9,9 @@ import {
   State, // eslint-disable-line no-unused-vars
   Workout,  // eslint-disable-line no-unused-vars
   ActivityGroup,  // eslint-disable-line no-unused-vars
-} from '../../helpers/types';
-import { unorderedListStyle } from '../SharedStyles';
-import { bannerHeight } from '../../helpers/constants';
+} from '../../../helpers/types';
+import { unorderedListStyle } from '../../../components/SharedStyles';
+import { bannerHeight } from '../../../helpers/constants';
 
 const Ul = styled.ul`
   ${unorderedListStyle}
@@ -29,7 +29,6 @@ const EditableActivityList: React.FC<Props> = ({
         groupId={g.id}
         index={i}
         activity={e}
-        editable
       />
     ));
 
@@ -40,7 +39,6 @@ const EditableActivityList: React.FC<Props> = ({
         heading={g.name}
         id={g.id}
         activityTotal={tiles.length}
-        editable
       >
         <Ul>{tiles}</Ul>
       </ActivityListHeading>

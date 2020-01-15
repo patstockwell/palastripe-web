@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import CircleTick from '../assets/svg/CircleTick';
-import { checkboxWrapperStyle } from '../components/ActivityTile/ActivityTileSharedStyles';
+import { checkboxWrapperStyle } from '../components/SharedStyles';
 
 const IconWrapper = styled.div`
   ${checkboxWrapperStyle}

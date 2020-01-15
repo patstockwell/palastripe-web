@@ -1,16 +1,15 @@
 import React, { useState} from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import EditIconPencil from '../../assets/svg/EditIconPencil';
 import {
   ReduxAction, // eslint-disable-line no-unused-vars
-} from '../../helpers/types';
+} from '../../../helpers/types';
 import {
   activityHeadingHeight,
   lightLightGrey,
   gutterWidth,
   EDIT_WORKOUT_UPDATE_GROUP_NAME,
-} from '../../helpers/constants';
+} from '../../../helpers/constants';
 
 const HeadingPanel = styled.div<{ top: number }>`
   height: ${activityHeadingHeight}px;
@@ -53,20 +52,10 @@ const Sets = styled.p`
   flex-shrink: 0;
 `;
 
-const Button = styled.button`
-  border: none;
-  background: none;
-  padding: 0;
-  font-size: inherit;
-  font-weight: inherit;
-  text-align: left;
-`;
-
 interface OwnProps {
   activityTotal?: number;
   heading: string;
   stickyTop?: number;
-  editable?: boolean;
   id?: string;
   completedActivities?: number;
 }
@@ -80,7 +69,6 @@ const ActivityListHeading: React.FC<Props> = ({
   children,
   heading,
   stickyTop,
-  editable,
   id,
 }) => {
   const [showInput, setShowInput] = useState(false);
@@ -109,20 +97,9 @@ const ActivityListHeading: React.FC<Props> = ({
           />
         ) : (
           <Heading>
-            {editable ? (
-              <Button onClick={() => setShowInput(true)}>
-                <EditIconPencil
-                  width={12}
-                  height={12}
-                  style={{ marginRight: '4px', fill: 'black' }}
-                />
-                {heading}
-              </Button>
-            ) : (
-              <React.Fragment>
-                {heading}
-              </React.Fragment>
-            )}
+            <React.Fragment>
+              {heading}
+            </React.Fragment>
           </Heading>
         )}
         <Sets>

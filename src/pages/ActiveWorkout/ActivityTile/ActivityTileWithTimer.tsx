@@ -2,16 +2,13 @@ import React, { useRef, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import styled, { keyframes } from 'styled-components';
 
-import { useAudio } from '../../context/audio';
+import { useAudio } from '../../../context/audio';
 import HiddenTimerArea from './HiddenTimerArea';
-import EditActivityPanel from '../EditActivityPanel';
 import { ShowHiddenAreaArrowWrapper } from './ActivityTileWithReps';
 import ToggleSetCompleteButton from './ToggleSetCompleteButton';
-import { ShowEditArrowWrapper } from './ActivityTileWithReps';
-import ForwardArrow from '../../assets/svg/ForwardArrow';
 import StartTimedExerciseButton from './StartTimedExerciseButton';
 import { tileStyle } from './ActivityTileSharedStyles';
-import DownArrow from '../../assets/svg/DownArrow';
+import DownArrow from '../../../assets/svg/DownArrow';
 import {
   Dispatch, // eslint-disable-line no-unused-vars
 } from 'redux';
@@ -19,19 +16,19 @@ import {
   ReduxAction, // eslint-disable-line no-unused-vars
   SingleSetAction, // eslint-disable-line no-unused-vars
   TimedActivity, // eslint-disable-line no-unused-vars
-} from '../../helpers/types';
+} from '../../../helpers/types';
 import {
   formatSeconds,
   scrollElementToTop,
   useHiddenAreaAnimation,
-} from '../../helpers/functions';
+} from '../../../helpers/functions';
 import {
   green,
   superLightGrey,
   timedExerciseWaitPeriod,
   TOGGLE_SET_COMPLETE,
   tileMinHeight,
-} from '../../helpers/constants';
+} from '../../../helpers/constants';
 import {
   Details,
   Title,
@@ -82,7 +79,6 @@ interface OwnProps {
   groupId: string;
   index: number;
   selected: boolean;
-  editable: boolean;
   showHiddenArea: boolean;
   toggleShowHiddenArea: () => void;
   handleSelect: () => void;
@@ -91,20 +87,15 @@ interface OwnProps {
 type Props = OwnProps & DispatchProps;
 
 const ActivityTileWithTimer: React.FC<Props> = ({
-  activity,
   activity: { name, timerInSeconds, completed, restPeriodInSeconds },
-  groupId,
-  index,
   handleSelect,
   selected,
   toggleShowHiddenArea,
   showHiddenArea,
   toggleSetComplete,
-  editable,
 }) => {
   const [count, setCount] = useState(0);
   const [preparationComplete, setPreparationComplete] = useState(false);
-  const [showEditPanel, setShowEditPanel] = useState(false);
   const [ finishedAnimating, setFinishedAnimating ] = useState(false);
   const [started, setStarted] = useState(false);
   const [paused, setPaused] = useState(false);
@@ -173,13 +164,7 @@ const ActivityTileWithTimer: React.FC<Props> = ({
         <Duration>
           <p>{formattedTime}</p>
         </Duration>
-        {editable &&
-          <ShowEditArrowWrapper onClick={() => setShowEditPanel(true)}>
-            <ForwardArrow style={{ fill: 'grey' }}/>
-          </ShowEditArrowWrapper>
-        }
-
-        {!editable && (started || completed) ? (
+        {started || completed ? (
           <ToggleSetCompleteButton
             selected={selected}
             restPeriodInSeconds={restPeriodInSeconds}
@@ -216,15 +201,6 @@ const ActivityTileWithTimer: React.FC<Props> = ({
           <DownArrow style={{ fill: 'lightgrey' }}/>
         </ShowHiddenAreaArrowWrapper>
       }
-
-      <EditActivityPanel
-        show={showEditPanel}
-        activity={activity}
-        groupId={groupId}
-        index={index}
-        hide={() => setShowEditPanel(false)}
-      />
-
     </Tile>
   );
 };

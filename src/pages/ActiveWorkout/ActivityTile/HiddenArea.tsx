@@ -12,17 +12,17 @@ import {
   State,
   ReduxAction,
   WeightedActivity,
-} from '../../helpers/types';
-import { convertWeight } from '../../helpers/functions';
+} from '../../../helpers/types';
+import { convertWeight } from '../../../helpers/functions';
 import {
   DECREMENT_WEIGHT,
   INCREMENT_WEIGHT,
   CHANGE_REPS,
   TOGGLE_SET_COMPLETE,
-} from '../../helpers/constants';
+} from '../../../helpers/constants';
 import IncrementDecrementPanel from './IncrementDecrementPanel';
-import { buttonStyle } from '../SharedStyles';
-import { useRestTimer } from '../../context/restTimer';
+import { buttonStyle } from '../../../components/SharedStyles';
+import { useRestTimer } from '../../../context/restTimer';
 
 const MainValue = styled.span`
   font-size: 32px;

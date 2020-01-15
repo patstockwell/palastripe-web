@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import CheckboxTick from '../CheckboxTick';
+import CheckboxTick from '../../../components/CheckboxTick';
 import {
   ReduxAction, // eslint-disable-line no-unused-vars
-} from '../../helpers/types';
-import { SELECT_NEXT_EXERCISE } from '../../helpers/constants';
+} from '../../../helpers/types';
+import { SELECT_NEXT_EXERCISE } from '../../../helpers/constants';
 import {
   selectCompleteButtonStyle,
 } from './ActivityTileSharedStyles';
-import { useRestTimer } from '../../context/restTimer';
+import { useRestTimer } from '../../../context/restTimer';
 
 const SelectCompleteButton = styled.button`
   ${selectCompleteButtonStyle}
