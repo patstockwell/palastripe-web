@@ -1,8 +1,7 @@
 import React from 'react';
-import completeAudio from '../assets/activityEnd.mp3';
-import startAudio from '../assets/activityStart.mp3';
 
 interface AudioFunctions {
+  setAudio: (beginning: HTMLAudioElement, end: HTMLAudioElement) => void;
   playStart: () => void;
   playComplete: () => void;
 }
@@ -14,22 +13,32 @@ interface Props {
 const AudioContext = React.createContext<AudioFunctions>(null);
 
 const AudioProvider: React.FC<Props> = ({ soundOn, children }) => {
+  let start: HTMLAudioElement;
+  let complete: HTMLAudioElement;
+
   const playStart = () => {
-    if (soundOn) {
-      const start = new Audio(startAudio);
+    console.log('starting audio', start);
+    if (soundOn && start) {
       start.play();
     }
   };
 
   const playComplete = () => {
-    if (soundOn) {
-      const complete = new Audio(completeAudio);
+    if (soundOn && complete) {
       complete.play();
     }
   };
 
+  const setAudio = (
+    beginning: HTMLAudioElement,
+    end: HTMLAudioElement,
+  ) => {
+    start = beginning;
+    complete = end;
+  };
+
   return (
-    <AudioContext.Provider value={{ playStart, playComplete }}>
+    <AudioContext.Provider value={{ setAudio, playStart, playComplete }}>
       {children}
     </AudioContext.Provider>
   );

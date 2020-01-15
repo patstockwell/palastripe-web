@@ -7,6 +7,8 @@ import {
   OpaqueInterpolation, // eslint-disable-line no-unused-vars
 } from 'react-spring';
 import styled, { keyframes } from 'styled-components';
+import startAudio from '../../../assets/activityStart.mp3';
+import completeAudio from '../../../assets/activityEnd.mp3';
 import { buttonStyle } from '../../../components/SharedStyles';
 import {
   timedExerciseWaitPeriod,
@@ -15,6 +17,7 @@ import {
   purple,
 } from '../../../helpers/constants';
 import { useRestTimer } from '../../../context/restTimer';
+import { useAudio } from '../../../context/audio';
 
 const Time = styled.p`
   font-size: 4em;
@@ -77,6 +80,7 @@ const HiddenTimerArea: React.FC<Props> = ({
   const label = !started ? 'start' : paused ? 'resume' : 'pause';
   const background = !started ? purple : paused ? green : 'grey';
   const { hideTimer } = useRestTimer();
+  const { setAudio } = useAudio();
 
   return (
     <Area style={{
@@ -88,6 +92,11 @@ const HiddenTimerArea: React.FC<Props> = ({
         onClick={() => {
           handleButtonClick();
           hideTimer();
+          // by initialising audio here after a click event, it gives the
+          // user-agent permission to play the audio later
+          const start = new Audio(startAudio);
+          const complete = new Audio(completeAudio);
+          setAudio(start, complete);
         }}
         disabled={completed}
         background={background}
