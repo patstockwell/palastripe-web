@@ -109,29 +109,26 @@ const ActivitySummary: React.FC<Props> = ({
     && s.repsAchieved >= s.repsGoal
   );
 
-  const sets = exerciseSets.map((a, i) => {
-
-    return (
-      <SetSummary key={i}>
-        <Colour colour={a.completed ? purple : 'grey'}>
-          {a.completed ? '✓' : '✗'}
-        </Colour>
-          {isTimed(a) ? (
-            <Duration>{formatSeconds(a.timerInSeconds)}</Duration>
-          ) : (
-            <>
-              <Duration>
-                {a.completed ? a.repsAchieved : 0}<span> /{a.repsGoal}</span>
-              </Duration>
-              <Weight useKilos={useKilos} activity={a} />
-              {allComplete &&
-                <IncrementBadge increment={a.autoIncrement} useKilos={useKilos} />
-              }
-            </>
-          )}
-      </SetSummary>
-    );
-  });
+  const sets = exerciseSets.map((a, i) => (
+    <SetSummary key={i}>
+      <Colour colour={a.completed ? purple : 'grey'}>
+        {a.completed ? '✓' : '✗'}
+      </Colour>
+      {isTimed(a) ? (
+        <Duration>{formatSeconds(a.timerInSeconds)}</Duration>
+      ) : (
+        <>
+          <Duration>
+            {a.completed ? a.repsAchieved : 0}<span> /{a.repsGoal}</span>
+          </Duration>
+          <Weight useKilos={useKilos} activity={a} />
+          {allComplete &&
+            <IncrementBadge increment={a.autoIncrement} useKilos={useKilos} />
+          }
+        </>
+      )}
+    </SetSummary>
+  ));
 
   const badgeStyle = {
     position: 'absolute',
