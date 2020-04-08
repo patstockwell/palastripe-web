@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { useTransition, animated } from 'react-spring';
 import styled from 'styled-components';
 import { GlobalOverFlowHiddenStyle } from '../components/SharedStyles';
+import { appMaxWidth } from '../helpers/constants';
 
 const bounceSpace = 9;
 const popUpHeight = 353 + bounceSpace;
@@ -20,12 +21,10 @@ const Dialog = styled.div`
   position: absolute;
   bottom: 0;
   left: 0;
-  width: 100vw;
-`;
-
-const ClickableSpace = styled.div`
-  height: 100%;
-  transform: translateY(-${popUpHeight}px);
+  width: 100%;
+  max-width: ${appMaxWidth}px;
+  transform: translateX(-50%);
+  left: 50%;
 `;
 
 const ButtonWrapper = styled.div`
@@ -56,6 +55,7 @@ const AlertConfirm: React.FC<Props> = ({
   message,
   onClose,
 }) => {
+  const backgroundRef = useRef(null);
   const transitions = useTransition(showAlert, null, {
     from: {
       transform: `translateY(${popUpHeight}px)`,
@@ -71,14 +71,20 @@ const AlertConfirm: React.FC<Props> = ({
     onDestroyed: () => { if (onClose) { onClose(); } },
   });
 
+  const clickHandler = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+    // only cancel alert if background was clicked
+    if (e.target === backgroundRef.current) {
+      cancelAlert();
+    }
+  };
+
   return (
     <React.Fragment>
       {transitions.map(({ item, props }) => {
         return item ?
           <animated.div key={'unique'} style={props}>
             <GlobalOverFlowHiddenStyle hidden={showAlert} />
-            <Background>
-              <ClickableSpace onClick={cancelAlert}/>
+            <Background ref={backgroundRef} onClick={clickHandler}>
               <Dialog>
                 <Message>{message}</Message>
                 <ButtonWrapper>
