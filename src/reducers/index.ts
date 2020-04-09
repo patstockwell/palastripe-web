@@ -10,7 +10,6 @@ import activeWorkoutReducer from './activeWorkoutReducer';
 import historyReducer from './historyReducer';
 import workoutsReducer from './workoutsReducer';
 import selectedExerciseReducer from './selectedExerciseReducer';
-import navAnimationReducer from './navAnimationReducer';
 
 const rootReducer = (state: State = initialState, action: ReduxAction<any>): State => ({
   ...state,
@@ -28,7 +27,6 @@ const rootReducer = (state: State = initialState, action: ReduxAction<any>): Sta
     ...state.entities,
     workouts: workoutsReducer(state.entities.workouts, action),
   },
-  navAnimation: navAnimationReducer(state.navAnimation, action),
 });
 
 export default rootReducer;

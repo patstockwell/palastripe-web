@@ -1,6 +1,5 @@
 import React, { useRef } from 'react';
-import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import styled, { css, keyframes } from 'styled-components';
 
 import ProfileIcon from '../assets/svg/ProfileIcon';
@@ -10,16 +9,12 @@ import {
   ACTIVITY_PAGE,
   WORKOUTS_PAGE,
   PROFILE_PAGE,
-  SET_NAV_ANIMATION,
   appMaxWidth,
 } from '../helpers/constants';
-import {
-  ReduxAction, // eslint-disable-line no-unused-vars
-  State, // eslint-disable-line no-unused-vars
-} from '../helpers/types';
 import ActivityBars from '../assets/svg/ActivityBars';
 import Cardiogram from '../assets/svg/Cardiogram';
 import { getCurrentPage } from '../helpers/functions';
+import { useAnimateNavigation } from '../context/useAnimateNavigation';
 
 const Nav = styled.nav`
   display: flex;
@@ -68,19 +63,13 @@ const NavLink = styled(Link)<{ selected: boolean, x: number }>`
   `}
 `;
 
-type Props = OwnProps & DispatchProps & StateProps;
-
-interface OwnProps {
+interface Props {
   onNavigation: () => void;
-  pathname: string;
 }
 
-const Navigation: React.FC<Props> = ({
-  pathname,
-  onNavigation,
-  setNavAnimation,
-  navAnimation,
-}) => {
+const Navigation: React.FC<Props> = ({ onNavigation }) => {
+  const { pathname } = useLocation();
+  const { animationDistance, setAnimationDistance } = useAnimateNavigation();
   const workoutsRef = useRef<HTMLAnchorElement>();
   const activityRef = useRef<HTMLAnchorElement>();
   const profileRef = useRef<HTMLAnchorElement>();
@@ -94,7 +83,7 @@ const Navigation: React.FC<Props> = ({
   const getTranslationDistance = (page: string): number => {
     const firstRef = refHash[getCurrentPage(pathname)];
     const lastRef = refHash[page];
-    if (!firstRef) {
+    if (!firstRef || ! lastRef) {
       return 0;
     }
     const { left: leftFirst } = firstRef.current.getBoundingClientRect();
@@ -106,7 +95,7 @@ const Navigation: React.FC<Props> = ({
     getCurrentPage(pathname) === page;
 
   const handleClick = (page: string) => {
-    setNavAnimation(getTranslationDistance(page));
+    setAnimationDistance(getTranslationDistance(page));
     onNavigation();
   };
 
@@ -117,7 +106,7 @@ const Navigation: React.FC<Props> = ({
         to="/workouts/"
         onClick={() => handleClick(WORKOUTS_PAGE)}
         innerRef={workoutsRef}
-        x={navAnimation}
+        x={animationDistance}
       >
         <Cardiogram />
       </NavLink>
@@ -126,7 +115,7 @@ const Navigation: React.FC<Props> = ({
         to="/activity/"
         onClick={() => handleClick(ACTIVITY_PAGE)}
         innerRef={activityRef}
-        x={navAnimation}
+        x={animationDistance}
       >
         <ActivityBars />
       </NavLink>
@@ -135,7 +124,7 @@ const Navigation: React.FC<Props> = ({
         onClick={() => handleClick(PROFILE_PAGE)}
         to="/profile/"
         innerRef={profileRef}
-        x={navAnimation}
+        x={animationDistance}
       >
         <ProfileIcon />
       </NavLink>
@@ -143,26 +132,4 @@ const Navigation: React.FC<Props> = ({
   );
 };
 
-interface StateProps {
-  navAnimation: number;
-}
-
-const mapStateToProps = (state: State): StateProps => ({
-  navAnimation: state.navAnimation,
-});
-
-interface DispatchProps {
-  setNavAnimation: (x: number) => ReduxAction<number>;
-}
-
-const mapDispatchToProps: DispatchProps = {
-  setNavAnimation: (x) => ({
-    type: SET_NAV_ANIMATION,
-    payload: x,
-  }),
-};
-
-export default connect<StateProps, DispatchProps, OwnProps>(
-  mapStateToProps,
-  mapDispatchToProps
-)(Navigation);
+export default Navigation;

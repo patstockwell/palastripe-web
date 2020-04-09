@@ -74,12 +74,7 @@ const Page: React.FC<Props> = ({
         </React.Fragment>
       }
       {children}
-      {pathname &&
-        <Navigation
-          onNavigation={() => onNavigation(pathname)}
-          pathname={pathname}
-        />
-      }
+      <Navigation onNavigation={() => onNavigation(pathname)} />
     </React.Fragment>
   );
 };

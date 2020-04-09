@@ -24,7 +24,6 @@ export interface State {
   history: Workout[];
   editableWorkout?: Workout;
   editableActivity?: WeightedActivity & TimedActivity;
-  navAnimation?: number;
 }
 
 export interface ScrollY {

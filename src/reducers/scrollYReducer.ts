@@ -1,6 +1,6 @@
 import {
-  ReduxAction, // eslint-disable-line no-unused-vars
-  ScrollY, // eslint-disable-line no-unused-vars
+  ReduxAction,
+  ScrollY,
 } from '../helpers/types';
 
 export const SET_WINDOW_SCROLL: string = 'SET_WINDOW_SCROLL';
