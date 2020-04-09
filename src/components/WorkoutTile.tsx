@@ -1,5 +1,4 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -11,13 +10,9 @@ import {
   gutterWidth,
   superLightGrey,
   workoutTileMinHeight,
-  WORKOUTS_PAGE,
 } from '../helpers/constants';
 import { calculateWorkoutTime, formatMinutes } from '../helpers/functions';
-import {
-  SetWindowScroll,
-  setWindowScroll as setWindowScrollActionCreator,
-} from '../reducers/scrollYReducer';
+import { useScrollPosition } from '../context/useScrollPosition';
 
 const Tile = styled.section`
   height: ${workoutTileMinHeight}px;
@@ -65,20 +60,16 @@ const StyledLink = styled(Link)`
   color: initial;
 `;
 
-interface OwnProps {
+interface Props {
   workout: Workout;
 }
 
-type Props = OwnProps & DispatchProps;
-
-const WorkoutTile = ({ setWindowScroll, workout }: Props) => {
-  const handleClick = () => {
-    setWindowScroll(window.scrollY, WORKOUTS_PAGE);
-  };
+const WorkoutTile: React.FC<Props> = ({ workout }) => {
+  const { setWorkoutPageScrollPosition } = useScrollPosition();
 
   return (
     <StyledLink
-      onClick={handleClick}
+      onClick={() => setWorkoutPageScrollPosition()}
       to={{
         pathname: `/workouts/${workout.id}/`,
         state: { immediate: false },
@@ -96,15 +87,4 @@ const WorkoutTile = ({ setWindowScroll, workout }: Props) => {
   );
 };
 
-interface DispatchProps {
-  setWindowScroll: SetWindowScroll;
-}
-
-const mapDispatchToProps: DispatchProps = {
-  setWindowScroll: setWindowScrollActionCreator,
-};
-
-export default connect<void, DispatchProps, OwnProps>(
-  null,
-  mapDispatchToProps
-)(WorkoutTile);
+export default WorkoutTile;

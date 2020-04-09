@@ -1,16 +1,12 @@
-import React, { memo, useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
 
 import AlertConfirm from '../../components/AlertConfirm';
 import TrashCan from '../../assets/svg/TrashCan';
 import Dots from '../../assets/svg/Dots';
 import Avatar from '../../components/Avatar';
-import {
-  ReduxAction, // eslint-disable-line no-unused-vars
-  Workout, // eslint-disable-line no-unused-vars
-} from '../../helpers/types';
+import { ReduxAction, Workout } from '../../helpers/types';
 import {
   getDiffInMinutes,
   getHoursAndMinutes,
@@ -18,16 +14,9 @@ import {
   getTotalWeightLifted,
   convertWeight,
 } from '../../helpers/functions';
-import {
-  purple,
-  superLightGrey,
-  ACTIVITY_PAGE,
-} from '../../helpers/constants';
+import { purple, superLightGrey } from '../../helpers/constants';
 import { buttonStyle } from '../../components/SharedStyles';
-import {
-  SetWindowScroll,
-  setWindowScroll as setWindowScrollActionCreator,
-} from '../../reducers/scrollYReducer';
+import {useScrollPosition} from '../../context/useScrollPosition';
 
 const Button = styled.button<{ background?: string }>`
   ${buttonStyle}
@@ -175,18 +164,15 @@ const MenuLink = styled.button`
   }
 `;
 
-interface OwnProps {
+interface Props {
   workout: Workout;
   showMenu: boolean;
   toggleMenu: () => void;
   deleteWorkout: () => ReduxAction<number>;
-  position: number; // useful for memoizing the result of this component
   initials: string;
   useKilos: boolean;
   historyLink: number;
 }
-
-type Props = OwnProps & DispatchProps;
 
 const ActivityHistoryTile: React.FC<Props> = ({
   workout,
@@ -195,9 +181,9 @@ const ActivityHistoryTile: React.FC<Props> = ({
   deleteWorkout,
   useKilos,
   historyLink,
-  setWindowScroll,
 }) => {
   const [ showDeleteWorkoutAlert, setShowDeleteWorkoutAlert ] = useState(false);
+  const { setActivityPageScrollPosition } = useScrollPosition();
 
   const { name: workoutName, startTime, finishTime } = workout;
   const { unitOfMeasurement, value } = getTimeSince(finishTime);
@@ -227,7 +213,7 @@ const ActivityHistoryTile: React.FC<Props> = ({
           </OptionsButton>
           <TimeSince>{value} {unitOfMeasurement} ago</TimeSince>
           <SummaryLink
-            onClick={() => setWindowScroll(window.scrollY, ACTIVITY_PAGE)}
+            onClick={() => setActivityPageScrollPosition(window.scrollY)}
             to={`/activity/${historyLink}`}
           >
             <div>You <span>completed</span></div>
@@ -280,22 +266,4 @@ const ActivityHistoryTile: React.FC<Props> = ({
   );
 };
 
-const areEqualProps = (prevProps: Props, nextProps: Props): boolean => (
-  prevProps.showMenu === nextProps.showMenu
-  && prevProps.position === nextProps.position
-);
-
-interface DispatchProps {
-  setWindowScroll: SetWindowScroll;
-}
-
-const mapDispatchToProps: DispatchProps = ({
-  setWindowScroll: setWindowScrollActionCreator,
-});
-
-export default memo(
-  connect<void, DispatchProps, OwnProps>(
-    null,
-    mapDispatchToProps,
-  )(ActivityHistoryTile),
-areEqualProps);
+export default ActivityHistoryTile;

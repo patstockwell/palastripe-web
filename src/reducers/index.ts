@@ -5,7 +5,6 @@ import {
 import initialState from './initialState';
 import settingsReducer from './settingsReducer';
 import profileReducer from './profileReducer';
-import scrollYReducer from './scrollYReducer';
 import activeWorkoutReducer from './activeWorkoutReducer';
 import historyReducer from './historyReducer';
 import workoutsReducer from './workoutsReducer';
@@ -19,7 +18,6 @@ const rootReducer = (state: State = initialState, action: ReduxAction<any>): Sta
     action,
     state.activeWorkout
   ),
-  scrollY: scrollYReducer(state.scrollY, action),
   settings: settingsReducer(state.settings, action),
   profile: profileReducer(state.profile, action),
   history: historyReducer(state.history, action),

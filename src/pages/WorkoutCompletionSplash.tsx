@@ -46,7 +46,7 @@ const Completed = styled.p`
   margin: 12px 0;
 `;
 
-const WorkoutSummary: React.FC<StateProps> = ({ firstName, workout }) => {
+const WorkoutCompletionSplash: React.FC<StateProps> = ({ firstName, workout }) => {
   const { name: workoutName } = workout;
   console.log(firstName);
 
@@ -79,4 +79,4 @@ const mapStateToProps = (state: State): StateProps => ({
 
 export default connect<StateProps, void, void>(
   mapStateToProps
-)(WorkoutSummary);
+)(WorkoutCompletionSplash);

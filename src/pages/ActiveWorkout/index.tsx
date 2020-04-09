@@ -26,12 +26,8 @@ import {
   SET_ACTIVE_WORKOUT,
   FINISH_WORKOUT,
   ONE_SECOND,
-  ACTIVITY_PAGE,
 } from '../../helpers/constants';
-import {
-  setWindowScroll as setWindowScrollActionCreator,
-  SetWindowScroll,
-} from '../../reducers/scrollYReducer';
+import {useScrollPosition} from '../../context/useScrollPosition';
 
 const Button = styled.button<{ background?: string }>`
   ${buttonStyle}
@@ -52,13 +48,13 @@ const ActiveWorkout: React.FC<Props> = ({
   entities,
   activeWorkout,
   setActiveWorkout,
-  setWindowScroll,
   soundOn,
 }) => {
   const [ showEndWorkoutAlert, setShowEndWorkoutAlert ] = useState(false);
   const [ showRestTimer, setShowRestTimer ] = useState(false);
   const [ count, setCount ] = useState(0);
   const [ restTime, setRestTime ] = useState(0);
+  const { setActivityPageScrollPosition } = useScrollPosition();
 
   useInterval(() => {
     setCount(count + 1);
@@ -93,7 +89,7 @@ const ActiveWorkout: React.FC<Props> = ({
   const finishWorkoutWithAlertTransition = () => {
     finishWorkout(activeWorkout);
     setShowEndWorkoutAlert(false);
-    setWindowScroll(0, ACTIVITY_PAGE);
+    setActivityPageScrollPosition(0);
   };
 
   return (
@@ -133,7 +129,7 @@ const ActiveWorkout: React.FC<Props> = ({
             onClick={() => setShowEndWorkoutAlert(false)}
             background={'grey'}>No</Button>
           <LinkButton
-            to="/workout-summary/"
+            to="/workout-complete/"
             onClick={finishWorkoutWithAlertTransition}
           >Yes</LinkButton>
         </AlertConfirm>
@@ -145,7 +141,6 @@ const ActiveWorkout: React.FC<Props> = ({
 interface DispatchProps {
   finishWorkout: (w: Workout) => ReduxAction<{}>;
   setActiveWorkout: (workout: Workout) => ReduxAction<Workout>;
-  setWindowScroll: SetWindowScroll;
 }
 
 interface StateProps {
@@ -155,7 +150,6 @@ interface StateProps {
 }
 
 const mapDispatchToProps: DispatchProps = {
-  setWindowScroll: setWindowScrollActionCreator,
   finishWorkout: (workout: Workout) => ({
     type: FINISH_WORKOUT,
     payload: workout,

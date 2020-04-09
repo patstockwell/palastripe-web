@@ -2,10 +2,7 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 
-import {
-  ACTIVITY_PAGE,
-  DELETE_WORKOUT,
-} from '../../helpers/constants';
+import { DELETE_WORKOUT } from '../../helpers/constants';
 import { getInitials, formatDate } from '../../helpers/functions';
 import ActivityHistoryTile from './ActivityHistoryTile';
 import {
@@ -13,10 +10,7 @@ import {
   State, // eslint-disable-line no-unused-vars
   Workout, // eslint-disable-line no-unused-vars
 } from '../../helpers/types';
-import {
-  setWindowScroll as setWindowScrollActionCreator,
-  SetWindowScroll,
-} from '../../reducers/scrollYReducer';
+import { useScrollPosition } from '../../context/useScrollPosition';
 
 const BottomSpace = styled.div`
   height: 200px;
@@ -54,14 +48,14 @@ type Props = OwnProps & DispatchProps & StateProps;
 const ActivityHistoryList: React.FC<Props> = ({
   history,
   deleteWorkout,
-  setWindowScroll,
   firstName,
   lastName,
   useKilos,
   firstVisitDate,
 }) => {
   // undefined is used to denote no tile in list is selected
-  const [ showMenuIndex, setShowMenuIndex ] = useState(undefined);
+  const [showMenuIndex, setShowMenuIndex] = useState(undefined);
+  const {} = useScrollPosition();
 
   const historyTiles = history.map((w, i) => (
     <ActivityHistoryTile
@@ -69,10 +63,8 @@ const ActivityHistoryList: React.FC<Props> = ({
       key={w.finishTime}
       workout={w}
       showMenu={showMenuIndex === i}
-      position={i}
       toggleMenu={() => {
         setShowMenuIndex(showMenuIndex === i ? undefined : i);
-        setWindowScroll(window.scrollY, ACTIVITY_PAGE);
       }}
       deleteWorkout={() => deleteWorkout(i)}
       useKilos={useKilos}
@@ -101,7 +93,6 @@ interface StateProps {
 
 interface DispatchProps {
   deleteWorkout: (i: number) => ReduxAction<number>;
-  setWindowScroll: SetWindowScroll;
 }
 
 const mapStateToProps = (state: State): StateProps => ({
@@ -112,7 +103,6 @@ const mapStateToProps = (state: State): StateProps => ({
 });
 
 const mapDispatchToProps: DispatchProps = ({
-  setWindowScroll: setWindowScrollActionCreator,
   deleteWorkout: index => ({
     type: DELETE_WORKOUT,
     payload: index,

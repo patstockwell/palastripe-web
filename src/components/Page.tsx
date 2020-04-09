@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { connect } from 'react-redux';
 import styled from 'styled-components';
 
 import Banner from './Banner';
@@ -8,11 +7,7 @@ import {
   gutterWidth,
   bannerHeight,
 } from '../helpers/constants';
-import { getCurrentPage } from '../helpers/functions';
-import {
-  setWindowScroll as setWindowScrollActionCreator,
-  SetWindowScroll,
-} from '../reducers/scrollYReducer';
+import {useScrollPosition} from '../context/useScrollPosition';
 
 const Heading = styled.h1`
   margin: ${gutterWidth}px;
@@ -26,21 +21,19 @@ const Hr = styled.hr`
   border-bottom: solid 0.5px lightgrey;
 `;
 
-interface OwnProps {
+interface Props {
   pathname?: string;
   heading: string;
 }
-
-type Props = OwnProps & DispatchProps;
 
 const Page: React.FC<Props> = ({
   heading,
   pathname,
   children,
-  setWindowScroll,
 }) => {
   const observerTarget = useRef(null);
   const [headingHidden, setHeadingHidden] = useState(false);
+  const { setScrollPosition } = useScrollPosition();
 
   const callback = ([entry]: IntersectionObserverEntry[]) => {
     setHeadingHidden(!entry.isIntersecting);
@@ -57,13 +50,6 @@ const Page: React.FC<Props> = ({
     return () => observer.disconnect();
   });
 
-  const onNavigation = (path: string) => {
-    setWindowScroll(
-      window.scrollY,
-      getCurrentPage(path),
-    );
-  };
-
   return (
     <React.Fragment>
       <Banner heading={headingHidden && heading}/>
@@ -74,20 +60,9 @@ const Page: React.FC<Props> = ({
         </React.Fragment>
       }
       {children}
-      <Navigation onNavigation={() => onNavigation(pathname)} />
+      <Navigation onNavigation={() => setScrollPosition(pathname)} />
     </React.Fragment>
   );
 };
 
-interface DispatchProps {
-  setWindowScroll: SetWindowScroll;
-}
-
-const mapDispatchToProps: DispatchProps = {
-  setWindowScroll: setWindowScrollActionCreator,
-};
-
-export default connect<void, DispatchProps, OwnProps>(
-  null,
-  mapDispatchToProps
-)(Page);
+export default Page;
