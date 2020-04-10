@@ -1,31 +1,22 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
 import styled from 'styled-components';
 import CheckboxTick from '../../../components/CheckboxTick';
-import {
-  ReduxAction, // eslint-disable-line no-unused-vars
-} from '../../../helpers/types';
-import { SELECT_NEXT_EXERCISE } from '../../../helpers/constants';
-import {
-  selectCompleteButtonStyle,
-} from './ActivityTileSharedStyles';
+import { selectCompleteButtonStyle } from './ActivityTileSharedStyles';
 import { useRestTimer } from '../../../context/restTimer';
+import { useSelectedExercise } from '../../../context/useSelectedExercise';
 
 const SelectCompleteButton = styled.button`
   ${selectCompleteButtonStyle}
 `;
 
-interface OwnProps {
+interface Props {
   restPeriodInSeconds: number;
   handleClick: () => void;
   completed: boolean;
   selected: boolean;
 }
 
-type Props = OwnProps & DispatchProps;
-
 const ToggleSetCompleteButton: React.FC<Props> = ({
-  selectNextExercise,
   restPeriodInSeconds,
   handleClick,
   completed,
@@ -36,6 +27,7 @@ const ToggleSetCompleteButton: React.FC<Props> = ({
   // page, we can set a flag to ensure the animation was triggered via click.
   const [ clicked, setClicked ] = useState(false);
   const { hideTimer, showTimer } = useRestTimer();
+  const { selectNextExercise } = useSelectedExercise();
 
   return (
     <SelectCompleteButton onClick={() => {
@@ -60,17 +52,4 @@ const ToggleSetCompleteButton: React.FC<Props> = ({
   );
 };
 
-interface DispatchProps {
-  selectNextExercise: () => ReduxAction<undefined>;
-}
-
-const mapDispatchToProps: DispatchProps = {
-  selectNextExercise: () => ({
-    type: SELECT_NEXT_EXERCISE,
-  }),
-};
-
-export default connect<void, DispatchProps, OwnProps>(
-  null,
-  mapDispatchToProps
-)(ToggleSetCompleteButton);
+export default ToggleSetCompleteButton;

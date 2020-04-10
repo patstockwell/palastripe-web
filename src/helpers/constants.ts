@@ -64,8 +64,6 @@ export const charcoal = '#444444';
 export const darkPurple = '#291c3d';
 
 // action types
-export const SET_SELECTED_EXERCISE: string = 'SET_SELECTED_EXERCISE';
-export const SELECT_NEXT_EXERCISE: string = 'SELECT_NEXT_EXERCISE';
 export const FINISH_WORKOUT: string = 'FINISH_WORKOUT';
 export const DELETE_WORKOUT: string = 'DELETE_WORKOUT';
 export const EDIT_WORKOUT_ADD_SET: string = 'EDIT_WORKOUT_ADD_SET';

@@ -15,6 +15,7 @@ import { appMaxWidth } from '../helpers/constants';
 import WorkoutCompletionSplash from '../pages/WorkoutCompletionSplash';
 import { AnimateNavigationProvider } from '../context/useAnimateNavigation';
 import {ScrollPositionProvider} from '../context/useScrollPosition';
+import { SelectedExerciseProvider } from '../context/useSelectedExercise';
 
 const MaxWidthContainer = styled.div`
   max-width: ${appMaxWidth}px;
@@ -28,20 +29,22 @@ const Routes: React.FC = () => {
     <MaxWidthContainer>
       <ScrollPositionProvider>
         <AnimateNavigationProvider>
-          <Switch location={location}>
-            <Route path="/" exact component={Workouts} />
-            <Route path="/workouts/" exact component={Workouts} />
-            <Route path="/activity/" exact component={Activity} />
-            <Route path="/activity/:index/" component={HistorySummary} />
-            <Route path="/profile/" exact component={Profile} />
-            <Route path="/profile/name" component={ProfileName} />
-            <Route path="/profile/audio" component={SettingAudio} />
-            <Route path="/profile/unit-of-measurement" component={SettingUnitOfMeasurement} />
-            <Route path="/edit-workout/" component={EditWorkout} />
-            <Route path="/workouts/:id/" component={ActiveWorkout} />
-            <Route path="/workout-complete/" component={WorkoutCompletionSplash} />
-            <Route component={FourZeroFour} />
-          </Switch>
+          <SelectedExerciseProvider>
+            <Switch location={location}>
+              <Route path="/" exact component={Workouts} />
+              <Route path="/workouts/" exact component={Workouts} />
+              <Route path="/activity/" exact component={Activity} />
+              <Route path="/activity/:index/" component={HistorySummary} />
+              <Route path="/profile/" exact component={Profile} />
+              <Route path="/profile/name" component={ProfileName} />
+              <Route path="/profile/audio" component={SettingAudio} />
+              <Route path="/profile/unit-of-measurement" component={SettingUnitOfMeasurement} />
+              <Route path="/edit-workout/" component={EditWorkout} />
+              <Route path="/workouts/:id/" component={ActiveWorkout} />
+              <Route path="/workout-complete/" component={WorkoutCompletionSplash} />
+              <Route component={FourZeroFour} />
+            </Switch>
+          </SelectedExerciseProvider>
         </AnimateNavigationProvider>
       </ScrollPositionProvider>
     </MaxWidthContainer>

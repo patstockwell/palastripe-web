@@ -21,7 +21,7 @@ interface ConsumerValue {
 }
 
 export const ScrollPositionProvider: React.FC = ({ children }) => {
-  const [workoutScrollY, setWorkoutScrollY] = useState(100);
+  const [workoutScrollY, setWorkoutScrollY] = useState(0);
   const [activityScrollY, setActivityScrollY] = useState(0);
   const [profileScrollY, setProfileScrollY] = useState(0);
   const { pathname } = useLocation();

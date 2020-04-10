@@ -8,28 +8,15 @@ export interface SingleSetAction {
   index: number;
 }
 
-export interface SelectedExercise {
-  groupId: string | null;
-  index: number | null;
-}
-
 // State shape
 export interface State {
   activeWorkout?: Workout;
-  activeWorkoutSelectedExercise: SelectedExercise;
-  scrollY: ScrollY;
   profile: Profile;
   settings: Settings;
   entities: Entities;
   history: Workout[];
   editableWorkout?: Workout;
   editableActivity?: WeightedActivity & TimedActivity;
-}
-
-export interface ScrollY {
-  WORKOUTS_PAGE?: number;
-  ACTIVITY_PAGE?: number;
-  PROFILE_PAGE?: number;
 }
 
 export interface Profile {

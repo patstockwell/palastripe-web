@@ -28,14 +28,6 @@ import { combineDataForAllExercises as combine } from '../helpers/functions';
 const initialState: State = {
   // activeWorkout: undefined
 
-  activeWorkoutSelectedExercise: {
-    index: null,
-    groupId: null,
-  },
-  scrollY: {
-    WORKOUTS_PAGE: 0,
-  },
-
   profile: {
     firstName: '',
     lastName: '',

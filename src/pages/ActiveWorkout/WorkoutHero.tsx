@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import {
-  Dispatch, // eslint-disable-line no-unused-vars
-} from 'redux';
 import styled, { keyframes } from 'styled-components';
 import { useLocation } from 'react-router-dom';
 import * as clipboard from 'clipboard-polyfill';
@@ -22,22 +19,13 @@ import {
   formatMinutes,
   calculateWorkoutTime,
 } from '../../helpers/functions';
-import {
-  ReduxAction, // eslint-disable-line no-unused-vars
-  SelectedExercise, // eslint-disable-line no-unused-vars
-  SingleSetAction, // eslint-disable-line no-unused-vars
-  State, // eslint-disable-line no-unused-vars
-  Workout, // eslint-disable-line no-unused-vars
-} from '../../helpers/types';
-import {
-  SET_SELECTED_EXERCISE,
-  green,
-  APP_URL,
-} from '../../helpers/constants';
+import { State, Workout } from '../../helpers/types';
+import { green, APP_URL } from '../../helpers/constants';
 import {
   toggleSound as toggleSoundActionCreator,
   ToggleSound,
 } from '../../reducers/settingsReducer';
+import { useSelectedExercise } from '../../context/useSelectedExercise';
 
 export const Window = styled.div<{ colour?: string, imageUrl?: string }>`
   ${workoutHeroWindowStyle}
@@ -135,18 +123,23 @@ type Props = OwnProps & DispatchProps & StateProps;
 const WorkoutHero: React.FC<Props> = ({
   workout,
   workout: { imageUrl, name },
-  setSelected,
   soundOn,
   toggleSound,
 }) => {
   const [ showShareMessage, setShowShareMessage ] = useState(false);
   const [ showCircleTick, setShowCircleTick ] = useState(false);
   const { pathname } = useLocation();
+  const { setSelectedExercise } = useSelectedExercise();
   const time = formatMinutes(calculateWorkoutTime(workout));
 
   const handleShare = () => {
     setShowShareMessage(true);
     clipboard.writeText(APP_URL + pathname);
+  };
+
+  const selectFirstExercise = () => {
+    const { exerciseGroups: [firstGroup] } = workout;
+    setSelectedExercise({ index: 0, groupId: firstGroup.id });
   };
 
   return (
@@ -161,7 +154,7 @@ const WorkoutHero: React.FC<Props> = ({
       </ButtonGroup>
       <Title>{name}</Title>
       <Time>{time}</Time>
-      <StartButton onClick={setSelected}>
+      <StartButton onClick={selectFirstExercise}>
         <ColouredDot fill={green} />
         Start Workout
       </StartButton>
@@ -188,7 +181,6 @@ interface StateProps {
 }
 
 interface DispatchProps {
-  setSelected: () => ReduxAction<SelectedExercise>;
   toggleSound: ToggleSound;
 }
 
@@ -196,25 +188,8 @@ const mapStateToProps = (state: State): StateProps => ({
   soundOn: state.settings.soundOn,
 });
 
-const mapDispatchToProps = (
-  dispatch: Dispatch<ReduxAction<SingleSetAction | boolean>>,
-  ownProps: OwnProps
-): DispatchProps => {
-  const {
-    workout: {
-      exerciseGroups: [ firstGroup ],
-    },
-  } = ownProps;
-  const groupId = firstGroup.id;
-  const index = 0;
-
-  return {
-    toggleSound: toggleSoundActionCreator,
-    setSelected: () => dispatch({
-      type: SET_SELECTED_EXERCISE,
-      payload: { groupId, index },
-    }),
-  };
+const mapDispatchToProps: DispatchProps = {
+  toggleSound: toggleSoundActionCreator,
 };
 
 export default connect<StateProps, DispatchProps, OwnProps>(

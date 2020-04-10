@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import { connect } from 'react-redux';
 import ActivityTile from '../ActivityTile';
 import ColouredDot from '../../../assets/svg/ColouredDot';
 import ActivityListHeading from './ActivityListHeading';
@@ -8,16 +7,10 @@ import {
   activityHeadingHeight,
   orange,
   tileMinHeight,
-  SET_SELECTED_EXERCISE,
 } from '../../../helpers/constants';
-import {
-  Activity, // eslint-disable-line no-unused-vars
-  ReduxAction, // eslint-disable-line no-unused-vars
-  SelectedExercise, // eslint-disable-line no-unused-vars
-  State, // eslint-disable-line no-unused-vars
-  Workout,  // eslint-disable-line no-unused-vars
-} from '../../../helpers/types';
+import { Activity, Workout } from '../../../helpers/types';
 import { buttonStyle, unorderedListStyle } from '../../../components/SharedStyles';
+import { useSelectedExercise } from '../../../context/useSelectedExercise';
 
 const Ul = styled.ul`
   ${unorderedListStyle}
@@ -44,23 +37,22 @@ const BottomEmptySpace = styled.div<{ stickyTop?: number}>`
   height: ${tileMinHeight}px;
 `;
 
-interface OwnProps {
+interface Props {
   workout: Workout;
   finishWorkoutClickHandler?: () => void;
 }
 
-type Props = OwnProps & StateProps & DispatchProps;
-
 const ActivityList: React.FC<Props> = ({
   finishWorkoutClickHandler,
   workout: { exerciseGroups },
-  selected,
-  setSelected,
 }) => {
   const [ showHiddenArea, setShowHiddenArea ] = useState(true);
+  const { selectedExercise, setSelectedExercise } = useSelectedExercise();
 
   const createTile = (id: string) => (a: Activity, i: number) => {
-    const isSelected = selected.groupId === id && selected.index === i;
+    const isSelected =
+      selectedExercise.groupId === id
+      && selectedExercise.index === i;
 
     return (
       <ActivityTile
@@ -72,7 +64,7 @@ const ActivityList: React.FC<Props> = ({
         activity={a}
         handleSelect={() => {
           if (!isSelected) {
-            setSelected({ groupId: id, index: i });
+            setSelectedExercise({ groupId: id, index: i });
           }
         }}
         toggleShowHiddenArea={() => {
@@ -116,27 +108,4 @@ const ActivityList: React.FC<Props> = ({
   );
 };
 
-interface DispatchProps {
-  setSelected: ({ groupId, index }: SelectedExercise) => (
-    ReduxAction<SelectedExercise>);
-}
-
-const mapDispatchToProps: DispatchProps = {
-  setSelected: ({ index, groupId }) => ({
-    type: SET_SELECTED_EXERCISE,
-    payload: { groupId, index },
-  }),
-};
-
-interface StateProps {
-  selected: SelectedExercise;
-}
-
-const mapStateToProps = (state: State): StateProps => ({
-  selected: state.activeWorkoutSelectedExercise,
-});
-
-export default connect<StateProps, DispatchProps, OwnProps>(
-  mapStateToProps,
-  mapDispatchToProps
-)(ActivityList);
+export default ActivityList;

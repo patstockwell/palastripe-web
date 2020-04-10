@@ -78,7 +78,7 @@ const ActivityHistoryList: React.FC<Props> = ({
       {historyTiles}
       <BottomSpace>
         <div>Joined HBFF 🎉 </div>
-        <span>on {date}, {month}, {year}</span>
+        <span>on {date} {month}, {year}</span>
       </BottomSpace>
     </RoundCorneredTop>
   );
