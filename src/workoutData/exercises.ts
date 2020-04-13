@@ -1,6 +1,4 @@
-import {
-  Exercises, // eslint-disable-line no-unused-vars
-} from '../helpers/types';
+import { Exercises } from '../helpers/types';
 import { getIdsForStretchExercises } from '../helpers/functions';
 
 const byId = {

@@ -13,7 +13,7 @@ export interface State {
   activeWorkout?: Workout;
   profile: Profile;
   settings: Settings;
-  entities: Entities;
+  workouts: Workouts;
   history: Workout[];
   editableWorkout?: Workout;
   editableActivity?: WeightedActivity & TimedActivity;
@@ -30,11 +30,6 @@ export interface Settings {
   soundOn: boolean;
 }
 
-export interface Entities {
-  exercises: Exercises;
-  workouts: Workouts;
-}
-
 export interface Workouts {
   byId: {
     [propName: string]: Workout,
@@ -42,21 +37,14 @@ export interface Workouts {
   allIds: string[];
 }
 
-interface WorkoutBase {
+export interface Workout {
   id: string;
   imageUrl?: string;
   startTime?: number;
   finishTime?: number;
   name: string;
   version?: string;
-}
-
-export interface Workout extends WorkoutBase {
   exerciseGroups: ActivityGroup[];
-}
-
-export interface WorkoutOutline extends WorkoutBase {
-  exerciseGroups: ActivityOutlineGroup[];
 }
 
 export interface ActivityGroup {
@@ -65,25 +53,21 @@ export interface ActivityGroup {
   exercises: Activity[];
 }
 
-export interface ActivityOutlineGroup {
-  id: string;
-  name: string;
-  exercises: ActivityOutline[];
-}
-
 // Activity stuff
 
-interface ActivityBase {
+export interface TimedActivity {
   id: string;
+  name: string;
   restPeriodInSeconds?: number;
   completed?: boolean;
-}
-
-interface TimedActivityOutline extends ActivityBase {
   timerInSeconds: number;
 }
 
-interface WeightedActivityOutline extends ActivityBase {
+export interface WeightedActivity {
+  id: string;
+  name: string;
+  restPeriodInSeconds?: number;
+  completed?: boolean;
   weightInKilos: number;
   repsGoal: number;
   repsAchieved: number;
@@ -93,15 +77,10 @@ interface WeightedActivityOutline extends ActivityBase {
 export interface Exercise {
   id: string;
   name: string;
-  mostWeightInKilos?: number;
   tags: string[];
 }
 
-export type TimedActivity = TimedActivityOutline & Exercise;
-export type WeightedActivity = WeightedActivityOutline & Exercise;
-
 export type Activity = WeightedActivity | TimedActivity;
-export type ActivityOutline = WeightedActivityOutline | TimedActivityOutline;
 
 export interface Exercises {
   byId: {

@@ -1,10 +1,8 @@
-import {
-  WorkoutOutline, // eslint-disable-line no-unused-vars
-} from '../../helpers/types';
+import { Workout } from '../../helpers/types';
 import { VERSION_ONE } from '../../helpers/constants';
 import Image from '../../assets/images/active-body-crossfit-1533897.jpg';
 
-const circuitSpeed: WorkoutOutline = {
+const circuitSpeed: Workout = {
   id: 'circuit-speed',
   name: 'Circuit Speed',
   imageUrl: Image,
@@ -17,6 +15,7 @@ const circuitSpeed: WorkoutOutline = {
         {
           id: 'sit_ups',
           timerInSeconds: 60,
+          name: 'Sit Ups',
         },
       ],
     },
@@ -31,8 +30,10 @@ const circuitSpeed: WorkoutOutline = {
           repsAchieved: 10,
           weightInKilos: 30,
           restPeriodInSeconds: 60,
+          name: 'Upright Row',
         },
         {
+          name: 'Upright Row',
           id: 'upright_row',
           autoIncrement: 0,
           repsGoal: 10,
@@ -41,6 +42,7 @@ const circuitSpeed: WorkoutOutline = {
           restPeriodInSeconds: 60,
         },
         {
+          name: 'Upright Row',
           id: 'upright_row',
           autoIncrement: 0,
           repsGoal: 10,
@@ -49,6 +51,7 @@ const circuitSpeed: WorkoutOutline = {
           restPeriodInSeconds: 60,
         },
         {
+          name: 'Upright Row',
           id: 'upright_row',
           autoIncrement: 0,
           repsGoal: 10,
@@ -65,18 +68,22 @@ const circuitSpeed: WorkoutOutline = {
       exercises: [
         {
           id: 'right_arm_cross_body_stretch',
+          name: 'Right Arm Cross Body',
           timerInSeconds: 60,
         },
         {
           id: 'left_arm_cross_body_stretch',
+          name: 'Left Arm Cross Body',
           timerInSeconds: 60,
         },
         {
           id: 'left_glute_pigeon_pose_stretch',
+          name: 'Left Glute Pigeon Pose',
           timerInSeconds: 60,
         },
         {
           id: 'right_glute_pigeon_pose_stretch',
+          name: 'Right Glute Pigeon Pose',
           timerInSeconds: 60,
         },
       ],

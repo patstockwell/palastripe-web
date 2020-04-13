@@ -2,7 +2,7 @@ import { connect } from 'react-redux';
 import {
   LOCAL_STORAGE_HISTORY,
   LOCAL_STORAGE_SETTINGS,
-  LOCAL_STORAGE_ENTITIES,
+  LOCAL_STORAGE_WORKOUTS,
   LOCAL_STORAGE_ACTIVE_WORKOUT,
   LOCAL_STORAGE_PROFILE,
 } from '../helpers/constants';
@@ -19,14 +19,14 @@ type Props = DispatchProps & State;
 const LocalStorageSetter: React.FC<Props> = ({
   history,
   settings,
-  entities,
+  workouts,
   activeWorkout,
   profile,
   setFirstVisitDate,
 }) => {
   localStorage.setItem(LOCAL_STORAGE_HISTORY, JSON.stringify(history));
   localStorage.setItem(LOCAL_STORAGE_SETTINGS, JSON.stringify(settings));
-  localStorage.setItem(LOCAL_STORAGE_ENTITIES, JSON.stringify(entities));
+  localStorage.setItem(LOCAL_STORAGE_WORKOUTS, JSON.stringify(workouts));
   localStorage.setItem(LOCAL_STORAGE_PROFILE, JSON.stringify(profile));
   localStorage.setItem(LOCAL_STORAGE_ACTIVE_WORKOUT, JSON.stringify(activeWorkout));
 

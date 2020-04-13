@@ -17,12 +17,10 @@ import {
 } from './constants';
 import {
   isTimed,
-  Activity, // eslint-disable-line no-unused-vars
-  ActivityGroup, // eslint-disable-line no-unused-vars
-  Exercise, // eslint-disable-line no-unused-vars
-  Exercises, // eslint-disable-line no-unused-vars
-  Workout, // eslint-disable-line no-unused-vars
-  WorkoutOutline, // eslint-disable-line no-unused-vars
+  Activity,
+  ActivityGroup,
+  Exercise,
+  Workout,
 } from './types';
 
 export const convertWeight = (
@@ -141,27 +139,6 @@ export const getIdsForStretchExercises = (
     // map their ids into an array
     .map((e: Exercise): string => e.id)
 );
-
-const combineExerciseData =
-  (exercises: Exercises) => (activity: Activity): Activity => ({
-    ...activity,
-    ...exercises.byId[activity.id] || {},
-  });
-
-export const combineDataForAllExercises = (
-  workout: WorkoutOutline,
-  exercisesList: Exercises,
-): Workout => {
-  const addExerciseData = combineExerciseData(exercisesList);
-
-  return {
-    ...workout,
-    exerciseGroups: workout.exerciseGroups.map(group => ({
-      ...group,
-      exercises: group.exercises.map(addExerciseData),
-    })),
-  };
-};
 
 export const getLocalStorage = (name: string, defaultValue: any) => {
   const item: (string | null) = localStorage.getItem(name);
@@ -282,7 +259,7 @@ const getRestTime = (a: Activity): number =>
 const getTotalActivityTime = (a: Activity): number =>
   getRestTime(a) + getActivityTime(a);
 
-export const calculateWorkoutTime = (w: WorkoutOutline): number => {
+export const calculateWorkoutTime = (w: Workout): number => {
   const total = w.exerciseGroups
     .flatMap(group => group.exercises)
     .map(getTotalActivityTime)

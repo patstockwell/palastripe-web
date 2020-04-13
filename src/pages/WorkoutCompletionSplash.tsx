@@ -48,7 +48,6 @@ const Completed = styled.p`
 
 const WorkoutCompletionSplash: React.FC<StateProps> = ({ firstName, workout }) => {
   const { name: workoutName } = workout;
-  console.log(firstName);
 
   return (
     <>

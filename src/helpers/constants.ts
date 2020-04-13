@@ -86,6 +86,6 @@ export const ACTIVE_WORKOUT_PAGE: string = 'ACTIVE_WORKOUT_PAGE';
 
 export const LOCAL_STORAGE_HISTORY: string = 'HBFF_HISTORY';
 export const LOCAL_STORAGE_SETTINGS: string = 'HBFF_SETTINGS';
-export const LOCAL_STORAGE_ENTITIES: string = 'HBFF_ENTITIES';
+export const LOCAL_STORAGE_WORKOUTS: string = 'HBFF_WORKOUTS';
 export const LOCAL_STORAGE_ACTIVE_WORKOUT: string = 'HBFF_ACTIVE_WORKOUT';
 export const LOCAL_STORAGE_PROFILE: string = 'HBFF_PROFILE';

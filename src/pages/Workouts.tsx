@@ -44,13 +44,10 @@ interface StateProps {
   workouts: Workout[];
 }
 
-const mapStateToProps = ({
-  entities: {
-    workouts: { allIds, byId },
-  },
-}: State): StateProps => {
-  const workouts = allIds.map(id => byId[id]);
-  return { workouts };
+const mapStateToProps = ({ workouts }: State): StateProps => {
+  const { allIds, byId } = workouts;
+  const mappedWorkouts = allIds.map(id => byId[id]);
+  return { workouts: mappedWorkouts };
 };
 
 export default connect<StateProps, void, void>(mapStateToProps)(Workouts);

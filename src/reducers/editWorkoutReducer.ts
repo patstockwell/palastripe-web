@@ -67,7 +67,6 @@ const addSetToEditWorkout = (state: Workout) => {
     name: 'Exercise with reps',
     repsGoal: 12,
     repsAchieved: 12,
-    tags: [],
     weightInKilos: 20,
     autoIncrement: 0,
     completed: false,

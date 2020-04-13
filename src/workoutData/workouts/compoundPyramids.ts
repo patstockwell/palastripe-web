@@ -1,10 +1,8 @@
-import {
-  WorkoutOutline, // eslint-disable-line no-unused-vars
-} from '../../helpers/types';
+import { Workout } from '../../helpers/types';
 import { VERSION_ONE } from '../../helpers/constants';
 import Image from '../../assets/images/leg-press-dark.jpg';
 
-const circuitSpeed: WorkoutOutline = {
+const circuitSpeed: Workout = {
   id: 'compound-pyramids',
   name: 'Compound Pyramids',
   imageUrl: Image,
@@ -21,9 +19,11 @@ const circuitSpeed: WorkoutOutline = {
           repsAchieved: 12,
           weightInKilos: 0,
           restPeriodInSeconds: 90,
+          name: 'Leg Press',
         },
         {
           id: 'leg_press',
+          name: 'Leg Press',
           autoIncrement: 0,
           repsGoal: 8,
           repsAchieved: 8,
@@ -32,6 +32,7 @@ const circuitSpeed: WorkoutOutline = {
         },
         {
           id: 'leg_press',
+          name: 'Leg Press',
           autoIncrement: 0,
           repsGoal: 6,
           repsAchieved: 6,
@@ -40,6 +41,7 @@ const circuitSpeed: WorkoutOutline = {
         },
         {
           id: 'leg_press',
+          name: 'Leg Press',
           autoIncrement: 0,
           repsGoal: 4,
           repsAchieved: 4,
@@ -54,6 +56,7 @@ const circuitSpeed: WorkoutOutline = {
       exercises: [
         {
           id: 'overhead_press',
+          name: 'Overhead Press',
           autoIncrement: 0,
           repsGoal: 3,
           repsAchieved: 3,
@@ -62,6 +65,7 @@ const circuitSpeed: WorkoutOutline = {
         },
         {
           id: 'overhead_press',
+          name: 'Overhead Press',
           autoIncrement: 0,
           repsGoal: 3,
           repsAchieved: 3,
@@ -70,6 +74,7 @@ const circuitSpeed: WorkoutOutline = {
         },
         {
           id: 'overhead_press',
+          name: 'Overhead Press',
           autoIncrement: 0,
           repsGoal: 3,
           repsAchieved: 3,
@@ -78,6 +83,7 @@ const circuitSpeed: WorkoutOutline = {
         },
         {
           id: 'overhead_press',
+          name: 'Overhead Press',
           autoIncrement: 0,
           repsGoal: 3,
           repsAchieved: 3,
@@ -92,6 +98,7 @@ const circuitSpeed: WorkoutOutline = {
       exercises: [
         {
           id: 'upright_row',
+          name: 'Upright Row',
           autoIncrement: 0,
           repsGoal: 8,
           repsAchieved: 8,
@@ -100,6 +107,7 @@ const circuitSpeed: WorkoutOutline = {
         },
         {
           id: 'upright_row',
+          name: 'Upright Row',
           autoIncrement: 0,
           repsGoal: 8,
           repsAchieved: 8,
@@ -108,6 +116,7 @@ const circuitSpeed: WorkoutOutline = {
         },
         {
           id: 'upright_row',
+          name: 'Upright Row',
           autoIncrement: 0,
           repsGoal: 8,
           repsAchieved: 8,
@@ -116,6 +125,7 @@ const circuitSpeed: WorkoutOutline = {
         },
         {
           id: 'upright_row',
+          name: 'Upright Row',
           autoIncrement: 0,
           repsGoal: 8,
           repsAchieved: 8,
@@ -130,6 +140,7 @@ const circuitSpeed: WorkoutOutline = {
       exercises: [
         {
           id: 'dumbbell_bench_press',
+          name: 'Dumbbell Bench Press',
           autoIncrement: 0,
           repsGoal: 12,
           repsAchieved: 12,
@@ -138,6 +149,7 @@ const circuitSpeed: WorkoutOutline = {
         },
         {
           id: 'dumbbell_bench_press',
+          name: 'Dumbbell Bench Press',
           autoIncrement: 0,
           repsGoal: 8,
           repsAchieved: 8,
@@ -146,6 +158,7 @@ const circuitSpeed: WorkoutOutline = {
         },
         {
           id: 'dumbbell_bench_press',
+          name: 'Dumbbell Bench Press',
           autoIncrement: 0,
           repsGoal: 6,
           repsAchieved: 6,
@@ -154,6 +167,7 @@ const circuitSpeed: WorkoutOutline = {
         },
         {
           id: 'dumbbell_bench_press',
+          name: 'Dumbbell Bench Press',
           autoIncrement: 0,
           repsGoal: 3,
           repsAchieved: 3,
@@ -168,30 +182,37 @@ const circuitSpeed: WorkoutOutline = {
       exercises: [
         {
           id: 'right_arm_cross_body_stretch',
+          name: 'Right Arm Cross Body',
           timerInSeconds: 60,
         },
         {
           id: 'left_arm_cross_body_stretch',
+          name: 'Left Arm Cross Body',
           timerInSeconds: 60,
         },
         {
           id: 'kneeling_right_hip_flexor_stretch',
+          name: 'Kneeling Right Hip-Flexor Stretch',
           timerInSeconds: 45,
         },
         {
           id: 'kneeling_left_hip_flexor_stretch',
+          name: 'Kneeling Left Hip-Flexor Stretch',
           timerInSeconds: 45,
         },
         {
           id: 'left_glute_pigeon_pose_stretch',
+          name: 'Left Glute Pigeon Pose',
           timerInSeconds: 60,
         },
         {
           id: 'right_glute_pigeon_pose_stretch',
+          name: 'Right Glute Pigeon Pose',
           timerInSeconds: 60,
         },
         {
           id: 'overhead_band_chest_stretch',
+          name: 'Overhead Band Chest Stretch',
           timerInSeconds: 60,
         },
       ],

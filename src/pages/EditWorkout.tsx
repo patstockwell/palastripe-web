@@ -8,12 +8,7 @@ import { buttonStyle } from '../components/SharedStyles';
 import { EditableActivityList } from './ActiveWorkout/ActivityList';
 import EditWorkoutHero from '../components/EditWorkoutHero';
 import BackLinkBanner from '../components/BackLinkBanner';
-import {
-  Exercises, // eslint-disable-line no-unused-vars
-  ReduxAction, // eslint-disable-line no-unused-vars
-  State, // eslint-disable-line no-unused-vars
-  Exercise, // eslint-disable-line no-unused-vars
-} from '../helpers/types';
+import { ReduxAction, Exercise } from '../helpers/types';
 import {
   tileMinHeight,
   activityHeadingHeight,
@@ -68,9 +63,7 @@ export const accumulateMatches =
     ];
   };
 
-type Props = StateProps & DispatchProps;
-
-const EditWorkout: React.FC<Props> = ({
+const EditWorkout: React.FC<DispatchProps> = ({
   addSet,
   addGroup,
 }) => {
@@ -136,15 +129,7 @@ interface DispatchProps {
   addGroup: () => ReduxAction<undefined>;
 }
 
-const mapStateToProps = (state: State) => ({
-  exercises: state.entities.exercises,
-});
-
-interface StateProps {
-  exercises: Exercises;
-}
-
-export default connect<StateProps, DispatchProps, void>(
-  mapStateToProps,
+export default connect<void, DispatchProps, void>(
+  null,
   mapDispatchToProps
 )(EditWorkout);

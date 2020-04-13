@@ -1,10 +1,8 @@
-import {
-  WorkoutOutline, // eslint-disable-line no-unused-vars
-} from '../../helpers/types';
+import { Workout } from '../../helpers/types';
 import { VERSION_ONE } from '../../helpers/constants';
 import Image from '../../assets/images/active-athlete-barbell-2261482.jpg';
 
-const glutesAndGlory: WorkoutOutline = {
+const glutesAndGlory: Workout = {
   id: 'glutes-and-glory',
   name: 'Glutes & Glory',
   imageUrl: Image,
@@ -16,6 +14,7 @@ const glutesAndGlory: WorkoutOutline = {
       exercises: [
         {
           id: 'back_squat',
+          name: 'Back Squat',
           repsGoal: 10,
           repsAchieved: 10,
           autoIncrement: 2.5,
@@ -24,6 +23,7 @@ const glutesAndGlory: WorkoutOutline = {
         },
         {
           id: 'back_squat',
+          name: 'Back Squat',
           repsGoal: 10,
           repsAchieved: 10,
           autoIncrement: 2.5,
@@ -32,6 +32,7 @@ const glutesAndGlory: WorkoutOutline = {
         },
         {
           id: 'back_squat',
+          name: 'Back Squat',
           repsGoal: 10,
           repsAchieved: 10,
           autoIncrement: 2.5,
@@ -40,6 +41,7 @@ const glutesAndGlory: WorkoutOutline = {
         },
         {
           id: 'back_squat',
+          name: 'Back Squat',
           repsGoal: 10,
           repsAchieved: 10,
           autoIncrement: 2.5,
@@ -48,6 +50,7 @@ const glutesAndGlory: WorkoutOutline = {
         },
         {
           id: 'back_squat',
+          name: 'Back Squat',
           repsGoal: 10,
           repsAchieved: 10,
           autoIncrement: 2.5,
@@ -57,6 +60,7 @@ const glutesAndGlory: WorkoutOutline = {
 
         {
           id: 'dead_lift',
+          name: 'Dead Lift',
           repsGoal: 10,
           repsAchieved: 10,
           autoIncrement: 2.5,
@@ -65,6 +69,7 @@ const glutesAndGlory: WorkoutOutline = {
         },
         {
           id: 'dead_lift',
+          name: 'Dead Lift',
           repsGoal: 10,
           repsAchieved: 10,
           autoIncrement: 2.5,
@@ -73,6 +78,7 @@ const glutesAndGlory: WorkoutOutline = {
         },
         {
           id: 'dead_lift',
+          name: 'Dead Lift',
           repsGoal: 10,
           repsAchieved: 10,
           autoIncrement: 2.5,
@@ -81,6 +87,7 @@ const glutesAndGlory: WorkoutOutline = {
         },
         {
           id: 'dead_lift',
+          name: 'Dead Lift',
           repsGoal: 10,
           repsAchieved: 10,
           autoIncrement: 2.5,
@@ -89,6 +96,7 @@ const glutesAndGlory: WorkoutOutline = {
         },
         {
           id: 'dead_lift',
+          name: 'Dead Lift',
           repsGoal: 10,
           repsAchieved: 10,
           autoIncrement: 2.5,
@@ -103,6 +111,7 @@ const glutesAndGlory: WorkoutOutline = {
       exercises: [
         {
           id: 'standing_calf_raises',
+          name: 'Standing Calf Raises',
           repsGoal: 10,
           repsAchieved: 10,
           autoIncrement: 2.5,
@@ -111,6 +120,7 @@ const glutesAndGlory: WorkoutOutline = {
         },
         {
           id: 'standing_calf_raises',
+          name: 'Standing Calf Raises',
           repsGoal: 10,
           repsAchieved: 10,
           autoIncrement: 2.5,
@@ -119,6 +129,7 @@ const glutesAndGlory: WorkoutOutline = {
         },
         {
           id: 'standing_calf_raises',
+          name: 'Standing Calf Raises',
           repsGoal: 10,
           repsAchieved: 10,
           autoIncrement: 2.5,
@@ -127,6 +138,7 @@ const glutesAndGlory: WorkoutOutline = {
         },
         {
           id: 'standing_calf_raises',
+          name: 'Standing Calf Raises',
           repsGoal: 10,
           repsAchieved: 10,
           autoIncrement: 2.5,
@@ -135,6 +147,7 @@ const glutesAndGlory: WorkoutOutline = {
         },
         {
           id: 'standing_calf_raises',
+          name: 'Standing Calf Raises',
           repsGoal: 10,
           repsAchieved: 10,
           autoIncrement: 2.5,
@@ -144,6 +157,7 @@ const glutesAndGlory: WorkoutOutline = {
 
         {
           id: 'calf_press_on_leg_press',
+          name: 'Calf Press on Leg Press',
           repsGoal: 10,
           repsAchieved: 10,
           autoIncrement: 2.5,
@@ -152,6 +166,7 @@ const glutesAndGlory: WorkoutOutline = {
         },
         {
           id: 'calf_press_on_leg_press',
+          name: 'Calf Press on Leg Press',
           repsGoal: 10,
           repsAchieved: 10,
           autoIncrement: 2.5,
@@ -160,6 +175,7 @@ const glutesAndGlory: WorkoutOutline = {
         },
         {
           id: 'calf_press_on_leg_press',
+          name: 'Calf Press on Leg Press',
           repsGoal: 10,
           repsAchieved: 10,
           autoIncrement: 2.5,
@@ -168,6 +184,7 @@ const glutesAndGlory: WorkoutOutline = {
         },
         {
           id: 'calf_press_on_leg_press',
+          name: 'Calf Press on Leg Press',
           repsGoal: 10,
           repsAchieved: 10,
           autoIncrement: 2.5,
@@ -176,6 +193,7 @@ const glutesAndGlory: WorkoutOutline = {
         },
         {
           id: 'calf_press_on_leg_press',
+          name: 'Calf Press on Leg Press',
           repsGoal: 10,
           repsAchieved: 10,
           autoIncrement: 2.5,
@@ -191,6 +209,7 @@ const glutesAndGlory: WorkoutOutline = {
       exercises: [
         {
           id: 'leg_press',
+          name: 'Leg Press',
           repsGoal: 10,
           repsAchieved: 10,
           autoIncrement: 2.5,
@@ -199,6 +218,7 @@ const glutesAndGlory: WorkoutOutline = {
         },
         {
           id: 'leg_press',
+          name: 'Leg Press',
           repsGoal: 10,
           repsAchieved: 10,
           autoIncrement: 2.5,
@@ -207,6 +227,7 @@ const glutesAndGlory: WorkoutOutline = {
         },
         {
           id: 'leg_press',
+          name: 'Leg Press',
           repsGoal: 10,
           repsAchieved: 10,
           autoIncrement: 2.5,
@@ -215,6 +236,7 @@ const glutesAndGlory: WorkoutOutline = {
         },
         {
           id: 'leg_press',
+          name: 'Leg Press',
           repsGoal: 10,
           repsAchieved: 10,
           autoIncrement: 2.5,
@@ -223,6 +245,7 @@ const glutesAndGlory: WorkoutOutline = {
         },
         {
           id: 'leg_press',
+          name: 'Leg Press',
           repsGoal: 10,
           repsAchieved: 10,
           autoIncrement: 2.5,
@@ -232,6 +255,7 @@ const glutesAndGlory: WorkoutOutline = {
 
         {
           id: 'lying_leg_curls',
+          name: 'Lying Leg Curls',
           repsGoal: 10,
           repsAchieved: 10,
           autoIncrement: 2.5,
@@ -240,6 +264,7 @@ const glutesAndGlory: WorkoutOutline = {
         },
         {
           id: 'lying_leg_curls',
+          name: 'Lying Leg Curls',
           repsGoal: 10,
           repsAchieved: 10,
           autoIncrement: 2.5,
@@ -248,6 +273,7 @@ const glutesAndGlory: WorkoutOutline = {
         },
         {
           id: 'lying_leg_curls',
+          name: 'Lying Leg Curls',
           repsGoal: 10,
           repsAchieved: 10,
           autoIncrement: 2.5,
@@ -256,6 +282,7 @@ const glutesAndGlory: WorkoutOutline = {
         },
         {
           id: 'lying_leg_curls',
+          name: 'Lying Leg Curls',
           repsGoal: 10,
           repsAchieved: 10,
           autoIncrement: 2.5,
@@ -264,6 +291,7 @@ const glutesAndGlory: WorkoutOutline = {
         },
         {
           id: 'lying_leg_curls',
+          name: 'Lying Leg Curls',
           repsGoal: 10,
           repsAchieved: 10,
           autoIncrement: 2.5,
@@ -279,6 +307,7 @@ const glutesAndGlory: WorkoutOutline = {
       exercises: [
         {
           id: 'ab_crunch_machine',
+          name: 'Ab Crunch Machine',
           repsGoal: 10,
           repsAchieved: 10,
           autoIncrement: 2.5,
@@ -287,6 +316,7 @@ const glutesAndGlory: WorkoutOutline = {
         },
         {
           id: 'ab_crunch_machine',
+          name: 'Ab Crunch Machine',
           repsGoal: 10,
           repsAchieved: 10,
           autoIncrement: 2.5,
@@ -295,6 +325,7 @@ const glutesAndGlory: WorkoutOutline = {
         },
         {
           id: 'ab_crunch_machine',
+          name: 'Ab Crunch Machine',
           repsGoal: 10,
           repsAchieved: 10,
           autoIncrement: 2.5,
@@ -303,6 +334,7 @@ const glutesAndGlory: WorkoutOutline = {
         },
         {
           id: 'ab_crunch_machine',
+          name: 'Ab Crunch Machine',
           repsGoal: 10,
           repsAchieved: 10,
           autoIncrement: 2.5,
@@ -311,6 +343,7 @@ const glutesAndGlory: WorkoutOutline = {
         },
         {
           id: 'ab_crunch_machine',
+          name: 'Ab Crunch Machine',
           repsGoal: 10,
           repsAchieved: 10,
           autoIncrement: 2.5,
@@ -326,30 +359,37 @@ const glutesAndGlory: WorkoutOutline = {
       exercises: [
         {
           id: 'left_leg_hamstring_stretch',
+          name: 'Left Leg Hamstring stretch',
           timerInSeconds: 45,
         },
         {
           id: 'right_leg_hamstring_stretch',
+          name: 'Right Leg Hamstring stretch',
           timerInSeconds: 45,
         },
         {
           id: 'left_glute_pigeon_pose_stretch',
+          name: 'Left Glute Pigeon Pose',
           timerInSeconds: 45,
         },
         {
           id: 'right_glute_pigeon_pose_stretch',
+          name: 'Right Glute Pigeon Pose',
           timerInSeconds: 45,
         },
         {
           id: 'kneeling_left_hip_flexor_stretch',
+          name: 'Kneeling Left Hip-Flexor Stretch',
           timerInSeconds: 45,
         },
         {
           id: 'kneeling_right_hip_flexor_stretch',
+          name: 'Kneeling Right Hip-Flexor Stretch',
           timerInSeconds: 45,
         },
         {
           id: 'overhead_band_chest_stretch',
+          name: 'Overhead Band Chest Stretch',
           timerInSeconds: 45,
         },
       ],

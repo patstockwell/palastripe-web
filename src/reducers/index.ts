@@ -15,10 +15,7 @@ const rootReducer = (state: State = initialState, action: ReduxAction<any>): Sta
   settings: settingsReducer(state.settings, action),
   profile: profileReducer(state.profile, action),
   history: historyReducer(state.history, action),
-  entities: {
-    ...state.entities,
-    workouts: workoutsReducer(state.entities.workouts, action),
-  },
+  workouts: workoutsReducer(state.workouts, action),
 });
 
 export default rootReducer;

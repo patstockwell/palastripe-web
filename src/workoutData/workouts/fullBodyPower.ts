@@ -1,10 +1,8 @@
-import {
-  WorkoutOutline, // eslint-disable-line no-unused-vars
-} from '../../helpers/types';
+import { Workout } from '../../helpers/types';
 import { VERSION_ONE } from '../../helpers/constants';
 import Image from '../../assets/images/active-adult-aerobics-206573.jpg';
 
-const fullBodyPower: WorkoutOutline = {
+const fullBodyPower: Workout = {
   id: 'full-body-power',
   name: 'Full Body Power',
   imageUrl: Image,
@@ -16,11 +14,13 @@ const fullBodyPower: WorkoutOutline = {
       exercises: [
         {
           id: 'stationary_bike',
+          name: 'Stationary Bike',
           timerInSeconds: 300,
           restPeriodInSeconds: 60,
         },
         {
           id: 'lunges',
+          name: 'Lunges',
           timerInSeconds: 60,
           restPeriodInSeconds: 30,
         },
@@ -32,6 +32,7 @@ const fullBodyPower: WorkoutOutline = {
       exercises: [
         {
           id: 'back_squat',
+          name: 'Back Squat',
           weightInKilos: 40,
           repsGoal: 5,
           repsAchieved: 5,
@@ -40,6 +41,7 @@ const fullBodyPower: WorkoutOutline = {
         },
         {
           id: 'back_squat',
+          name: 'Back Squat',
           weightInKilos: 40,
           repsGoal: 5,
           repsAchieved: 5,
@@ -48,6 +50,7 @@ const fullBodyPower: WorkoutOutline = {
         },
         {
           id: 'back_squat',
+          name: 'Back Squat',
           weightInKilos: 40,
           repsGoal: 5,
           repsAchieved: 5,
@@ -56,6 +59,7 @@ const fullBodyPower: WorkoutOutline = {
         },
         {
           id: 'dead_lift',
+          name: 'Dead Lift',
           weightInKilos: 80,
           repsGoal: 5,
           repsAchieved: 5,
@@ -64,6 +68,7 @@ const fullBodyPower: WorkoutOutline = {
         },
         {
           id: 'dead_lift',
+          name: 'Dead Lift',
           weightInKilos: 80,
           repsGoal: 5,
           repsAchieved: 5,
@@ -72,6 +77,7 @@ const fullBodyPower: WorkoutOutline = {
         },
         {
           id: 'dead_lift',
+          name: 'Dead Lift',
           weightInKilos: 80,
           repsGoal: 5,
           repsAchieved: 5,
@@ -80,6 +86,7 @@ const fullBodyPower: WorkoutOutline = {
         },
         {
           id: 'chin_up',
+          name: 'Chin Ups',
           weightInKilos: 0,
           repsGoal: 5,
           repsAchieved: 5,
@@ -88,6 +95,7 @@ const fullBodyPower: WorkoutOutline = {
         },
         {
           id: 'chin_up',
+          name: 'Chin Ups',
           weightInKilos: 0,
           repsGoal: 5,
           repsAchieved: 5,
@@ -96,6 +104,7 @@ const fullBodyPower: WorkoutOutline = {
         },
         {
           id: 'chin_up',
+          name: 'Chin Ups',
           weightInKilos: 0,
           repsGoal: 5,
           repsAchieved: 5,
@@ -104,6 +113,7 @@ const fullBodyPower: WorkoutOutline = {
         },
         {
           id: 'overhead_press',
+          name: 'Overhead Press',
           weightInKilos: 30,
           repsGoal: 5,
           repsAchieved: 5,
@@ -112,6 +122,7 @@ const fullBodyPower: WorkoutOutline = {
         },
         {
           id: 'overhead_press',
+          name: 'Overhead Press',
           weightInKilos: 30,
           repsGoal: 5,
           repsAchieved: 5,
@@ -120,6 +131,7 @@ const fullBodyPower: WorkoutOutline = {
         },
         {
           id: 'overhead_press',
+          name: 'Overhead Press',
           weightInKilos: 30,
           repsGoal: 5,
           repsAchieved: 5,
@@ -128,14 +140,7 @@ const fullBodyPower: WorkoutOutline = {
         },
         {
           id: 'push_ups',
-          weightInKilos: 0,
-          repsGoal: 20,
-          repsAchieved: 20,
-          autoIncrement: 0,
-          restPeriodInSeconds: 60,
-        },
-        {
-          id: 'push_ups',
+          name: 'Push Ups',
           weightInKilos: 0,
           repsGoal: 20,
           repsAchieved: 20,
@@ -144,6 +149,16 @@ const fullBodyPower: WorkoutOutline = {
         },
         {
           id: 'push_ups',
+          name: 'Push Ups',
+          weightInKilos: 0,
+          repsGoal: 20,
+          repsAchieved: 20,
+          autoIncrement: 0,
+          restPeriodInSeconds: 60,
+        },
+        {
+          id: 'push_ups',
+          name: 'Push Ups',
           weightInKilos: 0,
           repsGoal: 20,
           repsAchieved: 20,
@@ -152,6 +167,7 @@ const fullBodyPower: WorkoutOutline = {
         },
         {
           id: 'ring_rows',
+          name: 'Ring Rows',
           weightInKilos: 0,
           repsGoal: 12,
           repsAchieved: 12,
@@ -160,6 +176,7 @@ const fullBodyPower: WorkoutOutline = {
         },
         {
           id: 'ring_rows',
+          name: 'Ring Rows',
           weightInKilos: 0,
           repsGoal: 12,
           repsAchieved: 12,
@@ -168,6 +185,7 @@ const fullBodyPower: WorkoutOutline = {
         },
         {
           id: 'ring_rows',
+          name: 'Ring Rows',
           weightInKilos: 0,
           repsGoal: 12,
           repsAchieved: 12,

@@ -13,15 +13,7 @@ import BackLinkBanner from '../../components/BackLinkBanner';
 import WorkoutHero from './WorkoutHero';
 import FourZeroFour from '../../pages/FourZeroFour';
 import { ActivityList } from './ActivityList';
-import {
-  ReduxAction, // eslint-disable-line no-unused-vars
-  Entities, // eslint-disable-line no-unused-vars
-  State, // eslint-disable-line no-unused-vars
-  Workout, // eslint-disable-line no-unused-vars
-} from '../../helpers/types';
-import {
-  combineDataForAllExercises,
-} from '../../helpers/functions';
+import { ReduxAction, State, Workout, Workouts } from '../../helpers/types';
 import {
   SET_ACTIVE_WORKOUT,
   FINISH_WORKOUT,
@@ -45,7 +37,7 @@ type Props = DispatchProps & StateProps;
 
 const ActiveWorkout: React.FC<Props> = ({
   finishWorkout,
-  entities,
+  workouts,
   activeWorkout,
   setActiveWorkout,
   soundOn,
@@ -66,25 +58,22 @@ const ActiveWorkout: React.FC<Props> = ({
   };
   // get the workout ID from the URL
   const { id: workoutId }: { id: string } = useParams();
-  const workout = entities.workouts.byId[workoutId];
+  const workoutFromUrl = workouts.byId[workoutId];
 
-  if (!workout) {
+  if (!workoutFromUrl) {
     return <FourZeroFour />;
   }
-
-  const workoutWithAllActivityData: Workout =
-    combineDataForAllExercises(workout, entities.exercises);
 
   const workoutSetAsActive = activeWorkout && workoutId === activeWorkout.id;
 
   if (!workoutSetAsActive) {
     // if a workout is visited that is not currently the activeWorkout, set it
-    setActiveWorkout(workoutWithAllActivityData);
+    setActiveWorkout(workoutFromUrl);
   }
 
   const displayedWorkout = workoutSetAsActive
     ? activeWorkout
-    : workoutWithAllActivityData;
+    : workoutFromUrl;
 
   const finishWorkoutWithAlertTransition = () => {
     finishWorkout(activeWorkout);
@@ -145,7 +134,7 @@ interface DispatchProps {
 
 interface StateProps {
   activeWorkout: Workout;
-  entities: Entities;
+  workouts: Workouts;
   soundOn: boolean;
 }
 
@@ -162,7 +151,7 @@ const mapDispatchToProps: DispatchProps = {
 
 const mapStateToProps = (state: State): StateProps => ({
   activeWorkout: state.activeWorkout,
-  entities: state.entities,
+  workouts: state.workouts,
   soundOn: state.settings.soundOn,
 });
 
