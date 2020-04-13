@@ -8,7 +8,6 @@ import {
   State, // eslint-disable-line
 } from '../helpers/types';
 import {
-  UpdateName,
   updateName as updateNameActionCreator,
 } from '../reducers/profileReducer';
 
@@ -55,7 +54,7 @@ const InputWrapper = styled.div`
   align-items: center;
 `;
 
-type Props = StateProps & DispatchProps;
+type Props = StateProps & typeof mapDispatch;
 
 const ProfileName: React.FC<Props> = ({
   updateName,
@@ -110,11 +109,7 @@ interface StateProps {
   lastName: string;
 }
 
-interface DispatchProps {
-  updateName: UpdateName;
-}
-
-const mapDispatchToProps: DispatchProps = {
+const mapDispatch = {
   updateName: updateNameActionCreator,
 };
 
@@ -123,7 +118,7 @@ const mapStateToProps = (state: State): StateProps => ({
   lastName: state.profile.lastName,
 });
 
-export default connect<StateProps, DispatchProps, void>(
+export default connect<StateProps, typeof mapDispatch, void>(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatch
 )(ProfileName);

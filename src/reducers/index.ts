@@ -1,7 +1,4 @@
-import {
-  ReduxAction, // eslint-disable-line
-  State, // eslint-disable-line
-} from '../helpers/types';
+import { ReduxAction, State } from '../helpers/types';
 import initialState from './initialState';
 import settingsReducer from './settingsReducer';
 import profileReducer from './profileReducer';

@@ -11,11 +11,11 @@ import {
 } from '../helpers/constants';
 import { convertWeight } from '../helpers/functions';
 import {
-  Activity, // eslint-disable-line no-unused-vars
-  ReduxAction, // eslint-disable-line no-unused-vars
-  Workout, // eslint-disable-line no-unused-vars
-  WeightedActivity, // eslint-disable-line no-unused-vars
-  SingleSetAction, // eslint-disable-line no-unused-vars
+  Activity,
+  ReduxAction,
+  Workout,
+  WeightedActivity,
+  SingleSetAction,
 } from '../helpers/types';
 
 const activeWorkoutReducer = (

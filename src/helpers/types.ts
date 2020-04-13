@@ -1,5 +1,7 @@
-export interface ReduxAction<P> {
-  type: string;
+import { Action } from '@reduxjs/toolkit';
+import { Profile } from '../reducers/profileReducer';
+
+export interface ReduxAction<P> extends Action {
   payload?: P;
 }
 
@@ -17,12 +19,6 @@ export interface State {
   history: Workout[];
   editableWorkout?: Workout;
   editableActivity?: WeightedActivity & TimedActivity;
-}
-
-export interface Profile {
-  firstName: string;
-  lastName: string;
-  firstVisitDate: number;
 }
 
 export interface Settings {

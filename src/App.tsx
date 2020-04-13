@@ -1,5 +1,5 @@
 import React from 'react';
-import { createStore } from 'redux';
+import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 
@@ -17,7 +17,9 @@ import smoothscroll from 'smoothscroll-polyfill';
 // only when necessary.
 smoothscroll.polyfill();
 
-const store = createStore(rootReducer);
+const store = configureStore({
+  reducer: rootReducer,
+});
 
 const App = () => (
   <Provider store={store}>
