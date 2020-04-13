@@ -1,5 +1,6 @@
 import { Action } from '@reduxjs/toolkit';
 import { Profile } from '../reducers/profileReducer';
+import { Settings } from '../reducers/settingsReducer';
 
 export interface ReduxAction<P> extends Action {
   payload?: P;
@@ -19,11 +20,6 @@ export interface State {
   history: Workout[];
   editableWorkout?: Workout;
   editableActivity?: WeightedActivity & TimedActivity;
-}
-
-export interface Settings {
-  useKilos: boolean;
-  soundOn: boolean;
 }
 
 export interface Workouts {

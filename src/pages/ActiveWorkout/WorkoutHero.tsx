@@ -22,8 +22,7 @@ import {
 import { State, Workout } from '../../helpers/types';
 import { green, APP_URL } from '../../helpers/constants';
 import {
-  toggleSound as toggleSoundActionCreator,
-  ToggleSound,
+  useSound as useSoundActionCreator,
 } from '../../reducers/settingsReducer';
 import { useSelectedExercise } from '../../context/useSelectedExercise';
 
@@ -118,13 +117,13 @@ interface OwnProps {
   workout: Workout;
 }
 
-type Props = OwnProps & DispatchProps & StateProps;
+type Props = OwnProps & typeof mapDispatch & StateProps;
 
 const WorkoutHero: React.FC<Props> = ({
   workout,
   workout: { imageUrl, name },
   soundOn,
-  toggleSound,
+  useSound,
 }) => {
   const [ showShareMessage, setShowShareMessage ] = useState(false);
   const [ showCircleTick, setShowCircleTick ] = useState(false);
@@ -145,7 +144,7 @@ const WorkoutHero: React.FC<Props> = ({
   return (
     <Window imageUrl={imageUrl}>
       <ButtonGroup>
-        <Button onClick={() => toggleSound(!soundOn)}>
+        <Button onClick={() => useSound(!soundOn)}>
           {soundOn ? <SoundOn /> : <SoundOff />}
         </Button>
         <Button onClick={handleShare}>
@@ -180,19 +179,13 @@ interface StateProps {
   soundOn: boolean;
 }
 
-interface DispatchProps {
-  toggleSound: ToggleSound;
-}
-
-const mapStateToProps = (state: State): StateProps => ({
+const mapState = (state: State): StateProps => ({
   soundOn: state.settings.soundOn,
 });
 
-const mapDispatchToProps: DispatchProps = {
-  toggleSound: toggleSoundActionCreator,
-};
+const mapDispatch = { useSound: useSoundActionCreator };
 
-export default connect<StateProps, DispatchProps, OwnProps>(
-  mapStateToProps,
-  mapDispatchToProps,
+export default connect<StateProps, typeof mapDispatch, OwnProps>(
+  mapState,
+  mapDispatch,
 )(WorkoutHero);

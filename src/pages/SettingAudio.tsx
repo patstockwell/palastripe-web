@@ -8,15 +8,14 @@ import {
 } from '../helpers/types';
 import BackLinkBanner from '../components/BackLinkBanner';
 import {
-  toggleSound as toggleSoundActionCreator,
-  ToggleSound,
+  useSound as useSoundActionCreator,
 } from '../reducers/settingsReducer';
 
-type Props = StateProps & DispatchProps;
+type Props = StateProps & typeof mapDispatch;
 
 const SettingAudio: React.FC<Props> = ({
   soundOn: soundOnRedux,
-  toggleSound,
+  useSound,
 }) => {
   const [soundOnLocal, setSoundOnLocal] = useState(true);
   const [settingHasChanged, setSettingHasChanged] = useState(false);
@@ -31,7 +30,7 @@ const SettingAudio: React.FC<Props> = ({
           link: '/profile/',
           handleClick: () => {
             setSoundOnLocal(soundOn);
-            toggleSound(settingHasChanged
+            useSound(settingHasChanged
               ? soundOnLocal : soundOn);
           },
         }}
@@ -72,19 +71,13 @@ interface StateProps {
   soundOn: boolean;
 }
 
-interface DispatchProps {
-  toggleSound: ToggleSound;
-}
-
-const mapStateToProps = (state: State): StateProps => ({
+const mapState = (state: State): StateProps => ({
   soundOn: state.settings.soundOn,
 });
 
-const mapDispatchToProps: DispatchProps = {
-  toggleSound: toggleSoundActionCreator,
-};
+const mapDispatch = { useSound: useSoundActionCreator };
 
-export default connect<StateProps, DispatchProps, void>(
-  mapStateToProps,
-  mapDispatchToProps
+export default connect<StateProps, typeof mapDispatch, void>(
+  mapState,
+  mapDispatch
 )(SettingAudio);
