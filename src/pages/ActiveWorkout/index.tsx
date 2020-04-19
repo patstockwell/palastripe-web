@@ -13,8 +13,8 @@ import BackLinkBanner from '../../components/BackLinkBanner';
 import WorkoutHero from './WorkoutHero';
 import FourZeroFour from '../../pages/FourZeroFour';
 import { ActivityList } from './ActivityList';
-import { ReduxAction, State, Workouts } from '../../helpers/types';
-import { Workout } from '../../reducers/workoutsReducer';
+import { ReduxAction, State } from '../../helpers/types';
+import { Workout, Workouts} from '../../reducers/workoutsReducer';
 import {
   SET_ACTIVE_WORKOUT,
   FINISH_WORKOUT,

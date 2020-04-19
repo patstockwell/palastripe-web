@@ -3,10 +3,8 @@ import {
   LOCAL_STORAGE_ACTIVE_WORKOUT,
   LOCAL_STORAGE_WORKOUTS,
 } from '../helpers/constants';
-import {
-  State, // eslint-disable-line no-unused-vars
-  Workouts, // eslint-disable-line no-unused-vars
-} from '../helpers/types';
+import { State } from '../helpers/types';
+import { Workouts } from '../reducers/workoutsReducer';
 import circuitSpeed from '../workoutData/workouts/circuitSpeed';
 import fullBodyDumbbellStrength from '../workoutData/workouts/fullBodyDumbbellStrength';
 import upperBodyBurner from '../workoutData/workouts/upperBodyBurner';

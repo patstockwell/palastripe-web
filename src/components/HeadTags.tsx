@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import Helmet from 'react-helmet';
 import { Route, BrowserRouter as Router } from 'react-router-dom';
 import { RouteProps } from 'react-router-dom';
-import { State, Workouts } from '../helpers/types';
-import { Workout } from '../reducers/workoutsReducer';
+import { State } from '../helpers/types';
+import { Workouts, Workout } from '../reducers/workoutsReducer';
 
 const MetaTags: React.FC<StateProps> = ({ workouts, activeWorkout }) => {
 

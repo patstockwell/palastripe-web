@@ -1,11 +1,17 @@
-import { FINISH_WORKOUT } from '../helpers/constants';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import {
   Activity,
   ReduxAction,
   WeightedActivity,
-  Workouts,
   isTimed,
 } from '../helpers/types';
+
+export interface Workouts {
+  byId: {
+    [propName: string]: Workout,
+  };
+  allIds: string[];
+}
 
 export interface Workout {
   id: string;
@@ -23,12 +29,16 @@ export interface ActivityGroup {
   exercises: Activity[];
 }
 
+// const reducers = {
+//   updateWorkout: (state: 
+// };
+
 const workoutsReducer = (
   state: Workouts,
   action: ReduxAction<any>
 ): Workouts => {
   switch (action.type) {
-    case FINISH_WORKOUT: {
+    case 'FINISH_WORKOUT': {
       return finishWorkout(state, action.payload);
     }
     default: {
