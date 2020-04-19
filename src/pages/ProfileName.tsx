@@ -7,9 +7,7 @@ import { superLightGrey, gutterWidth } from '../helpers/constants';
 import {
   State, // eslint-disable-line
 } from '../helpers/types';
-import {
-  updateName as updateNameActionCreator,
-} from '../reducers/profileReducer';
+import { useUpdateName } from '../reducers/profileReducer';
 
 const EditPage = styled.div`
   height: 100vh;
@@ -54,17 +52,12 @@ const InputWrapper = styled.div`
   align-items: center;
 `;
 
-type Props = StateProps & typeof mapDispatch;
-
-const ProfileName: React.FC<Props> = ({
-  updateName,
-  firstName,
-  lastName,
-}) => {
+const ProfileName: React.FC<StateProps> = ({ firstName, lastName }) => {
   const [firstNameInput, setFirstNameInput] = useState('');
   const [lastNameInput, setLastNameInput] = useState('');
   const [firstNameHasChanged, setFirstNameHasChanged] = useState(false);
   const [lastNameHasChanged, setLastNameHasChanged] = useState(false);
+  const updateName = useUpdateName();
 
   return (
     <EditPage>
@@ -109,16 +102,11 @@ interface StateProps {
   lastName: string;
 }
 
-const mapDispatch = {
-  updateName: updateNameActionCreator,
-};
-
 const mapStateToProps = (state: State): StateProps => ({
   firstName: state.profile.firstName,
   lastName: state.profile.lastName,
 });
 
-export default connect<StateProps, typeof mapDispatch, void>(
+export default connect<StateProps, {}, {}>(
   mapStateToProps,
-  mapDispatch
 )(ProfileName);

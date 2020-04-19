@@ -1,4 +1,5 @@
 import { connect } from 'react-redux';
+import { State } from '../helpers/types';
 import {
   LOCAL_STORAGE_HISTORY,
   LOCAL_STORAGE_SETTINGS,
@@ -6,14 +7,8 @@ import {
   LOCAL_STORAGE_ACTIVE_WORKOUT,
   LOCAL_STORAGE_PROFILE,
 } from '../helpers/constants';
-import {
-  State, // eslint-disable-line no-unused-vars
-} from '../helpers/types';
-import { setFirstVisitDate } from '../reducers/profileReducer';
 
-type Props = typeof mapDispatch & State;
-
-const LocalStorageSetter: React.FC<Props> = props => {
+const LocalStorageSetter: React.FC<State> = props => {
   const {
     history,
     settings,
@@ -27,18 +22,9 @@ const LocalStorageSetter: React.FC<Props> = props => {
   localStorage.setItem(LOCAL_STORAGE_PROFILE, JSON.stringify(profile));
   localStorage.setItem(LOCAL_STORAGE_ACTIVE_WORKOUT, JSON.stringify(activeWorkout));
 
-  if (!profile.firstVisitDate) {
-    props.setFirstVisitDate();
-  }
-
   return null;
 };
 
 const mapState = (state: State): State => state;
 
-const mapDispatch = { setFirstVisitDate };
-
-export default connect<State, typeof mapDispatch, {}>(
-  mapState,
-  mapDispatch
-)(LocalStorageSetter);
+export default connect<State, {}, {}>(mapState)(LocalStorageSetter);
