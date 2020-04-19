@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useDispatch, connect } from 'react-redux';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { useParams, Link } from 'react-router-dom';
 
@@ -20,7 +20,7 @@ import {
   ONE_SECOND,
 } from '../../helpers/constants';
 import { useScrollPosition } from '../../context/useScrollPosition';
-import { addWorkoutToHistory } from '../../reducers/historyReducer';
+import { useAddWorkoutToHistory } from '../../reducers/historyReducer';
 
 const Button = styled.button<{ background?: string }>`
   ${buttonStyle}
@@ -48,7 +48,7 @@ const ActiveWorkout: React.FC<Props> = ({
   const [ count, setCount ] = useState(0);
   const [ restTime, setRestTime ] = useState(0);
   const { setActivityPageScrollPosition } = useScrollPosition();
-  const dispatch = useDispatch();
+  const addToHistory = useAddWorkoutToHistory();
 
   useInterval(() => {
     setCount(count + 1);
@@ -79,7 +79,7 @@ const ActiveWorkout: React.FC<Props> = ({
 
   const finishWorkoutWithAlertTransition = () => {
     finishWorkout(activeWorkout);
-    dispatch({ type: addWorkoutToHistory.type, payload: activeWorkout });
+    addToHistory(activeWorkout);
     setShowEndWorkoutAlert(false);
     setActivityPageScrollPosition(0);
   };
