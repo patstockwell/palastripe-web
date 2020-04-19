@@ -1,10 +1,19 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import {
-  Activity,
-  ReduxAction,
-  WeightedActivity,
-  isTimed,
-} from '../helpers/types';
+import { useDispatch } from 'react-redux';
+import { Activity, WeightedActivity, isTimed } from '../helpers/types';
+import circuitSpeed from '../workoutData/workouts/circuitSpeed';
+import fullBodyDumbbellStrength from '../workoutData/workouts/fullBodyDumbbellStrength';
+import upperBodyBurner from '../workoutData/workouts/upperBodyBurner';
+import overheadStrength from '../workoutData/workouts/overheadStrength';
+import fullBodyPower from '../workoutData/workouts/fullBodyPower';
+import glutesAndGlory from '../workoutData/workouts/glutesAndGlory';
+import squatAndBench from '../workoutData/workouts/squatAndBench';
+import shapeAndStrength from '../workoutData/workouts/shapeAndStrength';
+import pushAndPull from '../workoutData/workouts/pushAndPull';
+import legPower from '../workoutData/workouts/legPower';
+import compoundPyramids from '../workoutData/workouts/compoundPyramids';
+import { getLocalStorage } from '../helpers/functions';
+import {LOCAL_STORAGE_WORKOUTS} from '../helpers/constants';
 
 export interface Workouts {
   byId: {
@@ -28,24 +37,6 @@ export interface ActivityGroup {
   name: string;
   exercises: Activity[];
 }
-
-// const reducers = {
-//   updateWorkout: (state: 
-// };
-
-const workoutsReducer = (
-  state: Workouts,
-  action: ReduxAction<any>
-): Workouts => {
-  switch (action.type) {
-    case 'FINISH_WORKOUT': {
-      return finishWorkout(state, action.payload);
-    }
-    default: {
-      return state;
-    }
-  }
-};
 
 // create a hash of all exercises and their completion
 interface BoolHash {
@@ -118,32 +109,93 @@ const updateCompleted = (e: BoolHash) => (a: Activity) => {
   };
 };
 
-// When an active workout is finished, we update the existing workout template
-// that it came from. First update the weight values to match those executed in
-// the active workout, secondly, auto increment any exercises where all
-// sets and reps were completed successfully.
-const finishWorkout = (allWorkouts: Workouts, workout: Workout): Workouts => {
-  const completed: BoolHash = reduceCompletedExercises(workout);
-  const { id: wId } = workout;
-  const { exerciseGroups } = allWorkouts.byId[wId];
-  const newExerciseGroups = exerciseGroups.map((g: ActivityGroup, i) => {
-    const newExercises = g.exercises
-      .map(adjustWeight(workout, i))
-      .map(updateCompleted(completed));
+const allWorkoutTemplates = {
+  byId: {
+    'full-body-dumbbell-strength': fullBodyDumbbellStrength,
+    'circuit-speed': circuitSpeed,
+    'upper-body-burner': upperBodyBurner,
+    'overhead-strength': overheadStrength,
+    'full-body-power': fullBodyPower,
+    'glutes-and-glory': glutesAndGlory,
+    'squat-and-bench': squatAndBench,
+    'shape-and-strength': shapeAndStrength,
+    'push-and-pull': pushAndPull,
+    'leg-power': legPower,
+    'compound-pyramids': compoundPyramids,
+  },
+  allIds: [
+    'shape-and-strength',
+    'push-and-pull',
+    'leg-power',
+    'compound-pyramids',
+    'full-body-dumbbell-strength',
+    'squat-and-bench',
+    'circuit-speed',
+    'glutes-and-glory',
+    'upper-body-burner',
+    'overhead-strength',
+    'full-body-power',
+  ],
+};
 
-    return { ...g, exercises: newExercises };
-  });
+const mergeWorkouts = (
+  initial: Workouts,
+  localStorage: Workouts,
+): Workouts => {
+  if (localStorage === undefined) {
+    return initial;
+  }
+  // TODO: remove all the workouts from localStorage that don't meet version1
+  const { allIds: localIds, byId } = localStorage;
+  const { allIds: initialIds, byId: initialWorkouts } = initial;
+  // find all the ids not in localStorage
+  const missingIds = initialIds.filter(id => !localIds.includes(id));
+  // get each of the workouts for those ids
+  const missingWorkouts = missingIds
+    .map(id => initialWorkouts[id])
+    .reduce ((acc, w) => ({ ...acc, [w.id]: w }), {});
 
   return {
-    ...allWorkouts,
-    byId: {
-      ...allWorkouts.byId,
-      [wId]: {
-        ...allWorkouts.byId[wId],
-        exerciseGroups: newExerciseGroups,
-      },
-    },
+    byId: { ...byId, ...missingWorkouts },
+    allIds: [ ...localIds, ...missingIds ],
   };
 };
 
-export default workoutsReducer;
+const localStorageWorkouts = getLocalStorage(LOCAL_STORAGE_WORKOUTS, undefined);
+const initialState = mergeWorkouts(allWorkoutTemplates, localStorageWorkouts);
+
+const reducers = {
+  // When an active workout is finished, we update the existing workout template
+  // that it came from. First update the weight values to match those executed in
+  // the active workout, secondly, auto increment any exercises where all
+  // sets and reps were completed successfully.
+  updateWorkout: (state: Workouts, action: PayloadAction<Workout>) => {
+    const workout = action.payload;
+    const { id: wId } = workout;
+    const completed: BoolHash = reduceCompletedExercises(workout);
+    const { exerciseGroups } = state.byId[wId];
+    const newExerciseGroups = exerciseGroups.map((g: ActivityGroup, i) => {
+      const newExercises = g.exercises
+        .map(adjustWeight(workout, i))
+        .map(updateCompleted(completed));
+      return { ...g, exercises: newExercises };
+    });
+    state.byId[wId].exerciseGroups = newExerciseGroups;
+  },
+};
+
+const workoutsSlice = createSlice<Workouts, typeof reducers>({
+  reducers,
+  name: 'workouts',
+  initialState,
+});
+
+export const useUpdateWorkout = () => {
+  const dispatch = useDispatch();
+  return (workout: Workout) => dispatch({
+    type: workoutsSlice.actions.updateWorkout.type,
+    payload: workout,
+  });
+};
+
+export default workoutsSlice.reducer;

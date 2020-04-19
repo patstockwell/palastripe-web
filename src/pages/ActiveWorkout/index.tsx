@@ -14,7 +14,6 @@ import WorkoutHero from './WorkoutHero';
 import FourZeroFour from '../../pages/FourZeroFour';
 import { ActivityList } from './ActivityList';
 import { ReduxAction, State } from '../../helpers/types';
-import { Workout, Workouts} from '../../reducers/workoutsReducer';
 import {
   SET_ACTIVE_WORKOUT,
   FINISH_WORKOUT,
@@ -22,6 +21,11 @@ import {
 } from '../../helpers/constants';
 import { useScrollPosition } from '../../context/useScrollPosition';
 import { useAddWorkoutToHistory } from '../../reducers/historyReducer';
+import {
+  Workout,
+  Workouts,
+  useUpdateWorkout,
+} from '../../reducers/workoutsReducer';
 
 const Button = styled.button<{ background?: string }>`
   ${buttonStyle}
@@ -50,6 +54,7 @@ const ActiveWorkout: React.FC<Props> = ({
   const [ restTime, setRestTime ] = useState(0);
   const { setActivityPageScrollPosition } = useScrollPosition();
   const addToHistory = useAddWorkoutToHistory();
+  const updateWorkoutTemplate = useUpdateWorkout();
 
   useInterval(() => {
     setCount(count + 1);
@@ -81,6 +86,7 @@ const ActiveWorkout: React.FC<Props> = ({
   const finishWorkoutWithAlertTransition = () => {
     finishWorkout(activeWorkout);
     addToHistory(activeWorkout);
+    updateWorkoutTemplate(activeWorkout);
     setShowEndWorkoutAlert(false);
     setActivityPageScrollPosition(0);
   };
