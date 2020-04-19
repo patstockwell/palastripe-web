@@ -19,7 +19,8 @@ import {
   FINISH_WORKOUT,
   ONE_SECOND,
 } from '../../helpers/constants';
-import {useScrollPosition} from '../../context/useScrollPosition';
+import { useScrollPosition } from '../../context/useScrollPosition';
+import { addWorkoutToHistory } from '../../reducers/historyReducer';
 
 const Button = styled.button<{ background?: string }>`
   ${buttonStyle}
@@ -36,6 +37,7 @@ const LinkButton = styled(Link)<{ background?: string; fontColour?: string; }>`
 type Props = DispatchProps & StateProps;
 
 const ActiveWorkout: React.FC<Props> = ({
+  addToHistory,
   finishWorkout,
   workouts,
   activeWorkout,
@@ -77,6 +79,7 @@ const ActiveWorkout: React.FC<Props> = ({
 
   const finishWorkoutWithAlertTransition = () => {
     finishWorkout(activeWorkout);
+    addToHistory(activeWorkout);
     setShowEndWorkoutAlert(false);
     setActivityPageScrollPosition(0);
   };
@@ -128,6 +131,7 @@ const ActiveWorkout: React.FC<Props> = ({
 };
 
 interface DispatchProps {
+  addToHistory: typeof addWorkoutToHistory;
   finishWorkout: (w: Workout) => ReduxAction<{}>;
   setActiveWorkout: (workout: Workout) => ReduxAction<Workout>;
 }
@@ -139,6 +143,7 @@ interface StateProps {
 }
 
 const mapDispatchToProps: DispatchProps = {
+  addToHistory: addWorkoutToHistory,
   finishWorkout: (workout: Workout) => ({
     type: FINISH_WORKOUT,
     payload: workout,

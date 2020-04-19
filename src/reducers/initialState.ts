@@ -1,6 +1,5 @@
 import { getLocalStorage } from '../helpers/functions';
 import {
-  LOCAL_STORAGE_HISTORY,
   LOCAL_STORAGE_ACTIVE_WORKOUT,
   LOCAL_STORAGE_SETTINGS,
   LOCAL_STORAGE_PROFILE,
@@ -22,9 +21,7 @@ import pushAndPull from '../workoutData/workouts/pushAndPull';
 import legPower from '../workoutData/workouts/legPower';
 import compoundPyramids from '../workoutData/workouts/compoundPyramids';
 
-const initialState: State = {
-  // activeWorkout: undefined
-
+const initialState = {
   profile: {
     firstName: '',
     lastName: '',
@@ -64,8 +61,6 @@ const initialState: State = {
       'full-body-power',
     ],
   },
-
-  history: [],
 };
 
 const mergeWorkouts = (
@@ -95,13 +90,11 @@ const workouts = mergeWorkouts(initialState.workouts, localStorageWorkouts);
 
 export default {
   ...initialState,
-  activeWorkout: getLocalStorage(LOCAL_STORAGE_ACTIVE_WORKOUT, initialState.activeWorkout),
+  activeWorkout: getLocalStorage(LOCAL_STORAGE_ACTIVE_WORKOUT, undefined),
   settings: {
     ...initialState.settings,
     ...getLocalStorage(LOCAL_STORAGE_SETTINGS, initialState.settings),
   },
   workouts,
-  // Removing this line will destroy users' history. Never remove.
-  history: getLocalStorage(LOCAL_STORAGE_HISTORY, []),
   profile: getLocalStorage(LOCAL_STORAGE_PROFILE, initialState.profile),
 } as State;

@@ -94,6 +94,10 @@ const updateCompleted = (e: BoolHash) => (a: Activity) => {
   };
 };
 
+// When an active workout is finished, we update the existing workout template
+// that it came from. First update the weight values to match those executed in
+// the active workout, secondly, auto increment any exercises where all
+// sets and reps were completed successfully.
 const finishWorkout = (allWorkouts: Workouts, workout: Workout): Workouts => {
   const completed: BoolHash = reduceCompletedExercises(workout);
   const { id: wId } = workout;

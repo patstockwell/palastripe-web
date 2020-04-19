@@ -1,35 +1,24 @@
-import { FINISH_WORKOUT, DELETE_WORKOUT } from '../helpers/constants';
-import {
-  Workout, // eslint-disable-line no-unused-vars
-  ReduxAction, // eslint-disable-line no-unused-vars
-} from '../helpers/types';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { Workout } from '../helpers/types';
+import { LOCAL_STORAGE_HISTORY } from '../helpers/constants';
+import {getLocalStorage} from '../helpers/functions';
 
-const historyReducer = (state: Workout[], action: ReduxAction<any>) => {
-  switch (action.type) {
-    case FINISH_WORKOUT: {
-      return finishWorkout(state, action);
-    }
-    case DELETE_WORKOUT: {
-      return deleteWorkout(state, action);
-    }
-    default: {
-      return state;
-    }
-  }
+const reducers = {
+  addWorkoutToHistory: (state: Workout[], action: PayloadAction<Workout>) => {
+    state.push(action.payload);
+  },
+  deleteWorkout: (state: Workout[], action: PayloadAction<number>) => {
+    state.slice(action.payload, 1);
+  },
 };
 
-const deleteWorkout = (state: Workout[], action: ReduxAction<number>) => {
-  return state.filter((_: any, i) => i !== action.payload);
-};
+const historySlice = createSlice<Workout[], typeof reducers>({
+  reducers,
+  name: 'history',
+  // Removing this line will destroy users' history. Never remove.
+  initialState: getLocalStorage(LOCAL_STORAGE_HISTORY, []),
+});
 
-const finishWorkout = (state: Workout[], action: ReduxAction<Workout>) => {
-  return [
-    {
-      ...action.payload,
-      finishTime: Date.now(),
-    },
-    ...state,
-  ];
-};
+export const { deleteWorkout, addWorkoutToHistory } = historySlice.actions;
 
-export default historyReducer;
+export default historySlice.reducer;
