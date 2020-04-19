@@ -79,4 +79,4 @@ const mapStateToProps = (state: State): StateProps => ({
   lastName: state.profile.lastName,
 });
 
-export default connect<StateProps, void, void>(mapStateToProps)(Avatar);
+export default connect<StateProps, {}, {}>(mapStateToProps)(Avatar);

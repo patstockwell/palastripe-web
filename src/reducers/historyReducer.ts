@@ -1,11 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { Workout } from '../helpers/types';
 import { LOCAL_STORAGE_HISTORY } from '../helpers/constants';
-import {getLocalStorage} from '../helpers/functions';
+import { getLocalStorage } from '../helpers/functions';
 
 const reducers = {
   addWorkoutToHistory: (state: Workout[], action: PayloadAction<Workout>) => {
-    state.push(action.payload);
+    return [ { ...action.payload, finishTime: Date.now() }, ...state ];
   },
   deleteWorkout: (state: Workout[], action: PayloadAction<number>) => {
     state.slice(action.payload, 1);

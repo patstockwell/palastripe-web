@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
+import { useDispatch, connect } from 'react-redux';
 import styled from 'styled-components';
 import { useParams, Link } from 'react-router-dom';
 
@@ -37,7 +37,6 @@ const LinkButton = styled(Link)<{ background?: string; fontColour?: string; }>`
 type Props = DispatchProps & StateProps;
 
 const ActiveWorkout: React.FC<Props> = ({
-  addToHistory,
   finishWorkout,
   workouts,
   activeWorkout,
@@ -49,6 +48,7 @@ const ActiveWorkout: React.FC<Props> = ({
   const [ count, setCount ] = useState(0);
   const [ restTime, setRestTime ] = useState(0);
   const { setActivityPageScrollPosition } = useScrollPosition();
+  const dispatch = useDispatch();
 
   useInterval(() => {
     setCount(count + 1);
@@ -79,7 +79,7 @@ const ActiveWorkout: React.FC<Props> = ({
 
   const finishWorkoutWithAlertTransition = () => {
     finishWorkout(activeWorkout);
-    addToHistory(activeWorkout);
+    dispatch({ type: addWorkoutToHistory.type, payload: activeWorkout });
     setShowEndWorkoutAlert(false);
     setActivityPageScrollPosition(0);
   };
@@ -131,7 +131,6 @@ const ActiveWorkout: React.FC<Props> = ({
 };
 
 interface DispatchProps {
-  addToHistory: typeof addWorkoutToHistory;
   finishWorkout: (w: Workout) => ReduxAction<{}>;
   setActiveWorkout: (workout: Workout) => ReduxAction<Workout>;
 }
@@ -143,7 +142,6 @@ interface StateProps {
 }
 
 const mapDispatchToProps: DispatchProps = {
-  addToHistory: addWorkoutToHistory,
   finishWorkout: (workout: Workout) => ({
     type: FINISH_WORKOUT,
     payload: workout,

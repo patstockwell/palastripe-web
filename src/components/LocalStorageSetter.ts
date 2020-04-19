@@ -38,7 +38,7 @@ const mapState = (state: State): State => state;
 
 const mapDispatch = { setFirstVisitDate };
 
-export default connect<State, typeof mapDispatch, void>(
+export default connect<State, typeof mapDispatch, {}>(
   mapState,
   mapDispatch
 )(LocalStorageSetter);

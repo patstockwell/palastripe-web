@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import uuidv4 from 'uuid/v4';
 
-import ActivityListHeading from './ActivityListHeading';
+import { ActivityListHeading } from './ActivityListHeading';
 import ActivityTile from '../ActivityTile';
 import {
   State, // eslint-disable-line no-unused-vars
@@ -60,7 +60,7 @@ const mapStateToProps = ({ editableWorkout }: State): StateProps => ({
   editableWorkout,
 });
 
-export default connect<StateProps, void, void>(
+export default connect<StateProps, {}, {}>(
   mapStateToProps,
   null
 )(EditableActivityList);

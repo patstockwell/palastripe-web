@@ -66,7 +66,7 @@ const mapStateToProps = (state: State): StateProps => ({
   activeWorkout: state.activeWorkout,
 });
 
-export const SelectedExerciseProvider = connect<StateProps, void, void>(
+export const SelectedExerciseProvider = connect<StateProps, {}, {}>(
   mapStateToProps
 )(SelectedExerciseProviderComponent);
 

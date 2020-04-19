@@ -70,6 +70,6 @@ const mapStateToProps = (state: State): StateProps => ({
   useKilos: state.settings.useKilos,
 });
 
-export default connect<StateProps, void, void>(
+export default connect<StateProps, {}, {}>(
   mapStateToProps
 )(UnitOfMeasurement);

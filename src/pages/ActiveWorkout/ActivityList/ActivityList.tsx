@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import ActivityTile from '../ActivityTile';
 import ColouredDot from '../../../assets/svg/ColouredDot';
-import ActivityListHeading from './ActivityListHeading';
+import { ActivityListHeading } from './ActivityListHeading';
 import {
   activityHeadingHeight,
   orange,

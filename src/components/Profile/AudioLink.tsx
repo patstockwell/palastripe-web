@@ -70,6 +70,6 @@ const mapStateToProps = (state: State): StateProps => ({
   soundOn: state.settings.soundOn,
 });
 
-export default connect<StateProps, void, void>(
+export default connect<StateProps, {}, {}>(
   mapStateToProps
 )(AudioLink);

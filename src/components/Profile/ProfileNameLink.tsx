@@ -77,6 +77,6 @@ const mapStateToProps = (state: State): StateProps => ({
   lastName: state.profile.lastName,
 });
 
-export default connect<StateProps, void, void>(
+export default connect<StateProps, {}, {}>(
   mapStateToProps
 )(ProfileNameLink);

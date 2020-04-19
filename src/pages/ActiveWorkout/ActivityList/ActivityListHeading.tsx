@@ -1,14 +1,9 @@
 import React, { useState} from 'react';
-import { connect } from 'react-redux';
 import styled from 'styled-components';
-import {
-  ReduxAction, // eslint-disable-line no-unused-vars
-} from '../../../helpers/types';
 import {
   activityHeadingHeight,
   lightLightGrey,
   gutterWidth,
-  EDIT_WORKOUT_UPDATE_GROUP_NAME,
 } from '../../../helpers/constants';
 
 const HeadingPanel = styled.div<{ top: number }>`
@@ -52,7 +47,7 @@ const Sets = styled.p`
   flex-shrink: 0;
 `;
 
-interface OwnProps {
+interface Props {
   activityTotal?: number;
   heading: string;
   stickyTop?: number;
@@ -60,16 +55,13 @@ interface OwnProps {
   completedActivities?: number;
 }
 
-type Props = OwnProps & DispatchProps;
-
-const ActivityListHeading: React.FC<Props> = ({
-  updateName,
+export const ActivityListHeading: React.FC<Props> = ({
   activityTotal,
   completedActivities,
   children,
   heading,
   stickyTop,
-  id,
+  // id,
 }) => {
   const [showInput, setShowInput] = useState(false);
   const handleKeyPress = (e: React.KeyboardEvent) => {
@@ -78,10 +70,10 @@ const ActivityListHeading: React.FC<Props> = ({
     }
   };
 
-  const handleInputChange = (e: React.ChangeEvent) => {
-    const target = e.target as HTMLTextAreaElement;
-    updateName(id, target.value);
-  };
+  // const handleInputChange = (e: React.ChangeEvent) => {
+  //   const target = e.target as HTMLTextAreaElement;
+  //   updateName(id, target.value);
+  // };
 
   return (
     <li key={heading}>
@@ -91,7 +83,6 @@ const ActivityListHeading: React.FC<Props> = ({
             onBlur={() => setShowInput(false)}
             autoFocus
             value={heading}
-            onChange={handleInputChange}
             placeholder={heading}
             onKeyDown={handleKeyPress}
           />
@@ -111,20 +102,3 @@ const ActivityListHeading: React.FC<Props> = ({
     </li>
   );
 };
-
-interface DispatchProps {
-  updateName: (id: string, name: string) => (
-    ReduxAction<{ id: string, name: string }>);
-}
-
-const mapDispatchToProps: DispatchProps = ({
-  updateName: (id, name) => ({
-    type: EDIT_WORKOUT_UPDATE_GROUP_NAME,
-    payload: { id, name },
-  }),
-});
-
-export default connect<void, DispatchProps, OwnProps>(
-  undefined,
-  mapDispatchToProps
-)(ActivityListHeading);
