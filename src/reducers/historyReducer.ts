@@ -21,7 +21,8 @@ const reducers = {
     state: Workout[],
     action: PayloadAction<number>
   ) => {
-    state.slice(action.payload, 1);
+    console.log(action.payload);
+    state.splice(action.payload, 1);
   },
 };
 

@@ -2,12 +2,11 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 
-import { DELETE_WORKOUT } from '../../helpers/constants';
 import { getInitials, formatDate } from '../../helpers/functions';
 import ActivityHistoryTile from './ActivityHistoryTile';
-import { ReduxAction, State } from '../../helpers/types';
+import { State } from '../../helpers/types';
 import { Workout } from '../../reducers/workoutsReducer';
-import { useScrollPosition } from '../../context/useScrollPosition';
+import { useDeleteWorkout } from '../../reducers/historyReducer';
 
 const BottomSpace = styled.div`
   height: 200px;
@@ -40,11 +39,10 @@ interface OwnProps {
   history: Workout[];
 }
 
-type Props = OwnProps & DispatchProps & StateProps;
+type Props = OwnProps & StateProps;
 
 const ActivityHistoryList: React.FC<Props> = ({
   history,
-  deleteWorkout,
   firstName,
   lastName,
   useKilos,
@@ -52,7 +50,7 @@ const ActivityHistoryList: React.FC<Props> = ({
 }) => {
   // undefined is used to denote no tile in list is selected
   const [showMenuIndex, setShowMenuIndex] = useState(undefined);
-  const {} = useScrollPosition();
+  const deleteWorkout = useDeleteWorkout();
 
   const historyTiles = history.map((w, i) => (
     <ActivityHistoryTile
@@ -88,10 +86,6 @@ interface StateProps {
   firstVisitDate: number;
 }
 
-interface DispatchProps {
-  deleteWorkout: (i: number) => ReduxAction<number>;
-}
-
 const mapStateToProps = (state: State): StateProps => ({
   firstName: state.profile.firstName,
   lastName: state.profile.lastName,
@@ -99,14 +93,6 @@ const mapStateToProps = (state: State): StateProps => ({
   firstVisitDate: state.profile.firstVisitDate,
 });
 
-const mapDispatchToProps: DispatchProps = ({
-  deleteWorkout: index => ({
-    type: DELETE_WORKOUT,
-    payload: index,
-  }),
-});
-
-export default connect<StateProps, DispatchProps, OwnProps>(
+export default connect<StateProps, {}, OwnProps>(
   mapStateToProps,
-  mapDispatchToProps
 )(ActivityHistoryList);

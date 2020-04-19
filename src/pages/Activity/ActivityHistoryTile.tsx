@@ -83,7 +83,7 @@ const SummaryLink = styled(Link)`
     position: absolute;
     top: 0;
     bottom: 0;
-    right: 0;
+    right: 50px;
     left: 0;
   }
 `;
