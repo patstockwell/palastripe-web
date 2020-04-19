@@ -1,11 +1,7 @@
 import React from 'react';
-import {
-  RouteProps, // eslint-disable-line no-unused-vars
-} from 'react-router-dom';
-import {
-  State, // eslint-disable-line no-unused-vars
-  Workout, // eslint-disable-line no-unused-vars
-} from '../../helpers/types';
+import { RouteProps } from 'react-router-dom';
+import { State } from '../../helpers/types';
+import { Workout } from '../../reducers/workoutsReducer';
 
 import ActivityHistoryList from './ActivityHistoryList';
 import { connect } from 'react-redux';

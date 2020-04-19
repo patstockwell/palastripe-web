@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
-import { Workout } from '../helpers/types';
+import { Workout } from '../reducers/workoutsReducer';
 import { LOCAL_STORAGE_HISTORY } from '../helpers/constants';
 import { getLocalStorage } from '../helpers/functions';
 

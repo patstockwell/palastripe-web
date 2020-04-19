@@ -1,6 +1,7 @@
 import { Action } from '@reduxjs/toolkit';
 import { Profile } from '../reducers/profileReducer';
 import { Settings } from '../reducers/settingsReducer';
+import { Workout } from '../reducers/workoutsReducer';
 
 export interface ReduxAction<P> extends Action {
   payload?: P;
@@ -27,22 +28,6 @@ export interface Workouts {
     [propName: string]: Workout,
   };
   allIds: string[];
-}
-
-export interface Workout {
-  id: string;
-  imageUrl?: string;
-  startTime?: number;
-  finishTime?: number;
-  name: string;
-  version?: string;
-  exerciseGroups: ActivityGroup[];
-}
-
-export interface ActivityGroup {
-  id: string;
-  name: string;
-  exercises: Activity[];
 }
 
 // Activity stuff

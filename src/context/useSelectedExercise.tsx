@@ -1,6 +1,7 @@
 import React, { createContext, useState } from 'react';
 import { connect } from 'react-redux';
-import { State, Workout } from '../helpers/types';
+import { State } from '../helpers/types';
+import { Workout } from '../reducers/workoutsReducer';
 
 const SelectedExerciseContext = createContext<UseSelectedExercise>(null);
 

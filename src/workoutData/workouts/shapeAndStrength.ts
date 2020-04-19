@@ -1,4 +1,4 @@
-import { Workout } from '../../helpers/types';
+import { Workout } from '../../reducers/workoutsReducer';
 import { VERSION_ONE } from '../../helpers/constants';
 import Image from '../../assets/images/overhead-press.jpg';
 

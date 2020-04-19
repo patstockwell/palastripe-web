@@ -19,7 +19,8 @@ import {
   formatMinutes,
   calculateWorkoutTime,
 } from '../../helpers/functions';
-import { State, Workout } from '../../helpers/types';
+import { State } from '../../helpers/types';
+import { Workout } from '../../reducers/workoutsReducer';
 import { green, APP_URL } from '../../helpers/constants';
 import { useSoundToggle } from '../../reducers/settingsReducer';
 import { useSelectedExercise } from '../../context/useSelectedExercise';

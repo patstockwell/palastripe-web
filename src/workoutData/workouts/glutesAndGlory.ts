@@ -1,4 +1,4 @@
-import { Workout } from '../../helpers/types';
+import { Workout } from '../../reducers/workoutsReducer';
 import { VERSION_ONE } from '../../helpers/constants';
 import Image from '../../assets/images/active-athlete-barbell-2261482.jpg';
 

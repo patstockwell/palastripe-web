@@ -13,10 +13,10 @@ import { convertWeight } from '../helpers/functions';
 import {
   Activity,
   ReduxAction,
-  Workout,
   WeightedActivity,
   SingleSetAction,
 } from '../helpers/types';
+import { Workout } from '../reducers/workoutsReducer';
 
 const activeWorkoutReducer = (
   state: Workout,

@@ -3,9 +3,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { opaqueImageInAfter } from './SharedStyles';
-import {
-  Workout, // eslint-disable-line no-unused-vars
-} from '../helpers/types';
+import { Workout } from '../reducers/workoutsReducer';
 import {
   gutterWidth,
   superLightGrey,

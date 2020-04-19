@@ -5,11 +5,8 @@ import uuidv4 from 'uuid/v4';
 
 import { ActivityListHeading } from './ActivityListHeading';
 import ActivityTile from '../ActivityTile';
-import {
-  State, // eslint-disable-line no-unused-vars
-  Workout,  // eslint-disable-line no-unused-vars
-  ActivityGroup,  // eslint-disable-line no-unused-vars
-} from '../../../helpers/types';
+import { State } from '../../../helpers/types';
+import { Workout, ActivityGroup } from '../../../reducers/workoutsReducer';
 import { unorderedListStyle } from '../../../components/SharedStyles';
 import { bannerHeight } from '../../../helpers/constants';
 

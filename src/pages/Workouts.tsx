@@ -1,18 +1,12 @@
 import React from 'react';
-import {
-  RouteProps, // eslint-disable-line no-unused-vars
-} from 'react-router-dom';
+import { RouteProps } from 'react-router-dom';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import WorkoutTile from '../components/WorkoutTile';
 import Page from '../components/Page';
-import {
-  State, // eslint-disable-line no-unused-vars
-  Workout, // eslint-disable-line no-unused-vars
-} from '../helpers/types';
-import {
-  navBarHeight,
-} from '../helpers/constants';
+import { State } from '../helpers/types';
+import { navBarHeight } from '../helpers/constants';
+import { Workout } from '../reducers/workoutsReducer';
 
 const EmptySpace = styled.div`
   height: ${2 * navBarHeight}px;

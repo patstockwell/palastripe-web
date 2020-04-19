@@ -8,11 +8,8 @@ import styled from 'styled-components';
 
 import ActivitySummary from '../components/ActivitySummary';
 import BackLinkBanner from '../components/BackLinkBanner';
-import {
-  State,
-  Workout,
-  Activity,
-} from '../helpers/types';
+import { State, Activity } from '../helpers/types';
+import { Workout } from '../reducers/workoutsReducer';
 import { getTimeSince } from '../helpers/functions';
 import { bannerHeight } from '../helpers/constants';
 

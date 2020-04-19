@@ -6,7 +6,8 @@ import AlertConfirm from '../../components/AlertConfirm';
 import TrashCan from '../../assets/svg/TrashCan';
 import Dots from '../../assets/svg/Dots';
 import Avatar from '../../components/Avatar';
-import { ReduxAction, Workout } from '../../helpers/types';
+import { Workout } from '../../reducers/workoutsReducer';
+import { ReduxAction } from '../../helpers/types';
 import {
   getDiffInMinutes,
   getHoursAndMinutes,

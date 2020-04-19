@@ -8,7 +8,8 @@ import {
   orange,
   tileMinHeight,
 } from '../../../helpers/constants';
-import { Activity, Workout } from '../../../helpers/types';
+import { Activity } from '../../../helpers/types';
+import { Workout } from '../../../reducers/workoutsReducer';
 import { buttonStyle, unorderedListStyle } from '../../../components/SharedStyles';
 import { useSelectedExercise } from '../../../context/useSelectedExercise';
 

@@ -1,10 +1,6 @@
 import uuidv4 from 'uuid/v4';
-import {
-  ReduxAction, // eslint-disable-line no-unused-vars
-  ActivityGroup, // eslint-disable-line no-unused-vars
-  Activity, // eslint-disable-line no-unused-vars
-  Workout, // eslint-disable-line no-unused-vars
-} from '../helpers/types';
+import { ReduxAction, Activity } from '../helpers/types';
+import { Workout, ActivityGroup } from '../reducers/workoutsReducer';
 import {
   EDIT_WORKOUT_ADD_SET,
   EDIT_WORKOUT_ADD_GROUP,

@@ -18,10 +18,10 @@ import {
 import {
   isTimed,
   Activity,
-  ActivityGroup,
   Exercise,
-  Workout,
 } from './types';
+
+import { ActivityGroup, Workout } from '../reducers/workoutsReducer';
 
 export const convertWeight = (
   weightInKilos: number,

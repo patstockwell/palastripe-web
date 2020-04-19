@@ -1,13 +1,27 @@
 import { FINISH_WORKOUT } from '../helpers/constants';
 import {
   Activity,
-  ActivityGroup,
   ReduxAction,
-  Workout,
   WeightedActivity,
   Workouts,
   isTimed,
 } from '../helpers/types';
+
+export interface Workout {
+  id: string;
+  imageUrl?: string;
+  startTime?: number;
+  finishTime?: number;
+  name: string;
+  version?: string;
+  exerciseGroups: ActivityGroup[];
+}
+
+export interface ActivityGroup {
+  id: string;
+  name: string;
+  exercises: Activity[];
+}
 
 const workoutsReducer = (
   state: Workouts,

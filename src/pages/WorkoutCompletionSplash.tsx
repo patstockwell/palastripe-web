@@ -1,7 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import { State, Workout } from '../helpers/types';
+import { State } from '../helpers/types';
+import { Workout } from '../reducers/workoutsReducer';
 import Banner from '../components/Banner';
 import GoldCup from '../assets/svg/GoldCup';
 import { workoutTitleStyle, buttonStyle } from '../components/SharedStyles';

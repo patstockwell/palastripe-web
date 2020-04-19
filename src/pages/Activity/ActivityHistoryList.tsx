@@ -5,11 +5,8 @@ import styled from 'styled-components';
 import { DELETE_WORKOUT } from '../../helpers/constants';
 import { getInitials, formatDate } from '../../helpers/functions';
 import ActivityHistoryTile from './ActivityHistoryTile';
-import {
-  ReduxAction, // eslint-disable-line no-unused-vars
-  State, // eslint-disable-line no-unused-vars
-  Workout, // eslint-disable-line no-unused-vars
-} from '../../helpers/types';
+import { ReduxAction, State } from '../../helpers/types';
+import { Workout } from '../../reducers/workoutsReducer';
 import { useScrollPosition } from '../../context/useScrollPosition';
 
 const BottomSpace = styled.div`
