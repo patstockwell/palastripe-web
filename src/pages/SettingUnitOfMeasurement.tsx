@@ -11,9 +11,7 @@ import {
   charcoal,
 } from '../helpers/constants';
 import CheckboxTick from '../components/CheckboxTick';
-import {
-  useKilos as useKilosActionCreator,
-} from '../reducers/settingsReducer';
+import { useKilosToggle } from '../reducers/settingsReducer';
 
 export const EditPage = styled.div`
   height: 100vh;
@@ -41,14 +39,12 @@ export const HiddenInput = styled.input`
   left: -9999px;
 `;
 
-type Props = StateProps & typeof mapDispatch;
-
-const SettingUnitOfMeasurement: React.FC<Props> = ({
+const SettingUnitOfMeasurement: React.FC<StateProps> = ({
   useKilos: useKilosRedux,
-  useKilosAsUnitOfMeasurement,
 }) => {
   const [useKilosLocal, setUseKilosLocal] = useState(true);
   const [measurementHasChanged, setMeasurementHasChanged] = useState(false);
+  const useKilosAsUnitOfMeasurement = useKilosToggle();
   const useKilos = measurementHasChanged ? useKilosLocal : useKilosRedux;
 
   return (
@@ -105,9 +101,6 @@ const mapState = (state: State): StateProps => ({
   useKilos: state.settings.useKilos,
 });
 
-const mapDispatch = { useKilosAsUnitOfMeasurement: useKilosActionCreator };
-
-export default connect<StateProps, typeof mapDispatch, void>(
+export default connect<StateProps, {}, void>(
   mapState,
-  mapDispatch
 )(SettingUnitOfMeasurement);

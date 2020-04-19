@@ -7,18 +7,12 @@ import {
   State, // eslint-disable-line no-unused-vars
 } from '../helpers/types';
 import BackLinkBanner from '../components/BackLinkBanner';
-import {
-  useSound as useSoundActionCreator,
-} from '../reducers/settingsReducer';
+import { useSoundToggle } from '../reducers/settingsReducer';
 
-type Props = StateProps & typeof mapDispatch;
-
-const SettingAudio: React.FC<Props> = ({
-  soundOn: soundOnRedux,
-  useSound,
-}) => {
+const SettingAudio: React.FC<StateProps> = ({ soundOn: soundOnRedux }) => {
   const [soundOnLocal, setSoundOnLocal] = useState(true);
   const [settingHasChanged, setSettingHasChanged] = useState(false);
+  const useSound = useSoundToggle();
   const soundOn = settingHasChanged ? soundOnLocal : soundOnRedux;
 
   return (
@@ -75,9 +69,6 @@ const mapState = (state: State): StateProps => ({
   soundOn: state.settings.soundOn,
 });
 
-const mapDispatch = { useSound: useSoundActionCreator };
-
-export default connect<StateProps, typeof mapDispatch, void>(
+export default connect<StateProps, {}, {}>(
   mapState,
-  mapDispatch
 )(SettingAudio);

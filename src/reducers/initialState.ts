@@ -1,8 +1,6 @@
 import { getLocalStorage } from '../helpers/functions';
 import {
   LOCAL_STORAGE_ACTIVE_WORKOUT,
-  LOCAL_STORAGE_SETTINGS,
-  LOCAL_STORAGE_PROFILE,
   LOCAL_STORAGE_WORKOUTS,
 } from '../helpers/constants';
 import {
@@ -26,11 +24,6 @@ const initialState = {
     firstName: '',
     lastName: '',
     firstVisitDate: Date.now(),
-  },
-
-  settings: {
-    useKilos: true,
-    soundOn: false,
   },
 
   workouts: {
@@ -91,10 +84,5 @@ const workouts = mergeWorkouts(initialState.workouts, localStorageWorkouts);
 export default {
   ...initialState,
   activeWorkout: getLocalStorage(LOCAL_STORAGE_ACTIVE_WORKOUT, undefined),
-  settings: {
-    ...initialState.settings,
-    ...getLocalStorage(LOCAL_STORAGE_SETTINGS, initialState.settings),
-  },
   workouts,
-  profile: getLocalStorage(LOCAL_STORAGE_PROFILE, initialState.profile),
 } as State;

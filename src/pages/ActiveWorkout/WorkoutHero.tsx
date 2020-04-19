@@ -21,9 +21,7 @@ import {
 } from '../../helpers/functions';
 import { State, Workout } from '../../helpers/types';
 import { green, APP_URL } from '../../helpers/constants';
-import {
-  useSound as useSoundActionCreator,
-} from '../../reducers/settingsReducer';
+import { useSoundToggle } from '../../reducers/settingsReducer';
 import { useSelectedExercise } from '../../context/useSelectedExercise';
 
 export const Window = styled.div<{ colour?: string, imageUrl?: string }>`
@@ -117,18 +115,18 @@ interface OwnProps {
   workout: Workout;
 }
 
-type Props = OwnProps & typeof mapDispatch & StateProps;
+type Props = OwnProps & StateProps;
 
 const WorkoutHero: React.FC<Props> = ({
   workout,
   workout: { imageUrl, name },
   soundOn,
-  useSound,
 }) => {
   const [ showShareMessage, setShowShareMessage ] = useState(false);
   const [ showCircleTick, setShowCircleTick ] = useState(false);
   const { pathname } = useLocation();
   const { setSelectedExercise } = useSelectedExercise();
+  const useSound = useSoundToggle();
   const time = formatMinutes(calculateWorkoutTime(workout));
 
   const handleShare = () => {
@@ -183,9 +181,6 @@ const mapState = (state: State): StateProps => ({
   soundOn: state.settings.soundOn,
 });
 
-const mapDispatch = { useSound: useSoundActionCreator };
-
-export default connect<StateProps, typeof mapDispatch, OwnProps>(
+export default connect<StateProps, {}, OwnProps>(
   mapState,
-  mapDispatch,
 )(WorkoutHero);

@@ -1,4 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import {getLocalStorage} from '../helpers/functions';
+import {LOCAL_STORAGE_PROFILE} from '../helpers/constants';
 
 export interface Profile {
   firstName: string;
@@ -23,11 +25,11 @@ const reducers = {
 
 const profileSlice = createSlice<Profile, typeof reducers>({
   name: 'profile',
-  initialState: {
+  initialState: getLocalStorage(LOCAL_STORAGE_PROFILE, {
     firstName: '',
     lastName: '',
     firstVisitDate: Date.now(),
-  },
+  }),
   reducers,
 });
 

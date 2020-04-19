@@ -1,4 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import { useDispatch } from 'react-redux';
+import { getLocalStorage } from '../helpers/functions';
+import { LOCAL_STORAGE_SETTINGS } from '../helpers/constants';
 
 export interface Settings {
   useKilos: boolean;
@@ -16,13 +19,27 @@ const reducers = {
 
 const settingsSlice = createSlice<Settings, typeof reducers>({
   name: 'settings',
-  initialState: {
+  initialState: getLocalStorage(LOCAL_STORAGE_SETTINGS, {
     soundOn: false,
     useKilos: true,
-  },
+  }),
   reducers,
 });
 
-export const { useSound, useKilos } = settingsSlice.actions;
+export const useKilosToggle = () => {
+  const dispatch = useDispatch();
+  return (useKilos: boolean) => dispatch({
+    type: settingsSlice.actions.useKilos.type,
+    payload: useKilos,
+  });
+};
+
+export const useSoundToggle = () => {
+  const dispatch = useDispatch();
+  return (soundOn: boolean) => dispatch({
+    type: settingsSlice.actions.useSound.type,
+    payload: soundOn,
+  });
+};
 
 export default settingsSlice.reducer;
