@@ -59,9 +59,6 @@
     "eslint-plugin-react": "^7.12.4",
     "gh-pages": "^2.0.1",
     "react-snap": "^1.23.0",
-    "tslint": "^5.14.0",
-    "tslint-eslint-rules": "^5.4.0",
-    "tslint-react": "^4.0.0",
     "typescript": "^3.7.2",
     "typescript-tslint-plugin": "^0.5.5",
     "workbox-build": "^4.3.1"
