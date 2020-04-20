@@ -119,8 +119,8 @@ const setActiveWorkout = (_state: Workout, action: PayloadAction<Workout>) => {
   return action.payload;
 };
 
-// simply set the active workout to undefined when the workout is complete
-const finishWorkout = (_state: Workout, _action: Action) => undefined;
+// simply set the active workout to null when the workout is complete
+const finishWorkout = (_state: Workout, _action: Action) => null;
 
 const reducers = {
   incrementWeight,
@@ -134,7 +134,7 @@ const reducers = {
 const activeWorkoutSlice = createSlice<Workout, typeof reducers>({
   reducers,
   name: 'activeWorkout',
-  initialState: getLocalStorage(LOCAL_STORAGE_ACTIVE_WORKOUT, undefined),
+  initialState: getLocalStorage(LOCAL_STORAGE_ACTIVE_WORKOUT, null),
 });
 
 const { actions } = activeWorkoutSlice;
