@@ -3,10 +3,6 @@ import styled from 'styled-components';
 import AdditionSymbol from '../../../assets/svg/AdditionSymbol';
 import SubtractionSymbol from '../../../assets/svg/SubtractionSymbol';
 import { pink, purple } from '../../../helpers/constants';
-import {
-  SingleSetAction, // eslint-disable-line no-unused-vars
-  ReduxAction, // eslint-disable-line no-unused-vars
-} from '../../../helpers/types';
 
 const IconWrapper = styled.div`
   height: 20px;
@@ -61,12 +57,9 @@ const Panel = styled.div`
   margin-bottom: 12px;
 `;
 
-// need to use a type defined in an action creator instead of redifining it here
-type DispatchFunction = () => ReduxAction<SingleSetAction & any>;
-
 interface Props {
-  handleDecrement: DispatchFunction;
-  handleIncrement: DispatchFunction;
+  handleDecrement: () => any;
+  handleIncrement: () => any;
   percentageComplete?: number;
 }
 

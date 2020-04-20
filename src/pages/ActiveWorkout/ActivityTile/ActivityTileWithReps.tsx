@@ -1,24 +1,13 @@
-import React, { memo, useRef, useState, useEffect } from 'react';
-import { connect } from 'react-redux';
+import React, { useRef, useState, useEffect } from 'react';
+import { useSelector } from 'react-redux';
 import { animated } from 'react-spring';
 import styled from 'styled-components';
-import {
-  Dispatch, // eslint-disable-line no-unused-vars
-} from 'redux';
 
 import HiddenArea from './HiddenArea';
 import ToggleSetCompleteButton from './ToggleSetCompleteButton';
 import { tileStyle } from './ActivityTileSharedStyles';
 import DownArrow from '../../../assets/svg/DownArrow';
-import {
-  ReduxAction, // eslint-disable-line no-unused-vars
-  State, // eslint-disable-line no-unused-vars
-  SingleSetAction, // eslint-disable-line no-unused-vars
-  WeightedActivity, // eslint-disable-line no-unused-vars
-} from '../../../helpers/types';
-import {
-  TOGGLE_SET_COMPLETE,
-} from '../../../helpers/constants';
+import { WeightedActivity, State } from '../../../helpers/types';
 import {
   scrollElementToTop,
   useHiddenAreaAnimation,
@@ -31,6 +20,7 @@ import {
   Duration,
   VisibleArea,
 } from './index';
+import { useToggleSetComplete } from '../../../reducers/activeWorkoutReducer';
 
 const Tile = styled.li<{ selected: boolean }>`
   ${tileStyle}
@@ -53,7 +43,7 @@ export const ShowHiddenAreaArrowWrapper = styled(animated.button)`
   transform: translateX(-50%);
 `;
 
-interface OwnProps {
+interface Props {
   activity: WeightedActivity;
   groupId: string;
   toggleShowHiddenArea: () => void;
@@ -62,8 +52,6 @@ interface OwnProps {
   selected: boolean;
   showHiddenArea: boolean;
 }
-
-type Props = DispatchProps & OwnProps & StateProps;
 
 const ActivityTileWithReps: React.FC<Props> = ({
   activity,
@@ -76,11 +64,11 @@ const ActivityTileWithReps: React.FC<Props> = ({
   toggleShowHiddenArea,
   selected,
   showHiddenArea,
-  toggleSetComplete,
-  useKilos,
 }) => {
   const [ finishedAnimating, setFinishedAnimating ] = useState(false);
   const listElement = useRef<HTMLLIElement>(null);
+  const toggleSetComplete = useToggleSetComplete();
+  const useKilos = useSelector((state: State) => state.settings.useKilos);
   const animatedStyles = useHiddenAreaAnimation({
     showHiddenArea,
     onRest: () => setFinishedAnimating(true),
@@ -98,6 +86,11 @@ const ActivityTileWithReps: React.FC<Props> = ({
   }, [showHiddenArea, selected, finishedAnimating]);
 
   const { label, weight } = formatWeight(weightInKilos, useKilos);
+  const handleClick = () => {
+    if (selected) {
+      toggleSetComplete({ groupId, index })
+    }
+  };
 
   return (
     <Tile
@@ -119,7 +112,7 @@ const ActivityTileWithReps: React.FC<Props> = ({
           <ToggleSetCompleteButton
             selected={selected}
             restPeriodInSeconds={restPeriodInSeconds}
-            handleClick={toggleSetComplete}
+            handleClick={handleClick}
             completed={completed}
           />
       </VisibleArea>
@@ -145,38 +138,4 @@ const ActivityTileWithReps: React.FC<Props> = ({
   );
 };
 
-interface StateProps {
-  useKilos: boolean;
-}
-
-interface DispatchProps {
-  toggleSetComplete: () => ReduxAction<SingleSetAction>;
-}
-
-const mapStateToProps = (state: State): StateProps => ({
-  useKilos: state.settings.useKilos,
-});
-
-const mapDispatchToProps = (
-  dispatch: Dispatch<ReduxAction<SingleSetAction>>,
-  ownProps: Props
-) => {
-  const { selected, groupId, index } = ownProps;
-
-  return {
-    toggleSetComplete: (): ReduxAction<SingleSetAction> => dispatch({
-      // only set the type correctly if this tile is selected
-      type: selected && TOGGLE_SET_COMPLETE,
-      payload: { groupId, index },
-    }),
-  };
-};
-
-const areEqual = (prevProps: Props, nextProps: Props) => {
-  return !nextProps.selected && prevProps.selected === nextProps.selected;
-};
-
-export default connect<StateProps, DispatchProps, OwnProps>(
-  mapStateToProps,
-  mapDispatchToProps
-)(memo(ActivityTileWithReps, areEqual));
+export default ActivityTileWithReps;

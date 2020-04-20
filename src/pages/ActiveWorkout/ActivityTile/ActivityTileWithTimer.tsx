@@ -1,5 +1,4 @@
 import React, { useRef, useEffect, useState } from 'react';
-import { connect } from 'react-redux';
 import styled, { keyframes } from 'styled-components';
 
 import { useAudio } from '../../../context/audio';
@@ -9,14 +8,7 @@ import ToggleSetCompleteButton from './ToggleSetCompleteButton';
 import StartTimedExerciseButton from './StartTimedExerciseButton';
 import { tileStyle } from './ActivityTileSharedStyles';
 import DownArrow from '../../../assets/svg/DownArrow';
-import {
-  Dispatch, // eslint-disable-line no-unused-vars
-} from 'redux';
-import {
-  ReduxAction, // eslint-disable-line no-unused-vars
-  SingleSetAction, // eslint-disable-line no-unused-vars
-  TimedActivity, // eslint-disable-line no-unused-vars
-} from '../../../helpers/types';
+import { TimedActivity } from '../../../helpers/types';
 import {
   formatSeconds,
   scrollElementToTop,
@@ -26,7 +18,6 @@ import {
   green,
   superLightGrey,
   timedExerciseWaitPeriod,
-  TOGGLE_SET_COMPLETE,
   tileMinHeight,
 } from '../../../helpers/constants';
 import {
@@ -35,6 +26,7 @@ import {
   Duration,
   VisibleArea,
 } from './index';
+import { useToggleSetComplete } from '../../../reducers/activeWorkoutReducer';
 
 const Tile = styled.li<{ selected: boolean }>`
   ${tileStyle}
@@ -74,7 +66,7 @@ const ActiveTimerBar = styled.div<{ timer: number, paused: boolean }>`
   animation-play-state: ${({ paused }) => paused ? 'paused' : 'running'};
 `;
 
-interface OwnProps {
+interface Props {
   activity: TimedActivity;
   groupId: string;
   index: number;
@@ -84,21 +76,21 @@ interface OwnProps {
   handleSelect: () => void;
 }
 
-type Props = OwnProps & DispatchProps;
-
 const ActivityTileWithTimer: React.FC<Props> = ({
   activity: { name, timerInSeconds, completed, restPeriodInSeconds },
   handleSelect,
   selected,
   toggleShowHiddenArea,
   showHiddenArea,
-  toggleSetComplete,
+  index,
+  groupId,
 }) => {
   const [count, setCount] = useState(0);
   const [preparationComplete, setPreparationComplete] = useState(false);
-  const [ finishedAnimating, setFinishedAnimating ] = useState(false);
+  const [finishedAnimating, setFinishedAnimating] = useState(false);
   const [started, setStarted] = useState(false);
   const [paused, setPaused] = useState(false);
+  const toggleSetComplete = useToggleSetComplete();
   const listElement = useRef(null);
   const { playStart, playComplete } = useAudio();
   const animatedStyles = useHiddenAreaAnimation({
@@ -135,6 +127,12 @@ const ActivityTileWithTimer: React.FC<Props> = ({
 
   const formattedTime: string = formatSeconds(timerInSeconds - count);
 
+  const handleClick = (completed?: boolean) => {
+    if (selected) {
+      toggleSetComplete({ groupId, index, completed })
+    }
+  };
+
   return (
     <Tile ref={listElement} selected={selected} onClick={handleSelect}>
       <VisibleArea>
@@ -145,7 +143,7 @@ const ActivityTileWithTimer: React.FC<Props> = ({
             timer={timerInSeconds + 1} // add 1 to allow for the count to finish
             onAnimationEnd={() => {
               playComplete();
-              toggleSetComplete(true);
+              handleClick(true);
             }}
           />
         ) : (
@@ -168,7 +166,7 @@ const ActivityTileWithTimer: React.FC<Props> = ({
           <ToggleSetCompleteButton
             selected={selected}
             restPeriodInSeconds={restPeriodInSeconds}
-            handleClick={() => toggleSetComplete()}
+            handleClick={() => handleClick()}
             completed={completed}
           />
         ) : (
@@ -205,32 +203,4 @@ const ActivityTileWithTimer: React.FC<Props> = ({
   );
 };
 
-const areEqual = (prevProps: Props, nextProps: Props) => {
-  return prevProps.selected === nextProps.selected && !nextProps.selected;
-};
-
-type ToggleSetAction = ReduxAction<SingleSetAction & { completed: boolean }>;
-
-const mapDispatchToProps = (
-  dispatch: Dispatch<ToggleSetAction>,
-  ownProps: OwnProps
-): DispatchProps => {
-  const { selected, groupId, index } = ownProps;
-
-  return {
-    toggleSetComplete: completed => dispatch({
-      // only set the action type correctly if this tile is selected
-      type: selected && TOGGLE_SET_COMPLETE,
-      payload: { completed, groupId, index },
-    }),
-  };
-};
-
-interface DispatchProps {
-  toggleSetComplete: (completed?: boolean) => ToggleSetAction;
-}
-
-export default connect<void, DispatchProps, OwnProps>(
-  null,
-  mapDispatchToProps
-)(React.memo(ActivityTileWithTimer, areEqual));
+export default ActivityTileWithTimer;

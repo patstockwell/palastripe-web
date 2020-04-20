@@ -13,12 +13,8 @@ import BackLinkBanner from '../../components/BackLinkBanner';
 import WorkoutHero from './WorkoutHero';
 import FourZeroFour from '../../pages/FourZeroFour';
 import { ActivityList } from './ActivityList';
-import { ReduxAction, State } from '../../helpers/types';
-import {
-  SET_ACTIVE_WORKOUT,
-  FINISH_WORKOUT,
-  ONE_SECOND,
-} from '../../helpers/constants';
+import { State } from '../../helpers/types';
+import { ONE_SECOND } from '../../helpers/constants';
 import { useScrollPosition } from '../../context/useScrollPosition';
 import { useAddWorkoutToHistory } from '../../reducers/historyReducer';
 import {
@@ -26,6 +22,10 @@ import {
   Workouts,
   useUpdateWorkout,
 } from '../../reducers/workoutsReducer';
+import {
+  useFinishWorkout,
+  useSetActiveWorkout,
+} from '../../reducers/activeWorkoutReducer';
 
 const Button = styled.button<{ background?: string }>`
   ${buttonStyle}
@@ -39,13 +39,9 @@ const LinkButton = styled(Link)<{ background?: string; fontColour?: string; }>`
   text-decoration: none;
 `;
 
-type Props = DispatchProps & StateProps;
-
-const ActiveWorkout: React.FC<Props> = ({
-  finishWorkout,
+const ActiveWorkout: React.FC<StateProps> = ({
   workouts,
   activeWorkout,
-  setActiveWorkout,
   soundOn,
 }) => {
   const [ showEndWorkoutAlert, setShowEndWorkoutAlert ] = useState(false);
@@ -55,6 +51,8 @@ const ActiveWorkout: React.FC<Props> = ({
   const { setActivityPageScrollPosition } = useScrollPosition();
   const addToHistory = useAddWorkoutToHistory();
   const updateWorkoutTemplate = useUpdateWorkout();
+  const finishWorkout = useFinishWorkout();
+  const setActiveWorkout = useSetActiveWorkout();
 
   useInterval(() => {
     setCount(count + 1);
@@ -84,7 +82,7 @@ const ActiveWorkout: React.FC<Props> = ({
     : workoutFromUrl;
 
   const finishWorkoutWithAlertTransition = () => {
-    finishWorkout(activeWorkout);
+    finishWorkout();
     addToHistory(activeWorkout);
     updateWorkoutTemplate(activeWorkout);
     setShowEndWorkoutAlert(false);
@@ -137,27 +135,11 @@ const ActiveWorkout: React.FC<Props> = ({
   );
 };
 
-interface DispatchProps {
-  finishWorkout: (w: Workout) => ReduxAction<{}>;
-  setActiveWorkout: (workout: Workout) => ReduxAction<Workout>;
-}
-
 interface StateProps {
   activeWorkout: Workout;
   workouts: Workouts;
   soundOn: boolean;
 }
-
-const mapDispatchToProps: DispatchProps = {
-  finishWorkout: (workout: Workout) => ({
-    type: FINISH_WORKOUT,
-    payload: workout,
-  }),
-  setActiveWorkout: (workout: Workout): ReduxAction<Workout> => ({
-    type: SET_ACTIVE_WORKOUT,
-    payload: workout,
-  }),
-};
 
 const mapStateToProps = (state: State): StateProps => ({
   activeWorkout: state.activeWorkout,
@@ -165,7 +147,6 @@ const mapStateToProps = (state: State): StateProps => ({
   soundOn: state.settings.soundOn,
 });
 
-export default connect<StateProps, DispatchProps, void>(
+export default connect<StateProps, {}, {}>(
   mapStateToProps,
-  mapDispatchToProps
 )(ActiveWorkout);

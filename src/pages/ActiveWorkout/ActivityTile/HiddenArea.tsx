@@ -1,28 +1,22 @@
 import React, { ReactText } from 'react';
-import { connect } from 'react-redux';
-import { Dispatch } from 'redux';
+import { useSelector } from 'react-redux';
 import {
   animated,
   OpaqueInterpolation,
   AnimatedValue,
 } from 'react-spring';
 import styled from 'styled-components';
-import {
-  SingleSetAction,
-  State,
-  ReduxAction,
-  WeightedActivity,
-} from '../../../helpers/types';
+import { State, WeightedActivity } from '../../../helpers/types';
 import { convertWeight } from '../../../helpers/functions';
-import {
-  DECREMENT_WEIGHT,
-  INCREMENT_WEIGHT,
-  CHANGE_REPS,
-  TOGGLE_SET_COMPLETE,
-} from '../../../helpers/constants';
 import IncrementDecrementPanel from './IncrementDecrementPanel';
 import { buttonStyle } from '../../../components/SharedStyles';
 import { useRestTimer } from '../../../context/restTimer';
+import {
+  useToggleSetComplete,
+  useDecrementWeight,
+  useIncrementWeight,
+  useChangeReps,
+} from '../../../reducers/activeWorkoutReducer';
 
 const MainValue = styled.span`
   font-size: 32px;
@@ -35,7 +29,7 @@ const Button = styled.button<{  background?: string; fontColour?: string; }>`
   margin: 16px auto 0;
 `;
 
-interface OwnProps {
+interface Props {
   activity: WeightedActivity;
   groupId: string;
   index: number;
@@ -45,13 +39,10 @@ interface OwnProps {
   }>;
 }
 
-type Props = DispatchProps & OwnProps & StateProps;
-
 const HiddenArea: React.FC<Props> = ({
-  incrementWeight,
-  decrementWeight,
   animatedStyles,
-  changeReps,
+  index,
+  groupId,
   activity: {
     repsGoal,
     weightInKilos,
@@ -59,12 +50,17 @@ const HiddenArea: React.FC<Props> = ({
     completed,
     restPeriodInSeconds,
   },
-  useKilos,
-  finishSet,
 }) => {
+  const useKilos = useSelector((state: State) => state.settings.useKilos);
+  // TODO: Can we bind the groupId and index here?
+  const toggleSetComplete = useToggleSetComplete()
+  const changeReps = useChangeReps();
+  const incrementWeight = useIncrementWeight();
+  const decrementWeight = useDecrementWeight();
   const { showTimer } = useRestTimer();
-  const handleClick = () => {
-    finishSet();
+
+  const handleButtonClick = () => {
+    toggleSetComplete({ completed: true, groupId, index });
     showTimer(restPeriodInSeconds);
   };
 
@@ -75,8 +71,8 @@ const HiddenArea: React.FC<Props> = ({
       cursor: 'default',
     }}>
       <IncrementDecrementPanel
-        handleDecrement={decrementWeight}
-        handleIncrement={incrementWeight}
+        handleDecrement={() => decrementWeight({ index, groupId })}
+        handleIncrement={() => incrementWeight({ index, groupId })}
         percentageComplete={1}
       >
         <p>
@@ -85,8 +81,8 @@ const HiddenArea: React.FC<Props> = ({
         <p>{useKilos ? 'kg' : 'lbs'}</p>
       </IncrementDecrementPanel>
       <IncrementDecrementPanel
-        handleDecrement={() => changeReps(-1)}
-        handleIncrement={() => changeReps(1)}
+        handleDecrement={() => changeReps({ index, groupId, increment: -1 })}
+        handleIncrement={() => changeReps({ index, groupId, increment: 1 })}
         percentageComplete={repsAchieved / repsGoal}
       >
         <p>
@@ -97,68 +93,11 @@ const HiddenArea: React.FC<Props> = ({
       </IncrementDecrementPanel>
 
       <Button
-        onClick={handleClick}
+        onClick={handleButtonClick}
         background={completed && 'grey'}
       >{completed ? 'Completed' : 'Finish set & rest'}</Button>
     </animated.div>
   );
 };
 
-type ChangeSetAction = ReduxAction<SingleSetAction & any>;
-type ChangeSetDispatch = Dispatch<ChangeSetAction>;
-
-interface StateProps {
-  useKilos: boolean;
-}
-
-interface DispatchProps {
-  changeReps: (increment: number) => ChangeSetAction;
-  incrementWeight: () => ReduxAction<SingleSetAction>;
-  decrementWeight: () => ReduxAction<SingleSetAction>;
-  finishSet: () => ReduxAction<SingleSetAction>;
-}
-
-const mapStateToProps = (state: State): StateProps => ({
-  useKilos: state.settings.useKilos,
-});
-
-const mapDispatchToProps = (
-  dispatch: ChangeSetDispatch,
-  ownProps: OwnProps
-): DispatchProps => ({
-  decrementWeight: () => dispatch({
-    type: DECREMENT_WEIGHT,
-    payload: {
-      groupId: ownProps.groupId,
-      index: ownProps.index,
-    },
-  }),
-  incrementWeight: () => dispatch({
-    type: INCREMENT_WEIGHT,
-    payload: {
-      groupId: ownProps.groupId,
-      index: ownProps.index,
-    },
-  }),
-  changeReps: (increment: number) => dispatch({
-    type: CHANGE_REPS,
-    payload: {
-      groupId: ownProps.groupId,
-      index: ownProps.index,
-      value: increment,
-    },
-  }),
-  finishSet: (): ReduxAction<SingleSetAction> => dispatch({
-    type: TOGGLE_SET_COMPLETE,
-    payload: {
-      groupId: ownProps.groupId,
-      index: ownProps.index,
-      completed: true,
-    },
-  }),
-});
-
-export default connect<StateProps, DispatchProps, OwnProps>(
-  mapStateToProps,
-  mapDispatchToProps
-)(HiddenArea);
+export default HiddenArea;

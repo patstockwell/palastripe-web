@@ -64,17 +64,9 @@ export const charcoal = '#444444';
 export const darkPurple = '#291c3d';
 
 // action types
-export const FINISH_WORKOUT: string = 'FINISH_WORKOUT';
 export const EDIT_WORKOUT_ADD_SET: string = 'EDIT_WORKOUT_ADD_SET';
 export const EDIT_WORKOUT_ADD_GROUP: string = 'EDIT_WORKOUT_ADD_GROUP';
 export const EDIT_WORKOUT_UPDATE_GROUP_NAME: string = 'EDIT_WORKOUT_UPDATE_GROUP_NAME';
-export const SET_ACTIVE_WORKOUT: string = 'SET_ACTIVE_WORKOUT';
-export const TOGGLE_SET_COMPLETE: string = 'TOGGLE_SET_COMPLETE';
-export const CHANGE_REPS: string = 'CHANGE_REPS';
-export const CHANGE_WEIGHT: string = 'CHANGE_WEIGHT';
-export const INCREMENT_WEIGHT: string = 'INCREMENT_WEIGHT';
-export const DECREMENT_WEIGHT: string = 'DECREMENT_WEIGHT';
-export const WORKOUT_SHAPE_VERSION: string = 'v1';
 
 // page names for setting the current scroll height
 export const WORKOUT_SUMMARY_PAGE: string = 'WORKOUT_SUMMARY_PAGE';
