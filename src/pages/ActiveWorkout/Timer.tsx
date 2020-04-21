@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useSpring, animated } from 'react-spring';
+import { appMaxWidth } from '../../helpers/constants';
 
 const TimerBackground = styled(animated.div)`
   display: flex;
@@ -8,6 +9,7 @@ const TimerBackground = styled(animated.div)`
   position: fixed;
   bottom: 0;
   width: 100%;
+  max-width: ${appMaxWidth}px;
   align-items: center;
   justify-content: center;
   flex-direction: column;
