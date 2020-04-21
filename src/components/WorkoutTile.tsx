@@ -12,7 +12,8 @@ import {
 import { calculateWorkoutTime, formatMinutes } from '../helpers/functions';
 import { useScrollPosition } from '../context/useScrollPosition';
 
-const Tile = styled.section`
+const Tile = styled.li`
+  position: relative;
   height: ${workoutTileMinHeight}px;
   padding: 0 ${gutterWidth}px;
   display: flex;
@@ -21,7 +22,7 @@ const Tile = styled.section`
   overflow: hidden;
 `;
 
-const Square = styled.div<{ image: string }>`
+const Square = styled.div<{ image?: string }>`
   height: 70px
   width: 70px
   background-color: black;
@@ -56,33 +57,46 @@ const Minutes = styled.p`
 const StyledLink = styled(Link)`
   text-decoration: none;
   color: initial;
+
+  ::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+  }
 `;
 
 interface Props {
   workout: Workout;
 }
 
-const WorkoutTile: React.FC<Props> = ({ workout }) => {
+export const WorkoutTile: React.FC<Props> = ({ workout }) => {
   const { setWorkoutPageScrollPosition } = useScrollPosition();
 
   return (
-    <StyledLink
-      onClick={() => setWorkoutPageScrollPosition()}
-      to={{
-        pathname: `/workouts/${workout.id}/`,
-        state: { immediate: false },
-      }}
-    >
-      <Tile>
-        <Square image={workout.imageUrl}>
-          <Minutes>{formatMinutes(calculateWorkoutTime(workout))}</Minutes>
-        </Square>
-        <Name>
-          {workout.name}
-        </Name>
-      </Tile>
-    </StyledLink>
+    <Tile>
+      <Square image={workout.imageUrl}>
+        <Minutes>{formatMinutes(calculateWorkoutTime(workout))}</Minutes>
+      </Square>
+      <StyledLink
+        onClick={() => setWorkoutPageScrollPosition()}
+        to={`/workouts/${workout.id}/`}
+      >
+        <Name>{workout.name}</Name>
+      </StyledLink>
+    </Tile>
   );
 };
 
-export default WorkoutTile;
+export const CustomWorkoutTile: React.FC = () => (
+  <Tile>
+    <Square>
+      <Minutes>+</Minutes>
+    </Square>
+    <StyledLink to="/custom-workout/">
+      <Name>Start custom workout</Name>
+    </StyledLink>
+  </Tile>
+);
