@@ -38,9 +38,12 @@ export const ScrollPositionProvider: React.FC = ({ children }) => {
   }, [pathname]);
 
   const scrollProviderValue = {
-    setActivityPageScrollPosition: (y?: number) => setActivityScrollY(y || window.scrollY),
-    setWorkoutPageScrollPosition: (y?: number) => setWorkoutScrollY(y || window.scrollY),
-    setProfilePageScrollPosition: (y?: number) => setProfileScrollY(y || window.scrollY),
+    setActivityPageScrollPosition: (y?: number) =>
+      setActivityScrollY(y === undefined ? window.scrollY : y),
+    setWorkoutPageScrollPosition: (y?: number) =>
+      setWorkoutScrollY(y === undefined ? window.scrollY : y),
+    setProfilePageScrollPosition: (y?: number) =>
+      setProfileScrollY(y === undefined ? window.scrollY : y),
     setScrollPosition: (path: string) => {
       const setScroll = ({
         [WORKOUTS_PAGE]: setWorkoutScrollY,
