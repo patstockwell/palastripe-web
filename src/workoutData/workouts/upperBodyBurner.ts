@@ -9,7 +9,7 @@ const topHalfBurner: Workout = {
   version: VERSION_ONE,
   exerciseGroups: [
     {
-      id: 'warm_up',
+      id: '416cee66-9d37-4a0e-828d-5c7db270b8a2',
       name: 'Warm Up',
       exercises: [
         {
@@ -28,7 +28,7 @@ const topHalfBurner: Workout = {
     },
 
     {
-      id: 'exercises',
+      id: 'e2ed380f-bf2e-4d67-9dfc-d176da1c5442',
       name: 'Exercises',
       exercises: [
         {
@@ -172,7 +172,7 @@ const topHalfBurner: Workout = {
 
     {
       name: 'Stretch',
-      id: 'stretch',
+      id: 'a8d91722-875b-4fdc-bdec-b7b989298864',
       exercises: [
         {
           id: 'right_arm_cross_body_stretch',

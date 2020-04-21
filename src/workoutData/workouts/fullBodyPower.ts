@@ -9,7 +9,7 @@ const fullBodyPower: Workout = {
   version: VERSION_ONE,
   exerciseGroups: [
     {
-      id: 'warm_up',
+      id: '81df4d60-3987-45fa-9504-f5242eb18544',
       name: 'Warm Up',
       exercises: [
         {
@@ -27,7 +27,7 @@ const fullBodyPower: Workout = {
       ],
     },
     {
-      id: 'exercises',
+      id: '7958db10-d0a1-474a-b8eb-e3d7ea92c1af',
       name: 'Exercises',
       exercises: [
         {

@@ -9,7 +9,7 @@ const fullBodyDumbbellStrength: Workout = {
   version: VERSION_ONE,
   exerciseGroups: [
     {
-      id: 'WARM_UP',
+      id: 'aa10b2a3-6a6a-4010-9ac3-81f45f9dd727',
       name: 'Warm Up',
       exercises: [
         {
@@ -21,7 +21,7 @@ const fullBodyDumbbellStrength: Workout = {
     },
 
     {
-      id: 'EXERCISES',
+      id: '63dca883-a3d4-4bbd-a0dc-3e993fde17d7',
       name: 'exercises',
       exercises: [
         {
@@ -108,7 +108,7 @@ const fullBodyDumbbellStrength: Workout = {
       ],
     },
     {
-      id: 'STRETCH',
+      id: 'bd2fc6bb-ecbd-4e61-9cd3-fe2b9cd27260',
       name: 'stretch',
       exercises: [
         {

@@ -9,7 +9,7 @@ const squatAndBench: Workout = {
   version: VERSION_ONE,
   exerciseGroups: [
     {
-      id: 'warm_up',
+      id: '7cc70a8f-7b50-42d0-b18d-d62e78407631',
       name: 'Warm Up',
       exercises: [
         {
@@ -28,7 +28,7 @@ const squatAndBench: Workout = {
     },
 
     {
-      id: 'squat_and_curl',
+      id: '6537f1c8-f9a3-4610-9bb6-14d777d1ead1',
       name: 'Squat & Curl',
       exercises: [
         {
@@ -126,7 +126,7 @@ const squatAndBench: Workout = {
 
     {
       name: 'Bench Press & Skull Crushers',
-      id: 'bench_press_and_skull_crushers',
+      id: '16c23437-2097-4905-af35-e1f89a7aaa3a',
       exercises: [
         {
           id: 'bench_press',
@@ -208,7 +208,7 @@ const squatAndBench: Workout = {
 
     {
       name: 'Stretch',
-      id: 'stretch',
+      id: 'd07063e5-36fa-490d-9656-6ca123f8ea0a',
       exercises: [
         {
           id: 'right_arm_cross_body_stretch',

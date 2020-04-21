@@ -9,7 +9,7 @@ const pushAndPull: Workout = {
   version: VERSION_ONE,
   exerciseGroups: [
     {
-      id: 'warm_up',
+      id: '9e4ac836-2bf7-4ac0-a467-911c9b4a592e',
       name: 'Warm Up',
       exercises: [
         {
@@ -28,7 +28,7 @@ const pushAndPull: Workout = {
     },
 
     {
-      id: 'press_and_raise',
+      id: '9f6b2e42-be67-426d-bc80-e65707f4ccf7',
       name: 'Press And Raise',
       exercises: [
         {
@@ -110,7 +110,7 @@ const pushAndPull: Workout = {
     },
 
     {
-      id: 'row_and_curl',
+      id: '3d6774c3-0181-4043-961c-8f59fccda646',
       name: 'Row And Curl',
       exercises: [
         {
@@ -194,7 +194,7 @@ const pushAndPull: Workout = {
 
     {
       name: 'Stretch',
-      id: 'stretch',
+      id: '779b159f-9315-4793-8d37-5418596630d9',
       exercises: [
         {
           id: 'left_leg_hamstring_stretch',

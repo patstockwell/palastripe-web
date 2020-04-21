@@ -9,7 +9,7 @@ const overheadStrength: Workout = {
   version: VERSION_ONE,
   exerciseGroups: [
     {
-      id: 'warm_up',
+      id: '706601c7-d966-4f99-8172-77a1957fc1e3',
       name: 'Warm Up',
       exercises: [
         {
@@ -27,7 +27,7 @@ const overheadStrength: Workout = {
       ],
     },
     {
-      id: 'press_superset_1',
+      id: '0ee1a57b-6dfc-43fb-95c9-f17597660a96',
       name: 'Press Superset 1',
       exercises: [
         {
@@ -109,7 +109,7 @@ const overheadStrength: Workout = {
     },
     {
       name: 'Press Superset 2',
-      id: 'press_superset_2',
+      id: '07e22d5d-75d8-4414-bcfc-4d879d9fee79',
       exercises: [
         {
           id: 'push_ups',
@@ -169,7 +169,7 @@ const overheadStrength: Workout = {
     },
     {
       name: 'Stretch',
-      id: 'stretch',
+      id: '61a1c4a9-9116-4ac8-b74b-25d19b11fb62',
       exercises: [
         {
           id: 'right_arm_cross_body_stretch',

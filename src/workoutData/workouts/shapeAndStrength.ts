@@ -9,7 +9,7 @@ const shapeAndStrength: Workout = {
   version: VERSION_ONE,
   exerciseGroups: [
     {
-      id: 'warm_up',
+      id: 'd55f682b-6540-448b-b56b-b4a576f5a100',
       name: 'Warm Up',
       exercises: [
         {
@@ -27,7 +27,7 @@ const shapeAndStrength: Workout = {
       ],
     },
     {
-      id: 'press_superset_1',
+      id: '53f0a8db-b433-4536-ad77-36731d6377ed',
       name: 'Press Superset 1',
       exercises: [
         {
@@ -110,7 +110,7 @@ const shapeAndStrength: Workout = {
 
     {
       name: 'Press Superset 2',
-      id: 'press_superset_2',
+      id: '59c6029f-1585-4f47-bd0d-6742352ab999',
       exercises: [
         {
           id: 'butterfly',
@@ -188,7 +188,7 @@ const shapeAndStrength: Workout = {
     },
     {
       name: 'Stretch',
-      id: 'stretch',
+      id: 'fade0a2a-831b-4576-903e-2af55d34df8c',
       exercises: [
         {
           id: 'right_arm_cross_body_stretch',

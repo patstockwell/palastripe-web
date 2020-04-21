@@ -9,7 +9,7 @@ const glutesAndGlory: Workout = {
   version: VERSION_ONE,
   exerciseGroups: [
     {
-      id: 'compound_barbell_exercises',
+      id: 'f3985524-f9a8-4383-963e-a4b32e5642b9',
       name: 'Compound Barbell Exercises',
       exercises: [
         {
@@ -106,7 +106,7 @@ const glutesAndGlory: Workout = {
       ],
     },
     {
-      name: 'calves',
+      name: 'a7ecd3f8-27e4-41d7-b9a9-6207081ab8ed',
       id: 'calves',
       exercises: [
         {
@@ -204,7 +204,7 @@ const glutesAndGlory: Workout = {
     },
 
     {
-      id: 'quads_and_hamstrings',
+      id: '36cbe4fc-8854-44ce-8468-afdd76831ac0',
       name: 'Quads and Hamstrings',
       exercises: [
         {
@@ -302,7 +302,7 @@ const glutesAndGlory: Workout = {
     },
 
     {
-      id: 'core_strength',
+      id: '3deb6248-74e0-491f-82b2-26e59c4b1afa',
       name: 'Core Strength',
       exercises: [
         {
@@ -354,7 +354,7 @@ const glutesAndGlory: Workout = {
     },
 
     {
-      id: 'stretch',
+      id: '0c9b7ef7-c704-4dee-aba2-730885dd426d',
       name: 'Stretch',
       exercises: [
         {

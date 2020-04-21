@@ -9,7 +9,7 @@ const circuitSpeed: Workout = {
   version: VERSION_ONE,
   exerciseGroups: [
     {
-      id: 'CIRCUIT_SPEED_WARM_UP',
+      id: '37263956-3c6b-4fad-a1db-d561331f1679',
       name: 'warm up',
       exercises: [
         {
@@ -20,7 +20,7 @@ const circuitSpeed: Workout = {
       ],
     },
     {
-      id: 'CIRCUIT_SPEED_WORKING_SETS',
+      id: 'f93991d8-ce32-4ded-979d-5927bf819642',
       name: 'working sets',
       exercises: [
         {
@@ -63,7 +63,7 @@ const circuitSpeed: Workout = {
       ],
     },
     {
-      id: 'CIRCUIT_SPEED_STRETCH',
+      id: '96e7b9a9-b417-4405-87ea-63b876e923f5',
       name: 'stretch',
       exercises: [
         {

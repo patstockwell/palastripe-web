@@ -9,7 +9,7 @@ const legPower: Workout = {
   version: VERSION_ONE,
   exerciseGroups: [
     {
-      id: 'warm_up',
+      id: 'b022809e-418e-4d53-93e7-f77fecb95909',
       name: 'Warm Up',
       exercises: [
         {
@@ -29,7 +29,7 @@ const legPower: Workout = {
     },
 
     {
-      id: 'posterior_chain',
+      id: 'e65433eb-2e1d-4c10-bd0e-ab0ac2191a48',
       name: 'Posterior Chain',
       exercises: [
         {
@@ -112,7 +112,7 @@ const legPower: Workout = {
     },
 
     {
-      id: 'core_strength',
+      id: '772e9e1f-8c2a-4adf-8f3e-53e8944e0809',
       name: 'Core Strength',
       exercises: [
         {
@@ -195,7 +195,7 @@ const legPower: Workout = {
     },
 
     {
-      id: 'stretch',
+      id: '0f191e50-0dfb-48e6-a154-7d0c06ffc67a',
       name: 'Stretch',
       exercises: [
         {
