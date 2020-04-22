@@ -7,7 +7,7 @@ import {
 import styled from 'styled-components';
 
 import ActivitySummary from '../components/ActivitySummary';
-import BackLinkBanner from '../components/BackLinkBanner';
+import { BackLinkBanner } from '../components/BackLinkBanner';
 import { State, Activity } from '../helpers/types';
 import { Workout } from '../reducers/workoutsReducer';
 import { getTimeSince } from '../helpers/functions';

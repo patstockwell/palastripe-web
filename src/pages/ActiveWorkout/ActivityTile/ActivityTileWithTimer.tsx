@@ -1,7 +1,7 @@
 import React, { useRef, useEffect, useState } from 'react';
 import styled, { keyframes } from 'styled-components';
 
-import { useAudio } from '../../../context/audio';
+import { useAudio } from '../../../context/useAudio';
 import HiddenTimerArea from './HiddenTimerArea';
 import { ShowHiddenAreaArrowWrapper } from './ActivityTileWithReps';
 import ToggleSetCompleteButton from './ToggleSetCompleteButton';

@@ -53,7 +53,7 @@ interface Props {
   };
 }
 
-const BackLinkBanner: React.FC<Props> = ({
+export const BackLinkBanner: React.FC<Props> = ({
   sticky = true,
   back,
   continueTo,
@@ -98,5 +98,3 @@ const BackLinkBanner: React.FC<Props> = ({
     </Header>
   );
 };
-
-export default BackLinkBanner;

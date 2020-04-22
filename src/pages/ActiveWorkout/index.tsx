@@ -3,13 +3,13 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { useParams, Link } from 'react-router-dom';
 
-import { AudioProvider } from '../../context/audio';
+import { AudioProvider } from '../../context/useAudio';
 import { RestTimerProvider } from '../../context/restTimer';
 import { buttonStyle } from '../../components/SharedStyles';
 import { useInterval } from '../../helpers/functions';
 import Timer from './Timer';
 import AlertConfirm from '../../components/AlertConfirm';
-import BackLinkBanner from '../../components/BackLinkBanner';
+import { BackLinkBanner } from '../../components/BackLinkBanner';
 import WorkoutHero from './WorkoutHero';
 import FourZeroFour from '../../pages/FourZeroFour';
 import { ActivityList } from './ActivityList';

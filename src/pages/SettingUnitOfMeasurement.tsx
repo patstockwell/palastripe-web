@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import {
   State, // eslint-disable-line no-unused-vars
 } from '../helpers/types';
-import BackLinkBanner from '../components/BackLinkBanner';
+import { BackLinkBanner } from '../components/BackLinkBanner';
 import {
   superLightGrey,
   charcoal,

@@ -7,7 +7,7 @@ import styled from 'styled-components';
 import { buttonStyle } from '../components/SharedStyles';
 import { EditableActivityList } from './ActiveWorkout/ActivityList';
 import EditWorkoutHero from '../components/EditWorkoutHero';
-import BackLinkBanner from '../components/BackLinkBanner';
+import { BackLinkBanner } from '../components/BackLinkBanner';
 import { ReduxAction, Exercise } from '../helpers/types';
 import {
   tileMinHeight,

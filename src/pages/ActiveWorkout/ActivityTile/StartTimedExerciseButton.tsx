@@ -8,7 +8,7 @@ import { purple } from '../../../helpers/constants';
 import Play from '../../../assets/svg/Play';
 import { selectCompleteButtonStyle } from './ActivityTileSharedStyles';
 import { checkboxWrapperStyle } from '../../../components/SharedStyles';
-import { useAudio } from '../../../context/audio';
+import { useAudio } from '../../../context/useAudio';
 
 const IconWrapper = styled.div<{ background?: string }>`
   ${checkboxWrapperStyle}

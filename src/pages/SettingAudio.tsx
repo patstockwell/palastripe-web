@@ -3,10 +3,8 @@ import { connect } from 'react-redux';
 
 import CheckboxTick from '../components/CheckboxTick';
 import { EditPage, Label, HiddenInput } from './SettingUnitOfMeasurement';
-import {
-  State, // eslint-disable-line no-unused-vars
-} from '../helpers/types';
-import BackLinkBanner from '../components/BackLinkBanner';
+import { State } from '../helpers/types';
+import { BackLinkBanner } from '../components/BackLinkBanner';
 import { useSoundToggle } from '../reducers/settingsReducer';
 
 const SettingAudio: React.FC<StateProps> = ({ soundOn: soundOnRedux }) => {

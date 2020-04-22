@@ -12,10 +12,11 @@ import ProfileName from '../pages/ProfileName';
 import SettingAudio from '../pages/SettingAudio';
 import SettingUnitOfMeasurement from '../pages/SettingUnitOfMeasurement';
 import { appMaxWidth } from '../helpers/constants';
-import WorkoutCompletionSplash from '../pages/WorkoutCompletionSplash';
+import { WorkoutCompletionSplash } from '../pages/WorkoutCompletionSplash';
 import { AnimateNavigationProvider } from '../context/useAnimateNavigation';
-import {ScrollPositionProvider} from '../context/useScrollPosition';
+import { ScrollPositionProvider } from '../context/useScrollPosition';
 import { SelectedExerciseProvider } from '../context/useSelectedExercise';
+import { CustomWorkout } from '../pages/CustomWorkout';
 
 const MaxWidthContainer = styled.div`
   max-width: ${appMaxWidth}px;
@@ -42,6 +43,7 @@ const Routes: React.FC = () => {
               <Route path="/edit-workout/" component={EditWorkout} />
               <Route path="/workouts/:id/" component={ActiveWorkout} />
               <Route path="/workout-complete/" component={WorkoutCompletionSplash} />
+              <Route path="/custom-workout/" component={CustomWorkout} />
               <Route component={FourZeroFour} />
             </Switch>
           </SelectedExerciseProvider>

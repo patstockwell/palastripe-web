@@ -1,11 +1,5 @@
-import React, {
-  ReactText, // eslint-disable-line no-unused-vars
-} from 'react';
-import {
-  animated,
-  AnimatedValue, // eslint-disable-line no-unused-vars
-  OpaqueInterpolation, // eslint-disable-line no-unused-vars
-} from 'react-spring';
+import React, { ReactText } from 'react';
+import { animated, AnimatedValue, OpaqueInterpolation } from 'react-spring';
 import styled, { keyframes } from 'styled-components';
 import startAudio from '../../../assets/activityStart.mp3';
 import completeAudio from '../../../assets/activityEnd.mp3';
@@ -17,7 +11,7 @@ import {
   purple,
 } from '../../../helpers/constants';
 import { useRestTimer } from '../../../context/restTimer';
-import { useAudio } from '../../../context/audio';
+import { useAudio } from '../../../context/useAudio';
 
 const Time = styled.p`
   font-size: 4em;

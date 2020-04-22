@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 
-import BackLinkBanner from '../components/BackLinkBanner';
+import { BackLinkBanner } from '../components/BackLinkBanner';
 import { superLightGrey, gutterWidth } from '../helpers/constants';
 import {
   State, // eslint-disable-line

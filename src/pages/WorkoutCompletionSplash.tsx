@@ -1,8 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { State } from '../helpers/types';
-import { Workout } from '../reducers/workoutsReducer';
 import Banner from '../components/Banner';
 import GoldCup from '../assets/svg/GoldCup';
 import { workoutTitleStyle, buttonStyle } from '../components/SharedStyles';
@@ -47,8 +46,10 @@ const Completed = styled.p`
   margin: 12px 0;
 `;
 
-const WorkoutCompletionSplash: React.FC<StateProps> = ({ firstName, workout }) => {
-  const { name: workoutName } = workout;
+export const WorkoutCompletionSplash: React.FC = () => {
+  // take the most recent workout from history
+  const workoutName = useSelector((state: State) => state.history[0].name);
+  const firstName = useSelector((state: State) => state.profile.firstName);
 
   return (
     <>
@@ -65,18 +66,3 @@ const WorkoutCompletionSplash: React.FC<StateProps> = ({ firstName, workout }) =
     </>
   );
 };
-
-interface StateProps {
-  workout: Workout;
-  firstName: string;
-}
-
-const mapStateToProps = (state: State): StateProps => ({
-  // take the most recent workout from history
-  workout: state.history[0],
-  firstName: state.profile.firstName,
-});
-
-export default connect<StateProps, void, void>(
-  mapStateToProps
-)(WorkoutCompletionSplash);
