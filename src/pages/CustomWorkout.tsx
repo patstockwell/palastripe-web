@@ -39,7 +39,7 @@ export const CustomWorkout: React.FC = () => {
   const setActiveWorkout = useSetActiveWorkout();
   const activeWorkout = useSelector((state: State) => state.activeWorkout);
 
-  if (activeWorkout.id !== customWorkoutId) {
+  if (!activeWorkout || activeWorkout.id !== customWorkoutId) {
     setActiveWorkout({
       id: customWorkoutId,
       name: 'Custom Workout',
@@ -54,9 +54,7 @@ export const CustomWorkout: React.FC = () => {
   }
 
   const allActivityTiles = activeWorkout.exerciseGroups.map(group => {
-    console.log(group);
     const groupActivityTiles = group.exercises.map(activity => {
-      console.log(activity);
       return (
         <li style={{ height: tileMinHeight }}>
           {activity.name}
