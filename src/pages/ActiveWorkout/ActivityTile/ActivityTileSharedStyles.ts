@@ -3,11 +3,12 @@ import {
   lightLightGrey,
   superLightGrey,
   tileMinHeight,
+  charcoal,
 } from '../../../helpers/constants';
 
 export const tileStyle = css<{ selected: boolean }>`
   position: relative;
-  color: ${({ selected }) => selected ? 'black' : '#444'};
+  color: ${props => props.selected ? 'black' : charcoal};
   border: none;
   border-bottom: 1px solid ${lightLightGrey};
   background-color: ${({ selected }) => selected ? 'white' : superLightGrey};

@@ -3,9 +3,7 @@ import styled from 'styled-components';
 import { isTimed } from '../../../helpers/types';
 import ActivityTileWithReps from './ActivityTileWithReps';
 import ActivityTileWithTimer from './ActivityTileWithTimer';
-import {
-  Activity, // eslint-disable-line no-unused-vars
-} from '../../../helpers/types';
+import { Activity } from '../../../helpers/types';
 import {
   tileMinHeight,
 } from '../../../helpers/constants';
