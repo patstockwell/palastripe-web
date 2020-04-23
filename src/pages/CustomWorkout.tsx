@@ -13,6 +13,7 @@ import {
   charcoal,
 } from '../helpers/constants';
 import { ActivityListHeading } from '../pages/ActiveWorkout/ActivityList/ActivityListHeading';
+import {Workout} from '../reducers/workoutsReducer';
 
 const HeroWindow = styled.div`
   ${workoutHeroWindowStyle}
@@ -38,22 +39,25 @@ const customWorkoutId = 'custom-workout';
 export const CustomWorkout: React.FC = () => {
   const setActiveWorkout = useSetActiveWorkout();
   const activeWorkout = useSelector((state: State) => state.activeWorkout);
-
-  if (!activeWorkout || activeWorkout.id !== customWorkoutId) {
-    setActiveWorkout({
-      id: customWorkoutId,
+  const initialCustomWorkout: Workout = {
+    id: customWorkoutId,
+    name: 'Custom Workout',
+    exerciseGroups: [{
       name: 'Custom Workout',
-      exerciseGroups: [{
-        name: 'Custom Workout',
-        id: 'first-group-custom-workout',
-        exercises: [],
-      }],
-      startTime: Date.now(),
-      version: VERSION_ONE,
-   });
+      id: 'first-group-custom-workout',
+      exercises: [],
+    }],
+    startTime: Date.now(),
+    version: VERSION_ONE,
   }
 
-  const allActivityTiles = activeWorkout.exerciseGroups.map(group => {
+  if (!activeWorkout || activeWorkout.id !== customWorkoutId) {
+    setActiveWorkout(initialCustomWorkout);
+  }
+
+  const displayedWorkout = activeWorkout || initialCustomWorkout;
+
+  const allActivityTiles = displayedWorkout.exerciseGroups.map(group => {
     const groupActivityTiles = group.exercises.map(activity => {
       return (
         <li style={{ height: tileMinHeight }}>
