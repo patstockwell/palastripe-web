@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-// @ts-ignore
+import { useLocation } from 'react-router-dom';
 import { useSpring } from 'react-spring';
 import {
   DAYS_OF_THE_WEEK,
@@ -22,6 +22,11 @@ import {
 } from './types';
 
 import { ActivityGroup, Workout } from '../reducers/workoutsReducer';
+
+export function useToggle(key: string) {
+  const query = new URLSearchParams(useLocation().search);
+  return query.get(key) !== null;
+}
 
 export const convertWeight = (
   weightInKilos: number,

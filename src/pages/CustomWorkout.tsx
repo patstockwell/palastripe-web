@@ -13,7 +13,7 @@ import {
   charcoal,
 } from '../helpers/constants';
 import { ActivityListHeading } from '../pages/ActiveWorkout/ActivityList/ActivityListHeading';
-import {Workout} from '../reducers/workoutsReducer';
+import { Workout } from '../reducers/workoutsReducer';
 
 const HeroWindow = styled.div`
   ${workoutHeroWindowStyle}

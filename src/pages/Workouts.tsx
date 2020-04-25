@@ -7,6 +7,7 @@ import Page from '../components/Page';
 import { State } from '../helpers/types';
 import { navBarHeight } from '../helpers/constants';
 import { Workout } from '../reducers/workoutsReducer';
+import { useToggle } from '../helpers/functions';
 
 const EmptySpace = styled.div`
   height: ${2 * navBarHeight}px;
@@ -28,6 +29,7 @@ const Workouts: React.FC<Props> = ({
   location,
   workouts,
 }) => {
+  const showCustomWorkout = useToggle("custom");
   const workoutTiles = workouts.map((w: Workout) =>
     <WorkoutTile key={w.id} workout={w} />
   );
@@ -35,7 +37,9 @@ const Workouts: React.FC<Props> = ({
   return (
     <Page heading={'Workouts'} pathname={location.pathname} >
       <Ul>
-        <CustomWorkoutTile />
+        {/* TODO: remove toggle */ showCustomWorkout &&
+          <CustomWorkoutTile />
+        }
         {workoutTiles}
       </Ul>
       <EmptySpace />
