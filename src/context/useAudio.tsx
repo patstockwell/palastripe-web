@@ -47,7 +47,7 @@ const AudioProvider: React.FC<Props> = ({ soundOn, children }) => {
 const useAudio = () => {
   const context = React.useContext(AudioContext);
   if (!context) {
-    throw new Error('usePageRef must be used within a AudioProvider');
+    throw new Error('useAudio must be used within a AudioProvider');
   }
 
   return context;

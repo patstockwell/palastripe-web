@@ -19,6 +19,7 @@ import { ActivityListHeading } from '../../pages/ActiveWorkout/ActivityList/Acti
 import { Workout } from '../../reducers/workoutsReducer';
 import { ActivitySearch } from './ActivitySearch';
 import { RestTimerProvider } from '../../context/useRestTimer';
+import { AudioProvider } from '../../context/useAudio';
 
 const HeroWindow = styled.div`
   ${workoutHeroWindowStyle}
@@ -48,6 +49,7 @@ export const CustomWorkout: React.FC = () => {
   const [showSearch, setShowSearch] = useState(false);
   const setActiveWorkout = useSetActiveWorkout();
   const activeWorkout = useSelector((state: State) => state.activeWorkout);
+  const soundOn = useSelector((state: State) => state.settings.soundOn);
 
   const initialCustomWorkout: Workout = {
     id: customWorkoutId,
@@ -99,38 +101,40 @@ export const CustomWorkout: React.FC = () => {
   })
 
   return (
-    <RestTimerProvider value={{
-      setShowTimer: setShowRestTimer,
-      setRestTime,
-      setCount,
-    }} >
-      <BackLinkBanner
-        sticky={false}
-        back={{
-          showArrows: true,
-          link: '/workouts/',
-        }}
-      />
-      <HeroWindow></HeroWindow>
-      <Ul>{allActivityTiles}</Ul>
-      <AddActivityButton onClick={() => setShowSearch(true)}>
-        + Add a set
-      </AddActivityButton>
-
-      {showSearch &&
-        <ActivitySearch finishSearch={() => setShowSearch(false)}/>
-      }
-
-      {showRestTimer && count > 0 && restTime >= 0 &&
-        <Timer
-          restPeriod={restTime}
-          resetTimer={() => {
-            setShowRestTimer(false);
-            setCount(0);
+    <AudioProvider soundOn={soundOn}>
+      <RestTimerProvider value={{
+        setShowTimer: setShowRestTimer,
+        setRestTime,
+        setCount,
+      }} >
+        <BackLinkBanner
+          sticky={false}
+          back={{
+            showArrows: true,
+            link: '/workouts/',
           }}
-          count={count - 1}
         />
-      }
-    </RestTimerProvider>
+        <HeroWindow></HeroWindow>
+        <Ul>{allActivityTiles}</Ul>
+        <AddActivityButton onClick={() => setShowSearch(true)}>
+          + Add a set
+        </AddActivityButton>
+
+        {showSearch &&
+          <ActivitySearch finishSearch={() => setShowSearch(false)}/>
+        }
+
+        {showRestTimer && count > 0 && restTime >= 0 &&
+          <Timer
+            restPeriod={restTime}
+            resetTimer={() => {
+              setShowRestTimer(false);
+              setCount(0);
+            }}
+            count={count - 1}
+          />
+        }
+      </RestTimerProvider>
+    </AudioProvider>
   );
 };
