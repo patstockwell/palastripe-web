@@ -1,19 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
-import { BackLinkBanner } from '../components/BackLinkBanner';
-import { workoutHeroWindowStyle, unorderedListStyle } from '../components/SharedStyles';
-import { useSetActiveWorkout } from '../reducers/activeWorkoutReducer';
-import { State } from '../helpers/types';
+
+import { BackLinkBanner } from '../../components/BackLinkBanner';
+import { workoutHeroWindowStyle, unorderedListStyle } from '../../components/SharedStyles';
+import { useSetActiveWorkout } from '../../reducers/activeWorkoutReducer';
+import { State } from '../../helpers/types';
 import {
   VERSION_ONE,
   tileMinHeight,
   lightLightGrey,
   superLightGrey,
   charcoal,
-} from '../helpers/constants';
-import { ActivityListHeading } from '../pages/ActiveWorkout/ActivityList/ActivityListHeading';
-import { Workout } from '../reducers/workoutsReducer';
+} from '../../helpers/constants';
+import { ActivityListHeading } from '../../pages/ActiveWorkout/ActivityList/ActivityListHeading';
+import { Workout } from '../../reducers/workoutsReducer';
+import { ActivitySearch } from './ActivitySearch';
 
 const HeroWindow = styled.div`
   ${workoutHeroWindowStyle}
@@ -37,8 +39,10 @@ const AddActivityButton = styled.button`
 const customWorkoutId = 'custom-workout';
 
 export const CustomWorkout: React.FC = () => {
+  const [showSearch, setShowSearch] = useState(false);
   const setActiveWorkout = useSetActiveWorkout();
   const activeWorkout = useSelector((state: State) => state.activeWorkout);
+
   const initialCustomWorkout: Workout = {
     id: customWorkoutId,
     name: 'Custom Workout',
@@ -86,12 +90,13 @@ export const CustomWorkout: React.FC = () => {
           link: '/workouts/',
         }}
       />
-      <HeroWindow>
-      </HeroWindow>
+      <HeroWindow></HeroWindow>
       <Ul>{allActivityTiles}</Ul>
-      <AddActivityButton>
+      <AddActivityButton onClick={() => setShowSearch(true)}>
         + Add a set
       </AddActivityButton>
+
+      {showSearch && <ActivitySearch />}
     </>
   );
 };

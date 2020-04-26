@@ -257,10 +257,8 @@ const allIds = [
 
 export const stretchExerciseIds = getIdsForStretchExercises(byId, allIds);
 
-const exercises: Exercises = {
+export const exercises: Exercises = {
   byId,
   allIds,
   stretchExerciseIds,
 };
-
-export default exercises;
