@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { useParams, Link } from 'react-router-dom';
 
 import { AudioProvider } from '../../context/useAudio';
-import { RestTimerProvider } from '../../context/restTimer';
+import { RestTimerProvider } from '../../context/useRestTimer';
 import { buttonStyle } from '../../components/SharedStyles';
 import { useInterval } from '../../helpers/functions';
 import Timer from './Timer';

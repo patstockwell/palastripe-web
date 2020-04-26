@@ -10,7 +10,7 @@ import {
   green,
   purple,
 } from '../../../helpers/constants';
-import { useRestTimer } from '../../../context/restTimer';
+import { useRestTimer } from '../../../context/useRestTimer';
 import { useAudio } from '../../../context/useAudio';
 
 const Time = styled.p`

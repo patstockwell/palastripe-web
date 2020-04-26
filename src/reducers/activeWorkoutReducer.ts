@@ -11,6 +11,7 @@ import {
   WeightedActivity,
   SingleSetAction,
   State,
+  Exercise,
 } from '../helpers/types';
 import { Workout } from '../reducers/workoutsReducer';
 
@@ -122,6 +123,18 @@ const setActiveWorkout = (_state: Workout, action: PayloadAction<Workout>) => {
 // simply set the active workout to null when the workout is complete
 const finishWorkout = (_state: Workout, _action: Action) => null;
 
+const addExercise = (state: Workout, action: PayloadAction<Exercise>) => {
+  state.exerciseGroups[0].exercises.push({
+    name: action.payload.name,
+    id: action.payload.id,
+    repsAchieved: 10,
+    repsGoal: 10,
+    weightInKilos: 40,
+    autoIncrement: 0,
+    completed: true,
+  });
+};
+
 const reducers = {
   incrementWeight,
   decrementWeight,
@@ -129,6 +142,7 @@ const reducers = {
   changeReps,
   toggleSetComplete,
   finishWorkout,
+  addExercise,
 };
 
 const activeWorkoutSlice = createSlice<Workout, typeof reducers>({
@@ -177,6 +191,14 @@ export const useDecrementWeight = () => {
       index,
       useKilos,
     },
+  });
+};
+
+export const useAddExercise = () => {
+  const dispatch = useDispatch();
+  return (exercise: Exercise) => dispatch({
+    type: actions.addExercise.type,
+    payload: { ...exercise },
   });
 };
 

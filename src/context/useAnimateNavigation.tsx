@@ -24,7 +24,7 @@ export const AnimateNavigationProvider: React.FC = ({ children }) => {
 
 export const useAnimateNavigation = () => {
   const context = React.useContext(AnimateNavigationContext);
-  if (context === undefined) {
+  if (!context) {
     throw new Error('useAnimateNavigation must be used within a AnimateNavigationProvider');
   }
 

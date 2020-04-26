@@ -33,7 +33,7 @@ const RestTimerProvider: React.FC<{ value: ProviderValue }> =
 
 const useRestTimer = () => {
   const context = React.useContext(RestTimerContext);
-  if (context === undefined) {
+  if (!context) {
     throw new Error('useRestTimer must be used within a RestTimerProvider');
   }
 

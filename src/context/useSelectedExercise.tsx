@@ -73,7 +73,7 @@ export const SelectedExerciseProvider = connect<StateProps, {}, {}>(
 
 export const useSelectedExercise = () => {
   const context = React.useContext(SelectedExerciseContext);
-  if (context === undefined) {
+  if (!context) {
     throw new Error('useSelectedExercise must be used within a SelectedExerciseProvider');
   }
 

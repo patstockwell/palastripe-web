@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
+import ActivityTile from '../ActiveWorkout/ActivityTile';
+import Timer from '../ActiveWorkout/Timer';
 import { BackLinkBanner } from '../../components/BackLinkBanner';
 import { workoutHeroWindowStyle, unorderedListStyle } from '../../components/SharedStyles';
 import { useSetActiveWorkout } from '../../reducers/activeWorkoutReducer';
@@ -16,6 +18,7 @@ import {
 import { ActivityListHeading } from '../../pages/ActiveWorkout/ActivityList/ActivityListHeading';
 import { Workout } from '../../reducers/workoutsReducer';
 import { ActivitySearch } from './ActivitySearch';
+import { RestTimerProvider } from '../../context/useRestTimer';
 
 const HeroWindow = styled.div`
   ${workoutHeroWindowStyle}
@@ -39,6 +42,9 @@ const AddActivityButton = styled.button`
 const customWorkoutId = 'custom-workout';
 
 export const CustomWorkout: React.FC = () => {
+  const [showRestTimer, setShowRestTimer] = useState(false);
+  const [count, setCount] = useState(0);
+  const [restTime, setRestTime] = useState(0);
   const [showSearch, setShowSearch] = useState(false);
   const setActiveWorkout = useSetActiveWorkout();
   const activeWorkout = useSelector((state: State) => state.activeWorkout);
@@ -62,11 +68,22 @@ export const CustomWorkout: React.FC = () => {
   const displayedWorkout = activeWorkout || initialCustomWorkout;
 
   const allActivityTiles = displayedWorkout.exerciseGroups.map(group => {
-    const groupActivityTiles = group.exercises.map(activity => {
+    const groupActivityTiles = group.exercises.map((activity, i) => {
+      // TODO: Refactor ActivityTile to allow targetReps to be optional. If it
+      // is undefined, then the colour ring should not change and the reps
+      // should just be a number, not a fraction. Eg 12 reps, not 12/14 reps.
       return (
-        <li style={{ height: tileMinHeight }}>
-          {activity.name}
-        </li>
+        <ActivityTile
+          key={activity.id}
+          activity={activity}
+          index={i}
+          groupId={group.id}
+          // TODO: Add these props -->
+          // selected
+          // handleSelect
+          // showHiddenArea
+          // toggleShowHiddenArea
+        />
       );
     });
 
@@ -82,7 +99,11 @@ export const CustomWorkout: React.FC = () => {
   })
 
   return (
-    <>
+    <RestTimerProvider value={{
+      setShowTimer: setShowRestTimer,
+      setRestTime,
+      setCount,
+    }} >
       <BackLinkBanner
         sticky={false}
         back={{
@@ -96,7 +117,20 @@ export const CustomWorkout: React.FC = () => {
         + Add a set
       </AddActivityButton>
 
-      {showSearch && <ActivitySearch />}
-    </>
+      {showSearch &&
+        <ActivitySearch finishSearch={() => setShowSearch(false)}/>
+      }
+
+      {showRestTimer && count > 0 && restTime >= 0 &&
+        <Timer
+          restPeriod={restTime}
+          resetTimer={() => {
+            setShowRestTimer(false);
+            setCount(0);
+          }}
+          count={count - 1}
+        />
+      }
+    </RestTimerProvider>
   );
 };

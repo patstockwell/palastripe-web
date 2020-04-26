@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import CheckboxTick from '../../../components/CheckboxTick';
 import { selectCompleteButtonStyle } from './ActivityTileSharedStyles';
-import { useRestTimer } from '../../../context/restTimer';
+import { useRestTimer } from '../../../context/useRestTimer';
 import { useSelectedExercise } from '../../../context/useSelectedExercise';
 
 const SelectCompleteButton = styled.button`

@@ -10,7 +10,7 @@ import { State, WeightedActivity } from '../../../helpers/types';
 import { convertWeight } from '../../../helpers/functions';
 import IncrementDecrementPanel from './IncrementDecrementPanel';
 import { buttonStyle } from '../../../components/SharedStyles';
-import { useRestTimer } from '../../../context/restTimer';
+import { useRestTimer } from '../../../context/useRestTimer';
 import {
   useToggleSetComplete,
   useDecrementWeight,

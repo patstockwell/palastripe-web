@@ -66,7 +66,7 @@ export const ScrollPositionProvider: React.FC = ({ children }) => {
 
 export const useScrollPosition = () => {
   const context = React.useContext(ScrollPositionContext);
-  if (context === undefined) {
+  if (!context) {
     throw new Error('useScrollPosition must be used within a ScrollPositionProvider');
   }
 

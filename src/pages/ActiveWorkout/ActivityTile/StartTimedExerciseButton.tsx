@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import startAudio from '../../../assets/activityStart.mp3';
 import completeAudio from '../../../assets/activityEnd.mp3';
-import { useRestTimer } from '../../../context/restTimer';
+import { useRestTimer } from '../../../context/useRestTimer';
 import { purple } from '../../../helpers/constants';
 import Play from '../../../assets/svg/Play';
 import { selectCompleteButtonStyle } from './ActivityTileSharedStyles';
