@@ -4,7 +4,6 @@ import ActivityTile from '../ActivityTile';
 import ColouredDot from '../../../assets/svg/ColouredDot';
 import { ActivityListHeading } from './ActivityListHeading';
 import {
-  activityHeadingHeight,
   orange,
   tileMinHeight,
 } from '../../../helpers/constants';
@@ -35,7 +34,6 @@ const FlexTile = styled.div`
 `;
 
 const BottomEmptySpace = styled.div<{ stickyTop?: number}>`
-  // height: calc(100vh - ${({ stickyTop = 0 }) => activityHeadingHeight + (2 * tileMinHeight) + stickyTop}px);
   height: ${tileMinHeight}px;
 `;
 
@@ -90,6 +88,7 @@ export const ActivityList: React.FC<Props> = ({
         heading={group.name}
         activityTotal={tiles.length}
         completedActivities={completedActivities.length}
+        shouldHideCompleted={isCustomWorkout}
       >
         <Ul>{tiles}</Ul>
       </ActivityListHeading>

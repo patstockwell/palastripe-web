@@ -63,39 +63,38 @@ const SearchSuggestionTile = styled.li`
 
 const ActivitySearchBackground = styled.div`
   background: white;
-  position: absolute;
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
   top: 0;
-  right: 0;
-  left: 0;
-  bottom: 0;
   z-index: 3;
 `;
 
-interface SlicesWithId {
-  start: string;
-  highlight: string;
-  end: string;
-  id: string;
-}
+// interface SlicesWithId {
+//   start: string;
+//   highlight: string;
+//   end: string;
+//   id: string;
+// }
 
-const accumulateMatches = (
-  searchTerm: string,
-  list: SlicesWithId[],
-  e: Exercise,
-): SlicesWithId[] => {
-    const name = e ? e.name : '';
-    const index = name.toLowerCase().indexOf(searchTerm.toLowerCase());
+// const accumulateMatches = (
+//   searchTerm: string,
+//   list: SlicesWithId[],
+//   e: Exercise,
+// ): SlicesWithId[] => {
+//     const name = e ? e.name : '';
+//     const index = name.toLowerCase().indexOf(searchTerm.toLowerCase());
 
-    return index === -1 ? list : [
-      ...list,
-      {
-        id: e.id,
-        start: name.slice(0, index),
-        highlight: name.slice(index, index + searchTerm.length),
-        end: name.slice(index + searchTerm.length),
-      },
-    ];
-  };
+//     return index === -1 ? list : [
+//       ...list,
+//       {
+//         id: e.id,
+//         start: name.slice(0, index),
+//         highlight: name.slice(index, index + searchTerm.length),
+//         end: name.slice(index + searchTerm.length),
+//       },
+//     ];
+//   };
 
 interface Props {
   finishSearch: () => void;
@@ -112,6 +111,7 @@ export const ActivitySearch: React.FC<Props> = ({ finishSearch }) => {
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
     if (e.which === 13) { // if enter key is pressed
+      // Add this exercise to a custom-exercise list
       addExercise({
         name: searchQuery,
         id: searchQuery.trim().split(' ').join('-').toLowerCase(),
@@ -126,34 +126,62 @@ export const ActivitySearch: React.FC<Props> = ({ finishSearch }) => {
     setSearchQuery(e.target.value);
   };
 
-  // Can I make this async so I don't block typing?
-  const matches = searchQuery.length >= 3 && exerciseList
-    .reduce((acc: SlicesWithId[], curr: Exercise): SlicesWithId[] => (
-      accumulateMatches(searchQuery, acc, curr)
-    ), [])
-    .map(({ id, start, highlight, end }: SlicesWithId) => (
-      <SearchSuggestionTile
-        key={start + highlight + end}
-        onClick={() => {
-          addExercise(exercises.byId[id]);
-          finishSearch();
-        }}
-      >
-        {start}<strong>{highlight}</strong>{end}
-      </SearchSuggestionTile>
-    ));
+  // const matchesWithHighlighting = searchQuery.length >= 3 && exerciseList
+  //   .reduce((acc: SlicesWithId[], curr: Exercise): SlicesWithId[] => (
+  //     accumulateMatches(searchQuery, acc, curr)
+  //   ), [])
+  //   .map(({ id, start, highlight, end }: SlicesWithId) => (
+  //     <SearchSuggestionTile
+  //       key={start + highlight + end}
+  //       onClick={() => {
+  //         addExercise(exercises.byId[id]);
+  //         finishSearch();
+  //       }}
+  //     >
+  //       {start}<strong>{highlight}</strong>{end}
+  //     </SearchSuggestionTile>
+  //   ));
+
+  const searchExercises = (
+    searchTerms: string[],
+    allExercises: Exercise[],
+  ): Exercise[] => {
+    const [firstSearchTerm, ...remainingSearchTerms] = searchTerms;
+
+    if (firstSearchTerm === undefined) {
+      return allExercises;
+    }
+
+    const filteredList = allExercises.filter((exercise) => {
+      const index = exercise.name
+        .toLowerCase()
+        .indexOf(firstSearchTerm.toLowerCase());
+      return index !== -1;
+    });
+
+    return searchExercises(remainingSearchTerms, filteredList);
+  };
+
+  // Can I make this async so I don't block keyboard input?
+  const multipleMatches = searchQuery.length >= 3
+    ? searchExercises(searchQuery.split(' '), exerciseList)
+    : [];
 
   return (
     <ActivitySearchBackground>
       <Input
         ref={inputRef}
-        placeholder="Search for an exercise"
+        placeholder="Search or create new exercise"
         onChange={handleSearchChange}
         value={searchQuery}
         autoFocus
         onKeyDown={handleKeyPress}
       />
-      <Ul>{matches}</Ul>
+      <Ul>
+        {multipleMatches.map(exercise => (
+          <SearchSuggestionTile>{exercise.name}</SearchSuggestionTile>
+        ))}
+      </Ul>
     </ActivitySearchBackground>
   );
 };

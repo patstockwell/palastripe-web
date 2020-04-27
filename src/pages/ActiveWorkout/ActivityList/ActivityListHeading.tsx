@@ -53,6 +53,7 @@ interface Props {
   stickyTop?: number;
   id?: string;
   completedActivities?: number;
+  shouldHideCompleted?: boolean;
 }
 
 export const ActivityListHeading: React.FC<Props> = ({
@@ -61,7 +62,7 @@ export const ActivityListHeading: React.FC<Props> = ({
   children,
   heading,
   stickyTop,
-  // id,
+  shouldHideCompleted,
 }) => {
   const [showInput, setShowInput] = useState(false);
   const handleKeyPress = (e: React.KeyboardEvent) => {
@@ -69,11 +70,6 @@ export const ActivityListHeading: React.FC<Props> = ({
       setShowInput(false);
     }
   };
-
-  // const handleInputChange = (e: React.ChangeEvent) => {
-  //   const target = e.target as HTMLTextAreaElement;
-  //   updateName(id, target.value);
-  // };
 
   return (
     <li key={heading}>
@@ -87,14 +83,10 @@ export const ActivityListHeading: React.FC<Props> = ({
             onKeyDown={handleKeyPress}
           />
         ) : (
-          <Heading>
-            <React.Fragment>
-              {heading}
-            </React.Fragment>
-          </Heading>
+          <Heading>{heading}</Heading>
         )}
         <Sets>
-          {completedActivities > 0 && `${completedActivities}/`}
+          {!shouldHideCompleted && `${completedActivities}/`}
           {activityTotal || 0} {activityTotal === 1 ? 'set' : 'sets'}
         </Sets>
       </HeadingPanel>
