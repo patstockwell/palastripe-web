@@ -8,6 +8,7 @@ import {
   gutterWidth,
   lightLightGrey,
   charcoal,
+  superLightGrey,
 } from '../../helpers/constants';
 
 const Input = styled.input`
@@ -48,9 +49,15 @@ const SearchSuggestionTile = styled.li`
   font-style: italic;
   padding: 12px;
   color: ${charcoal};
+  cursor: pointer;
 
   & strong {
     color: black;
+  }
+
+  &:hover,
+  &:active {
+    background: ${superLightGrey};
   }
 `;
 
@@ -103,6 +110,17 @@ export const ActivitySearch: React.FC<Props> = ({ finishSearch }) => {
     [exercises],
   );
 
+  const handleKeyPress = (e: React.KeyboardEvent) => {
+    if (e.which === 13) { // if enter key is pressed
+      addExercise({
+        name: searchQuery,
+        id: searchQuery.trim().split(' ').join('-').toLowerCase(),
+        tags: [],
+      })
+      finishSearch();
+    }
+  };
+
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     setSearchQuery(e.target.value);
@@ -133,6 +151,7 @@ export const ActivitySearch: React.FC<Props> = ({ finishSearch }) => {
         onChange={handleSearchChange}
         value={searchQuery}
         autoFocus
+        onKeyDown={handleKeyPress}
       />
       <Ul>{matches}</Ul>
     </ActivitySearchBackground>

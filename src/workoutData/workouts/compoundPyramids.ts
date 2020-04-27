@@ -2,7 +2,7 @@ import { Workout } from '../../reducers/workoutsReducer';
 import { VERSION_ONE } from '../../helpers/constants';
 import Image from '../../assets/images/leg-press-dark.jpg';
 
-const circuitSpeed: Workout = {
+export const compoundPyramids: Workout = {
   id: 'compound-pyramids',
   name: 'Compound Pyramids',
   imageUrl: Image,
@@ -219,5 +219,3 @@ const circuitSpeed: Workout = {
     },
   ],
 };
-
-export default circuitSpeed;

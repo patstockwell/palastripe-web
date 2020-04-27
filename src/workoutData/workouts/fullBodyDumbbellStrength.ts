@@ -2,7 +2,7 @@ import { Workout } from '../../reducers/workoutsReducer';
 import { VERSION_ONE } from '../../helpers/constants';
 import Image from '../../assets/images/bicep-workout-1851820.jpg';
 
-const fullBodyDumbbellStrength: Workout = {
+export const fullBodyDumbbellStrength: Workout = {
   id: 'full-body-dumbbell-strength',
   name: 'Full Body Dumbbell Strength',
   imageUrl: Image,
@@ -135,5 +135,3 @@ const fullBodyDumbbellStrength: Workout = {
     },
   ],
 };
-
-export default fullBodyDumbbellStrength;

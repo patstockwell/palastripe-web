@@ -10,7 +10,7 @@ import { useInterval } from '../../helpers/functions';
 import Timer from './Timer';
 import AlertConfirm from '../../components/AlertConfirm';
 import { BackLinkBanner } from '../../components/BackLinkBanner';
-import WorkoutHero from './WorkoutHero';
+import WorkoutHero, { Window as CustomWorkoutHero } from './WorkoutHero';
 import FourZeroFour from '../../pages/FourZeroFour';
 import { ActivityList } from './ActivityList';
 import { State } from '../../helpers/types';
@@ -26,6 +26,7 @@ import {
   useFinishWorkout,
   useSetActiveWorkout,
 } from '../../reducers/activeWorkoutReducer';
+import { customWorkoutId } from '../../workoutData/workouts/customWorkout';
 
 const Button = styled.button<{ background?: string }>`
   ${buttonStyle}
@@ -64,6 +65,7 @@ const ActiveWorkout: React.FC<StateProps> = ({
   };
   // get the workout ID from the URL
   const { id: workoutId }: { id: string } = useParams();
+  const isCustomWorkout = workoutId === customWorkoutId;
   const workoutFromUrl = workouts.byId[workoutId];
 
   if (!workoutFromUrl) {
@@ -103,10 +105,15 @@ const ActiveWorkout: React.FC<StateProps> = ({
             link: '/workouts/',
           }}
         />
-        <WorkoutHero workout={displayedWorkout} />
+        {isCustomWorkout ? (
+          <CustomWorkoutHero imageUrl={displayedWorkout.imageUrl}/>
+        ) : (
+          <WorkoutHero workout={displayedWorkout} />
+        )}
         <ActivityList
           workout={displayedWorkout}
           finishWorkoutClickHandler={() => setShowEndWorkoutAlert(true)}
+          isCustomWorkout={isCustomWorkout}
         />
 
         {showRestTimer && count > 0 && restTime >= 0 &&

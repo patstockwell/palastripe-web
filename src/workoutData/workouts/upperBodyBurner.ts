@@ -2,7 +2,7 @@ import { Workout } from '../../reducers/workoutsReducer';
 import { VERSION_ONE } from '../../helpers/constants';
 import Image from '../../assets/images/athlete-biceps-body-136405.jpg';
 
-const topHalfBurner: Workout = {
+export const upperBodyBurner: Workout = {
   id: 'upper-body-burner',
   name: 'Upper Body Burner',
   imageUrl: Image,
@@ -203,5 +203,3 @@ const topHalfBurner: Workout = {
     },
   ],
 };
-
-export default topHalfBurner;

@@ -2,7 +2,7 @@ import { Workout } from '../../reducers/workoutsReducer';
 import { VERSION_ONE } from '../../helpers/constants';
 import Image from '../../assets/images/squat.jpg';
 
-const legPower: Workout = {
+export const legPower: Workout = {
   id: 'leg-power',
   name: 'Leg Power',
   imageUrl: Image,
@@ -237,5 +237,3 @@ const legPower: Workout = {
     },
   ],
 };
-
-export default legPower;

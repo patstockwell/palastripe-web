@@ -2,7 +2,7 @@ import { Workout } from '../../reducers/workoutsReducer';
 import { VERSION_ONE } from '../../helpers/constants';
 import Image from '../../assets/images/benchpress.jpg';
 
-const pushAndPull: Workout = {
+export const pushAndPull: Workout = {
   id: 'push-and-pull',
   name: 'Push And Pull',
   imageUrl: Image,
@@ -235,5 +235,3 @@ const pushAndPull: Workout = {
     },
   ],
 };
-
-export default pushAndPull;

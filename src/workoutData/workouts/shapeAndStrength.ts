@@ -2,7 +2,7 @@ import { Workout } from '../../reducers/workoutsReducer';
 import { VERSION_ONE } from '../../helpers/constants';
 import Image from '../../assets/images/overhead-press.jpg';
 
-const shapeAndStrength: Workout = {
+export const shapeAndStrength: Workout = {
   id: 'shape-and-strength',
   name: 'Shape And Strength',
   imageUrl: Image,
@@ -219,5 +219,3 @@ const shapeAndStrength: Workout = {
     },
   ],
 };
-
-export default shapeAndStrength;

@@ -12,6 +12,7 @@ import { Activity } from '../../../helpers/types';
 import { Workout } from '../../../reducers/workoutsReducer';
 import { buttonStyle, unorderedListStyle } from '../../../components/SharedStyles';
 import { useSelectedExercise } from '../../../context/useSelectedExercise';
+import { CustomWorkout } from '../../CustomWorkout';
 
 const Ul = styled.ul`
   ${unorderedListStyle}
@@ -41,11 +42,13 @@ const BottomEmptySpace = styled.div<{ stickyTop?: number}>`
 interface Props {
   workout: Workout;
   finishWorkoutClickHandler?: () => void;
+  isCustomWorkout: boolean;
 }
 
-const ActivityList: React.FC<Props> = ({
+export const ActivityList: React.FC<Props> = ({
   finishWorkoutClickHandler,
   workout: { exerciseGroups },
+  isCustomWorkout,
 }) => {
   const [ showHiddenArea, setShowHiddenArea ] = useState(true);
   const { selectedExercise, setSelectedExercise } = useSelectedExercise();
@@ -94,9 +97,9 @@ const ActivityList: React.FC<Props> = ({
   });
 
   return (
-    <Ul>
-      {activityListTiles}
-
+    <>
+      <Ul>{activityListTiles}</Ul>
+      {isCustomWorkout && <CustomWorkout />}
       <FlexTile>
         <Button onClick={finishWorkoutClickHandler}>
           <ColouredDot fill={orange} />
@@ -105,8 +108,6 @@ const ActivityList: React.FC<Props> = ({
       </FlexTile>
 
       <BottomEmptySpace />
-    </Ul>
+    </>
   );
 };
-
-export default ActivityList;

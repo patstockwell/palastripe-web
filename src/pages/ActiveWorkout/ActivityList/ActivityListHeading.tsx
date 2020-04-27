@@ -57,7 +57,7 @@ interface Props {
 
 export const ActivityListHeading: React.FC<Props> = ({
   activityTotal,
-  completedActivities,
+  completedActivities = 0,
   children,
   heading,
   stickyTop,
@@ -94,7 +94,7 @@ export const ActivityListHeading: React.FC<Props> = ({
           </Heading>
         )}
         <Sets>
-          {completedActivities !== undefined && `${completedActivities}/`}
+          {completedActivities > 0 && `${completedActivities}/`}
           {activityTotal || 0} {activityTotal === 1 ? 'set' : 'sets'}
         </Sets>
       </HeadingPanel>

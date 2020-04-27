@@ -2,7 +2,7 @@ import { Workout } from '../../reducers/workoutsReducer';
 import { VERSION_ONE } from '../../helpers/constants';
 import Image from '../../assets/images/athlete-barbell-biceps-497934.jpg';
 
-const squatAndBench: Workout = {
+export const squatAndBench: Workout = {
   id: 'squat-and-bench',
   name: 'Squat And Bench',
   imageUrl: Image,
@@ -249,5 +249,3 @@ const squatAndBench: Workout = {
     },
   ],
 };
-
-export default squatAndBench;

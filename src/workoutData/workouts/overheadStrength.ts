@@ -2,7 +2,7 @@ import { Workout } from '../../reducers/workoutsReducer';
 import { VERSION_ONE } from '../../helpers/constants';
 import Image from '../../assets/images/athlete-barbell-body-931321.jpg';
 
-const overheadStrength: Workout = {
+export const overheadStrength: Workout = {
   id: 'overhead-strength',
   name: 'Overhead Strength',
   imageUrl: Image,
@@ -210,5 +210,3 @@ const overheadStrength: Workout = {
     },
   ],
 };
-
-export default overheadStrength;

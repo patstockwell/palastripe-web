@@ -95,7 +95,7 @@ export const CustomWorkoutTile: React.FC = () => (
     <Square>
       <Minutes>+</Minutes>
     </Square>
-    <StyledLink to="/custom-workout/">
+    <StyledLink to="/workouts/custom-workout/">
       <Name>Start custom workout</Name>
     </StyledLink>
   </Tile>

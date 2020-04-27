@@ -2,7 +2,7 @@ import { Workout } from '../../reducers/workoutsReducer';
 import { VERSION_ONE } from '../../helpers/constants';
 import Image from '../../assets/images/active-adult-aerobics-206573.jpg';
 
-const fullBodyPower: Workout = {
+export const fullBodyPower: Workout = {
   id: 'full-body-power',
   name: 'Full Body Power',
   imageUrl: Image,
@@ -196,5 +196,3 @@ const fullBodyPower: Workout = {
     },
   ],
 };
-
-export default fullBodyPower;
