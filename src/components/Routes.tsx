@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { useLocation, Route, Switch } from 'react-router-dom';
-import Workouts from '../pages/Workouts';
+import { Workouts } from '../pages/Workouts';
 import ActiveWorkout from '../pages/ActiveWorkout';
 import Activity from '../pages/Activity';
 import EditWorkout from '../pages/EditWorkout';

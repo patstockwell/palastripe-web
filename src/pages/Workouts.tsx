@@ -1,6 +1,6 @@
 import React from 'react';
 import { RouteProps } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 import { WorkoutTile, CustomWorkoutTile } from '../components/WorkoutTile';
 import Page from '../components/Page';
@@ -23,37 +23,25 @@ interface OwnProps {
   animationStyles: React.CSSProperties;
 }
 
-type Props = RouteProps & StateProps & OwnProps;
+type Props = RouteProps & OwnProps;
 
-const Workouts: React.FC<Props> = ({
-  location,
-  workouts,
-}) => {
+export const Workouts: React.FC<Props> = ({ location }) => {
+  const { allIds, byId } = useSelector((state: State) => state.workouts);
+
+  const mappedWorkouts = allIds.map(id => byId[id]);
   // Don't show the custom workout as a normal tile. There is a unique tile just
   // for starting a custom workout.
-  const workoutTiles = workouts
+  const workoutTiles = mappedWorkouts
     .filter((w: Workout) => w.id !== customWorkoutId) // remove custom-workout
     .map((w: Workout) => <WorkoutTile key={w.id} workout={w} />);
 
   return (
     <Page heading={'Workouts'} pathname={location.pathname} >
       <Ul>
-        <CustomWorkoutTile />
+        <CustomWorkoutTile imageUrl={byId[customWorkoutId].imageUrl}/>
         {workoutTiles}
       </Ul>
       <EmptySpace />
     </Page>
   );
 };
-
-interface StateProps {
-  workouts: Workout[];
-}
-
-const mapStateToProps = ({ workouts }: State): StateProps => {
-  const { allIds, byId } = workouts;
-  const mappedWorkouts = allIds.map(id => byId[id]);
-  return { workouts: mappedWorkouts };
-};
-
-export default connect<StateProps, void, void>(mapStateToProps)(Workouts);

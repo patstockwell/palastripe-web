@@ -11,6 +11,7 @@ import {
 } from '../helpers/constants';
 import { calculateWorkoutTime, formatMinutes } from '../helpers/functions';
 import { useScrollPosition } from '../context/useScrollPosition';
+import AdditionSymbol from '../assets/svg/AdditionSymbol';
 
 const Tile = styled.li`
   position: relative;
@@ -49,6 +50,7 @@ const Name = styled.h3`
 `;
 
 const Minutes = styled.p`
+  display: flex;
   color: white;
   font-weight: 800;
   text-align: center;
@@ -90,10 +92,12 @@ export const WorkoutTile: React.FC<Props> = ({ workout }) => {
   );
 };
 
-export const CustomWorkoutTile: React.FC = () => (
+export const CustomWorkoutTile: React.FC<{ imageUrl: string }> = ({ imageUrl }) => (
   <Tile>
-    <Square>
-      <Minutes>+</Minutes>
+    <Square image={imageUrl}>
+      <Minutes>
+        <AdditionSymbol style={{ fill: 'white' }}/>
+      </Minutes>
     </Square>
     <StyledLink to="/workouts/custom-workout/">
       <Name>Start custom workout</Name>
