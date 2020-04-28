@@ -179,7 +179,14 @@ export const ActivitySearch: React.FC<Props> = ({ finishSearch }) => {
       />
       <Ul>
         {multipleMatches.map(exercise => (
-          <SearchSuggestionTile>{exercise.name}</SearchSuggestionTile>
+          <SearchSuggestionTile
+            onClick={() => {
+              addExercise(exercise);
+              finishSearch();
+            }}
+          >
+            {exercise.name}
+          </SearchSuggestionTile>
         ))}
       </Ul>
     </ActivitySearchBackground>
