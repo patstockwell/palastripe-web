@@ -18,10 +18,12 @@ import smoothscroll from 'smoothscroll-polyfill';
 // only when necessary.
 smoothscroll.polyfill();
 
+// Redux
 const store = configureStore({
   reducer: rootReducer,
 });
 
+// Google Analytics
 Analytics.initialize('UA-164780880-1')
 
 const App = () => (
