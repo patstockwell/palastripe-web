@@ -7,7 +7,6 @@ import Page from '../components/Page';
 import { State } from '../helpers/types';
 import { navBarHeight } from '../helpers/constants';
 import { Workout } from '../reducers/workoutsReducer';
-import { useToggle } from '../helpers/functions';
 import {customWorkoutId} from '../workoutData/workouts/customWorkout';
 
 const EmptySpace = styled.div`
@@ -30,7 +29,6 @@ const Workouts: React.FC<Props> = ({
   location,
   workouts,
 }) => {
-  const showCustomWorkout = useToggle("custom");
   // Don't show the custom workout as a normal tile. There is a unique tile just
   // for starting a custom workout.
   const workoutTiles = workouts
@@ -40,9 +38,7 @@ const Workouts: React.FC<Props> = ({
   return (
     <Page heading={'Workouts'} pathname={location.pathname} >
       <Ul>
-        {/* TODO: remove toggle */ showCustomWorkout &&
-          <CustomWorkoutTile />
-        }
+        <CustomWorkoutTile />
         {workoutTiles}
       </Ul>
       <EmptySpace />

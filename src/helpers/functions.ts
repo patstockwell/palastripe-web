@@ -23,7 +23,7 @@ import {
 
 import { ActivityGroup, Workout } from '../reducers/workoutsReducer';
 
-export function useToggle(key: string) {
+export function useFeatureToggle(key: string) {
   const query = new URLSearchParams(useLocation().search);
   return query.get(key) !== null;
 }
