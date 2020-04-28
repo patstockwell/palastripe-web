@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import { connect } from 'react-redux';
-import uuidv4 from 'uuid/v4';
+import { v4 as uuidv4 } from 'uuid';
 
 import { ActivityListHeading } from './ActivityListHeading';
 import ActivityTile from '../ActivityTile';

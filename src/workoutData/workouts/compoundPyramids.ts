@@ -1,4 +1,4 @@
-import uuidv4 from 'uuid/v4';
+import { v4 as uuidv4 } from 'uuid';
 import { Workout } from '../../reducers/workoutsReducer';
 import { VERSION_ONE } from '../../helpers/constants';
 import Image from '../../assets/images/leg-press-dark.jpg';

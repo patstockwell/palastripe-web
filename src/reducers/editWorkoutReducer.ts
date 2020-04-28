@@ -1,4 +1,4 @@
-import uuidv4 from 'uuid/v4';
+import { v4 as uuidv4 } from 'uuid';
 import { ReduxAction, Activity } from '../helpers/types';
 import { Workout, ActivityGroup } from '../reducers/workoutsReducer';
 import {
