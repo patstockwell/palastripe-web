@@ -26,7 +26,8 @@ export interface State {
 // Activity stuff
 
 export interface TimedActivity {
-  id: string;
+  id: string; // this should be `exerciseId`
+  instanceId: string; // this should be `id`
   name: string;
   restPeriodInSeconds?: number;
   completed?: boolean;
@@ -34,7 +35,8 @@ export interface TimedActivity {
 }
 
 export interface WeightedActivity {
-  id: string;
+  id: string; // this should be `exerciseId`
+  instanceId: string; // this should be `id`
   name: string;
   restPeriodInSeconds?: number;
   completed?: boolean;

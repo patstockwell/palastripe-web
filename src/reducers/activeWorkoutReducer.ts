@@ -1,3 +1,4 @@
+import uuidv4 from 'uuid/v4';
 import { createSlice, PayloadAction, Action } from '@reduxjs/toolkit';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -127,6 +128,7 @@ const addExercise = (state: Workout, action: PayloadAction<Exercise>) => {
   state.exerciseGroups[0].exercises.push({
     name: action.payload.name,
     id: action.payload.id,
+    instanceId: uuidv4(),
     repsAchieved: 10,
     repsGoal: 10,
     weightInKilos: 40,

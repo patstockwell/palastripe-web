@@ -1,3 +1,4 @@
+import uuidv4 from 'uuid/v4';
 import { Workout } from '../../reducers/workoutsReducer';
 import { VERSION_ONE } from '../../helpers/constants';
 import Image from '../../assets/images/overhead-press.jpg';
@@ -13,12 +14,14 @@ export const shapeAndStrength: Workout = {
       name: 'Warm Up',
       exercises: [
         {
+          instanceId: uuidv4(),
           id: 'toe_touches',
           name: 'Toe Touches',
           timerInSeconds: 60,
           restPeriodInSeconds: 30,
         },
         {
+          instanceId: uuidv4(),
           id: 'lunges',
           name: 'Lunges',
           timerInSeconds: 60,
@@ -31,6 +34,7 @@ export const shapeAndStrength: Workout = {
       name: 'Press Superset 1',
       exercises: [
         {
+          instanceId: uuidv4(),
           id: 'overhead_press',
           name: 'Overhead Press',
           weightInKilos: 20,
@@ -40,6 +44,7 @@ export const shapeAndStrength: Workout = {
           restPeriodInSeconds: 90,
         },
         {
+          instanceId: uuidv4(),
           id: 'standing_bicep_curls',
           name: 'Standing Bicep Curls',
           weightInKilos: 12.5,
@@ -50,6 +55,7 @@ export const shapeAndStrength: Workout = {
         },
 
         {
+          instanceId: uuidv4(),
           id: 'overhead_press',
           name: 'Overhead Press',
           weightInKilos: 20,
@@ -59,6 +65,7 @@ export const shapeAndStrength: Workout = {
           restPeriodInSeconds: 90,
         },
         {
+          instanceId: uuidv4(),
           id: 'standing_bicep_curls',
           name: 'Standing Bicep Curls',
           weightInKilos: 12.5,
@@ -69,6 +76,7 @@ export const shapeAndStrength: Workout = {
         },
 
         {
+          instanceId: uuidv4(),
           id: 'overhead_press',
           name: 'Overhead Press',
           weightInKilos: 20,
@@ -78,6 +86,7 @@ export const shapeAndStrength: Workout = {
           restPeriodInSeconds: 90,
         },
         {
+          instanceId: uuidv4(),
           id: 'standing_bicep_curls',
           name: 'Standing Bicep Curls',
           weightInKilos: 15,
@@ -88,6 +97,7 @@ export const shapeAndStrength: Workout = {
         },
 
         {
+          instanceId: uuidv4(),
           id: 'overhead_press',
           name: 'Overhead Press',
           weightInKilos: 20,
@@ -97,6 +107,7 @@ export const shapeAndStrength: Workout = {
           restPeriodInSeconds: 90,
         },
         {
+          instanceId: uuidv4(),
           id: 'standing_bicep_curls',
           name: 'Standing Bicep Curls',
           weightInKilos: 12.5,
@@ -113,6 +124,7 @@ export const shapeAndStrength: Workout = {
       id: '59c6029f-1585-4f47-bd0d-6742352ab999',
       exercises: [
         {
+          instanceId: uuidv4(),
           id: 'butterfly',
           name: 'Butterfly',
           weightInKilos: 7,
@@ -122,6 +134,7 @@ export const shapeAndStrength: Workout = {
           restPeriodInSeconds: 60,
         },
         {
+          instanceId: uuidv4(),
           id: 'hanging_leg_raises',
           name: 'Hanging Leg Raises',
           weightInKilos: 0,
@@ -131,6 +144,7 @@ export const shapeAndStrength: Workout = {
           restPeriodInSeconds: 60,
         },
         {
+          instanceId: uuidv4(),
           id: 'butterfly',
           name: 'Butterfly',
           weightInKilos: 7,
@@ -140,6 +154,7 @@ export const shapeAndStrength: Workout = {
           restPeriodInSeconds: 60,
         },
         {
+          instanceId: uuidv4(),
           id: 'hanging_leg_raises',
           name: 'Hanging Leg Raises',
           weightInKilos: 0,
@@ -149,6 +164,7 @@ export const shapeAndStrength: Workout = {
           restPeriodInSeconds: 60,
         },
         {
+          instanceId: uuidv4(),
           id: 'butterfly',
           name: 'Butterfly',
           weightInKilos: 7,
@@ -158,6 +174,7 @@ export const shapeAndStrength: Workout = {
           restPeriodInSeconds: 60,
         },
         {
+          instanceId: uuidv4(),
           id: 'hanging_leg_raises',
           name: 'Hanging Leg Raises',
           weightInKilos: 0,
@@ -167,6 +184,7 @@ export const shapeAndStrength: Workout = {
           restPeriodInSeconds: 60,
         },
         {
+          instanceId: uuidv4(),
           id: 'butterfly',
           name: 'Butterfly',
           weightInKilos: 7,
@@ -176,6 +194,7 @@ export const shapeAndStrength: Workout = {
           restPeriodInSeconds: 60,
         },
         {
+          instanceId: uuidv4(),
           id: 'hanging_leg_raises',
           name: 'Hanging Leg Raises',
           weightInKilos: 0,
@@ -191,26 +210,31 @@ export const shapeAndStrength: Workout = {
       id: 'fade0a2a-831b-4576-903e-2af55d34df8c',
       exercises: [
         {
+          instanceId: uuidv4(),
           id: 'right_arm_cross_body_stretch',
           name: 'Right Arm Cross Body',
           timerInSeconds: 60,
         },
         {
+          instanceId: uuidv4(),
           id: 'left_arm_cross_body_stretch',
           name: 'Left Arm Cross Body',
           timerInSeconds: 60,
         },
         {
+          instanceId: uuidv4(),
           id: 'left_glute_pigeon_pose_stretch',
           name: 'Left Glute Pigeon Pose',
           timerInSeconds: 60,
         },
         {
+          instanceId: uuidv4(),
           id: 'right_glute_pigeon_pose_stretch',
           name: 'Right Glute Pigeon Pose',
           timerInSeconds: 60,
         },
         {
+          instanceId: uuidv4(),
           id: 'overhead_band_chest_stretch',
           name: 'Overhead Band Chest Stretch',
           timerInSeconds: 60,

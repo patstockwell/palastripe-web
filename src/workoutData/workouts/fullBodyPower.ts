@@ -1,3 +1,4 @@
+import uuidv4 from 'uuid/v4';
 import { Workout } from '../../reducers/workoutsReducer';
 import { VERSION_ONE } from '../../helpers/constants';
 import Image from '../../assets/images/active-adult-aerobics-206573.jpg';
@@ -13,12 +14,14 @@ export const fullBodyPower: Workout = {
       name: 'Warm Up',
       exercises: [
         {
+          instanceId: uuidv4(),
           id: 'stationary_bike',
           name: 'Stationary Bike',
           timerInSeconds: 300,
           restPeriodInSeconds: 60,
         },
         {
+          instanceId: uuidv4(),
           id: 'lunges',
           name: 'Lunges',
           timerInSeconds: 60,
@@ -31,6 +34,7 @@ export const fullBodyPower: Workout = {
       name: 'Exercises',
       exercises: [
         {
+          instanceId: uuidv4(),
           id: 'back_squat',
           name: 'Back Squat',
           weightInKilos: 40,
@@ -40,6 +44,7 @@ export const fullBodyPower: Workout = {
           restPeriodInSeconds: 90,
         },
         {
+          instanceId: uuidv4(),
           id: 'back_squat',
           name: 'Back Squat',
           weightInKilos: 40,
@@ -49,6 +54,7 @@ export const fullBodyPower: Workout = {
           restPeriodInSeconds: 90,
         },
         {
+          instanceId: uuidv4(),
           id: 'back_squat',
           name: 'Back Squat',
           weightInKilos: 40,
@@ -58,6 +64,7 @@ export const fullBodyPower: Workout = {
           restPeriodInSeconds: 90,
         },
         {
+          instanceId: uuidv4(),
           id: 'dead_lift',
           name: 'Dead Lift',
           weightInKilos: 80,
@@ -67,6 +74,7 @@ export const fullBodyPower: Workout = {
           restPeriodInSeconds: 90,
         },
         {
+          instanceId: uuidv4(),
           id: 'dead_lift',
           name: 'Dead Lift',
           weightInKilos: 80,
@@ -76,6 +84,7 @@ export const fullBodyPower: Workout = {
           restPeriodInSeconds: 90,
         },
         {
+          instanceId: uuidv4(),
           id: 'dead_lift',
           name: 'Dead Lift',
           weightInKilos: 80,
@@ -85,6 +94,7 @@ export const fullBodyPower: Workout = {
           restPeriodInSeconds: 90,
         },
         {
+          instanceId: uuidv4(),
           id: 'chin_up',
           name: 'Chin Ups',
           weightInKilos: 0,
@@ -94,6 +104,7 @@ export const fullBodyPower: Workout = {
           restPeriodInSeconds: 90,
         },
         {
+          instanceId: uuidv4(),
           id: 'chin_up',
           name: 'Chin Ups',
           weightInKilos: 0,
@@ -103,6 +114,7 @@ export const fullBodyPower: Workout = {
           restPeriodInSeconds: 90,
         },
         {
+          instanceId: uuidv4(),
           id: 'chin_up',
           name: 'Chin Ups',
           weightInKilos: 0,
@@ -112,6 +124,7 @@ export const fullBodyPower: Workout = {
           restPeriodInSeconds: 90,
         },
         {
+          instanceId: uuidv4(),
           id: 'overhead_press',
           name: 'Overhead Press',
           weightInKilos: 30,
@@ -121,6 +134,7 @@ export const fullBodyPower: Workout = {
           restPeriodInSeconds: 90,
         },
         {
+          instanceId: uuidv4(),
           id: 'overhead_press',
           name: 'Overhead Press',
           weightInKilos: 30,
@@ -130,6 +144,7 @@ export const fullBodyPower: Workout = {
           restPeriodInSeconds: 90,
         },
         {
+          instanceId: uuidv4(),
           id: 'overhead_press',
           name: 'Overhead Press',
           weightInKilos: 30,
@@ -139,6 +154,7 @@ export const fullBodyPower: Workout = {
           restPeriodInSeconds: 90,
         },
         {
+          instanceId: uuidv4(),
           id: 'push_ups',
           name: 'Push Ups',
           weightInKilos: 0,
@@ -148,6 +164,7 @@ export const fullBodyPower: Workout = {
           restPeriodInSeconds: 60,
         },
         {
+          instanceId: uuidv4(),
           id: 'push_ups',
           name: 'Push Ups',
           weightInKilos: 0,
@@ -157,6 +174,7 @@ export const fullBodyPower: Workout = {
           restPeriodInSeconds: 60,
         },
         {
+          instanceId: uuidv4(),
           id: 'push_ups',
           name: 'Push Ups',
           weightInKilos: 0,
@@ -166,6 +184,7 @@ export const fullBodyPower: Workout = {
           restPeriodInSeconds: 60,
         },
         {
+          instanceId: uuidv4(),
           id: 'ring_rows',
           name: 'Ring Rows',
           weightInKilos: 0,
@@ -175,6 +194,7 @@ export const fullBodyPower: Workout = {
           restPeriodInSeconds: 60,
         },
         {
+          instanceId: uuidv4(),
           id: 'ring_rows',
           name: 'Ring Rows',
           weightInKilos: 0,
@@ -184,6 +204,7 @@ export const fullBodyPower: Workout = {
           restPeriodInSeconds: 60,
         },
         {
+          instanceId: uuidv4(),
           id: 'ring_rows',
           name: 'Ring Rows',
           weightInKilos: 0,

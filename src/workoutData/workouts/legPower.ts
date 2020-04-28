@@ -1,3 +1,4 @@
+import uuidv4 from 'uuid/v4';
 import { Workout } from '../../reducers/workoutsReducer';
 import { VERSION_ONE } from '../../helpers/constants';
 import Image from '../../assets/images/squat.jpg';
@@ -13,12 +14,14 @@ export const legPower: Workout = {
       name: 'Warm Up',
       exercises: [
         {
+          instanceId: uuidv4(),
           id: 'sit_ups',
           name: 'Sit Ups',
           timerInSeconds: 60,
           restPeriodInSeconds: 30,
         },
         {
+          instanceId: uuidv4(),
           id: 'lunges',
           name: 'Lunges',
           timerInSeconds: 60,
@@ -33,6 +36,7 @@ export const legPower: Workout = {
       name: 'Posterior Chain',
       exercises: [
         {
+          instanceId: uuidv4(),
           id: 'dead_lift',
           name: 'Dead Lift',
           repsGoal: 12,
@@ -42,6 +46,7 @@ export const legPower: Workout = {
           restPeriodInSeconds: 30,
         },
         {
+          instanceId: uuidv4(),
           id: 'ez_bar_curl',
           name: 'EZ Bar Curl',
           repsGoal: 12,
@@ -52,6 +57,7 @@ export const legPower: Workout = {
         },
 
         {
+          instanceId: uuidv4(),
           id: 'dead_lift',
           name: 'Dead Lift',
           repsGoal: 12,
@@ -61,6 +67,7 @@ export const legPower: Workout = {
           restPeriodInSeconds: 30,
         },
         {
+          instanceId: uuidv4(),
           id: 'ez_bar_curl',
           name: 'EZ Bar Curl',
           repsGoal: 12,
@@ -71,6 +78,7 @@ export const legPower: Workout = {
         },
 
         {
+          instanceId: uuidv4(),
           id: 'dead_lift',
           name: 'Dead Lift',
           repsGoal: 12,
@@ -80,6 +88,7 @@ export const legPower: Workout = {
           restPeriodInSeconds: 30,
         },
         {
+          instanceId: uuidv4(),
           id: 'ez_bar_curl',
           name: 'EZ Bar Curl',
           repsGoal: 12,
@@ -90,6 +99,7 @@ export const legPower: Workout = {
         },
 
         {
+          instanceId: uuidv4(),
           id: 'dead_lift',
           name: 'Dead Lift',
           repsGoal: 12,
@@ -99,6 +109,7 @@ export const legPower: Workout = {
           restPeriodInSeconds: 30,
         },
         {
+          instanceId: uuidv4(),
           id: 'ez_bar_curl',
           name: 'EZ Bar Curl',
           repsGoal: 12,
@@ -116,6 +127,7 @@ export const legPower: Workout = {
       name: 'Core Strength',
       exercises: [
         {
+          instanceId: uuidv4(),
           id: 'back_squat',
           name: 'Back Squat',
           repsGoal: 12,
@@ -125,6 +137,7 @@ export const legPower: Workout = {
           restPeriodInSeconds: 60,
         },
         {
+          instanceId: uuidv4(),
           id: 'chest_dips',
           name: 'Chest Dips',
           repsGoal: 7,
@@ -135,6 +148,7 @@ export const legPower: Workout = {
         },
 
         {
+          instanceId: uuidv4(),
           id: 'back_squat',
           name: 'Back Squat',
           repsGoal: 12,
@@ -144,6 +158,7 @@ export const legPower: Workout = {
           restPeriodInSeconds: 60,
         },
         {
+          instanceId: uuidv4(),
           id: 'chest_dips',
           name: 'Chest Dips',
           repsGoal: 7,
@@ -154,6 +169,7 @@ export const legPower: Workout = {
         },
 
         {
+          instanceId: uuidv4(),
           name: 'Back Squat',
           id: 'back_squat',
           repsGoal: 12,
@@ -163,6 +179,7 @@ export const legPower: Workout = {
           restPeriodInSeconds: 60,
         },
         {
+          instanceId: uuidv4(),
           id: 'chest_dips',
           name: 'Chest Dips',
           repsGoal: 7,
@@ -173,6 +190,7 @@ export const legPower: Workout = {
         },
 
         {
+          instanceId: uuidv4(),
           id: 'back_squat',
           name: 'Back Squat',
           repsGoal: 12,
@@ -182,6 +200,7 @@ export const legPower: Workout = {
           restPeriodInSeconds: 60,
         },
         {
+          instanceId: uuidv4(),
           id: 'chest_dips',
           name: 'Chest Dips',
           repsGoal: 7,
@@ -199,36 +218,43 @@ export const legPower: Workout = {
       name: 'Stretch',
       exercises: [
         {
+          instanceId: uuidv4(),
           id: 'left_leg_hamstring_stretch',
           name: 'Left Leg Hamstring stretch',
           timerInSeconds: 45,
         },
         {
+          instanceId: uuidv4(),
           id: 'right_leg_hamstring_stretch',
           name: 'Right Leg Hamstring stretch',
           timerInSeconds: 45,
         },
         {
+          instanceId: uuidv4(),
           id: 'left_glute_pigeon_pose_stretch',
           name: 'Left Glute Pigeon Pose',
           timerInSeconds: 45,
         },
         {
+          instanceId: uuidv4(),
           id: 'right_glute_pigeon_pose_stretch',
           name: 'Right Glute Pigeon Pose',
           timerInSeconds: 45,
         },
         {
+          instanceId: uuidv4(),
           id: 'kneeling_left_hip_flexor_stretch',
           name: 'Kneeling Left Hip-Flexor Stretch',
           timerInSeconds: 45,
         },
         {
+          instanceId: uuidv4(),
           id: 'kneeling_right_hip_flexor_stretch',
           name: 'Kneeling Right Hip-Flexor Stretch',
           timerInSeconds: 45,
         },
         {
+          instanceId: uuidv4(),
           id: 'overhead_band_chest_stretch',
           name: 'Overhead Band Chest Stretch',
           timerInSeconds: 45,

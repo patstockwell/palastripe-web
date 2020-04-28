@@ -1,3 +1,4 @@
+import uuidv4 from 'uuid/v4';
 import { Workout } from '../../reducers/workoutsReducer';
 import { VERSION_ONE } from '../../helpers/constants';
 import Image from '../../assets/images/athlete-biceps-body-136405.jpg';
@@ -13,12 +14,14 @@ export const upperBodyBurner: Workout = {
       name: 'Warm Up',
       exercises: [
         {
+          instanceId: uuidv4(),
           id: 'sit_ups',
           name: 'Sit Ups',
           timerInSeconds: 60,
           restPeriodInSeconds: 30,
         },
         {
+          instanceId: uuidv4(),
           id: 'scissor_jumps',
           name: 'Scissor Jumps',
           timerInSeconds: 30,
@@ -32,6 +35,7 @@ export const upperBodyBurner: Workout = {
       name: 'Exercises',
       exercises: [
         {
+          instanceId: uuidv4(),
           id: 'dumbbell_bench_press',
           name: 'Dumbbell Bench Press',
           weightInKilos: 20,
@@ -41,6 +45,7 @@ export const upperBodyBurner: Workout = {
           restPeriodInSeconds: 90,
         },
         {
+          instanceId: uuidv4(),
           id: 'chin_up',
           name: 'Chin Ups',
           weightInKilos: 0,
@@ -50,6 +55,7 @@ export const upperBodyBurner: Workout = {
           restPeriodInSeconds: 90,
         },
         {
+          instanceId: uuidv4(),
           id: 'dumbbell_bench_press',
           name: 'Dumbbell Bench Press',
           weightInKilos: 25,
@@ -59,6 +65,7 @@ export const upperBodyBurner: Workout = {
           restPeriodInSeconds: 90,
         },
         {
+          instanceId: uuidv4(),
           id: 'chin_up',
           name: 'Chin Ups',
           weightInKilos: 0,
@@ -68,6 +75,7 @@ export const upperBodyBurner: Workout = {
           restPeriodInSeconds: 90,
         },
         {
+          instanceId: uuidv4(),
           id: 'dumbbell_bench_press',
           name: 'Dumbbell Bench Press',
           weightInKilos: 27.5,
@@ -77,6 +85,7 @@ export const upperBodyBurner: Workout = {
           restPeriodInSeconds: 90,
         },
         {
+          instanceId: uuidv4(),
           id: 'chin_up',
           name: 'Chin Ups',
           weightInKilos: 0,
@@ -86,6 +95,7 @@ export const upperBodyBurner: Workout = {
           restPeriodInSeconds: 90,
         },
         {
+          instanceId: uuidv4(),
           id: 'dumbbell_bench_press',
           name: 'Dumbbell Bench Press',
           weightInKilos: 30,
@@ -95,6 +105,7 @@ export const upperBodyBurner: Workout = {
           restPeriodInSeconds: 90,
         },
         {
+          instanceId: uuidv4(),
           id: 'chin_up',
           name: 'Chin Ups',
           weightInKilos: 0,
@@ -104,6 +115,7 @@ export const upperBodyBurner: Workout = {
           restPeriodInSeconds: 90,
         },
         {
+          instanceId: uuidv4(),
           id: 'dumbbell_bench_press',
           name: 'Dumbbell Bench Press',
           weightInKilos: 32.5,
@@ -114,6 +126,7 @@ export const upperBodyBurner: Workout = {
         },
 
         {
+          instanceId: uuidv4(),
           id: 'standing_bicep_hammer_curls',
           name: 'Standing Dumbbell Hammer Curls',
           weightInKilos: 12.5,
@@ -123,6 +136,7 @@ export const upperBodyBurner: Workout = {
           restPeriodInSeconds: 90,
         },
         {
+          instanceId: uuidv4(),
           id: 'face_pulls',
           name: 'Face Pulls',
           weightInKilos: 3,
@@ -132,6 +146,7 @@ export const upperBodyBurner: Workout = {
           autoIncrement: 0,
         },
         {
+          instanceId: uuidv4(),
           id: 'standing_bicep_hammer_curls',
           name: 'Standing Dumbbell Hammer Curls',
           weightInKilos: 12.5,
@@ -141,6 +156,7 @@ export const upperBodyBurner: Workout = {
           restPeriodInSeconds: 90,
         },
         {
+          instanceId: uuidv4(),
           id: 'face_pulls',
           name: 'Face Pulls',
           weightInKilos: 3,
@@ -150,6 +166,7 @@ export const upperBodyBurner: Workout = {
           autoIncrement: 0,
         },
         {
+          instanceId: uuidv4(),
           id: 'standing_bicep_hammer_curls',
           name: 'Standing Dumbbell Hammer Curls',
           weightInKilos: 12.5,
@@ -159,6 +176,7 @@ export const upperBodyBurner: Workout = {
           restPeriodInSeconds: 90,
         },
         {
+          instanceId: uuidv4(),
           id: 'face_pulls',
           name: 'Face Pulls',
           weightInKilos: 3,
@@ -175,26 +193,31 @@ export const upperBodyBurner: Workout = {
       id: 'a8d91722-875b-4fdc-bdec-b7b989298864',
       exercises: [
         {
+          instanceId: uuidv4(),
           id: 'right_arm_cross_body_stretch',
           name: 'Right Arm Cross Body',
           timerInSeconds: 60,
         },
         {
+          instanceId: uuidv4(),
           id: 'left_arm_cross_body_stretch',
           name: 'Left Arm Cross Body',
           timerInSeconds: 60,
         },
         {
+          instanceId: uuidv4(),
           id: 'left_glute_pigeon_pose_stretch',
           name: 'Left Glute Pigeon Pose',
           timerInSeconds: 60,
         },
         {
+          instanceId: uuidv4(),
           id: 'right_glute_pigeon_pose_stretch',
           name: 'Right Glute Pigeon Pose',
           timerInSeconds: 60,
         },
         {
+          instanceId: uuidv4(),
           id: 'overhead_band_chest_stretch',
           name: 'Overhead Band Chest Stretch',
           timerInSeconds: 60,
