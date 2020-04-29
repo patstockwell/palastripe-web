@@ -83,11 +83,11 @@ const HiddenArea: React.FC<Props> = ({
       <IncrementDecrementPanel
         handleDecrement={() => changeReps({ index, groupId, increment: -1 })}
         handleIncrement={() => changeReps({ index, groupId, increment: 1 })}
-        percentageComplete={repsAchieved / repsGoal}
+        percentageComplete={repsGoal ? repsAchieved / repsGoal : 1}
       >
         <p>
           <MainValue>{repsAchieved}</MainValue>
-          {`/${repsGoal}`}
+          {repsGoal && `/${repsGoal}`}
         </p>
         <p>Reps</p>
       </IncrementDecrementPanel>

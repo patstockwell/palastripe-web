@@ -41,7 +41,7 @@ export interface WeightedActivity {
   restPeriodInSeconds?: number;
   completed?: boolean;
   weightInKilos: number;
-  repsGoal: number;
+  repsGoal?: number;
   repsAchieved: number;
   autoIncrement: number;
 }

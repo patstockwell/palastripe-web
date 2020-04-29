@@ -130,7 +130,6 @@ const addExercise = (state: Workout, action: PayloadAction<Exercise>) => {
     id: action.payload.id,
     instanceId: uuidv4(),
     repsAchieved: 10,
-    repsGoal: 10,
     weightInKilos: 40,
     autoIncrement: 0,
     completed: true,
