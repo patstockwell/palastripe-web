@@ -10,6 +10,7 @@ import {
   charcoal,
   superLightGrey,
 } from '../../helpers/constants';
+import { BackLinkBanner } from '../../components/BackLinkBanner';
 
 const Input = styled.input`
   color: ${charcoal};
@@ -70,31 +71,67 @@ const ActivitySearchBackground = styled.div`
   z-index: 3;
 `;
 
-// interface SlicesWithId {
-//   start: string;
-//   highlight: string;
-//   end: string;
-//   id: string;
-// }
+interface SearchPieces {
+  searchPieces: Array<string[] | string>
+}
 
-// const accumulateMatches = (
-//   searchTerm: string,
-//   list: SlicesWithId[],
-//   e: Exercise,
-// ): SlicesWithId[] => {
-//     const name = e ? e.name : '';
-//     const index = name.toLowerCase().indexOf(searchTerm.toLowerCase());
+type SearchableExercise = Exercise & SearchPieces;
 
-//     return index === -1 ? list : [
-//       ...list,
-//       {
-//         id: e.id,
-//         start: name.slice(0, index),
-//         highlight: name.slice(index, index + searchTerm.length),
-//         end: name.slice(index + searchTerm.length),
-//       },
-//     ];
-//   };
+function filterList(
+  allExercises: SearchableExercise[],
+  firstSearchTerm: string,
+) {
+  return allExercises.reduce((
+    accumulator: SearchableExercise[],
+    exercise,
+  ): SearchableExercise[] => {
+    let foundMatch = false;
+
+    const searchPieces = exercise.searchPieces.reduce((
+      acc: Array<string | string[]>,
+      curr,
+    ) => {
+      if (Array.isArray(curr)) {
+        return [ ...acc, curr ];
+      }
+
+      const index = curr.toLowerCase().indexOf(firstSearchTerm.toLowerCase());
+
+      if (index === -1) {
+        return [ ...acc, curr ];
+      }
+
+      foundMatch = true;
+
+      return [
+        ...acc,
+        curr.slice(0, index),
+        [curr.slice(index, index + firstSearchTerm.length)],
+        curr.slice(index + firstSearchTerm.length),
+      ];
+    }, []);
+
+    if (foundMatch) {
+      return [ ...accumulator, { ...exercise, searchPieces }]
+    }
+
+    return accumulator;
+  }, []);
+};
+
+function searchExercises(
+  searchTerms: string[],
+  allExercises: SearchableExercise[],
+): SearchableExercise[] {
+  const [firstSearchTerm, ...remainingSearchTerms] = searchTerms;
+
+  if (firstSearchTerm === undefined) {
+    return allExercises;
+  }
+
+  const filteredList = filterList(allExercises, firstSearchTerm);
+  return searchExercises(remainingSearchTerms, filteredList);
+};
 
 interface Props {
   finishSearch: () => void;
@@ -109,15 +146,19 @@ export const ActivitySearch: React.FC<Props> = ({ finishSearch }) => {
     [exercises],
   );
 
+  const endSearchAndAddExercise = () => {
+    // Add this exercise to a custom-exercise list
+    addExercise({
+      name: searchQuery,
+      id: searchQuery.trim().split(' ').join('-').toLowerCase(),
+      tags: [],
+    })
+    finishSearch();
+  };
+
   const handleKeyPress = (e: React.KeyboardEvent) => {
     if (e.which === 13) { // if enter key is pressed
-      // Add this exercise to a custom-exercise list
-      addExercise({
-        name: searchQuery,
-        id: searchQuery.trim().split(' ').join('-').toLowerCase(),
-        tags: [],
-      })
-      finishSearch();
+      endSearchAndAddExercise();
     }
   };
 
@@ -126,49 +167,27 @@ export const ActivitySearch: React.FC<Props> = ({ finishSearch }) => {
     setSearchQuery(e.target.value);
   };
 
-  // const matchesWithHighlighting = searchQuery.length >= 3 && exerciseList
-  //   .reduce((acc: SlicesWithId[], curr: Exercise): SlicesWithId[] => (
-  //     accumulateMatches(searchQuery, acc, curr)
-  //   ), [])
-  //   .map(({ id, start, highlight, end }: SlicesWithId) => (
-  //     <SearchSuggestionTile
-  //       key={start + highlight + end}
-  //       onClick={() => {
-  //         addExercise(exercises.byId[id]);
-  //         finishSearch();
-  //       }}
-  //     >
-  //       {start}<strong>{highlight}</strong>{end}
-  //     </SearchSuggestionTile>
-  //   ));
-
-  const searchExercises = (
-    searchTerms: string[],
-    allExercises: Exercise[],
-  ): Exercise[] => {
-    const [firstSearchTerm, ...remainingSearchTerms] = searchTerms;
-
-    if (firstSearchTerm === undefined) {
-      return allExercises;
-    }
-
-    const filteredList = allExercises.filter((exercise) => {
-      const index = exercise.name
-        .toLowerCase()
-        .indexOf(firstSearchTerm.toLowerCase());
-      return index !== -1;
-    });
-
-    return searchExercises(remainingSearchTerms, filteredList);
-  };
-
   // Can I make this async so I don't block keyboard input?
-  const multipleMatches = searchQuery.length >= 3
-    ? searchExercises(searchQuery.split(' '), exerciseList)
-    : [];
+  const multipleMatches = searchQuery.length < 3 ? [] :
+    searchExercises(
+      searchQuery.split(' '),
+      exerciseList.map(e => ({ ...e, searchPieces: [e.name], })),
+    );
+
+  const addExerciseLink = searchQuery.length ? {
+    showArrows: false,
+    link: '',
+    text: 'Add',
+    handleClick: endSearchAndAddExercise,
+  } : undefined;
 
   return (
     <ActivitySearchBackground>
+      <BackLinkBanner
+        sticky={false}
+        back={{ handleClick: finishSearch, link: '', showArrows: true }}
+        continueTo={addExerciseLink}
+      />
       <Input
         ref={inputRef}
         placeholder="Search or create new exercise"
@@ -180,12 +199,15 @@ export const ActivitySearch: React.FC<Props> = ({ finishSearch }) => {
       <Ul>
         {multipleMatches.map(exercise => (
           <SearchSuggestionTile
+            key={exercise.id}
             onClick={() => {
               addExercise(exercise);
               finishSearch();
             }}
           >
-            {exercise.name}
+            {exercise.searchPieces.map(piece => (
+              Array.isArray(piece) ? <strong key={piece[0]}>{piece}</strong> : piece
+            ))}
           </SearchSuggestionTile>
         ))}
       </Ul>
