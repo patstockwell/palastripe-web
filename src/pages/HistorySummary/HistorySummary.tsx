@@ -1,17 +1,17 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import {
   RouteComponentProps,
   Redirect,
 } from 'react-router';
 import styled from 'styled-components';
 
-import ActivitySummary from '../components/ActivitySummary';
-import { BackLinkBanner } from '../components/BackLinkBanner';
-import { State, Activity } from '../helpers/types';
-import { Workout } from '../reducers/workoutsReducer';
-import { getTimeSince } from '../helpers/functions';
-import { bannerHeight } from '../helpers/constants';
+import { ActivitySummary } from '../../components/ActivitySummary';
+import { BackLinkBanner } from '../../components/BackLinkBanner';
+import { State, Activity } from '../../helpers/types';
+import { Workout } from '../../reducers/workoutsReducer';
+import { getTimeSince } from '../../helpers/functions';
+import { bannerHeight } from '../../helpers/constants';
 
 const Hr = styled.hr`
   border: none;
@@ -61,18 +61,22 @@ const createExerciseHash = (workout: Workout): ExerciseHash => {
     }, {});
 };
 
-const HistorySummary: React.FC<StateProps> = ({ workout }) => {
+type Props = RouteComponentProps<{ index?: string }>
+
+export const HistorySummary: React.FC<Props> = ({
+  match: { params: { index } }
+}) => {
+  const workout = useSelector((state: State) => state.history[index]);
+
   if (!workout) {
     return <Redirect to="/activity/" />;
   }
 
+  const { value, unitOfMeasurement } = getTimeSince(workout.finishTime);
   const exercises = createExerciseHash(workout);
-
   const activitySummaryTiles = Object.entries(exercises).map(exerciseSets => (
     <ActivitySummary key={exerciseSets[0]} exerciseSets={exerciseSets} />
   ));
-
-  const { value, unitOfMeasurement } = getTimeSince(workout.finishTime);
 
   return (
     <>
@@ -91,21 +95,3 @@ const HistorySummary: React.FC<StateProps> = ({ workout }) => {
     </>
   );
 };
-
-interface StateProps {
-  workout: Workout;
-}
-
-const mapStateToProps = (
-  state: State,
-  { match }: RouteComponentProps<{ index?: string }>,
-): StateProps => {
-  const { index } = match.params;
-  return {
-    workout: state.history[index],
-  };
-};
-
-export default connect<StateProps, void, RouteComponentProps>(
-  mapStateToProps
-)(HistorySummary);

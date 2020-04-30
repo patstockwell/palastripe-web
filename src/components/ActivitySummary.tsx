@@ -1,5 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
 import Badge from '../assets/svg/Badge';
@@ -19,9 +19,10 @@ const Ul = styled.ul`
 `;
 
 const Duration = styled.span`
-  flex-basis: 70px;
+  flex-basis: 50px;
    & span {
     font-size: 0.7em;
+    color: grey;
    }
 `;
 
@@ -45,10 +46,11 @@ const ActivityName = styled.p`
 `;
 
 const WeightAndLabel = styled.span`
-  flex-basis: 50px;
+  flex-basis: 80px;
 
   & span {
     font-size: 0.7em;
+    color: grey;
   }
 `;
 
@@ -90,19 +92,18 @@ const Weight: React.FC<{
   useKilos: boolean;
 }> = ({ activity, useKilos }) => {
   const { weight, label } = formatWeight(activity.weightInKilos, useKilos);
-  return <WeightAndLabel>{weight} <span>{label}</span></WeightAndLabel>;
+  return <WeightAndLabel>× {weight} <span>{label}</span></WeightAndLabel>;
 };
 
-interface OwnProps {
+interface Props {
   exerciseSets: [ string, Activity[] ];
 }
 
-type Props = OwnProps & StateProps;
-
-const ActivitySummary: React.FC<Props> = ({
+export const ActivitySummary: React.FC<Props> = ({
   exerciseSets: [exerciseId, exerciseSets],
-  useKilos,
 }) => {
+  const { useKilos } = useSelector((state: State) => state.settings);
+
   const allComplete = exerciseSets.every(s =>
     !isTimed(s)
     && s.completed
@@ -119,7 +120,7 @@ const ActivitySummary: React.FC<Props> = ({
       ) : (
         <>
           <Duration>
-            {a.completed ? a.repsAchieved : 0}<span> /{a.repsGoal}</span>
+            {a.completed ? a.repsAchieved : 0}<span> {a.repsGoal && `/${a.repsGoal}`}</span>
           </Duration>
           <Weight useKilos={useKilos} activity={a} />
           {allComplete &&
@@ -148,17 +149,3 @@ const ActivitySummary: React.FC<Props> = ({
     </li>
   );
 };
-
-interface StateProps {
-  useKilos: boolean;
-}
-
-const mapStateToProps = (state: State): StateProps => {
-  return {
-    useKilos: state.settings.useKilos,
-  };
-};
-
-export default connect<StateProps, void, OwnProps>(
-  mapStateToProps
-)(ActivitySummary);

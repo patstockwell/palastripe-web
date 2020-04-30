@@ -9,7 +9,7 @@ import Activity from '../pages/Activity';
 import EditWorkout from '../pages/EditWorkout';
 import FourZeroFour from '../pages/FourZeroFour';
 import Profile from '../pages/Profile';
-import HistorySummary from '../pages/HistorySummary';
+import { HistorySummary } from '../pages/HistorySummary';
 import ProfileName from '../pages/ProfileName';
 import SettingAudio from '../pages/SettingAudio';
 import SettingUnitOfMeasurement from '../pages/SettingUnitOfMeasurement';
