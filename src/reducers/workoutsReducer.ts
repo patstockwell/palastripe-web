@@ -146,7 +146,7 @@ const allWorkoutTemplates = {
 
 const mergeWorkouts = (
   initial: Workouts,
-  localStorage: Workouts,
+  localStorage: Workouts | undefined,
 ): Workouts => {
   if (localStorage === undefined) {
     return initial;
@@ -175,18 +175,19 @@ const localStorageWorkouts: Workouts = getLocalStorage(LOCAL_STORAGE_WORKOUTS, u
 // TODO: Remove this after 30th October 2020 (6 months from implementation).
 // This allows for enough time for existing users who might care about their
 // data to open the app at least once and have their workout templates updated.
-const updatedLocalStorageWorkouts =
-  localStorageWorkouts.allIds.reduce((acc, id): { [key: string]: Workout } => {
+const getWorkoutsWithUpdatedInstanceIds = (allIds: string[]) => allIds.reduce(
+  (acc, id): { [key: string]: Workout } => {
     const workout: Workout = localStorageWorkouts.byId[id];
-    const newActivityGroups = workout.exerciseGroups.map((group): ActivityGroup => {
-      return {
-        ...group,
-        exercises: group.exercises.map(exercise => ({
-          ...exercise,
-          instanceId: exercise.instanceId || uuidv4(),
-        })),
-      };
-    });
+    const newActivityGroups = workout.exerciseGroups.map(
+      (group): ActivityGroup => {
+        return {
+          ...group,
+          exercises: group.exercises.map(exercise => ({
+            ...exercise,
+            instanceId: exercise.instanceId || uuidv4(),
+          })),
+        };
+      });
 
     return {
       ...acc,
@@ -194,7 +195,13 @@ const updatedLocalStorageWorkouts =
     };
   }, {});
 
-const initialState = mergeWorkouts(allWorkoutTemplates, { ...localStorageWorkouts, byId: updatedLocalStorageWorkouts });
+const updatedLocalStorageWorkouts: Workouts | undefined = localStorageWorkouts
+  ? {
+    allIds: localStorageWorkouts.allIds,
+    byId: getWorkoutsWithUpdatedInstanceIds(localStorageWorkouts.allIds)
+  } : undefined;
+
+const initialState = mergeWorkouts(allWorkoutTemplates, updatedLocalStorageWorkouts);
 // const initialState = mergeWorkouts(allWorkoutTemplates, localStorageWorkouts);
 
 const reducers = {
