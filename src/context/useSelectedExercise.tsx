@@ -1,7 +1,6 @@
 import React, { createContext, useState } from 'react';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { State } from '../helpers/types';
-import { Workout } from '../reducers/workoutsReducer';
 
 const SelectedExerciseContext = createContext<UseSelectedExercise>(null);
 
@@ -16,16 +15,12 @@ interface UseSelectedExercise {
   selectNextExercise: () => void;
 }
 
-interface StateProps {
-  activeWorkout: Workout;
-}
-
-const SelectedExerciseProviderComponent: React.FC<StateProps> = ({
+export const SelectedExerciseProvider: React.FC = ({
   children,
-  activeWorkout,
 }) => {
   const [exerciseIndex, setExerciseIndex] = useState(0);
   const [groupId, setGroupId] = useState('');
+  const { activeWorkout } = useSelector((state: State) => state);
 
   const selectedExerciseValue: UseSelectedExercise = {
     selectedExercise: {
@@ -62,14 +57,6 @@ const SelectedExerciseProviderComponent: React.FC<StateProps> = ({
     </SelectedExerciseContext.Provider>
   );
 };
-
-const mapStateToProps = (state: State): StateProps => ({
-  activeWorkout: state.activeWorkout,
-});
-
-export const SelectedExerciseProvider = connect<StateProps, {}, {}>(
-  mapStateToProps
-)(SelectedExerciseProviderComponent);
 
 export const useSelectedExercise = () => {
   const context = React.useContext(SelectedExerciseContext);

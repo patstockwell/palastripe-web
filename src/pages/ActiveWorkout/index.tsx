@@ -23,10 +23,7 @@ import {
   Workouts,
   useUpdateWorkout,
 } from '../../reducers/workoutsReducer';
-import {
-  useFinishWorkout,
-  useSetActiveWorkout,
-} from '../../reducers/activeWorkoutReducer';
+import { useActiveWorkout } from '../../reducers/activeWorkoutReducer';
 import { customWorkoutId } from '../../workoutData/workouts/customWorkout';
 
 const Button = styled.button<{ background?: string }>`
@@ -53,8 +50,7 @@ const ActiveWorkout: React.FC<StateProps> = ({
   const { setActivityPageScrollPosition } = useScrollPosition();
   const addToHistory = useAddWorkoutToHistory();
   const updateWorkoutTemplate = useUpdateWorkout();
-  const finishWorkout = useFinishWorkout();
-  const setActiveWorkout = useSetActiveWorkout();
+  const { finishWorkout, setActiveWorkout } = useActiveWorkout();
 
   useInterval(() => {
     setCount(count + 1);

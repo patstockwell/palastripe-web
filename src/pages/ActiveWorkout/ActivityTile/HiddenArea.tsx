@@ -11,12 +11,7 @@ import { convertWeight } from '../../../helpers/functions';
 import IncrementDecrementPanel from './IncrementDecrementPanel';
 import { buttonStyle } from '../../../components/SharedStyles';
 import { useRestTimer } from '../../../context/useRestTimer';
-import {
-  useToggleSetComplete,
-  useDecrementWeight,
-  useIncrementWeight,
-  useChangeReps,
-} from '../../../reducers/activeWorkoutReducer';
+import { useActiveWorkout } from '../../../reducers/activeWorkoutReducer';
 
 const MainValue = styled.span`
   font-size: 32px;
@@ -53,10 +48,7 @@ const HiddenArea: React.FC<Props> = ({
 }) => {
   const useKilos = useSelector((state: State) => state.settings.useKilos);
   // TODO: Can we bind the groupId and index here?
-  const toggleSetComplete = useToggleSetComplete()
-  const changeReps = useChangeReps();
-  const incrementWeight = useIncrementWeight();
-  const decrementWeight = useDecrementWeight();
+  const { toggleSetComplete, changeReps, changeWeight } = useActiveWorkout();
   const { showTimer } = useRestTimer();
 
   const handleButtonClick = () => {
@@ -71,8 +63,8 @@ const HiddenArea: React.FC<Props> = ({
       cursor: 'default',
     }}>
       <IncrementDecrementPanel
-        handleDecrement={() => decrementWeight({ index, groupId })}
-        handleIncrement={() => incrementWeight({ index, groupId })}
+        handleDecrement={() => changeWeight({ shouldIncrement: false, index, groupId })}
+        handleIncrement={() => changeWeight({ shouldIncrement: true, index, groupId })}
         percentageComplete={1}
       >
         <p>

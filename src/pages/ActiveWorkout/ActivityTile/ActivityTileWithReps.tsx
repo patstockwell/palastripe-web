@@ -20,7 +20,7 @@ import {
   Duration,
   VisibleArea,
 } from './index';
-import { useToggleSetComplete } from '../../../reducers/activeWorkoutReducer';
+import { useActiveWorkout } from '../../../reducers/activeWorkoutReducer';
 
 const Tile = styled.li<{ selected: boolean }>`
   ${tileStyle}
@@ -67,7 +67,7 @@ const ActivityTileWithReps: React.FC<Props> = ({
 }) => {
   const [ finishedAnimating, setFinishedAnimating ] = useState(false);
   const listElement = useRef<HTMLLIElement>(null);
-  const toggleSetComplete = useToggleSetComplete();
+  const { toggleSetComplete } = useActiveWorkout();
   const useKilos = useSelector((state: State) => state.settings.useKilos);
   const animatedStyles = useHiddenAreaAnimation({
     showHiddenArea,

@@ -1,6 +1,6 @@
 import React, { useState, useRef, useMemo } from 'react';
 import styled from 'styled-components';
-import { useAddExercise } from '../../reducers/activeWorkoutReducer';
+import { useActiveWorkout } from '../../reducers/activeWorkoutReducer';
 import { exercises } from '../../workoutData/exercises';
 import { Exercise } from '../../helpers/types';
 import {
@@ -139,7 +139,7 @@ interface Props {
 
 export const ActivitySearch: React.FC<Props> = ({ finishSearch }) => {
   const inputRef = useRef(null)
-  const addExercise = useAddExercise();
+  const { addExercise } = useActiveWorkout();
   const [searchQuery, setSearchQuery] = useState('');
   const exerciseList = useMemo(() =>
     exercises.allIds.map((id: string): Exercise => exercises.byId[id]),

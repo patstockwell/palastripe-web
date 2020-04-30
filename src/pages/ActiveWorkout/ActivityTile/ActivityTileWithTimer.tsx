@@ -26,7 +26,7 @@ import {
   Duration,
   VisibleArea,
 } from './index';
-import { useToggleSetComplete } from '../../../reducers/activeWorkoutReducer';
+import { useActiveWorkout } from '../../../reducers/activeWorkoutReducer';
 
 const Tile = styled.li<{ selected: boolean }>`
   ${tileStyle}
@@ -90,7 +90,7 @@ const ActivityTileWithTimer: React.FC<Props> = ({
   const [finishedAnimating, setFinishedAnimating] = useState(false);
   const [started, setStarted] = useState(false);
   const [paused, setPaused] = useState(false);
-  const toggleSetComplete = useToggleSetComplete();
+  const { toggleSetComplete } = useActiveWorkout();
   const listElement = useRef(null);
   const { playStart, playComplete } = useAudio();
   const animatedStyles = useHiddenAreaAnimation({

@@ -154,71 +154,53 @@ const activeWorkoutSlice = createSlice<Workout, typeof reducers>({
 
 const { actions } = activeWorkoutSlice;
 
-// TODO: Refactor each of these custom action creator bindings with the
-// useActions binding function:
-// https://react-redux.js.org/api/hooks#recipe-useactions
-export const useToggleSetComplete = () => {
+export const useActiveWorkout = () => {
   const dispatch = useDispatch();
-  return (payload: SingleSetAction & { completed?: boolean }) => dispatch({
-    type: actions.toggleSetComplete.type,
-    payload,
-  });
-};
+  const useKilos = useSelector<State, boolean>(state => state.settings.useKilos);
 
-export const useChangeReps = () => {
-  const dispatch = useDispatch();
-  return (payload: SingleSetAction & { increment: number }) => dispatch({
-    type: actions.changeReps.type,
-    payload,
-  });
-};
+  const toggleSetComplete =
+    (payload: SingleSetAction & { completed?: boolean }) => dispatch({
+      type: actions.toggleSetComplete.type,
+      payload,
+    });
 
-export const useSetActiveWorkout = () => {
-  const dispatch = useDispatch();
-  return (workout: Workout) => dispatch({
+  const changeReps = (payload: SingleSetAction & { increment: number }) =>
+    dispatch({ type: actions.changeReps.type, payload });
+
+  const setActiveWorkout = (workout: Workout) => dispatch({
     type: actions.setActiveWorkout.type,
     payload: workout,
   });
-};
 
-// TODO: Replace incrementWeight/decrementWeight with single changeWeight func.
-export const useDecrementWeight = () => {
-  const dispatch = useDispatch();
-  const useKilos = useSelector<State, boolean>(state => state.settings.useKilos);
-  return ({ groupId, index }: SingleSetAction) => dispatch({
-    type: actions.decrementWeight.type,
+  const changeWeight = (
+    { shouldIncrement, groupId, index }: SingleSetAction & { shouldIncrement: boolean },
+  ) => dispatch({
+    type: shouldIncrement
+      ? actions.incrementWeight.type
+      : actions.decrementWeight.type,
     payload: {
       groupId,
       index,
       useKilos,
     },
   });
-};
 
-export const useAddExercise = () => {
-  const dispatch = useDispatch();
-  return (exercise: Exercise) => dispatch({
+  const addExercise = (exercise: Exercise) => dispatch({
     type: actions.addExercise.type,
     payload: { ...exercise },
   });
-};
 
-export const useIncrementWeight = () => {
-  const dispatch = useDispatch();
-  const useKilos = useSelector<State, boolean>(state => state.settings.useKilos);
-  return ({ groupId, index }: SingleSetAction) => dispatch({
-    type: actions.incrementWeight.type,
-    payload: {
-      groupId,
-      index,
-      useKilos,
-    },
-  });
-};
+  const finishWorkout = () => dispatch({ type: actions.finishWorkout.type });
 
-export const useFinishWorkout = () => {
-  const dispatch = useDispatch();
-  return () => dispatch({ type: actions.finishWorkout.type });
+  return {
+    toggleSetComplete,
+    changeReps,
+    setActiveWorkout,
+    changeWeight,
+    addExercise,
+    finishWorkout,
+  };
 };
+// TODO: Replace incrementWeight/decrementWeight with single changeWeight func.
 
 export default activeWorkoutSlice.reducer;

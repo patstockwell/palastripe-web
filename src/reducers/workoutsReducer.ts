@@ -1,5 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
+import { v4 as uuidv4} from 'uuid';
+
 import { Activity, WeightedActivity, isTimed } from '../helpers/types';
 import { circuitSpeed } from '../workoutData/workouts/circuitSpeed';
 import { fullBodyDumbbellStrength } from '../workoutData/workouts/fullBodyDumbbellStrength';
@@ -165,8 +167,35 @@ const mergeWorkouts = (
   };
 };
 
-const localStorageWorkouts = getLocalStorage(LOCAL_STORAGE_WORKOUTS, undefined);
-const initialState = mergeWorkouts(allWorkoutTemplates, localStorageWorkouts);
+const localStorageWorkouts: Workouts = getLocalStorage(LOCAL_STORAGE_WORKOUTS, undefined);
+// instanceId was added to the `Activity` types meaning that some clients have
+// workouts stored in localStorage that out of date. Here we ensure that
+// workouts retreived from localStorage are given a instanceIds on all
+// Activities if missing.
+// TODO: Remove this after 30th October 2020 (6 months from implementation).
+// This allows for enough time for existing users who might care about their
+// data to open the app at least once and have their workout templates updated.
+const updatedLocalStorageWorkouts =
+  localStorageWorkouts.allIds.reduce((acc, id): { [key: string]: Workout } => {
+    const workout: Workout = localStorageWorkouts.byId[id];
+    const newActivityGroups = workout.exerciseGroups.map((group): ActivityGroup => {
+      return {
+        ...group,
+        exercises: group.exercises.map(exercise => ({
+          ...exercise,
+          instanceId: exercise.instanceId || uuidv4(),
+        })),
+      };
+    });
+
+    return {
+      ...acc,
+      [workout.id]: { ...workout, exerciseGroups: newActivityGroups },
+    };
+  }, {});
+
+const initialState = mergeWorkouts(allWorkoutTemplates, { ...localStorageWorkouts, byId: updatedLocalStorageWorkouts });
+// const initialState = mergeWorkouts(allWorkoutTemplates, localStorageWorkouts);
 
 const reducers = {
   // When an active workout is finished, we update the existing workout template
