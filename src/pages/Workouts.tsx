@@ -7,7 +7,7 @@ import Page from '../components/Page';
 import { State } from '../helpers/types';
 import { navBarHeight } from '../helpers/constants';
 import { Workout } from '../reducers/workoutsReducer';
-import {customWorkoutId} from '../workoutData/workouts/customWorkout';
+import { customWorkoutId } from '../workoutData/workouts/customWorkout';
 
 const EmptySpace = styled.div`
   height: ${2 * navBarHeight}px;

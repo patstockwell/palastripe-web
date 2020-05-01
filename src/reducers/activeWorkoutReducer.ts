@@ -124,6 +124,9 @@ const finishWorkout = (_state: Workout, _action: Action) => null;
 
 const addActivity = (state: Workout, action: PayloadAction<Activity>) => {
   state.exerciseGroups[0].exercises.push(action.payload);
+  if (!state.startTime) {
+    state.startTime = Date.now();
+  }
 };
 
 const reducers = {

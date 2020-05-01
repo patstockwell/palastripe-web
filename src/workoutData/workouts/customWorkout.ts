@@ -14,6 +14,5 @@ export const customWorkout: Workout = {
     id: customWorkoutGroupId,
     exercises: [],
   }],
-  startTime: Date.now(),
   version: VERSION_ONE,
 };

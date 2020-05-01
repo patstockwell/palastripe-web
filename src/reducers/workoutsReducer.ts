@@ -162,7 +162,13 @@ const mergeWorkouts = (
     .reduce ((acc, w) => ({ ...acc, [w.id]: w }), {});
 
   return {
-    byId: { ...byId, ...missingWorkouts },
+    byId: {
+      ...byId,
+      ...missingWorkouts,
+      // Custom workout is never changed by the client. We can override here and
+      // ensure that clients always get the latest version.
+      [customWorkoutId]: customWorkout,
+    },
     allIds: [ ...localIds, ...missingIds ],
   };
 };
