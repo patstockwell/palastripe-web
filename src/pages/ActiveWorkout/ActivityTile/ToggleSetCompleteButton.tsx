@@ -4,6 +4,9 @@ import CheckboxTick from '../../../components/CheckboxTick';
 import { selectCompleteButtonStyle } from './ActivityTileSharedStyles';
 import { useRestTimer } from '../../../context/useRestTimer';
 import { useSelectedExercise } from '../../../context/useSelectedExercise';
+import { useSelector } from 'react-redux';
+import { State } from '../../../helpers/types';
+import { customWorkoutId } from '../../../workoutData/workouts/customWorkout';
 
 const SelectCompleteButton = styled.button`
   ${selectCompleteButtonStyle}
@@ -27,7 +30,19 @@ const ToggleSetCompleteButton: React.FC<Props> = ({
   // page, we can set a flag to ensure the animation was triggered via click.
   const [ clicked, setClicked ] = useState(false);
   const { hideTimer, showTimer } = useRestTimer();
+  const { activeWorkout } = useSelector((state: State) => state)
   const { selectNextExercise } = useSelectedExercise();
+  const handleAnimationEnd = () => {
+    // check the animation was triggered via click and not reload
+    if (selected || clicked) {
+      showTimer(restPeriodInSeconds);
+      const isCustomWorkout = activeWorkout.id === customWorkoutId;
+      // don't select the next exercise if this is a custom workout.
+      if (!isCustomWorkout) {
+        selectNextExercise();
+      }
+    }
+  }
 
   return (
     <SelectCompleteButton onClick={() => {
@@ -40,13 +55,7 @@ const ToggleSetCompleteButton: React.FC<Props> = ({
     }}>
       <CheckboxTick
         checked={completed}
-        onAnimationEnd={() => {
-          // check the animation was triggered via click and not reload
-          if (selected || clicked) {
-            showTimer(restPeriodInSeconds);
-            selectNextExercise();
-          }
-        }}
+        onAnimationEnd={handleAnimationEnd}
       />
     </SelectCompleteButton>
   );

@@ -1,4 +1,3 @@
-import { v4 as uuidv4 } from 'uuid';
 import { createSlice, PayloadAction, Action } from '@reduxjs/toolkit';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -12,7 +11,6 @@ import {
   WeightedActivity,
   SingleSetAction,
   State,
-  Exercise,
 } from '../helpers/types';
 import { Workout } from '../reducers/workoutsReducer';
 
@@ -124,16 +122,8 @@ const setActiveWorkout = (_state: Workout, action: PayloadAction<Workout>) => {
 // simply set the active workout to null when the workout is complete
 const finishWorkout = (_state: Workout, _action: Action) => null;
 
-const addExercise = (state: Workout, action: PayloadAction<Exercise>) => {
-  state.exerciseGroups[0].exercises.push({
-    name: action.payload.name,
-    id: action.payload.id,
-    instanceId: uuidv4(),
-    repsAchieved: 10,
-    weightInKilos: 40,
-    autoIncrement: 0,
-    completed: true,
-  });
+const addActivity = (state: Workout, action: PayloadAction<Activity>) => {
+  state.exerciseGroups[0].exercises.push(action.payload);
 };
 
 const reducers = {
@@ -143,7 +133,7 @@ const reducers = {
   changeReps,
   toggleSetComplete,
   finishWorkout,
-  addExercise,
+  addActivity,
 };
 
 const activeWorkoutSlice = createSlice<Workout, typeof reducers>({
@@ -185,9 +175,9 @@ export const useActiveWorkout = () => {
     },
   });
 
-  const addExercise = (exercise: Exercise) => dispatch({
-    type: actions.addExercise.type,
-    payload: { ...exercise },
+  const addActivity = (activity: Activity) => dispatch({
+    type: actions.addActivity.type,
+    payload: activity,
   });
 
   const finishWorkout = () => dispatch({ type: actions.finishWorkout.type });
@@ -197,7 +187,7 @@ export const useActiveWorkout = () => {
     changeReps,
     setActiveWorkout,
     changeWeight,
-    addExercise,
+    addActivity,
     finishWorkout,
   };
 };

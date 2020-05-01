@@ -1,8 +1,10 @@
 import React, { useState, useRef, useMemo } from 'react';
+import { useSelector } from 'react-redux';
+import { v4 as uuidv4 } from 'uuid';
 import styled from 'styled-components';
 import { useActiveWorkout } from '../../reducers/activeWorkoutReducer';
 import { exercises } from '../../workoutData/exercises';
-import { Exercise } from '../../helpers/types';
+import { Exercise, State } from '../../helpers/types';
 import {
   appMaxWidth,
   gutterWidth,
@@ -11,6 +13,8 @@ import {
   superLightGrey,
 } from '../../helpers/constants';
 import { BackLinkBanner } from '../../components/BackLinkBanner';
+import { useSelectedExercise } from '../../context/useSelectedExercise';
+import { customWorkoutGroupId } from '../../workoutData/workouts/customWorkout';
 
 const Input = styled.input`
   color: ${charcoal};
@@ -139,20 +143,33 @@ interface Props {
 
 export const ActivitySearch: React.FC<Props> = ({ finishSearch }) => {
   const inputRef = useRef(null)
-  const { addExercise } = useActiveWorkout();
+  const { activeWorkout } = useSelector((state: State) => state);
+  const { addActivity } = useActiveWorkout();
   const [searchQuery, setSearchQuery] = useState('');
+  const { setSelectedExercise } = useSelectedExercise();
   const exerciseList = useMemo(() =>
     exercises.allIds.map((id: string): Exercise => exercises.byId[id]),
     [exercises],
   );
+  // use the first group as that is the only group used for a custom workout.
+  const newActivityIndex = activeWorkout.exerciseGroups[0].exercises.length;
 
-  const endSearchAndAddExercise = () => {
+  const endSearchAndAddExercise = (e?: Exercise) => {
     // Add this exercise to a custom-exercise list
-    addExercise({
-      name: searchQuery,
-      id: searchQuery.trim().split(' ').join('-').toLowerCase(),
-      tags: [],
-    })
+    addActivity({
+      name: e ? e.name : searchQuery,
+      id: e ? e.id : searchQuery.trim().split(' ').join('-').toLowerCase(),
+      instanceId: uuidv4(),
+      repsAchieved: 10,
+      weightInKilos: 40,
+      autoIncrement: 0,
+      completed: true,
+    });
+    // Set the newly added exercise as `selected`
+    setSelectedExercise({
+      groupId: customWorkoutGroupId,
+      index: newActivityIndex,
+    });
     finishSearch();
   };
 
@@ -174,11 +191,11 @@ export const ActivitySearch: React.FC<Props> = ({ finishSearch }) => {
       exerciseList.map(e => ({ ...e, searchPieces: [e.name], })),
     );
 
-  const addExerciseLink = searchQuery.length ? {
+  const continueToArgs = searchQuery.length ? {
     showArrows: false,
     link: '',
     text: 'Add',
-    handleClick: endSearchAndAddExercise,
+    handleClick: () => endSearchAndAddExercise(),
   } : undefined;
 
   return (
@@ -186,7 +203,7 @@ export const ActivitySearch: React.FC<Props> = ({ finishSearch }) => {
       <BackLinkBanner
         sticky={false}
         back={{ handleClick: finishSearch, link: '', showArrows: true }}
-        continueTo={addExerciseLink}
+        continueTo={continueToArgs}
       />
       <Input
         ref={inputRef}
@@ -200,14 +217,11 @@ export const ActivitySearch: React.FC<Props> = ({ finishSearch }) => {
         {multipleMatches.map(exercise => (
           <SearchSuggestionTile
             key={exercise.id}
-            onClick={() => {
-              addExercise(exercise);
-              finishSearch();
-            }}
+            onClick={() => endSearchAndAddExercise(exercise)}
           >
-            {exercise.searchPieces.map(piece => (
-              Array.isArray(piece) ? <strong key={piece[0]}>{piece}</strong> : piece
-            ))}
+            {exercise.searchPieces.map(piece => Array.isArray(piece)
+              ? <strong key={piece[0]}>{piece}</strong> : piece
+            )}
           </SearchSuggestionTile>
         ))}
       </Ul>

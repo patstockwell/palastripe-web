@@ -3,6 +3,7 @@ import { Workout } from '../../reducers/workoutsReducer';
 import Image from '../../assets/images/custom-workout-image.jpg';
 
 export const customWorkoutId = 'custom-workout';
+export const customWorkoutGroupId = 'first-group-custom-workout';
 
 export const customWorkout: Workout = {
   id: customWorkoutId,
@@ -10,7 +11,7 @@ export const customWorkout: Workout = {
   imageUrl: Image,
   exerciseGroups: [{
     name: 'Custom Workout',
-    id: 'first-group-custom-workout',
+    id: customWorkoutGroupId,
     exercises: [],
   }],
   startTime: Date.now(),
