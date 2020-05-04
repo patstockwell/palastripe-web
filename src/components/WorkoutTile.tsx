@@ -11,7 +11,7 @@ import {
 } from '../helpers/constants';
 import { calculateWorkoutTime, formatMinutes } from '../helpers/functions';
 import { useScrollPosition } from '../context/useScrollPosition';
-import AdditionSymbol from '../assets/svg/AdditionSymbol';
+import { LightningBolt } from '../assets/svg/LightningBolt';
 
 const Tile = styled.li`
   position: relative;
@@ -96,11 +96,11 @@ export const CustomWorkoutTile: React.FC<{ imageUrl: string }> = ({ imageUrl }) 
   <Tile>
     <Square image={imageUrl}>
       <Minutes>
-        <AdditionSymbol style={{ fill: 'white' }}/>
+        <LightningBolt />
       </Minutes>
     </Square>
     <StyledLink to="/workouts/custom-workout/">
-      <Name>Start custom workout</Name>
+      <Name>Track a workout on the fly</Name>
     </StyledLink>
   </Tile>
 );
