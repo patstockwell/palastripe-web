@@ -21,17 +21,31 @@ const AddActivityButton = styled.button`
   margin-bottom: 30px;
 `;
 
-export const CustomWorkout: React.FC = () => {
+interface Props {
+  setShowHiddenArea: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export const CustomWorkoutTile: React.FC<Props> = ({ setShowHiddenArea }) => {
   const [showSearch, setShowSearch] = useState(false);
+
+  const handleAddActivityClick = () => {
+    setShowSearch(true);
+    setShowHiddenArea(false);
+  };
+
+  const handleFinishSearchClick = () => {
+    setShowSearch(false);
+    setShowHiddenArea(true);
+  };
 
   return (
     <>
-      <AddActivityButton onClick={() => setShowSearch(true)}>
+      <AddActivityButton onClick={handleAddActivityClick}>
         + Add a set
       </AddActivityButton>
 
       {showSearch &&
-        <ActivitySearch finishSearch={() => setShowSearch(false)}/>
+        <ActivitySearch finishSearch={handleFinishSearchClick}/>
       }
     </>
   );

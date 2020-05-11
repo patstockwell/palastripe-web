@@ -11,7 +11,7 @@ import { Activity } from '../../../helpers/types';
 import { Workout } from '../../../reducers/workoutsReducer';
 import { buttonStyle, unorderedListStyle } from '../../../components/SharedStyles';
 import { useSelectedExercise } from '../../../context/useSelectedExercise';
-import { CustomWorkout } from '../../CustomWorkout';
+import { CustomWorkoutTile } from '../CustomWorkoutTile';
 
 const Ul = styled.ul`
   ${unorderedListStyle}
@@ -98,7 +98,9 @@ export const ActivityList: React.FC<Props> = ({
   return (
     <>
       <Ul>{activityListTiles}</Ul>
-      {isCustomWorkout && <CustomWorkout />}
+      {isCustomWorkout &&
+        <CustomWorkoutTile setShowHiddenArea={setShowHiddenArea}/>
+      }
       <FlexTile>
         <Button onClick={finishWorkoutClickHandler}>
           <ColouredDot fill={orange} />
