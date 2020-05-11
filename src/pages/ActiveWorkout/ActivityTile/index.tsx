@@ -1,12 +1,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import { isTimed } from '../../../helpers/types';
-import ActivityTileWithReps from './ActivityTileWithReps';
-import ActivityTileWithTimer from './ActivityTileWithTimer';
+import { ActivityTileWithReps } from './ActivityTileWithReps';
+import { ActivityTileWithTimer } from './ActivityTileWithTimer';
 import { Activity } from '../../../helpers/types';
-import {
-  tileMinHeight,
-} from '../../../helpers/constants';
+import { tileMinHeight } from '../../../helpers/constants';
 
 export const Details = styled.div`
   display: flex;
@@ -62,7 +60,7 @@ interface Props {
   showHiddenArea?: boolean;
 }
 
-const ActivityTile: React.FC<Props> = ({
+export const ActivityTile: React.FC<Props> = ({
   activity,
   groupId,
   index,
@@ -94,5 +92,3 @@ const ActivityTile: React.FC<Props> = ({
       />
     )
 );
-
-export default ActivityTile;

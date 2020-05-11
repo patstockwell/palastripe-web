@@ -76,7 +76,7 @@ interface Props {
   handleSelect: () => void;
 }
 
-const ActivityTileWithTimer: React.FC<Props> = ({
+export const ActivityTileWithTimer: React.FC<Props> = ({
   activity: { name, timerInSeconds, completed, restPeriodInSeconds },
   handleSelect,
   selected,
@@ -202,5 +202,3 @@ const ActivityTileWithTimer: React.FC<Props> = ({
     </Tile>
   );
 };
-
-export default ActivityTileWithTimer;

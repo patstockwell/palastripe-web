@@ -53,7 +53,7 @@ interface Props {
   showHiddenArea: boolean;
 }
 
-const ActivityTileWithReps: React.FC<Props> = ({
+export const ActivityTileWithReps: React.FC<Props> = ({
   activity,
   activity: {
     name, repsAchieved, weightInKilos, completed, restPeriodInSeconds,
@@ -137,5 +137,3 @@ const ActivityTileWithReps: React.FC<Props> = ({
     </Tile>
   );
 };
-
-export default ActivityTileWithReps;

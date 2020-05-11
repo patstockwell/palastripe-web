@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 
 import { ActivityListHeading } from './ActivityListHeading';
-import ActivityTile from '../ActivityTile';
+import { ActivityTile } from '../ActivityTile';
 import { State } from '../../../helpers/types';
 import { Workout, ActivityGroup } from '../../../reducers/workoutsReducer';
 import { unorderedListStyle } from '../../../components/SharedStyles';
