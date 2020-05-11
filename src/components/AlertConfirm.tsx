@@ -14,6 +14,10 @@ const Background = styled.div`
   background-color: rgba(0, 0, 0, 0.6);
 `;
 
+const FixedWrapper = styled(animated.div)`
+  position: 'fixed';
+`;
+
 const Dialog = styled.div`
   background-color: white;
   border-radius: 24px 24px 0 0;
@@ -59,7 +63,6 @@ const AlertConfirm: React.FC<Props> = ({
   const transitions = useTransition(showAlert, null, {
     from: {
       transform: `translateY(${popUpHeight}px)`,
-      position: 'fixed',
       top: 0,
       left: 0,
       opacity: 0,
@@ -82,7 +85,7 @@ const AlertConfirm: React.FC<Props> = ({
     <React.Fragment>
       {transitions.map(({ item, props }) => {
         return item ?
-          <animated.div key={'unique'} style={props}>
+          <FixedWrapper key={'unique'} style={props}>
             <GlobalOverFlowHiddenStyle hidden={showAlert} />
             <Background ref={backgroundRef} onClick={clickHandler}>
               <Dialog>
@@ -92,7 +95,7 @@ const AlertConfirm: React.FC<Props> = ({
                 </ButtonWrapper>
               </Dialog>
             </Background>
-          </animated.div>
+          </FixedWrapper>
           : null;
       })}
     </React.Fragment>

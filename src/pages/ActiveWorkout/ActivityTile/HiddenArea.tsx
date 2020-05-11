@@ -1,9 +1,8 @@
-import React, { ReactText } from 'react';
+import React from 'react';
 import { useSelector } from 'react-redux';
 import {
   animated,
-  OpaqueInterpolation,
-  AnimatedValue,
+  SpringValue
 } from 'react-spring';
 import styled from 'styled-components';
 import { State, WeightedActivity } from '../../../helpers/types';
@@ -28,10 +27,9 @@ interface Props {
   activity: WeightedActivity;
   groupId: string;
   index: number;
-  animatedStyles: AnimatedValue<{
-    height: ReactText,
-    opacity: OpaqueInterpolation<any>,
-  }>;
+  animatedStyles: {
+    [x: string]: SpringValue<any>;
+  };
 }
 
 const HiddenArea: React.FC<Props> = ({

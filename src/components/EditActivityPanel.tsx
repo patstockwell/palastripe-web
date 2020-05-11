@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 import { useTransition, animated } from 'react-spring';
 import styled from 'styled-components';
-import {
-  Activity, // eslint-disable-line no-unused-vars
-} from '../helpers/types';
+import { Activity } from '../helpers/types';
 import { GlobalOverFlowHiddenStyle, buttonStyle } from './SharedStyles';
 import { gutterWidth, purple } from '../helpers/constants';
 
@@ -66,6 +64,10 @@ const IsTimedPanel = styled.div`
   display: flex;
 `;
 
+const FixedWrapper = styled(animated.div)`
+  position: fixed;
+`;
+
 interface Props {
   hide: () => void;
   show: boolean;
@@ -85,7 +87,6 @@ const EditActivityPanel: React.FC<Props> = ({
   const transitions = useTransition(show, null, {
     from: {
       transform: 'translateX(100%)',
-      position: 'fixed',
       top: 0,
       left: 0,
       zIndex: 10,
@@ -115,8 +116,7 @@ const EditActivityPanel: React.FC<Props> = ({
     <React.Fragment>
       {transitions.map(({ item, props }) => {
         return item ?
-          <animated.div key={'unique'} style={{ ...props, opacity: 1 }}>
-
+          <FixedWrapper key={'unique'} style={{ ...props, opacity: 1 }}>
             <GlobalOverFlowHiddenStyle hidden={addGlobalStyle} />
             <Background style={{ opacity: props.opacity }}/>
 
@@ -145,8 +145,7 @@ const EditActivityPanel: React.FC<Props> = ({
                 </ConfirmPanel>
               </DisplayArea>
             </Dialog>
-
-          </animated.div>
+          </FixedWrapper>
           : null;
       })}
     </React.Fragment>

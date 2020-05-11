@@ -1,5 +1,5 @@
-import React, { ReactText } from 'react';
-import { animated, AnimatedValue, OpaqueInterpolation } from 'react-spring';
+import React from 'react';
+import { animated, SpringValue } from 'react-spring';
 import styled, { keyframes } from 'styled-components';
 import startAudio from '../../../assets/activityStart.mp3';
 import completeAudio from '../../../assets/activityEnd.mp3';
@@ -55,10 +55,9 @@ interface Props {
   completed: boolean;
   paused: boolean;
   started: boolean;
-  animatedStyles: AnimatedValue<{
-    height: ReactText,
-    opacity: OpaqueInterpolation<any>,
-  }>;
+  animatedStyles: {
+    [x: string]: SpringValue,
+  };
   handleButtonClick: () => void;
 }
 
