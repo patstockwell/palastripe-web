@@ -136,7 +136,6 @@ export const ActivityTileWithTimer: React.FC<Props> = ({
   return (
     <Tile ref={listElement} selected={selected} onClick={handleSelect}>
       <VisibleArea>
-
         {inProgress && (preparationComplete ? (
           <ActiveTimerBar
             paused={paused}

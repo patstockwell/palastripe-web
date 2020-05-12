@@ -21,6 +21,7 @@ import {
   VisibleArea,
 } from './index';
 import { useActiveWorkout } from '../../../reducers/activeWorkoutReducer';
+import { DraggableTileDelete } from './DraggableTileDelete';
 
 const Tile = styled.li<{ selected: boolean }>`
   ${tileStyle}
@@ -99,23 +100,25 @@ export const ActivityTileWithReps: React.FC<Props> = ({
       onClick={() => handleSelect()}
       ref={listElement}
     >
-      <VisibleArea>
-        <Details onClick={toggleShowHiddenArea}>
-          <Title>{name}</Title>
-          <SubTitle>
-            Weight: {weight} {label}
-          </SubTitle>
-        </Details>
-        <Duration>
-          <p>{repsAchieved} x</p>
-        </Duration>
-          <ToggleSetCompleteButton
-            selected={selected}
-            restPeriodInSeconds={restPeriodInSeconds}
-            handleClick={handleClick}
-            completed={completed}
-          />
-      </VisibleArea>
+      <DraggableTileDelete>
+        <VisibleArea>
+          <Details onClick={toggleShowHiddenArea}>
+            <Title>{name}</Title>
+            <SubTitle>
+              Weight: {weight} {label}
+            </SubTitle>
+          </Details>
+          <Duration>
+            <p>{repsAchieved} x</p>
+          </Duration>
+            <ToggleSetCompleteButton
+              selected={selected}
+              restPeriodInSeconds={restPeriodInSeconds}
+              handleClick={handleClick}
+              completed={completed}
+            />
+        </VisibleArea>
+      </DraggableTileDelete>
 
       <HiddenArea
         activity={activity}
