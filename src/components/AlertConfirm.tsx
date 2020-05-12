@@ -15,7 +15,7 @@ const Background = styled.div`
 `;
 
 const FixedWrapper = styled(animated.div)`
-  position: 'fixed';
+  position: fixed;
 `;
 
 const Dialog = styled.div`

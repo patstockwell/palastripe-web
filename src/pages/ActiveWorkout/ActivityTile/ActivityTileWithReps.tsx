@@ -57,7 +57,12 @@ interface Props {
 export const ActivityTileWithReps: React.FC<Props> = ({
   activity,
   activity: {
-    name, repsAchieved, weightInKilos, completed, restPeriodInSeconds,
+    name,
+    repsAchieved,
+    weightInKilos,
+    completed,
+    restPeriodInSeconds,
+    instanceId,
   },
   groupId,
   index,
@@ -89,7 +94,7 @@ export const ActivityTileWithReps: React.FC<Props> = ({
   const { label, weight } = formatWeight(weightInKilos, useKilos);
   const handleClick = () => {
     if (selected) {
-      toggleSetComplete({ groupId, index })
+      toggleSetComplete({ groupId, index });
     }
   };
 
@@ -100,7 +105,7 @@ export const ActivityTileWithReps: React.FC<Props> = ({
       onClick={() => handleSelect()}
       ref={listElement}
     >
-      <DraggableTileDelete>
+      <DraggableTileDelete id={instanceId}>
         <VisibleArea>
           <Details onClick={toggleShowHiddenArea}>
             <Title>{name}</Title>
@@ -111,12 +116,12 @@ export const ActivityTileWithReps: React.FC<Props> = ({
           <Duration>
             <p>{repsAchieved} x</p>
           </Duration>
-            <ToggleSetCompleteButton
-              selected={selected}
-              restPeriodInSeconds={restPeriodInSeconds}
-              handleClick={handleClick}
-              completed={completed}
-            />
+          <ToggleSetCompleteButton
+            selected={selected}
+            restPeriodInSeconds={restPeriodInSeconds}
+            handleClick={handleClick}
+            completed={completed}
+          />
         </VisibleArea>
       </DraggableTileDelete>
 

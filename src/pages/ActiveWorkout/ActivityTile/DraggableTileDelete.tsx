@@ -1,37 +1,50 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components';
 import { useSpring, animated } from 'react-spring';
 import { useDrag } from 'react-use-gesture';
+import { orange } from '../../../helpers/constants';
+import AlertConfirm from '../../../components/AlertConfirm';
+import { buttonStyle } from '../../../components/SharedStyles';
+import { useActiveWorkout } from '../../../reducers/activeWorkoutReducer';
 
 const deleteButtonWidth = 100;
 const restingPositionLeft = -deleteButtonWidth;
 const snapThresholdLeft = -70;
 
-const Button = styled.button`
+const ConfirmButton = styled.button<{ background?: string }>`
+  ${buttonStyle}
+`;
+
+const DeleteButton = styled(animated.button)`
   height: 100%;
   position: absolute;
-  right: 0;
-  z-index: 1;
-  background-color: red;
+  right: -${deleteButtonWidth}px;
+  top: 0;
+  background-color: ${orange}
   width: ${deleteButtonWidth}px;
   border: none;
 `;
 
 const SlidingLayer = styled(animated.div)`
-  z-index: 4;
-  background-color: white;
   position: relative;
-`
+`;
 
 const SlidingTray = styled.div`
   position: relative;
 `;
 
-export const DraggableTileDelete: React.FC = ({ children }) => {
+interface Props {
+  id: string;
+}
+
+// TODO: Ensure that only one tray is open at a time.
+export const DraggableTileDelete: React.FC<Props> = ({ id, children }) => {
+  const [showAlert, setShowAlert] = useState(false);
+  const { deleteActivity } = useActiveWorkout();
   const [{ x }, set] = useSpring(() => ({
     x: 0,
     config: { mass: 1, tension: 710, friction: 40 },
-  }))
+  }));
 
   const bind = useDrag(({ last, down, movement: [jx, jy] }) => {
     if (last) { // reset the scroll when swiping has finished.
@@ -39,12 +52,12 @@ export const DraggableTileDelete: React.FC = ({ children }) => {
       document.body.style.height = '';
     }
 
-    if (jy < -15 || jy > 15 && x.getValue() === 0) {
+    if (jy < -15 || jy > 15) {
       // if we have scrolled more than 15px, do not trigger swipe
       return;
     }
 
-    if (jx < -15) { // disable scroll for better horizontal swiping
+    if (jx < -15 && !last) { // disable scroll for better horizontal swiping
       document.body.style.overflow = 'hidden';
       document.body.style.height = '100vh';
     }
@@ -52,21 +65,38 @@ export const DraggableTileDelete: React.FC = ({ children }) => {
     if (jx > 0) {
       // do nothing if swiping past the right hand side of the screen
     } else if (jx < snapThresholdLeft) {
-      set({ x: restingPositionLeft }) // snap to resting position
+      set({ x: restingPositionLeft }); // snap to resting position
     } else {
-      set({ x: down ? jx : 0 }) // else snap back to zero when you let go.
+      set({ x: down ? jx : 0 }); // else snap back to zero when you let go.
     }
-  })
+  });
 
   return (
-    <SlidingTray>
-      <Button onClick={() => console.log('clicked')}>Click me</Button>
-      <SlidingLayer
-        {...bind()}
-        style={{ x }}
+    <>
+      <SlidingTray>
+        <SlidingLayer
+          {...bind()}
+          style={{ x }}
+        >
+          {children}
+        </SlidingLayer>
+        <DeleteButton
+          onClick={() => setShowAlert(true)}
+          style={{ x }}
+        >
+          Delete
+        </DeleteButton>
+      </SlidingTray>
+      <AlertConfirm
+        showAlert={showAlert}
+        message={'Delete this activity?'}
+        cancelAlert={() => setShowAlert(false)}
       >
-        {children}
-      </SlidingLayer>
-    </SlidingTray>
+        <ConfirmButton onClick={() => setShowAlert(false)} background={'grey'}>
+          No
+        </ConfirmButton>
+        <ConfirmButton onClick={() => deleteActivity(id)}>Yes</ConfirmButton>
+      </AlertConfirm>
+    </>
   );
 };

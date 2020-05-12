@@ -123,9 +123,21 @@ const setActiveWorkout = (_state: Workout, action: PayloadAction<Workout>) => {
 const finishWorkout = (_state: Workout, _action: Action) => null;
 
 const addActivity = (state: Workout, action: PayloadAction<Activity>) => {
+  // We can use the first exerciseGroup because there is only 1 group in a
+  // custom workout.
   state.exerciseGroups[0].exercises.push(action.payload);
   if (!state.startTime) {
     state.startTime = Date.now();
+  }
+};
+
+const deleteActivity = (state: Workout, action: PayloadAction<string>) => {
+  const index = state.exerciseGroups[0].exercises.findIndex(a =>
+    a.instanceId === action.payload
+  );
+
+  if (index !== -1) { // -1 means nothing was found, so only splice if it exists
+    state.exerciseGroups[0].exercises.splice(index, 1);
   }
 };
 
@@ -137,6 +149,7 @@ const reducers = {
   toggleSetComplete,
   finishWorkout,
   addActivity,
+  deleteActivity,
 };
 
 const activeWorkoutSlice = createSlice<Workout, typeof reducers>({
@@ -150,6 +163,12 @@ const { actions } = activeWorkoutSlice;
 export const useActiveWorkout = () => {
   const dispatch = useDispatch();
   const useKilos = useSelector<State, boolean>(state => state.settings.useKilos);
+
+  const deleteActivity =
+    (payload: string) => dispatch({
+      type: actions.deleteActivity.type,
+      payload,
+    });
 
   const toggleSetComplete =
     (payload: SingleSetAction & { completed?: boolean }) => dispatch({
@@ -192,6 +211,7 @@ export const useActiveWorkout = () => {
     changeWeight,
     addActivity,
     finishWorkout,
+    deleteActivity,
   };
 };
 // TODO: Replace incrementWeight/decrementWeight with single changeWeight func.
