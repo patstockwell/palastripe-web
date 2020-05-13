@@ -22,6 +22,7 @@ const EditableActivityList: React.FC<Props> = ({
   const exerciseGroupTiles = exerciseGroups.map((g: ActivityGroup) => {
     const tiles = g.exercises.map((e, i) => (
       <ActivityTile
+        disableDelete={false}
         key={uuidv4()}
         groupId={g.id}
         index={i}

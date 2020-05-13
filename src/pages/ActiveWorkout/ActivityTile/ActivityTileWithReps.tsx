@@ -52,6 +52,7 @@ interface Props {
   index: number;
   selected: boolean;
   showHiddenArea: boolean;
+  disableDelete: boolean;
 }
 
 export const ActivityTileWithReps: React.FC<Props> = ({
@@ -70,6 +71,7 @@ export const ActivityTileWithReps: React.FC<Props> = ({
   toggleShowHiddenArea,
   selected,
   showHiddenArea,
+  disableDelete,
 }) => {
   const [ finishedAnimating, setFinishedAnimating ] = useState(false);
   const listElement = useRef<HTMLLIElement>(null);
@@ -105,7 +107,7 @@ export const ActivityTileWithReps: React.FC<Props> = ({
       onClick={() => handleSelect()}
       ref={listElement}
     >
-      <DraggableTileDelete id={instanceId}>
+      <DraggableTileDelete disable={disableDelete} id={instanceId}>
         <VisibleArea>
           <Details onClick={toggleShowHiddenArea}>
             <Title>{name}</Title>

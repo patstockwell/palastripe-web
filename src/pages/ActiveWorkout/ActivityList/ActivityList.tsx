@@ -58,6 +58,7 @@ export const ActivityList: React.FC<Props> = ({
 
     return (
       <ActivityTile
+        disableDelete={!isCustomWorkout}
         selected={isSelected}
         showHiddenArea={isSelected && showHiddenArea}
         groupId={id}

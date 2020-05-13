@@ -58,6 +58,7 @@ interface Props {
   toggleShowHiddenArea?: () => void;
   selected?: boolean;
   showHiddenArea?: boolean;
+  disableDelete: boolean;
 }
 
 export const ActivityTile: React.FC<Props> = ({
@@ -68,6 +69,7 @@ export const ActivityTile: React.FC<Props> = ({
   toggleShowHiddenArea,
   selected,
   showHiddenArea,
+  disableDelete,
 }) => (
   isTimed(activity)
     ? (
@@ -89,6 +91,7 @@ export const ActivityTile: React.FC<Props> = ({
         activity={activity}
         handleSelect={handleSelect}
         toggleShowHiddenArea={toggleShowHiddenArea}
+        disableDelete={disableDelete}
       />
     )
 );
