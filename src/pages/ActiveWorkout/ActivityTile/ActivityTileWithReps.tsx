@@ -85,14 +85,17 @@ export const ActivityTileWithReps: React.FC<Props> = ({
   });
 
   useEffect(() => {
-    // When adding a new tile to a custom workout, the tile is immediately open
-    // without animation. `finishedAnimating` is initialised to false so when
-    // adding a new tile, the tile is not scrolled to the top. In order to tell
-    // if the tile is open we compare the animated and the expected heights.
+    // `finishedAnimating` is initialised to false. When transitioning to a tile
+    // and no animation happens (like when adding a tile during a custom
+    // workout, or when selecting a tile with `showHiddenArea` set to false),
+    // the `onRest` callback is not fired. In order to tell if the tile is ready
+    // to be scrolled, we compare the animated and the expected heights.
     const height = selected && animatedStyles.height.getValue();
     const isOpen = showHiddenArea && height === activeWorkoutWindowHeight;
+    const isClosed = !showHiddenArea && height === 0;
 
-    if (selected && (finishedAnimating || isOpen)) {
+    if (selected && (finishedAnimating || isOpen || isClosed)) {
+      // Only scroll after animation is at rest.
       scrollElementToTop(listElement);
     }
 

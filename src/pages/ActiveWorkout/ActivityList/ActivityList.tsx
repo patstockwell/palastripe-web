@@ -100,7 +100,10 @@ export const ActivityList: React.FC<Props> = ({
     <>
       <Ul>{activityListTiles}</Ul>
       {isCustomWorkout &&
-        <CustomWorkoutTile setShowHiddenArea={setShowHiddenArea}/>
+        <CustomWorkoutTile
+          setShowHiddenArea={setShowHiddenArea}
+          showHiddenArea={showHiddenArea}
+        />
       }
       <FlexTile>
         <Button onClick={finishWorkoutClickHandler}>

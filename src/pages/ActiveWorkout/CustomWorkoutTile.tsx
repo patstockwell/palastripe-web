@@ -23,6 +23,7 @@ const AddActivityButton = styled.button`
 
 interface Props {
   setShowHiddenArea: React.Dispatch<React.SetStateAction<boolean>>;
+  showHiddenArea: boolean;
 }
 
 export const CustomWorkoutTile: React.FC<Props> = ({ setShowHiddenArea }) => {
