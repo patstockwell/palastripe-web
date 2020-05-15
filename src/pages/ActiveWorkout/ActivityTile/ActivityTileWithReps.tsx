@@ -22,6 +22,7 @@ import {
 } from './index';
 import { useActiveWorkout } from '../../../reducers/activeWorkoutReducer';
 import { DraggableTileDelete } from './DraggableTileDelete';
+import { activeWorkoutWindowHeight } from '../../../helpers/constants';
 
 const Tile = styled.li<{ selected: boolean }>`
   ${tileStyle}
@@ -84,7 +85,14 @@ export const ActivityTileWithReps: React.FC<Props> = ({
   });
 
   useEffect(() => {
-    if (selected && finishedAnimating) {
+    // When adding a new tile to a custom workout, the tile is immediately open
+    // without animation. `finishedAnimating` is initialised to false so when
+    // adding a new tile, the tile is not scrolled to the top. In order to tell
+    // if the tile is open we compare the animated and the expected heights.
+    const height = selected && animatedStyles.height.getValue();
+    const isOpen = showHiddenArea && height === activeWorkoutWindowHeight;
+
+    if (selected && (finishedAnimating || isOpen)) {
       scrollElementToTop(listElement);
     }
 

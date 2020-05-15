@@ -129,7 +129,7 @@ export const ActivityTileWithTimer: React.FC<Props> = ({
 
   const handleClick = (completed?: boolean) => {
     if (selected) {
-      toggleSetComplete({ groupId, index, completed })
+      toggleSetComplete({ groupId, index, completed });
     }
   };
 
