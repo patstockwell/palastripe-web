@@ -15,17 +15,21 @@ interface ConsumerValue {
 
 const RestTimerProvider: React.FC<{ value: ProviderValue }> =
   ({ value: { setShowTimer, setCount, setRestTime }, children }) => {
-    return (
-      <RestTimerContext.Provider value={{
-        hideTimer: () => {
-          setShowTimer(false);
-          setCount(0);
-        },
-        showTimer: (restTime) => {
+    const providerValue = {
+      hideTimer: () => {
+        setShowTimer(false);
+        setCount(0);
+      },
+      showTimer: (restTime?: number) => {
+        if (restTime) {
           setRestTime(restTime);
           setShowTimer(true);
-        },
-      }}>
+        }
+      },
+    };
+
+    return (
+      <RestTimerContext.Provider value={providerValue}>
         {children}
       </RestTimerContext.Provider>
     );
