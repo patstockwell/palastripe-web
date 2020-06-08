@@ -15,7 +15,7 @@ import {
 } from '../../helpers/constants';
 import { BackLinkBanner } from '../../components/BackLinkBanner';
 import { useSelectedExercise } from '../../context/useSelectedExercise';
-import { customWorkoutGroupId, customWorkoutId } from '../../workoutData/workouts/customWorkout';
+import { customWorkoutGroupId } from '../../workoutData/workouts/customWorkout';
 
 const Input = styled.input`
   color: ${charcoal};
@@ -186,7 +186,7 @@ export const ActivitySearch: React.FC = () => {
   };
 
   // Can I make this async so I don't block keyboard input?
-  const multipleMatches = searchQuery.length < 3 ? [] :
+  const multipleMatches = searchQuery.length < 2 ? [] :
     searchExercises(
       searchQuery.split(' '),
       exerciseList.map(e => ({ ...e, searchPieces: [e.name], })),
