@@ -18,6 +18,8 @@ import { WorkoutCompletionSplash } from '../pages/WorkoutCompletionSplash';
 import { AnimateNavigationProvider } from '../context/useAnimateNavigation';
 import { ScrollPositionProvider } from '../context/useScrollPosition';
 import { SelectedExerciseProvider } from '../context/useSelectedExercise';
+import { activitySearchPath, ActivitySearch } from '../pages/ActiveWorkout/ActivitySearch';
+import { customWorkoutId } from '../workoutData/workouts/customWorkout';
 
 const MaxWidthContainer = styled.div`
   max-width: ${appMaxWidth}px;
@@ -30,10 +32,10 @@ const Routes: React.FC = () => {
 
   useEffect(() => {
     if (process.env.NODE_ENV === 'production') {
-      Analytics.set({ page: pathname }) // sets custom dimensions
+      Analytics.set({ page: pathname }); // sets custom dimensions
       Analytics.pageview(pathname);
     }
-  }, [pathname])
+  }, [pathname]);
 
   return (
     <MaxWidthContainer>
@@ -50,6 +52,7 @@ const Routes: React.FC = () => {
               <Route path="/profile/audio" component={SettingAudio} />
               <Route path="/profile/unit-of-measurement" component={SettingUnitOfMeasurement} />
               <Route path="/edit-workout/" component={EditWorkout} />
+              <Route path={`/workouts/${customWorkoutId}/${activitySearchPath}`} component={ActivitySearch} />
               <Route path="/workouts/:id/" component={ActiveWorkout} />
               <Route path="/workout-complete/" component={WorkoutCompletionSplash} />
               <Route component={FourZeroFour} />

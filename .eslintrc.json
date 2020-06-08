@@ -4,12 +4,13 @@
         "es6": true
     },
     "globals": {
-        "it": true,
-        "describe": true,
-        "expect": true,
-        "require": true,
-        "importScripts": true,
-        "beforeEach": true
+      "process": true,
+      "it": true,
+      "describe": true,
+      "expect": true,
+      "require": true,
+      "importScripts": true,
+      "beforeEach": true
     },
     "extends": [
       "plugin:react/recommended",

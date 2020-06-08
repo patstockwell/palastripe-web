@@ -1,4 +1,5 @@
 import React, { useState, useRef, useMemo } from 'react';
+import { useHistory } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 import styled from 'styled-components';
@@ -14,7 +15,7 @@ import {
 } from '../../helpers/constants';
 import { BackLinkBanner } from '../../components/BackLinkBanner';
 import { useSelectedExercise } from '../../context/useSelectedExercise';
-import { customWorkoutGroupId } from '../../workoutData/workouts/customWorkout';
+import { customWorkoutGroupId, customWorkoutId } from '../../workoutData/workouts/customWorkout';
 
 const Input = styled.input`
   color: ${charcoal};
@@ -116,12 +117,12 @@ function filterList(
     }, []);
 
     if (foundMatch) {
-      return [ ...accumulator, { ...exercise, searchPieces }]
+      return [ ...accumulator, { ...exercise, searchPieces }];
     }
 
     return accumulator;
   }, []);
-};
+}
 
 function searchExercises(
   searchTerms: string[],
@@ -135,24 +136,23 @@ function searchExercises(
 
   const filteredList = filterList(allExercises, firstSearchTerm);
   return searchExercises(remainingSearchTerms, filteredList);
-};
-
-interface Props {
-  finishSearch: () => void;
 }
 
-export const ActivitySearch: React.FC<Props> = ({ finishSearch }) => {
-  const inputRef = useRef(null)
+export const activitySearchPath = 'activity-search';
+
+export const ActivitySearch: React.FC = () => {
+  const inputRef = useRef(null);
+  const history = useHistory();
   const { activeWorkout } = useSelector((state: State) => state);
   const { addActivity } = useActiveWorkout();
   const [searchQuery, setSearchQuery] = useState('');
   const { setSelectedExercise } = useSelectedExercise();
-  const exerciseList = useMemo(() =>
-    exercises.allIds.map((id: string): Exercise => exercises.byId[id]),
-    [exercises],
-  );
+  const exerciseList = useMemo(() => (
+    exercises.allIds.map((id: string): Exercise => exercises.byId[id])
+  ), [exercises]);
   // use the first group as that is the only group used for a custom workout.
   const newActivityIndex = activeWorkout.exerciseGroups[0].exercises.length;
+  const backLinkPath = `/workouts/${activeWorkout.id}`;
 
   const endSearchAndAddExercise = (e?: Exercise) => {
     // Add this exercise to a custom-exercise list
@@ -170,7 +170,8 @@ export const ActivitySearch: React.FC<Props> = ({ finishSearch }) => {
       groupId: customWorkoutGroupId,
       index: newActivityIndex,
     });
-    finishSearch();
+    // navigate back to the active workout URL
+    history.push(`/workouts/${activeWorkout.id}`);
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
@@ -193,7 +194,7 @@ export const ActivitySearch: React.FC<Props> = ({ finishSearch }) => {
 
   const continueToArgs = searchQuery.length ? {
     showArrows: false,
-    link: '',
+    link: backLinkPath,
     text: 'Add',
     handleClick: () => endSearchAndAddExercise(),
   } : undefined;
@@ -202,7 +203,7 @@ export const ActivitySearch: React.FC<Props> = ({ finishSearch }) => {
     <ActivitySearchBackground>
       <BackLinkBanner
         sticky={false}
-        back={{ handleClick: finishSearch, link: '', showArrows: true }}
+        back={{ link: backLinkPath, showArrows: true }}
         continueTo={continueToArgs}
       />
       <Input

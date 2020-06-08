@@ -30,7 +30,7 @@ const ToggleSetCompleteButton: React.FC<Props> = ({
   // page, we can set a flag to ensure the animation was triggered via click.
   const [ clicked, setClicked ] = useState(false);
   const { hideTimer, showTimer } = useRestTimer();
-  const { activeWorkout } = useSelector((state: State) => state)
+  const { activeWorkout } = useSelector((state: State) => state);
   const { selectNextExercise } = useSelectedExercise();
   const handleAnimationEnd = () => {
     // check the animation was triggered via click and not reload
@@ -42,7 +42,7 @@ const ToggleSetCompleteButton: React.FC<Props> = ({
         selectNextExercise();
       }
     }
-  }
+  };
 
   return (
     <SelectCompleteButton onClick={() => {
