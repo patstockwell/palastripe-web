@@ -30,6 +30,7 @@ interface Props {
   animatedStyles: {
     [x: string]: SpringValue<any>;
   };
+  toggleShowHiddenArea: () => void;
 }
 
 const HiddenArea: React.FC<Props> = ({
@@ -43,15 +44,19 @@ const HiddenArea: React.FC<Props> = ({
     completed,
     restPeriodInSeconds,
   },
+  toggleShowHiddenArea,
 }) => {
   const useKilos = useSelector((state: State) => state.settings.useKilos);
-  // TODO: Can we bind the groupId and index here?
   const { toggleSetComplete, changeReps, changeWeight } = useActiveWorkout();
   const { showTimer } = useRestTimer();
 
-  const handleButtonClick = () => {
-    toggleSetComplete({ completed: true, groupId, index });
-    showTimer(restPeriodInSeconds);
+  const handleButtonClick = (completed: boolean) => {
+    if (completed) {
+      toggleShowHiddenArea();
+    } else {
+      toggleSetComplete({ completed: true, groupId, index });
+      showTimer(restPeriodInSeconds);
+    }
   };
 
   return (
@@ -83,9 +88,9 @@ const HiddenArea: React.FC<Props> = ({
       </IncrementDecrementPanel>
 
       <Button
-        onClick={handleButtonClick}
+        onClick={() => handleButtonClick(completed)}
         background={completed && 'grey'}
-      >{completed ? 'Completed' : 'Finish set & rest'}</Button>
+      >{completed ? 'Done' : 'Finish set & rest'}</Button>
     </animated.div>
   );
 };

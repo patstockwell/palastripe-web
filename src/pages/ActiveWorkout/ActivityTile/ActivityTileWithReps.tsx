@@ -143,6 +143,7 @@ export const ActivityTileWithReps: React.FC<Props> = ({
         groupId={groupId}
         index={index}
         animatedStyles={animatedStyles}
+        toggleShowHiddenArea={toggleShowHiddenArea}
       />
 
       {selected &&
