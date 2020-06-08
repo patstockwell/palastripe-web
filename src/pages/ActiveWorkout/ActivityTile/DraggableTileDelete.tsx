@@ -19,6 +19,7 @@ const DeleteButton = styled.button`
   background-color: ${orange}
   width: ${deleteButtonWidth}px;
   border: none;
+  scroll-snap-align: end;
 `;
 
 const ScrollSnapWrapper = styled.div`
