@@ -25,19 +25,19 @@ export interface State {
 
 // Activity stuff
 
-export interface TimedActivity {
-  id: string; // this should be `exerciseId`
+export interface TimedActivity extends Exercise {
+  // id: string; // this should be `exerciseId`
+  // name: string;
   instanceId: string; // this should be `id`
-  name: string;
   restPeriodInSeconds?: number;
   completed?: boolean;
   timerInSeconds: number;
 }
 
-export interface WeightedActivity {
-  id: string; // this should be `exerciseId`
+export interface WeightedActivity extends Exercise {
+  // id: string; // this should be `exerciseId`
+  // name: string;
   instanceId: string; // this should be `id`
-  name: string;
   restPeriodInSeconds?: number;
   completed?: boolean;
   weightInKilos: number;
@@ -49,7 +49,7 @@ export interface WeightedActivity {
 export interface Exercise {
   id: string;
   name: string;
-  tags: string[];
+  tags?: string[];
 }
 
 export type Activity = WeightedActivity | TimedActivity;

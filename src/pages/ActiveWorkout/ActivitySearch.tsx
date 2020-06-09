@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from 'uuid';
 import styled from 'styled-components';
 import { useActiveWorkout } from '../../reducers/activeWorkoutReducer';
 import { exercises } from '../../workoutData/exercises';
-import { Exercise, State } from '../../helpers/types';
+import { Exercise, State, WeightedActivity } from '../../helpers/types';
 import {
   appMaxWidth,
   gutterWidth,
@@ -138,6 +138,10 @@ function searchExercises(
   return searchExercises(remainingSearchTerms, filteredList);
 }
 
+interface RecentActivities {
+  [id: string]: WeightedActivity;
+}
+
 export const activitySearchPath = 'activity-search';
 
 export const ActivitySearch: React.FC = () => {
@@ -154,14 +158,19 @@ export const ActivitySearch: React.FC = () => {
   const newActivityIndex = activeWorkout.exerciseGroups[0].exercises.length;
   const backLinkPath = `/workouts/${activeWorkout.id}`;
 
-  const endSearchAndAddExercise = (e?: Exercise) => {
+  const endSearchAndAddExercise = (exercise?: {
+    name: string,
+    id: string,
+    repsAchieved?: number,
+    weightInKilos?: number,
+  }) => {
     // Add this exercise to a custom-exercise list
     addActivity({
-      name: e ? e.name : searchQuery,
-      id: e ? e.id : searchQuery.trim().split(' ').join('-').toLowerCase(),
+      name: exercise.name || searchQuery,
+      id: exercise.id || searchQuery.trim().split(' ').join('-').toLowerCase(),
       instanceId: uuidv4(),
-      repsAchieved: 10,
-      weightInKilos: 40,
+      repsAchieved: exercise.repsAchieved || 10,
+      weightInKilos: exercise.weightInKilos || 40,
       autoIncrement: 0,
       completed: true,
     });
@@ -192,6 +201,11 @@ export const ActivitySearch: React.FC = () => {
       exerciseList.map(e => ({ ...e, searchPieces: [e.name], })),
     );
 
+  const recentActivities: RecentActivities =
+    activeWorkout.exerciseGroups[0].exercises.reduce((acc, curr) => ({
+      ...acc, [curr.id]: curr
+    }), {});
+
   const continueToArgs = searchQuery.length ? {
     showArrows: false,
     link: backLinkPath,
@@ -215,16 +229,26 @@ export const ActivitySearch: React.FC = () => {
         onKeyDown={handleKeyPress}
       />
       <Ul>
-        {multipleMatches.map(exercise => (
-          <SearchSuggestionTile
-            key={exercise.id}
-            onClick={() => endSearchAndAddExercise(exercise)}
-          >
-            {exercise.searchPieces.map(piece => Array.isArray(piece)
-              ? <strong key={piece[0]}>{piece}</strong> : piece
-            )}
-          </SearchSuggestionTile>
-        ))}
+        {multipleMatches.length // show suggestions from the input query
+          ?  multipleMatches.map(exercise => (
+            <SearchSuggestionTile
+              key={exercise.id}
+              onClick={() => endSearchAndAddExercise(exercise)}
+            >
+              {exercise.searchPieces.map(piece => Array.isArray(piece)
+                ? <strong key={piece[0]}>{piece}</strong> : piece
+              )}
+            </SearchSuggestionTile>
+          )) // else show the recently added exercises as suggestions
+          : Object.values(recentActivities).map((activity: WeightedActivity) => (
+            <SearchSuggestionTile
+              key={activity.instanceId}
+              onClick={() => endSearchAndAddExercise(activity)}
+            >
+              {activity.name}
+            </SearchSuggestionTile>
+          ))
+        }
       </Ul>
     </ActivitySearchBackground>
   );
