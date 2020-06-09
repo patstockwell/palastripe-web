@@ -158,9 +158,9 @@ export const ActivitySearch: React.FC = () => {
   const newActivityIndex = activeWorkout.exerciseGroups[0].exercises.length;
   const backLinkPath = `/workouts/${activeWorkout.id}`;
 
-  const endSearchAndAddExercise = (exercise?: {
-    name: string,
-    id: string,
+  const endSearchAndAddExercise = (exercise: {
+    name?: string,
+    id?: string,
     repsAchieved?: number,
     weightInKilos?: number,
   }) => {
@@ -185,7 +185,7 @@ export const ActivitySearch: React.FC = () => {
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
     if (e.which === 13) { // if enter key is pressed
-      endSearchAndAddExercise();
+      endSearchAndAddExercise({});
     }
   };
 
@@ -210,7 +210,7 @@ export const ActivitySearch: React.FC = () => {
     showArrows: false,
     link: backLinkPath,
     text: 'Add',
-    handleClick: () => endSearchAndAddExercise(),
+    handleClick: () => endSearchAndAddExercise({}),
   } : undefined;
 
   return (
