@@ -31,6 +31,8 @@ const SlidingLayer = styled.div`
   overflow: scroll;
   scrollbar-width: none; // This only works in Firefox.
   scroll-snap-type: x proximity;
+  background-color: transparent;
+  background-image: linear-gradient(90deg, transparent 50%, ${orange} 50%);
 
   // non standard css. Not supported in all browsers.
   &::-webkit-scrollbar {

@@ -119,7 +119,7 @@ export const ActivityTileWithReps: React.FC<Props> = ({
       ref={listElement}
     >
       <DraggableTileDelete disable={disableDelete} id={instanceId}>
-        <VisibleArea>
+        <VisibleArea selected={selected}>
           <Details onClick={toggleShowHiddenArea}>
             <Title>{name}</Title>
             <SubTitle>

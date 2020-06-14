@@ -11,7 +11,7 @@ export const tileStyle = css<{ selected: boolean }>`
   color: ${props => props.selected ? 'black' : charcoal};
   border: none;
   border-bottom: 1px solid ${lightLightGrey};
-  background-color: ${({ selected }) => selected ? 'white' : superLightGrey};
+  background-color: ${props => props.selected ? 'white' : superLightGrey};
   cursor: pointer;
   min-height: ${tileMinHeight}px;
   touch-action: manipulation; // stops double-tap-to-zoom

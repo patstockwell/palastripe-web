@@ -4,7 +4,7 @@ import { isTimed } from '../../../helpers/types';
 import { ActivityTileWithReps } from './ActivityTileWithReps';
 import { ActivityTileWithTimer } from './ActivityTileWithTimer';
 import { Activity } from '../../../helpers/types';
-import { tileMinHeight } from '../../../helpers/constants';
+import { tileMinHeight, superLightGrey } from '../../../helpers/constants';
 
 export const Details = styled.div`
   display: flex;
@@ -39,14 +39,19 @@ export const Duration = styled.div`
   order: 1;
 `;
 
-export const VisibleArea = styled.div`
+export const VisibleArea = styled.div<{ selected?: boolean }>`
   position: relative;
   display: flex;
   align-items: stretch;
   flex-direction: row;
   justify-content: flex-start;
   min-height: ${tileMinHeight}px;
-  background-color: transparent;
+  background-color: ${props => {
+    if (props.selected === undefined) {
+      return 'transparent';
+    }
+    return props.selected ? 'white' : superLightGrey;
+  }};
   z-index: 1;
 `;
 
