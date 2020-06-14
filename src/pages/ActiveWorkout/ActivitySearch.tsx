@@ -69,9 +69,8 @@ const SearchSuggestionTile = styled.li`
 
 const ActivitySearchBackground = styled.div`
   background: white;
-  position: fixed;
-  height: 100vh;
-  width: 100vw;
+  height: 100%;
+  width: 100%;
   top: 0;
   z-index: 3;
 `;
