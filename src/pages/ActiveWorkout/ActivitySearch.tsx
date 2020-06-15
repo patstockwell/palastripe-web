@@ -75,6 +75,123 @@ const ActivitySearchBackground = styled.div`
   z-index: 3;
 `;
 
+export const activitySearchPath = 'activity-search';
+
+export const ActivitySearch: React.FC = () => {
+  const inputRef = useRef(null);
+  const history = useHistory();
+  const { activeWorkout } = useSelector((state: State) => state);
+  const { addActivity } = useActiveWorkout();
+  const [searchQuery, setSearchQuery] = useState('');
+  const { setSelectedExercise } = useSelectedExercise();
+  const exerciseList = useMemo(() => (
+    exercises.allIds.map((id: string): Exercise => exercises.byId[id])
+  ), [exercises]);
+  // use the first group as that is the only group used for a custom workout.
+  const newActivityIndex = activeWorkout.exerciseGroups[0].exercises.length;
+  const backLinkPath = `/workouts/${activeWorkout.id}`;
+
+  const endSearchAndAddExercise = ({
+    id,
+    name,
+    weightInKilos = 40,
+    repsAchieved = 10,
+  }: {
+    name?: string,
+    id?: string,
+    repsAchieved?: number,
+    weightInKilos?: number,
+  }) => {
+    // Add this exercise to a custom-exercise list
+    addActivity({
+      name: name || searchQuery,
+      id: id || searchQuery.trim().split(' ').join('-').toLowerCase(),
+      instanceId: uuidv4(),
+      repsAchieved,
+      weightInKilos,
+      autoIncrement: 0,
+      completed: true,
+    });
+    // Set the newly added exercise as `selected`
+    setSelectedExercise({
+      groupId: customWorkoutGroupId,
+      index: newActivityIndex,
+    });
+    // navigate back to the active workout URL
+    history.push(`/workouts/${activeWorkout.id}`);
+  };
+
+  const handleKeyPress = (e: React.KeyboardEvent) => {
+    if (e.which === 13) { // if enter key is pressed
+      endSearchAndAddExercise({});
+    }
+  };
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    setSearchQuery(e.target.value);
+  };
+
+  // Can I make this async so I don't block keyboard input?
+  const multipleMatches = searchQuery.length < 2 ? [] :
+    searchExercises(
+      searchQuery.split(' '),
+      exerciseList.map(e => ({ ...e, searchPieces: [e.name], })),
+    );
+
+  const recentActivities: { [id: string]: WeightedActivity } =
+    activeWorkout.exerciseGroups[0].exercises.reduce((acc, curr) => ({
+      ...acc, [curr.id]: curr
+    }), {});
+
+  const continueToArgs = searchQuery.length ? {
+    showArrows: false,
+    link: backLinkPath,
+    text: 'Add',
+    handleClick: () => endSearchAndAddExercise({}),
+  } : undefined;
+
+  return (
+    <ActivitySearchBackground>
+      <BackLinkBanner
+        sticky={false}
+        back={{ link: backLinkPath, showArrows: true }}
+        continueTo={continueToArgs}
+      />
+      <Input
+        ref={inputRef}
+        placeholder="Search or create new exercise"
+        onChange={handleSearchChange}
+        value={searchQuery}
+        autoFocus
+        onKeyDown={handleKeyPress}
+      />
+      <Ul>
+        {multipleMatches.length // show suggestions from the input query
+          ?  multipleMatches.map(exercise => (
+            <SearchSuggestionTile
+              key={exercise.id}
+              onClick={() => endSearchAndAddExercise(exercise)}
+            >
+              {exercise.searchPieces.map(piece => Array.isArray(piece)
+                ? <strong key={piece[0]}>{piece}</strong> : piece
+              )}
+            </SearchSuggestionTile>
+          )) // else show the recently added exercises as suggestions
+          : Object.values(recentActivities).map((activity: WeightedActivity) => (
+            <SearchSuggestionTile
+              key={activity.instanceId}
+              onClick={() => endSearchAndAddExercise(activity)}
+            >
+              {activity.name}
+            </SearchSuggestionTile>
+          ))
+        }
+      </Ul>
+    </ActivitySearchBackground>
+  );
+};
+
 interface SearchPieces {
   searchPieces: Array<string[] | string>
 }
@@ -137,118 +254,3 @@ function searchExercises(
   return searchExercises(remainingSearchTerms, filteredList);
 }
 
-interface RecentActivities {
-  [id: string]: WeightedActivity;
-}
-
-export const activitySearchPath = 'activity-search';
-
-export const ActivitySearch: React.FC = () => {
-  const inputRef = useRef(null);
-  const history = useHistory();
-  const { activeWorkout } = useSelector((state: State) => state);
-  const { addActivity } = useActiveWorkout();
-  const [searchQuery, setSearchQuery] = useState('');
-  const { setSelectedExercise } = useSelectedExercise();
-  const exerciseList = useMemo(() => (
-    exercises.allIds.map((id: string): Exercise => exercises.byId[id])
-  ), [exercises]);
-  // use the first group as that is the only group used for a custom workout.
-  const newActivityIndex = activeWorkout.exerciseGroups[0].exercises.length;
-  const backLinkPath = `/workouts/${activeWorkout.id}`;
-
-  const endSearchAndAddExercise = (exercise: {
-    name?: string,
-    id?: string,
-    repsAchieved?: number,
-    weightInKilos?: number,
-  }) => {
-    // Add this exercise to a custom-exercise list
-    addActivity({
-      name: exercise.name || searchQuery,
-      id: exercise.id || searchQuery.trim().split(' ').join('-').toLowerCase(),
-      instanceId: uuidv4(),
-      repsAchieved: exercise.repsAchieved || 10,
-      weightInKilos: exercise.weightInKilos || 40,
-      autoIncrement: 0,
-      completed: true,
-    });
-    // Set the newly added exercise as `selected`
-    setSelectedExercise({
-      groupId: customWorkoutGroupId,
-      index: newActivityIndex,
-    });
-    // navigate back to the active workout URL
-    history.push(`/workouts/${activeWorkout.id}`);
-  };
-
-  const handleKeyPress = (e: React.KeyboardEvent) => {
-    if (e.which === 13) { // if enter key is pressed
-      endSearchAndAddExercise({});
-    }
-  };
-
-  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault();
-    setSearchQuery(e.target.value);
-  };
-
-  // Can I make this async so I don't block keyboard input?
-  const multipleMatches = searchQuery.length < 2 ? [] :
-    searchExercises(
-      searchQuery.split(' '),
-      exerciseList.map(e => ({ ...e, searchPieces: [e.name], })),
-    );
-
-  const recentActivities: RecentActivities =
-    activeWorkout.exerciseGroups[0].exercises.reduce((acc, curr) => ({
-      ...acc, [curr.id]: curr
-    }), {});
-
-  const continueToArgs = searchQuery.length ? {
-    showArrows: false,
-    link: backLinkPath,
-    text: 'Add',
-    handleClick: () => endSearchAndAddExercise({}),
-  } : undefined;
-
-  return (
-    <ActivitySearchBackground>
-      <BackLinkBanner
-        sticky={false}
-        back={{ link: backLinkPath, showArrows: true }}
-        continueTo={continueToArgs}
-      />
-      <Input
-        ref={inputRef}
-        placeholder="Search or create new exercise"
-        onChange={handleSearchChange}
-        value={searchQuery}
-        autoFocus
-        onKeyDown={handleKeyPress}
-      />
-      <Ul>
-        {multipleMatches.length // show suggestions from the input query
-          ?  multipleMatches.map(exercise => (
-            <SearchSuggestionTile
-              key={exercise.id}
-              onClick={() => endSearchAndAddExercise(exercise)}
-            >
-              {exercise.searchPieces.map(piece => Array.isArray(piece)
-                ? <strong key={piece[0]}>{piece}</strong> : piece
-              )}
-            </SearchSuggestionTile>
-          )) // else show the recently added exercises as suggestions
-          : Object.values(recentActivities).map((activity: WeightedActivity) => (
-            <SearchSuggestionTile
-              key={activity.instanceId}
-              onClick={() => endSearchAndAddExercise(activity)}
-            >
-              {activity.name}
-            </SearchSuggestionTile>
-          ))
-        }
-      </Ul>
-    </ActivitySearchBackground>
-  );
-};
