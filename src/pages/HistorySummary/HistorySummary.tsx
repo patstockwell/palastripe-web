@@ -10,7 +10,7 @@ import { ActivitySummary } from '../../components/ActivitySummary';
 import { BackLinkBanner } from '../../components/BackLinkBanner';
 import { State, Activity } from '../../helpers/types';
 import { Workout } from '../../reducers/workoutsReducer';
-import { getTimeSince } from '../../helpers/functions';
+import { formatDate } from '../../helpers/functions';
 import { bannerHeight } from '../../helpers/constants';
 
 const Hr = styled.hr`
@@ -72,7 +72,7 @@ export const HistorySummary: React.FC<Props> = ({
     return <Redirect to="/activity/" />;
   }
 
-  const { value, unitOfMeasurement } = getTimeSince(workout.finishTime);
+  const { historyTileDateFormat } = formatDate(workout.finishTime);
   const exercises = createExerciseHash(workout);
   const activitySummaryTiles = Object.entries(exercises).map(exerciseSets => (
     <ActivitySummary key={exerciseSets[0]} exerciseSets={exerciseSets} />
@@ -86,7 +86,7 @@ export const HistorySummary: React.FC<Props> = ({
       }}/>
       <Page>
         <h2>{workout.name}</h2>
-        <h3>{value} {unitOfMeasurement} ago</h3>
+        <h3>{historyTileDateFormat}</h3>
         <Hr />
         <Ul>
           {activitySummaryTiles}
