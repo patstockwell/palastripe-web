@@ -34,7 +34,7 @@ const FlexTile = styled.div`
 `;
 
 const BottomEmptySpace = styled.div<{ stickyTop?: number}>`
-  height: ${tileMinHeight}px;
+  height: ${tileMinHeight * 3}px;
 `;
 
 interface Props {
