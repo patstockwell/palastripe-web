@@ -1,7 +1,7 @@
 // Never remove versions, simply add new ones as needed
 export const VERSION_ONE = 'Version 1';
 
-export const appMaxWidth = 600;
+export const appMaxWidth = 812; // 812px is the size of an iPhone X on its side
 export const tileGap: number = 16;
 export const tileMinHeight: number = 88;
 export const workoutTileMinHeight: number = 100;
