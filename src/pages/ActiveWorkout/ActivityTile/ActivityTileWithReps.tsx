@@ -43,6 +43,7 @@ export const ShowHiddenAreaArrowWrapper = styled(animated.button)`
   bottom: 0px;
   left: 50%;
   transform: translateX(-50%);
+  z-index: 1;
 `;
 
 interface Props {

@@ -1,5 +1,5 @@
 import React, { useState, useRef, useMemo } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useHistory, Redirect } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 import styled from 'styled-components';
@@ -87,6 +87,10 @@ export const ActivitySearch: React.FC = () => {
   const exerciseList = useMemo(() => (
     exercises.allIds.map((id: string): Exercise => exercises.byId[id])
   ), [exercises]);
+
+  if (!activeWorkout) {
+    return <Redirect to="/workouts/" />;
+  }
   // use the first group as that is the only group used for a custom workout.
   const newActivityIndex = activeWorkout.exerciseGroups[0].exercises.length;
   const backLinkPath = `/workouts/${activeWorkout.id}`;
