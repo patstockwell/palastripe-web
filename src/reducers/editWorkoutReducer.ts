@@ -60,7 +60,7 @@ const addSetToEditWorkout = (state: Workout) => {
   const { exercises }: ActivityGroup = exerciseGroups[lastGroupIndex];
   const lastExercise: Activity = exercises[exercises.length - 1] || {
     instanceId: uuidv4(),
-    id: uuidv4(),
+    exerciseId: uuidv4(),
     name: 'Exercise with reps',
     repsGoal: 12,
     repsAchieved: 12,

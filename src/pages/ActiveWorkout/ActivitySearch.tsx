@@ -91,25 +91,26 @@ export const ActivitySearch: React.FC = () => {
   if (!activeWorkout) {
     return <Redirect to="/workouts/" />;
   }
+
   // use the first group as that is the only group used for a custom workout.
   const newActivityIndex = activeWorkout.exerciseGroups[0].exercises.length;
   const backLinkPath = `/workouts/${activeWorkout.id}`;
 
   const endSearchAndAddExercise = ({
-    id,
+    exerciseId,
     name,
     weightInKilos = 40,
     repsAchieved = 10,
   }: {
     name?: string,
-    id?: string,
+    exerciseId?: string,
     repsAchieved?: number,
     weightInKilos?: number,
   }) => {
     // Add this exercise to a custom-exercise list
     addActivity({
       name: name || searchQuery,
-      id: id || searchQuery.trim().split(' ').join('-').toLowerCase(),
+      exerciseId: exerciseId || searchQuery.trim().split(' ').join('-').toLowerCase(),
       instanceId: uuidv4(),
       repsAchieved,
       weightInKilos,
@@ -145,7 +146,7 @@ export const ActivitySearch: React.FC = () => {
 
   const recentActivities: { [id: string]: WeightedActivity } =
     activeWorkout.exerciseGroups[0].exercises.reduce((acc, curr) => ({
-      ...acc, [curr.id]: curr
+      ...acc, [curr.exerciseId]: curr
     }), {});
 
   const continueToArgs = searchQuery.length ? {
@@ -175,7 +176,10 @@ export const ActivitySearch: React.FC = () => {
           ?  multipleMatches.map(exercise => (
             <SearchSuggestionTile
               key={exercise.id}
-              onClick={() => endSearchAndAddExercise(exercise)}
+              onClick={() => endSearchAndAddExercise({
+                name: exercise.name,
+                exerciseId: exercise.id,
+              })}
             >
               {exercise.searchPieces.map(piece => Array.isArray(piece)
                 ? <strong key={piece[0]}>{piece}</strong> : piece
@@ -185,7 +189,12 @@ export const ActivitySearch: React.FC = () => {
           : Object.values(recentActivities).map((activity: WeightedActivity) => (
             <SearchSuggestionTile
               key={activity.instanceId}
-              onClick={() => endSearchAndAddExercise(activity)}
+              onClick={() => endSearchAndAddExercise({
+                name: activity.name,
+                repsAchieved: activity.repsAchieved,
+                exerciseId: activity.exerciseId,
+                weightInKilos: activity.weightInKilos,
+              })}
             >
               {activity.name}
             </SearchSuggestionTile>

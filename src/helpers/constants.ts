@@ -1,5 +1,4 @@
-// Never remove versions, simply add new ones as needed
-export const VERSION_ONE = 'Version 1';
+export const WORKOUT_VERSION = 'Tue 16 Jun 2020 22:18:03 AEST';
 
 export const appMaxWidth = 812; // 812px is the size of an iPhone X on its side
 export const tileGap: number = 16;

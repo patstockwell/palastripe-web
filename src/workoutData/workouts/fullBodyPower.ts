@@ -1,13 +1,13 @@
 import { v4 as uuidv4 } from 'uuid';
 import { Workout } from '../../reducers/workoutsReducer';
-import { VERSION_ONE } from '../../helpers/constants';
+import { WORKOUT_VERSION } from '../../helpers/constants';
 import Image from '../../assets/images/active-adult-aerobics-206573.jpg';
 
 export const fullBodyPower: Workout = {
   id: 'full-body-power',
   name: 'Full Body Power',
   imageUrl: Image,
-  version: VERSION_ONE,
+  version: WORKOUT_VERSION,
   exerciseGroups: [
     {
       id: '81df4d60-3987-45fa-9504-f5242eb18544',
@@ -15,14 +15,14 @@ export const fullBodyPower: Workout = {
       exercises: [
         {
           instanceId: uuidv4(),
-          id: 'stationary_bike',
+          exerciseId: 'stationary_bike',
           name: 'Stationary Bike',
           timerInSeconds: 300,
           restPeriodInSeconds: 60,
         },
         {
           instanceId: uuidv4(),
-          id: 'lunges',
+          exerciseId: 'lunges',
           name: 'Lunges',
           timerInSeconds: 60,
           restPeriodInSeconds: 30,
@@ -35,7 +35,7 @@ export const fullBodyPower: Workout = {
       exercises: [
         {
           instanceId: uuidv4(),
-          id: 'back_squat',
+          exerciseId: 'back_squat',
           name: 'Back Squat',
           weightInKilos: 40,
           repsGoal: 5,
@@ -45,7 +45,7 @@ export const fullBodyPower: Workout = {
         },
         {
           instanceId: uuidv4(),
-          id: 'back_squat',
+          exerciseId: 'back_squat',
           name: 'Back Squat',
           weightInKilos: 40,
           repsGoal: 5,
@@ -55,7 +55,7 @@ export const fullBodyPower: Workout = {
         },
         {
           instanceId: uuidv4(),
-          id: 'back_squat',
+          exerciseId: 'back_squat',
           name: 'Back Squat',
           weightInKilos: 40,
           repsGoal: 5,
@@ -65,7 +65,7 @@ export const fullBodyPower: Workout = {
         },
         {
           instanceId: uuidv4(),
-          id: 'dead_lift',
+          exerciseId: 'dead_lift',
           name: 'Dead Lift',
           weightInKilos: 80,
           repsGoal: 5,
@@ -75,7 +75,7 @@ export const fullBodyPower: Workout = {
         },
         {
           instanceId: uuidv4(),
-          id: 'dead_lift',
+          exerciseId: 'dead_lift',
           name: 'Dead Lift',
           weightInKilos: 80,
           repsGoal: 5,
@@ -85,7 +85,7 @@ export const fullBodyPower: Workout = {
         },
         {
           instanceId: uuidv4(),
-          id: 'dead_lift',
+          exerciseId: 'dead_lift',
           name: 'Dead Lift',
           weightInKilos: 80,
           repsGoal: 5,
@@ -95,7 +95,7 @@ export const fullBodyPower: Workout = {
         },
         {
           instanceId: uuidv4(),
-          id: 'chin_up',
+          exerciseId: 'chin_up',
           name: 'Chin Ups',
           weightInKilos: 0,
           repsGoal: 5,
@@ -105,7 +105,7 @@ export const fullBodyPower: Workout = {
         },
         {
           instanceId: uuidv4(),
-          id: 'chin_up',
+          exerciseId: 'chin_up',
           name: 'Chin Ups',
           weightInKilos: 0,
           repsGoal: 5,
@@ -115,7 +115,7 @@ export const fullBodyPower: Workout = {
         },
         {
           instanceId: uuidv4(),
-          id: 'chin_up',
+          exerciseId: 'chin_up',
           name: 'Chin Ups',
           weightInKilos: 0,
           repsGoal: 5,
@@ -125,7 +125,7 @@ export const fullBodyPower: Workout = {
         },
         {
           instanceId: uuidv4(),
-          id: 'overhead_press',
+          exerciseId: 'overhead_press',
           name: 'Overhead Press',
           weightInKilos: 30,
           repsGoal: 5,
@@ -135,7 +135,7 @@ export const fullBodyPower: Workout = {
         },
         {
           instanceId: uuidv4(),
-          id: 'overhead_press',
+          exerciseId: 'overhead_press',
           name: 'Overhead Press',
           weightInKilos: 30,
           repsGoal: 5,
@@ -145,7 +145,7 @@ export const fullBodyPower: Workout = {
         },
         {
           instanceId: uuidv4(),
-          id: 'overhead_press',
+          exerciseId: 'overhead_press',
           name: 'Overhead Press',
           weightInKilos: 30,
           repsGoal: 5,
@@ -155,7 +155,7 @@ export const fullBodyPower: Workout = {
         },
         {
           instanceId: uuidv4(),
-          id: 'push_ups',
+          exerciseId: 'push_ups',
           name: 'Push Ups',
           weightInKilos: 0,
           repsGoal: 20,
@@ -165,7 +165,7 @@ export const fullBodyPower: Workout = {
         },
         {
           instanceId: uuidv4(),
-          id: 'push_ups',
+          exerciseId: 'push_ups',
           name: 'Push Ups',
           weightInKilos: 0,
           repsGoal: 20,
@@ -175,7 +175,7 @@ export const fullBodyPower: Workout = {
         },
         {
           instanceId: uuidv4(),
-          id: 'push_ups',
+          exerciseId: 'push_ups',
           name: 'Push Ups',
           weightInKilos: 0,
           repsGoal: 20,
@@ -185,7 +185,7 @@ export const fullBodyPower: Workout = {
         },
         {
           instanceId: uuidv4(),
-          id: 'ring_rows',
+          exerciseId: 'ring_rows',
           name: 'Ring Rows',
           weightInKilos: 0,
           repsGoal: 12,
@@ -195,7 +195,7 @@ export const fullBodyPower: Workout = {
         },
         {
           instanceId: uuidv4(),
-          id: 'ring_rows',
+          exerciseId: 'ring_rows',
           name: 'Ring Rows',
           weightInKilos: 0,
           repsGoal: 12,
@@ -205,7 +205,7 @@ export const fullBodyPower: Workout = {
         },
         {
           instanceId: uuidv4(),
-          id: 'ring_rows',
+          exerciseId: 'ring_rows',
           name: 'Ring Rows',
           weightInKilos: 0,
           repsGoal: 12,

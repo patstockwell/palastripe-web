@@ -1,13 +1,13 @@
-import { v4 as uuidv4 } from 'uuid';
-import { Workout } from '../../reducers/workoutsReducer';
-import { VERSION_ONE } from '../../helpers/constants';
+import {v4 as uuidv4} from 'uuid';
+import {Workout} from '../../reducers/workoutsReducer';
+import {WORKOUT_VERSION} from '../../helpers/constants';
 import Image from '../../assets/images/athlete-barbell-biceps-497934.jpg';
 
 export const squatAndBench: Workout = {
   id: 'squat-and-bench',
   name: 'Squat And Bench',
   imageUrl: Image,
-  version: VERSION_ONE,
+  version: WORKOUT_VERSION,
   exerciseGroups: [
     {
       id: '7cc70a8f-7b50-42d0-b18d-d62e78407631',
@@ -15,14 +15,14 @@ export const squatAndBench: Workout = {
       exercises: [
         {
           instanceId: uuidv4(),
-          id: 'sit_ups',
+          exerciseId: 'sit_ups',
           name: 'Sit Ups',
           timerInSeconds: 60,
           restPeriodInSeconds: 30,
         },
         {
           instanceId: uuidv4(),
-          id: 'lunges',
+          exerciseId: 'lunges',
           name: 'Lunges',
           timerInSeconds: 60,
           restPeriodInSeconds: 30,
@@ -36,7 +36,7 @@ export const squatAndBench: Workout = {
       exercises: [
         {
           instanceId: uuidv4(),
-          id: 'back_squat',
+          exerciseId: 'back_squat',
           name: 'Back Squat',
           repsGoal: 12,
           repsAchieved: 12,
@@ -46,7 +46,7 @@ export const squatAndBench: Workout = {
         },
         {
           instanceId: uuidv4(),
-          id: 'concentration_curl',
+          exerciseId: 'concentration_curl',
           name: 'Concentration Curl',
           repsGoal: 12,
           repsAchieved: 12,
@@ -56,7 +56,7 @@ export const squatAndBench: Workout = {
         },
         {
           instanceId: uuidv4(),
-          id: 'back_squat',
+          exerciseId: 'back_squat',
           name: 'Back Squat',
           repsGoal: 10,
           repsAchieved: 10,
@@ -66,7 +66,7 @@ export const squatAndBench: Workout = {
         },
         {
           instanceId: uuidv4(),
-          id: 'concentration_curl',
+          exerciseId: 'concentration_curl',
           name: 'Concentration Curl',
           repsGoal: 12,
           repsAchieved: 12,
@@ -76,7 +76,7 @@ export const squatAndBench: Workout = {
         },
         {
           instanceId: uuidv4(),
-          id: 'back_squat',
+          exerciseId: 'back_squat',
           name: 'Back Squat',
           repsGoal: 6,
           repsAchieved: 6,
@@ -86,7 +86,7 @@ export const squatAndBench: Workout = {
         },
         {
           instanceId: uuidv4(),
-          id: 'concentration_curl',
+          exerciseId: 'concentration_curl',
           name: 'Concentration Curl',
           repsGoal: 12,
           repsAchieved: 12,
@@ -96,7 +96,7 @@ export const squatAndBench: Workout = {
         },
         {
           instanceId: uuidv4(),
-          id: 'back_squat',
+          exerciseId: 'back_squat',
           name: 'Back Squat',
           repsGoal: 3,
           repsAchieved: 3,
@@ -106,7 +106,7 @@ export const squatAndBench: Workout = {
         },
         {
           instanceId: uuidv4(),
-          id: 'concentration_curl',
+          exerciseId: 'concentration_curl',
           name: 'Concentration Curl',
           repsGoal: 12,
           repsAchieved: 12,
@@ -116,7 +116,7 @@ export const squatAndBench: Workout = {
         },
         {
           instanceId: uuidv4(),
-          id: 'back_squat',
+          exerciseId: 'back_squat',
           name: 'Back Squat',
           repsGoal: 1,
           repsAchieved: 1,
@@ -126,7 +126,7 @@ export const squatAndBench: Workout = {
         },
         {
           instanceId: uuidv4(),
-          id: 'concentration_curl',
+          exerciseId: 'concentration_curl',
           name: 'Concentration Curl',
           repsGoal: 12,
           repsAchieved: 12,
@@ -143,7 +143,7 @@ export const squatAndBench: Workout = {
       exercises: [
         {
           instanceId: uuidv4(),
-          id: 'bench_press',
+          exerciseId: 'bench_press',
           name: 'Bench Press',
           repsGoal: 12,
           repsAchieved: 12,
@@ -153,7 +153,7 @@ export const squatAndBench: Workout = {
         },
         {
           instanceId: uuidv4(),
-          id: 'skull_crushers',
+          exerciseId: 'skull_crushers',
           name: 'Skull Crushers',
           repsGoal: 12,
           repsAchieved: 12,
@@ -164,7 +164,7 @@ export const squatAndBench: Workout = {
 
         {
           instanceId: uuidv4(),
-          id: 'bench_press',
+          exerciseId: 'bench_press',
           name: 'Bench Press',
           repsGoal: 8,
           repsAchieved: 8,
@@ -174,7 +174,7 @@ export const squatAndBench: Workout = {
         },
         {
           instanceId: uuidv4(),
-          id: 'skull_crushers',
+          exerciseId: 'skull_crushers',
           name: 'Skull Crushers',
           repsGoal: 12,
           repsAchieved: 12,
@@ -185,7 +185,7 @@ export const squatAndBench: Workout = {
 
         {
           instanceId: uuidv4(),
-          id: 'bench_press',
+          exerciseId: 'bench_press',
           name: 'Bench Press',
           repsGoal: 4,
           repsAchieved: 4,
@@ -195,7 +195,7 @@ export const squatAndBench: Workout = {
         },
         {
           instanceId: uuidv4(),
-          id: 'skull_crushers',
+          exerciseId: 'skull_crushers',
           name: 'Skull Crushers',
           repsGoal: 12,
           repsAchieved: 12,
@@ -206,7 +206,7 @@ export const squatAndBench: Workout = {
 
         {
           instanceId: uuidv4(),
-          id: 'bench_press',
+          exerciseId: 'bench_press',
           name: 'Bench Press',
           repsGoal: 1,
           repsAchieved: 1,
@@ -216,7 +216,7 @@ export const squatAndBench: Workout = {
         },
         {
           instanceId: uuidv4(),
-          id: 'skull_crushers',
+          exerciseId: 'skull_crushers',
           name: 'Skull Crushers',
           repsGoal: 12,
           repsAchieved: 12,
@@ -233,43 +233,43 @@ export const squatAndBench: Workout = {
       exercises: [
         {
           instanceId: uuidv4(),
-          id: 'right_arm_cross_body_stretch',
+          exerciseId: 'right_arm_cross_body_stretch',
           name: 'Right Arm Cross Body',
           timerInSeconds: 60,
         },
         {
           instanceId: uuidv4(),
-          id: 'left_arm_cross_body_stretch',
+          exerciseId: 'left_arm_cross_body_stretch',
           name: 'Left Arm Cross Body',
           timerInSeconds: 60,
         },
         {
           instanceId: uuidv4(),
-          id: 'kneeling_right_hip_flexor_stretch',
+          exerciseId: 'kneeling_right_hip_flexor_stretch',
           name: 'Kneeling Right Hip-Flexor Stretch',
           timerInSeconds: 45,
         },
         {
           instanceId: uuidv4(),
-          id: 'kneeling_left_hip_flexor_stretch',
+          exerciseId: 'kneeling_left_hip_flexor_stretch',
           name: 'Kneeling Left Hip-Flexor Stretch',
           timerInSeconds: 45,
         },
         {
           instanceId: uuidv4(),
-          id: 'left_glute_pigeon_pose_stretch',
+          exerciseId: 'left_glute_pigeon_pose_stretch',
           name: 'Left Glute Pigeon Pose',
           timerInSeconds: 60,
         },
         {
           instanceId: uuidv4(),
-          id: 'right_glute_pigeon_pose_stretch',
+          exerciseId: 'right_glute_pigeon_pose_stretch',
           name: 'Right Glute Pigeon Pose',
           timerInSeconds: 60,
         },
         {
           instanceId: uuidv4(),
-          id: 'overhead_band_chest_stretch',
+          exerciseId: 'overhead_band_chest_stretch',
           name: 'Overhead Band Chest Stretch',
           timerInSeconds: 60,
         },

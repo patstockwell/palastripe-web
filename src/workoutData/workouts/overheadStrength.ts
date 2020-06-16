@@ -1,13 +1,13 @@
 import { v4 as uuidv4 } from 'uuid';
 import { Workout } from '../../reducers/workoutsReducer';
-import { VERSION_ONE } from '../../helpers/constants';
+import { WORKOUT_VERSION } from '../../helpers/constants';
 import Image from '../../assets/images/athlete-barbell-body-931321.jpg';
 
 export const overheadStrength: Workout = {
   id: 'overhead-strength',
   name: 'Overhead Strength',
   imageUrl: Image,
-  version: VERSION_ONE,
+  version: WORKOUT_VERSION,
   exerciseGroups: [
     {
       id: '706601c7-d966-4f99-8172-77a1957fc1e3',
@@ -15,14 +15,14 @@ export const overheadStrength: Workout = {
       exercises: [
         {
           instanceId: uuidv4(),
-          id: 'sit_ups',
+          exerciseId: 'sit_ups',
           name: 'Sit Ups',
           timerInSeconds: 60,
           restPeriodInSeconds: 30,
         },
         {
           instanceId: uuidv4(),
-          id: 'lunges',
+          exerciseId: 'lunges',
           name: 'Lunges',
           timerInSeconds: 60,
           restPeriodInSeconds: 30,
@@ -35,7 +35,7 @@ export const overheadStrength: Workout = {
       exercises: [
         {
           instanceId: uuidv4(),
-          id: 'overhead_press',
+          exerciseId: 'overhead_press',
           name: 'Overhead Press',
           weightInKilos: 20,
           repsGoal: 12,
@@ -45,7 +45,7 @@ export const overheadStrength: Workout = {
         },
         {
           instanceId: uuidv4(),
-          id: 'concentration_curl',
+          exerciseId: 'concentration_curl',
           name: 'Concentration Curl',
           weightInKilos: 12.5,
           repsGoal: 10,
@@ -56,7 +56,7 @@ export const overheadStrength: Workout = {
 
         {
           instanceId: uuidv4(),
-          id: 'overhead_press',
+          exerciseId: 'overhead_press',
           name: 'Overhead Press',
           weightInKilos: 30,
           repsGoal: 8,
@@ -66,7 +66,7 @@ export const overheadStrength: Workout = {
         },
         {
           instanceId: uuidv4(),
-          id: 'concentration_curl',
+          exerciseId: 'concentration_curl',
           name: 'Concentration Curl',
           weightInKilos: 12.5,
           repsGoal: 10,
@@ -77,7 +77,7 @@ export const overheadStrength: Workout = {
 
         {
           instanceId: uuidv4(),
-          id: 'overhead_press',
+          exerciseId: 'overhead_press',
           name: 'Overhead Press',
           weightInKilos: 40,
           repsGoal: 4,
@@ -87,7 +87,7 @@ export const overheadStrength: Workout = {
         },
         {
           instanceId: uuidv4(),
-          id: 'concentration_curl',
+          exerciseId: 'concentration_curl',
           name: 'Concentration Curl',
           weightInKilos: 15,
           repsGoal: 8,
@@ -98,7 +98,7 @@ export const overheadStrength: Workout = {
 
         {
           instanceId: uuidv4(),
-          id: 'overhead_press',
+          exerciseId: 'overhead_press',
           name: 'Overhead Press',
           weightInKilos: 50,
           repsGoal: 1,
@@ -108,7 +108,7 @@ export const overheadStrength: Workout = {
         },
         {
           instanceId: uuidv4(),
-          id: 'concentration_curl',
+          exerciseId: 'concentration_curl',
           name: 'Concentration Curl',
           weightInKilos: 12.5,
           repsGoal: 10,
@@ -124,7 +124,7 @@ export const overheadStrength: Workout = {
       exercises: [
         {
           instanceId: uuidv4(),
-          id: 'push_ups',
+          exerciseId: 'push_ups',
           name: 'Push Ups',
           weightInKilos: 0,
           repsGoal: 10,
@@ -134,7 +134,7 @@ export const overheadStrength: Workout = {
         },
         {
           instanceId: uuidv4(),
-          id: 'machine_chest_flys',
+          exerciseId: 'machine_chest_flys',
           name: 'Machine Chest Flys',
           weightInKilos: 7,
           repsGoal: 10,
@@ -144,7 +144,7 @@ export const overheadStrength: Workout = {
         },
         {
           instanceId: uuidv4(),
-          id: 'push_ups',
+          exerciseId: 'push_ups',
           name: 'Push Ups',
           weightInKilos: 0,
           repsGoal: 10,
@@ -154,7 +154,7 @@ export const overheadStrength: Workout = {
         },
         {
           instanceId: uuidv4(),
-          id: 'machine_chest_flys',
+          exerciseId: 'machine_chest_flys',
           name: 'Machine Chest Flys',
           weightInKilos: 7,
           repsGoal: 10,
@@ -164,7 +164,7 @@ export const overheadStrength: Workout = {
         },
         {
           instanceId: uuidv4(),
-          id: 'push_ups',
+          exerciseId: 'push_ups',
           name: 'Push Ups',
           weightInKilos: 0,
           repsGoal: 10,
@@ -174,7 +174,7 @@ export const overheadStrength: Workout = {
         },
         {
           instanceId: uuidv4(),
-          id: 'machine_chest_flys',
+          exerciseId: 'machine_chest_flys',
           name: 'Machine Chest Flys',
           weightInKilos: 7,
           repsGoal: 10,
@@ -190,43 +190,43 @@ export const overheadStrength: Workout = {
       exercises: [
         {
           instanceId: uuidv4(),
-          id: 'right_arm_cross_body_stretch',
+          exerciseId: 'right_arm_cross_body_stretch',
           name: 'Right Arm Cross Body',
           timerInSeconds: 60,
         },
         {
           instanceId: uuidv4(),
-          id: 'left_arm_cross_body_stretch',
+          exerciseId: 'left_arm_cross_body_stretch',
           name: 'Left Arm Cross Body',
           timerInSeconds: 60,
         },
         {
           instanceId: uuidv4(),
-          id: 'right_leg_hamstring_stretch',
+          exerciseId: 'right_leg_hamstring_stretch',
           name: 'Right Leg Hamstring stretch',
           timerInSeconds: 45,
         },
         {
           instanceId: uuidv4(),
-          id: 'left_leg_hamstring_stretch',
+          exerciseId: 'left_leg_hamstring_stretch',
           name: 'Left Leg Hamstring stretch',
           timerInSeconds: 45,
         },
         {
           instanceId: uuidv4(),
-          id: 'right_glute_pigeon_pose_stretch',
+          exerciseId: 'right_glute_pigeon_pose_stretch',
           name: 'Right Glute Pigeon Pose',
           timerInSeconds: 60,
         },
         {
           instanceId: uuidv4(),
-          id: 'left_glute_pigeon_pose_stretch',
+          exerciseId: 'left_glute_pigeon_pose_stretch',
           name: 'Left Glute Pigeon Pose',
           timerInSeconds: 60,
         },
         {
           instanceId: uuidv4(),
-          id: 'overhead_band_chest_stretch',
+          exerciseId: 'overhead_band_chest_stretch',
           name: 'Overhead Band Chest Stretch',
           timerInSeconds: 60,
         },

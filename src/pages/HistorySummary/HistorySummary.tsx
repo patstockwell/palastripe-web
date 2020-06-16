@@ -51,10 +51,12 @@ const createExerciseHash = (workout: Workout): ExerciseHash => {
     .flatMap(group => group.exercises)
     // .filter(activity => !activity.tags.includes('stretch'))
     .reduce((acc, curr) => {
+      // Check if the new field exists (exerciseId), else use the old field (id)
+      const legacyId = curr.exerciseId || (curr as any).id;
       return {
         ...acc,
-        [curr.id]: [
-          ...(acc[curr.id] || []),
+        [legacyId]: [
+          ...(acc[legacyId] || []),
           curr,
         ],
       };

@@ -16,7 +16,7 @@ import { legPower } from '../workoutData/workouts/legPower';
 import { compoundPyramids } from '../workoutData/workouts/compoundPyramids';
 import { customWorkoutId, customWorkout } from '../workoutData/workouts/customWorkout';
 import { getLocalStorage } from '../helpers/functions';
-import { LOCAL_STORAGE_WORKOUTS } from '../helpers/constants';
+import { LOCAL_STORAGE_WORKOUTS, WORKOUT_VERSION } from '../helpers/constants';
 
 export interface Workouts {
   byId: {
@@ -60,15 +60,14 @@ export const reduceCompletedExercises = (workout: Workout): BoolHash => {
       if (isTimed(curr)) {
         return acc;
       }
-      const { id, completed, repsGoal, repsAchieved } = curr;
-      const newKey = acc[id] === undefined;
-      // completed may be undefined so it's cast to boolean with `!!`
+      const { exerciseId, completed, repsGoal, repsAchieved } = curr;
+      const newKey = acc[exerciseId] === undefined;
       const success = !!completed && repsAchieved >= repsGoal;
-      const done = newKey ? success : success && acc[id];
+      const done = newKey ? success : success && acc[exerciseId];
 
       return {
         ...acc,
-        [id]: done,
+        [exerciseId]: done,
       };
     }, {});
 };
@@ -95,7 +94,7 @@ export const adjustWeight = (w: Workout, groupIndex: number) =>
 
 /**
  * This function ensures that if all sets for an exercise were completed
- * successfully, then the weight is incremented. Each _set_ detirmines it own
+ * successfully, then the weight is incremented. Each _set_ determines it own
  * increment. That means that if 4 sets of bench press are completed
  * successfully, none, some, or all may get an increment.
  */
@@ -106,7 +105,7 @@ const updateCompleted = (e: BoolHash) => (a: Activity) => {
 
   return {
     ...a,
-    weightInKilos: e[a.id]
+    weightInKilos: e[a.exerciseId]
       ? a.weightInKilos + a.autoIncrement
       : a.weightInKilos,
   };
@@ -151,10 +150,17 @@ const mergeWorkouts = (
   if (localStorage === undefined) {
     return initial;
   }
-  // TODO: remove all the workouts from localStorage that don't meet version1
-  const { allIds: localIds, byId } = localStorage;
+  const { allIds: localIds, byId: localById } = localStorage;
   const { allIds: initialIds, byId: initialWorkouts } = initial;
-  // find all the ids not in localStorage
+
+  // remove all the workouts from localStorage that don't meet the current version
+  const localIdsToKeep = localIds.filter(id => localById[id].version === WORKOUT_VERSION);
+  const localIdsToDelete = localIds.filter(id => localById[id].version !== WORKOUT_VERSION);
+  localIdsToDelete.forEach(id => {
+    delete localById[id];
+  });
+
+  // find all the new workouts (any ids not in localStorage)
   const missingIds = initialIds.filter(id => !localIds.includes(id));
   // get each of the workouts for those ids
   const missingWorkouts = missingIds
@@ -163,13 +169,13 @@ const mergeWorkouts = (
 
   return {
     byId: {
-      ...byId,
+      ...localById,
       ...missingWorkouts,
       // Custom workout is never changed by the client. We can override here and
       // ensure that clients always get the latest version.
       [customWorkoutId]: customWorkout,
     },
-    allIds: [ ...localIds, ...missingIds ],
+    allIds: [ ...localIdsToKeep, ...missingIds ],
   };
 };
 
