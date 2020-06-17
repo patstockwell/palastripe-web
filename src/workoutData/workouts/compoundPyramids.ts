@@ -14,7 +14,7 @@ export const compoundPyramids: Workout = {
       name: 'Legs',
       exercises: [
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'leg_press',
           autoIncrement: 0,
           repsGoal: 12,
@@ -24,7 +24,7 @@ export const compoundPyramids: Workout = {
           name: 'Leg Press',
         },
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'leg_press',
           name: 'Leg Press',
           autoIncrement: 0,
@@ -34,7 +34,7 @@ export const compoundPyramids: Workout = {
           restPeriodInSeconds: 90,
         },
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'leg_press',
           name: 'Leg Press',
           autoIncrement: 0,
@@ -44,7 +44,7 @@ export const compoundPyramids: Workout = {
           restPeriodInSeconds: 90,
         },
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'leg_press',
           name: 'Leg Press',
           autoIncrement: 0,
@@ -60,7 +60,7 @@ export const compoundPyramids: Workout = {
       name: 'Shoulders',
       exercises: [
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'overhead_press',
           name: 'Overhead Press',
           autoIncrement: 0,
@@ -70,7 +70,7 @@ export const compoundPyramids: Workout = {
           restPeriodInSeconds: 90,
         },
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'overhead_press',
           name: 'Overhead Press',
           autoIncrement: 0,
@@ -80,7 +80,7 @@ export const compoundPyramids: Workout = {
           restPeriodInSeconds: 90,
         },
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'overhead_press',
           name: 'Overhead Press',
           autoIncrement: 0,
@@ -90,7 +90,7 @@ export const compoundPyramids: Workout = {
           restPeriodInSeconds: 90,
         },
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'overhead_press',
           name: 'Overhead Press',
           autoIncrement: 0,
@@ -106,7 +106,7 @@ export const compoundPyramids: Workout = {
       name: 'Back',
       exercises: [
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'upright_row',
           name: 'Upright Row',
           autoIncrement: 0,
@@ -116,7 +116,7 @@ export const compoundPyramids: Workout = {
           restPeriodInSeconds: 90,
         },
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'upright_row',
           name: 'Upright Row',
           autoIncrement: 0,
@@ -126,7 +126,7 @@ export const compoundPyramids: Workout = {
           restPeriodInSeconds: 90,
         },
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'upright_row',
           name: 'Upright Row',
           autoIncrement: 0,
@@ -136,7 +136,7 @@ export const compoundPyramids: Workout = {
           restPeriodInSeconds: 90,
         },
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'upright_row',
           name: 'Upright Row',
           autoIncrement: 0,
@@ -152,7 +152,7 @@ export const compoundPyramids: Workout = {
       name: 'Chest',
       exercises: [
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'dumbbell_bench_press',
           name: 'Dumbbell Bench Press',
           autoIncrement: 0,
@@ -162,7 +162,7 @@ export const compoundPyramids: Workout = {
           restPeriodInSeconds: 90,
         },
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'dumbbell_bench_press',
           name: 'Dumbbell Bench Press',
           autoIncrement: 0,
@@ -172,7 +172,7 @@ export const compoundPyramids: Workout = {
           restPeriodInSeconds: 90,
         },
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'dumbbell_bench_press',
           name: 'Dumbbell Bench Press',
           autoIncrement: 0,
@@ -182,7 +182,7 @@ export const compoundPyramids: Workout = {
           restPeriodInSeconds: 90,
         },
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'dumbbell_bench_press',
           name: 'Dumbbell Bench Press',
           autoIncrement: 0,
@@ -198,43 +198,43 @@ export const compoundPyramids: Workout = {
       name: 'stretch',
       exercises: [
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'right_arm_cross_body_stretch',
           name: 'Right Arm Cross Body',
           timerInSeconds: 60,
         },
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'left_arm_cross_body_stretch',
           name: 'Left Arm Cross Body',
           timerInSeconds: 60,
         },
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'kneeling_right_hip_flexor_stretch',
           name: 'Kneeling Right Hip-Flexor Stretch',
           timerInSeconds: 45,
         },
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'kneeling_left_hip_flexor_stretch',
           name: 'Kneeling Left Hip-Flexor Stretch',
           timerInSeconds: 45,
         },
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'left_glute_pigeon_pose_stretch',
           name: 'Left Glute Pigeon Pose',
           timerInSeconds: 60,
         },
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'right_glute_pigeon_pose_stretch',
           name: 'Right Glute Pigeon Pose',
           timerInSeconds: 60,
         },
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'overhead_band_chest_stretch',
           name: 'Overhead Band Chest Stretch',
           timerInSeconds: 60,

@@ -63,7 +63,7 @@ export const ActivityList: React.FC<Props> = ({
         showHiddenArea={isSelected && showHiddenArea}
         groupId={id}
         index={i}
-        key={a.instanceId}
+        key={a.id}
         activity={a}
         handleSelect={() => {
           if (!isSelected) {

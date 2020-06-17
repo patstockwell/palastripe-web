@@ -14,14 +14,14 @@ export const pushAndPull: Workout = {
       name: 'Warm Up',
       exercises: [
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'sit_ups',
           name: 'Sit Ups',
           timerInSeconds: 60,
           restPeriodInSeconds: 30,
         },
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'band_pass_through',
           name: 'Band Pass Through',
           timerInSeconds: 60,
@@ -35,7 +35,7 @@ export const pushAndPull: Workout = {
       name: 'Press And Raise',
       exercises: [
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'bench_press',
           name: 'Bench Press',
           weightInKilos: 40,
@@ -45,7 +45,7 @@ export const pushAndPull: Workout = {
           restPeriodInSeconds: 90,
         },
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'chin_up',
           name: 'Chin Ups',
           weightInKilos: 0,
@@ -56,7 +56,7 @@ export const pushAndPull: Workout = {
         },
 
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'bench_press',
           name: 'Bench Press',
           weightInKilos: 40,
@@ -66,7 +66,7 @@ export const pushAndPull: Workout = {
           restPeriodInSeconds: 90,
         },
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'chin_up',
           name: 'Chin Ups',
           weightInKilos: 0,
@@ -77,7 +77,7 @@ export const pushAndPull: Workout = {
         },
 
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'bench_press',
           name: 'Bench Press',
           weightInKilos: 40,
@@ -87,7 +87,7 @@ export const pushAndPull: Workout = {
           restPeriodInSeconds: 90,
         },
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'chin_up',
           name: 'Chin Ups',
           weightInKilos: 0,
@@ -98,7 +98,7 @@ export const pushAndPull: Workout = {
         },
 
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'bench_press',
           name: 'Bench Press',
           weightInKilos: 40,
@@ -108,7 +108,7 @@ export const pushAndPull: Workout = {
           restPeriodInSeconds: 90,
         },
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'chin_up',
           name: 'Chin Ups',
           weightInKilos: 0,
@@ -125,7 +125,7 @@ export const pushAndPull: Workout = {
       name: 'Row And Curl',
       exercises: [
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'upright_row',
           name: 'Upright Row',
           weightInKilos: 20,
@@ -135,7 +135,7 @@ export const pushAndPull: Workout = {
           restPeriodInSeconds: 60,
         },
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'concentration_curl',
           name: 'Concentration Curl',
           weightInKilos: 12.5,
@@ -146,7 +146,7 @@ export const pushAndPull: Workout = {
         },
 
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'upright_row',
           name: 'Upright Row',
           weightInKilos: 20,
@@ -156,7 +156,7 @@ export const pushAndPull: Workout = {
           restPeriodInSeconds: 60,
         },
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'concentration_curl',
           name: 'Concentration Curl',
           weightInKilos: 12.5,
@@ -167,7 +167,7 @@ export const pushAndPull: Workout = {
         },
 
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'upright_row',
           name: 'Upright Row',
           weightInKilos: 20,
@@ -177,7 +177,7 @@ export const pushAndPull: Workout = {
           restPeriodInSeconds: 60,
         },
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'concentration_curl',
           name: 'Concentration Curl',
           weightInKilos: 12.5,
@@ -188,7 +188,7 @@ export const pushAndPull: Workout = {
         },
 
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'upright_row',
           name: 'Upright Row',
           weightInKilos: 20,
@@ -198,7 +198,7 @@ export const pushAndPull: Workout = {
           restPeriodInSeconds: 60,
         },
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'concentration_curl',
           name: 'Concentration Curl',
           weightInKilos: 12.5,
@@ -216,43 +216,43 @@ export const pushAndPull: Workout = {
       id: '779b159f-9315-4793-8d37-5418596630d9',
       exercises: [
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'left_leg_hamstring_stretch',
           name: 'Left Leg Hamstring stretch',
           timerInSeconds: 45,
         },
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'right_leg_hamstring_stretch',
           name: 'Right Leg Hamstring stretch',
           timerInSeconds: 45,
         },
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'right_arm_cross_body_stretch',
           name: 'Right Arm Cross Body',
           timerInSeconds: 60,
         },
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'left_arm_cross_body_stretch',
           name: 'Left Arm Cross Body',
           timerInSeconds: 60,
         },
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'left_glute_pigeon_pose_stretch',
           name: 'Left Glute Pigeon Pose',
           timerInSeconds: 60,
         },
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'right_glute_pigeon_pose_stretch',
           name: 'Right Glute Pigeon Pose',
           timerInSeconds: 60,
         },
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'overhead_band_chest_stretch',
           name: 'Overhead Band Chest Stretch',
           timerInSeconds: 60,

@@ -14,7 +14,7 @@ export const fullBodyDumbbellStrength: Workout = {
       name: 'Warm Up',
       exercises: [
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'sit_ups',
           name: 'Sit Ups',
           timerInSeconds: 60,
@@ -27,7 +27,7 @@ export const fullBodyDumbbellStrength: Workout = {
       name: 'exercises',
       exercises: [
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'straight_leg_dumbbell_deadlift',
           name: 'Straight-leg Dumbbell Deadlift',
           weightInKilos: 15,
@@ -37,7 +37,7 @@ export const fullBodyDumbbellStrength: Workout = {
           restPeriodInSeconds: 60,
         },
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'straight_leg_dumbbell_deadlift',
           name: 'Straight-leg Dumbbell Deadlift',
           weightInKilos: 15,
@@ -47,7 +47,7 @@ export const fullBodyDumbbellStrength: Workout = {
           restPeriodInSeconds: 60,
         },
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'straight_leg_dumbbell_deadlift',
           name: 'Straight-leg Dumbbell Deadlift',
           weightInKilos: 15,
@@ -57,7 +57,7 @@ export const fullBodyDumbbellStrength: Workout = {
           restPeriodInSeconds: 60,
         },
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'dumbbell_overhead_press',
           name: 'Dumbbell Overhead Press',
           weightInKilos: 15,
@@ -67,7 +67,7 @@ export const fullBodyDumbbellStrength: Workout = {
           restPeriodInSeconds: 60,
         },
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'dumbbell_overhead_press',
           name: 'Dumbbell Overhead Press',
           weightInKilos: 15,
@@ -77,7 +77,7 @@ export const fullBodyDumbbellStrength: Workout = {
           restPeriodInSeconds: 60,
         },
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'dumbbell_overhead_press',
           name: 'Dumbbell Overhead Press',
           weightInKilos: 15,
@@ -87,7 +87,7 @@ export const fullBodyDumbbellStrength: Workout = {
           restPeriodInSeconds: 60,
         },
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'bicep_curl',
           name: 'Bicep Curl',
           weightInKilos: 15,
@@ -97,7 +97,7 @@ export const fullBodyDumbbellStrength: Workout = {
           restPeriodInSeconds: 60,
         },
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'bicep_curl',
           name: 'Bicep Curl',
           weightInKilos: 15,
@@ -107,7 +107,7 @@ export const fullBodyDumbbellStrength: Workout = {
           restPeriodInSeconds: 60,
         },
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'bicep_curl',
           name: 'Bicep Curl',
           weightInKilos: 15,
@@ -123,25 +123,25 @@ export const fullBodyDumbbellStrength: Workout = {
       name: 'stretch',
       exercises: [
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'right_arm_cross_body_stretch',
           name: 'Right Arm Cross Body',
           timerInSeconds: 60,
         },
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'left_arm_cross_body_stretch',
           name: 'Left Arm Cross Body',
           timerInSeconds: 60,
         },
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'left_glute_pigeon_pose_stretch',
           name: 'Left Glute Pigeon Pose',
           timerInSeconds: 60,
         },
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'right_glute_pigeon_pose_stretch',
           name: 'Right Glute Pigeon Pose',
           timerInSeconds: 60,

@@ -14,7 +14,7 @@ export const glutesAndGlory: Workout = {
       name: 'Compound Barbell Exercises',
       exercises: [
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'back_squat',
           name: 'Back Squat',
           repsGoal: 10,
@@ -24,7 +24,7 @@ export const glutesAndGlory: Workout = {
           restPeriodInSeconds: 30,
         },
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'back_squat',
           name: 'Back Squat',
           repsGoal: 10,
@@ -34,7 +34,7 @@ export const glutesAndGlory: Workout = {
           restPeriodInSeconds: 30,
         },
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'back_squat',
           name: 'Back Squat',
           repsGoal: 10,
@@ -44,7 +44,7 @@ export const glutesAndGlory: Workout = {
           restPeriodInSeconds: 30,
         },
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'back_squat',
           name: 'Back Squat',
           repsGoal: 10,
@@ -54,7 +54,7 @@ export const glutesAndGlory: Workout = {
           restPeriodInSeconds: 30,
         },
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'back_squat',
           name: 'Back Squat',
           repsGoal: 10,
@@ -65,7 +65,7 @@ export const glutesAndGlory: Workout = {
         },
 
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'dead_lift',
           name: 'Dead Lift',
           repsGoal: 10,
@@ -75,7 +75,7 @@ export const glutesAndGlory: Workout = {
           restPeriodInSeconds: 30,
         },
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'dead_lift',
           name: 'Dead Lift',
           repsGoal: 10,
@@ -85,7 +85,7 @@ export const glutesAndGlory: Workout = {
           restPeriodInSeconds: 30,
         },
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'dead_lift',
           name: 'Dead Lift',
           repsGoal: 10,
@@ -95,7 +95,7 @@ export const glutesAndGlory: Workout = {
           restPeriodInSeconds: 30,
         },
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'dead_lift',
           name: 'Dead Lift',
           repsGoal: 10,
@@ -105,7 +105,7 @@ export const glutesAndGlory: Workout = {
           restPeriodInSeconds: 30,
         },
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'dead_lift',
           name: 'Dead Lift',
           repsGoal: 10,
@@ -121,7 +121,7 @@ export const glutesAndGlory: Workout = {
       id: 'calves',
       exercises: [
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'standing_calf_raises',
           name: 'Standing Calf Raises',
           repsGoal: 10,
@@ -131,7 +131,7 @@ export const glutesAndGlory: Workout = {
           restPeriodInSeconds: 30,
         },
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'standing_calf_raises',
           name: 'Standing Calf Raises',
           repsGoal: 10,
@@ -141,7 +141,7 @@ export const glutesAndGlory: Workout = {
           restPeriodInSeconds: 30,
         },
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'standing_calf_raises',
           name: 'Standing Calf Raises',
           repsGoal: 10,
@@ -151,7 +151,7 @@ export const glutesAndGlory: Workout = {
           restPeriodInSeconds: 30,
         },
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'standing_calf_raises',
           name: 'Standing Calf Raises',
           repsGoal: 10,
@@ -161,7 +161,7 @@ export const glutesAndGlory: Workout = {
           restPeriodInSeconds: 30,
         },
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'standing_calf_raises',
           name: 'Standing Calf Raises',
           repsGoal: 10,
@@ -172,7 +172,7 @@ export const glutesAndGlory: Workout = {
         },
 
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'calf_press_on_leg_press',
           name: 'Calf Press on Leg Press',
           repsGoal: 10,
@@ -182,7 +182,7 @@ export const glutesAndGlory: Workout = {
           restPeriodInSeconds: 30,
         },
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'calf_press_on_leg_press',
           name: 'Calf Press on Leg Press',
           repsGoal: 10,
@@ -192,7 +192,7 @@ export const glutesAndGlory: Workout = {
           restPeriodInSeconds: 30,
         },
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'calf_press_on_leg_press',
           name: 'Calf Press on Leg Press',
           repsGoal: 10,
@@ -202,7 +202,7 @@ export const glutesAndGlory: Workout = {
           restPeriodInSeconds: 30,
         },
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'calf_press_on_leg_press',
           name: 'Calf Press on Leg Press',
           repsGoal: 10,
@@ -212,7 +212,7 @@ export const glutesAndGlory: Workout = {
           restPeriodInSeconds: 30,
         },
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'calf_press_on_leg_press',
           name: 'Calf Press on Leg Press',
           repsGoal: 10,
@@ -229,7 +229,7 @@ export const glutesAndGlory: Workout = {
       name: 'Quads and Hamstrings',
       exercises: [
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'leg_press',
           name: 'Leg Press',
           repsGoal: 10,
@@ -239,7 +239,7 @@ export const glutesAndGlory: Workout = {
           restPeriodInSeconds: 30,
         },
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'leg_press',
           name: 'Leg Press',
           repsGoal: 10,
@@ -249,7 +249,7 @@ export const glutesAndGlory: Workout = {
           restPeriodInSeconds: 30,
         },
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'leg_press',
           name: 'Leg Press',
           repsGoal: 10,
@@ -259,7 +259,7 @@ export const glutesAndGlory: Workout = {
           restPeriodInSeconds: 30,
         },
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'leg_press',
           name: 'Leg Press',
           repsGoal: 10,
@@ -269,7 +269,7 @@ export const glutesAndGlory: Workout = {
           restPeriodInSeconds: 30,
         },
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'leg_press',
           name: 'Leg Press',
           repsGoal: 10,
@@ -280,7 +280,7 @@ export const glutesAndGlory: Workout = {
         },
 
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'lying_leg_curls',
           name: 'Lying Leg Curls',
           repsGoal: 10,
@@ -290,7 +290,7 @@ export const glutesAndGlory: Workout = {
           restPeriodInSeconds: 30,
         },
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'lying_leg_curls',
           name: 'Lying Leg Curls',
           repsGoal: 10,
@@ -300,7 +300,7 @@ export const glutesAndGlory: Workout = {
           restPeriodInSeconds: 30,
         },
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'lying_leg_curls',
           name: 'Lying Leg Curls',
           repsGoal: 10,
@@ -310,7 +310,7 @@ export const glutesAndGlory: Workout = {
           restPeriodInSeconds: 30,
         },
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'lying_leg_curls',
           name: 'Lying Leg Curls',
           repsGoal: 10,
@@ -320,7 +320,7 @@ export const glutesAndGlory: Workout = {
           restPeriodInSeconds: 30,
         },
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'lying_leg_curls',
           name: 'Lying Leg Curls',
           repsGoal: 10,
@@ -337,7 +337,7 @@ export const glutesAndGlory: Workout = {
       name: 'Core Strength',
       exercises: [
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'ab_crunch_machine',
           name: 'Ab Crunch Machine',
           repsGoal: 10,
@@ -347,7 +347,7 @@ export const glutesAndGlory: Workout = {
           restPeriodInSeconds: 30,
         },
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'ab_crunch_machine',
           name: 'Ab Crunch Machine',
           repsGoal: 10,
@@ -357,7 +357,7 @@ export const glutesAndGlory: Workout = {
           restPeriodInSeconds: 30,
         },
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'ab_crunch_machine',
           name: 'Ab Crunch Machine',
           repsGoal: 10,
@@ -367,7 +367,7 @@ export const glutesAndGlory: Workout = {
           restPeriodInSeconds: 30,
         },
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'ab_crunch_machine',
           name: 'Ab Crunch Machine',
           repsGoal: 10,
@@ -377,7 +377,7 @@ export const glutesAndGlory: Workout = {
           restPeriodInSeconds: 30,
         },
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'ab_crunch_machine',
           name: 'Ab Crunch Machine',
           repsGoal: 10,
@@ -394,43 +394,43 @@ export const glutesAndGlory: Workout = {
       name: 'Stretch',
       exercises: [
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'left_leg_hamstring_stretch',
           name: 'Left Leg Hamstring stretch',
           timerInSeconds: 45,
         },
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'right_leg_hamstring_stretch',
           name: 'Right Leg Hamstring stretch',
           timerInSeconds: 45,
         },
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'left_glute_pigeon_pose_stretch',
           name: 'Left Glute Pigeon Pose',
           timerInSeconds: 45,
         },
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'right_glute_pigeon_pose_stretch',
           name: 'Right Glute Pigeon Pose',
           timerInSeconds: 45,
         },
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'kneeling_left_hip_flexor_stretch',
           name: 'Kneeling Left Hip-Flexor Stretch',
           timerInSeconds: 45,
         },
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'kneeling_right_hip_flexor_stretch',
           name: 'Kneeling Right Hip-Flexor Stretch',
           timerInSeconds: 45,
         },
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'overhead_band_chest_stretch',
           name: 'Overhead Band Chest Stretch',
           timerInSeconds: 45,

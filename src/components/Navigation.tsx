@@ -50,16 +50,16 @@ const NavLink = styled(Link)<{ selected: boolean, x: number }>`
 
   ${({ x, selected }) => selected && css`
 
-  &::before {
-    transform: translate(${x}px, 0);
-    content: '';
-    height: 4px;
-    width: 48px;
-    background-color: ${purple};
-    top: -0.5px;
-    position: absolute;
-    animation: ${home} 200ms ease-in-out forwards;
-  }
+    &::before {
+      transform: translate(${x}px, 0);
+      content: '';
+      height: 4px;
+      width: 48px;
+      background-color: ${purple};
+      top: -0.5px;
+      position: absolute;
+      animation: ${home} 200ms ease-in-out forwards;
+    }
   `}
 `;
 

@@ -14,7 +14,7 @@ export const circuitSpeed: Workout = {
       name: 'warm up',
       exercises: [
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'sit_ups',
           timerInSeconds: 60,
           name: 'Sit Ups',
@@ -26,7 +26,7 @@ export const circuitSpeed: Workout = {
       name: 'working sets',
       exercises: [
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'upright_row',
           autoIncrement: 0,
           repsGoal: 10,
@@ -36,7 +36,7 @@ export const circuitSpeed: Workout = {
           name: 'Upright Row',
         },
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           name: 'Upright Row',
           exerciseId: 'upright_row',
           autoIncrement: 0,
@@ -46,7 +46,7 @@ export const circuitSpeed: Workout = {
           restPeriodInSeconds: 60,
         },
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           name: 'Upright Row',
           exerciseId: 'upright_row',
           autoIncrement: 0,
@@ -56,7 +56,7 @@ export const circuitSpeed: Workout = {
           restPeriodInSeconds: 60,
         },
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           name: 'Upright Row',
           exerciseId: 'upright_row',
           autoIncrement: 0,
@@ -73,25 +73,25 @@ export const circuitSpeed: Workout = {
       name: 'stretch',
       exercises: [
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'right_arm_cross_body_stretch',
           name: 'Right Arm Cross Body',
           timerInSeconds: 60,
         },
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'left_arm_cross_body_stretch',
           name: 'Left Arm Cross Body',
           timerInSeconds: 60,
         },
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'left_glute_pigeon_pose_stretch',
           name: 'Left Glute Pigeon Pose',
           timerInSeconds: 60,
         },
         {
-          instanceId: uuidv4(),
+          id: uuidv4(),
           exerciseId: 'right_glute_pigeon_pose_stretch',
           name: 'Right Glute Pigeon Pose',
           timerInSeconds: 60,

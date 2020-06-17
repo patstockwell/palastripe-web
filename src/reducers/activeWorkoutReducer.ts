@@ -133,7 +133,7 @@ const addActivity = (state: Workout, action: PayloadAction<Activity>) => {
 
 const deleteActivity = (state: Workout, action: PayloadAction<string>) => {
   const index = state.exerciseGroups[0].exercises.findIndex(a =>
-    a.instanceId === action.payload
+    a.id === action.payload
   );
 
   if (index !== -1) { // -1 means nothing was found, so only splice if it exists

@@ -111,7 +111,7 @@ export const ActivitySearch: React.FC = () => {
     addActivity({
       name: name || searchQuery,
       exerciseId: exerciseId || searchQuery.trim().split(' ').join('-').toLowerCase(),
-      instanceId: uuidv4(),
+      id: uuidv4(),
       repsAchieved,
       weightInKilos,
       autoIncrement: 0,
@@ -188,7 +188,7 @@ export const ActivitySearch: React.FC = () => {
           )) // else show the recently added exercises as suggestions
           : Object.values(recentActivities).map((activity: WeightedActivity) => (
             <SearchSuggestionTile
-              key={activity.instanceId}
+              key={activity.id}
               onClick={() => endSearchAndAddExercise({
                 name: activity.name,
                 repsAchieved: activity.repsAchieved,

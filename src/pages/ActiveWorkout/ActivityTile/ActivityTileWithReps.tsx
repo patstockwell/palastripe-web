@@ -65,7 +65,7 @@ export const ActivityTileWithReps: React.FC<Props> = ({
     weightInKilos,
     completed,
     restPeriodInSeconds,
-    instanceId,
+    id,
   },
   groupId,
   index,
@@ -119,7 +119,7 @@ export const ActivityTileWithReps: React.FC<Props> = ({
       onClick={() => handleSelect()}
       ref={listElement}
     >
-      <DraggableTileDelete disable={disableDelete} id={instanceId}>
+      <DraggableTileDelete disable={disableDelete} id={id}>
         <VisibleArea selected={selected}>
           <Details onClick={toggleShowHiddenArea}>
             <Title>{name}</Title>
