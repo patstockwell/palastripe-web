@@ -23,6 +23,7 @@ export const Title = styled.h3`
   text-overflow: ellipsis;
   white-space: nowrap;
   font-size: 16px;
+  line-height: 1.3;
 `;
 
 export const SubTitle = styled.p`
