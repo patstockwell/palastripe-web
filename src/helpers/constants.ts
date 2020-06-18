@@ -1,4 +1,4 @@
-export const WORKOUT_VERSION = 'Tue 16 Jun 2020 22:18:03 AEST';
+export const WORKOUT_VERSION = 'Thu 18 Jun 2020 15:24:46 AEST';
 
 export const appMaxWidth = 812; // 812px is the size of an iPhone X on its side
 export const tileGap: number = 16;
