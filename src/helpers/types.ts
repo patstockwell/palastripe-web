@@ -50,7 +50,7 @@ export interface Exercise {
   id: string;
   name: string;
   defaultWeightInKilos: number;
-  tags?: string[];
+  tags: string[];
 }
 
 export type Activity = WeightedActivity | TimedActivity;

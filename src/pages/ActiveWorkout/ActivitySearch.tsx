@@ -137,17 +137,19 @@ export const ActivitySearch: React.FC = () => {
     setSearchQuery(e.target.value);
   };
 
-  // Can I make this async so I don't block keyboard input?
+  // TODO: Can I make this async so I don't block keyboard input?
   const multipleMatches = searchQuery.length < 2 ? [] :
     searchExercises(
       searchQuery.split(' '),
       exerciseList.map(e => ({ ...e, searchPieces: [e.name], })),
     );
 
-  const recentActivities: { [id: string]: WeightedActivity } =
-    activeWorkout.exerciseGroups[0].exercises.reduce((acc, curr) => ({
-      ...acc, [curr.exerciseId]: curr
-    }), {});
+  const recentActivities: WeightedActivity[] =
+    activeWorkout.exerciseGroups[0].exercises.reduce((acc, curr) => {
+      const isNewExercise = acc.every(a => a.exerciseId !== curr.exerciseId);
+
+      return isNewExercise ? [ ...acc, curr ] : acc;
+    }, []);
 
   const continueToArgs = searchQuery.length ? {
     showArrows: false,

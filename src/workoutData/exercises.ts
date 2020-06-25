@@ -19,6 +19,7 @@ const byId: ById = {
     tags: ['tricep', 'triceps'],
   },
   dumbbell_lateral_raise: {
+    tags: [],
     defaultWeightInKilos: 7.5,
     id: 'dumbbell_lateral_raise',
     name: 'Dumbbell Lateral Raise',
