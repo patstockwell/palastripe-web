@@ -6,259 +6,276 @@ interface ById {
 }
 
 const byId: ById = {
-  'band_pass_through' : {
+  front_squat: {
+    defaultWeightInKilos: 40,
+    id: 'front_squat',
+    name: 'Front Squat',
+    tags: ['legs'],
+  },
+  overhead_tricep_extension: {
+    name: 'Overhead Tricep Extension',
+    id: 'overhead_tricep_extension',
+    defaultWeightInKilos: 25,
+    tags: ['tricep', 'triceps'],
+  },
+  dumbbell_lateral_raise: {
+    defaultWeightInKilos: 7.5,
+    id: 'dumbbell_lateral_raise',
+    name: 'Dumbbell Lateral Raise',
+  },
+  band_pass_through : {
     defaultWeightInKilos: 0,
     tags: ['shoulders', 'warm up', 'warmup', 'warm-up'],
     id: 'band_pass_through',
     name: 'Band Pass Through',
   },
-  'ez_bar_curl' : {
+  ez_bar_curl : {
     defaultWeightInKilos: 20,
     tags: ['arms', 'bicep', 'biceps', 'curl', 'bar'],
     id: 'ez_bar_curl',
     name: 'EZ Bar Curl',
   },
-  'butterfly' : {
+  butterfly : {
     defaultWeightInKilos: 8,
     tags: ['arms', 'chest', 'machine'],
     id: 'butterfly',
     name: 'Butterfly',
   },
-  'hanging_leg_raises' : {
+  hanging_leg_raises : {
     defaultWeightInKilos: 0,
     tags: ['core'],
     id: 'hanging_leg_raises',
     name: 'Hanging Leg Raises',
   },
-  'toe_touches': {
+  toe_touches: {
     defaultWeightInKilos: 0,
     tags: ['abs', 'core'],
     id: 'toe_touches',
     name: 'Toe Touches',
   },
-  'skull_crushers': {
+  skull_crushers: {
     defaultWeightInKilos: 20,
     tags: [],
     id: 'skull_crushers',
     name: 'Skull Crushers',
   },
-  'kneeling_right_hip_flexor_stretch': {
+  kneeling_right_hip_flexor_stretch: {
     defaultWeightInKilos: 0,
     tags: ['stretch'],
     id: 'kneeling_right_hip_flexor_stretch',
     name: 'Kneeling Right Hip-Flexor Stretch',
   },
-  'kneeling_left_hip_flexor_stretch': {
+  kneeling_left_hip_flexor_stretch: {
     defaultWeightInKilos: 0,
     tags: ['stretch'],
     id: 'kneeling_left_hip_flexor_stretch',
     name: 'Kneeling Left Hip-Flexor Stretch',
   },
-  'ab_crunch_machine': {
+  ab_crunch_machine: {
     defaultWeightInKilos: 10,
     tags: [],
     id: 'ab_crunch_machine',
     name: 'Ab Crunch Machine',
   },
-  'lying_leg_curls': {
+  lying_leg_curls: {
     defaultWeightInKilos: 15,
     tags: [],
     id: 'lying_leg_curls',
     name: 'Lying Leg Curls',
   },
-  'leg_press': {
+  leg_press: {
     defaultWeightInKilos: 60,
     tags: [],
     id: 'leg_press',
     name: 'Leg Press',
   },
-  'standing_calf_raises': {
+  standing_calf_raises: {
     defaultWeightInKilos: 10,
     tags: [],
     id: 'standing_calf_raises',
     name: 'Standing Calf Raises',
   },
-  'calf_press_on_leg_press': {
+  calf_press_on_leg_press: {
     defaultWeightInKilos: 40,
     tags: [],
     id: 'calf_press_on_leg_press',
     name: 'Calf Press on Leg Press',
   },
-  'dead_lift': {
+  dead_lift: {
     defaultWeightInKilos: 40,
     tags: [],
     id: 'dead_lift',
     name: 'Dead Lift',
   },
-  'back_squat': {
+  back_squat: {
     defaultWeightInKilos: 60,
     tags: [],
     id: 'back_squat',
     name: 'Back Squat',
   },
-  'overhead_press': {
+  overhead_press: {
     defaultWeightInKilos: 40,
     tags: [],
     id: 'overhead_press',
     name: 'Overhead Press',
   },
-  'chin_up': {
+  chin_up: {
     defaultWeightInKilos: 0,
     tags: [],
     id: 'chin_up',
     name: 'Chin Ups',
   },
-  'bench_press': {
+  bench_press: {
     defaultWeightInKilos: 60,
     tags: ['chest', 'compound', 'barbell'],
     id: 'bench_press',
     name: 'Bench Press',
   },
-  'standing_alternate_dumbbell_curl': {
+  standing_alternate_dumbbell_curl: {
     defaultWeightInKilos: 10,
     tags: [],
     id: 'standing_alternate_dumbbell_curl',
     name: 'Standing Alternate Dumbbell Curl',
   },
-  'preacher_curl': {
+  preacher_curl: {
     defaultWeightInKilos: 20,
     tags: [],
     id: 'preacher_curl',
     name: 'Preacher Curl',
   },
-  'bent_over_row': {
+  bent_over_row: {
     defaultWeightInKilos: 30,
     tags: [],
     id: 'bent_over_row',
     name: 'Bent-over Row',
   },
-  'upright_row': {
+  upright_row: {
     defaultWeightInKilos: 10,
     tags: [],
     id: 'upright_row',
     name: 'Upright Row',
   },
-  'straight_leg_dumbbell_deadlift': {
+  straight_leg_dumbbell_deadlift: {
     defaultWeightInKilos: 12.5,
     tags: [],
     id: 'straight_leg_dumbbell_deadlift',
     name: 'Straight-leg Dumbbell Deadlift',
   },
-  'dumbbell_overhead_press': {
+  dumbbell_overhead_press: {
     defaultWeightInKilos: 10,
     tags: [],
     id: 'dumbbell_overhead_press',
     name: 'Dumbbell Overhead Press',
   },
-  'sit_ups': {
+  sit_ups: {
     defaultWeightInKilos: 0,
     tags: [],
     id: 'sit_ups',
     name: 'Sit Ups',
   },
-  'right_arm_cross_body_stretch': {
+  right_arm_cross_body_stretch: {
     defaultWeightInKilos: 0,
     tags: ['stretch'],
     id: 'right_arm_cross_body_stretch',
     name: 'Right Arm Cross Body',
   },
-  'left_arm_cross_body_stretch': {
+  left_arm_cross_body_stretch: {
     defaultWeightInKilos: 0,
     tags: ['stretch'],
     id: 'left_arm_cross_body_stretch',
     name: 'Left Arm Cross Body',
   },
-  'left_glute_pigeon_pose_stretch': {
+  left_glute_pigeon_pose_stretch: {
     defaultWeightInKilos: 0,
     tags: ['stretch'],
     id: 'left_glute_pigeon_pose_stretch',
     name: 'Left Glute Pigeon Pose',
   },
-  'right_glute_pigeon_pose_stretch': {
+  right_glute_pigeon_pose_stretch: {
     defaultWeightInKilos: 0,
     tags: ['stretch'],
     id: 'right_glute_pigeon_pose_stretch',
     name: 'Right Glute Pigeon Pose',
   },
-  'scissor_jumps': {
+  scissor_jumps: {
     defaultWeightInKilos: 0,
     tags: [],
     id: 'scissor_jumps',
     name: 'Scissor Jumps',
   },
-  'dumbbell_bench_press': {
+  dumbbell_bench_press: {
     defaultWeightInKilos: 20,
     tags: [],
     id: 'dumbbell_bench_press',
     name: 'Dumbbell Bench Press',
   },
-  'standing_bicep_hammer_curls': {
+  standing_bicep_hammer_curls: {
     defaultWeightInKilos: 12.5,
     tags: [],
     id: 'standing_bicep_hammer_curls',
     name: 'Standing Dumbbell Hammer Curls',
   },
-  'face_pulls': {
+  face_pulls: {
     defaultWeightInKilos: 5,
     tags: [],
     id: 'face_pulls',
     name: 'Face Pulls',
   },
-  'overhead_band_chest_stretch': {
+  overhead_band_chest_stretch: {
     defaultWeightInKilos: 0,
     tags: ['stretch'],
     id: 'overhead_band_chest_stretch',
     name: 'Overhead Band Chest Stretch',
   },
-  'lunges': {
+  lunges: {
     defaultWeightInKilos: 0,
     tags: [],
     id: 'lunges',
     name: 'Lunges',
   },
-  'right_leg_hamstring_stretch': {
+  right_leg_hamstring_stretch: {
     defaultWeightInKilos: 0,
     tags: ['stretch'],
     id: 'right_leg_hamstring_stretch',
     name: 'Right Leg Hamstring stretch',
   },
-  'left_leg_hamstring_stretch': {
+  left_leg_hamstring_stretch: {
     defaultWeightInKilos: 0,
     tags: ['stretch'],
     id: 'left_leg_hamstring_stretch',
     name: 'Left Leg Hamstring stretch',
   },
-  'concentration_curl': {
+  concentration_curl: {
     defaultWeightInKilos: 15,
     tags: [],
     id: 'concentration_curl',
     name: 'Concentration Curl',
   },
-  'push_ups': {
+  push_ups: {
     defaultWeightInKilos: 0,
     tags: [],
     id: 'push_ups',
     name: 'Push Ups',
   },
-  'machine_chest_flys': {
+  machine_chest_flys: {
     defaultWeightInKilos: 8,
     tags: [],
     id: 'machine_chest_flys',
     name: 'Machine Chest Flys',
   },
-  'stationary_bike': {
+  stationary_bike: {
     defaultWeightInKilos: 0,
     tags: [],
     id: 'stationary_bike',
     name: 'Stationary Bike',
   },
-  'ring_rows': {
+  ring_rows: {
     defaultWeightInKilos: 0,
     tags: [],
     id: 'ring_rows',
     name: 'Ring Rows',
   },
-  'chest_dips': {
+  chest_dips: {
     defaultWeightInKilos: 0,
     tags: ['chest'],
     id: 'chest_dips',
@@ -308,6 +325,9 @@ const allIds = [
   'standing_alternate_dumbbell_curl',
   'bent_over_row',
   'machine_chest_flys',
+  'overhead_tricep_extension',
+  'front_squat',
+  'dumbbell_lateral_raise',
 ];
 
 export const stretchExerciseIds = getIdsForStretchExercises(byId, allIds);
