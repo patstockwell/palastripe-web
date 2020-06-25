@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import { useLocation, Route, Switch } from 'react-router-dom';
 import Analytics from 'react-ga';
 
+import { LandingSplash } from '../pages/LandingSplash';
 import { Workouts } from '../pages/Workouts';
 import ActiveWorkout from '../pages/ActiveWorkout';
 import Activity from '../pages/Activity';
@@ -43,7 +44,7 @@ const Routes: React.FC = () => {
         <AnimateNavigationProvider>
           <SelectedExerciseProvider>
             <Switch location={location}>
-              <Route path="/" exact component={Workouts} />
+              <Route path="/" exact component={LandingSplash} />
               <Route path="/workouts/" exact component={Workouts} />
               <Route path="/activity/" exact component={Activity} />
               <Route path="/activity/:index/" component={HistorySummary} />
