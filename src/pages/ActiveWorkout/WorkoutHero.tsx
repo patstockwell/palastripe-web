@@ -6,7 +6,7 @@ import * as clipboard from 'clipboard-polyfill';
 
 import CheckboxTick from '../../components/CheckboxTick';
 import AlertConfirm from '../../components/AlertConfirm';
-import ColouredDot from '../../assets/svg/ColouredDot';
+import { ColouredDot } from '../../assets/svg/ColouredDot';
 import ShareIcon from '../../assets/svg/Share';
 import SoundOn from '../../assets/svg/SoundOn';
 import SoundOff from '../../assets/svg/SoundOff';

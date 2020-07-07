@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import {
@@ -8,13 +9,9 @@ import {
   purple,
 } from '../helpers/constants';
 
-const AppLogo = styled.p`
-  position: absolute;
-  left: ${gutterWidth}px;
-  top: 11px;
+export const AppLogoStyle = `
   font-family: 'Muli', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   color: white;
-  text-align: center;
   font-size: 16px;
   font-weight: 900;
   font-style: italic;
@@ -22,6 +19,14 @@ const AppLogo = styled.p`
   padding: 3px 9px;
   background-color: ${purple};
   background-image: linear-gradient( 140deg, ${pink}, ${purple});
+`;
+
+const AppLogo = styled(Link)`
+  position: absolute;
+  left: ${gutterWidth}px;
+  top: 11px;
+  text-decoration: none;
+  ${AppLogoStyle}
 `;
 
 export const Header = styled.header`
@@ -49,7 +54,7 @@ const Banner: React.FC<Props> = ({ heading }) => {
 
   return (
     <Header>
-      <AppLogo>hbff</AppLogo>
+      <AppLogo to="/">hbff</AppLogo>
       <Heading>{heading}</Heading>
     </Header>
   );

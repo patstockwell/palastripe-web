@@ -12,10 +12,8 @@ interface Props {
   fill?: string;
 }
 
-const ColouredDot: React.FC<Props> = ({ fill = 'black' }) => (
+export const ColouredDot: React.FC<Props> = ({ fill = 'black' }) => (
   <Svg role="img" width='8' height='8' fill={fill}>
     <circle cx="4" cy="4" r="4" />
   </Svg>
 );
-
-export default ColouredDot;
