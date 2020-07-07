@@ -148,7 +148,11 @@ export const ActivitySearch: React.FC = () => {
     activeWorkout.exerciseGroups[0].exercises.reduce((acc, curr) => {
       const isNewExercise = acc.every(a => a.exerciseId !== curr.exerciseId);
 
-      return isNewExercise ? [ ...acc, curr ] : acc;
+      return isNewExercise
+        // add the new exercise
+        ? [ ...acc, curr ]
+        // else replace the one that exists with the most recent
+        : acc.map(a => a.exerciseId === curr.exerciseId ? curr : a);
     }, []);
 
   const continueToArgs = searchQuery.length ? {
