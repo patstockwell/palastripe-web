@@ -48,11 +48,11 @@ const byId: ById = {
     id: 'butterfly',
     name: 'Butterfly',
   },
-  hanging_leg_raises : {
+  hanging_leg_raise : {
     defaultWeightInKilos: 0,
     tags: ['core'],
-    id: 'hanging_leg_raises',
-    name: 'Hanging Leg Raises',
+    id: 'hanging_leg_raise',
+    name: 'Hanging Leg Raise',
   },
   toe_touches: {
     defaultWeightInKilos: 0,
@@ -96,11 +96,11 @@ const byId: ById = {
     id: 'leg_press',
     name: 'Leg Press',
   },
-  standing_calf_raises: {
+  standing_calf_raise: {
     defaultWeightInKilos: 10,
     tags: [],
-    id: 'standing_calf_raises',
-    name: 'Standing Calf Raises',
+    id: 'standing_calf_raise',
+    name: 'Standing Calf Raise',
   },
   calf_press_on_leg_press: {
     defaultWeightInKilos: 40,
@@ -291,7 +291,7 @@ const byId: ById = {
 };
 
 const allIds = [
-  'standing_calf_raises',
+  'standing_calf_raise',
   'calf_press_on_leg_press',
   'deadlift',
   'back_squat',
@@ -323,7 +323,7 @@ const allIds = [
   'kneeling_right_hip_flexor_stretch',
   'skull_crushers',
   'toe_touches',
-  'hanging_leg_raises',
+  'hanging_leg_raise',
   'butterfly',
   'band_pass_through',
   'ez_bar_curl',
