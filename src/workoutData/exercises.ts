@@ -6,6 +6,12 @@ interface ById {
 }
 
 const byId: ById = {
+  sumo_deadlift: {
+    defaultWeightInKilos: 60,
+    id: 'sumo_deadlift',
+    name: 'Sumo Deadlift',
+    tags: ['legs', 'barbell'],
+  },
   front_squat: {
     defaultWeightInKilos: 40,
     id: 'front_squat',
@@ -102,11 +108,11 @@ const byId: ById = {
     id: 'calf_press_on_leg_press',
     name: 'Calf Press on Leg Press',
   },
-  dead_lift: {
+  deadlift: {
     defaultWeightInKilos: 40,
-    tags: [],
-    id: 'dead_lift',
-    name: 'Dead Lift',
+    tags: ['legs', 'barbell'],
+    id: 'deadlift',
+    name: 'Deadlift',
   },
   back_squat: {
     defaultWeightInKilos: 60,
@@ -287,7 +293,7 @@ const byId: ById = {
 const allIds = [
   'standing_calf_raises',
   'calf_press_on_leg_press',
-  'dead_lift',
+  'deadlift',
   'back_squat',
   'overhead_press',
   'chin_up',
@@ -329,6 +335,7 @@ const allIds = [
   'overhead_tricep_extension',
   'front_squat',
   'dumbbell_lateral_raise',
+  'sumo_deadlift',
 ];
 
 export const stretchExerciseIds = getIdsForStretchExercises(byId, allIds);
