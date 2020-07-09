@@ -2,16 +2,17 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { DownloadArrow } from '../assets/svg/DownloadArrow';
-import { BackLinkBanner } from '../components/BackLinkBanner';
+import { Page } from '../components/Page';
 import { gutterWidth } from '../helpers/constants';
 import { PWA } from '../assets/svg/PWA';
 import { AppLogoStyle } from '../components/Banner';
 
 const H1 = styled.h1`
   display: flex;
+  align-items: center;
 `;
 
-const PageWithGutter = styled.div`
+const Gutter = styled.div`
   padding: ${gutterWidth}px;
 `;
 
@@ -35,13 +36,9 @@ const H3 = styled.h3`
 `;
 
 export const Install = () => (
-  <>
-    <BackLinkBanner sticky={true} back={{ link: '/', showArrows: true }} />
-    <PageWithGutter>
-      <H1>
-        <DownloadArrow style={{ marginRight: '12px', width: '30px' }} />
-        Install app
-      </H1>
+  <Page heading="Install" hideNavigation={true}>
+    <Gutter>
+      <DownloadArrow style={{ margin: '12px 0', height: '30px', width: '30px' }} />
       <p><Logo>hbff</Logo> is a Progressive Web App <PWA style={{ width: '30px' }}/>, the next generation of mobile applications. Once installed you won&#39;t feel a difference to a native Android or iOS app, only that you never need to update it.</p>
 
       <h2>iOS</h2>
@@ -58,6 +55,6 @@ export const Install = () => (
       <Hr />
       <p><em>The app also works perfectly fine in the browser and you do not need to install it on your device. However, we recommend installing it for a better user experience.</em></p>
 
-    </PageWithGutter>
-  </>
+    </Gutter>
+  </Page>
 );
