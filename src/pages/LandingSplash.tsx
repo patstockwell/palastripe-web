@@ -2,11 +2,11 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-// import { DownloadArrow } from '../assets/svg/DownloadArrow';
+import { DownloadArrow } from '../assets/svg/DownloadArrow';
 import { AppLogoStyle } from '../components/Banner';
 import { buttonStyle } from '../components/SharedStyles';
 import { ColouredDot } from '../assets/svg/ColouredDot';
-import { green, bannerHeight } from '../helpers/constants';
+import { gutterWidth, green, bannerHeight } from '../helpers/constants';
 
 const Logo = styled.h1`
   ${AppLogoStyle}
@@ -31,14 +31,14 @@ const Page = styled.div`
   text-align: center;
 `;
 
-// const Install = styled(Link)`
-//   text-decoration: none;
-//   color: black;
-//   display: flex;
-//   align-items: center;
-//   margin-left: ${gutterWidth}px;
-//   font-weight: bold;
-// `;
+const Install = styled(Link)`
+  text-decoration: none;
+  color: black;
+  display: flex;
+  align-items: center;
+  margin-left: ${gutterWidth}px;
+  font-weight: bold;
+`;
 
 const Banner = styled.div`
   height: ${bannerHeight}px;
@@ -51,11 +51,10 @@ export const LandingSplash: React.FC = () => {
   return (
     <Page>
       <Banner>
-        {/* Uncomment this when the Install page is ready */}
-        {/* <Install to="/"> */}
-        {/*   <DownloadArrow style={{ marginRight: '8px', width: '20px', height: '20px' }}/> */}
-        {/*   Install app */}
-        {/* </Install> */}
+        <Install to="/install/">
+          <DownloadArrow style={{ marginRight: '8px', width: '20px', height: '20px' }}/>
+          Install app
+        </Install>
       </Banner>
       <Logo>hbff</Logo>
       <p>

@@ -5,6 +5,7 @@ import Analytics from 'react-ga';
 
 import { LandingSplash } from '../pages/LandingSplash';
 import { Workouts } from '../pages/Workouts';
+import { Install } from '../pages/Install';
 import ActiveWorkout from '../pages/ActiveWorkout';
 import Activity from '../pages/Activity';
 import EditWorkout from '../pages/EditWorkout';
@@ -45,6 +46,7 @@ const Routes: React.FC = () => {
           <SelectedExerciseProvider>
             <Switch location={location}>
               <Route path="/" exact component={LandingSplash} />
+              <Route path="/install/" exact component={Install} />
               <Route path="/workouts/" exact component={Workouts} />
               <Route path="/activity/" exact component={Activity} />
               <Route path="/activity/:index/" component={HistorySummary} />

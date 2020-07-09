@@ -26,7 +26,7 @@ interface Props {
   heading: string;
 }
 
-const Page: React.FC<Props> = ({
+export const Page: React.FC<Props> = ({
   heading,
   pathname,
   children,
@@ -51,7 +51,7 @@ const Page: React.FC<Props> = ({
   });
 
   return (
-    <React.Fragment>
+    <>
       <Banner heading={headingHidden && heading}/>
       {heading &&
         <React.Fragment>
@@ -61,8 +61,6 @@ const Page: React.FC<Props> = ({
       }
       {children}
       <Navigation onNavigation={() => setScrollPosition(pathname)} />
-    </React.Fragment>
+    </>
   );
 };
-
-export default Page;

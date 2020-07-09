@@ -5,7 +5,7 @@ import { Workout } from '../../reducers/workoutsReducer';
 
 import ActivityHistoryList from './ActivityHistoryList';
 import { connect } from 'react-redux';
-import Page from '../../components/Page';
+import { Page } from '../../components/Page';
 import ActivityHistoryHero from './ActivityHistoryHero';
 import {
   getTotalWeightLifted,

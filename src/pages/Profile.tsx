@@ -9,12 +9,13 @@ import {
   AudioLink,
   UnitOfMeasurementLink,
 } from '../components/Profile';
-import Page from '../components/Page';
+import { Page } from '../components/Page';
+import { gutterWidth } from '../helpers/constants';
 
 const Panel = styled.div`
   background-color: white;
   margin-bottom: 8px;
-  padding: 12px;
+  padding: ${gutterWidth}px;
   position: relative;
 `;
 
