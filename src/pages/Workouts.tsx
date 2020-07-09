@@ -25,7 +25,7 @@ interface OwnProps {
 
 type Props = RouteProps & OwnProps;
 
-export const Workouts: React.FC<Props> = ({ location }) => {
+export const Workouts: React.FC<Props> = () => {
   const { allIds, byId } = useSelector((state: State) => state.workouts);
 
   const mappedWorkouts = allIds.map(id => byId[id]);
@@ -36,7 +36,7 @@ export const Workouts: React.FC<Props> = ({ location }) => {
     .map((w: Workout) => <WorkoutTile key={w.id} workout={w} />);
 
   return (
-    <Page heading={'Workouts'} pathname={location.pathname} >
+    <Page heading={'Workouts'}>
       <Ul>
         <CustomWorkoutTile imageUrl={byId[customWorkoutId].imageUrl}/>
         {workoutTiles}

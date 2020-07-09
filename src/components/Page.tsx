@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
+import { useLocation } from 'react-router-dom';
 
 import { Banner } from './Banner';
 import Navigation from './Navigation';
@@ -7,7 +8,7 @@ import {
   gutterWidth,
   bannerHeight,
 } from '../helpers/constants';
-import {useScrollPosition} from '../context/useScrollPosition';
+import { useScrollPosition } from '../context/useScrollPosition';
 
 const Heading = styled.h1`
   margin: ${gutterWidth}px;
@@ -22,18 +23,19 @@ const Hr = styled.hr`
 `;
 
 interface Props {
-  pathname?: string;
   heading: string;
+  hideNavigation?: boolean;
 }
 
 export const Page: React.FC<Props> = ({
+  hideNavigation,
   heading,
-  pathname,
   children,
 }) => {
   const observerTarget = useRef(null);
   const [headingHidden, setHeadingHidden] = useState(false);
   const { setScrollPosition } = useScrollPosition();
+  const location = useLocation();
 
   const callback = ([entry]: IntersectionObserverEntry[]) => {
     setHeadingHidden(!entry.isIntersecting);
@@ -60,7 +62,9 @@ export const Page: React.FC<Props> = ({
         </React.Fragment>
       }
       {children}
-      <Navigation onNavigation={() => setScrollPosition(pathname)} />
+      {!hideNavigation &&
+        <Navigation onNavigation={() => setScrollPosition(location.pathname)} />
+      }
     </>
   );
 };

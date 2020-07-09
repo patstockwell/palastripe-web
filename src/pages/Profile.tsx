@@ -21,8 +21,8 @@ const Panel = styled.div`
 
 type Props = RouteProps;
 
-const Profile: React.FC<Props> = ({ location }) => (
-  <Page heading={'Profile'} pathname={location.pathname}>
+const Profile: React.FC<Props> = () => (
+  <Page heading={'Profile'}>
     <Panel>
       <ProfileNameLink />
     </Panel>

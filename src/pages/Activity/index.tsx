@@ -25,17 +25,13 @@ const getTotalWeight = (history: Workout[]): number => (
 
 type Props = StateProps & RouteProps;
 
-const Activity: React.FC<Props> = ({
-  location,
-  history,
-  useKilos,
-}) => {
+const Activity: React.FC<Props> = ({ history, useKilos }) => {
   const totalMinutes = getTotalMinutes(history);
   const totalWeight = getTotalWeight(history);
   const convertedWeight = convertWeight(totalWeight, useKilos);
 
   return (
-    <Page heading={'Activity'} pathname={location.pathname} >
+    <Page heading={'Activity'}>
       <ActivityHistoryHero
         totalWorkouts={history.length}
         totalMinutes={totalMinutes}
