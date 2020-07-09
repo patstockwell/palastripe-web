@@ -30,6 +30,10 @@ const Hr = styled.hr`
   margin: 48px 0;
 `;
 
+const H3 = styled.h3`
+  color: grey;
+`;
+
 export const Install = () => (
   <>
     <BackLinkBanner sticky={true} back={{ link: '/', showArrows: true }} />
@@ -44,10 +48,10 @@ export const Install = () => (
       <p>Open this page with Safari, click on the share button (box with up arrow) and in the opening popup &#34;Add to Home Screen&#34;. Ready!</p>
 
       <h2>Android</h2>
-      <h3>Firefox</h3>
+      <H3>Firefox</H3>
       <p>In the address bar, to the right of the URL there is a small house icon with a plus symbol in the middle. Click on it and <em>&#34;+ Add to home screen&#34;</em>. That&#39;s it!</p>
 
-      <h3>Chrome / Brave</h3>
+      <H3>Chrome / Brave</H3>
       <p>Look for a banner at the bottom of the page that says <em>&#34;Add hbff to Home screen&#34;</em>. Click on it and you&#39;re ready to go.</p>
       <p>If the banner is not there, click on the menu icon and select <em>&#34;Add to Home screen&#34;</em>. That&#39;s it, open the app via the app icon.</p>
 
