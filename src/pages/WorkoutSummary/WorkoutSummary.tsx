@@ -6,12 +6,12 @@ import {
 } from 'react-router';
 import styled from 'styled-components';
 
-import { ActivitySummary } from '../../components/ActivitySummary';
+import { ActivitySummary } from './ActivitySummary';
 import { BackLinkBanner } from '../../components/BackLinkBanner';
 import { State, Activity } from '../../helpers/types';
 import { Workout } from '../../reducers/workoutsReducer';
 import { formatDate } from '../../helpers/functions';
-import { bannerHeight } from '../../helpers/constants';
+import { bannerHeight, gutterWidth } from '../../helpers/constants';
 
 const Hr = styled.hr`
   border: none;
@@ -20,26 +20,31 @@ const Hr = styled.hr`
   border-bottom: solid 0.5px lightgrey;
 `;
 
-const Page = styled.div`
-  padding: 12px 0;
-
-  h2, h3, & > ul {
-    padding-left: 40px;
-    padding-right: 12px;
-  }
-
-  & h3 {
-    color: grey;
-  }
+const PanelWithGutter = styled.div`
+  padding: ${gutterWidth}px;
 `;
 
 const Ul = styled.ul`
   list-style: none;
   margin: 16px 0;
+  padding-left: 32px;
 
   & > li + li {
     margin-top: 16px;
   }
+`;
+
+const H2 = styled.h2`
+  margin: 0;
+  padding-left: 32px;
+`;
+
+const H3 = styled.h3`
+  margin: 0;
+  padding-left: 32px;
+  font-size: 1em;
+  font-weight: 400;
+  color: grey;
 `;
 
 interface ExerciseHash {
@@ -65,7 +70,7 @@ const createExerciseHash = (workout: Workout): ExerciseHash => {
 
 type Props = RouteComponentProps<{ index?: string }>
 
-export const HistorySummary: React.FC<Props> = ({
+export const WorkoutSummary: React.FC<Props> = ({
   match: { params: { index } }
 }) => {
   const workout = useSelector((state: State) => state.history[index]);
@@ -86,14 +91,16 @@ export const HistorySummary: React.FC<Props> = ({
         showArrows: true,
         link: '/activity/',
       }}/>
-      <Page>
-        <h2>{workout.name}</h2>
-        <h3>{historyTileDateFormat}</h3>
+      <PanelWithGutter>
+        <H2>{workout.name}</H2>
+        <H3>{historyTileDateFormat}</H3>
+      </PanelWithGutter>
         <Hr />
+      <PanelWithGutter>
         <Ul>
           {activitySummaryTiles}
         </Ul>
-      </Page>
+      </PanelWithGutter>
     </>
   );
 };

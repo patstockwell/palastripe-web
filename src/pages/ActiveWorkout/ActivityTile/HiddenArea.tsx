@@ -7,7 +7,7 @@ import {
 import styled from 'styled-components';
 import { State, WeightedActivity } from '../../../helpers/types';
 import { convertWeight } from '../../../helpers/functions';
-import IncrementDecrementPanel from './IncrementDecrementPanel';
+import { IncrementDecrementPanel } from './IncrementDecrementPanel';
 import { buttonStyle } from '../../../components/SharedStyles';
 import { useRestTimer } from '../../../context/useRestTimer';
 import { useActiveWorkout } from '../../../reducers/activeWorkoutReducer';
@@ -15,6 +15,11 @@ import { useActiveWorkout } from '../../../reducers/activeWorkoutReducer';
 const MainValue = styled.span`
   font-size: 32px;
   font-weight: 800;
+  margin: 0;
+`;
+
+const P = styled.p`
+  margin: 0;
 `;
 
 const Button = styled.button<{  background?: string; fontColour?: string; }>`
@@ -33,7 +38,7 @@ interface Props {
   toggleShowHiddenArea: () => void;
 }
 
-const HiddenArea: React.FC<Props> = ({
+export const HiddenArea: React.FC<Props> = ({
   animatedStyles,
   index,
   groupId,
@@ -70,21 +75,19 @@ const HiddenArea: React.FC<Props> = ({
         handleIncrement={() => changeWeight({ shouldIncrement: true, index, groupId })}
         percentageComplete={1}
       >
-        <p>
-          <MainValue>{convertWeight(weightInKilos, useKilos)}</MainValue>
-        </p>
-        <p>{useKilos ? 'kg' : 'lbs'}</p>
+        <MainValue>{convertWeight(weightInKilos, useKilos)}</MainValue>
+        <P>{useKilos ? 'kg' : 'lbs'}</P>
       </IncrementDecrementPanel>
       <IncrementDecrementPanel
         handleDecrement={() => changeReps({ index, groupId, increment: -1 })}
         handleIncrement={() => changeReps({ index, groupId, increment: 1 })}
         percentageComplete={repsGoal ? repsAchieved / repsGoal : 1}
       >
-        <p>
+        <P>
           <MainValue>{repsAchieved}</MainValue>
           {repsGoal && `/${repsGoal}`}
-        </p>
-        <p>Reps</p>
+        </P>
+        <P>Reps</P>
       </IncrementDecrementPanel>
 
       <Button
@@ -94,5 +97,3 @@ const HiddenArea: React.FC<Props> = ({
     </animated.div>
   );
 };
-
-export default HiddenArea;

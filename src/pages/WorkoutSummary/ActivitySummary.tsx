@@ -2,16 +2,16 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
-import Badge from '../assets/svg/Badge';
-import { purple, orange } from '../helpers/constants';
+import Badge from '../../assets/svg/Badge';
+import { purple, orange } from '../../helpers/constants';
 import {
   Activity,
   State,
   isTimed,
   WeightedActivity,
-} from '../helpers/types';
-import { formatSeconds, formatWeight } from '../helpers/functions';
-import Flame from '../assets/svg/Flame';
+} from '../../helpers/types';
+import { formatSeconds, formatWeight } from '../../helpers/functions';
+import Flame from '../../assets/svg/Flame';
 
 const Ul = styled.ul`
   padding: 0;
@@ -43,6 +43,7 @@ const ActivityName = styled.p`
   display: flex;
   position: relative;
   font-weight: 800;
+  margin-bottom: 4px;
 `;
 
 const WeightAndLabel = styled.span`

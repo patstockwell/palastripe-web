@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import styled from 'styled-components';
 
-import Banner from './Banner';
+import { Banner } from './Banner';
 import Navigation from './Navigation';
 import {
   gutterWidth,

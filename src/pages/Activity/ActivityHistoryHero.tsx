@@ -7,10 +7,12 @@ const Heading = styled.h3`
   color: grey;
   font-size: 0.75em;
   text-transform: uppercase;
+  margin: 0;
 `;
 
 const TotalWorkouts = styled.p`
   font-size: 5em;
+  margin: 0;
 `;
 
 const Workouts = styled.div`
@@ -39,6 +41,7 @@ const TimesAndWeights = styled.div`
 const Total = styled.p`
   font-weight: 800;
   font-size: 1.5em;
+  margin: 0;
 `;
 
 const UnitLabel = styled.span`

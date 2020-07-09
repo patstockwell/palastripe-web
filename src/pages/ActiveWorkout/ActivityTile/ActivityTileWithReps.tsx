@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { animated } from 'react-spring';
 import styled from 'styled-components';
 
-import HiddenArea from './HiddenArea';
+import { HiddenArea } from './HiddenArea';
 import ToggleSetCompleteButton from './ToggleSetCompleteButton';
 import { tileStyle } from './ActivityTileSharedStyles';
 import DownArrow from '../../../assets/svg/DownArrow';

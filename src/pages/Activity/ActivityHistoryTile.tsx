@@ -35,6 +35,7 @@ const Tile = styled.li`
 const TimeSince = styled.p`
   color: grey;
   font-size: 12px;
+  margin: 0;
 `;
 
 const Left = styled.div`
@@ -104,6 +105,7 @@ const UnitLabel = styled.span`
 const Statistic = styled.p`
   font-weight: 600;
   font-size: 1.5em;
+  margin: 0;
 `;
 
 const TextLabel = styled.p`
@@ -111,6 +113,7 @@ const TextLabel = styled.p`
   text-transform: uppercase;
   font-weight: 500;
   color: grey;
+  margin: 0;
 `;
 
 const OptionsButton = styled.button`

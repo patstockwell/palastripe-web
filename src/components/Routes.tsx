@@ -11,7 +11,7 @@ import Activity from '../pages/Activity';
 import EditWorkout from '../pages/EditWorkout';
 import FourZeroFour from '../pages/FourZeroFour';
 import Profile from '../pages/Profile';
-import { HistorySummary } from '../pages/HistorySummary';
+import { WorkoutSummary } from '../pages/WorkoutSummary';
 import ProfileName from '../pages/ProfileName';
 import SettingAudio from '../pages/SettingAudio';
 import SettingUnitOfMeasurement from '../pages/SettingUnitOfMeasurement';
@@ -49,7 +49,7 @@ const Routes: React.FC = () => {
               <Route path="/install/" exact component={Install} />
               <Route path="/workouts/" exact component={Workouts} />
               <Route path="/activity/" exact component={Activity} />
-              <Route path="/activity/:index/" component={HistorySummary} />
+              <Route path="/activity/:index/" component={WorkoutSummary} />
               <Route path="/profile/" exact component={Profile} />
               <Route path="/profile/name" component={ProfileName} />
               <Route path="/profile/audio" component={SettingAudio} />

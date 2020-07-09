@@ -32,6 +32,7 @@ const Label = styled(Link)`
 const Value = styled.p`
   color: grey;
   font-style: italic;
+  margin: 0;
 `;
 
 const ShowEditArrowWrapper = styled.div`

@@ -44,13 +44,14 @@ export const Header = styled.header`
 
 const Heading = styled.p`
   font-weight: 800;
+  margin: 0;
 `;
 
 interface Props {
   heading?: string;
 }
 
-const Banner: React.FC<Props> = ({ heading }) => {
+export const Banner: React.FC<Props> = ({ heading }) => {
 
   return (
     <Header>
@@ -59,5 +60,3 @@ const Banner: React.FC<Props> = ({ heading }) => {
     </Header>
   );
 };
-
-export default Banner;

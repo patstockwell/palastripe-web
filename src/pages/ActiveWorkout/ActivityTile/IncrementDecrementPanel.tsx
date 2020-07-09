@@ -63,7 +63,7 @@ interface Props {
   percentageComplete?: number;
 }
 
-const IncrementDecrementPanel: React.FC<Props> = ({
+export const IncrementDecrementPanel: React.FC<Props> = ({
   children,
   handleDecrement,
   handleIncrement,
@@ -104,5 +104,3 @@ const IncrementDecrementPanel: React.FC<Props> = ({
     </Panel>
   );
 };
-
-export default IncrementDecrementPanel;

@@ -24,10 +24,6 @@ export const GlobalStyle = createGlobalStyle`
     display: none;
   }
 
-  h1, h2, h3, h4, h5, h6, p {
-    margin: 0;
-  }
-
   a, button {
     -webkit-tap-highlight-color: transparent;
     outline-style: none;

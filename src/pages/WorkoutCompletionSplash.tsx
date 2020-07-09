@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { useSelector } from 'react-redux';
 import { State } from '../helpers/types';
-import Banner from '../components/Banner';
+import { Banner } from '../components/Banner';
 import GoldCup from '../assets/svg/GoldCup';
 import { workoutTitleStyle, buttonStyle } from '../components/SharedStyles';
 import { bannerHeight } from '../helpers/constants';
