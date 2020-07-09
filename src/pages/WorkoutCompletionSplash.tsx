@@ -53,7 +53,7 @@ export const WorkoutCompletionSplash: React.FC = () => {
 
   return (
     <>
-      <Banner heading="Workout Summary" />
+      <Banner heading="Workout Complete" />
       <Hr />
       <Page>
         <GreatJob>Great Job{firstName && `, ${firstName}`}!</GreatJob>
