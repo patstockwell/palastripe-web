@@ -16,6 +16,7 @@ import { useAudio } from '../../../context/useAudio';
 const Time = styled.p`
   font-size: 4em;
   font-weight: 800;
+  margin: 0;
 `;
 
 const Area = styled(animated.div)`
@@ -40,6 +41,7 @@ const Message = styled.p`
   transform: translateX(-50%);
   animation: ${fade} ${timedExerciseWaitPeriod / 2}s ease-out;
   opacity: 0;
+  margin: 0;
 `;
 
 const StartButton = styled.button<{ background?: string; fontColour?: string; }>`
