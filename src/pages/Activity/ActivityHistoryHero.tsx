@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import styled from 'styled-components';
 import { pink, purple } from '../../helpers/constants';
 import { getHoursAndMinutes } from '../../helpers/functions';
+import { CalendarGraph } from './CalendarGraph';
 
 const Heading = styled.h3`
   color: grey;
@@ -19,7 +20,7 @@ const Workouts = styled.div`
   display: flex;
   flex-direction: column-reverse;
   align-items: center;
-  padding: 48px 0;
+  padding: 32px 0;
 `;
 
 const TimesAndWeights = styled.div`
@@ -74,6 +75,8 @@ const ActivityHistoryHero: React.FC<Props> = ({
           {totalWorkouts}
         </TotalWorkouts>
       </Workouts>
+
+      <CalendarGraph />
 
       <TimesAndWeights>
         <Statistic>
