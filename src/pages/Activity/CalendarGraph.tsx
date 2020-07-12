@@ -91,8 +91,6 @@ export const CalendarGraph: React.FC = () => {
     iterator.setDate(iterator.getDate() - 1);
   }
 
-  console.log(dates);
-
   return (
     <Grid>
       <Row className="month">
