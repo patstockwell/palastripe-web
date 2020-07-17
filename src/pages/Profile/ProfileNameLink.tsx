@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
-import Avatar from '../Avatar';
+import Avatar from '../../components/Avatar';
 import EditIconPencil from '../../assets/svg/EditIconPencil';
 import {
   State, // eslint-disable-line

@@ -14,7 +14,7 @@ import CheckboxTick from '../components/CheckboxTick';
 import { useKilosToggle } from '../reducers/settingsReducer';
 
 export const EditPage = styled.div`
-  height: 100vh;
+  min-height: 100vh;
   background-color: ${superLightGrey};
 `;
 

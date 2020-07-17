@@ -10,10 +10,11 @@ import ActiveWorkout from '../pages/ActiveWorkout';
 import Activity from '../pages/Activity';
 import EditWorkout from '../pages/EditWorkout';
 import FourZeroFour from '../pages/FourZeroFour';
-import Profile from '../pages/Profile';
+import { Profile } from '../pages/Profile';
 import { WorkoutSummary } from '../pages/WorkoutSummary';
 import ProfileName from '../pages/ProfileName';
 import SettingAudio from '../pages/SettingAudio';
+import { DataExport } from '../pages/DataExport';
 import SettingUnitOfMeasurement from '../pages/SettingUnitOfMeasurement';
 import { appMaxWidth } from '../helpers/constants';
 import { WorkoutCompletionSplash } from '../pages/WorkoutCompletionSplash';
@@ -53,6 +54,7 @@ const Routes: React.FC = () => {
               <Route path="/profile/" exact component={Profile} />
               <Route path="/profile/name" component={ProfileName} />
               <Route path="/profile/audio" component={SettingAudio} />
+              <Route path="/profile/export" component={DataExport} />
               <Route path="/profile/unit-of-measurement" component={SettingUnitOfMeasurement} />
               <Route path="/edit-workout/" component={EditWorkout} />
               <Route path={`/workouts/${customWorkoutId}/${activitySearchPath}`} component={ActivitySearch} />
