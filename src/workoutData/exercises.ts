@@ -6,6 +6,42 @@ interface ById {
 }
 
 const byId: ById = {
+  leg_extension: {
+    defaultWeightInKilos: 20,
+    id: 'leg_extension',
+    name: 'Leg Extension',
+    tags: ['legs'],
+  },
+  bulgarian_split_squat: {
+    defaultWeightInKilos: 20,
+    id: 'bulgarian_split_squat',
+    name: 'Bulgarian Split Squat',
+    tags: ['legs'],
+  },
+  neck_curl: {
+    defaultWeightInKilos: 2.5,
+    id: 'neck_curl',
+    name: 'Neck Curl',
+    tags: [],
+  },
+  seated_dumbbell_press: {
+    defaultWeightInKilos: 12.5,
+    id: 'seated_dumbbell_press',
+    name: 'Seated Dumbbell Press',
+    tags: [],
+  },
+  dumbbell_row: {
+    defaultWeightInKilos: 15,
+    id: 'dumbbell_row',
+    name: 'Dumbbell Row',
+    tags: ['dumbbell'],
+  },
+  dumbbell_shrug: {
+    defaultWeightInKilos: 20,
+    id: 'dumbbell_shrug',
+    name: 'Dumbbell Shrug',
+    tags: ['dumbbell'],
+  },
   sumo_deadlift: {
     defaultWeightInKilos: 60,
     id: 'sumo_deadlift',
@@ -336,6 +372,12 @@ const allIds = [
   'front_squat',
   'dumbbell_lateral_raise',
   'sumo_deadlift',
+  'leg_extension',
+  'bulgarian_split_squat',
+  'neck_curl',
+  'seated_dumbbell_press',
+  'dumbbell_row',
+  'dumbbell_shrug',
 ];
 
 export const stretchExerciseIds = getIdsForStretchExercises(byId, allIds);
