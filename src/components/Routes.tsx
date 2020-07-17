@@ -21,6 +21,7 @@ import { WorkoutCompletionSplash } from '../pages/WorkoutCompletionSplash';
 import { AnimateNavigationProvider } from '../context/useAnimateNavigation';
 import { ScrollPositionProvider } from '../context/useScrollPosition';
 import { SelectedExerciseProvider } from '../context/useSelectedExercise';
+import { ActivityHistoryLengthProvider } from '../context/useActivityHistoryLength';
 import { activitySearchPath, ActivitySearch } from '../pages/ActiveWorkout/ActivitySearch';
 import { customWorkoutId } from '../workoutData/workouts/customWorkout';
 
@@ -45,23 +46,25 @@ const Routes: React.FC = () => {
       <ScrollPositionProvider>
         <AnimateNavigationProvider>
           <SelectedExerciseProvider>
-            <Switch location={location}>
-              <Route path="/" exact component={LandingSplash} />
-              <Route path="/install/" exact component={Install} />
-              <Route path="/workouts/" exact component={Workouts} />
-              <Route path="/activity/" exact component={Activity} />
-              <Route path="/activity/:index/" component={WorkoutSummary} />
-              <Route path="/profile/" exact component={Profile} />
-              <Route path="/profile/name" component={ProfileName} />
-              <Route path="/profile/audio" component={SettingAudio} />
-              <Route path="/profile/export" component={DataExport} />
-              <Route path="/profile/unit-of-measurement" component={SettingUnitOfMeasurement} />
-              <Route path="/edit-workout/" component={EditWorkout} />
-              <Route path={`/workouts/${customWorkoutId}/${activitySearchPath}`} component={ActivitySearch} />
-              <Route path="/workouts/:id/" component={ActiveWorkout} />
-              <Route path="/workout-complete/" component={WorkoutCompletionSplash} />
-              <Route component={FourZeroFour} />
-            </Switch>
+            <ActivityHistoryLengthProvider>
+              <Switch location={location}>
+                <Route path="/" exact component={LandingSplash} />
+                <Route path="/install/" exact component={Install} />
+                <Route path="/workouts/" exact component={Workouts} />
+                <Route path="/activity/" exact component={Activity} />
+                <Route path="/activity/:index/" component={WorkoutSummary} />
+                <Route path="/profile/" exact component={Profile} />
+                <Route path="/profile/name" component={ProfileName} />
+                <Route path="/profile/audio" component={SettingAudio} />
+                <Route path="/profile/export" component={DataExport} />
+                <Route path="/profile/unit-of-measurement" component={SettingUnitOfMeasurement} />
+                <Route path="/edit-workout/" component={EditWorkout} />
+                <Route path={`/workouts/${customWorkoutId}/${activitySearchPath}`} component={ActivitySearch} />
+                <Route path="/workouts/:id/" component={ActiveWorkout} />
+                <Route path="/workout-complete/" component={WorkoutCompletionSplash} />
+                <Route component={FourZeroFour} />
+              </Switch>
+            </ActivityHistoryLengthProvider>
           </SelectedExerciseProvider>
         </AnimateNavigationProvider>
       </ScrollPositionProvider>
