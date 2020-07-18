@@ -6,6 +6,12 @@ interface ById {
 }
 
 const byId: ById = {
+  box_step_up: {
+    defaultWeightInKilos: 20,
+    id: 'box_step_up',
+    name: 'Box Step Up',
+    tags: ['legs'],
+  },
   leg_extension: {
     defaultWeightInKilos: 20,
     id: 'leg_extension',
@@ -298,13 +304,13 @@ const byId: ById = {
     defaultWeightInKilos: 0,
     tags: [],
     id: 'push_ups',
-    name: 'Push Ups',
+    name: 'Push Up',
   },
-  machine_chest_flys: {
+  machine_chest_fly: {
     defaultWeightInKilos: 8,
     tags: [],
-    id: 'machine_chest_flys',
-    name: 'Machine Chest Flys',
+    id: 'machine_chest_fly',
+    name: 'Machine Chest Fly',
   },
   stationary_bike: {
     defaultWeightInKilos: 0,
@@ -312,11 +318,11 @@ const byId: ById = {
     id: 'stationary_bike',
     name: 'Stationary Bike',
   },
-  ring_rows: {
+  ring_row: {
     defaultWeightInKilos: 0,
     tags: [],
-    id: 'ring_rows',
-    name: 'Ring Rows',
+    id: 'ring_row',
+    name: 'Ring Row',
   },
   chest_dips: {
     defaultWeightInKilos: 0,
@@ -367,7 +373,7 @@ const allIds = [
   'concentration_curl',
   'standing_alternate_dumbbell_curl',
   'bent_over_row',
-  'machine_chest_flys',
+  'machine_chest_fly',
   'overhead_tricep_extension',
   'front_squat',
   'dumbbell_lateral_raise',
@@ -378,6 +384,9 @@ const allIds = [
   'seated_dumbbell_press',
   'dumbbell_row',
   'dumbbell_shrug',
+  'push_ups',
+  'ring_row',
+  'box_step_up',
 ];
 
 export const stretchExerciseIds = getIdsForStretchExercises(byId, allIds);
