@@ -6,14 +6,17 @@ import { DownloadArrow } from '../assets/svg/DownloadArrow';
 import { AppLogoStyle } from '../components/Banner';
 import { buttonStyle } from '../components/SharedStyles';
 import { ColouredDot } from '../assets/svg/ColouredDot';
-import { gutterWidth, green, bannerHeight } from '../helpers/constants';
+import { gutterWidth, green, bannerHeight, purple, pink } from '../helpers/constants';
 
 const Logo = styled.h1`
   ${AppLogoStyle}
   display: inline-block;
-  font-size: 2em;
-  border-radius: 8px;
-  padding: 4px 12px;
+  font-size: 3em;
+  border-radius: 0;
+  padding: 2px;
+  color: transparent;
+  background-clip: text;
+  background-image: linear-gradient( 140deg, ${pink}, ${purple});
 `;
 
 const StartButton = styled(Link)`
