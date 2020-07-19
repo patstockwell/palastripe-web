@@ -6,17 +6,22 @@ import { DownloadArrow } from '../assets/svg/DownloadArrow';
 import { AppLogoStyle } from '../components/Banner';
 import { buttonStyle } from '../components/SharedStyles';
 import { ColouredDot } from '../assets/svg/ColouredDot';
-import { gutterWidth, green, bannerHeight, purple, pink } from '../helpers/constants';
+import { gutterWidth, green, bannerHeight, purple } from '../helpers/constants';
+import { ThreeBars } from '../assets/svg/ThreeBars';
 
 const Logo = styled.h1`
   ${AppLogoStyle}
   display: inline-block;
-  font-size: 3em;
+  font-size: 2em;
   border-radius: 0;
-  padding: 2px;
+  padding: 0;
   color: transparent;
   background-clip: text;
-  background-image: linear-gradient( 140deg, ${pink}, ${purple});
+  background-image: linear-gradient(90deg, ${green}, ${purple});
+
+  // for the svg
+  display: flex;
+  align-items: baseline;
 `;
 
 const StartButton = styled(Link)`
@@ -59,7 +64,14 @@ export const LandingSplash: React.FC = () => {
           Install app
         </Install>
       </Banner>
-      <Logo>hbff</Logo>
+      <Logo>
+        <ThreeBars style={{
+          margin: '0 0.3em',
+          transform: 'rotate(45deg)',
+          fill: 'black',
+        }}/>
+        palastripe
+      </Logo>
       <p>
         {/* Use a javascript quotes to explicitly show trailing space. */}
         Track your gym workouts to get{' '}
