@@ -3,25 +3,26 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { DownloadArrow } from '../assets/svg/DownloadArrow';
-import { AppLogoStyle } from '../components/Banner';
 import { buttonStyle } from '../components/SharedStyles';
 import { ColouredDot } from '../assets/svg/ColouredDot';
-import { gutterWidth, green, bannerHeight, purple } from '../helpers/constants';
+import { gutterWidth, green, bannerHeight } from '../helpers/constants';
 import { ThreeBars } from '../assets/svg/ThreeBars';
 
+const LogoWrapper = styled.div`
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+`;
+
 const Logo = styled.h1`
-  ${AppLogoStyle}
-  display: inline-block;
+  font-family: 'Muli', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-weight: 900;
+  font-style: italic;
   font-size: 2em;
   border-radius: 0;
   padding: 0;
-  color: transparent;
-  background-clip: text;
-  background-image: linear-gradient(90deg, ${green}, ${purple});
-
-  // for the svg
-  display: flex;
-  align-items: baseline;
+  margin-left: 8px;
+  color: black;
 `;
 
 const StartButton = styled(Link)`
@@ -37,6 +38,7 @@ const Page = styled.div`
   align-items: center;
   justify-content: space-between;
   text-align: center;
+  padding: 0 ${gutterWidth}px;
 `;
 
 const Install = styled(Link)`
@@ -64,22 +66,17 @@ export const LandingSplash: React.FC = () => {
           Install app
         </Install>
       </Banner>
-      <Logo>
+      <LogoWrapper>
         <ThreeBars style={{
           margin: '0 0.3em',
           transform: 'rotate(45deg)',
           fill: 'black',
         }}/>
-        palastripe
-      </Logo>
-      <p>
-        {/* Use a javascript quotes to explicitly show trailing space. */}
-        Track your gym workouts to get{' '}
-        <strong>harder</strong>,{' '}
-        <strong>better</strong>,{' '}
-        <strong>faster</strong>,{' '}
-        <strong>fitter</strong>.{' '}
-      </p>
+        <Logo>
+          palastripe
+        </Logo>
+      </LogoWrapper>
+      <p>Track your gym workouts, visualise your progress, and meet your strength training goals with <strong>palastripe</strong>.</p>
       <StartButton to="/workouts/">
         <ColouredDot fill={green} />
         Start a workout

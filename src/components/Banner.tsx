@@ -5,27 +5,28 @@ import styled from 'styled-components';
 import {
   bannerHeight,
   gutterWidth,
-  pink,
+  green,
   purple,
 } from '../helpers/constants';
 
 export const AppLogoStyle = `
   font-family: 'Muli', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   color: white;
-  font-size: 16px;
   font-weight: 900;
   font-style: italic;
-  border-radius: 5px;
-  padding: 3px 9px;
   background-color: ${purple};
-  background-image: linear-gradient( 140deg, ${pink}, ${purple});
+  background-image: linear-gradient(140deg, ${green}, ${purple});
+  color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
 `;
 
 const AppLogo = styled(Link)`
   position: absolute;
-  left: ${gutterWidth}px;
-  top: 11px;
+  left: 14px;
+  top: 16px;
   text-decoration: none;
+  font-size: 15px;
   ${AppLogoStyle}
 `;
 
@@ -55,7 +56,7 @@ export const Banner: React.FC<Props> = ({ heading }) => {
 
   return (
     <Header>
-      <AppLogo to="/">hbff</AppLogo>
+      <AppLogo to="/">palastripe</AppLogo>
       <Heading>{heading}</Heading>
     </Header>
   );
