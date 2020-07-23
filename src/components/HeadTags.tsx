@@ -34,7 +34,7 @@ const MetaTags: React.FC<StateProps> = ({ workouts, activeWorkout }) => {
       }}/>
       <Route path="/workouts/" exact render={() => (
         <Helmet>
-          <title>palastripe</title>
+          <title>Palastripe</title>
           <meta property="og:title" content="Get fit and strong. Get a gym plan. Use palastripe." />
           <meta property="og:url" content="https://palastripe.com" />
           <meta property="og:image" content="og-image.jpg" />
