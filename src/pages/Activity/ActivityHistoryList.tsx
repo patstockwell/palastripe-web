@@ -86,7 +86,7 @@ export const ActivityHistoryList: React.FC<Props> = ({ history }) => {
         {listLength < history.length && (
           <p>loading...</p>
         )}
-        <div>Joined HBFF 🎉 </div>
+        <div>Joined palastripe 🎉 </div>
         <span>on {date} {month}, {year}</span>
       </BottomSpace>
     </RoundCorneredTop>

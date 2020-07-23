@@ -48,7 +48,7 @@ export const MONTHS_OF_THE_YEAR: string[] = [
   'December',
 ];
 
-export const APP_URL = 'https://harderbetterfasterfitter.com';
+export const APP_URL = 'https://palastripe.com';
 
 export const pink: string = '#ff02c8';
 export const purple: string = '#6702ff';
@@ -74,8 +74,8 @@ export const ACTIVITY_PAGE: string = 'ACTIVITY_PAGE';
 export const PROFILE_PAGE: string = 'PROFILE_PAGE';
 export const ACTIVE_WORKOUT_PAGE: string = 'ACTIVE_WORKOUT_PAGE';
 
-export const LOCAL_STORAGE_HISTORY: string = 'HBFF_HISTORY';
-export const LOCAL_STORAGE_SETTINGS: string = 'HBFF_SETTINGS';
-export const LOCAL_STORAGE_WORKOUTS: string = 'HBFF_WORKOUTS';
-export const LOCAL_STORAGE_ACTIVE_WORKOUT: string = 'HBFF_ACTIVE_WORKOUT';
-export const LOCAL_STORAGE_PROFILE: string = 'HBFF_PROFILE';
+export const LOCAL_STORAGE_HISTORY: string = 'PALASTRIPE_HISTORY';
+export const LOCAL_STORAGE_SETTINGS: string = 'PALASTRIPE_SETTINGS';
+export const LOCAL_STORAGE_WORKOUTS: string = 'PALASTRIPE_WORKOUTS';
+export const LOCAL_STORAGE_ACTIVE_WORKOUT: string = 'PALASTRIPE_ACTIVE_WORKOUT';
+export const LOCAL_STORAGE_PROFILE: string = 'PALASTRIPE_PROFILE';

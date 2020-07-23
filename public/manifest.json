@@ -1,6 +1,6 @@
 {
-  "short_name": "HBFF",
-  "name": "Harder Better Faster Fitter",
+  "short_name": "palastripe",
+  "name": "palastripe",
   "icons": [
     {
       "src": "favicon.ico",
@@ -20,7 +20,7 @@
   ],
   "intent_filters": {
     "scope_url_scheme": "https",
-    "scope_url_host": "harderbetterfasterfitter.com",
+    "scope_url_host": "palastripe.com",
     "scope_url_path": "/"
   },
   "scope_url": "/",
