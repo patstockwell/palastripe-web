@@ -15,7 +15,7 @@ import {
   getTotalWeightLifted,
   convertWeight,
 } from '../../helpers/functions';
-import { purple, superLightGrey } from '../../helpers/constants';
+import { purple, lightGrey3 } from '../../helpers/constants';
 import { buttonStyle } from '../../components/SharedStyles';
 import {useScrollPosition} from '../../context/useScrollPosition';
 
@@ -26,7 +26,7 @@ const Button = styled.button<{ background?: string }>`
 const Tile = styled.li`
   position: relative;
   padding: 24px 12px;
-  border-bottom: 0.5px solid ${superLightGrey};
+  border-bottom: 0.5px solid ${lightGrey3};
   display: flex;
   box-sizing: border-box;
   min-height: 180px;

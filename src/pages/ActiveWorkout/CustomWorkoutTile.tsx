@@ -4,8 +4,8 @@ import styled from 'styled-components';
 
 import {
   tileMinHeight,
-  lightLightGrey,
-  superLightGrey,
+  lightGrey1,
+  lightGrey3,
   charcoal,
 } from '../../helpers/constants';
 import { customWorkoutId } from '../../workoutData/workouts/customWorkout';
@@ -16,8 +16,8 @@ const AddActivityButton = styled(Link)`
   width: 100%;
   background: none;
   border: none;
-  border-bottom: 1px solid ${lightLightGrey};
-  background-color: ${superLightGrey}
+  border-bottom: 1px solid ${lightGrey1};
+  background-color: ${lightGrey3}
   font-weight: 600;
   color: ${charcoal}
   margin-bottom: 30px;

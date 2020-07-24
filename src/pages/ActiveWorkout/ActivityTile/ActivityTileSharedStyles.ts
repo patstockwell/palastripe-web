@@ -1,7 +1,7 @@
 import { css } from 'styled-components';
 import {
-  lightLightGrey,
-  superLightGrey,
+  lightGrey1,
+  lightGrey3,
   tileMinHeight,
   charcoal,
 } from '../../../helpers/constants';
@@ -10,8 +10,8 @@ export const tileStyle = css<{ selected: boolean }>`
   position: relative;
   color: ${props => props.selected ? 'black' : charcoal};
   border: none;
-  border-bottom: 1px solid ${lightLightGrey};
-  background-color: ${props => props.selected ? 'white' : superLightGrey};
+  border-bottom: 1px solid ${lightGrey1};
+  background-color: ${props => props.selected ? 'white' : lightGrey3};
   cursor: pointer;
   min-height: ${tileMinHeight}px;
   touch-action: manipulation; // stops double-tap-to-zoom

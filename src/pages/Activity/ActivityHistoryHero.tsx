@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react';
 import styled from 'styled-components';
-import { pink, purple } from '../../helpers/constants';
+import { green, purple } from '../../helpers/constants';
 import { getHoursAndMinutes } from '../../helpers/functions';
 import { CalendarGraph } from './CalendarGraph';
 
@@ -31,7 +31,7 @@ const TimesAndWeights = styled.div`
   margin-bottom: -24px;
   padding: 24px 0 48px 0;
   border-radius: 24px 24px 0 0;
-  background-image: linear-gradient(140deg, ${pink}, ${purple});
+  background-image: linear-gradient(140deg, ${green}, ${purple});
   color: white;
 
   & h3 {

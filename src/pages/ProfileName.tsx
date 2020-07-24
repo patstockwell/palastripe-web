@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import styled from 'styled-components';
 
 import { BackLinkBanner } from '../components/BackLinkBanner';
-import { superLightGrey, gutterWidth } from '../helpers/constants';
+import { lightGrey3, gutterWidth } from '../helpers/constants';
 import {
   State, // eslint-disable-line
 } from '../helpers/types';
@@ -11,7 +11,7 @@ import { useUpdateName } from '../reducers/profileReducer';
 
 const EditPage = styled.div`
   height: 100vh;
-  background-color: ${superLightGrey};
+  background-color: ${lightGrey3};
 `;
 
 const Input = styled.input`

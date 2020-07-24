@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 
 import { State } from '../../helpers/types';
 import { Workout } from '../../reducers/workoutsReducer';
-import { MONTHS_OF_THE_YEAR, purple } from '../../helpers/constants';
+import { MONTHS_OF_THE_YEAR, purple, lightGrey2 } from '../../helpers/constants';
 
 const Grid = styled.div`
   margin: 0 auto 24px;
@@ -45,11 +45,14 @@ const Month = styled.div`
   margin-bottom: 4px;
 `;
 
-const Block = styled.div<{ highlight: boolean }>`
+const Block = styled.div<{ highlight: boolean; evenMonth: boolean }>`
   ${blockStyle}
 
   color: transparent;
-  background-color: ${props => props.highlight ? purple : 'lightgrey'};
+  // first give the default background-color rule.
+  background-color: ${props => props.evenMonth ? lightGrey2 : 'lightgrey'};
+  // then highlight workouts in purple.
+  ${props => props.highlight && `background-color: ${purple};`}
   ${props => props.highlight && 'opacity: 0.7;'}
 `;
 
@@ -73,7 +76,7 @@ export const CalendarGraph: React.FC = () => {
     [], // saturdays
   ];
 
-  const dateHash: { [key: string]: Workout } = activityHistory.reduce((acc, curr) => {
+  const existingWorkoutsDateHash: { [key: string]: Workout } = activityHistory.reduce((acc, curr) => {
     const date = new Date(curr.finishTime);
     return {
       ...acc,
@@ -85,7 +88,7 @@ export const CalendarGraph: React.FC = () => {
   for (let x = 0; x < daysToDisplay; x++) {
     dates[iterator.getDay()].unshift(new Date(iterator) as WorkoutDate);
     // see if a workout exists for this date
-    if (dateHash[iterator.toDateString()]) {
+    if (existingWorkoutsDateHash[iterator.toDateString()]) {
       dates[iterator.getDay()][0].workoutCompleted = true;
     }
     iterator.setDate(iterator.getDate() - 1);
@@ -93,11 +96,25 @@ export const CalendarGraph: React.FC = () => {
 
   return (
     <Grid>
+      {dates.map(weekday => (
+        <Row key={weekday[0].toDateString()}>
+          {weekday.map(date => (
+            <Block
+              highlight={date.workoutCompleted}
+              key={date.toDateString()}
+              evenMonth={date.getMonth() % 2 === 0}
+            >
+              {date.getDate()}
+            </Block>
+          ))}
+          {weekday.length < weeksToDisplay && <EmptyBlock />}
+        </Row>
+      ))}
       <Row className="month">
         {dates[6].map((date, i) => (
           // iterate over the last day of each week to find the month name
           <Month key={date.toDateString()}>
-            {i === 0 || date.getMonth() > dates[6][i - 1].getMonth()
+            {i !== 0 && date.getMonth() > dates[6][i - 1].getMonth()
               // only display label on first week of the month
               ? MONTHS_OF_THE_YEAR[date.getMonth()].slice(0, 3)
               : null
@@ -105,16 +122,6 @@ export const CalendarGraph: React.FC = () => {
           </Month>
         ))}
       </Row>
-      {dates.map(weekday => (
-        <Row key={weekday[0].toDateString()}>
-          {weekday.map(date => (
-            <Block highlight={date.workoutCompleted} key={date.toDateString()}>
-              {date.getDate()}
-            </Block>
-          ))}
-          {weekday.length < weeksToDisplay && <EmptyBlock />}
-        </Row>
-      ))}
     </Grid>
   );
 };

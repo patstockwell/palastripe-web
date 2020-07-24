@@ -16,7 +16,7 @@ import {
 } from '../../../helpers/functions';
 import {
   green,
-  superLightGrey,
+  lightGrey3,
   timedExerciseWaitPeriod,
   tileMinHeight,
   activeWorkoutWindowHeight,
@@ -39,9 +39,9 @@ const grow = keyframes`
 `;
 
 const colourPulse = keyframes`
-  0% { background-color: ${superLightGrey}; }
+  0% { background-color: ${lightGrey3}; }
   20% { background-color: darkgrey; }
-  100% { background-color: ${superLightGrey}; }
+  100% { background-color: ${lightGrey3}; }
 `;
 
 const timerStyle = `

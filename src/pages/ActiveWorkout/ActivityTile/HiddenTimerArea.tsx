@@ -6,7 +6,7 @@ import completeAudio from '../../../assets/activityEnd.mp3';
 import { buttonStyle } from '../../../components/SharedStyles';
 import {
   timedExerciseWaitPeriod,
-  lightLightGrey,
+  lightGrey1,
   green,
   purple,
 } from '../../../helpers/constants';
@@ -48,7 +48,7 @@ const StartButton = styled.button<{ background?: string; fontColour?: string; }>
   ${buttonStyle}
   margin-top: 30px;
   background-color: ${({ background }) => background};
-  background-color: ${({ disabled }) => disabled && lightLightGrey};
+  background-color: ${({ disabled }) => disabled && lightGrey1};
 `;
 
 interface Props {

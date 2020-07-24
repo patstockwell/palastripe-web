@@ -9,9 +9,9 @@ import { Exercise, State, WeightedActivity } from '../../helpers/types';
 import {
   appMaxWidth,
   gutterWidth,
-  lightLightGrey,
+  lightGrey1,
   charcoal,
-  superLightGrey,
+  lightGrey3,
 } from '../../helpers/constants';
 import { BackLinkBanner } from '../../components/BackLinkBanner';
 import { useSelectedExercise } from '../../context/useSelectedExercise';
@@ -39,15 +39,15 @@ const Ul = styled.ul`
   padding: 0;
   margin: 0 12px;
   list-style: none;
-  border-left: 1px solid ${lightLightGrey};
-  border-right: 1px solid ${lightLightGrey};
+  border-left: 1px solid ${lightGrey1};
+  border-right: 1px solid ${lightGrey1};
 
   & > li {
-    border-top: 1px solid ${lightLightGrey};
+    border-top: 1px solid ${lightGrey1};
   }
 
   & > li:last-child {
-    border-bottom: 1px solid ${lightLightGrey};
+    border-bottom: 1px solid ${lightGrey1};
   }
 `;
 
@@ -63,7 +63,7 @@ const SearchSuggestionTile = styled.li`
 
   &:hover,
   &:active {
-    background: ${superLightGrey};
+    background: ${lightGrey3};
   }
 `;
 

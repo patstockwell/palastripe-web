@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 
-import { lightLightGrey } from '../helpers/constants';
+import { lightGrey1 } from '../helpers/constants';
 import { getInitials } from '../helpers/functions';
 import {
   State, // eslint-disable-line no-unused-vars
@@ -21,7 +21,7 @@ const AvatarCircle = styled.div<OwnProps>`
   align-items: center;
   width: ${({ isLargeSize }) => isLargeSize ? 80 : 32}px;
   height: ${({ isLargeSize }) => isLargeSize ? 80 : 32}px;
-  background-color: ${({ backgroundColour: b }) => b || lightLightGrey};
+  background-color: ${({ backgroundColour: b }) => b || lightGrey1};
   border: 2px solid white;
   border-radius: 50%;
   overflow: hidden;

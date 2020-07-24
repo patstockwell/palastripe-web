@@ -67,11 +67,7 @@ export const LandingSplash: React.FC = () => {
         </Install>
       </Banner>
       <LogoWrapper>
-        <ThreeBars style={{
-          margin: '0 0.3em',
-          transform: 'rotate(45deg)',
-          fill: 'black',
-        }}/>
+        <ThreeBars style={{ margin: '0.3em', transform: 'rotate(45deg)' }}/>
         <Logo>
           palastripe
         </Logo>

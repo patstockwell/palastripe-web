@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import SearchIcon from '../assets/svg/SearchIcon';
-import { lightLightGrey } from '../helpers/constants';
+import { lightGrey1 } from '../helpers/constants';
 
 const SearchArea = styled.div<{ background: string }>`
   display: flex;
@@ -29,7 +29,7 @@ interface Props {
 const SearchBar: React.FC<Props> = ({
   inputValue,
   changeHandler,
-  backgroundColour = lightLightGrey,
+  backgroundColour = lightGrey1,
 }) => (
   <SearchArea background={backgroundColour} >
     <SearchIcon width={20} height={20} />

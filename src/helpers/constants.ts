@@ -57,8 +57,9 @@ export const green: string = '#02d386';
 export const yellow: string = '#f7f529';
 export const orange: string = '#f79729';
 export const fadedYellow: string = '#fffd8e';
-export const lightLightGrey = '#dedede';
-export const superLightGrey = '#f4f4f4';
+export const lightGrey1 = '#dedede';
+export const lightGrey2 = '#e8e8e8';
+export const lightGrey3 = '#f4f4f4';
 export const charcoal = '#444444';
 export const darkPurple = '#291c3d';
 

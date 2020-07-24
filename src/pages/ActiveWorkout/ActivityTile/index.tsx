@@ -4,7 +4,7 @@ import { isTimed } from '../../../helpers/types';
 import { ActivityTileWithReps } from './ActivityTileWithReps';
 import { ActivityTileWithTimer } from './ActivityTileWithTimer';
 import { Activity } from '../../../helpers/types';
-import { tileMinHeight, superLightGrey } from '../../../helpers/constants';
+import { tileMinHeight, lightGrey3 } from '../../../helpers/constants';
 
 export const Details = styled.div`
   display: flex;
@@ -53,7 +53,7 @@ export const VisibleArea = styled.div<{ selected?: boolean }>`
     if (props.selected === undefined) {
       return 'transparent';
     }
-    return props.selected ? 'white' : superLightGrey;
+    return props.selected ? 'white' : lightGrey3;
   }};
   z-index: 1;
 `;

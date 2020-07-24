@@ -6,7 +6,7 @@ import { opaqueImageInAfter } from './SharedStyles';
 import { Workout } from '../reducers/workoutsReducer';
 import {
   gutterWidth,
-  superLightGrey,
+  lightGrey3,
   workoutTileMinHeight,
 } from '../helpers/constants';
 import { calculateWorkoutTime, formatMinutes } from '../helpers/functions';
@@ -19,7 +19,7 @@ const Tile = styled.li`
   padding: 0 ${gutterWidth}px;
   display: flex;
   align-items: center;
-  border-bottom: solid 1px ${superLightGrey};
+  border-bottom: solid 1px ${lightGrey3};
   overflow: hidden;
 `;
 

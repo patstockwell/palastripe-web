@@ -7,20 +7,12 @@ import { gutterWidth } from '../helpers/constants';
 import { PWA } from '../assets/svg/PWA';
 import { AppLogoStyle } from '../components/Banner';
 
-const H1 = styled.h1`
-  display: flex;
-  align-items: center;
-`;
-
 const Gutter = styled.div`
   padding: ${gutterWidth}px;
 `;
 
 const Logo = styled.span`
   ${AppLogoStyle};
-  background-image: none;
-  background-color: white;
-  color: black;
   padding: 0;
 `;
 

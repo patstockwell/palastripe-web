@@ -7,7 +7,7 @@ import {
 } from '../helpers/types';
 import { BackLinkBanner } from '../components/BackLinkBanner';
 import {
-  superLightGrey,
+  lightGrey3,
   charcoal,
 } from '../helpers/constants';
 import CheckboxTick from '../components/CheckboxTick';
@@ -15,7 +15,7 @@ import { useKilosToggle } from '../reducers/settingsReducer';
 
 export const EditPage = styled.div`
   min-height: 100vh;
-  background-color: ${superLightGrey};
+  background-color: ${lightGrey3};
 `;
 
 export const Label = styled.label`

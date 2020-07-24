@@ -2,14 +2,14 @@ import React, { useState} from 'react';
 import styled from 'styled-components';
 import {
   activityHeadingHeight,
-  lightLightGrey,
+  lightGrey1,
   gutterWidth,
 } from '../../../helpers/constants';
 
 const HeadingPanel = styled.div<{ top: number }>`
   height: ${activityHeadingHeight}px;
   background-color: white;
-  border-bottom: 1px solid ${lightLightGrey};
+  border-bottom: 1px solid ${lightGrey1};
   display: flex;
   align-items: center;
   justify-content: space-between;
