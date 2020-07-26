@@ -2,7 +2,6 @@ import React from 'react';
 import { configureStore } from '@reduxjs/toolkit';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
-import Analytics from 'react-ga';
 
 import rootReducer from './reducers';
 import { GlobalStyle } from './components/GlobalStyle';
@@ -22,9 +21,6 @@ smoothscroll.polyfill();
 const store = configureStore({
   reducer: rootReducer,
 });
-
-// Google Analytics
-Analytics.initialize('UA-164780880-1')
 
 const App = () => (
   <Provider store={store}>

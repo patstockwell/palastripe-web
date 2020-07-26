@@ -1,7 +1,6 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { useLocation, Route, Switch } from 'react-router-dom';
-import Analytics from 'react-ga';
 
 import { LandingSplash } from '../pages/LandingSplash';
 import { Workouts } from '../pages/Workouts';
@@ -33,14 +32,6 @@ const MaxWidthContainer = styled.div`
 
 const Routes: React.FC = () => {
   const location = useLocation();
-  const { pathname } = location;
-
-  useEffect(() => {
-    if (process.env.NODE_ENV === 'production') {
-      Analytics.set({ page: pathname }); // sets custom dimensions
-      Analytics.pageview(pathname);
-    }
-  }, [pathname]);
 
   return (
     <MaxWidthContainer>

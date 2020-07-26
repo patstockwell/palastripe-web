@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 import { useParams, Link } from 'react-router-dom';
-import Analytics from 'react-ga';
 
 import { AudioProvider } from '../../context/useAudio';
 import { RestTimerProvider } from '../../context/useRestTimer';
@@ -84,11 +83,6 @@ const ActiveWorkout: React.FC<StateProps> = ({
     finishWorkout(); // activeWorkoutReducer
     addToHistory(activeWorkout); // historyReducer
     updateWorkoutTemplate(activeWorkout); // workoutsReducer
-    Analytics.event({
-      category: 'Workout',
-      action: 'Completed workout',
-      label: displayedWorkout.name,
-    });
     setShowEndWorkoutAlert(false);
     setActivityPageScrollPosition(0);
   };
