@@ -13,17 +13,9 @@ export const AppLogoStyle = `
   background-clip: text;
   -webkit-background-clip: text;
   color: black;
-
-  // Use these rules to create gradient text.
-  // background-color: {purple};
-  // background-image: linear-gradient(140deg, {green}, {purple});
-  // color: transparent;
 `;
 
 const AppLogo = styled(Link)`
-  position: absolute;
-  left: 14px;
-  top: 16px;
   text-decoration: none;
   font-size: 15px;
   ${AppLogoStyle}
@@ -32,7 +24,7 @@ const AppLogo = styled(Link)`
 export const Header = styled.header`
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   background-color: white;
   z-index: 3;
   overflow: hidden;
