@@ -9,6 +9,8 @@ import {
   LOCAL_STORAGE_SUBSCRIBE_EMAIL,
   gutterWidth,
   purple,
+  lightGrey3,
+  bannerHeight,
 } from '../helpers/constants';
 import { CheckboxTick, CheckboxCross } from '../components/Checkbox';
 
@@ -44,6 +46,8 @@ const SubscribeButton = styled.button<{ disable: boolean }>`
 const Gutter = styled.div`
   padding: ${gutterWidth}px;
   text-align: center;
+  background-color: ${lightGrey3};
+  min-height: calc(100vh - ${2 * gutterWidth + bannerHeight}px);
 `;
 
 const Label = styled.label`

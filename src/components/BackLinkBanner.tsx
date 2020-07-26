@@ -30,6 +30,7 @@ const Header = styled.header<{ sticky: boolean }>`
 
 const Heading = styled.h1`
   position: absolute;
+  top: 4px;
   font-size: 1em;
   font-weight: 800;
   width: 100%;
