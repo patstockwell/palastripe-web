@@ -15,6 +15,7 @@ import { WorkoutSummary } from '../pages/WorkoutSummary';
 import ProfileName from '../pages/ProfileName';
 import SettingAudio from '../pages/SettingAudio';
 import { DataExport } from '../pages/DataExport';
+import { Subscribe } from '../pages/Subscribe';
 import SettingUnitOfMeasurement from '../pages/SettingUnitOfMeasurement';
 import { appMaxWidth } from '../helpers/constants';
 import { WorkoutCompletionSplash } from '../pages/WorkoutCompletionSplash';
@@ -62,6 +63,7 @@ const Routes: React.FC = () => {
                 <Route path={`/workouts/${customWorkoutId}/${activitySearchPath}`} component={ActivitySearch} />
                 <Route path="/workouts/:id/" component={ActiveWorkout} />
                 <Route path="/workout-complete/" component={WorkoutCompletionSplash} />
+                <Route path="/subscribe/" component={Subscribe} />
                 <Route component={FourZeroFour} />
               </Switch>
             </ActivityHistoryLengthProvider>

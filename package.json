@@ -8,6 +8,7 @@
     "clipboard-polyfill": "^2.8.6",
     "core-js": "^3.2.1",
     "intersection-observer": "^0.7.0",
+    "jsonp": "^0.2.1",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-ga": "^2.7.0",
@@ -47,6 +48,7 @@
   ],
   "devDependencies": {
     "@types/jest": "^24.0.11",
+    "@types/jsonp": "^0.2.0",
     "@types/node": "^11.11.6",
     "@types/react": "^16.8.8",
     "@types/react-dom": "^16.8.3",

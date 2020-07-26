@@ -65,7 +65,7 @@ interface Props {
   animate?: boolean;
 }
 
-const CircleTick: React.FC<Props> = ({ animate = true, onAnimationEnd }) => (
+export const CircleTick: React.FC<Props> = ({ animate = true, onAnimationEnd }) => (
   <Svg
     className="checkmark"
     viewBox="0 0 52 52"
@@ -90,5 +90,3 @@ const CircleTick: React.FC<Props> = ({ animate = true, onAnimationEnd }) => (
     />
   </Svg>
 );
-
-export default CircleTick;

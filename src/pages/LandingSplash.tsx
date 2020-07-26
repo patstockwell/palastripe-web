@@ -8,6 +8,12 @@ import { ColouredDot } from '../assets/svg/ColouredDot';
 import { gutterWidth, green, bannerHeight } from '../helpers/constants';
 import { ThreeBars } from '../assets/svg/ThreeBars';
 
+const SubscribeLink = styled(Link)`
+  color: grey;
+  display: block;
+  margin: 24px 12px;
+`;
+
 const LogoWrapper = styled.div`
   display: flex;
   align-items: baseline;
@@ -32,7 +38,7 @@ const StartButton = styled(Link)`
 `;
 
 const Page = styled.div`
-  height: 320px;
+  height: 450px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -77,6 +83,7 @@ export const LandingSplash: React.FC = () => {
         <ColouredDot fill={green} />
         Start a workout
       </StartButton>
+      <SubscribeLink to="/subscribe/">Get early beta access to a palastripe account</SubscribeLink>
     </Page>
   );
 };

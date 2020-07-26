@@ -10,7 +10,7 @@ import {
   lightGrey3,
   charcoal,
 } from '../helpers/constants';
-import CheckboxTick from '../components/CheckboxTick';
+import { CheckboxTick } from '../components/Checkbox';
 import { useKilosToggle } from '../reducers/settingsReducer';
 
 export const EditPage = styled.div`

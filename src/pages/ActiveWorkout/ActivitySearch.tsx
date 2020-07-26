@@ -17,7 +17,7 @@ import { BackLinkBanner } from '../../components/BackLinkBanner';
 import { useSelectedExercise } from '../../context/useSelectedExercise';
 import { customWorkoutGroupId } from '../../workoutData/workouts/customWorkout';
 
-const Input = styled.input`
+export const Input = styled.input`
   color: ${charcoal};
   width: calc(100% - (2 * ${gutterWidth}px));
   box-sizing: border-box;

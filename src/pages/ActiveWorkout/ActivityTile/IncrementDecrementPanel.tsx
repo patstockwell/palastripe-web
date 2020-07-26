@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import AdditionSymbol from '../../../assets/svg/AdditionSymbol';
+import { AdditionSymbol } from '../../../assets/svg/AdditionSymbol';
 import SubtractionSymbol from '../../../assets/svg/SubtractionSymbol';
 import { pink, purple } from '../../../helpers/constants';
 

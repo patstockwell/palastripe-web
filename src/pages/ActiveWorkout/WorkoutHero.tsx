@@ -4,7 +4,7 @@ import styled, { keyframes } from 'styled-components';
 import { useLocation } from 'react-router-dom';
 import * as clipboard from 'clipboard-polyfill';
 
-import CheckboxTick from '../../components/CheckboxTick';
+import { CheckboxTick } from '../../components/Checkbox';
 import AlertConfirm from '../../components/AlertConfirm';
 import { ColouredDot } from '../../assets/svg/ColouredDot';
 import ShareIcon from '../../assets/svg/Share';

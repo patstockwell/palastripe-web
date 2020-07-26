@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 
-import CheckboxTick from '../components/CheckboxTick';
+import { CheckboxTick } from '../components/Checkbox';
 import { EditPage, Label, HiddenInput } from './SettingUnitOfMeasurement';
 import { State } from '../helpers/types';
 import { BackLinkBanner } from '../components/BackLinkBanner';
