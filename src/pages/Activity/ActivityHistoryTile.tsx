@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-import AlertConfirm from '../../components/AlertConfirm';
+import { ConfirmButton, AlertConfirm, MessageText } from '../../components/AlertConfirm';
 import TrashCan from '../../assets/svg/TrashCan';
 import Dots from '../../assets/svg/Dots';
 import Avatar from '../../components/Avatar';
@@ -16,12 +16,7 @@ import {
   convertWeight,
 } from '../../helpers/functions';
 import { purple, lightGrey3 } from '../../helpers/constants';
-import { buttonStyle } from '../../components/SharedStyles';
-import {useScrollPosition} from '../../context/useScrollPosition';
-
-const Button = styled.button<{ background?: string }>`
-  ${buttonStyle}
-`;
+import { useScrollPosition } from '../../context/useScrollPosition';
 
 const Tile = styled.li`
   position: relative;
@@ -259,12 +254,13 @@ const ActivityHistoryTile: React.FC<Props> = ({
       <AlertConfirm
         cancelAlert={() => setShowDeleteWorkoutAlert(false)}
         showAlert={showDeleteWorkoutAlert}
-        message={'Are you sure you want to delete this workout?'}
       >
-        <Button
+        <MessageText>Are you sure you want to delete this workout?</MessageText>
+        <ConfirmButton
           onClick={() => setShowDeleteWorkoutAlert(false)}
-          background={'grey'}>No</Button>
-        <Button onClick={handleConfirmationClick}>Yes</Button>
+          background={'grey'}
+        >No</ConfirmButton>
+        <ConfirmButton onClick={handleConfirmationClick}>Yes</ConfirmButton>
       </AlertConfirm>
     </Tile>
   );

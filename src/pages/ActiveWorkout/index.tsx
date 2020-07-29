@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import styled from 'styled-components';
-import { useParams, Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 import { AudioProvider } from '../../context/useAudio';
 import { RestTimerProvider } from '../../context/useRestTimer';
-import { buttonStyle } from '../../components/SharedStyles';
 import { useInterval } from '../../helpers/functions';
 import Timer from './Timer';
-import AlertConfirm from '../../components/AlertConfirm';
+import {
+  ConfirmButtonLink,
+  MessageText,
+  ConfirmButton,
+  AlertConfirm,
+} from '../../components/AlertConfirm';
 import { BackLinkBanner } from '../../components/BackLinkBanner';
 import WorkoutHero, { Window as CustomWorkoutHero } from './WorkoutHero';
 import FourZeroFour from '../../pages/FourZeroFour';
@@ -24,18 +27,6 @@ import {
 } from '../../reducers/workoutsReducer';
 import { useActiveWorkout } from '../../reducers/activeWorkoutReducer';
 import { customWorkoutId } from '../../workoutData/workouts/customWorkout';
-
-const Button = styled.button<{ background?: string }>`
-  ${buttonStyle}
-`;
-
-const LinkButton = styled(Link)<{ background?: string; fontColour?: string; }>`
-  ${buttonStyle}
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
-`;
 
 const ActiveWorkout: React.FC<StateProps> = ({
   workouts,
@@ -123,15 +114,16 @@ const ActiveWorkout: React.FC<StateProps> = ({
         <AlertConfirm
           cancelAlert={() => setShowEndWorkoutAlert(false)}
           showAlert={showEndWorkoutAlert}
-          message={'Are you sure you want to finish the workout?'}
         >
-          <Button
-            onClick={() => setShowEndWorkoutAlert(false)}
-            background={'grey'}>No</Button>
-          <LinkButton
+          <MessageText>Are you sure you want to finish the workout?</MessageText>
+          <ConfirmButtonLink
             to="/workout-complete/"
             onClick={finishWorkoutWithAlertTransition}
-          >Yes</LinkButton>
+          >Yes</ConfirmButtonLink>
+          <ConfirmButton
+            onClick={() => setShowEndWorkoutAlert(false)}
+            background={'darkgrey'}
+          >No</ConfirmButton>
         </AlertConfirm>
       </RestTimerProvider>
     </AudioProvider>

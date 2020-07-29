@@ -1,15 +1,10 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
 import { orange } from '../../../helpers/constants';
-import AlertConfirm from '../../../components/AlertConfirm';
-import { buttonStyle } from '../../../components/SharedStyles';
+import { ConfirmButton, MessageText, AlertConfirm } from '../../../components/AlertConfirm';
 import { useActiveWorkout } from '../../../reducers/activeWorkoutReducer';
 
 const deleteButtonWidth = 100;
-
-const ConfirmButton = styled.button<{ background?: string }>`
-  ${buttonStyle}
-`;
 
 const DeleteButton = styled.button`
   height: 100%;
@@ -66,13 +61,13 @@ export const DraggableTileDelete: React.FC<Props> = ({ disable, id, children }) 
           </SlidingLayer>
           <AlertConfirm
             showAlert={showAlert}
-            message={'Delete this activity?'}
             cancelAlert={() => setShowAlert(false)}
           >
-            <ConfirmButton onClick={() => setShowAlert(false)} background={'grey'}>
+            <MessageText>Delete this activity?</MessageText>
+            <ConfirmButton onClick={() => deleteActivity(id)}>Yes</ConfirmButton>
+            <ConfirmButton onClick={() => setShowAlert(false)} background={'darkgrey'}>
               No
             </ConfirmButton>
-            <ConfirmButton onClick={() => deleteActivity(id)}>Yes</ConfirmButton>
           </AlertConfirm>
         </>
       )}
