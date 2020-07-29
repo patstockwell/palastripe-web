@@ -149,7 +149,6 @@ const ActivityHistoryTile: React.FC<Props> = ({
 
   const handleConfirmationClick = () => {
     deleteWorkout();
-    toggleMenu();
     setShowDeleteWorkoutAlert(false);
   };
 
