@@ -43,7 +43,7 @@ const ButtonWrapper = styled.div`
   margin: 0 auto;
 `;
 
-export const ConfirmButton = styled.button<{ background?: string }>`
+export const ConfirmButton = styled.button<{ fontColour?: string, background?: string }>`
   ${buttonStyle}
   display: block;
   margin: ${gutterWidth}px 0;
@@ -100,10 +100,7 @@ export const AlertConfirm: React.FC<Props> = ({
     <React.Fragment>
       {transitions.map(({ item, props }) => {
         return item ?
-          <FixedWrapper
-            key={'unique'}
-            style={{ opacity: props.opacity }}
-          >
+          <FixedWrapper key={'unique'} style={{ opacity: props.opacity }}>
             <GlobalOverFlowHiddenStyle hidden={showAlert} />
             <Background ref={backgroundRef} onClick={clickHandler}>
               <Dialog style={props}>

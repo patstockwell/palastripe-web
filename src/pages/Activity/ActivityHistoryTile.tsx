@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 import { ConfirmButton, AlertConfirm, MessageText } from '../../components/AlertConfirm';
-import TrashCan from '../../assets/svg/TrashCan';
 import Dots from '../../assets/svg/Dots';
 import Avatar from '../../components/Avatar';
 import { Workout } from '../../reducers/workoutsReducer';
@@ -15,7 +14,7 @@ import {
   getTotalWeightLifted,
   convertWeight,
 } from '../../helpers/functions';
-import { purple, lightGrey3 } from '../../helpers/constants';
+import { purple, lightGrey3, charcoal } from '../../helpers/constants';
 import { useScrollPosition } from '../../context/useScrollPosition';
 
 const Tile = styled.li`
@@ -120,49 +119,6 @@ const OptionsButton = styled.button`
   margin: -15px -10px 0 0;
 `;
 
-const DropDownMenuPanel = styled.div`
-  position: absolute;
-  right: 2px;
-  top: 64px;
-  padding: 4px;
-  border-radius: 5px;
-  background-color: white;
-  box-shadow: 0px 0px 24px rgba(0, 0, 0, 0.8);
-  width: calc(100% - 4px);
-  box-sizing: border-box;
-
-  &::after {
-    content: "";
-    position: absolute;
-    top: -16px;
-    left: 87%;
-    border-width: 8px;
-    border-style: solid;
-    border-color: transparent transparent white transparent;
-  }
-`;
-
-const Menu = styled.ul`
-  padding: 16px;
-  margin: 0;
-  list-style: none;
-`;
-
-const MenuLink = styled.button`
-  border: none;
-  background: none;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  font-size: 16px;
-  height: 48px;
-  width: 100%;
-
-  & span {
-    margin: 0 8px;
-  }
-`;
-
 interface Props {
   workout: Workout;
   showMenu: boolean;
@@ -238,29 +194,35 @@ const ActivityHistoryTile: React.FC<Props> = ({
         </StatsPanel>
       </Right>
 
-      {showMenu &&
-        <DropDownMenuPanel role="menu" aria-haspopup="true">
-          <Menu>
-            <li>
-              <MenuLink onClick={() => setShowDeleteWorkoutAlert(true)}>
-                <TrashCan width={15} height={15} />
-                <span>Delete</span>
-              </MenuLink>
-            </li>
-          </Menu>
-        </DropDownMenuPanel>
-      }
+      <AlertConfirm
+        cancelAlert={() => toggleMenu()}
+        showAlert={showMenu}
+      >
+        <MessageText>Options</MessageText>
+        <ConfirmButton
+          onClick={() => {
+            setShowDeleteWorkoutAlert(true);
+            toggleMenu();
+          }}
+          background={lightGrey3}
+          fontColour={charcoal}
+        >Delete Workout</ConfirmButton>
+        <ConfirmButton
+          onClick={() => toggleMenu()}
+          background={'darkgrey'}
+        >Cancel</ConfirmButton>
+      </AlertConfirm>
 
       <AlertConfirm
         cancelAlert={() => setShowDeleteWorkoutAlert(false)}
         showAlert={showDeleteWorkoutAlert}
       >
         <MessageText>Are you sure you want to delete this workout?</MessageText>
+        <ConfirmButton onClick={handleConfirmationClick}>Yes</ConfirmButton>
         <ConfirmButton
           onClick={() => setShowDeleteWorkoutAlert(false)}
           background={'grey'}
         >No</ConfirmButton>
-        <ConfirmButton onClick={handleConfirmationClick}>Yes</ConfirmButton>
       </AlertConfirm>
     </Tile>
   );
