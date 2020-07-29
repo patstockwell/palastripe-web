@@ -39,8 +39,8 @@ const Dialog = styled(animated.div)`
 `;
 
 const ButtonWrapper = styled.div`
-  width: 280px;
-  margin: 0 auto;
+  width: 320px;
+  margin: 0 auto 36px;
 `;
 
 export const ConfirmButton = styled.button<{ fontColour?: string, background?: string }>`

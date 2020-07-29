@@ -34,6 +34,7 @@ const TimeSince = styled.p`
 
 const Left = styled.div`
   position: relative;
+  margin-left: 12px;
   margin-right: 16px;
 `;
 
@@ -116,7 +117,7 @@ const OptionsButton = styled.button`
   display: flex;
   padding: 15px;
   float: right;
-  margin: -15px -10px 0 0;
+  margin: -15px 0 0 0;
 `;
 
 interface Props {
