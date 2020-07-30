@@ -35,8 +35,9 @@ const Dialog = styled(animated.div)`
 
 const ButtonWrapper = styled.div`
   width: 320px;
-  margin: 0 auto 36px;
-  padding: 0 ${gutterWidth}px;
+  margin: 0 auto 40px;
+  padding: ${gutterWidth}px;
+  padding-top: 0;
   box-sizing: border-box;
 `;
 

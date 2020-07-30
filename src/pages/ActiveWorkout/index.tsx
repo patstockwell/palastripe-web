@@ -16,7 +16,7 @@ import WorkoutHero, { Window as CustomWorkoutHero } from './WorkoutHero';
 import FourZeroFour from '../../pages/FourZeroFour';
 import { ActivityList } from './ActivityList';
 import { State } from '../../helpers/types';
-import { ONE_SECOND, lightGrey3, charcoal } from '../../helpers/constants';
+import { ONE_SECOND, lightGrey2, charcoal } from '../../helpers/constants';
 import { useScrollPosition } from '../../context/useScrollPosition';
 import { useAddWorkoutToHistory } from '../../reducers/historyReducer';
 import {
@@ -121,7 +121,7 @@ const ActiveWorkout: React.FC<StateProps> = ({
           >Finish workout</ConfirmButtonLink>
           <ConfirmButton
             onClick={() => setShowEndWorkoutAlert(false)}
-            background={lightGrey3}
+            background={lightGrey2}
             fontColour={charcoal}
           >Cancel</ConfirmButton>
         </AlertConfirm>
