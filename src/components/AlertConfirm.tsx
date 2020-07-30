@@ -24,12 +24,12 @@ const FixedWrapper = styled(animated.div)`
 const Dialog = styled(animated.div)`
   background-color: white;
   border-radius: 24px 24px 0 0;
-  position: absolute;
+  position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
   max-width: ${appMaxWidth}px;
-  max-height: calc(100vh - 100px);
+  max-height: calc(100vh - 130px);
   overflow: scroll;
 `;
 
