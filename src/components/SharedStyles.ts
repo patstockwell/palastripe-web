@@ -60,7 +60,10 @@ export const buttonStyle = css<ButtonProps | any>`
   font-weight: 800;
   z-index: 1;
   text-decoration: none;
-  padding: 17px 25px;
+  padding: 0 25px;
+  display: flex;
+  align-items: center;
+  height: 48px;
 `;
 
 export const workoutTitleStyle = `
