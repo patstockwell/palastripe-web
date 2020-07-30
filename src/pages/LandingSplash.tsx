@@ -33,7 +33,6 @@ const Logo = styled.h1`
 
 const StartButton = styled(Link)`
   ${buttonStyle}
-  display: inline-block;
   background: black;
 `;
 

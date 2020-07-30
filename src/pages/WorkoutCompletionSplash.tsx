@@ -32,7 +32,6 @@ const Title = styled.p`
 const Button = styled(Link)`
   ${buttonStyle}
   margin: 40px auto;
-  display: block;
   max-width: 300px;
 `;
 
