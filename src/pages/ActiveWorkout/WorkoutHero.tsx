@@ -5,7 +5,7 @@ import { useLocation } from 'react-router-dom';
 import * as clipboard from 'clipboard-polyfill';
 
 import { CheckboxTick } from '../../components/Checkbox';
-import { MessageText, AlertConfirm } from '../../components/AlertConfirm';
+import { AlertConfirm } from '../../components/AlertConfirm';
 import { ColouredDot } from '../../assets/svg/ColouredDot';
 import ShareIcon from '../../assets/svg/Share';
 import SoundOn from '../../assets/svg/SoundOn';
@@ -163,8 +163,8 @@ const WorkoutHero: React.FC<Props> = ({
         cancelAlert={() => setShowShareMessage(false)}
         showAlert={showShareMessage}
         onClose={() => setShowCircleTick(false)}
+        messageText="Share link copied to clipboard."
       >
-        <MessageText>Share link copied to clipboard</MessageText>
         <IconWrapper onAnimationEnd={() => setShowCircleTick(true)}>
           <CheckboxTick
             checked={showCircleTick}

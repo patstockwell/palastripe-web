@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
-import { ConfirmButton, AlertConfirm, MessageText } from '../../components/AlertConfirm';
+import { ConfirmButton, AlertConfirm } from '../../components/AlertConfirm';
 import Dots from '../../assets/svg/Dots';
 import Avatar from '../../components/Avatar';
 import { Workout } from '../../reducers/workoutsReducer';
@@ -14,7 +14,7 @@ import {
   getTotalWeightLifted,
   convertWeight,
 } from '../../helpers/functions';
-import { purple, lightGrey3, charcoal, blue } from '../../helpers/constants';
+import { purple, lightGrey3, charcoal, blue, orange } from '../../helpers/constants';
 import { useScrollPosition } from '../../context/useScrollPosition';
 
 const Tile = styled.li`
@@ -197,8 +197,8 @@ const ActivityHistoryTile: React.FC<Props> = ({
       <AlertConfirm
         cancelAlert={() => toggleMenu()}
         showAlert={showMenu}
+        messageText="Options"
       >
-        <MessageText>Options</MessageText>
         <ConfirmButton
           onClick={() => {
             setShowDeleteWorkoutAlert(true);
@@ -216,13 +216,13 @@ const ActivityHistoryTile: React.FC<Props> = ({
       <AlertConfirm
         cancelAlert={() => setShowDeleteWorkoutAlert(false)}
         showAlert={showDeleteWorkoutAlert}
+        messageText="This workout will be deleted. This action cannot be undone."
       >
-        <MessageText>Are you sure you want to delete this workout?</MessageText>
-        <ConfirmButton onClick={handleConfirmationClick}>Yes</ConfirmButton>
+        <ConfirmButton background={orange} onClick={handleConfirmationClick}>Delete</ConfirmButton>
         <ConfirmButton
           onClick={() => setShowDeleteWorkoutAlert(false)}
-          background={'grey'}
-        >No</ConfirmButton>
+          background={blue}
+        >Cancel</ConfirmButton>
       </AlertConfirm>
     </Tile>
   );

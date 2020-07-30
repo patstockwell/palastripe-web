@@ -8,7 +8,6 @@ import { useInterval } from '../../helpers/functions';
 import Timer from './Timer';
 import {
   ConfirmButtonLink,
-  MessageText,
   ConfirmButton,
   AlertConfirm,
 } from '../../components/AlertConfirm';
@@ -17,7 +16,7 @@ import WorkoutHero, { Window as CustomWorkoutHero } from './WorkoutHero';
 import FourZeroFour from '../../pages/FourZeroFour';
 import { ActivityList } from './ActivityList';
 import { State } from '../../helpers/types';
-import { ONE_SECOND } from '../../helpers/constants';
+import { ONE_SECOND, lightGrey3, charcoal } from '../../helpers/constants';
 import { useScrollPosition } from '../../context/useScrollPosition';
 import { useAddWorkoutToHistory } from '../../reducers/historyReducer';
 import {
@@ -114,16 +113,17 @@ const ActiveWorkout: React.FC<StateProps> = ({
         <AlertConfirm
           cancelAlert={() => setShowEndWorkoutAlert(false)}
           showAlert={showEndWorkoutAlert}
+          messageText="This will end your workout and save it to activity history."
         >
-          <MessageText>Are you sure you want to finish the workout?</MessageText>
           <ConfirmButtonLink
             to="/workout-complete/"
             onClick={finishWorkoutWithAlertTransition}
-          >Yes</ConfirmButtonLink>
+          >Finish workout</ConfirmButtonLink>
           <ConfirmButton
             onClick={() => setShowEndWorkoutAlert(false)}
-            background={'darkgrey'}
-          >No</ConfirmButton>
+            background={lightGrey3}
+            fontColour={charcoal}
+          >Cancel</ConfirmButton>
         </AlertConfirm>
       </RestTimerProvider>
     </AudioProvider>

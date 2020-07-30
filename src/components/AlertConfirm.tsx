@@ -24,22 +24,19 @@ const FixedWrapper = styled(animated.div)`
 const Dialog = styled(animated.div)`
   background-color: white;
   border-radius: 24px 24px 0 0;
-
-  // use min height here instead of height so that the dialog can take any
-  // number of children (buttons) and still stack upwards. If the height is
-  // larger than the translate, it won't matter, as it is accompanied by
-  // opacity and look fine sliding in from half height.
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
   max-width: ${appMaxWidth}px;
+  max-height: calc(100vh - 100px);
+  overflow: scroll;
 `;
 
 const ButtonWrapper = styled.div`
   width: 320px;
   margin: 0 auto 36px;
-  padding: ${gutterWidth}px;
+  padding: 0 ${gutterWidth}px;
   box-sizing: border-box;
 `;
 
@@ -60,15 +57,19 @@ export const ConfirmButtonLink = styled(Link)<{ background?: string; fontColour?
 
 export const MessageText = styled.p`
   color: black;
-  padding: 20px;
+  padding: 24px ${gutterWidth}px 16px;
   text-align: center;
-  margin: ${gutterWidth}px auto 0;
+  margin: 0 auto;
+  position: sticky;
+  top: 0;
+  background: rgba(256, 256, 256, 0.98);
 `;
 
 interface Props {
   showAlert: boolean;
   cancelAlert: () => void;
   onClose?: () => void;
+  messageText?: string;
 }
 
 export const AlertConfirm: React.FC<Props> = ({
@@ -76,6 +77,7 @@ export const AlertConfirm: React.FC<Props> = ({
   showAlert,
   cancelAlert,
   onClose,
+  messageText,
 }) => {
   const backgroundRef = useRef(null);
   const transitions = useTransition(showAlert, null, {
@@ -97,13 +99,14 @@ export const AlertConfirm: React.FC<Props> = ({
   };
 
   return (
-    <React.Fragment>
+    <>
       {transitions.map(({ item, props }) => {
         return item ?
           <FixedWrapper key={'unique'} style={{ opacity: props.opacity }}>
             <GlobalOverFlowHiddenStyle hidden={showAlert} />
             <Background ref={backgroundRef} onClick={clickHandler}>
               <Dialog style={props}>
+                <MessageText>{messageText}</MessageText>
                 <ButtonWrapper>
                   {children}
                 </ButtonWrapper>
@@ -112,6 +115,6 @@ export const AlertConfirm: React.FC<Props> = ({
           </FixedWrapper>
           : null;
       })}
-    </React.Fragment>
+    </>
   );
 };
