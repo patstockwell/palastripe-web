@@ -14,7 +14,7 @@ import {
   getTotalWeightLifted,
   convertWeight,
 } from '../../helpers/functions';
-import { purple, lightGrey3, charcoal } from '../../helpers/constants';
+import { purple, lightGrey3, charcoal, blue } from '../../helpers/constants';
 import { useScrollPosition } from '../../context/useScrollPosition';
 
 const Tile = styled.li`
@@ -209,7 +209,7 @@ const ActivityHistoryTile: React.FC<Props> = ({
         >Delete Workout</ConfirmButton>
         <ConfirmButton
           onClick={() => toggleMenu()}
-          background={'darkgrey'}
+          background={blue}
         >Cancel</ConfirmButton>
       </AlertConfirm>
 

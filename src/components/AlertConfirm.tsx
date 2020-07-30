@@ -6,7 +6,7 @@ import { appMaxWidth, gutterWidth } from '../helpers/constants';
 import { Link } from 'react-router-dom';
 
 const bounceSpace = 9;
-const popUpHeight = 353 + bounceSpace;
+const popUpSlideDistance = 353 + bounceSpace;
 
 const Background = styled.div`
   width: 100vw;
@@ -29,24 +29,24 @@ const Dialog = styled(animated.div)`
   // number of children (buttons) and still stack upwards. If the height is
   // larger than the translate, it won't matter, as it is accompanied by
   // opacity and look fine sliding in from half height.
-  min-height: ${popUpHeight}px;
   position: absolute;
   bottom: 0;
   left: 0;
   width: 100%;
   max-width: ${appMaxWidth}px;
-  transform: translateY(${popUpHeight + bounceSpace}px);
 `;
 
 const ButtonWrapper = styled.div`
   width: 320px;
   margin: 0 auto 36px;
+  padding: ${gutterWidth}px;
+  box-sizing: border-box;
 `;
 
 export const ConfirmButton = styled.button<{ fontColour?: string, background?: string }>`
   ${buttonStyle}
   display: block;
-  margin: ${gutterWidth}px 0;
+  margin-top: ${gutterWidth}px;
   width: 100%;
 `;
 
@@ -62,7 +62,7 @@ export const MessageText = styled.p`
   color: black;
   padding: 20px;
   text-align: center;
-  margin: 15px auto;
+  margin: ${gutterWidth}px auto 0;
 `;
 
 interface Props {
@@ -80,11 +80,11 @@ export const AlertConfirm: React.FC<Props> = ({
   const backgroundRef = useRef(null);
   const transitions = useTransition(showAlert, null, {
     from: {
-      transform: `translateY(${popUpHeight}px)`,
+      transform: `translateY(${popUpSlideDistance}px)`,
       opacity: 0,
     },
     enter: { opacity: 1, transform: `translateY(${bounceSpace}px)` },
-    leave: { opacity: 0, transform: `translateY(${popUpHeight}px)` },
+    leave: { opacity: 0, transform: `translateY(${popUpSlideDistance}px)` },
     config: { mass: 1, tension: 710, friction: 40 },
     onDestroyed: () => { if (onClose) { onClose(); } },
   });
