@@ -7,8 +7,7 @@ import { Workouts } from '../pages/Workouts';
 import { Install } from '../pages/Install';
 import ActiveWorkout from '../pages/ActiveWorkout';
 import Activity from '../pages/Activity';
-import EditWorkout from '../pages/EditWorkout';
-import FourZeroFour from '../pages/FourZeroFour';
+import { FourZeroFour } from '../pages/FourZeroFour';
 import { Profile } from '../pages/Profile';
 import { WorkoutSummary } from '../pages/WorkoutSummary';
 import ProfileName from '../pages/ProfileName';
@@ -50,7 +49,6 @@ const Routes: React.FC = () => {
                 <Route path="/profile/audio" component={SettingAudio} />
                 <Route path="/profile/export" component={DataExport} />
                 <Route path="/profile/unit-of-measurement" component={SettingUnitOfMeasurement} />
-                <Route path="/edit-workout/" component={EditWorkout} />
                 <Route path={`/workouts/${customWorkoutId}/${activitySearchPath}`} component={ActivitySearch} />
                 <Route path="/workouts/:id/" component={ActiveWorkout} />
                 <Route path="/workout-complete/" component={WorkoutCompletionSplash} />

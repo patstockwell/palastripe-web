@@ -13,7 +13,7 @@ import {
 } from '../../components/AlertConfirm';
 import { BackLinkBanner } from '../../components/BackLinkBanner';
 import WorkoutHero, { Window as CustomWorkoutHero } from './WorkoutHero';
-import FourZeroFour from '../../pages/FourZeroFour';
+import { FourZeroFour } from '../../pages/FourZeroFour';
 import { ActivityList } from './ActivityList';
 import { State } from '../../helpers/types';
 import { ONE_SECOND, lightGrey2, charcoal } from '../../helpers/constants';
