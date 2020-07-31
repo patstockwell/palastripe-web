@@ -6,7 +6,6 @@ import { buttonStyle } from '../components/SharedStyles';
 
 const Button = styled(Link)`
   ${buttonStyle}
-  display: inline-block;
   margin: 16px;
 `;
 

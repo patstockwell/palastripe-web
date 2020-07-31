@@ -8,6 +8,12 @@ import { Link } from 'react-router-dom';
 const bounceSpace = 9;
 const popUpSlideDistance = 353 + bounceSpace;
 
+const CentrePanel = styled.div`
+  margin: 0 auto;
+  max-width: ${appMaxWidth}px;
+  height: 100%;
+`;
+
 const Background = styled.div`
   width: 100vw;
   height: 100vh;
@@ -26,7 +32,6 @@ const Dialog = styled(animated.div)`
   border-radius: 24px 24px 0 0;
   position: fixed;
   bottom: 0;
-  left: 0;
   width: 100%;
   max-width: ${appMaxWidth}px;
   max-height: calc(100vh - 130px);
@@ -106,12 +111,14 @@ export const AlertConfirm: React.FC<Props> = ({
           <FixedWrapper key={'unique'} style={{ opacity: props.opacity }}>
             <GlobalOverFlowHiddenStyle hidden={showAlert} />
             <Background ref={backgroundRef} onClick={clickHandler}>
-              <Dialog style={props}>
-                <MessageText>{messageText}</MessageText>
-                <ButtonWrapper>
-                  {children}
-                </ButtonWrapper>
-              </Dialog>
+              <CentrePanel>
+                <Dialog style={props}>
+                  <MessageText>{messageText}</MessageText>
+                  <ButtonWrapper>
+                    {children}
+                  </ButtonWrapper>
+                </Dialog>
+              </CentrePanel>
             </Background>
           </FixedWrapper>
           : null;

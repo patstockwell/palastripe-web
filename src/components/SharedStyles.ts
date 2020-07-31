@@ -63,6 +63,7 @@ export const buttonStyle = css<ButtonProps | any>`
   padding: 0 25px;
   display: flex;
   align-items: center;
+  justify-content: center;
   height: 48px;
 `;
 
