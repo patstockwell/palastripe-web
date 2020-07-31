@@ -5,7 +5,6 @@ import { useLocation, Route, Switch } from 'react-router-dom';
 import { LandingSplash } from '../pages/LandingSplash';
 import { Workouts } from '../pages/Workouts';
 import { Install } from '../pages/Install';
-import { Import } from '../pages/Import';
 import ActiveWorkout from '../pages/ActiveWorkout';
 import Activity from '../pages/Activity';
 import { FourZeroFour } from '../pages/FourZeroFour';
@@ -54,7 +53,6 @@ const Routes: React.FC = () => {
                 <Route path="/workouts/:id/" component={ActiveWorkout} />
                 <Route path="/workout-complete/" component={WorkoutCompletionSplash} />
                 <Route path="/subscribe/" component={Subscribe} />
-                <Route path="/import/" component={Import} />
                 <Route component={FourZeroFour} />
               </Switch>
             </ActivityHistoryLengthProvider>
