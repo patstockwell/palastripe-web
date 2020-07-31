@@ -11,6 +11,7 @@ import { useDeleteWorkout } from '../../reducers/historyReducer';
 import {
   useActivityHistoryLength,
 } from '../../context/useActivityHistoryLength';
+import {Link} from 'react-router-dom';
 
 const BottomSpace = styled.div`
   height: 200px;
@@ -88,6 +89,7 @@ export const ActivityHistoryList: React.FC<Props> = ({ history }) => {
         )}
         <div>Joined palastripe 🎉 </div>
         <span>on {date} {month}, {year}</span>
+        <Link to='/import/'>Import data</Link>
       </BottomSpace>
     </RoundCorneredTop>
   );

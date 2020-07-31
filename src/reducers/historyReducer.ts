@@ -23,6 +23,12 @@ const reducers = {
   ) => {
     state.splice(action.payload, 1);
   },
+  UNSTABLE_AddHistoryToEndOfHistory: (
+    state: Workout[],
+    action: PayloadAction<Workout[]>
+  ) => {
+    return state.concat(action.payload);
+  },
 };
 
 const historySlice = createSlice<Workout[], typeof reducers>({
@@ -37,6 +43,14 @@ export const useAddWorkoutToHistory = () => {
   return (workout: Workout) => dispatch({
     type: historySlice.actions.addWorkoutToHistory.type,
     payload: workout,
+  });
+};
+
+export const use_UNSTABLE_AddHistoryToEndOfHistory = () => {
+  const dispatch = useDispatch();
+  return (workouts: Workout[]) => dispatch({
+    type: historySlice.actions.UNSTABLE_AddHistoryToEndOfHistory.type,
+    payload: workouts,
   });
 };
 
