@@ -60,11 +60,23 @@ const byId: ById = {
     name: 'Front Squat',
     tags: ['legs'],
   },
-  overhead_tricep_extension: {
-    name: 'Overhead Tricep Extension',
-    id: 'overhead_tricep_extension',
+  overhead_tricep_extension_cable: {
+    name: 'Overhead Tricep Extension - Cable',
+    id: 'overhead_tricep_extension_cable',
     defaultWeightInKilos: 25,
-    tags: ['tricep', 'triceps'],
+    tags: ['tricep', 'triceps', 'dumbbell'],
+  },
+  overhead_tricep_extension_ez_bar: {
+    name: 'Overhead Tricep Extension - EZ Bar',
+    id: 'overhead_tricep_extension_ez_bar',
+    defaultWeightInKilos: 25,
+    tags: ['tricep', 'triceps', 'dumbbell'],
+  },
+  overhead_tricep_extension_dumbbell: {
+    name: 'Overhead Tricep Extension - Dumbbell',
+    id: 'overhead_tricep_extension_dumbbell',
+    defaultWeightInKilos: 10,
+    tags: ['tricep', 'triceps', 'dumbbell'],
   },
   dumbbell_lateral_raise: {
     tags: [],
@@ -156,11 +168,11 @@ const byId: ById = {
     id: 'deadlift',
     name: 'Deadlift',
   },
-  back_squat: {
+  squat: {
     defaultWeightInKilos: 60,
     tags: [],
-    id: 'back_squat',
-    name: 'Back Squat',
+    id: 'squat',
+    name: 'Squat',
   },
   overhead_press: {
     defaultWeightInKilos: 40,
@@ -168,11 +180,17 @@ const byId: ById = {
     id: 'overhead_press',
     name: 'Overhead Press',
   },
+  pull_up: {
+    defaultWeightInKilos: 0,
+    tags: [],
+    id: 'pull_up',
+    name: 'Pull Up',
+  },
   chin_up: {
     defaultWeightInKilos: 0,
     tags: [],
     id: 'chin_up',
-    name: 'Chin Ups',
+    name: 'Chin Up',
   },
   bench_press: {
     defaultWeightInKilos: 60,
