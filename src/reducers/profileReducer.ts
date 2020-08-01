@@ -6,7 +6,7 @@ import { LOCAL_STORAGE_PROFILE } from '../helpers/constants';
 export interface Profile {
   firstName: string;
   lastName: string;
-  firstVisitDate: number;
+  firstVisitDate: string;
 }
 
 const reducers = {
@@ -26,8 +26,8 @@ const profileSlice = createSlice<Profile, typeof reducers>({
     lastName: '',
     // If nothing is found in localStorage, then this is the user's first visit.
     // Set the firstVisitDate to now.
-    firstVisitDate: Date.now(),
-  }),
+    firstVisitDate: (new Date()).toISOString(),
+  } as Profile),
   reducers,
 });
 

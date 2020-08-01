@@ -79,7 +79,7 @@ export const WorkoutSummary: React.FC<Props> = ({
     return <Redirect to="/activity/" />;
   }
 
-  const { historyTileDateFormat } = formatDate(workout.finishTime);
+  const { formattedDateString } = formatDate(workout.finishTime);
   const exercises = createExerciseHash(workout);
   const activitySummaryTiles = Object.entries(exercises).map(exerciseSets => (
     <ActivitySummary key={exerciseSets[0]} exerciseSets={exerciseSets} />
@@ -93,7 +93,7 @@ export const WorkoutSummary: React.FC<Props> = ({
       }}/>
       <PanelWithGutter>
         <H2>{workout.name}</H2>
-        <H3>{historyTileDateFormat}</H3>
+        <H3>{formattedDateString}</H3>
       </PanelWithGutter>
         <Hr />
       <PanelWithGutter>

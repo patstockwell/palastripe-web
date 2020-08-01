@@ -27,8 +27,8 @@ export interface Workouts {
 export interface Workout {
   id: string;
   imageUrl?: string;
-  startTime?: number;
-  finishTime?: number;
+  startTime?: string;
+  finishTime?: string;
   name: string;
   version?: string;
   exerciseGroups: ActivityGroup[];
@@ -124,7 +124,6 @@ const allWorkoutTemplates = {
     'leg-power': legPower,
     'compound-pyramids': compoundPyramids,
     [customWorkoutId]: customWorkout,
-
   },
   allIds: [
     'shape-and-strength',

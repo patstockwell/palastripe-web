@@ -173,13 +173,13 @@ export const getTotalWeightLifted = (workout: Workout): number => (
   ), 0)
 );
 
-export const formatDate = (unixTime: number | Date): {
+export const formatDate = (unixTime: string): {
   day: string;
   date: number;
   month: string;
   year: number;
   time: string;
-  historyTileDateFormat: string;
+  formattedDateString: string;
 } => {
   const d = new Date(unixTime);
   const day = DAYS_OF_THE_WEEK[d.getUTCDay()];
@@ -187,12 +187,12 @@ export const formatDate = (unixTime: number | Date): {
   const month = MONTHS_OF_THE_YEAR[d.getMonth()];
   const year = d.getFullYear();
   const time = `${d.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit'})}`;
-  const historyTileDateFormat = `${day}, ${date} ${month}, at ${time}`;
+  const formattedDateString = `${day}, ${date} ${month}, at ${time}`;
 
-  return { day, date, month, year, time, historyTileDateFormat };
+  return { day, date, month, year, time, formattedDateString };
 };
 
-export const getDiffInMinutes = (start: number, finish: number): number => {
+export const getDiffInMinutes = (start: string, finish: string): number => {
   // create date object first because we can't guarantee that it is in
   // the unix epoc time format
   const startTime = new Date(start);
@@ -203,11 +203,11 @@ export const getDiffInMinutes = (start: number, finish: number): number => {
   ) : 0;
 };
 
-export const getTimeSince = (date: number): {
+export const getTimeSince = (date: string): {
   value: number;
   unitOfMeasurement: string;
 } => {
-  const diff = getDiffInMinutes(date, Date.now());
+  const diff = getDiffInMinutes(date, (new Date()).toISOString());
   const ONE_HOUR = 60; // in minutes
   const ONE_DAY = ONE_HOUR * 24;
   const ONE_WEEK = ONE_DAY * 7;

@@ -88,7 +88,7 @@ const toggleSetComplete = (
 
   return {
     ...state,
-    startTime: startTime ? startTime : Date.now(),
+    startTime: startTime ? startTime : (new Date()).toISOString(),
     exerciseGroups: exerciseGroups.map(g => (
       g.id !== groupId ? g : {
         ...g,
@@ -127,7 +127,7 @@ const addActivity = (state: Workout, action: PayloadAction<Activity>) => {
   // custom workout.
   state.exerciseGroups[0].exercises.push(action.payload);
   if (!state.startTime) {
-    state.startTime = Date.now();
+    state.startTime = (new Date()).toISOString();
   }
 };
 
