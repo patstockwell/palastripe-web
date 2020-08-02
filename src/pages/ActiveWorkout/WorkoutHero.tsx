@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import styled, { keyframes } from 'styled-components';
 import { useLocation } from 'react-router-dom';
 import * as clipboard from 'clipboard-polyfill';
@@ -97,21 +97,15 @@ const StartButton = styled.button`
   }
 `;
 
-interface OwnProps {
+interface Props {
   workout: Workout;
 }
 
-type Props = OwnProps & StateProps;
-
-const WorkoutHero: React.FC<Props> = ({
-  workout,
-  workout: { imageUrl, name },
-  soundOn,
-}) => {
+export const WorkoutHero: React.FC<Props> = ({ workout }) => {
   const [ showShareMessage, setShowShareMessage ] = useState(false);
-  const [ showCircleTick, setShowCircleTick ] = useState(false);
   const { pathname } = useLocation();
   const { setSelectedExercise } = useSelectedExercise();
+  const { soundOn } = useSelector((state: State) => state.settings);
   const useSound = useSoundToggle();
   const time = formatMinutes(calculateWorkoutTime(workout));
 
@@ -126,7 +120,7 @@ const WorkoutHero: React.FC<Props> = ({
   };
 
   return (
-    <Window imageUrl={imageUrl}>
+    <Window imageUrl={workout.imageUrl}>
       <ButtonGroup>
         <Button onClick={() => useSound(!soundOn)}>
           {soundOn ? <SoundOn /> : <SoundOff />}
@@ -135,7 +129,7 @@ const WorkoutHero: React.FC<Props> = ({
           <ShareIcon />
         </Button>
       </ButtonGroup>
-      <Title>{name}</Title>
+      <Title>{workout.name}</Title>
       <Time>{time}</Time>
       <StartButton onClick={selectFirstExercise}>
         <ColouredDot fill={green} />
@@ -150,15 +144,3 @@ const WorkoutHero: React.FC<Props> = ({
     </Window>
   );
 };
-
-interface StateProps {
-  soundOn: boolean;
-}
-
-const mapState = (state: State): StateProps => ({
-  soundOn: state.settings.soundOn,
-});
-
-export default connect<StateProps, {}, OwnProps>(
-  mapState,
-)(WorkoutHero);

@@ -12,7 +12,7 @@ import {
   AlertConfirm,
 } from '../../components/AlertConfirm';
 import { BackLinkBanner } from '../../components/BackLinkBanner';
-import WorkoutHero, { Window as CustomWorkoutHero } from './WorkoutHero';
+import { WorkoutHero, Window as CustomWorkoutHero } from './WorkoutHero';
 import { FourZeroFour } from '../../pages/FourZeroFour';
 import { ActivityList } from './ActivityList';
 import { State } from '../../helpers/types';
