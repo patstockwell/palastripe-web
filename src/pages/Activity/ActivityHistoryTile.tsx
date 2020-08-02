@@ -142,7 +142,7 @@ const ActivityHistoryTile: React.FC<Props> = ({
   const { setActivityPageScrollPosition } = useScrollPosition();
 
   const { name: workoutName, startTime, finishTime } = workout;
-  const { unitOfMeasurement, value } = getTimeSince(finishTime);
+  const timeSince = getTimeSince(finishTime);
   const {
     mins, hours, minsLabel, hoursLabel,
   } = getHoursAndMinutes(getDiffInMinutes(startTime, finishTime));
@@ -166,7 +166,7 @@ const ActivityHistoryTile: React.FC<Props> = ({
           <OptionsButton onClick={toggleMenu}>
             <Dots />
           </OptionsButton>
-          <TimeSince>{value} {unitOfMeasurement} ago</TimeSince>
+          <TimeSince>{timeSince}</TimeSince>
           <SummaryLink
             onClick={() => setActivityPageScrollPosition(window.scrollY)}
             to={`/activity/${historyLink}`}

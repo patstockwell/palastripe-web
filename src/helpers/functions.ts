@@ -1,6 +1,8 @@
 import { useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useSpring } from 'react-spring';
+import { formatDistance } from 'date-fns';
+
 import {
   DAYS_OF_THE_WEEK,
   MILLISECONDS_IN_A_MINUTE,
@@ -203,29 +205,12 @@ export const getDiffInMinutes = (start: string, finish: string): number => {
   ) : 0;
 };
 
-export const getTimeSince = (date: string): {
-  value: number;
-  unitOfMeasurement: string;
-} => {
-  const diff = getDiffInMinutes(date, (new Date()).toISOString());
-  const ONE_HOUR = 60; // in minutes
-  const ONE_DAY = ONE_HOUR * 24;
-  const ONE_WEEK = ONE_DAY * 7;
-
-  if (diff < ONE_HOUR) {
-    return { value: diff, unitOfMeasurement: 'min' };
-  }
-  if (diff < ONE_DAY) {
-    const hours = Math.round(diff / ONE_HOUR);
-    return { value: hours, unitOfMeasurement: 'hr' };
-  }
-  if (diff < ONE_WEEK) {
-    const days = Math.floor(diff / ONE_DAY);
-    return { value: days, unitOfMeasurement: days === 1 ? 'day' : 'days' };
-  }
-
-  const weeks = Math.ceil(diff / ONE_WEEK);
-  return { value: weeks, unitOfMeasurement: weeks === 1 ? 'week' : 'weeks' };
+export const getTimeSince = (timeStamp: string): string => {
+  return formatDistance(
+    new Date(timeStamp),
+    new Date(),
+    { addSuffix: true },
+  );
 };
 
 export const formatSeconds = (seconds: number): string => {
