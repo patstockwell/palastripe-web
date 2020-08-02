@@ -32,7 +32,7 @@ interface Props {
   restPeriod: number;
 }
 
-const Timer: React.FC<Props> = ({ resetTimer, count, restPeriod }) => {
+export const RestTimer: React.FC<Props> = ({ resetTimer, count, restPeriod }) => {
   // animation config
   const config = { mass: 1, tension: 470, friction: 40 };
   const [ divStyle, setDivStyle ] = useSpring(() => ({
@@ -67,5 +67,3 @@ const Timer: React.FC<Props> = ({ resetTimer, count, restPeriod }) => {
     </TimerBackground>
   );
 };
-
-export default Timer;

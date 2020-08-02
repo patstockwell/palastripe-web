@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 import { AudioProvider } from '../../context/useAudio';
 import { RestTimerProvider } from '../../context/useRestTimer';
 import { useInterval } from '../../helpers/functions';
-import Timer from './Timer';
+import { RestTimer } from './RestTimer';
 import {
   ConfirmButtonLink,
   ConfirmButton,
@@ -103,7 +103,7 @@ const ActiveWorkout: React.FC<StateProps> = ({
         />
 
         {showRestTimer && count > 0 && restTime >= 0 &&
-          <Timer
+          <RestTimer
             restPeriod={restTime}
             resetTimer={resetTimer}
             count={count - 1}
