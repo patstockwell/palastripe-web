@@ -1,14 +1,18 @@
 import React, { useRef, useEffect, useState } from 'react';
 import styled, { keyframes } from 'styled-components';
+import { useSelector } from 'react-redux';
 
+import { customWorkoutId } from '../../../workoutData/workouts/customWorkout';
 import { useAudio } from '../../../context/useAudio';
+import { useRestTimer } from '../../../context/useRestTimer';
+import { useSelectedExercise } from '../../../context/useSelectedExercise';
 import HiddenTimerArea from './HiddenTimerArea';
 import { ShowHiddenAreaArrowWrapper } from './ActivityTileWithReps';
-import ToggleSetCompleteButton from './ToggleSetCompleteButton';
+import { ToggleSetCompleteButton } from './ToggleSetCompleteButton';
 import StartTimedExerciseButton from './StartTimedExerciseButton';
 import { tileStyle } from './ActivityTileSharedStyles';
 import DownArrow from '../../../assets/svg/DownArrow';
-import { TimedActivity } from '../../../helpers/types';
+import { State, TimedActivity } from '../../../helpers/types';
 import {
   formatSeconds,
   scrollElementToTop,
@@ -21,12 +25,7 @@ import {
   tileMinHeight,
   activeWorkoutWindowHeight,
 } from '../../../helpers/constants';
-import {
-  Details,
-  Title,
-  Duration,
-  VisibleArea,
-} from './index';
+import { Details, Title, Duration, VisibleArea } from './index';
 import { useActiveWorkout } from '../../../reducers/activeWorkoutReducer';
 
 const Tile = styled.li<{ selected: boolean }>`
@@ -94,6 +93,9 @@ export const ActivityTileWithTimer: React.FC<Props> = ({
   const { toggleSetComplete } = useActiveWorkout();
   const listElement = useRef(null);
   const { playStart, playComplete } = useAudio();
+  const { hideTimer, showTimer } = useRestTimer();
+  const activeWorkoutId = useSelector((state: State) => state.activeWorkout.id);
+  const { selectNextExercise } = useSelectedExercise();
   const animatedStyles = useHiddenAreaAnimation({
     showHiddenArea,
     onRest: () => setFinishedAnimating(true),
@@ -144,6 +146,17 @@ export const ActivityTileWithTimer: React.FC<Props> = ({
     }
   };
 
+  const onSetComplete = () => {
+    if (selected) {
+      showTimer(restPeriodInSeconds);
+      const isCustomWorkout = activeWorkoutId === customWorkoutId;
+      // don't select the next exercise if this is a custom workout.
+      if (!isCustomWorkout) {
+        selectNextExercise();
+      }
+    }
+  };
+
   return (
     <Tile ref={listElement} selected={selected} onClick={handleSelect}>
       <VisibleArea>
@@ -174,10 +187,12 @@ export const ActivityTileWithTimer: React.FC<Props> = ({
         </Duration>
         {started || completed ? (
           <ToggleSetCompleteButton
-            selected={selected}
-            restPeriodInSeconds={restPeriodInSeconds}
-            handleClick={() => handleClick()}
+            handleClick={() => {
+              handleClick();
+              hideTimer();
+            }}
             completed={completed}
+            onAnimationEnd={onSetComplete}
           />
         ) : (
           <StartTimedExerciseButton

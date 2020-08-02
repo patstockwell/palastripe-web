@@ -17,7 +17,6 @@ const AudioProvider: React.FC<Props> = ({ soundOn, children }) => {
   let complete: HTMLAudioElement;
 
   const playStart = () => {
-    console.log('starting audio', start);
     if (soundOn && start) {
       start.play();
     }
