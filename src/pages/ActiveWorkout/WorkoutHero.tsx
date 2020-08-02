@@ -21,6 +21,7 @@ import {
 import { State } from '../../helpers/types';
 import { Workout } from '../../reducers/workoutsReducer';
 import { green, APP_URL } from '../../helpers/constants';
+import { useActiveWorkout } from '../../reducers/activeWorkoutReducer';
 import { useSoundToggle } from '../../reducers/settingsReducer';
 import { useSelectedExercise } from '../../context/useSelectedExercise';
 
@@ -105,6 +106,7 @@ export const WorkoutHero: React.FC<Props> = ({ workout }) => {
   const [ showShareMessage, setShowShareMessage ] = useState(false);
   const { pathname } = useLocation();
   const { setSelectedExercise } = useSelectedExercise();
+  const { startWorkout } = useActiveWorkout();
   const { soundOn } = useSelector((state: State) => state.settings);
   const useSound = useSoundToggle();
   const time = formatMinutes(calculateWorkoutTime(workout));
@@ -114,9 +116,10 @@ export const WorkoutHero: React.FC<Props> = ({ workout }) => {
     clipboard.writeText(APP_URL + pathname);
   };
 
-  const selectFirstExercise = () => {
+  const handleStartButtonClick = () => {
     const { exerciseGroups: [firstGroup] } = workout;
     setSelectedExercise({ index: 0, groupId: firstGroup.id });
+    startWorkout();
   };
 
   return (
@@ -131,7 +134,7 @@ export const WorkoutHero: React.FC<Props> = ({ workout }) => {
       </ButtonGroup>
       <Title>{workout.name}</Title>
       <Time>{time}</Time>
-      <StartButton onClick={selectFirstExercise}>
+      <StartButton onClick={handleStartButtonClick}>
         <ColouredDot fill={green} />
         Start Workout
       </StartButton>

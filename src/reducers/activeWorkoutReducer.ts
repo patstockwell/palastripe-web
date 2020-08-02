@@ -141,6 +141,12 @@ const deleteActivity = (state: Workout, action: PayloadAction<string>) => {
   }
 };
 
+const startWorkout = (state: Workout, _action: Action): Workout => ({
+  ...state,
+  // Only set the startTime if the workout hasn't already started.
+  startTime: state.startTime || (new Date()).toISOString(),
+});
+
 const reducers = {
   incrementWeight,
   decrementWeight,
@@ -150,6 +156,7 @@ const reducers = {
   finishWorkout,
   addActivity,
   deleteActivity,
+  startWorkout,
 };
 
 const activeWorkoutSlice = createSlice<Workout, typeof reducers>({
@@ -204,6 +211,8 @@ export const useActiveWorkout = () => {
 
   const finishWorkout = () => dispatch({ type: actions.finishWorkout.type });
 
+  const startWorkout = () => dispatch({ type: actions.startWorkout.type });
+
   return {
     toggleSetComplete,
     changeReps,
@@ -212,6 +221,7 @@ export const useActiveWorkout = () => {
     addActivity,
     finishWorkout,
     deleteActivity,
+    startWorkout,
   };
 };
 // TODO: Replace incrementWeight/decrementWeight with single changeWeight func.

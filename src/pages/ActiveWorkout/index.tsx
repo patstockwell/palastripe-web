@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
 import { AudioProvider } from '../../context/useAudio';
@@ -19,19 +19,11 @@ import { State } from '../../helpers/types';
 import { ONE_SECOND, lightGrey2, charcoal } from '../../helpers/constants';
 import { useScrollPosition } from '../../context/useScrollPosition';
 import { useAddWorkoutToHistory } from '../../reducers/historyReducer';
-import {
-  Workout,
-  Workouts,
-  useUpdateWorkout,
-} from '../../reducers/workoutsReducer';
+import { useUpdateWorkout } from '../../reducers/workoutsReducer';
 import { useActiveWorkout } from '../../reducers/activeWorkoutReducer';
 import { customWorkoutId } from '../../workoutData/workouts/customWorkout';
 
-const ActiveWorkout: React.FC<StateProps> = ({
-  workouts,
-  activeWorkout,
-  soundOn,
-}) => {
+export const ActiveWorkout: React.FC = () => {
   const [ showEndWorkoutAlert, setShowEndWorkoutAlert ] = useState(false);
   const [ showRestTimer, setShowRestTimer ] = useState(false);
   const [ count, setCount ] = useState(0);
@@ -40,6 +32,11 @@ const ActiveWorkout: React.FC<StateProps> = ({
   const addToHistory = useAddWorkoutToHistory();
   const updateWorkoutTemplate = useUpdateWorkout();
   const { finishWorkout, setActiveWorkout } = useActiveWorkout();
+  const {
+    workouts,
+    activeWorkout,
+    settings: { soundOn },
+  } = useSelector((state: State) => state);
 
   useInterval(() => {
     setCount(count + 1);
@@ -129,19 +126,3 @@ const ActiveWorkout: React.FC<StateProps> = ({
     </AudioProvider>
   );
 };
-
-interface StateProps {
-  activeWorkout: Workout;
-  workouts: Workouts;
-  soundOn: boolean;
-}
-
-const mapStateToProps = (state: State): StateProps => ({
-  activeWorkout: state.activeWorkout,
-  workouts: state.workouts,
-  soundOn: state.settings.soundOn,
-});
-
-export default connect<StateProps, {}, {}>(
-  mapStateToProps,
-)(ActiveWorkout);

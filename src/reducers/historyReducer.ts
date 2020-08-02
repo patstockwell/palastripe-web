@@ -28,7 +28,7 @@ const reducers = {
 
 // This function gets the workout history from local storage and updates all the
 // timestamps from a unix number format to a ISO string format.
-// Remove after Sept 1st 2020.
+// TODO: Remove after Sept 1st 2020.
 const getInitialState = (): Workout[] => {
   const workouts = getLocalStorage(LOCAL_STORAGE_HISTORY, []) as Workout[];
   return workouts.map((w: Workout) => {

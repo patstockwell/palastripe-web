@@ -5,7 +5,7 @@ import { useLocation, Route, Switch } from 'react-router-dom';
 import { LandingSplash } from '../pages/LandingSplash';
 import { Workouts } from '../pages/Workouts';
 import { Install } from '../pages/Install';
-import ActiveWorkout from '../pages/ActiveWorkout';
+import { ActiveWorkout } from '../pages/ActiveWorkout';
 import Activity from '../pages/Activity';
 import { FourZeroFour } from '../pages/FourZeroFour';
 import { Profile } from '../pages/Profile';
