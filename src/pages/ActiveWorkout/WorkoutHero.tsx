@@ -4,12 +4,11 @@ import styled, { keyframes } from 'styled-components';
 import { useLocation } from 'react-router-dom';
 import * as clipboard from 'clipboard-polyfill';
 
-import { CheckboxTick } from '../../components/Checkbox';
-import { AlertConfirm } from '../../components/AlertConfirm';
+import { SuccessAlert } from '../../components/AlertConfirm';
 import { ColouredDot } from '../../assets/svg/ColouredDot';
-import ShareIcon from '../../assets/svg/Share';
-import SoundOn from '../../assets/svg/SoundOn';
-import SoundOff from '../../assets/svg/SoundOff';
+import { Share as ShareIcon } from '../../assets/svg/Share';
+import { SoundOn } from '../../assets/svg/SoundOn';
+import { SoundOff } from '../../assets/svg/SoundOff';
 import {
   buttonStyle,
   workoutTitleStyle,
@@ -77,15 +76,6 @@ const Button = styled.button`
   background-color: rgba(256, 256, 256, 0.3);
 `;
 
-const scale = keyframes `
-  0%, 100% {
-    transform: none;
-  }
-  50% {
-    transform: scale3d(1.1, 1.1, 1);
-  }
-`;
-
 const slide = keyframes `
   0%, 80%, 100% {
     transform: translateX(-8px);
@@ -93,13 +83,6 @@ const slide = keyframes `
   90% {
     transform: translateX(0px);
   }
-`;
-
-const IconWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  margin: 0 auto;
-  animation: ${scale} 0.5s linear;
 `;
 
 const StartButton = styled.button`
@@ -159,19 +142,11 @@ const WorkoutHero: React.FC<Props> = ({
         Start Workout
       </StartButton>
 
-      <AlertConfirm
-        cancelAlert={() => setShowShareMessage(false)}
-        showAlert={showShareMessage}
-        onClose={() => setShowCircleTick(false)}
-        messageText="Share link copied to clipboard."
-      >
-        <IconWrapper onAnimationEnd={() => setShowCircleTick(true)}>
-          <CheckboxTick
-            checked={showCircleTick}
-            onAnimationEnd={() => setShowShareMessage(false)}
-          />
-        </IconWrapper>
-      </AlertConfirm>
+      <SuccessAlert
+        message="Share link copied to clipboard."
+        showMessage={showShareMessage}
+        setShowMessage={setShowShareMessage}
+      />
     </Window>
   );
 };

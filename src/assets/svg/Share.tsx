@@ -4,7 +4,7 @@ interface Props {
   style?: any;
 }
 
-const Share: React.FC<Props> = ({ style }) => (
+export const Share: React.FC<Props> = ({ style }) => (
   <svg role="img" width={style && style.width || '20'} fill='white' viewBox='0 0 473.932 473.932' style={style}>
     <path d="M385.513,301.214c-27.438,0-51.64,13.072-67.452,33.09l-146.66-75.002
       c1.92-7.161,3.3-14.56,3.3-22.347c0-8.477-1.639-16.458-3.926-24.224l146.013-74.656c15.725,20.924,40.553,34.6,68.746,34.6
@@ -15,5 +15,3 @@ const Share: React.FC<Props> = ({ style }) => (
       C471.904,339.848,433.271,301.214,385.513,301.214z"/>
   </svg>
 );
-
-export default Share;

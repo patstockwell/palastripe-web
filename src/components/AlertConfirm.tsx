@@ -1,6 +1,8 @@
-import React, { useRef } from 'react';
+import React, { useState, useRef } from 'react';
 import { useTransition, animated } from 'react-spring';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
+
+import { CheckboxTick } from '../components/Checkbox';
 import { GlobalOverFlowHiddenStyle, buttonStyle } from '../components/SharedStyles';
 import { appMaxWidth, gutterWidth } from '../helpers/constants';
 import { Link } from 'react-router-dom';
@@ -124,5 +126,51 @@ export const AlertConfirm: React.FC<Props> = ({
           : null;
       })}
     </>
+  );
+};
+
+const scale = keyframes `
+  0%, 100% {
+    transform: none;
+  }
+  50% {
+    transform: scale3d(1.1, 1.1, 1);
+  }
+`;
+
+const IconWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  animation: ${scale} 0.5s linear;
+`;
+
+interface SuccessAlertProps {
+  message: string;
+  showMessage: boolean;
+  setShowMessage: (show: boolean) => void;
+}
+
+export const SuccessAlert: React.FC<SuccessAlertProps> = ({
+  message,
+  setShowMessage,
+  showMessage,
+}) => {
+  const [ showCircleTick, setShowCircleTick ] = useState(false);
+
+  return (
+    <AlertConfirm
+      cancelAlert={() => setShowMessage(false)}
+      showAlert={showMessage}
+      onClose={() => setShowCircleTick(false)}
+      messageText={message}
+    >
+      <IconWrapper onAnimationEnd={() => setShowCircleTick(true)}>
+        <CheckboxTick
+          checked={showCircleTick}
+          onAnimationEnd={() => setShowMessage(false)}
+        />
+      </IconWrapper>
+    </AlertConfirm>
   );
 };
