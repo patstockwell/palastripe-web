@@ -127,13 +127,12 @@ export const ActivityTile: React.FC<Props> = ({
 
   const onSetComplete = () => {
     if (selected) {
+      setShowRestTimer(true);
       const isCustomWorkout = activeWorkoutId === customWorkoutId;
+
       // don't select the next exercise if this is a custom workout.
       if (!isCustomWorkout) {
         selectNextExercise();
-        // TODO: Refactor the timer to count up to allow the timer to be used in
-        // the custom workout.
-        setShowRestTimer(true);
       }
     }
   };

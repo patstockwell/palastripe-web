@@ -3,28 +3,29 @@ import styled from 'styled-components';
 import { useSpring, animated } from 'react-spring';
 import { ONE_SECOND, appMaxWidth } from '../../helpers/constants';
 import { useInterval } from '../../helpers/functions';
+import { green, orange } from '../../helpers/constants';
 
 const TimerBackground = styled(animated.div)`
   display: flex;
+  justify-content: center;
   background-color: rgba(0, 0, 0, 0.85);
   position: fixed;
   bottom: 0;
   width: 100%;
   max-width: ${appMaxWidth}px;
   align-items: center;
-  justify-content: center;
-  flex-direction: column;
   z-index: 5;
 `;
 
-const Count = styled(animated.p)`
+const Count = styled(animated.p)<{ color: string }>`
   font-size: 1.5em;
   font-weight: 800;
-  color: white;
+  color: ${props => props.color};
 `;
 
 const Message = styled(animated.p)`
   color: white;
+  margin-left: 0.75em;
 `;
 
 interface Props {
@@ -34,7 +35,7 @@ interface Props {
 
 export const RestTimer: React.FC<Props> = ({
   handleClick,
-  restPeriod,
+  restPeriod = 90, // default rest period of 90 seconds
 }) => {
   const [ count, setCount ] = useState(0);
   const [ divStyle, setDivStyle ] = useSpring(() => ({
@@ -52,23 +53,19 @@ export const RestTimer: React.FC<Props> = ({
     }});
   };
 
-  // unmount after rest period
-  if (count >= restPeriod) {
-    fadeAndReset();
-  }
-
-  // format the timer
-  const countDown = restPeriod - count;
-  const timerMinutes = Math.floor(countDown / 60);
-  const timerSeconds = countDown % 60;
+  const formatTimer = (totalSeconds: number): string => {
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = totalSeconds % 60;
+    return `${minutes}${seconds > 9 ? ':' : ':0'}${seconds}`;
+  };
 
   return (
     <TimerBackground style={divStyle} onClick={fadeAndReset} >
-      <Count>
-        {timerMinutes}{timerSeconds > 9 ? ':' : ':0'}{timerSeconds}
+      <Count color={count < restPeriod ? orange : green}>
+        {formatTimer(count)}
       </Count>
       <Message>
-        {'You\'re doing great, take a rest'}
+        Great job, take a <strong>{formatTimer(restPeriod)}</strong> rest.
       </Message>
     </TimerBackground>
   );
