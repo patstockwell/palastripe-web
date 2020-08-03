@@ -3,9 +3,6 @@ import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
 import { AudioProvider } from '../../context/useAudio';
-import { RestTimerProvider } from '../../context/useRestTimer';
-import { useInterval } from '../../helpers/functions';
-import { RestTimer } from './RestTimer';
 import {
   ConfirmButtonLink,
   ConfirmButton,
@@ -16,7 +13,7 @@ import { WorkoutHero, Window as CustomWorkoutHero } from './WorkoutHero';
 import { FourZeroFour } from '../../pages/FourZeroFour';
 import { ActivityList } from './ActivityList';
 import { State } from '../../helpers/types';
-import { ONE_SECOND, lightGrey2, charcoal } from '../../helpers/constants';
+import { lightGrey2, charcoal } from '../../helpers/constants';
 import { useScrollPosition } from '../../context/useScrollPosition';
 import { useAddWorkoutToHistory } from '../../reducers/historyReducer';
 import { useUpdateWorkout } from '../../reducers/workoutsReducer';
@@ -25,9 +22,6 @@ import { customWorkoutId } from '../../workoutData/workouts/customWorkout';
 
 export const ActiveWorkout: React.FC = () => {
   const [ showEndWorkoutAlert, setShowEndWorkoutAlert ] = useState(false);
-  const [ showRestTimer, setShowRestTimer ] = useState(false);
-  const [ count, setCount ] = useState(0);
-  const [ restTime, setRestTime ] = useState(0);
   const { setActivityPageScrollPosition } = useScrollPosition();
   const addToHistory = useAddWorkoutToHistory();
   const updateWorkoutTemplate = useUpdateWorkout();
@@ -38,14 +32,6 @@ export const ActiveWorkout: React.FC = () => {
     settings: { soundOn },
   } = useSelector((state: State) => state);
 
-  useInterval(() => {
-    setCount(count + 1);
-  }, showRestTimer ? ONE_SECOND : null);
-
-  const resetTimer = () => {
-    setShowRestTimer(false);
-    setCount(0);
-  };
   // get the workout ID from the URL
   const { id: workoutId }: { id: string } = useParams();
   const isCustomWorkout = workoutId === customWorkoutId;
@@ -76,53 +62,39 @@ export const ActiveWorkout: React.FC = () => {
 
   return (
     <AudioProvider soundOn={soundOn}>
-      <RestTimerProvider value={{
-        setShowTimer: setShowRestTimer,
-        setRestTime,
-        setCount,
-      }} >
-        <BackLinkBanner
-          sticky={false}
-          back={{
-            showArrows: true,
-            link: '/workouts/',
-          }}
-        />
-        {isCustomWorkout ? (
-          <CustomWorkoutHero imageUrl={displayedWorkout.imageUrl}/>
-        ) : (
-          <WorkoutHero workout={displayedWorkout} />
-        )}
-        <ActivityList
-          workout={displayedWorkout}
-          finishWorkoutClickHandler={() => setShowEndWorkoutAlert(true)}
-          isCustomWorkout={isCustomWorkout}
-        />
+      <BackLinkBanner
+        sticky={false}
+        back={{
+          showArrows: true,
+          link: '/workouts/',
+        }}
+      />
+      {isCustomWorkout ? (
+        <CustomWorkoutHero imageUrl={displayedWorkout.imageUrl}/>
+      ) : (
+        <WorkoutHero workout={displayedWorkout} />
+      )}
+      <ActivityList
+        workout={displayedWorkout}
+        finishWorkoutClickHandler={() => setShowEndWorkoutAlert(true)}
+        isCustomWorkout={isCustomWorkout}
+      />
 
-        {showRestTimer && count > 0 && restTime >= 0 &&
-          <RestTimer
-            restPeriod={restTime}
-            resetTimer={resetTimer}
-            count={count - 1}
-          />
-        }
-
-        <AlertConfirm
-          cancelAlert={() => setShowEndWorkoutAlert(false)}
-          showAlert={showEndWorkoutAlert}
-          messageText="This will end your workout and save it to activity history."
-        >
-          <ConfirmButtonLink
-            to="/workout-complete/"
-            onClick={finishWorkoutWithAlertTransition}
-          >Finish workout</ConfirmButtonLink>
-          <ConfirmButton
-            onClick={() => setShowEndWorkoutAlert(false)}
-            background={lightGrey2}
-            fontColour={charcoal}
-          >Cancel</ConfirmButton>
-        </AlertConfirm>
-      </RestTimerProvider>
+      <AlertConfirm
+        cancelAlert={() => setShowEndWorkoutAlert(false)}
+        showAlert={showEndWorkoutAlert}
+        messageText="This will end your workout and save it to activity history."
+      >
+        <ConfirmButtonLink
+          to="/workout-complete/"
+          onClick={finishWorkoutWithAlertTransition}
+        >Finish workout</ConfirmButtonLink>
+        <ConfirmButton
+          onClick={() => setShowEndWorkoutAlert(false)}
+          background={lightGrey2}
+          fontColour={charcoal}
+        >Cancel</ConfirmButton>
+      </AlertConfirm>
     </AudioProvider>
   );
 };

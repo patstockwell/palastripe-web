@@ -10,7 +10,6 @@ import {
   green,
   purple,
 } from '../../../helpers/constants';
-import { useRestTimer } from '../../../context/useRestTimer';
 import { useAudio } from '../../../context/useAudio';
 
 const Time = styled.p`
@@ -74,7 +73,6 @@ const HiddenTimerArea: React.FC<Props> = ({
 }) => {
   const label = !started ? 'start' : paused ? 'resume' : 'pause';
   const background = !started ? purple : paused ? green : 'grey';
-  const { hideTimer } = useRestTimer();
   const { setAudio } = useAudio();
 
   return (
@@ -86,7 +84,6 @@ const HiddenTimerArea: React.FC<Props> = ({
       <StartButton
         onClick={() => {
           handleButtonClick();
-          hideTimer();
           // by initialising audio here after a click event, it gives the
           // user-agent permission to play the audio later
           const start = new Audio(startAudio);

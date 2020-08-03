@@ -1,29 +1,23 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled, { keyframes } from 'styled-components';
-import { useSelector } from 'react-redux';
+import { SpringValue } from 'react-spring';
 
-import { customWorkoutId } from '../../../workoutData/workouts/customWorkout';
 import { useAudio } from '../../../context/useAudio';
-import { useRestTimer } from '../../../context/useRestTimer';
-import { useSelectedExercise } from '../../../context/useSelectedExercise';
 import HiddenTimerArea from './HiddenTimerArea';
 import { ShowHiddenAreaArrowWrapper } from './ActivityTileWithReps';
 import { ToggleSetCompleteButton } from './ToggleSetCompleteButton';
-import StartTimedExerciseButton from './StartTimedExerciseButton';
+import { StartTimedExerciseButton } from './StartTimedExerciseButton';
 import { tileStyle } from './ActivityTileSharedStyles';
 import DownArrow from '../../../assets/svg/DownArrow';
-import { State, TimedActivity } from '../../../helpers/types';
+import { TimedActivity } from '../../../helpers/types';
 import {
   formatSeconds,
-  scrollElementToTop,
-  useHiddenAreaAnimation,
 } from '../../../helpers/functions';
 import {
   green,
   lightGrey3,
   timedExerciseWaitPeriod,
   tileMinHeight,
-  activeWorkoutWindowHeight,
 } from '../../../helpers/constants';
 import { Details, Title, Duration, VisibleArea } from './index';
 import { useActiveWorkout } from '../../../reducers/activeWorkoutReducer';
@@ -74,53 +68,29 @@ interface Props {
   showHiddenArea: boolean;
   toggleShowHiddenArea: () => void;
   handleSelect: () => void;
+  onSetComplete: () => void;
+  animatedStyles: { [x: string]: SpringValue<any>; };
+  listElement: React.MutableRefObject<HTMLLIElement>;
 }
 
 export const ActivityTileWithTimer: React.FC<Props> = ({
-  activity: { name, timerInSeconds, completed, restPeriodInSeconds },
+  activity: { name, timerInSeconds, completed },
   handleSelect,
   selected,
   toggleShowHiddenArea,
   showHiddenArea,
   index,
   groupId,
+  onSetComplete,
+  animatedStyles,
+  listElement,
 }) => {
   const [count, setCount] = useState(0);
   const [preparationComplete, setPreparationComplete] = useState(false);
-  const [finishedAnimating, setFinishedAnimating] = useState(false);
   const [started, setStarted] = useState(false);
   const [paused, setPaused] = useState(false);
   const { toggleSetComplete } = useActiveWorkout();
-  const listElement = useRef(null);
   const { playStart, playComplete } = useAudio();
-  const { hideTimer, showTimer } = useRestTimer();
-  const activeWorkoutId = useSelector((state: State) => state.activeWorkout.id);
-  const { selectNextExercise } = useSelectedExercise();
-  const animatedStyles = useHiddenAreaAnimation({
-    showHiddenArea,
-    onRest: () => setFinishedAnimating(true),
-    selected,
-  });
-
-  useEffect(() => {
-    // `finishedAnimating` is initialised to false. When transitioning to a tile
-    // and no animation happens (like when adding a tile during a custom
-    // workout, or when selecting a tile with `showHiddenArea` set to false),
-    // the `onRest` callback is not fired. In order to tell if the tile is ready
-    // to be scrolled, we compare the animated and the expected heights.
-    const height = selected && animatedStyles.height.getValue();
-    const isOpen = showHiddenArea && height === activeWorkoutWindowHeight;
-    const isClosed = !showHiddenArea && height === 0;
-
-    if (selected && (finishedAnimating || isOpen || isClosed)) {
-      // Only scroll after animation is at rest.
-      scrollElementToTop(listElement);
-    }
-
-    if (!selected && finishedAnimating) {
-      setFinishedAnimating(false);
-    }
-  }, [showHiddenArea, selected, finishedAnimating]);
 
   const inProgress = selected && !completed && started;
 
@@ -146,19 +116,13 @@ export const ActivityTileWithTimer: React.FC<Props> = ({
     }
   };
 
-  const onSetComplete = () => {
-    if (selected) {
-      showTimer(restPeriodInSeconds);
-      const isCustomWorkout = activeWorkoutId === customWorkoutId;
-      // don't select the next exercise if this is a custom workout.
-      if (!isCustomWorkout) {
-        selectNextExercise();
-      }
-    }
-  };
-
   return (
-    <Tile ref={listElement} selected={selected} onClick={handleSelect}>
+    <Tile
+      aria-expanded={showHiddenArea}
+      selected={selected}
+      onClick={handleSelect}
+      ref={listElement}
+    >
       <VisibleArea>
         {inProgress && (preparationComplete ? (
           <ActiveTimerBar
@@ -187,10 +151,7 @@ export const ActivityTileWithTimer: React.FC<Props> = ({
         </Duration>
         {started || completed ? (
           <ToggleSetCompleteButton
-            handleClick={() => {
-              handleClick();
-              hideTimer();
-            }}
+            handleClick={() => handleClick()}
             completed={completed}
             onAnimationEnd={onSetComplete}
           />

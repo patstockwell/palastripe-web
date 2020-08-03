@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
-import { useSpring } from 'react-spring';
+import { useSpring, SpringValue } from 'react-spring';
 import { formatDistance } from 'date-fns';
 
 import {
@@ -71,7 +71,7 @@ export const useHiddenAreaAnimation = ({
   showHiddenArea: boolean;
   onRest: any;
   selected: boolean;
-}) =>
+}): { [x: string]: SpringValue<any> } =>
   useSpring({
     height: showHiddenArea ? activeWorkoutWindowHeight : 0,
     opacity: showHiddenArea ? 1 : 0,

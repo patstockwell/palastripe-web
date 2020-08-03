@@ -1,10 +1,24 @@
-import React from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { SpringValue } from 'react-spring';
+import { useSelector } from 'react-redux';
+
+import { RestTimer } from '../RestTimer';
 import { isTimed } from '../../../helpers/types';
 import { ActivityTileWithReps } from './ActivityTileWithReps';
 import { ActivityTileWithTimer } from './ActivityTileWithTimer';
-import { Activity } from '../../../helpers/types';
-import { tileMinHeight, lightGrey3 } from '../../../helpers/constants';
+import { State, Activity } from '../../../helpers/types';
+import {
+  tileMinHeight,
+  lightGrey3,
+  activeWorkoutWindowHeight,
+} from '../../../helpers/constants';
+import { useSelectedExercise } from '../../../context/useSelectedExercise';
+import { customWorkoutId } from '../../../workoutData/workouts/customWorkout';
+import {
+  scrollElementToTop,
+  useHiddenAreaAnimation,
+} from '../../../helpers/functions';
 
 export const Details = styled.div`
   display: flex;
@@ -78,28 +92,91 @@ export const ActivityTile: React.FC<Props> = ({
   selected,
   showHiddenArea,
   disableDelete,
-}) => (
-  isTimed(activity)
-    ? (
-      <ActivityTileWithTimer
-        selected={selected}
-        showHiddenArea={showHiddenArea}
-        groupId={groupId}
-        index={index}
-        activity={activity}
-        handleSelect={handleSelect}
-        toggleShowHiddenArea={toggleShowHiddenArea}
-      />
-    ) : (
-      <ActivityTileWithReps
-        selected={selected}
-        showHiddenArea={showHiddenArea}
-        groupId={groupId}
-        index={index}
-        activity={activity}
-        handleSelect={handleSelect}
-        toggleShowHiddenArea={toggleShowHiddenArea}
-        disableDelete={disableDelete}
-      />
-    )
-);
+}) => {
+  const [ showRestTimer, setShowRestTimer ] = useState(false);
+  const [ finishedAnimating, setFinishedAnimating ] = useState(false);
+  const activeWorkoutId = useSelector((state: State) => state.activeWorkout.id);
+  const { selectNextExercise } = useSelectedExercise();
+  const listElement = useRef<HTMLLIElement>(null);
+
+  const animatedStyles: { [x: string]: SpringValue<any>; } = useHiddenAreaAnimation({
+    showHiddenArea,
+    onRest: () => setFinishedAnimating(true),
+    selected,
+  });
+
+  useEffect(() => {
+    // `finishedAnimating` is initialised to false. When transitioning to a tile
+    // and no animation happens (like when adding a tile during a custom
+    // workout, or when selecting a tile with `showHiddenArea` set to false),
+    // the `onRest` callback is not fired. In order to tell if the tile is ready
+    // to be scrolled, we compare the animated and the expected heights.
+    const height = selected && animatedStyles.height.getValue();
+    const isOpen = showHiddenArea && height === activeWorkoutWindowHeight;
+    const isClosed = !showHiddenArea && height === 0;
+
+    if (selected && (finishedAnimating || isOpen || isClosed)) {
+      // Only scroll after animation is at rest.
+      scrollElementToTop(listElement);
+    }
+
+    if (!selected && finishedAnimating) {
+      setFinishedAnimating(false);
+    }
+  }, [showHiddenArea, selected, finishedAnimating]);
+
+  const onSetComplete = () => {
+    if (selected) {
+      const isCustomWorkout = activeWorkoutId === customWorkoutId;
+      // don't select the next exercise if this is a custom workout.
+      if (!isCustomWorkout) {
+        selectNextExercise();
+        // TODO: Refactor the timer to count up to allow the timer to be used in
+        // the custom workout.
+        setShowRestTimer(true);
+      }
+    }
+  };
+
+  return (
+    <>
+      {isTimed(activity)
+        ? (
+          <ActivityTileWithTimer
+            selected={selected}
+            showHiddenArea={showHiddenArea}
+            groupId={groupId}
+            index={index}
+            activity={activity}
+            handleSelect={handleSelect}
+            toggleShowHiddenArea={toggleShowHiddenArea}
+            onSetComplete={onSetComplete}
+            listElement={listElement}
+            animatedStyles={animatedStyles}
+          />
+        ) : (
+          <ActivityTileWithReps
+            selected={selected}
+            showHiddenArea={showHiddenArea}
+            groupId={groupId}
+            index={index}
+            activity={activity}
+            handleSelect={handleSelect}
+            toggleShowHiddenArea={toggleShowHiddenArea}
+            disableDelete={disableDelete}
+            onSetComplete={onSetComplete}
+            listElement={listElement}
+            animatedStyles={animatedStyles}
+          />
+        )
+      }
+
+      {showRestTimer && (
+        <RestTimer
+          restPeriod={activity.restPeriodInSeconds}
+          handleClick={() => setShowRestTimer(false)}
+        />
+      )}
+    </>
+  );
+};

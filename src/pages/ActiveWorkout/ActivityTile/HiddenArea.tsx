@@ -9,7 +9,6 @@ import { State, WeightedActivity } from '../../../helpers/types';
 import { convertWeight } from '../../../helpers/functions';
 import { IncrementDecrementPanel } from './IncrementDecrementPanel';
 import { buttonStyle } from '../../../components/SharedStyles';
-import { useRestTimer } from '../../../context/useRestTimer';
 import { useActiveWorkout } from '../../../reducers/activeWorkoutReducer';
 
 const MainValue = styled.span`
@@ -47,20 +46,17 @@ export const HiddenArea: React.FC<Props> = ({
     weightInKilos,
     repsAchieved,
     completed,
-    restPeriodInSeconds,
   },
   toggleShowHiddenArea,
 }) => {
   const useKilos = useSelector((state: State) => state.settings.useKilos);
   const { toggleSetComplete, changeReps, changeWeight } = useActiveWorkout();
-  const { showTimer } = useRestTimer();
 
   const handleButtonClick = (completed: boolean) => {
     if (completed) {
       toggleShowHiddenArea();
     } else {
       toggleSetComplete({ completed: true, groupId, index });
-      showTimer(restPeriodInSeconds);
     }
   };
 

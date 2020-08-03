@@ -3,7 +3,6 @@ import styled from 'styled-components';
 
 import startAudio from '../../../assets/activityStart.mp3';
 import completeAudio from '../../../assets/activityEnd.mp3';
-import { useRestTimer } from '../../../context/useRestTimer';
 import { purple } from '../../../helpers/constants';
 import Play from '../../../assets/svg/Play';
 import { selectCompleteButtonStyle } from './ActivityTileSharedStyles';
@@ -24,17 +23,15 @@ interface Props {
   showIcon: boolean;
 }
 
-const StartTimedExerciseButton: React.FC<Props> = ({
+export const StartTimedExerciseButton: React.FC<Props> = ({
   showIcon,
   handleClick,
 }) => {
-  const { hideTimer } = useRestTimer();
   const { setAudio } = useAudio();
 
   return (
     <SelectCompleteButton onClick={() => {
       handleClick();
-      hideTimer();
       // by initialising audio here after a click event, it gives the
       // user-agent permission to play the audio later
       const start = new Audio(startAudio);
@@ -47,5 +44,3 @@ const StartTimedExerciseButton: React.FC<Props> = ({
     </SelectCompleteButton>
   );
 };
-
-export default StartTimedExerciseButton;
