@@ -16,6 +16,7 @@ import Flame from '../../assets/svg/Flame';
 const Ul = styled.ul`
   padding: 0;
   list-style: none;
+  margin-top: 4px;
 `;
 
 const Duration = styled.span`
@@ -53,6 +54,12 @@ const WeightAndLabel = styled.span`
     font-size: 0.7em;
     color: grey;
   }
+`;
+
+const Volume = styled.p`
+  font-size: 0.75em;
+  color: darkgrey;
+  margin: 0;
 `;
 
 const IncrementHighlight = styled.span`
@@ -100,6 +107,16 @@ interface Props {
   exerciseSets: [ string, Activity[] ];
 }
 
+export const badgeOffsetLeft = 20;
+
+export const badgeStyle = {
+  position: 'absolute',
+  left: `-${badgeOffsetLeft}px`,
+  top: '3px',
+  fill: purple,
+  width: '15px',
+};
+
 export const ActivitySummary: React.FC<Props> = ({
   exerciseSets: [exerciseId, exerciseSets],
 }) => {
@@ -132,13 +149,10 @@ export const ActivitySummary: React.FC<Props> = ({
     </SetSummary>
   ));
 
-  const badgeStyle = {
-    position: 'absolute',
-    left: '-20px',
-    top: '3px',
-    fill: purple,
-    width: '15px',
-  };
+  const totalVolume = exerciseSets.reduce((acc, curr: WeightedActivity) => {
+    return acc + (curr.completed ? curr.weightInKilos * curr.repsAchieved : 0);
+  }, 0);
+  const { weight, label } = formatWeight(totalVolume, useKilos);
 
   return (
     <li key={exerciseId}>
@@ -146,6 +160,9 @@ export const ActivitySummary: React.FC<Props> = ({
         {exerciseSets[0].name}
         {allComplete && <Badge style={badgeStyle} />}
       </ActivityName>
+      {!isTimed(exerciseSets[0]) &&
+        <Volume>Volume: <strong>{weight}{label}</strong></Volume>
+      }
       <Ul>{sets}</Ul>
     </li>
   );

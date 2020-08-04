@@ -6,12 +6,13 @@ import {
 } from 'react-router';
 import styled from 'styled-components';
 
-import { ActivitySummary } from './ActivitySummary';
+import { ActivitySummary, badgeOffsetLeft, badgeStyle } from './ActivitySummary';
 import { BackLinkBanner } from '../../components/BackLinkBanner';
 import { State, Activity } from '../../helpers/types';
 import { Workout } from '../../reducers/workoutsReducer';
 import { formatDate } from '../../helpers/functions';
 import { bannerHeight, gutterWidth } from '../../helpers/constants';
+import Badge from '../../assets/svg/Badge';
 
 const Hr = styled.hr`
   border: none;
@@ -22,12 +23,13 @@ const Hr = styled.hr`
 
 const PanelWithGutter = styled.div`
   padding: ${gutterWidth}px;
+  padding-left: ${gutterWidth + badgeOffsetLeft}px;
 `;
 
 const Ul = styled.ul`
   list-style: none;
   margin: 16px 0;
-  padding-left: 32px;
+  padding-left: 0;
 
   & > li + li {
     margin-top: 16px;
@@ -36,15 +38,20 @@ const Ul = styled.ul`
 
 const H2 = styled.h2`
   margin: 0;
-  padding-left: 32px;
 `;
 
 const H3 = styled.h3`
   margin: 0;
-  padding-left: 32px;
   font-size: 1em;
   font-weight: 400;
   color: grey;
+`;
+
+const Info = styled.p`
+  position: relative;
+  font-style: italic;
+  color: darkgrey;
+  font-size: 0.75em;
 `;
 
 interface ExerciseHash {
@@ -97,6 +104,10 @@ export const WorkoutSummary: React.FC<Props> = ({
       </PanelWithGutter>
         <Hr />
       <PanelWithGutter>
+        <Info>
+          <Badge style={{ ...badgeStyle, top: '-1px', fill: 'darkgrey' }} />
+          *All sets and reps were completed successfully.
+        </Info>
         <Ul>
           {activitySummaryTiles}
         </Ul>
