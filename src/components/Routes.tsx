@@ -6,15 +6,16 @@ import { LandingSplash } from '../pages/LandingSplash';
 import { Workouts } from '../pages/Workouts';
 import { Install } from '../pages/Install';
 import { ActiveWorkout } from '../pages/ActiveWorkout';
-import Activity from '../pages/Activity';
+import { Activity } from '../pages/Activity';
 import { FourZeroFour } from '../pages/FourZeroFour';
 import { Profile } from '../pages/Profile';
 import { WorkoutSummary } from '../pages/WorkoutSummary';
-import ProfileName from '../pages/ProfileName';
-import SettingAudio from '../pages/SettingAudio';
+import { ProfileName } from '../pages/ProfileName';
 import { DataExport } from '../pages/DataExport';
 import { Subscribe } from '../pages/Subscribe';
-import SettingUnitOfMeasurement from '../pages/SettingUnitOfMeasurement';
+import { SettingUnitOfMeasurement } from '../pages/SettingUnitOfMeasurement';
+import { SettingAudio } from '../pages/SettingAudio';
+import { SettingUseRestTimer } from '../pages/SettingUseRestTimer';
 import { appMaxWidth } from '../helpers/constants';
 import { WorkoutCompletionSplash } from '../pages/WorkoutCompletionSplash';
 import { AnimateNavigationProvider } from '../context/useAnimateNavigation';
@@ -45,10 +46,11 @@ const Routes: React.FC = () => {
                 <Route path="/activity/" exact component={Activity} />
                 <Route path="/activity/:index/" component={WorkoutSummary} />
                 <Route path="/profile/" exact component={Profile} />
-                <Route path="/profile/name" component={ProfileName} />
-                <Route path="/profile/audio" component={SettingAudio} />
-                <Route path="/profile/export" component={DataExport} />
-                <Route path="/profile/unit-of-measurement" component={SettingUnitOfMeasurement} />
+                <Route path="/profile/name/" component={ProfileName} />
+                <Route path="/profile/audio/" component={SettingAudio} />
+                <Route path="/profile/rest-timer/" component={SettingUseRestTimer} />
+                <Route path="/profile/export/" component={DataExport} />
+                <Route path="/profile/unit-of-measurement/" component={SettingUnitOfMeasurement} />
                 <Route path={`/workouts/${customWorkoutId}/${activitySearchPath}`} component={ActivitySearch} />
                 <Route path="/workouts/:id/" component={ActiveWorkout} />
                 <Route path="/workout-complete/" component={WorkoutCompletionSplash} />

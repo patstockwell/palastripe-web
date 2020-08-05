@@ -1,10 +1,9 @@
 import React from 'react';
-import { RouteProps } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+
 import { State } from '../../helpers/types';
 import { Workout } from '../../reducers/workoutsReducer';
-
 import { ActivityHistoryList } from './ActivityHistoryList';
-import { connect } from 'react-redux';
 import { Page } from '../../components/Page';
 import ActivityHistoryHero from './ActivityHistoryHero';
 import {
@@ -23,9 +22,8 @@ const getTotalWeight = (history: Workout[]): number => (
   history.reduce((acc, curr) => getTotalWeightLifted(curr) + acc, 0)
 );
 
-type Props = StateProps & RouteProps;
-
-const Activity: React.FC<Props> = ({ history, useKilos }) => {
+export const Activity: React.FC = () => {
+  const { history, settings: { useKilos } } = useSelector((s: State) => s);
   const totalMinutes = getTotalMinutes(history);
   const totalWeight = getTotalWeight(history);
   const convertedWeight = convertKilosToDisplayedWeight(totalWeight, useKilos);
@@ -42,15 +40,3 @@ const Activity: React.FC<Props> = ({ history, useKilos }) => {
     </Page>
   );
 };
-
-interface StateProps {
-  history: Workout[];
-  useKilos: boolean;
-}
-
-const mapStateToProps = (state: State): StateProps => ({
-  history: state.history,
-  useKilos: state.settings.useKilos,
-});
-
-export default connect<StateProps, void, void>(mapStateToProps)(Activity);

@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
 import { BackLinkBanner } from '../components/BackLinkBanner';
 import { lightGrey3, gutterWidth } from '../helpers/constants';
-import {
-  State, // eslint-disable-line
-} from '../helpers/types';
+import { State } from '../helpers/types';
 import { useUpdateName } from '../reducers/profileReducer';
 
 const EditPage = styled.div`
@@ -52,7 +50,8 @@ const InputWrapper = styled.div`
   align-items: center;
 `;
 
-const ProfileName: React.FC<StateProps> = ({ firstName, lastName }) => {
+export const ProfileName: React.FC = () => {
+  const { firstName, lastName } = useSelector((s: State) => s.profile);
   const [firstNameInput, setFirstNameInput] = useState('');
   const [lastNameInput, setLastNameInput] = useState('');
   const [firstNameHasChanged, setFirstNameHasChanged] = useState(false);
@@ -96,17 +95,3 @@ const ProfileName: React.FC<StateProps> = ({ firstName, lastName }) => {
     </EditPage>
   );
 };
-
-interface StateProps {
-  firstName: string;
-  lastName: string;
-}
-
-const mapStateToProps = (state: State): StateProps => ({
-  firstName: state.profile.firstName,
-  lastName: state.profile.lastName,
-});
-
-export default connect<StateProps, {}, {}>(
-  mapStateToProps,
-)(ProfileName);

@@ -1,9 +1,12 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useSpring, animated } from 'react-spring';
+import { useSelector } from 'react-redux';
+
 import { ONE_SECOND, appMaxWidth } from '../../helpers/constants';
 import { useInterval } from '../../helpers/functions';
 import { green, orange } from '../../helpers/constants';
+import { State } from '../../helpers/types';
 
 const TimerBackground = styled(animated.div)`
   display: flex;
@@ -37,6 +40,7 @@ export const RestTimer: React.FC<Props> = ({
   handleClick,
   restPeriod = 90, // default rest period of 90 seconds
 }) => {
+  const { useRestTimer } = useSelector((s: State) => s.settings);
   const [ count, setCount ] = useState(0);
   const [ divStyle, setDivStyle ] = useSpring(() => ({
     opacity: 1,
@@ -59,7 +63,7 @@ export const RestTimer: React.FC<Props> = ({
     return `${minutes}${seconds > 9 ? ':' : ':0'}${seconds}`;
   };
 
-  return (
+  return useRestTimer && (
     <TimerBackground style={divStyle} onClick={fadeAndReset} >
       <Count color={count < restPeriod ? orange : green}>
         {formatTimer(count)}

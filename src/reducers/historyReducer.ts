@@ -30,7 +30,7 @@ const reducers = {
 // timestamps from a unix number format to a ISO string format.
 // TODO: Remove after Sept 1st 2020.
 const getInitialState = (): Workout[] => {
-  const workouts = getLocalStorage(LOCAL_STORAGE_HISTORY, []) as Workout[];
+  const workouts = getLocalStorage<Array<Workout>>(LOCAL_STORAGE_HISTORY, []);
   return workouts.map((w: Workout) => {
     const startDate = new Date(w.startTime);
     const finishDate = new Date(w.finishTime);

@@ -22,7 +22,7 @@ import { State } from '../../helpers/types';
 import { Workout } from '../../reducers/workoutsReducer';
 import { green, APP_URL } from '../../helpers/constants';
 import { useActiveWorkout } from '../../reducers/activeWorkoutReducer';
-import { useSoundToggle } from '../../reducers/settingsReducer';
+import { useSettings } from '../../reducers/settingsReducer';
 import { useSelectedExercise } from '../../context/useSelectedExercise';
 
 export const Window = styled.div<{ colour?: string, imageUrl?: string }>`
@@ -108,7 +108,7 @@ export const WorkoutHero: React.FC<Props> = ({ workout }) => {
   const { setSelectedExercise } = useSelectedExercise();
   const { startWorkout } = useActiveWorkout();
   const { soundOn } = useSelector((state: State) => state.settings);
-  const useSound = useSoundToggle();
+  const { setUseSound } = useSettings();
   const time = formatMinutes(calculateWorkoutTime(workout));
 
   const handleShare = () => {
@@ -125,7 +125,7 @@ export const WorkoutHero: React.FC<Props> = ({ workout }) => {
   return (
     <Window imageUrl={workout.imageUrl}>
       <ButtonGroup>
-        <Button onClick={() => useSound(!soundOn)}>
+        <Button onClick={() => setUseSound(!soundOn)}>
           {soundOn ? <SoundOn /> : <SoundOff />}
         </Button>
         <Button onClick={handleShare}>

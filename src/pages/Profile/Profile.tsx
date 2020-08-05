@@ -23,7 +23,7 @@ const BottomSpace = styled.div`
 type Props = RouteProps;
 
 export const Profile: React.FC<Props> = () => {
-  const { useKilos, soundOn } = useSelector((state: State) => state.settings);
+  const { useKilos, soundOn, useRestTimer } = useSelector((state: State) => state.settings);
 
   return (
     <Page heading={'Profile'}>
@@ -32,15 +32,22 @@ export const Profile: React.FC<Props> = () => {
       </Panel>
       <Panel>
         <LinkTile
-          subLabel={useKilos ? 'kilograms' : 'pounds'}
           label="Unit of measurement"
+          subLabel={useKilos ? 'kilograms' : 'pounds'}
           to="/profile/unit-of-measurement/"
         />
       </Panel>
       <Panel>
         <LinkTile
-          subLabel={soundOn ? 'on' : 'off'}
+          label="Rest timer"
+          subLabel={useRestTimer ? 'on' : 'off'}
+          to="/profile/rest-timer/"
+        />
+      </Panel>
+      <Panel>
+        <LinkTile
           label="Audio"
+          subLabel={soundOn ? 'on' : 'off'}
           to="/profile/audio/"
         />
       </Panel>

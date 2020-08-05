@@ -1,17 +1,12 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import styled from 'styled-components';
 
-import {
-  State, // eslint-disable-line no-unused-vars
-} from '../helpers/types';
+import { State } from '../helpers/types';
 import { BackLinkBanner } from '../components/BackLinkBanner';
-import {
-  lightGrey3,
-  charcoal,
-} from '../helpers/constants';
+import { lightGrey3, charcoal } from '../helpers/constants';
 import { CheckboxTick } from '../components/Checkbox';
-import { useKilosToggle } from '../reducers/settingsReducer';
+import { useSettings } from '../reducers/settingsReducer';
 
 export const EditPage = styled.div`
   min-height: 100vh;
@@ -39,12 +34,11 @@ export const HiddenInput = styled.input`
   left: -9999px;
 `;
 
-const SettingUnitOfMeasurement: React.FC<StateProps> = ({
-  useKilos: useKilosRedux,
-}) => {
+export const SettingUnitOfMeasurement: React.FC = () => {
+  const { useKilos: useKilosRedux } = useSelector((s: State) => s.settings);
   const [useKilosLocal, setUseKilosLocal] = useState(true);
   const [measurementHasChanged, setMeasurementHasChanged] = useState(false);
-  const useKilosAsUnitOfMeasurement = useKilosToggle();
+  const { setUseKilos } = useSettings();
   const useKilos = measurementHasChanged ? useKilosLocal : useKilosRedux;
 
   return (
@@ -55,8 +49,7 @@ const SettingUnitOfMeasurement: React.FC<StateProps> = ({
           showArrows: true,
           link: '/profile/',
           handleClick: () => {
-            setUseKilosLocal(useKilos);
-            useKilosAsUnitOfMeasurement(measurementHasChanged
+            setUseKilos(measurementHasChanged
               ? useKilosLocal : useKilos);
           },
         }}
@@ -92,15 +85,3 @@ const SettingUnitOfMeasurement: React.FC<StateProps> = ({
     </EditPage>
   );
 };
-
-interface StateProps {
-  useKilos: boolean;
-}
-
-const mapState = (state: State): StateProps => ({
-  useKilos: state.settings.useKilos,
-});
-
-export default connect<StateProps, {}, void>(
-  mapState,
-)(SettingUnitOfMeasurement);

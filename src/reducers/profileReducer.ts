@@ -21,7 +21,7 @@ const reducers = {
 
 const profileSlice = createSlice<Profile, typeof reducers>({
   name: 'profile',
-  initialState: getLocalStorage(LOCAL_STORAGE_PROFILE, {
+  initialState: getLocalStorage<Profile>(LOCAL_STORAGE_PROFILE, {
     firstName: '',
     lastName: '',
     // If nothing is found in localStorage, then this is the user's first visit.

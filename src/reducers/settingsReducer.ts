@@ -6,6 +6,7 @@ import { LOCAL_STORAGE_SETTINGS } from '../helpers/constants';
 export interface Settings {
   useKilos: boolean;
   soundOn: boolean;
+  useRestTimer: boolean;
 }
 
 const reducers = {
@@ -15,31 +16,43 @@ const reducers = {
   useKilos: (state: Settings, action: PayloadAction<boolean>) => {
     state.useKilos = action.payload;
   },
+  useRestTimer: (state: Settings, action: PayloadAction<boolean>) => {
+    state.useRestTimer = action.payload;
+  },
 };
 
 const settingsSlice = createSlice<Settings, typeof reducers>({
   name: 'settings',
-  initialState: getLocalStorage(LOCAL_STORAGE_SETTINGS, {
+  initialState: getLocalStorage<Settings>(LOCAL_STORAGE_SETTINGS, {
     soundOn: false,
     useKilos: true,
+    useRestTimer: true,
   }),
   reducers,
 });
 
-export const useKilosToggle = () => {
+export const useSettings = () => {
   const dispatch = useDispatch();
-  return (useKilos: boolean) => dispatch({
+  const setUseKilos = (useKilos: boolean) => dispatch<PayloadAction<boolean>>({
     type: settingsSlice.actions.useKilos.type,
     payload: useKilos,
   });
-};
 
-export const useSoundToggle = () => {
-  const dispatch = useDispatch();
-  return (soundOn: boolean) => dispatch({
+  const setUseSound = (soundOn: boolean) => dispatch<PayloadAction<boolean>>({
     type: settingsSlice.actions.useSound.type,
     payload: soundOn,
   });
+
+  const setUseRestTimer = (useRestTimer: boolean) => dispatch<PayloadAction<boolean>>({
+    type: settingsSlice.actions.useRestTimer.type,
+    payload: useRestTimer,
+  });
+
+  return {
+    setUseKilos,
+    setUseSound,
+    setUseRestTimer,
+  };
 };
 
 export default settingsSlice.reducer;

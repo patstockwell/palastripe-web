@@ -1,16 +1,17 @@
 import React, { useState } from 'react';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { CheckboxTick } from '../components/Checkbox';
 import { EditPage, Label, HiddenInput } from './SettingUnitOfMeasurement';
 import { State } from '../helpers/types';
 import { BackLinkBanner } from '../components/BackLinkBanner';
-import { useSoundToggle } from '../reducers/settingsReducer';
+import { useSettings } from '../reducers/settingsReducer';
 
-const SettingAudio: React.FC<StateProps> = ({ soundOn: soundOnRedux }) => {
+export const SettingAudio: React.FC = () => {
+  const { soundOn: soundOnRedux } = useSelector((s: State) => s.settings);
   const [soundOnLocal, setSoundOnLocal] = useState(true);
   const [settingHasChanged, setSettingHasChanged] = useState(false);
-  const useSound = useSoundToggle();
+  const { setUseSound } = useSettings();
   const soundOn = settingHasChanged ? soundOnLocal : soundOnRedux;
 
   return (
@@ -22,7 +23,7 @@ const SettingAudio: React.FC<StateProps> = ({ soundOn: soundOnRedux }) => {
           link: '/profile/',
           handleClick: () => {
             setSoundOnLocal(soundOn);
-            useSound(settingHasChanged
+            setUseSound(settingHasChanged
               ? soundOnLocal : soundOn);
           },
         }}
@@ -58,15 +59,3 @@ const SettingAudio: React.FC<StateProps> = ({ soundOn: soundOnRedux }) => {
     </EditPage>
   );
 };
-
-interface StateProps {
-  soundOn: boolean;
-}
-
-const mapState = (state: State): StateProps => ({
-  soundOn: state.settings.soundOn,
-});
-
-export default connect<StateProps, {}, {}>(
-  mapState,
-)(SettingAudio);

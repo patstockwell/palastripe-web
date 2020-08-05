@@ -160,7 +160,7 @@ export const getIdsForStretchExercises = (
     .map((e: Exercise): string => e.id)
 );
 
-export const getLocalStorage = (name: string, defaultValue: any) => {
+export const getLocalStorage = <T>(name: string, defaultValue: T) => {
   const item: (string | null) = localStorage.getItem(name);
 
   if (item) {
