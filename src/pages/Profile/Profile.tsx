@@ -1,13 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
+import { useSelector } from 'react-redux';
 import { RouteProps } from 'react-router-dom';
 
 import ProfileNameLink from './ProfileNameLink';
-import AudioLink from './AudioLink';
-import UnitOfMeasurementLink from './UnitOfMeasurementLink';
-import { ExportDataLink } from './ExportDataLink';
+import { LinkTile } from './LinkTile';
 import { Page } from '../../components/Page';
 import { gutterWidth } from '../../helpers/constants';
+import { State } from '../../helpers/types';
 
 const Panel = styled.div`
   background-color: white;
@@ -22,20 +22,35 @@ const BottomSpace = styled.div`
 
 type Props = RouteProps;
 
-export const Profile: React.FC<Props> = () => (
-  <Page heading={'Profile'}>
-    <Panel>
-      <ProfileNameLink />
-    </Panel>
-    <Panel>
-      <UnitOfMeasurementLink />
-    </Panel>
-    <Panel>
-      <AudioLink />
-    </Panel>
-    <Panel>
-      <ExportDataLink />
-    </Panel>
-    <BottomSpace />
-  </Page>
-);
+export const Profile: React.FC<Props> = () => {
+  const { useKilos, soundOn } = useSelector((state: State) => state.settings);
+
+  return (
+    <Page heading={'Profile'}>
+      <Panel>
+        <ProfileNameLink />
+      </Panel>
+      <Panel>
+        <LinkTile
+          subLabel={useKilos ? 'kilograms' : 'pounds'}
+          label="Unit of measurement"
+          to="/profile/unit-of-measurement/"
+        />
+      </Panel>
+      <Panel>
+        <LinkTile
+          subLabel={soundOn ? 'on' : 'off'}
+          label="Audio"
+          to="/profile/audio/"
+        />
+      </Panel>
+      <Panel>
+        <LinkTile
+          label="Export data"
+          to="/profile/export/"
+        />
+      </Panel>
+      <BottomSpace />
+    </Page>
+  );
+};

@@ -1,13 +1,9 @@
 import React from 'react';
-import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { gutterWidth } from '../../helpers/constants';
 import ForwardArrow from '../../assets/svg/ForwardArrow';
-import {
-  State, // eslint-disable-line no-unused-vars
-} from '../../helpers/types';
 
 const Label = styled(Link)`
   text-transform: uppercase;
@@ -29,10 +25,8 @@ const Label = styled(Link)`
   }
 `;
 
-const Value = styled.p`
-  color: grey;
-  font-style: italic;
-  margin: 0;
+const Section = styled.section`
+  cursor: pointer;
 `;
 
 const ShowEditArrowWrapper = styled.div`
@@ -44,33 +38,24 @@ const ShowEditArrowWrapper = styled.div`
   align-items: center;
 `;
 
-const Section = styled.section`
-  cursor: pointer;
+const Value = styled.p`
+  color: grey;
+  font-style: italic;
+  margin: 0;
 `;
 
-const AudioLink: React.FC<StateProps> = ({ soundOn }) => (
+interface Props {
+  label: string;
+  subLabel?: string;
+  to: string;
+}
+
+export const LinkTile: React.FC<Props> = ({ label, subLabel, to }) => (
   <Section>
     <ShowEditArrowWrapper>
       <ForwardArrow style={{ fill: 'grey' }}/>
     </ShowEditArrowWrapper>
-    <Label
-      to={{
-        pathname: '/profile/audio/',
-        state: { immediate: false },
-      }}
-    >Audio</Label>
-    <Value>{soundOn ? 'on' : 'off'}</Value>
+    <Label to={to}>{label}</Label>
+    <Value>{subLabel}</Value>
   </Section>
 );
-
-interface StateProps {
-  soundOn: boolean;
-}
-
-const mapStateToProps = (state: State): StateProps => ({
-  soundOn: state.settings.soundOn,
-});
-
-export default connect<StateProps, {}, {}>(
-  mapStateToProps
-)(AudioLink);
