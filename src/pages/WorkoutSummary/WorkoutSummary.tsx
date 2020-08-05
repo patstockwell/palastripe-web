@@ -13,6 +13,7 @@ import { Workout } from '../../reducers/workoutsReducer';
 import { formatDate } from '../../helpers/functions';
 import { bannerHeight, gutterWidth } from '../../helpers/constants';
 import Badge from '../../assets/svg/Badge';
+import {customWorkoutId} from '../../workoutData/workouts/customWorkout';
 
 const Hr = styled.hr`
   border: none;
@@ -80,7 +81,7 @@ type Props = RouteComponentProps<{ index?: string }>
 export const WorkoutSummary: React.FC<Props> = ({
   match: { params: { index } }
 }) => {
-  const workout = useSelector((state: State) => state.history[index]);
+  const workout: Workout = useSelector((state: State) => state.history[index]);
 
   if (!workout) {
     return <Redirect to="/activity/" />;
@@ -104,10 +105,12 @@ export const WorkoutSummary: React.FC<Props> = ({
       </PanelWithGutter>
         <Hr />
       <PanelWithGutter>
-        <Info>
-          <Badge style={{ ...badgeStyle, top: '-1px', fill: 'darkgrey' }} />
-          *All sets and reps were completed successfully.
-        </Info>
+        {workout.id !== customWorkoutId && // hide badge info for custom workout
+          <Info>
+            <Badge style={{ ...badgeStyle, top: '-1px', fill: 'darkgrey' }} />
+            *All sets and reps were completed successfully.
+          </Info>
+        }
         <Ul>
           {activitySummaryTiles}
         </Ul>

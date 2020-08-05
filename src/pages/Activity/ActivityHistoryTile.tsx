@@ -12,9 +12,16 @@ import {
   getHoursAndMinutes,
   getTimeSince,
   getTotalWeightLifted,
-  convertWeight,
+  formatWeight,
 } from '../../helpers/functions';
-import { purple, lightGrey3, charcoal, blue, orange, lightGrey2 } from '../../helpers/constants';
+import {
+  purple,
+  lightGrey3,
+  charcoal,
+  blue,
+  orange,
+  lightGrey2,
+} from '../../helpers/constants';
 import { useScrollPosition } from '../../context/useScrollPosition';
 
 const Tile = styled.li`
@@ -153,6 +160,8 @@ const ActivityHistoryTile: React.FC<Props> = ({
     setShowDeleteWorkoutAlert(false);
   };
 
+  const { label, weight } = formatWeight(totalWeightLifted, useKilos);
+
   return (
     <Tile>
       <Left>
@@ -183,13 +192,11 @@ const ActivityHistoryTile: React.FC<Props> = ({
               }
               {mins} <UnitLabel>{minsLabel}</UnitLabel>
             </Statistic>
-            <TextLabel>Workout Time</TextLabel>
+            <TextLabel>Duration</TextLabel>
           </StatsBox>
           <StatsBox>
-            <Statistic>
-              {convertWeight(totalWeightLifted, useKilos)} <UnitLabel>{useKilos ? 'kg' : 'lbs'}</UnitLabel>
-            </Statistic>
-            <TextLabel>Workout Volume</TextLabel>
+            <Statistic>{weight}<UnitLabel>{label}</UnitLabel></Statistic>
+            <TextLabel>Volume</TextLabel>
           </StatsBox>
         </StatsPanel>
       </Right>

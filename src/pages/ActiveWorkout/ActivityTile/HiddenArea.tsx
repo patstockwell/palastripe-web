@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import {
   animated,
@@ -6,7 +6,7 @@ import {
 } from 'react-spring';
 import styled from 'styled-components';
 import { State, WeightedActivity } from '../../../helpers/types';
-import { convertWeight } from '../../../helpers/functions';
+import { convertKilosToDisplayedWeight } from '../../../helpers/functions';
 import { IncrementDecrementPanel } from './IncrementDecrementPanel';
 import { buttonStyle } from '../../../components/SharedStyles';
 import { useActiveWorkout } from '../../../reducers/activeWorkoutReducer';
@@ -50,7 +50,12 @@ export const HiddenArea: React.FC<Props> = ({
   toggleShowHiddenArea,
 }) => {
   const useKilos = useSelector((state: State) => state.settings.useKilos);
-  const { toggleSetComplete, changeReps, changeWeight } = useActiveWorkout();
+  const {
+    toggleSetComplete,
+    changeReps,
+    changeWeight,
+    setWeight,
+  } = useActiveWorkout();
 
   const handleButtonClick = (completed: boolean) => {
     if (completed) {
@@ -60,28 +65,44 @@ export const HiddenArea: React.FC<Props> = ({
     }
   };
 
+  const convertedWeight = convertKilosToDisplayedWeight(weightInKilos, useKilos);
+
   return (
     <animated.div style={{
       height: animatedStyles.height,
       opacity: animatedStyles.opacity,
       cursor: 'default',
     }}>
+
       <IncrementDecrementPanel
         handleDecrement={() => changeWeight({ shouldIncrement: false, index, groupId })}
         handleIncrement={() => changeWeight({ shouldIncrement: true, index, groupId })}
         percentageComplete={1}
       >
-        <MainValue>{convertWeight(weightInKilos, useKilos)}</MainValue>
+        <EditableInput
+          value={convertedWeight}
+          onBlurOrEnter={(weight: number) => setWeight({ weight, groupId, index })}
+          allowIntegersOnly={false}
+        >
+          <MainValue>{convertedWeight}</MainValue>
+        </EditableInput>
         <P>{useKilos ? 'kg' : 'lbs'}</P>
       </IncrementDecrementPanel>
+
       <IncrementDecrementPanel
-        handleDecrement={() => changeReps({ index, groupId, increment: -1 })}
-        handleIncrement={() => changeReps({ index, groupId, increment: 1 })}
+        handleDecrement={() => changeReps({ index, groupId, newReps: repsAchieved - 1 })}
+        handleIncrement={() => changeReps({ index, groupId, newReps: repsAchieved + 1 })}
         percentageComplete={repsGoal ? repsAchieved / repsGoal : 1}
       >
         <P>
-          <MainValue>{repsAchieved}</MainValue>
-          {repsGoal && `/${repsGoal}`}
+          <EditableInput
+            value={repsAchieved}
+            onBlurOrEnter={(reps: number) => changeReps({ newReps: reps, groupId, index })}
+            allowIntegersOnly
+          >
+            <MainValue>{repsAchieved}</MainValue>
+            {repsGoal && `/${repsGoal}`}
+          </EditableInput>
         </P>
         <P>Reps</P>
       </IncrementDecrementPanel>
@@ -91,5 +112,79 @@ export const HiddenArea: React.FC<Props> = ({
         background={completed && 'grey'}
       >{completed ? 'Done' : 'Finish set & rest'}</Button>
     </animated.div>
+  );
+};
+
+const EditableInputButton = styled.button`
+  padding: 0;
+  border: none;
+  background: none;
+`;
+
+const Input = styled.input`
+  padding: 0;
+  background: none;
+  border: none;
+  width: 100%;
+  text-align: center;
+  font-size: 32px;
+  font-weight: 800;
+`;
+
+interface EditableInputProps {
+  value: number;
+  onBlurOrEnter: (updatedValue: number) => void;
+  allowIntegersOnly: boolean;
+}
+
+const EditableInput: React.FC<EditableInputProps> = ({
+  value: initialValue,
+  onBlurOrEnter,
+  allowIntegersOnly,
+  children,
+}) => {
+  const [inputValue, setInputValue] = useState(null);
+  const [showInput, setShowInput] = useState(false);
+
+  const handleBlurOrEnter = () => {
+    const parsedValue = allowIntegersOnly
+      ? Number.parseInt(inputValue, 10)
+      : Number.parseFloat(inputValue);
+    const canUpdate = inputValue !== null && !isNaN(parsedValue);
+    onBlurOrEnter(canUpdate ? parsedValue : initialValue);
+    setShowInput(false);
+    setInputValue(null); // reset the input
+  };
+
+  const handleKeyPress = (e: React.KeyboardEvent) => {
+    if (e.which === 13) { // if enter key is pressed
+      handleBlurOrEnter();
+    }
+  };
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputValue(e.target.value);
+  };
+
+  return (
+    <>
+      {showInput ? (
+        <Input
+          type="number"
+          pattern="[0-9]*"
+          inputMode="decimal"
+          onBlur={handleBlurOrEnter}
+          autoFocus
+          value={inputValue === null ? initialValue : inputValue}
+          onChange={handleChange}
+          placeholder="0.0"
+          onKeyPress={handleKeyPress}
+        />
+      ) : (
+        <EditableInputButton onClick={() => setShowInput(true)}>
+          {children}
+        </EditableInputButton>
+      )}
+    </>
   );
 };

@@ -10,7 +10,7 @@ import ActivityHistoryHero from './ActivityHistoryHero';
 import {
   getTotalWeightLifted,
   getDiffInMinutes,
-  convertWeight,
+  convertKilosToDisplayedWeight,
 } from '../../helpers/functions';
 
 const getTotalMinutes = (history: Workout[]): number => (
@@ -28,7 +28,7 @@ type Props = StateProps & RouteProps;
 const Activity: React.FC<Props> = ({ history, useKilos }) => {
   const totalMinutes = getTotalMinutes(history);
   const totalWeight = getTotalWeight(history);
-  const convertedWeight = convertWeight(totalWeight, useKilos);
+  const convertedWeight = convertKilosToDisplayedWeight(totalWeight, useKilos);
 
   return (
     <Page heading={'Activity'}>

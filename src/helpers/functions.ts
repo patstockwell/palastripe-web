@@ -30,7 +30,20 @@ export function useFeatureToggle(key: string) {
   return query.get(key) !== null;
 }
 
-export const convertWeight = (
+export const convertDisplayedWeightToKilos = (
+  weight: number,
+  useKilos: boolean,
+): number => {
+  if (useKilos) {
+    return weight;
+  }
+  // else the weight is in pounds, convert back to kilos.
+  const exactWeightInKilos = weight / poundsInAKilo;
+  // round to the nearest 0.5
+  return Math.round(exactWeightInKilos / 0.5) * 0.5;
+};
+
+export const convertKilosToDisplayedWeight = (
   weightInKilos: number,
   useKilos: boolean,
 ): number => {
@@ -56,7 +69,7 @@ export const formatWeight = (
   weight: number;
   label: string;
 } => {
-  const weight = convertWeight(weightInKilos, useKilos);
+  const weight = convertKilosToDisplayedWeight(weightInKilos, useKilos);
   return {
     weight,
     label: useKilos ? 'kg' : 'lb',

@@ -5,7 +5,11 @@ import {
   halfAPoundInKilos,
   LOCAL_STORAGE_ACTIVE_WORKOUT,
 } from '../helpers/constants';
-import { convertWeight, getLocalStorage } from '../helpers/functions';
+import {
+  convertKilosToDisplayedWeight,
+  convertDisplayedWeightToKilos,
+  getLocalStorage,
+} from '../helpers/functions';
 import {
   Activity,
   WeightedActivity,
@@ -14,12 +18,32 @@ import {
 } from '../helpers/types';
 import { Workout } from '../reducers/workoutsReducer';
 
+type SetWeightAction = PayloadAction<SingleSetAction & {
+  useKilos: boolean;
+  weight: number;
+}>;
+
+const setWeight = ( state: Workout, action: SetWeightAction) => {
+  const { weight, useKilos, groupId, index } = action.payload;
+  const weightInKilos = convertDisplayedWeightToKilos(weight, useKilos);
+
+  state.exerciseGroups.forEach(group => {
+    if (group.id === groupId) {
+      (group.exercises[index] as WeightedActivity).weightInKilos = weightInKilos;
+    }
+  });
+
+  return state;
+};
+
 const changeWeight = (
   state: Workout,
-  action: PayloadAction<SingleSetAction & { useKilos: boolean }>,
-  shouldDecrement: boolean,
+  action: PayloadAction<SingleSetAction & {
+    useKilos: boolean;
+    shouldIncrement: boolean;
+  }>,
 ) => {
-  const { payload: { useKilos, groupId, index } } = action;
+  const { shouldIncrement, useKilos, groupId, index } = action.payload;
   const { exerciseGroups } = state;
   const group = exerciseGroups.find(g => g.id === groupId);
   const weight = (group.exercises[index] as WeightedActivity).weightInKilos;
@@ -29,13 +53,13 @@ const changeWeight = (
   const largeIncrement = useKilos ? 2.5 : twoAndAHalfPoundsInKilos;
 
   // check if the increment should be 0.5 or 2.5
-  const useSmallIncrement: boolean = convertWeight(weight, useKilos) < 20
-    || convertWeight(weight, useKilos) === 20
-    && shouldDecrement;
-  const increment: number = useSmallIncrement ? smallIncrement : largeIncrement;
+  const useLargeIncrement: boolean =
+    convertKilosToDisplayedWeight(weight, useKilos) > 20
+    || convertKilosToDisplayedWeight(weight, useKilos) === 20 && shouldIncrement;
+  const increment: number = useLargeIncrement ? largeIncrement : smallIncrement ;
 
   // should we increment or decrement?
-  const newWeight = shouldDecrement ? weight - increment : weight + increment;
+  const newWeight = shouldIncrement ? weight + increment : weight - increment;
 
   return {
     ...state,
@@ -51,32 +75,22 @@ const changeWeight = (
   };
 };
 
+type ChangeRepsAction = PayloadAction<SingleSetAction & { newReps: number }>;
+
 const changeReps = (
   state: Workout,
-  action: PayloadAction<SingleSetAction & { increment: number }>
+  action: ChangeRepsAction,
 ): Workout => {
-  const { payload: { increment, groupId, index } } = action;
-  const { exerciseGroups } = state;
+  const { payload: { newReps, groupId, index } } = action;
 
-  return {
-    ...state,
-    exerciseGroups: exerciseGroups.map(g => (
-      g.id !== groupId ? g : {
-        ...g,
-        exercises: g.exercises.map((wa: WeightedActivity, i) => {
-          if (i === index) {
-            const newRepsAchieved: number = increment + wa.repsAchieved;
-            return {
-              ...wa,
-              // check first for negative reps and set to zero
-              repsAchieved: newRepsAchieved < 0 ? 0 : newRepsAchieved,
-            };
-          }
-          return wa;
-        }),
-      }
-    )),
-  };
+  state.exerciseGroups.forEach(group => {
+    if (group.id === groupId) {
+      const newRepsAchieved = newReps < 0 ? 0 : newReps;
+      (group.exercises[index] as WeightedActivity).repsAchieved = newRepsAchieved;
+    }
+  });
+
+  return state;
 };
 
 const toggleSetComplete = (
@@ -99,20 +113,6 @@ const toggleSetComplete = (
       }
     )),
   };
-};
-
-const incrementWeight = (
-  state: Workout,
-  action: PayloadAction<SingleSetAction & { useKilos: boolean }>,
-) => {
-  return changeWeight(state, action, false);
-};
-
-const decrementWeight = (
-  state: Workout,
-  action: PayloadAction<SingleSetAction & { useKilos: boolean }>,
-) => {
-  return changeWeight(state, action, true);
 };
 
 const setActiveWorkout = (_state: Workout, action: PayloadAction<Workout>) => {
@@ -148,9 +148,9 @@ const startWorkout = (state: Workout, _action: Action): Workout => ({
 });
 
 const reducers = {
-  incrementWeight,
-  decrementWeight,
+  setWeight,
   setActiveWorkout,
+  changeWeight,
   changeReps,
   toggleSetComplete,
   finishWorkout,
@@ -183,25 +183,28 @@ export const useActiveWorkout = () => {
       payload,
     });
 
-  const changeReps = (payload: SingleSetAction & { increment: number }) =>
-    dispatch({ type: actions.changeReps.type, payload });
+  const changeReps = (payload: SingleSetAction & { newReps: number }) =>
+    dispatch<ChangeRepsAction>({ type: actions.changeReps.type, payload });
 
   const setActiveWorkout = (workout: Workout) => dispatch({
     type: actions.setActiveWorkout.type,
     payload: workout,
   });
 
-  const changeWeight = (
-    { shouldIncrement, groupId, index }: SingleSetAction & { shouldIncrement: boolean },
-  ) => dispatch({
-    type: shouldIncrement
-      ? actions.incrementWeight.type
-      : actions.decrementWeight.type,
-    payload: {
-      groupId,
-      index,
-      useKilos,
-    },
+  const setWeight = (
+    payload: SingleSetAction & { weight: number },
+  ) => dispatch<SetWeightAction>({
+    type: actions.setWeight.type,
+    payload: { ...payload, useKilos },
+  });
+
+  const changeWeight = ({
+    shouldIncrement,
+    groupId,
+    index,
+  }: SingleSetAction & { shouldIncrement: boolean }) => dispatch({
+    type: actions.changeWeight.type,
+    payload: { groupId, index, useKilos, shouldIncrement },
   });
 
   const addActivity = (activity: Activity) => dispatch({
@@ -214,6 +217,7 @@ export const useActiveWorkout = () => {
   const startWorkout = () => dispatch({ type: actions.startWorkout.type });
 
   return {
+    setWeight,
     toggleSetComplete,
     changeReps,
     setActiveWorkout,
@@ -224,6 +228,5 @@ export const useActiveWorkout = () => {
     startWorkout,
   };
 };
-// TODO: Replace incrementWeight/decrementWeight with single changeWeight func.
 
 export default activeWorkoutSlice.reducer;
