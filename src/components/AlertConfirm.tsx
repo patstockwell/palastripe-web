@@ -112,8 +112,8 @@ export const AlertConfirm: React.FC<Props> = ({
         return item ?
           <FixedWrapper key={'unique'} style={{ opacity: props.opacity }}>
             <GlobalOverFlowHiddenStyle hidden={showAlert} />
-            <Background ref={backgroundRef} onClick={clickHandler}>
-              <CentrePanel>
+            <Background>
+              <CentrePanel ref={backgroundRef} onClick={clickHandler}>
                 <Dialog style={props}>
                   <MessageText>{messageText}</MessageText>
                   <ButtonWrapper>

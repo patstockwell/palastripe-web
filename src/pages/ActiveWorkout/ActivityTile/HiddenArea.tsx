@@ -150,10 +150,12 @@ const EditableInput: React.FC<EditableInputProps> = ({
     const parsedValue = allowIntegersOnly
       ? Number.parseInt(inputValue, 10)
       : Number.parseFloat(inputValue);
+    // Only update if the input has changed and is a valid number.
     const canUpdate = inputValue !== null && !isNaN(parsedValue);
     onBlurOrEnter(canUpdate ? parsedValue : initialValue);
+    // reset the input
+    setInputValue(null);
     setShowInput(false);
-    setInputValue(null); // reset the input
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
@@ -177,7 +179,7 @@ const EditableInput: React.FC<EditableInputProps> = ({
           autoFocus
           value={inputValue === null ? initialValue : inputValue}
           onChange={handleChange}
-          placeholder="0.0"
+          placeholder="0"
           onKeyPress={handleKeyPress}
         />
       ) : (
