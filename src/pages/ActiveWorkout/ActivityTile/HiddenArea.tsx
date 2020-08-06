@@ -143,7 +143,7 @@ const EditableInput: React.FC<EditableInputProps> = ({
   allowIntegersOnly,
   children,
 }) => {
-  const [inputValue, setInputValue] = useState(null);
+  const [inputValue, setInputValue] = useState('');
   const [showInput, setShowInput] = useState(false);
 
   const handleBlurOrEnter = () => {
@@ -151,10 +151,10 @@ const EditableInput: React.FC<EditableInputProps> = ({
       ? Number.parseInt(inputValue, 10)
       : Number.parseFloat(inputValue);
     // Only update if the input has changed and is a valid number.
-    const canUpdate = inputValue !== null && !isNaN(parsedValue);
+    const canUpdate = inputValue !== '' && !isNaN(parsedValue);
     onBlurOrEnter(canUpdate ? parsedValue : initialValue);
     // reset the input
-    setInputValue(null);
+    setInputValue('');
     setShowInput(false);
   };
 
@@ -177,7 +177,7 @@ const EditableInput: React.FC<EditableInputProps> = ({
           inputMode="decimal"
           onBlur={handleBlurOrEnter}
           autoFocus
-          value={inputValue === null ? initialValue : inputValue}
+          value={inputValue}
           onChange={handleChange}
           placeholder="0"
           onKeyPress={handleKeyPress}
