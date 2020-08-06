@@ -19,6 +19,7 @@ import { useAddWorkoutToHistory } from '../../reducers/historyReducer';
 import { useUpdateWorkout } from '../../reducers/workoutsReducer';
 import { useActiveWorkout } from '../../reducers/activeWorkoutReducer';
 import { customWorkoutId } from '../../workoutData/workouts/customWorkout';
+import { useSelectedExercise } from '../../context/useSelectedExercise';
 
 export const ActiveWorkout: React.FC = () => {
   const [ showEndWorkoutAlert, setShowEndWorkoutAlert ] = useState(false);
@@ -26,6 +27,7 @@ export const ActiveWorkout: React.FC = () => {
   const addToHistory = useAddWorkoutToHistory();
   const updateWorkoutTemplate = useUpdateWorkout();
   const { finishWorkout, setActiveWorkout } = useActiveWorkout();
+  const { setSelectedExercise } = useSelectedExercise()
   const {
     workouts,
     activeWorkout,
@@ -56,8 +58,8 @@ export const ActiveWorkout: React.FC = () => {
     finishWorkout(); // activeWorkoutReducer
     addToHistory(activeWorkout); // historyReducer
     updateWorkoutTemplate(activeWorkout); // workoutsReducer
-    setShowEndWorkoutAlert(false);
-    setActivityPageScrollPosition(0);
+    setSelectedExercise({ index: 0, groupId: '' }); // reset selected exercise
+    setActivityPageScrollPosition(0); // reset scroll for activity history page
   };
 
   return (
