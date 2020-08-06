@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import styled from 'styled-components';
 import { useSpring, animated } from 'react-spring';
 import { useSelector } from 'react-redux';
@@ -48,7 +48,13 @@ export const RestTimer: React.FC<Props> = ({
     config: { mass: 1, tension: 470, friction: 40 },
   }));
 
-  useInterval(() => setCount(count + 1), ONE_SECOND);
+  // The timer tick is created by storing the time at zero (when the component
+  // first mounts) and then at each interval taking the difference between the
+  // current time and the zero time.
+  const timeAtZero = useRef(Math.floor(Date.now() / 1000));
+  useInterval(() => (
+    setCount(Math.floor(Date.now() / 1000) - timeAtZero.current)
+  ), ONE_SECOND);
 
   // graceful way to unmount
   const fadeAndReset = () => {
