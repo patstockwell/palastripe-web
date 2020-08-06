@@ -10,14 +10,13 @@ import { StartTimedExerciseButton } from './StartTimedExerciseButton';
 import { tileStyle } from './ActivityTileSharedStyles';
 import DownArrow from '../../../assets/svg/DownArrow';
 import { TimedActivity } from '../../../helpers/types';
-import {
-  formatSeconds,
-} from '../../../helpers/functions';
+import { formatSeconds, useInterval } from '../../../helpers/functions';
 import {
   green,
   lightGrey3,
   timedExerciseWaitPeriod,
   tileMinHeight,
+  ONE_SECOND,
 } from '../../../helpers/constants';
 import { Details, Title, Duration, VisibleArea } from './index';
 import { useActiveWorkout } from '../../../reducers/activeWorkoutReducer';
@@ -87,23 +86,21 @@ export const ActivityTileWithTimer: React.FC<Props> = ({
 }) => {
   const [count, setCount] = useState(0);
   const [preparationComplete, setPreparationComplete] = useState(false);
-  const [started, setStarted] = useState(false);
+  const [preparationStarted, setPreparationStarted] = useState(false);
   const [paused, setPaused] = useState(false);
   const { toggleSetComplete } = useActiveWorkout();
   const { playStart, playComplete } = useAudio();
 
-  const inProgress = selected && !completed && started;
+  const inProgress = selected && !completed && preparationStarted;
+
+  const shouldUseInterval = inProgress && preparationComplete && !paused;
+  useInterval(() => setCount(n => n + 1), shouldUseInterval ? ONE_SECOND : null);
 
   useEffect(() => {
-    if (inProgress && preparationComplete && !paused) { // keep counting
-      const id = setInterval(() => setCount(count + 1), 1000);
-      return () => clearInterval(id);
-    }
-
-    if (!selected && completed || !selected && started) { // reset
+    if (!selected && completed || !selected && preparationStarted) { // reset
       setPreparationComplete(false);
       setCount(0);
-      setStarted(false);
+      setPreparationStarted(false);
       setPaused(false);
     }
   });
@@ -149,7 +146,7 @@ export const ActivityTileWithTimer: React.FC<Props> = ({
         <Duration>
           <p>{formattedTime}</p>
         </Duration>
-        {started || completed ? (
+        {preparationStarted || completed ? (
           <ToggleSetCompleteButton
             handleClick={() => handleClick()}
             completed={completed}
@@ -157,7 +154,7 @@ export const ActivityTileWithTimer: React.FC<Props> = ({
           />
         ) : (
           <StartTimedExerciseButton
-            handleClick={() => selected && setStarted(true)}
+            handleClick={() => selected && setPreparationStarted(true)}
             showIcon={selected}
           />
         )}
@@ -168,11 +165,12 @@ export const ActivityTileWithTimer: React.FC<Props> = ({
         time={formattedTime}
         animatedStyles={animatedStyles}
         preparing={inProgress && !preparationComplete}
-        started={started}
+        started={preparationStarted}
         paused={paused}
-        handleButtonClick={() => {
-          !started ? setStarted(true) : setPaused(!paused);
-        }}
+        handleButtonClick={() => !preparationStarted
+          ? setPreparationStarted(true)
+          : setPaused(!paused)
+        }
       />
 
       {selected &&
