@@ -40,7 +40,7 @@ export const RestTimer: React.FC<Props> = ({
   handleClick,
   restPeriod = 90, // default rest period of 90 seconds
 }) => {
-  const { useRestTimer } = useSelector((s: State) => s.settings);
+  const { useRestTimer = true } = useSelector((s: State) => s.settings);
   const [ count, setCount ] = useState(0);
   const [ divStyle, setDivStyle ] = useSpring(() => ({
     opacity: 1,

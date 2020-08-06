@@ -1,10 +1,15 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useSelector } from 'react-redux';
+import {useSelector} from 'react-redux';
 
-import { State } from '../../helpers/types';
-import { Workout } from '../../reducers/workoutsReducer';
-import { MONTHS_OF_THE_YEAR, purple, lightGrey2 } from '../../helpers/constants';
+import {State} from '../../helpers/types';
+import {Workout} from '../../reducers/workoutsReducer';
+import {
+  MONTHS_OF_THE_YEAR,
+  purple,
+  lightGrey2,
+  DAYS_OF_THE_WEEK,
+} from '../../helpers/constants';
 
 const Grid = styled.div`
   margin: 0 auto 24px;
@@ -23,6 +28,7 @@ const Row = styled.div`
 
 const blockStyle = `
   display: block;
+  position: relative;
   height: 10px;
   width: 10px;
   font-size: 10px;
@@ -30,6 +36,8 @@ const blockStyle = `
   border-radius: 2px;
   padding: 0;
   margin: 2px;
+  color: darkgrey;
+  font-size: 10px;
 `;
 
 const EmptyBlock = styled.div`
@@ -39,10 +47,19 @@ const EmptyBlock = styled.div`
 
 const Month = styled.div`
   ${blockStyle}
-
-  font-size: 10px;
-  color: grey;
   margin-bottom: 4px;
+`;
+
+const DayBlock = styled.div`
+  ${blockStyle}
+  margin: 0;
+  margin-right: 4px;
+`;
+
+const DayText = styled.span`
+  margin: 0;
+  position: absolute;
+  right: 0;
 `;
 
 const Block = styled.div<{ highlight: boolean; evenMonth: boolean }>`
@@ -60,7 +77,7 @@ export const CalendarGraph: React.FC = () => {
   const activityHistory = useSelector((state: State) => state.history);
   const iterator = new Date();
   const daysInAWeek = 7;
-  const weeksToDisplay = 18;
+  const weeksToDisplay = 17;
   const daysUntilEndOfThisWeek = 6 - iterator.getDay();
   const daysToDisplay = (daysInAWeek * weeksToDisplay) - daysUntilEndOfThisWeek;
   interface WorkoutDate extends Date {
@@ -98,6 +115,9 @@ export const CalendarGraph: React.FC = () => {
     <Grid>
       {dates.map(weekday => (
         <Row key={weekday[0].toDateString()}>
+          <DayBlock>
+            <DayText>{DAYS_OF_THE_WEEK[weekday[0].getDay()].substring(0, 1)}</DayText>
+          </DayBlock>
           {weekday.map(date => (
             <Block
               highlight={date.workoutCompleted}
@@ -111,6 +131,7 @@ export const CalendarGraph: React.FC = () => {
         </Row>
       ))}
       <Row className="month">
+        <Month /* Add extra month to fill the first column (day labels) */ />
         {dates[6].map((date, i) => (
           // iterate over the last day of each week to find the month name
           <Month key={date.toDateString()}>
