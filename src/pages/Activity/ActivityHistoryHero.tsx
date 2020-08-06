@@ -1,14 +1,19 @@
 import React, { Fragment } from 'react';
 import styled from 'styled-components';
-import { green, purple } from '../../helpers/constants';
-import { getHoursAndMinutes } from '../../helpers/functions';
-import { CalendarGraph } from './CalendarGraph';
 
-const Heading = styled.h3`
+import {green, purple} from '../../helpers/constants';
+import {getHoursAndMinutes} from '../../helpers/functions';
+import {CalendarGraph} from './CalendarGraph';
+
+const headingStyle = `
   color: grey;
   font-size: 0.75em;
   text-transform: uppercase;
   margin: 0;
+`;
+
+const Heading = styled.h2`
+  ${headingStyle}
 `;
 
 const TotalWorkouts = styled.p`
@@ -23,20 +28,31 @@ const Workouts = styled.div`
   padding: 32px 0;
 `;
 
-const TimesAndWeights = styled.div`
-  display: flex;
-  justify-content: space-around;
-
+const HighlightPanel = styled.div`
   // this allows the bottom of the div to overflow the edge of its sibling
   margin-bottom: -24px;
   padding: 24px 0 48px 0;
   border-radius: 24px 24px 0 0;
   background-image: linear-gradient(140deg, ${green}, ${purple});
   color: white;
+`;
 
-  & h3 {
-    color: lightgrey;
-  }
+const HighlightPanelHeading = styled.h2`
+  ${headingStyle}
+  text-align: center;
+  color: lightgrey;
+  transform: translateY(-8px);
+
+`;
+
+const StatsHeading = styled.h3`
+  ${headingStyle}
+  color: lightgrey;
+`;
+
+const TimesAndWeights = styled.div`
+  display: flex;
+  justify-content: space-around;
 `;
 
 const Total = styled.p`
@@ -51,20 +67,26 @@ const UnitLabel = styled.span`
 `;
 
 const Statistic = styled.div`
+  display: flex;
   flex-direction: column-reverse;
 `;
 
 interface Props {
-  totalWeight: number;
-  totalMinutes: number;
+  weeklyVolume: number;
+  weeklyMinutes: number;
   totalWorkouts: number;
   unitOfWeight: string;
+  workoutsThisWeek: number;
 }
 
-const ActivityHistoryHero: React.FC<Props> = ({
-  totalMinutes, totalWorkouts, totalWeight, unitOfWeight,
+export const ActivityHistoryHero: React.FC<Props> = ({
+  weeklyMinutes,
+  totalWorkouts,
+  weeklyVolume,
+  unitOfWeight,
+  workoutsThisWeek,
 }) => {
-  const { mins, hours, minsLabel, hoursLabel } = getHoursAndMinutes(totalMinutes);
+  const { mins, hours, minsLabel, hoursLabel } = getHoursAndMinutes(weeklyMinutes);
 
   return (
     <Fragment>
@@ -78,27 +100,30 @@ const ActivityHistoryHero: React.FC<Props> = ({
 
       <CalendarGraph />
 
-      <TimesAndWeights>
-        <Statistic>
-          <Heading>Total Time</Heading>
-          <Total>
-            {hours > 0 &&
-              <span>{hours} <UnitLabel>{hoursLabel}</UnitLabel>{' '}</span>
-            }
-            {mins < 10 ? `0${mins}` : mins} <UnitLabel>{minsLabel}</UnitLabel>
-          </Total>
-        </Statistic>
+      <HighlightPanel>
+        <HighlightPanelHeading>
+          Workouts This Week: {workoutsThisWeek}
+        </HighlightPanelHeading>
+        <TimesAndWeights>
+          <Statistic>
+            <StatsHeading>Duration</StatsHeading>
+            <Total>
+              {hours > 0 &&
+                <span>{hours} <UnitLabel>{hoursLabel}</UnitLabel>{' '}</span>
+              }
+              {mins < 10 ? `0${mins}` : mins} <UnitLabel>{minsLabel}</UnitLabel>
+            </Total>
+          </Statistic>
 
-        <Statistic>
-          <Heading>Total Volume</Heading>
-          <Total>
-            <span>{totalWeight} <UnitLabel>{unitOfWeight}</UnitLabel></span>
-          </Total>
-        </Statistic>
-      </TimesAndWeights>
+          <Statistic>
+            <StatsHeading>Volume</StatsHeading>
+            <Total>
+              <span>{weeklyVolume} <UnitLabel>{unitOfWeight}</UnitLabel></span>
+            </Total>
+          </Statistic>
+        </TimesAndWeights>
+      </HighlightPanel>
 
     </Fragment>
   );
 };
-
-export default ActivityHistoryHero;
