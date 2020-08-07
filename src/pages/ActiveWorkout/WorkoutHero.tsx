@@ -1,14 +1,16 @@
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
-import styled, { keyframes } from 'styled-components';
-import { useLocation } from 'react-router-dom';
+import React, {useState} from 'react';
+import {useSelector} from 'react-redux';
+import styled, {keyframes} from 'styled-components';
+import {useLocation} from 'react-router-dom';
 import * as clipboard from 'clipboard-polyfill';
+import {format} from 'date-fns';
 
-import { SuccessAlert } from '../../components/AlertConfirm';
-import { ColouredDot } from '../../assets/svg/ColouredDot';
-import { Share as ShareIcon } from '../../assets/svg/Share';
-import { SoundOn } from '../../assets/svg/SoundOn';
-import { SoundOff } from '../../assets/svg/SoundOff';
+import {SuccessAlert} from '../../components/AlertConfirm';
+import {StopWatch} from '../../assets/svg/StopWatch';
+import {ColouredDot} from '../../assets/svg/ColouredDot';
+import {Share as ShareIcon} from '../../assets/svg/Share';
+import {SoundOn} from '../../assets/svg/SoundOn';
+import {SoundOff} from '../../assets/svg/SoundOff';
 import {
   buttonStyle,
   workoutTitleStyle,
@@ -18,12 +20,12 @@ import {
   formatMinutes,
   calculateWorkoutTime,
 } from '../../helpers/functions';
-import { State } from '../../helpers/types';
-import { Workout } from '../../reducers/workoutsReducer';
-import { green, APP_URL } from '../../helpers/constants';
-import { useActiveWorkout } from '../../reducers/activeWorkoutReducer';
-import { useSettings } from '../../reducers/settingsReducer';
-import { useSelectedExercise } from '../../context/useSelectedExercise';
+import {State} from '../../helpers/types';
+import {Workout} from '../../reducers/workoutsReducer';
+import {green, APP_URL} from '../../helpers/constants';
+import {useActiveWorkout} from '../../reducers/activeWorkoutReducer';
+import {useSettings} from '../../reducers/settingsReducer';
+import {useSelectedExercise} from '../../context/useSelectedExercise';
 
 export const Window = styled.div<{ colour?: string, imageUrl?: string }>`
   ${workoutHeroWindowStyle}
@@ -51,6 +53,8 @@ export const Title = styled.h1`
 `;
 
 export const Time = styled.p`
+  display: flex;
+  align-items: flex-end;
   color: white;
   size: 16px;
   font-weight: 400;
@@ -103,12 +107,12 @@ interface Props {
 }
 
 export const WorkoutHero: React.FC<Props> = ({ workout }) => {
-  const [ showShareMessage, setShowShareMessage ] = useState(false);
-  const { pathname } = useLocation();
-  const { setSelectedExercise } = useSelectedExercise();
-  const { startWorkout } = useActiveWorkout();
-  const { soundOn } = useSelector((state: State) => state.settings);
-  const { setUseSound } = useSettings();
+  const [showShareMessage, setShowShareMessage] = useState(false);
+  const {pathname} = useLocation();
+  const {setSelectedExercise} = useSelectedExercise();
+  const {startWorkout} = useActiveWorkout();
+  const {soundOn} = useSelector((state: State) => state.settings);
+  const {setUseSound} = useSettings();
   const time = formatMinutes(calculateWorkoutTime(workout));
 
   const handleShare = () => {
@@ -122,6 +126,10 @@ export const WorkoutHero: React.FC<Props> = ({ workout }) => {
     startWorkout();
   };
 
+  const displayedTime = workout.startTime
+    ? format(new Date(workout.startTime), 'p')
+    : time;
+
   return (
     <Window imageUrl={workout.imageUrl}>
       <ButtonGroup>
@@ -133,7 +141,10 @@ export const WorkoutHero: React.FC<Props> = ({ workout }) => {
         </Button>
       </ButtonGroup>
       <Title>{workout.name}</Title>
-      <Time>{time}</Time>
+      <Time>
+        <StopWatch style={{ fill: 'white', marginRight: '8px' }}/>
+        {displayedTime}
+      </Time>
       <StartButton onClick={handleStartButtonClick}>
         <ColouredDot fill={green} />
         Start Workout
