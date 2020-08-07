@@ -52,8 +52,14 @@ const Ul = styled.ul`
 `;
 
 const SearchSuggestionTile = styled.li`
+  height: 48px;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+
   font-style: italic;
-  padding: 12px;
+  padding: 0 12px;
   color: ${charcoal};
   cursor: pointer;
 

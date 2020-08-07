@@ -65,7 +65,7 @@ export const ConfirmButtonLink = styled(Link)<{ background?: string; fontColour?
 
 export const MessageText = styled.p`
   color: black;
-  padding: 24px ${gutterWidth}px 16px;
+  padding: 24px ${gutterWidth}px;
   text-align: center;
   margin: 0 auto;
   position: sticky;
@@ -115,8 +115,8 @@ export const AlertConfirm: React.FC<Props> = ({
             <Background>
               <CentrePanel ref={backgroundRef} onClick={clickHandler}>
                 <Dialog style={props}>
-                  <MessageText>{messageText}</MessageText>
                   <ButtonWrapper>
+                    <MessageText>{messageText}</MessageText>
                     {children}
                   </ButtonWrapper>
                 </Dialog>
