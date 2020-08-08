@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import React, {useState} from 'react';
+import {useSelector} from 'react-redux';
 import {
   animated,
   SpringValue
 } from 'react-spring';
 import styled from 'styled-components';
-import { State, WeightedActivity } from '../../../helpers/types';
-import { convertKilosToDisplayedWeight } from '../../../helpers/functions';
-import { IncrementDecrementPanel } from './IncrementDecrementPanel';
-import { buttonStyle } from '../../../components/SharedStyles';
-import { useActiveWorkout } from '../../../reducers/activeWorkoutReducer';
+import {State, WeightedActivity} from '../../../helpers/types';
+import {getOneRepMax, formatWeight} from '../../../helpers/functions';
+import {IncrementDecrementPanel} from './IncrementDecrementPanel';
+import {buttonStyle} from '../../../components/SharedStyles';
+import {useActiveWorkout} from '../../../reducers/activeWorkoutReducer';
 
 const MainValue = styled.span`
   font-size: 32px;
@@ -21,10 +21,19 @@ const P = styled.p`
   margin: 0;
 `;
 
-const Button = styled.button<{  background?: string; fontColour?: string; }>`
+const Button = styled.button<{background?: string; fontColour?: string;}>`
   ${buttonStyle}
   display: block;
   margin: 16px auto 0;
+`;
+
+const OneRepMax = styled.p`
+  position: absolute;
+  right: 12px;
+  margin: 0;
+  font-size: 0.75em;
+  color: gray;
+  text-transform: uppercase;
 `;
 
 interface Props {
@@ -65,7 +74,7 @@ export const HiddenArea: React.FC<Props> = ({
     }
   };
 
-  const convertedWeight = convertKilosToDisplayedWeight(weightInKilos, useKilos);
+  const {weight, label} = formatWeight(weightInKilos, useKilos);
 
   return (
     <animated.div style={{
@@ -74,19 +83,22 @@ export const HiddenArea: React.FC<Props> = ({
       cursor: 'default',
     }}>
 
+      <OneRepMax>
+        1RM: {getOneRepMax(repsAchieved, weight) || '~'} {label}
+      </OneRepMax>
       <IncrementDecrementPanel
         handleDecrement={() => changeWeight({ shouldIncrement: false, index, groupId })}
         handleIncrement={() => changeWeight({ shouldIncrement: true, index, groupId })}
         percentageComplete={1}
       >
         <EditableInput
-          value={convertedWeight}
+          value={weight}
           onBlurOrEnter={(weight: number) => setWeight({ weight, groupId, index })}
           allowIntegersOnly={false}
         >
-          <MainValue>{convertedWeight}</MainValue>
+          <MainValue>{weight}</MainValue>
         </EditableInput>
-        <P>{useKilos ? 'kg' : 'lbs'}</P>
+        <P>{label}</P>
       </IncrementDecrementPanel>
 
       <IncrementDecrementPanel

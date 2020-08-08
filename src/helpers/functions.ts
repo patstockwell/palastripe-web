@@ -269,3 +269,7 @@ export const calculateWorkoutTime = (w: Workout): number => {
     .reduce((acc, curr) => acc + curr, 0);
   return Math.round(total / SECONDS_IN_A_MINUTE);
 };
+
+export const getOneRepMax = (reps: number, weight: number): number =>
+  // If reps are higher that 20, then the 1RM is not accurate. Simply return 0.
+  reps > 20 ? 0 : Math.round(weight * (36 / (37 - reps)));
