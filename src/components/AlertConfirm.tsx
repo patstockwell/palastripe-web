@@ -174,15 +174,14 @@ export const SuccessAlert: React.FC<SuccessAlertProps> = ({
 
 const AlertButtonBase = styled.button<ButtonStyleProps>`
   ${buttonStyle}
-  display: block;
   margin-top: ${gutterWidth}px;
+  display: block;
   width: 100%;
-  background-color: ${props => props.background};
-  color: ${props => props.fontColour};
 `;
 
 const AlertButtonLink = styled(Link)<ButtonStyleProps>`
   ${buttonStyle}
+  margin-top: ${gutterWidth}px;
   display: flex;
   align-items: center;
   justify-content: center;

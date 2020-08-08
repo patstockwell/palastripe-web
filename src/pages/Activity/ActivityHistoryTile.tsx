@@ -1,20 +1,11 @@
-import React, {useState} from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import {Link} from 'react-router-dom';
 
-import {
-  AlertButtonBlue,
-  AlertButtonGrey,
-  AlertButtonOrange,
-  AlertConfirm,
-} from '../../components/AlertConfirm';
 import Dots from '../../assets/svg/Dots';
 import Avatar from '../../components/Avatar';
 import {Workout} from '../../reducers/workoutsReducer';
-import {
-  ReduxAction,
-  Activity,
-} from '../../helpers/types';
+import { ReduxAction } from '../../helpers/types';
 import {
   getDiffInMinutes,
   getHoursAndMinutes,
@@ -24,7 +15,7 @@ import {
 } from '../../helpers/functions';
 import {purple, lightGrey3} from '../../helpers/constants';
 import {useScrollPosition} from '../../context/useScrollPosition';
-import {useActiveWorkout} from '../../reducers/activeWorkoutReducer';
+import {ActivityHistoryOptionsMenu} from './ActivityHistoryOptionsMenu';
 
 const Tile = styled.li`
   position: relative;
@@ -197,93 +188,14 @@ export const ActivityHistoryTile: React.FC<Props> = ({
         </StatsPanel>
       </Right>
 
-      <ActivityHistoryTileOptionsMenu
+      <ActivityHistoryOptionsMenu
         showMenu={showMenu}
         deleteWorkout={deleteWorkout}
         toggleMenu={toggleMenu}
         workout={workout}
+        historyLink={historyLink}
       />
     </Tile>
   );
 };
 
-interface MenuProps {
-  showMenu: boolean;
-  deleteWorkout: () => ReduxAction<number>;
-  toggleMenu: () => void;
-  workout: Workout;
-}
-
-const ActivityHistoryTileOptionsMenu: React.FC<MenuProps> = ({
-  deleteWorkout,
-  showMenu,
-  toggleMenu,
-  workout,
-}) => {
-  const [showDeleteWorkoutAlert, setShowDeleteWorkoutAlert] = useState(false);
-  const {setActiveWorkout} = useActiveWorkout();
-
-  const handleDeleteConfirmationClick = () => {
-    deleteWorkout();
-    setShowDeleteWorkoutAlert(false);
-  };
-
-  const handleRepeatWorkoutClick = () => {
-    const incompleteWorkout: Workout = {
-      ...workout,
-      startTime: undefined,
-      finishTime: undefined,
-      exerciseGroups: workout.exerciseGroups.map(group => ({
-        ...group,
-        exercises: group.exercises.map((a): Activity => ({
-          ...a, completed: false
-        })),
-      }))
-    };
-
-    setActiveWorkout(incompleteWorkout);
-  };
-
-  return (
-    <>
-      <AlertConfirm
-        cancelAlert={() => toggleMenu()}
-        showAlert={showMenu}
-        messageText="Options"
-      >
-        <AlertButtonGrey
-          onClick={handleRepeatWorkoutClick}
-          to={`/workouts/${workout.id}/`}
-        >
-          Repeat Workout
-        </AlertButtonGrey>
-
-        <AlertButtonGrey
-          onClick={() => {
-            setShowDeleteWorkoutAlert(true);
-            toggleMenu();
-          }}
-        >
-          Delete Workout
-        </AlertButtonGrey>
-
-        <AlertButtonBlue onClick={() => toggleMenu()}>
-          Cancel
-        </AlertButtonBlue>
-      </AlertConfirm>
-
-      <AlertConfirm
-        cancelAlert={() => setShowDeleteWorkoutAlert(false)}
-        showAlert={showDeleteWorkoutAlert}
-        messageText="This workout will be deleted. This action cannot be undone."
-      >
-        <AlertButtonOrange onClick={handleDeleteConfirmationClick}>
-          Delete
-        </AlertButtonOrange>
-        <AlertButtonBlue onClick={() => setShowDeleteWorkoutAlert(false)}>
-          Cancel
-        </AlertButtonBlue>
-      </AlertConfirm>
-    </>
-  );
-};
