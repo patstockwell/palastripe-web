@@ -190,7 +190,7 @@ const AlertButtonLink = styled(Link)<ButtonStyleProps>`
 `;
 
 interface AlertButtonProps {
-  onClick: () => void;
+  onClick?: () => void;
   to?: string;
 }
 

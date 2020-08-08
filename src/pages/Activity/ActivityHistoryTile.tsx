@@ -11,7 +11,10 @@ import {
 import Dots from '../../assets/svg/Dots';
 import Avatar from '../../components/Avatar';
 import {Workout} from '../../reducers/workoutsReducer';
-import {ReduxAction} from '../../helpers/types';
+import {
+  ReduxAction,
+  Activity,
+} from '../../helpers/types';
 import {
   getDiffInMinutes,
   getHoursAndMinutes,
@@ -21,6 +24,7 @@ import {
 } from '../../helpers/functions';
 import {purple, lightGrey3} from '../../helpers/constants';
 import {useScrollPosition} from '../../context/useScrollPosition';
+import {useActiveWorkout} from '../../reducers/activeWorkoutReducer';
 
 const Tile = styled.li`
   position: relative;
@@ -197,6 +201,7 @@ export const ActivityHistoryTile: React.FC<Props> = ({
         showMenu={showMenu}
         deleteWorkout={deleteWorkout}
         toggleMenu={toggleMenu}
+        workout={workout}
       />
     </Tile>
   );
@@ -206,18 +211,37 @@ interface MenuProps {
   showMenu: boolean;
   deleteWorkout: () => ReduxAction<number>;
   toggleMenu: () => void;
+  workout: Workout;
 }
 
 const ActivityHistoryTileOptionsMenu: React.FC<MenuProps> = ({
   deleteWorkout,
   showMenu,
   toggleMenu,
+  workout,
 }) => {
   const [showDeleteWorkoutAlert, setShowDeleteWorkoutAlert] = useState(false);
+  const {setActiveWorkout} = useActiveWorkout();
 
   const handleDeleteConfirmationClick = () => {
     deleteWorkout();
     setShowDeleteWorkoutAlert(false);
+  };
+
+  const handleRepeatWorkoutClick = () => {
+    const incompleteWorkout: Workout = {
+      ...workout,
+      startTime: undefined,
+      finishTime: undefined,
+      exerciseGroups: workout.exerciseGroups.map(group => ({
+        ...group,
+        exercises: group.exercises.map((a): Activity => ({
+          ...a, completed: false
+        })),
+      }))
+    };
+
+    setActiveWorkout(incompleteWorkout);
   };
 
   return (
@@ -227,6 +251,13 @@ const ActivityHistoryTileOptionsMenu: React.FC<MenuProps> = ({
         showAlert={showMenu}
         messageText="Options"
       >
+        <AlertButtonGrey
+          onClick={handleRepeatWorkoutClick}
+          to={`/workouts/${workout.id}/`}
+        >
+          Repeat Workout
+        </AlertButtonGrey>
+
         <AlertButtonGrey
           onClick={() => {
             setShowDeleteWorkoutAlert(true);
