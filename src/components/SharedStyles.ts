@@ -48,9 +48,9 @@ export const opaqueImageInAfter = css<{ image: string }>`
   z-index: -1;
 `;
 
-interface ButtonProps { background?: string; fontColour?: string; }
+export interface ButtonStyleProps { background?: string; fontColour?: string; }
 
-export const buttonStyle = css<ButtonProps | any>`
+export const buttonStyle = css<ButtonStyleProps | any>`
   color: ${({ fontColour }) => fontColour || 'white'};
   border: none;
   font-size: 12px;

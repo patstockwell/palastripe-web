@@ -1,41 +1,40 @@
-import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import React, {useState} from 'react';
+import {useSelector} from 'react-redux';
+import {useParams} from 'react-router-dom';
 
-import { AudioProvider } from '../../context/useAudio';
+import {AudioProvider} from '../../context/useAudio';
 import {
-  ConfirmButtonLink,
-  ConfirmButton,
+  AlertButtonPurple,
+  AlertButtonGrey,
   AlertConfirm,
 } from '../../components/AlertConfirm';
-import { BackLinkBanner } from '../../components/BackLinkBanner';
-import { WorkoutHero, Window as CustomWorkoutHero } from './WorkoutHero';
-import { FourZeroFour } from '../../pages/FourZeroFour';
-import { ActivityList } from './ActivityList';
-import { State } from '../../helpers/types';
-import { lightGrey2, charcoal } from '../../helpers/constants';
-import { useScrollPosition } from '../../context/useScrollPosition';
-import { useAddWorkoutToHistory } from '../../reducers/historyReducer';
-import { useUpdateWorkout } from '../../reducers/workoutsReducer';
-import { useActiveWorkout } from '../../reducers/activeWorkoutReducer';
-import { customWorkoutId } from '../../workoutData/workouts/customWorkout';
-import { useSelectedExercise } from '../../context/useSelectedExercise';
+import {BackLinkBanner} from '../../components/BackLinkBanner';
+import {WorkoutHero, Window as CustomWorkoutHero} from './WorkoutHero';
+import {FourZeroFour} from '../../pages/FourZeroFour';
+import {ActivityList} from './ActivityList';
+import {State} from '../../helpers/types';
+import {useScrollPosition} from '../../context/useScrollPosition';
+import {useAddWorkoutToHistory} from '../../reducers/historyReducer';
+import {useUpdateWorkout} from '../../reducers/workoutsReducer';
+import {useActiveWorkout} from '../../reducers/activeWorkoutReducer';
+import {customWorkoutId} from '../../workoutData/workouts/customWorkout';
+import {useSelectedExercise} from '../../context/useSelectedExercise';
 
 export const ActiveWorkout: React.FC = () => {
-  const [ showEndWorkoutAlert, setShowEndWorkoutAlert ] = useState(false);
-  const { setActivityPageScrollPosition } = useScrollPosition();
+  const [showEndWorkoutAlert, setShowEndWorkoutAlert] = useState(false);
+  const {setActivityPageScrollPosition} = useScrollPosition();
   const addToHistory = useAddWorkoutToHistory();
   const updateWorkoutTemplate = useUpdateWorkout();
-  const { finishWorkout, setActiveWorkout } = useActiveWorkout();
-  const { setSelectedExercise } = useSelectedExercise()
+  const {finishWorkout, setActiveWorkout} = useActiveWorkout();
+  const {setSelectedExercise} = useSelectedExercise();
   const {
     workouts,
     activeWorkout,
-    settings: { soundOn },
+    settings: {soundOn},
   } = useSelector((state: State) => state);
 
   // get the workout ID from the URL
-  const { id: workoutId }: { id: string } = useParams();
+  const {id: workoutId}: {id: string} = useParams();
   const isCustomWorkout = workoutId === customWorkoutId;
   const workoutFromUrl = workouts.byId[workoutId];
 
@@ -87,15 +86,15 @@ export const ActiveWorkout: React.FC = () => {
         showAlert={showEndWorkoutAlert}
         messageText="This will end your workout and save it to activity history."
       >
-        <ConfirmButtonLink
+        <AlertButtonPurple
           to="/workout-complete/"
           onClick={finishWorkoutWithAlertTransition}
-        >Finish workout</ConfirmButtonLink>
-        <ConfirmButton
-          onClick={() => setShowEndWorkoutAlert(false)}
-          background={lightGrey2}
-          fontColour={charcoal}
-        >Cancel</ConfirmButton>
+        >
+          Finish workout
+        </AlertButtonPurple>
+        <AlertButtonGrey onClick={() => setShowEndWorkoutAlert(false)}>
+          Cancel
+        </AlertButtonGrey>
       </AlertConfirm>
     </AudioProvider>
   );

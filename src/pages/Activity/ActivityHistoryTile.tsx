@@ -1,12 +1,17 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 
-import { ConfirmButton, AlertConfirm } from '../../components/AlertConfirm';
+import {
+  AlertButtonBlue,
+  AlertButtonGrey,
+  AlertButtonOrange,
+  AlertConfirm,
+} from '../../components/AlertConfirm';
 import Dots from '../../assets/svg/Dots';
 import Avatar from '../../components/Avatar';
-import { Workout } from '../../reducers/workoutsReducer';
-import { ReduxAction } from '../../helpers/types';
+import {Workout} from '../../reducers/workoutsReducer';
+import {ReduxAction} from '../../helpers/types';
 import {
   getDiffInMinutes,
   getHoursAndMinutes,
@@ -14,15 +19,8 @@ import {
   getTotalWeightLifted,
   formatWeight,
 } from '../../helpers/functions';
-import {
-  purple,
-  lightGrey3,
-  charcoal,
-  blue,
-  orange,
-  lightGrey2,
-} from '../../helpers/constants';
-import { useScrollPosition } from '../../context/useScrollPosition';
+import {purple, lightGrey3} from '../../helpers/constants';
+import {useScrollPosition} from '../../context/useScrollPosition';
 
 const Tile = styled.li`
   position: relative;
@@ -130,14 +128,14 @@ const OptionsButton = styled.button`
 interface Props {
   workout: Workout;
   showMenu: boolean;
-  toggleMenu: () => void;
   deleteWorkout: () => ReduxAction<number>;
+  toggleMenu: () => void;
   initials: string;
   useKilos: boolean;
   historyLink: number;
 }
 
-const ActivityHistoryTile: React.FC<Props> = ({
+export const ActivityHistoryTile: React.FC<Props> = ({
   workout,
   toggleMenu,
   showMenu,
@@ -145,22 +143,16 @@ const ActivityHistoryTile: React.FC<Props> = ({
   useKilos,
   historyLink,
 }) => {
-  const [ showDeleteWorkoutAlert, setShowDeleteWorkoutAlert ] = useState(false);
-  const { setActivityPageScrollPosition } = useScrollPosition();
+  const {setActivityPageScrollPosition} = useScrollPosition();
 
-  const { name: workoutName, startTime, finishTime } = workout;
+  const {name: workoutName, startTime, finishTime} = workout;
   const timeSince = getTimeSince(finishTime);
   const {
     mins, hours, minsLabel, hoursLabel,
   } = getHoursAndMinutes(getDiffInMinutes(startTime, finishTime));
   const totalWeightLifted = getTotalWeightLifted(workout);
 
-  const handleConfirmationClick = () => {
-    deleteWorkout();
-    setShowDeleteWorkoutAlert(false);
-  };
-
-  const { label, weight } = formatWeight(totalWeightLifted, useKilos);
+  const {label, weight} = formatWeight(totalWeightLifted, useKilos);
 
   return (
     <Tile>
@@ -201,23 +193,52 @@ const ActivityHistoryTile: React.FC<Props> = ({
         </StatsPanel>
       </Right>
 
+      <ActivityHistoryTileOptionsMenu
+        showMenu={showMenu}
+        deleteWorkout={deleteWorkout}
+        toggleMenu={toggleMenu}
+      />
+    </Tile>
+  );
+};
+
+interface MenuProps {
+  showMenu: boolean;
+  deleteWorkout: () => ReduxAction<number>;
+  toggleMenu: () => void;
+}
+
+const ActivityHistoryTileOptionsMenu: React.FC<MenuProps> = ({
+  deleteWorkout,
+  showMenu,
+  toggleMenu,
+}) => {
+  const [showDeleteWorkoutAlert, setShowDeleteWorkoutAlert] = useState(false);
+
+  const handleDeleteConfirmationClick = () => {
+    deleteWorkout();
+    setShowDeleteWorkoutAlert(false);
+  };
+
+  return (
+    <>
       <AlertConfirm
         cancelAlert={() => toggleMenu()}
         showAlert={showMenu}
         messageText="Options"
       >
-        <ConfirmButton
+        <AlertButtonGrey
           onClick={() => {
             setShowDeleteWorkoutAlert(true);
             toggleMenu();
           }}
-          background={lightGrey2}
-          fontColour={charcoal}
-        >Delete Workout</ConfirmButton>
-        <ConfirmButton
-          onClick={() => toggleMenu()}
-          background={blue}
-        >Cancel</ConfirmButton>
+        >
+          Delete Workout
+        </AlertButtonGrey>
+
+        <AlertButtonBlue onClick={() => toggleMenu()}>
+          Cancel
+        </AlertButtonBlue>
       </AlertConfirm>
 
       <AlertConfirm
@@ -225,14 +246,13 @@ const ActivityHistoryTile: React.FC<Props> = ({
         showAlert={showDeleteWorkoutAlert}
         messageText="This workout will be deleted. This action cannot be undone."
       >
-        <ConfirmButton background={orange} onClick={handleConfirmationClick}>Delete</ConfirmButton>
-        <ConfirmButton
-          onClick={() => setShowDeleteWorkoutAlert(false)}
-          background={blue}
-        >Cancel</ConfirmButton>
+        <AlertButtonOrange onClick={handleDeleteConfirmationClick}>
+          Delete
+        </AlertButtonOrange>
+        <AlertButtonBlue onClick={() => setShowDeleteWorkoutAlert(false)}>
+          Cancel
+        </AlertButtonBlue>
       </AlertConfirm>
-    </Tile>
+    </>
   );
 };
-
-export default ActivityHistoryTile;

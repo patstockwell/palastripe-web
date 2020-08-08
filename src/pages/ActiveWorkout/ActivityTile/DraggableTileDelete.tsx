@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
-import { orange, blue } from '../../../helpers/constants';
-import { ConfirmButton, AlertConfirm } from '../../../components/AlertConfirm';
-import { useActiveWorkout } from '../../../reducers/activeWorkoutReducer';
+import {orange, blue} from '../../../helpers/constants';
+import {AlertButtonBlue, AlertButtonOrange, AlertConfirm} from '../../../components/AlertConfirm';
+import {useActiveWorkout} from '../../../reducers/activeWorkoutReducer';
 
 const deleteButtonWidth = 100;
 
@@ -41,9 +41,13 @@ interface Props {
 }
 
 // TODO: Ensure that only one tray is open at a time.
-export const DraggableTileDelete: React.FC<Props> = ({ disable, id, children }) => {
+export const DraggableTileDelete: React.FC<Props> = ({
+  disable,
+  id,
+  children,
+}) => {
   const [showAlert, setShowAlert] = useState(false);
-  const { deleteActivity } = useActiveWorkout();
+  const {deleteActivity} = useActiveWorkout();
 
   return (
     <>
@@ -64,12 +68,12 @@ export const DraggableTileDelete: React.FC<Props> = ({ disable, id, children }) 
             cancelAlert={() => setShowAlert(false)}
             messageText="This will delete the acitivity."
           >
-            <ConfirmButton onClick={() => deleteActivity(id)} background={orange}>
+            <AlertButtonOrange onClick={() => deleteActivity(id)}>
               Delete
-            </ConfirmButton>
-            <ConfirmButton onClick={() => setShowAlert(false)} background={blue}>
+            </AlertButtonOrange>
+            <AlertButtonBlue onClick={() => setShowAlert(false)}>
               Cancel
-            </ConfirmButton>
+            </AlertButtonBlue>
           </AlertConfirm>
         </>
       )}

@@ -1,11 +1,23 @@
-import React, { useState, useRef } from 'react';
-import { useTransition, animated } from 'react-spring';
-import styled, { keyframes } from 'styled-components';
+import React, {useState, useRef} from 'react';
+import {useTransition, animated} from 'react-spring';
+import styled, {keyframes} from 'styled-components';
+import {Link} from 'react-router-dom';
 
-import { CheckboxTick } from '../components/Checkbox';
-import { GlobalOverFlowHiddenStyle, buttonStyle } from '../components/SharedStyles';
-import { appMaxWidth, gutterWidth } from '../helpers/constants';
-import { Link } from 'react-router-dom';
+import {CheckboxTick} from '../components/Checkbox';
+import {
+  GlobalOverFlowHiddenStyle,
+  ButtonStyleProps,
+  buttonStyle,
+} from '../components/SharedStyles';
+import {
+  lightGrey2,
+  charcoal,
+  appMaxWidth,
+  gutterWidth,
+  blue,
+  orange,
+  purple,
+} from '../helpers/constants';
 
 const bounceSpace = 9;
 const popUpSlideDistance = 353 + bounceSpace;
@@ -46,21 +58,6 @@ const ButtonWrapper = styled.div`
   padding: ${gutterWidth}px;
   padding-top: 0;
   box-sizing: border-box;
-`;
-
-export const ConfirmButton = styled.button<{ fontColour?: string, background?: string }>`
-  ${buttonStyle}
-  display: block;
-  margin-top: ${gutterWidth}px;
-  width: 100%;
-`;
-
-export const ConfirmButtonLink = styled(Link)<{ background?: string; fontColour?: string; }>`
-  ${buttonStyle}
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;
 `;
 
 export const MessageText = styled.p`
@@ -174,3 +171,98 @@ export const SuccessAlert: React.FC<SuccessAlertProps> = ({
     </AlertConfirm>
   );
 };
+
+const AlertButtonBase = styled.button<ButtonStyleProps>`
+  ${buttonStyle}
+  display: block;
+  margin-top: ${gutterWidth}px;
+  width: 100%;
+  background-color: ${props => props.background};
+  color: ${props => props.fontColour};
+`;
+
+const AlertButtonLink = styled(Link)<ButtonStyleProps>`
+  ${buttonStyle}
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+`;
+
+interface AlertButtonProps {
+  onClick: () => void;
+  to?: string;
+}
+
+const AlertButton: React.FC<AlertButtonProps & ButtonStyleProps> = ({
+  fontColour,
+  background,
+  to,
+  onClick,
+  children,
+}) => {
+  return to ? (
+    <AlertButtonLink
+      to={to}
+      onClick={onClick}
+      fontColour={fontColour}
+      background={background}
+    >{children}</AlertButtonLink>
+  ) : (
+    <AlertButtonBase
+      onClick={onClick}
+      fontColour={fontColour}
+      background={background}
+    >{children}</AlertButtonBase>
+
+  );
+};
+
+export const AlertButtonBlue: React.FC<AlertButtonProps> = ({
+  onClick,
+  to,
+  children,
+}) =>
+  <AlertButton
+    onClick={onClick}
+    to={to}
+    background={blue}
+    fontColour={'white'}
+  >{children}</AlertButton>;
+
+export const AlertButtonOrange: React.FC<AlertButtonProps> = ({
+  onClick,
+  to,
+  children,
+}) =>
+  <AlertButton
+    onClick={onClick}
+    to={to}
+    background={orange}
+    fontColour={'white'}
+  >{children}</AlertButton>;
+
+export const AlertButtonGrey: React.FC<AlertButtonProps> = ({
+  onClick,
+  to,
+  children,
+}) =>
+  <AlertButton
+    onClick={onClick}
+    to={to}
+    background={lightGrey2}
+    fontColour={charcoal}
+  >{children}</AlertButton>;
+
+export const AlertButtonPurple: React.FC<AlertButtonProps> = ({
+  onClick,
+  to,
+  children,
+}) =>
+  <AlertButton
+    onClick={onClick}
+    to={to}
+    background={purple}
+    fontColour={'white'}
+  >{children}</AlertButton>;
+

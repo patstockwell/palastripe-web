@@ -1,13 +1,13 @@
-import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import React, {useState, useEffect} from 'react';
+import {useSelector} from 'react-redux';
 import styled from 'styled-components';
-import { useInView } from 'react-intersection-observer';
+import {useInView} from 'react-intersection-observer';
 
-import { getInitials, formatDate } from '../../helpers/functions';
-import ActivityHistoryTile from './ActivityHistoryTile';
-import { State } from '../../helpers/types';
-import { Workout } from '../../reducers/workoutsReducer';
-import { useDeleteWorkout } from '../../reducers/historyReducer';
+import {getInitials, formatDate} from '../../helpers/functions';
+import {ActivityHistoryTile} from './ActivityHistoryTile';
+import {State} from '../../helpers/types';
+import {Workout} from '../../reducers/workoutsReducer';
+import {useDeleteWorkout} from '../../reducers/historyReducer';
 import {
   useActivityHistoryLength,
 } from '../../context/useActivityHistoryLength';
@@ -43,19 +43,19 @@ interface Props {
   history: Workout[];
 }
 
-export const ActivityHistoryList: React.FC<Props> = ({ history }) => {
+export const ActivityHistoryList: React.FC<Props> = ({history}) => {
   // undefined is used to denote no tile in list is selected
   const [showMenuIndex, setShowMenuIndex] = useState(undefined);
   const deleteWorkout = useDeleteWorkout();
   const {
-    profile: { firstVisitDate, lastName, firstName },
-    settings: { useKilos },
+    profile: {firstVisitDate, lastName, firstName},
+    settings: {useKilos},
   } = useSelector((state: State) => state);
   const [ref, inView] = useInView({
     threshold: 0,
     rootMargin: '200px',
   });
-  const { viewMore, listLength } = useActivityHistoryLength();
+  const {viewMore, listLength} = useActivityHistoryLength();
 
   useEffect(() => {
     if (inView) {
