@@ -49,7 +49,7 @@ export const opaqueImageInAfter = css<{ image: string }>`
   z-index: -1;
 `;
 
-export interface ButtonStyleProps { background?: string; fontColour?: string; }
+export interface ButtonStyleProps { background?: string; color?: string; }
 
 const buttonStyle = `
   border: none;
@@ -68,13 +68,13 @@ const buttonStyle = `
 
 export const ButtonBaseWithLink = styled(Link)<ButtonStyleProps>`
 ${buttonStyle}
-  color: ${props => props.fontColour || 'white'};
+  color: ${props => props.color || 'white'};
   background-color: ${props => props.background || purple};
 `;
 
 export const ButtonBase = styled.button<ButtonStyleProps>`
 ${buttonStyle}
-  color: ${props => props.fontColour || 'white'};
+  color: ${props => props.color || 'white'};
   background-color: ${props => props.background || purple};
 `;
 

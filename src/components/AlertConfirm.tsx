@@ -192,7 +192,7 @@ interface AlertButtonProps {
 }
 
 const AlertButton: React.FC<AlertButtonProps & ButtonStyleProps> = ({
-  fontColour,
+  color,
   background,
   to,
   onClick,
@@ -202,13 +202,13 @@ const AlertButton: React.FC<AlertButtonProps & ButtonStyleProps> = ({
     <AlertButtonLink
       to={to}
       onClick={onClick}
-      fontColour={fontColour}
+      color={color}
       background={background}
     >{children}</AlertButtonLink>
   ) : (
     <AlertButtonBase
       onClick={onClick}
-      fontColour={fontColour}
+      color={color}
       background={background}
     >{children}</AlertButtonBase>
 
@@ -224,7 +224,7 @@ export const AlertButtonBlue: React.FC<AlertButtonProps> = ({
     onClick={onClick}
     to={to}
     background={blue}
-    fontColour={'white'}
+    color={'white'}
   >{children}</AlertButton>;
 
 export const AlertButtonOrange: React.FC<AlertButtonProps> = ({
@@ -236,7 +236,7 @@ export const AlertButtonOrange: React.FC<AlertButtonProps> = ({
     onClick={onClick}
     to={to}
     background={orange}
-    fontColour={'white'}
+    color={'white'}
   >{children}</AlertButton>;
 
 export const AlertButtonGrey: React.FC<AlertButtonProps> = ({
@@ -248,7 +248,7 @@ export const AlertButtonGrey: React.FC<AlertButtonProps> = ({
     onClick={onClick}
     to={to}
     background={lightGrey2}
-    fontColour={charcoal}
+    color={charcoal}
   >{children}</AlertButton>;
 
 export const AlertButtonPurple: React.FC<AlertButtonProps> = ({
@@ -260,6 +260,6 @@ export const AlertButtonPurple: React.FC<AlertButtonProps> = ({
     onClick={onClick}
     to={to}
     background={purple}
-    fontColour={'white'}
+    color={'white'}
   >{children}</AlertButton>;
 

@@ -124,11 +124,11 @@ const EditActivityPanel: React.FC<Props> = ({
                 <IsTimedPanel>
                   <ButtonLeftHalf
                     onClick={() => setIsTimed(false)}
-                    fontColour={repsFontColour}
+                    color={repsFontColour}
                     background={repsBackground}>With Reps</ButtonLeftHalf>
                   <ButtonRightHalf
                     onClick={() => setIsTimed(true)}
-                    fontColour={timedFontColour}
+                    color={timedFontColour}
                     background={timedBackground}>With Timer</ButtonRightHalf>
                 </IsTimedPanel>
 
