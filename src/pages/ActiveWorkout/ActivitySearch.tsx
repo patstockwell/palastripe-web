@@ -51,6 +51,12 @@ const Ul = styled.ul`
   }
 `;
 
+const OverflowContainer = styled.div`
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+`;
+
 const SearchSuggestionTile = styled.li`
   height: 48px;
   box-sizing: border-box;
@@ -194,12 +200,14 @@ export const ActivitySearch: React.FC = () => {
                 weightInKilos: exercise.defaultWeightInKilos,
               })}
             >
-              {exercise.searchPieces.map(piece => Array.isArray(piece)
-                // Use an array with only one item in it to represent a section
-                // of the search that should be bold. This is because an array
-                // of strings can be rendered in the same way as a string.
-                ? <strong key={piece[0]}>{piece}</strong> : piece
-              )}
+              <OverflowContainer>
+                {exercise.searchPieces.map(piece => Array.isArray(piece)
+                  // Use an array with only one item in it to represent a section
+                  // of the search that should be bold. This is because an array
+                  // of strings can be rendered in the same way as a string.
+                  ? <strong key={piece[0]}>{piece}</strong> : piece
+                )}
+              </OverflowContainer>
             </SearchSuggestionTile>
           )) // else show the recently added exercises as suggestions
           : Object.values(recentActivities).map((activity: WeightedActivity) => (
