@@ -9,7 +9,7 @@ import {
   AlertConfirm,
 } from '../../components/AlertConfirm';
 import {BackLinkBanner} from '../../components/BackLinkBanner';
-import {WorkoutHero, Window as CustomWorkoutHero} from './WorkoutHero';
+import {WorkoutHero} from './WorkoutHero';
 import {FourZeroFour} from '../../pages/FourZeroFour';
 import {ActivityList} from './ActivityList';
 import {State} from '../../helpers/types';
@@ -72,11 +72,7 @@ export const ActiveWorkout: React.FC = () => {
             link: '/workouts/',
           }}
         />
-        {isCustomWorkout ? (
-          <CustomWorkoutHero imageUrl={displayedWorkout.imageUrl}/>
-        ) : (
-          <WorkoutHero workout={displayedWorkout} />
-        )}
+        <WorkoutHero workout={displayedWorkout} />
         <ActivityList
           workout={displayedWorkout}
           finishWorkoutClickHandler={() => setShowEndWorkoutAlert(true)}

@@ -21,7 +21,6 @@ const AddActivityButton = styled(Link)`
   background-color: ${lightGrey3}
   font-weight: 600;
   color: ${charcoal}
-  margin-bottom: 30px;
   display: flex;
   text-decoration: none;
   justify-content: center;

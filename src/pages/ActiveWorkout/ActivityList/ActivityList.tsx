@@ -30,6 +30,7 @@ const FlexTile = styled.div`
   align-items: center;
   justify-content: center;
   min-height: ${tileMinHeight}px;
+  margin-top: 30px;
 `;
 
 const BottomEmptySpace = styled.div<{ stickyTop?: number}>`

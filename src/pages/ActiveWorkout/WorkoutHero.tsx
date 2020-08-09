@@ -116,7 +116,7 @@ interface Props {
   workout: Workout;
 }
 
-export const WorkoutHero: React.FC<Props> = ({ workout }) => {
+export const WorkoutHero: React.FC<Props> = ({workout}) => {
   const [showShareMessage, setShowShareMessage] = useState(false);
   const [showResetWorkoutAlert, setShowResetWorkoutAlert] = useState(false);
   const {pathname} = useLocation();
