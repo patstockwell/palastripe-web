@@ -1,4 +1,5 @@
-import React, { createContext, useState } from 'react';
+import React, {createContext, useState, useEffect} from 'react';
+import {useLocation} from 'react-router-dom';
 
 const AnimateNavigationContext = createContext<ConsumerValue>(null);
 
@@ -7,8 +8,15 @@ interface ConsumerValue {
   setAnimationDistance: (x: number) => void;
 }
 
-export const AnimateNavigationProvider: React.FC = ({ children }) => {
+export const AnimateNavigationProvider: React.FC = ({children}) => {
   const [animationDistance, setAnimationDistance] = useState(0);
+  const {pathname} = useLocation();
+  const animatablePaths = ['/workouts/', '/activity/', '/profile/'];
+  useEffect(() => {
+    if (!animatablePaths.includes(pathname)) {
+      setAnimationDistance(0);
+    }
+  }, [pathname]);
 
   return (
     <AnimateNavigationContext.Provider
