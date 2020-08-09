@@ -4,7 +4,7 @@ import React, {
 import { connect } from 'react-redux';
 import styled from 'styled-components';
 
-import { buttonStyle } from '../components/SharedStyles';
+import { ButtonBase } from '../components/SharedStyles';
 import { EditableActivityList } from './ActiveWorkout/ActivityList';
 import EditWorkoutHero from '../components/EditWorkoutHero';
 import { BackLinkBanner } from '../components/BackLinkBanner';
@@ -17,8 +17,7 @@ import {
   EDIT_WORKOUT_ADD_GROUP,
 } from '../helpers/constants';
 
-const AddItemButton = styled.button<{ background?: string }>`
-  ${buttonStyle}
+const AddItemButton = styled(ButtonBase)<{ background?: string }>`
   min-width: 130px;
 `;
 

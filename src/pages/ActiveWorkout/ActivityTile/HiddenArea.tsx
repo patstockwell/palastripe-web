@@ -8,7 +8,7 @@ import styled from 'styled-components';
 import {State, WeightedActivity} from '../../../helpers/types';
 import {getOneRepMax, formatWeight} from '../../../helpers/functions';
 import {IncrementDecrementPanel} from './IncrementDecrementPanel';
-import {buttonStyle} from '../../../components/SharedStyles';
+import {ButtonBase, ButtonStyleProps} from '../../../components/SharedStyles';
 import {useActiveWorkout} from '../../../reducers/activeWorkoutReducer';
 
 const MainValue = styled.span`
@@ -21,8 +21,7 @@ const P = styled.p`
   margin: 0;
 `;
 
-const Button = styled.button<{background?: string; fontColour?: string;}>`
-  ${buttonStyle}
+const Button = styled(ButtonBase)<ButtonStyleProps>`
   display: block;
   margin: 16px auto 0;
 `;

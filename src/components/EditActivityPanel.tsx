@@ -2,11 +2,14 @@ import React, { useState } from 'react';
 import { useTransition, animated } from 'react-spring';
 import styled from 'styled-components';
 import { Activity } from '../helpers/types';
-import { GlobalOverFlowHiddenStyle, buttonStyle } from './SharedStyles';
+import {
+  GlobalOverFlowHiddenStyle,
+  ButtonBase,
+  ButtonStyleProps,
+} from './SharedStyles';
 import { gutterWidth, purple } from '../helpers/constants';
 
-const Button = styled.button<{ fontColour?: string, background?: string }>`
-  ${buttonStyle}
+const Button = styled(ButtonBase)<ButtonStyleProps>`
   width: 120px;
 `;
 
@@ -17,15 +20,13 @@ const buttonStyleOverrides = `
   flex-grow: 1;
 `;
 
-const ButtonLeftHalf = styled.button<{ fontColour?: string, background?: string }>`
-  ${buttonStyle}
+const ButtonLeftHalf = styled(ButtonBase)<ButtonStyleProps>`
   ${buttonStyleOverrides}
   border-radius: 30px 0 0 30px;
   border-right: none;
 `;
 
-const ButtonRightHalf = styled.button<{ fontColour?: string, background?: string }>`
-  ${buttonStyle}
+const ButtonRightHalf = styled(ButtonBase)<ButtonStyleProps>`
   ${buttonStyleOverrides}
   border-radius: 0 30px 30px 0;
   border-left: none;

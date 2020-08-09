@@ -1,12 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useSelector } from 'react-redux';
-import { State } from '../helpers/types';
-import { Banner } from '../components/Banner';
+import {useSelector} from 'react-redux';
+
+import {State} from '../helpers/types';
+import {Banner} from '../components/Banner';
 import GoldCup from '../assets/svg/GoldCup';
-import { workoutTitleStyle, buttonStyle } from '../components/SharedStyles';
-import { bannerHeight } from '../helpers/constants';
-import { Link } from 'react-router-dom';
+import {workoutTitleStyle, ButtonBaseWithLink} from '../components/SharedStyles';
+import {bannerHeight} from '../helpers/constants';
 
 const Page = styled.div`
   text-align: center;
@@ -29,8 +29,7 @@ const Title = styled.p`
   ${workoutTitleStyle};
 `;
 
-const Button = styled(Link)`
-  ${buttonStyle}
+const Button = styled(ButtonBaseWithLink)`
   margin: 40px auto;
   max-width: 300px;
 `;

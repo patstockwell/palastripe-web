@@ -12,7 +12,7 @@ import {Share as ShareIcon} from '../../assets/svg/Share';
 import {SoundOn} from '../../assets/svg/SoundOn';
 import {SoundOff} from '../../assets/svg/SoundOff';
 import {
-  buttonStyle,
+  ButtonBase,
   workoutTitleStyle,
   workoutHeroWindowStyle,
 } from '../../components/SharedStyles';
@@ -90,8 +90,7 @@ const slide = keyframes `
   }
 `;
 
-const StartButton = styled.button`
-  ${buttonStyle}
+const StartButton = styled(ButtonBase)`
   margin: 32px 0;
   color: black;
   background: white;

@@ -1,12 +1,12 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import styled from 'styled-components';
 
-import { DownloadArrow } from '../assets/svg/DownloadArrow';
-import { buttonStyle } from '../components/SharedStyles';
-import { ColouredDot } from '../assets/svg/ColouredDot';
-import { gutterWidth, green, bannerHeight } from '../helpers/constants';
-import { ThreeBars } from '../assets/svg/ThreeBars';
+import {DownloadArrow} from '../assets/svg/DownloadArrow';
+import {ButtonBaseWithLink} from '../components/SharedStyles';
+import {ColouredDot} from '../assets/svg/ColouredDot';
+import {gutterWidth, green, bannerHeight} from '../helpers/constants';
+import {ThreeBars} from '../assets/svg/ThreeBars';
 
 const SubscribeLink = styled(Link)`
   color: grey;
@@ -31,8 +31,7 @@ const Logo = styled.h1`
   color: black;
 `;
 
-const StartButton = styled(Link)`
-  ${buttonStyle}
+const StartButton = styled(ButtonBaseWithLink)`
   background: black;
 `;
 

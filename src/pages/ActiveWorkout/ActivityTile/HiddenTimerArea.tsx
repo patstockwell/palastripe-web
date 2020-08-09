@@ -1,16 +1,16 @@
 import React from 'react';
-import { animated, SpringValue } from 'react-spring';
-import styled, { keyframes } from 'styled-components';
+import {animated, SpringValue} from 'react-spring';
+import styled, {keyframes} from 'styled-components';
 import startAudio from '../../../assets/activityStart.mp3';
 import completeAudio from '../../../assets/activityEnd.mp3';
-import { buttonStyle } from '../../../components/SharedStyles';
+import {ButtonBase} from '../../../components/SharedStyles';
 import {
   timedExerciseWaitPeriod,
   lightGrey1,
   green,
   purple,
 } from '../../../helpers/constants';
-import { useAudio } from '../../../context/useAudio';
+import {useAudio} from '../../../context/useAudio';
 
 const Time = styled.p`
   font-size: 4em;
@@ -43,11 +43,9 @@ const Message = styled.p`
   margin: 0;
 `;
 
-const StartButton = styled.button<{ background?: string; fontColour?: string; }>`
-  ${buttonStyle}
+const StartButton = styled(ButtonBase)<{ background?: string; disabled?: boolean; }>`
   margin-top: 30px;
-  background-color: ${({ background }) => background};
-  background-color: ${({ disabled }) => disabled && lightGrey1};
+  background-color: ${props => (props.disabled && lightGrey1) || props.background};
 `;
 
 interface Props {
@@ -73,7 +71,7 @@ const HiddenTimerArea: React.FC<Props> = ({
 }) => {
   const label = !started ? 'start' : paused ? 'resume' : 'pause';
   const background = !started ? purple : paused ? green : 'grey';
-  const { setAudio } = useAudio();
+  const {setAudio} = useAudio();
 
   return (
     <Area style={{

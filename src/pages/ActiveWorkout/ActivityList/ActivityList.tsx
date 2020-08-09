@@ -1,24 +1,23 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components';
-import { ActivityTile } from '../ActivityTile';
-import { ColouredDot } from '../../../assets/svg/ColouredDot';
-import { ActivityListHeading } from './ActivityListHeading';
+import {ActivityTile} from '../ActivityTile';
+import {ColouredDot} from '../../../assets/svg/ColouredDot';
+import {ActivityListHeading} from './ActivityListHeading';
 import {
   orange,
   tileMinHeight,
 } from '../../../helpers/constants';
-import { Activity } from '../../../helpers/types';
-import { Workout } from '../../../reducers/workoutsReducer';
-import { buttonStyle, unorderedListStyle } from '../../../components/SharedStyles';
-import { useSelectedExercise } from '../../../context/useSelectedExercise';
-import { CustomWorkoutTile } from '../CustomWorkoutTile';
+import {Activity} from '../../../helpers/types';
+import {Workout} from '../../../reducers/workoutsReducer';
+import {ButtonBase, unorderedListStyle} from '../../../components/SharedStyles';
+import {useSelectedExercise} from '../../../context/useSelectedExercise';
+import {CustomWorkoutTile} from '../CustomWorkoutTile';
 
 const Ul = styled.ul`
   ${unorderedListStyle}
 `;
 
-const Button = styled.button`
-  ${buttonStyle}
+const Button = styled(ButtonBase)`
   background-color: black;
 
   & svg {
@@ -48,8 +47,8 @@ export const ActivityList: React.FC<Props> = ({
   workout: { exerciseGroups },
   isCustomWorkout,
 }) => {
-  const [ showHiddenArea, setShowHiddenArea ] = useState(true);
-  const { selectedExercise, setSelectedExercise } = useSelectedExercise();
+  const [showHiddenArea, setShowHiddenArea] = useState(true);
+  const {selectedExercise, setSelectedExercise} = useSelectedExercise();
 
   const createTile = (id: string) => (a: Activity, i: number) => {
     const isSelected =

@@ -1,13 +1,13 @@
 import React, {useState, useRef} from 'react';
 import {useTransition, animated} from 'react-spring';
 import styled, {keyframes} from 'styled-components';
-import {Link} from 'react-router-dom';
 
 import {CheckboxTick} from '../components/Checkbox';
 import {
   GlobalOverFlowHiddenStyle,
   ButtonStyleProps,
-  buttonStyle,
+  ButtonBase,
+  ButtonBaseWithLink,
 } from '../components/SharedStyles';
 import {
   lightGrey2,
@@ -172,15 +172,13 @@ export const SuccessAlert: React.FC<SuccessAlertProps> = ({
   );
 };
 
-const AlertButtonBase = styled.button<ButtonStyleProps>`
-  ${buttonStyle}
+const AlertButtonBase = styled(ButtonBase)<ButtonStyleProps>`
   margin-top: ${gutterWidth}px;
   display: block;
   width: 100%;
 `;
 
-const AlertButtonLink = styled(Link)<ButtonStyleProps>`
-  ${buttonStyle}
+const AlertButtonLink = styled(ButtonBaseWithLink)<ButtonStyleProps>`
   margin-top: ${gutterWidth}px;
   display: flex;
   align-items: center;

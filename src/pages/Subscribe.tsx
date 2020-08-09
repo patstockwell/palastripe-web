@@ -2,9 +2,9 @@ import React, {useState, ChangeEvent, useRef} from 'react';
 import styled from 'styled-components';
 import jsonp from 'jsonp';
 
-import { BackLinkBanner } from '../components/BackLinkBanner';
-import { buttonStyle } from '../components/SharedStyles';
-import { Input as InputBase } from './ActiveWorkout/ActivitySearch';
+import {BackLinkBanner} from '../components/BackLinkBanner';
+import {ButtonBase} from '../components/SharedStyles';
+import {Input as InputBase} from './ActiveWorkout/ActivitySearch';
 import {
   LOCAL_STORAGE_SUBSCRIBE_EMAIL,
   gutterWidth,
@@ -12,7 +12,7 @@ import {
   lightGrey3,
   bannerHeight,
 } from '../helpers/constants';
-import { CheckboxTick, CheckboxCross } from '../components/Checkbox';
+import {CheckboxTick, CheckboxCross} from '../components/Checkbox';
 
 const Form = styled.form`
   text-align: left;
@@ -35,8 +35,7 @@ const Input = styled(InputBase)`
   }
 `;
 
-const SubscribeButton = styled.button<{ disable: boolean }>`
-  ${buttonStyle}
+const SubscribeButton = styled(ButtonBase)<{ disable: boolean }>`
   display: block;
   margin: 24px auto;
   background: ${props => props.disable ? 'lightgrey' : purple};

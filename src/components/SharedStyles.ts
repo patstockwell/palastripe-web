@@ -1,9 +1,10 @@
-import { createGlobalStyle, css } from 'styled-components';
+import styled, {createGlobalStyle, css} from 'styled-components';
 
 import {
   purple,
   workoutWindowViewport,
 } from '../helpers/constants';
+import {Link} from 'react-router-dom';
 
 export const GlobalOverFlowHiddenStyle = createGlobalStyle<{ hidden: boolean }>`
   html, body {
@@ -40,7 +41,7 @@ export const opaqueImageInAfter = css<{ image: string }>`
   left: 0;
   width: 100%;
   height: 100%;
-  background-image: url(${({ image }) => image});
+  background-image: url(${props => props.image});
   background-size: cover;
   background-position-y: top;
   background-position-x: center;
@@ -50,12 +51,10 @@ export const opaqueImageInAfter = css<{ image: string }>`
 
 export interface ButtonStyleProps { background?: string; fontColour?: string; }
 
-export const buttonStyle = css<ButtonStyleProps | any>`
-  color: ${({ fontColour }) => fontColour || 'white'};
+const buttonStyle = `
   border: none;
   font-size: 12px;
   border-radius: 30px;
-  background-color: ${({ background }) => background || purple};
   text-transform: uppercase;
   font-weight: 800;
   z-index: 1;
@@ -65,6 +64,18 @@ export const buttonStyle = css<ButtonStyleProps | any>`
   align-items: center;
   justify-content: center;
   height: 48px;
+`;
+
+export const ButtonBaseWithLink = styled(Link)<ButtonStyleProps>`
+${buttonStyle}
+  color: ${props => props.fontColour || 'white'};
+  background-color: ${props => props.background || purple};
+`;
+
+export const ButtonBase = styled.button<ButtonStyleProps>`
+${buttonStyle}
+  color: ${props => props.fontColour || 'white'};
+  background-color: ${props => props.background || purple};
 `;
 
 export const workoutTitleStyle = `

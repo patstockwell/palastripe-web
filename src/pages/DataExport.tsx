@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components';
-import { useSelector } from 'react-redux';
+import {useSelector} from 'react-redux';
 import * as clipboard from 'clipboard-polyfill';
 
-import { SuccessAlert } from '../components/AlertConfirm';
-import { State } from '../helpers/types';
-import { buttonStyle } from '../components/SharedStyles';
-import { EditPage } from './SettingUnitOfMeasurement';
-import { BackLinkBanner } from '../components/BackLinkBanner';
+import {SuccessAlert} from '../components/AlertConfirm';
+import {State} from '../helpers/types';
+import {ButtonBase} from '../components/SharedStyles';
+import {EditPage} from './SettingUnitOfMeasurement';
+import {BackLinkBanner} from '../components/BackLinkBanner';
 
 const Pre = styled.pre`
   white-space: pre-wrap;
@@ -15,14 +15,13 @@ const Pre = styled.pre`
   overflow: hidden;
 `;
 
-const Button = styled.button`
-  ${buttonStyle}
+const Button = styled(ButtonBase)`
   margin: 24px auto;
   display: block;
 `;
 
 export const DataExport = () => {
-  const [ showMessage, setShowMessage ] = useState(false);
+  const [showMessage, setShowMessage] = useState(false);
   const history = useSelector((state: State) => state.history);
   const copyHistoryToClipboard = () => {
     clipboard.writeText(JSON.stringify(history, null, 2));

@@ -1,11 +1,9 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import Helmet from 'react-helmet';
 import styled from 'styled-components';
-import { buttonStyle } from '../components/SharedStyles';
+import {ButtonBaseWithLink} from '../components/SharedStyles';
 
-const Button = styled(Link)`
-  ${buttonStyle}
+const Button = styled(ButtonBaseWithLink)`
   margin: 16px;
 `;
 
