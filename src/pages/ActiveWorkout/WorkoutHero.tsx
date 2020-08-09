@@ -128,7 +128,7 @@ export const WorkoutHero: React.FC<Props> = ({ workout }) => {
 
   const displayedTime = workout.startTime
     ? format(new Date(workout.startTime), 'p')
-    : time;
+    : `≈${time}`;
 
   return (
     <Window imageUrl={workout.imageUrl}>

@@ -19,6 +19,7 @@ import {useUpdateWorkout} from '../../reducers/workoutsReducer';
 import {useActiveWorkout} from '../../reducers/activeWorkoutReducer';
 import {customWorkoutId} from '../../workoutData/workouts/customWorkout';
 import {useSelectedExercise} from '../../context/useSelectedExercise';
+import {RestTimerProvider} from '../../context/useRestTimer';
 
 export const ActiveWorkout: React.FC = () => {
   const [showEndWorkoutAlert, setShowEndWorkoutAlert] = useState(false);
@@ -62,40 +63,42 @@ export const ActiveWorkout: React.FC = () => {
   };
 
   return (
-    <AudioProvider soundOn={soundOn}>
-      <BackLinkBanner
-        sticky={false}
-        back={{
-          showArrows: true,
-          link: '/workouts/',
-        }}
-      />
-      {isCustomWorkout ? (
-        <CustomWorkoutHero imageUrl={displayedWorkout.imageUrl}/>
-      ) : (
-        <WorkoutHero workout={displayedWorkout} />
-      )}
-      <ActivityList
-        workout={displayedWorkout}
-        finishWorkoutClickHandler={() => setShowEndWorkoutAlert(true)}
-        isCustomWorkout={isCustomWorkout}
-      />
+    <RestTimerProvider>
+      <AudioProvider soundOn={soundOn}>
+        <BackLinkBanner
+          sticky={false}
+          back={{
+            showArrows: true,
+            link: '/workouts/',
+          }}
+        />
+        {isCustomWorkout ? (
+          <CustomWorkoutHero imageUrl={displayedWorkout.imageUrl}/>
+        ) : (
+          <WorkoutHero workout={displayedWorkout} />
+        )}
+        <ActivityList
+          workout={displayedWorkout}
+          finishWorkoutClickHandler={() => setShowEndWorkoutAlert(true)}
+          isCustomWorkout={isCustomWorkout}
+        />
 
-      <AlertConfirm
-        cancelAlert={() => setShowEndWorkoutAlert(false)}
-        showAlert={showEndWorkoutAlert}
-        messageText="This will end your workout and save it to activity history."
-      >
-        <AlertButtonPurple
-          to="/workout-complete/"
-          onClick={finishWorkoutWithAlertTransition}
+        <AlertConfirm
+          cancelAlert={() => setShowEndWorkoutAlert(false)}
+          showAlert={showEndWorkoutAlert}
+          messageText="This will end your workout and save it to activity history."
         >
-          Finish workout
-        </AlertButtonPurple>
-        <AlertButtonGrey onClick={() => setShowEndWorkoutAlert(false)}>
-          Cancel
-        </AlertButtonGrey>
-      </AlertConfirm>
-    </AudioProvider>
+          <AlertButtonPurple
+            to="/workout-complete/"
+            onClick={finishWorkoutWithAlertTransition}
+          >
+            Finish workout
+          </AlertButtonPurple>
+          <AlertButtonGrey onClick={() => setShowEndWorkoutAlert(false)}>
+            Cancel
+          </AlertButtonGrey>
+        </AlertConfirm>
+      </AudioProvider>
+    </RestTimerProvider>
   );
 };

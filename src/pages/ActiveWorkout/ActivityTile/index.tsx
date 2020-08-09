@@ -1,20 +1,21 @@
-import React, { useRef, useEffect, useState } from 'react';
+import React, {useRef, useEffect, useState} from 'react';
 import styled from 'styled-components';
-import { SpringValue } from 'react-spring';
-import { useSelector } from 'react-redux';
+import {SpringValue} from 'react-spring';
+import {useSelector} from 'react-redux';
 
-import { RestTimer } from '../RestTimer';
-import { isTimed } from '../../../helpers/types';
-import { ActivityTileWithReps } from './ActivityTileWithReps';
-import { ActivityTileWithTimer } from './ActivityTileWithTimer';
-import { State, Activity } from '../../../helpers/types';
+import {RestTimer} from '../RestTimer';
+import {isTimed} from '../../../helpers/types';
+import {ActivityTileWithReps} from './ActivityTileWithReps';
+import {ActivityTileWithTimer} from './ActivityTileWithTimer';
+import {State, Activity} from '../../../helpers/types';
 import {
   tileMinHeight,
   lightGrey3,
   activeWorkoutWindowHeight,
 } from '../../../helpers/constants';
-import { useSelectedExercise } from '../../../context/useSelectedExercise';
-import { customWorkoutId } from '../../../workoutData/workouts/customWorkout';
+import {useSelectedExercise} from '../../../context/useSelectedExercise';
+import {useRestTimer} from '../../../context/useRestTimer';
+import {customWorkoutId} from '../../../workoutData/workouts/customWorkout';
 import {
   scrollElementToTop,
   useHiddenAreaAnimation,
@@ -93,13 +94,13 @@ export const ActivityTile: React.FC<Props> = ({
   showHiddenArea,
   disableDelete,
 }) => {
-  const [ showRestTimer, setShowRestTimer ] = useState(false);
-  const [ finishedAnimating, setFinishedAnimating ] = useState(false);
+  const [finishedAnimating, setFinishedAnimating] = useState(false);
   const activeWorkoutId = useSelector((state: State) => state.activeWorkout.id);
-  const { selectNextExercise } = useSelectedExercise();
+  const {selectNextExercise} = useSelectedExercise();
+  const {activeRestTimer: restTimer, setActiveRestTimer} = useRestTimer();
   const listElement = useRef<HTMLLIElement>(null);
 
-  const animatedStyles: { [x: string]: SpringValue<any>; } = useHiddenAreaAnimation({
+  const animatedStyles: {[x: string]: SpringValue<any>} = useHiddenAreaAnimation({
     showHiddenArea,
     onRest: () => setFinishedAnimating(true),
     selected,
@@ -127,7 +128,7 @@ export const ActivityTile: React.FC<Props> = ({
 
   const onSetComplete = () => {
     if (selected) {
-      setShowRestTimer(true);
+      setActiveRestTimer({ groupId, index });
       const isCustomWorkout = activeWorkoutId === customWorkoutId;
 
       // don't select the next exercise if this is a custom workout.
@@ -170,10 +171,10 @@ export const ActivityTile: React.FC<Props> = ({
         )
       }
 
-      {showRestTimer && (
+      {restTimer.groupId === groupId && restTimer.index === index && (
         <RestTimer
           restPeriod={activity.restPeriodInSeconds}
-          handleClick={() => setShowRestTimer(false)}
+          handleClick={() => setActiveRestTimer({ groupId: '', index: 0 })}
         />
       )}
     </>

@@ -1,15 +1,15 @@
-import React, { createContext, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { State } from '../helpers/types';
+import React, {createContext, useState} from 'react';
+import {useSelector} from 'react-redux';
+import {State} from '../helpers/types';
 
-const SelectedExerciseContext = createContext<UseSelectedExercise>(null);
+const SelectedExerciseContext = createContext<ConsumerValue>(null);
 
 export interface SelectedExercise {
   groupId: string | null;
   index: number | null;
 }
 
-interface UseSelectedExercise {
+interface ConsumerValue {
   selectedExercise: SelectedExercise;
   setSelectedExercise: (se: SelectedExercise) => void;
   selectNextExercise: () => void;
@@ -20,9 +20,9 @@ export const SelectedExerciseProvider: React.FC = ({
 }) => {
   const [exerciseIndex, setExerciseIndex] = useState(0);
   const [groupId, setGroupId] = useState('');
-  const { activeWorkout } = useSelector((state: State) => state);
+  const {activeWorkout} = useSelector((state: State) => state);
 
-  const selectedExerciseValue: UseSelectedExercise = {
+  const selectedExerciseValue: ConsumerValue = {
     selectedExercise: {
       index: exerciseIndex,
       groupId,
@@ -32,7 +32,7 @@ export const SelectedExerciseProvider: React.FC = ({
       setGroupId(selectedExercise.groupId);
     },
     selectNextExercise: () => {
-      const { exerciseGroups = [] } = activeWorkout;
+      const {exerciseGroups = []} = activeWorkout;
       const groupIndex = exerciseGroups.findIndex(g => g.id === groupId);
       const group = exerciseGroups[groupIndex];
 
