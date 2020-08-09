@@ -138,6 +138,11 @@ export const ActivityTile: React.FC<Props> = ({
     }
   };
 
+  const showTheRestTimer =
+    restTimer.groupId === groupId
+    && restTimer.index === index
+    && activity.completed;
+
   return (
     <>
       {isTimed(activity)
@@ -171,7 +176,7 @@ export const ActivityTile: React.FC<Props> = ({
         )
       }
 
-      {restTimer.groupId === groupId && restTimer.index === index && (
+      {showTheRestTimer && (
         <RestTimer
           restPeriod={activity.restPeriodInSeconds}
           handleClick={() => setActiveRestTimer({ groupId: '', index: 0 })}

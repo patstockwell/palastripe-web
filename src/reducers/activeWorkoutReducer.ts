@@ -120,7 +120,7 @@ const setActiveWorkout = (_state: Workout, action: PayloadAction<Workout>) => {
 };
 
 // simply set the active workout to null when the workout is complete
-const finishWorkout = (_state: Workout, _action: Action) => null;
+const clearActiveWorkout = (_state: Workout, _action: Action) => null;
 
 const addActivity = (state: Workout, action: PayloadAction<Activity>) => {
   // We can use the first exerciseGroup because there is only 1 group in a
@@ -153,7 +153,7 @@ const reducers = {
   changeWeight,
   changeReps,
   toggleSetComplete,
-  finishWorkout,
+  clearActiveWorkout,
   addActivity,
   deleteActivity,
   startWorkout,
@@ -212,7 +212,7 @@ export const useActiveWorkout = () => {
     payload: activity,
   });
 
-  const finishWorkout = () => dispatch({ type: actions.finishWorkout.type });
+  const clearActiveWorkout = () => dispatch({ type: actions.clearActiveWorkout.type });
 
   const startWorkout = () => dispatch({ type: actions.startWorkout.type });
 
@@ -223,7 +223,7 @@ export const useActiveWorkout = () => {
     setActiveWorkout,
     changeWeight,
     addActivity,
-    finishWorkout,
+    clearActiveWorkout,
     deleteActivity,
     startWorkout,
   };

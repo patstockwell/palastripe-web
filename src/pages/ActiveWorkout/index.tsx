@@ -26,7 +26,7 @@ export const ActiveWorkout: React.FC = () => {
   const {setActivityPageScrollPosition} = useScrollPosition();
   const addToHistory = useAddWorkoutToHistory();
   const updateWorkoutTemplate = useUpdateWorkout();
-  const {finishWorkout, setActiveWorkout} = useActiveWorkout();
+  const {clearActiveWorkout, setActiveWorkout} = useActiveWorkout();
   const {setSelectedExercise} = useSelectedExercise();
   const {
     workouts,
@@ -55,7 +55,7 @@ export const ActiveWorkout: React.FC = () => {
     : workoutFromUrl;
 
   const finishWorkoutWithAlertTransition = () => {
-    finishWorkout(); // activeWorkoutReducer
+    clearActiveWorkout(); // activeWorkoutReducer
     addToHistory(activeWorkout); // historyReducer
     updateWorkoutTemplate(activeWorkout); // workoutsReducer
     setSelectedExercise({ index: 0, groupId: '' }); // reset selected exercise

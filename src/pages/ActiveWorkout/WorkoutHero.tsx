@@ -5,7 +5,12 @@ import {useLocation} from 'react-router-dom';
 import * as clipboard from 'clipboard-polyfill';
 import {format} from 'date-fns';
 
-import {SuccessAlert} from '../../components/AlertConfirm';
+import {
+  AlertConfirm,
+  AlertButtonBlue,
+  AlertButtonOrange,
+  SuccessAlert,
+} from '../../components/AlertConfirm';
 import {StopWatch} from '../../assets/svg/StopWatch';
 import {ColouredDot} from '../../assets/svg/ColouredDot';
 import {Share as ShareIcon} from '../../assets/svg/Share';
@@ -22,7 +27,7 @@ import {
 } from '../../helpers/functions';
 import {State} from '../../helpers/types';
 import {Workout} from '../../reducers/workoutsReducer';
-import {green, APP_URL} from '../../helpers/constants';
+import {green, APP_URL, orange} from '../../helpers/constants';
 import {useActiveWorkout} from '../../reducers/activeWorkoutReducer';
 import {useSettings} from '../../reducers/settingsReducer';
 import {useSelectedExercise} from '../../context/useSelectedExercise';
@@ -90,6 +95,12 @@ const slide = keyframes `
   }
 `;
 
+const ResetButton = styled(ButtonBase)`
+  margin: 32px 0;
+  color: black;
+  background: white;
+`;
+
 const StartButton = styled(ButtonBase)`
   margin: 32px 0;
   color: black;
@@ -107,9 +118,10 @@ interface Props {
 
 export const WorkoutHero: React.FC<Props> = ({ workout }) => {
   const [showShareMessage, setShowShareMessage] = useState(false);
+  const [showResetWorkoutAlert, setShowResetWorkoutAlert] = useState(false);
   const {pathname} = useLocation();
   const {setSelectedExercise} = useSelectedExercise();
-  const {startWorkout} = useActiveWorkout();
+  const {startWorkout, clearActiveWorkout} = useActiveWorkout();
   const {soundOn} = useSelector((state: State) => state.settings);
   const {setUseSound} = useSettings();
   const time = formatMinutes(calculateWorkoutTime(workout));
@@ -144,10 +156,36 @@ export const WorkoutHero: React.FC<Props> = ({ workout }) => {
         <StopWatch style={{ fill: 'white', marginRight: '8px' }}/>
         {displayedTime}
       </Time>
-      <StartButton onClick={handleStartButtonClick}>
-        <ColouredDot fill={green} />
-        Start Workout
-      </StartButton>
+      {workout.startTime ? (
+        <ResetButton onClick={() => setShowResetWorkoutAlert(true)}>
+          <ColouredDot fill={orange} />
+          Reset Workout
+        </ResetButton>
+      ) : (
+        <StartButton onClick={handleStartButtonClick}>
+          <ColouredDot fill={green} />
+          Start Workout
+        </StartButton>
+      )}
+
+      <AlertConfirm
+        cancelAlert={() => setShowResetWorkoutAlert(false)}
+        showAlert={showResetWorkoutAlert}
+        messageText="This will clear the current workout and all progress will be lost."
+      >
+        <AlertButtonOrange onClick={() => {
+          clearActiveWorkout();
+          setShowResetWorkoutAlert(false);
+        }}>
+          Reset Workout
+        </AlertButtonOrange>
+
+        <br />
+
+        <AlertButtonBlue onClick={() => setShowResetWorkoutAlert(false)}>
+          Cancel
+        </AlertButtonBlue>
+      </AlertConfirm>
 
       <SuccessAlert
         message="Share link copied to clipboard."
