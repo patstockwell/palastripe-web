@@ -15,6 +15,7 @@ import {useScrollPosition} from '../context/useScrollPosition';
 import {LightningBolt} from '../assets/svg/LightningBolt';
 import {useSelector} from 'react-redux';
 import {State} from '../helpers/types';
+import {customWorkoutId} from '../workoutData/workouts/customWorkout';
 
 const Tile = styled.li`
   position: relative;
@@ -73,7 +74,7 @@ const StyledLink = styled(Link)`
   }
 `;
 
-const InProgress = styled.p`
+export const InProgress = styled.p`
   position: absolute;
   right: 0;
   color: ${purple};
@@ -90,7 +91,10 @@ interface Props {
 }
 
 export const WorkoutTile: React.FC<Props> = ({ workout }) => {
-  const {id, startTime} = useSelector((state: State) => state.activeWorkout) || {};
+  const {
+    id,
+    startTime,
+  } = useSelector((state: State) => state.activeWorkout) || {};
   const {setWorkoutPageScrollPosition} = useScrollPosition();
 
   return (
@@ -109,15 +113,23 @@ export const WorkoutTile: React.FC<Props> = ({ workout }) => {
   );
 };
 
-export const CustomWorkoutTile: React.FC<{ imageUrl: string }> = ({ imageUrl }) => (
-  <Tile>
-    <Square image={imageUrl}>
-      <Minutes>
-        <LightningBolt />
-      </Minutes>
-    </Square>
-    <StyledLink to="/workouts/custom-workout/">
-      <Name>Track a workout on the fly</Name>
-    </StyledLink>
-  </Tile>
-);
+export const CustomWorkoutTile: React.FC<{ imageUrl: string }> = ({ imageUrl }) => {
+  const {
+    id,
+    startTime,
+  } = useSelector((state: State) => state.activeWorkout) || {};
+
+  return (
+    <Tile>
+      <Square image={imageUrl}>
+        <Minutes>
+          <LightningBolt />
+        </Minutes>
+      </Square>
+      {startTime && id === customWorkoutId && <InProgress>In progress...</InProgress>}
+      <StyledLink to="/workouts/custom-workout/">
+        <Name>Track a workout on the fly</Name>
+      </StyledLink>
+    </Tile>
+  );
+};
