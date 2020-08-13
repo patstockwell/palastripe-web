@@ -1,17 +1,20 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import styled from 'styled-components';
 
-import { opaqueImageInAfter } from './SharedStyles';
-import { Workout } from '../reducers/workoutsReducer';
+import {opaqueImageInAfter} from './SharedStyles';
+import {Workout} from '../reducers/workoutsReducer';
 import {
+  purple,
   gutterWidth,
   lightGrey3,
   workoutTileMinHeight,
 } from '../helpers/constants';
-import { calculateWorkoutTime, formatMinutes } from '../helpers/functions';
-import { useScrollPosition } from '../context/useScrollPosition';
-import { LightningBolt } from '../assets/svg/LightningBolt';
+import {calculateWorkoutTime, formatMinutes} from '../helpers/functions';
+import {useScrollPosition} from '../context/useScrollPosition';
+import {LightningBolt} from '../assets/svg/LightningBolt';
+import {useSelector} from 'react-redux';
+import {State} from '../helpers/types';
 
 const Tile = styled.li`
   position: relative;
@@ -70,18 +73,32 @@ const StyledLink = styled(Link)`
   }
 `;
 
+const InProgress = styled.p`
+  position: absolute;
+  right: 0;
+  color: ${purple};
+  text-transform: uppercase;
+  font-size: 0.75em;
+  font-weight: 800;
+  top: 0;
+  margin: ${gutterWidth}px;
+  font-style: italic;
+`;
+
 interface Props {
   workout: Workout;
 }
 
 export const WorkoutTile: React.FC<Props> = ({ workout }) => {
-  const { setWorkoutPageScrollPosition } = useScrollPosition();
+  const {id, startTime} = useSelector((state: State) => state.activeWorkout) || {};
+  const {setWorkoutPageScrollPosition} = useScrollPosition();
 
   return (
     <Tile>
       <Square image={workout.imageUrl}>
         <Minutes>{formatMinutes(calculateWorkoutTime(workout))}</Minutes>
       </Square>
+      {startTime && id === workout.id && <InProgress>In progress...</InProgress>}
       <StyledLink
         onClick={() => setWorkoutPageScrollPosition()}
         to={`/workouts/${workout.id}/`}
