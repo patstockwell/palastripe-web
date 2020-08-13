@@ -162,7 +162,7 @@ const reducers = {
 const activeWorkoutSlice = createSlice<Workout, typeof reducers>({
   reducers,
   name: 'activeWorkout',
-  initialState: getLocalStorage(LOCAL_STORAGE_ACTIVE_WORKOUT, null),
+  initialState: getLocalStorage<Workout | null>(LOCAL_STORAGE_ACTIVE_WORKOUT, null),
 });
 
 const { actions } = activeWorkoutSlice;

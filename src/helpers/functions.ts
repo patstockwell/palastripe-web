@@ -164,7 +164,7 @@ export const getLocalStorage = <T>(name: string, defaultValue: T) => {
   const item: (string | null) = localStorage.getItem(name);
 
   if (item) {
-    // try to parse the string, if it's not an object, then unset it.
+    // try to parse the string, if it's not a valid data type, then unset it.
     try {
       return JSON.parse(item);
     } catch {

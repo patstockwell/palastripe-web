@@ -44,7 +44,9 @@ export const ActiveWorkout: React.FC = () => {
     return <FourZeroFour />;
   }
 
-  const unfinsihedWorkoutExists = activeWorkout && idFromUrl !== activeWorkout.id;
+  const unfinsihedWorkoutExists = activeWorkout
+    && activeWorkout.startTime
+    && idFromUrl !== activeWorkout.id;
 
   if (unfinsihedWorkoutExists && !showExistingWorkoutAlert) {
     setShowExistingWorkoutAlert(true);
@@ -85,7 +87,12 @@ export const ActiveWorkout: React.FC = () => {
           showAlert={showExistingWorkoutAlert}
           messageText={`"${activeWorkout && activeWorkout.name}" is not finished. Starting a new workout will clear all progress.`}
         >
-          <AlertButtonPurple onClick={() => setActiveWorkout(workoutFromUrl)}>
+          <AlertButtonPurple
+            onClick={() => {
+              setActiveWorkout(workoutFromUrl);
+              setShowExistingWorkoutAlert(false);
+            }}
+          >
             Start new workout
           </AlertButtonPurple>
           <AlertButtonGrey
