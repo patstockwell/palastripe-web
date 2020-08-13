@@ -1,6 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import styled from 'styled-components';
+import {useSelector} from 'react-redux';
 
 import {opaqueImageInAfter} from './SharedStyles';
 import {Workout} from '../reducers/workoutsReducer';
@@ -10,10 +11,10 @@ import {
   lightGrey3,
   workoutTileMinHeight,
 } from '../helpers/constants';
+import {FastClock} from '../assets/svg/FastClock';
 import {calculateWorkoutTime, formatMinutes} from '../helpers/functions';
 import {useScrollPosition} from '../context/useScrollPosition';
 import {LightningBolt} from '../assets/svg/LightningBolt';
-import {useSelector} from 'react-redux';
 import {State} from '../helpers/types';
 import {customWorkoutId} from '../workoutData/workouts/customWorkout';
 
@@ -75,6 +76,8 @@ const StyledLink = styled(Link)`
 `;
 
 export const InProgress = styled.p`
+  display: flex;
+  align-items: center;
   position: absolute;
   right: 0;
   color: ${purple};
@@ -102,7 +105,16 @@ export const WorkoutTile: React.FC<Props> = ({ workout }) => {
       <Square image={workout.imageUrl}>
         <Minutes>{formatMinutes(calculateWorkoutTime(workout))}</Minutes>
       </Square>
-      {startTime && id === workout.id && <InProgress>In progress...</InProgress>}
+      {startTime && id === workout.id && (
+        <InProgress>
+          <FastClock style={{
+            fill: '#6702ff',
+            marginRight: '4px',
+            height: '16px',
+          }}/>
+          In progress...
+        </InProgress>
+      )}
       <StyledLink
         onClick={() => setWorkoutPageScrollPosition()}
         to={`/workouts/${workout.id}/`}
@@ -126,7 +138,16 @@ export const CustomWorkoutTile: React.FC<{ imageUrl: string }> = ({ imageUrl }) 
           <LightningBolt />
         </Minutes>
       </Square>
-      {startTime && id === customWorkoutId && <InProgress>In progress...</InProgress>}
+      {startTime && id === customWorkoutId && (
+        <InProgress>
+          <FastClock style={{
+            fill: '#6702ff',
+            marginRight: '4px',
+            height: '16px',
+          }}/>
+          In progress...
+        </InProgress>
+      )}
       <StyledLink to="/workouts/custom-workout/">
         <Name>Track a workout on the fly</Name>
       </StyledLink>
