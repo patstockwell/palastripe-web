@@ -1,6 +1,7 @@
 import React, {createContext, useState} from 'react';
 import {useSelector} from 'react-redux';
 import {State} from '../helpers/types';
+import {customWorkoutId} from '../workoutData/workouts/customWorkout';
 
 const SelectedExerciseContext = createContext<ConsumerValue>(null);
 
@@ -32,7 +33,7 @@ export const SelectedExerciseProvider: React.FC = ({
       setGroupId(selectedExercise.groupId);
     },
     selectNextExercise: () => {
-      const {exerciseGroups = []} = activeWorkout;
+      const {id, exerciseGroups = []} = activeWorkout;
       const groupIndex = exerciseGroups.findIndex(g => g.id === groupId);
       const group = exerciseGroups[groupIndex];
 
@@ -42,12 +43,21 @@ export const SelectedExerciseProvider: React.FC = ({
         return;
       }
 
-      // else give me the first exercise in the next group (or false if no next)
+      // if another group exists, give me the first exercise in the next group
       const nextGroup = exerciseGroups[groupIndex + 1];
       const newGroupId: string = nextGroup && nextGroup.id;
+
+      if (!nextGroup && id == customWorkoutId) {
+        // The customWorkout is always appending items to the end of the
+        // workout and immediately checking them off. Completion triggers next
+        // exercise being called which looks strange if you have only just
+        // added the exercise. We should return early if the customWorkout is
+        // active and there is no next exercise.
+        return;
+      }
+
       setExerciseIndex(0);
       setGroupId(newGroupId);
-      return;
     },
   };
 
