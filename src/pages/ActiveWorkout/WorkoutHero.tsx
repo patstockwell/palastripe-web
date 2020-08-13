@@ -7,7 +7,7 @@ import {format} from 'date-fns';
 
 import {
   AlertConfirm,
-  AlertButtonBlue,
+  AlertButtonGrey,
   AlertButtonOrange,
   SuccessAlert,
 } from '../../components/AlertConfirm';
@@ -114,9 +114,13 @@ const StartButton = styled(ButtonBase)`
 
 interface Props {
   workout: Workout;
+  checkCanStartWorkout: (callback: () => void) => void;
 }
 
-export const WorkoutHero: React.FC<Props> = ({workout}) => {
+export const WorkoutHero: React.FC<Props> = ({
+  checkCanStartWorkout,
+  workout,
+}) => {
   const [showShareMessage, setShowShareMessage] = useState(false);
   const [showResetWorkoutAlert, setShowResetWorkoutAlert] = useState(false);
   const {pathname} = useLocation();
@@ -133,8 +137,12 @@ export const WorkoutHero: React.FC<Props> = ({workout}) => {
 
   const handleStartButtonClick = () => {
     const { exerciseGroups: [firstGroup] } = workout;
-    setSelectedExercise({ index: 0, groupId: firstGroup.id });
-    startWorkout();
+    // This function will check for an existing workout, set an alert if it
+    // exists, or call the function if not.
+    checkCanStartWorkout(() => {
+      startWorkout();
+      setSelectedExercise({ index: 0, groupId: firstGroup.id });
+    });
   };
 
   const displayedTime = workout.startTime
@@ -182,9 +190,9 @@ export const WorkoutHero: React.FC<Props> = ({workout}) => {
 
         <br />
 
-        <AlertButtonBlue onClick={() => setShowResetWorkoutAlert(false)}>
+        <AlertButtonGrey onClick={() => setShowResetWorkoutAlert(false)}>
           Cancel
-        </AlertButtonBlue>
+        </AlertButtonGrey>
       </AlertConfirm>
 
       <SuccessAlert

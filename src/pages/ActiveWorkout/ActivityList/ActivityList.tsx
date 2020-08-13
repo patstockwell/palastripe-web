@@ -41,12 +41,14 @@ interface Props {
   workout: Workout;
   finishWorkoutClickHandler?: () => void;
   isCustomWorkout: boolean;
+  checkCanSelectTile: (callback: () => void) => void;
 }
 
 export const ActivityList: React.FC<Props> = ({
   finishWorkoutClickHandler,
-  workout: { exerciseGroups },
+  workout: { startTime, exerciseGroups },
   isCustomWorkout,
+  checkCanSelectTile,
 }) => {
   const [showHiddenArea, setShowHiddenArea] = useState(true);
   const {selectedExercise, setSelectedExercise} = useSelectedExercise();
@@ -67,7 +69,9 @@ export const ActivityList: React.FC<Props> = ({
         activity={a}
         handleSelect={() => {
           if (!isSelected) {
-            setSelectedExercise({ groupId: id, index: i });
+            checkCanSelectTile(() => {
+              setSelectedExercise({ groupId: id, index: i });
+            });
           }
         }}
         toggleShowHiddenArea={() => {
@@ -105,12 +109,14 @@ export const ActivityList: React.FC<Props> = ({
           showHiddenArea={showHiddenArea}
         />
       }
-      <FlexTile>
-        <Button onClick={finishWorkoutClickHandler}>
-          <ColouredDot fill={orange} />
-          Finish Workout
-        </Button>
-      </FlexTile>
+      {startTime && // Only show the finish button if the workout has started.
+        <FlexTile>
+          <Button onClick={finishWorkoutClickHandler}>
+            <ColouredDot fill={orange} />
+            Finish Workout
+          </Button>
+        </FlexTile>
+      }
 
       <BottomEmptySpace />
     </>

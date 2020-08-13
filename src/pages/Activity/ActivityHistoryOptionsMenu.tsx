@@ -1,8 +1,8 @@
 import React, {useState} from 'react';
 
-import {ReduxAction, Activity} from '../../helpers/types';
+import {ReduxAction, Activity, State} from '../../helpers/types';
 import {
-  AlertButtonBlue,
+  AlertButtonPurple,
   AlertButtonGrey,
   AlertButtonOrange,
   AlertConfirm,
@@ -11,6 +11,7 @@ import {Workout} from '../../reducers/workoutsReducer';
 import {useScrollPosition} from '../../context/useScrollPosition';
 import {useActiveWorkout} from '../../reducers/activeWorkoutReducer';
 import {customWorkoutId} from '../../workoutData/workouts/customWorkout';
+import {useSelector} from 'react-redux';
 
 interface Props {
   showMenu: boolean;
@@ -27,22 +28,28 @@ export const ActivityHistoryOptionsMenu: React.FC<Props> = ({
   workout,
   historyLink,
 }) => {
+  const [showExistingWorkoutAlert, setShowExistingWorkoutAlert] = useState(false);
   const [showDeleteWorkoutAlert, setShowDeleteWorkoutAlert] = useState(false);
   const {setActiveWorkout} = useActiveWorkout();
   const {setActivityPageScrollPosition} = useScrollPosition();
+  const {
+    name: activeWorkoutName,
+    id: activeWorkoutId,
+  } = useSelector((state: State) => state.activeWorkout) || {};
 
   const handleDeleteConfirmationClick = () => {
     deleteWorkout();
     setShowDeleteWorkoutAlert(false);
   };
 
-  const handleRepeatWorkoutClick = () => {
-    // Only set the active workout if it is the custom workout, otherwise, let
-    // the component render the workout as usual from the URL.
+  const repeatWorkout = () => {
+    // Only set the active workout if it is the custom workout, otherwise,
+    // clear the active workout first by setting it to null, and then let the
+    // component render the workout as usual from the URL.
     if (workout.id === customWorkoutId) {
       const incompleteWorkout: Workout = {
         ...workout,
-        startTime: undefined,
+        startTime: (new Date).toISOString(),
         finishTime: undefined,
         exerciseGroups: workout.exerciseGroups.map(group => ({
           ...group,
@@ -54,6 +61,8 @@ export const ActivityHistoryOptionsMenu: React.FC<Props> = ({
 
       setActiveWorkout(incompleteWorkout);
     }
+
+    setActiveWorkout(null);
   };
 
   return (
@@ -63,34 +72,33 @@ export const ActivityHistoryOptionsMenu: React.FC<Props> = ({
         showAlert={showMenu}
         messageText="Options"
       >
-        <AlertButtonGrey
+        <AlertButtonPurple
           onClick={() => setActivityPageScrollPosition(window.scrollY)}
           to={`/activity/${historyLink}`}
         >
           View Summary
-        </AlertButtonGrey>
+        </AlertButtonPurple>
 
-        <AlertButtonGrey
+        <AlertButtonPurple
           onClick={() => {
             setShowDeleteWorkoutAlert(true);
             toggleMenu();
           }}
         >
           Delete Workout
-        </AlertButtonGrey>
+        </AlertButtonPurple>
 
-        <AlertButtonGrey
-          onClick={handleRepeatWorkoutClick}
-          to={`/workouts/${workout.id}/`}
+        <AlertButtonPurple
+          onClick={() => setShowExistingWorkoutAlert(true)}
         >
           Repeat Workout
-        </AlertButtonGrey>
+        </AlertButtonPurple>
 
         <br />
 
-        <AlertButtonBlue onClick={() => toggleMenu()}>
+        <AlertButtonGrey onClick={() => toggleMenu()}>
           Cancel
-        </AlertButtonBlue>
+        </AlertButtonGrey>
       </AlertConfirm>
 
       <AlertConfirm
@@ -104,9 +112,29 @@ export const ActivityHistoryOptionsMenu: React.FC<Props> = ({
 
         <br />
 
-        <AlertButtonBlue onClick={() => setShowDeleteWorkoutAlert(false)}>
+        <AlertButtonGrey onClick={() => setShowDeleteWorkoutAlert(false)}>
           Cancel
-        </AlertButtonBlue>
+        </AlertButtonGrey>
+      </AlertConfirm>
+
+      <AlertConfirm
+        cancelAlert={() => setShowExistingWorkoutAlert(false)}
+        showAlert={showExistingWorkoutAlert}
+        messageText={`"${activeWorkoutName}" is not finished. Starting a new workout will clear all progress.`}
+      >
+        <AlertButtonPurple
+          onClick={repeatWorkout}
+          to={`/workouts/${workout.id}/`}
+        >
+          Start new workout
+        </AlertButtonPurple>
+        <AlertButtonGrey to={`/workouts/${activeWorkoutId}/`}>
+          Continue existing workout
+        </AlertButtonGrey>
+        <br />
+        <AlertButtonGrey onClick={() => setShowExistingWorkoutAlert(false)}>
+          Cancel
+        </AlertButtonGrey>
       </AlertConfirm>
     </>
   );

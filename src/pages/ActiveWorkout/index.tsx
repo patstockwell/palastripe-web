@@ -44,15 +44,21 @@ export const ActiveWorkout: React.FC = () => {
     return <FourZeroFour />;
   }
 
-  const unfinsihedWorkoutExists = activeWorkout
-    && activeWorkout.startTime
-    && idFromUrl !== activeWorkout.id;
-
-  if (unfinsihedWorkoutExists && !showExistingWorkoutAlert) {
-    setShowExistingWorkoutAlert(true);
-  } else if (!activeWorkout) {
+  if (!activeWorkout || !activeWorkout.startTime) {
     setActiveWorkout(workoutFromUrl);
   }
+
+  const unfinsihedWorkoutExists = Boolean(activeWorkout
+    && activeWorkout.startTime
+    && idFromUrl !== activeWorkout.id);
+
+  const checkUnfinishedWorkout = (callback: () => void) => {
+    if (unfinsihedWorkoutExists && !showExistingWorkoutAlert) {
+      setShowExistingWorkoutAlert(true);
+    } else {
+      callback();
+    }
+  };
 
   const displayedWorkout = activeWorkout && idFromUrl === activeWorkout.id
     ? activeWorkout // This is the expected case where URL & activeWorkout match.
@@ -66,6 +72,18 @@ export const ActiveWorkout: React.FC = () => {
     setActivityPageScrollPosition(0); // reset scroll for activity history page
   };
 
+  const startNewWorkout = () => {
+    setActiveWorkout({
+      ...workoutFromUrl,
+      startTime: (new Date).toISOString(),
+    });
+    setShowExistingWorkoutAlert(false);
+    setSelectedExercise({
+      index: 0,
+      groupId: workoutFromUrl.exerciseGroups[0].id,
+    });
+  };
+
   return (
     <RestTimerProvider>
       <AudioProvider soundOn={soundOn}>
@@ -76,32 +94,24 @@ export const ActiveWorkout: React.FC = () => {
             link: '/workouts/',
           }}
         />
-        <WorkoutHero workout={displayedWorkout} />
+        <WorkoutHero
+          workout={displayedWorkout}
+          checkCanStartWorkout={checkUnfinishedWorkout}
+        />
         <ActivityList
           workout={displayedWorkout}
           finishWorkoutClickHandler={() => setShowEndWorkoutAlert(true)}
           isCustomWorkout={isCustomWorkout}
+          checkCanSelectTile={checkUnfinishedWorkout}
         />
 
-        <AlertConfirm
+        <UnfinishedWorkoutAlert
+          cancelAlert={() => setShowExistingWorkoutAlert(false)}
           showAlert={showExistingWorkoutAlert}
-          messageText={`"${activeWorkout && activeWorkout.name}" is not finished. Starting a new workout will clear all progress.`}
-        >
-          <AlertButtonPurple
-            onClick={() => {
-              setActiveWorkout(workoutFromUrl);
-              setShowExistingWorkoutAlert(false);
-            }}
-          >
-            Start new workout
-          </AlertButtonPurple>
-          <AlertButtonGrey
-            onClick={() => setShowExistingWorkoutAlert(false)}
-            to={`/workouts/${activeWorkout && activeWorkout.id}/`}
-          >
-            Continue existing workout
-          </AlertButtonGrey>
-        </AlertConfirm>
+          activeWorkoutName={activeWorkout && activeWorkout.name}
+          activeWorkoutId={activeWorkout && activeWorkout.id}
+          onStartNewWorkout={startNewWorkout}
+        />
 
         <AlertConfirm
           cancelAlert={() => setShowEndWorkoutAlert(false)}
@@ -114,6 +124,7 @@ export const ActiveWorkout: React.FC = () => {
           >
             Finish workout
           </AlertButtonPurple>
+          <br />
           <AlertButtonGrey onClick={() => setShowEndWorkoutAlert(false)}>
             Cancel
           </AlertButtonGrey>
@@ -122,3 +133,39 @@ export const ActiveWorkout: React.FC = () => {
     </RestTimerProvider>
   );
 };
+
+interface UnfinishedWorkoutAlertProps {
+  cancelAlert: () => void;
+  showAlert: boolean;
+  onStartNewWorkout: () => void;
+  activeWorkoutName: string;
+  activeWorkoutId: string;
+}
+
+const UnfinishedWorkoutAlert: React.FC<UnfinishedWorkoutAlertProps> = ({
+  onStartNewWorkout,
+  cancelAlert,
+  showAlert,
+  activeWorkoutId,
+  activeWorkoutName,
+}) => (
+  <AlertConfirm
+    cancelAlert={cancelAlert}
+    showAlert={showAlert}
+    messageText={`"${activeWorkoutName}" is not finished. Starting a new workout will clear all progress.`}
+  >
+    <AlertButtonPurple onClick={onStartNewWorkout}>
+      Start new workout
+    </AlertButtonPurple>
+    <AlertButtonGrey
+      onClick={cancelAlert}
+      to={`/workouts/${activeWorkoutId}/`}
+    >
+    Continue existing workout
+    </AlertButtonGrey>
+    <br />
+    <AlertButtonGrey onClick={cancelAlert}>
+    Cancel
+    </AlertButtonGrey>
+  </AlertConfirm>
+);
