@@ -1,8 +1,8 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { useDispatch } from 'react-redux';
-import { Workout } from '../reducers/workoutsReducer';
-import { LOCAL_STORAGE_HISTORY } from '../helpers/constants';
-import { getLocalStorage } from '../helpers/functions';
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {useDispatch} from 'react-redux';
+import {Workout} from '../reducers/workoutsReducer';
+import {LOCAL_STORAGE_HISTORY} from '../helpers/constants';
+import {getLocalStorage} from '../helpers/functions';
 
 const reducers = {
   addWorkoutToHistory: (
@@ -26,29 +26,11 @@ const reducers = {
   },
 };
 
-// This function gets the workout history from local storage and updates all the
-// timestamps from a unix number format to a ISO string format.
-// TODO: Remove after Sept 1st 2020.
-const getInitialState = (): Workout[] => {
-  const workouts = getLocalStorage<Array<Workout>>(LOCAL_STORAGE_HISTORY, []);
-  return workouts.map((w: Workout) => {
-    const startDate = new Date(w.startTime);
-    const finishDate = new Date(w.finishTime);
-
-    return {
-      ...w,
-      startTime: w.startTime ? startDate.toISOString() : undefined,
-      finishTime: w.finishTime ? finishDate.toISOString() : undefined,
-    };
-  });
-};
-
 const historySlice = createSlice<Workout[], typeof reducers>({
   reducers,
   name: 'history',
   // Removing this line will destroy users' history. Never remove.
-  initialState: getInitialState(),
-  // initialState: getLocalStorage(LOCAL_STORAGE_HISTORY, []) as Workout[],
+  initialState: getLocalStorage<Workout[]>(LOCAL_STORAGE_HISTORY, []),
 });
 
 export const useAddWorkoutToHistory = () => {

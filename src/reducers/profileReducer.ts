@@ -1,7 +1,7 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { useDispatch } from 'react-redux';
-import { getLocalStorage } from '../helpers/functions';
-import { LOCAL_STORAGE_PROFILE } from '../helpers/constants';
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {useDispatch} from 'react-redux';
+import {getLocalStorage} from '../helpers/functions';
+import {LOCAL_STORAGE_PROFILE} from '../helpers/constants';
 
 export interface Profile {
   firstName: string;

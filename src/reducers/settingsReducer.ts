@@ -1,7 +1,7 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { useDispatch } from 'react-redux';
-import { getLocalStorage } from '../helpers/functions';
-import { LOCAL_STORAGE_SETTINGS } from '../helpers/constants';
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {useDispatch} from 'react-redux';
+import {getLocalStorage} from '../helpers/functions';
+import {LOCAL_STORAGE_SETTINGS} from '../helpers/constants';
 
 export interface Settings {
   useKilos: boolean;
