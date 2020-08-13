@@ -72,7 +72,7 @@ export const MessageText = styled.p`
 
 interface Props {
   showAlert: boolean;
-  cancelAlert: () => void;
+  cancelAlert?: () => void;
   onClose?: () => void;
   messageText?: string;
 }
@@ -80,7 +80,7 @@ interface Props {
 export const AlertConfirm: React.FC<Props> = ({
   children,
   showAlert,
-  cancelAlert,
+  cancelAlert = () => undefined,
   onClose,
   messageText,
 }) => {

@@ -23,6 +23,7 @@ import {RestTimerProvider} from '../../context/useRestTimer';
 
 export const ActiveWorkout: React.FC = () => {
   const [showEndWorkoutAlert, setShowEndWorkoutAlert] = useState(false);
+  const [showExistingWorkoutAlert, setShowExistingWorkoutAlert] = useState(false);
   const {setActivityPageScrollPosition} = useScrollPosition();
   const addToHistory = useAddWorkoutToHistory();
   const updateWorkoutTemplate = useUpdateWorkout();
@@ -35,24 +36,25 @@ export const ActiveWorkout: React.FC = () => {
   } = useSelector((state: State) => state);
 
   // get the workout ID from the URL
-  const {id: workoutId}: {id: string} = useParams();
-  const isCustomWorkout = workoutId === customWorkoutId;
-  const workoutFromUrl = workouts.byId[workoutId];
+  const {id: idFromUrl}: {id: string} = useParams();
+  const isCustomWorkout = idFromUrl === customWorkoutId;
+  const workoutFromUrl = workouts.byId[idFromUrl];
 
   if (!workoutFromUrl) {
     return <FourZeroFour />;
   }
 
-  const workoutSetAsActive = activeWorkout && workoutId === activeWorkout.id;
+  const unfinsihedWorkoutExists = activeWorkout && idFromUrl !== activeWorkout.id;
 
-  if (!workoutSetAsActive) {
-    // if a workout is visited that is not currently the activeWorkout, set it
+  if (unfinsihedWorkoutExists && !showExistingWorkoutAlert) {
+    setShowExistingWorkoutAlert(true);
+  } else if (!activeWorkout) {
     setActiveWorkout(workoutFromUrl);
   }
 
-  const displayedWorkout = workoutSetAsActive
-    ? activeWorkout
-    : workoutFromUrl;
+  const displayedWorkout = activeWorkout && idFromUrl === activeWorkout.id
+    ? activeWorkout // This is the expected case where URL & activeWorkout match.
+    : workoutFromUrl; // An alert will pop up in this case.
 
   const finishWorkoutWithAlertTransition = () => {
     clearActiveWorkout(); // activeWorkoutReducer
@@ -78,6 +80,21 @@ export const ActiveWorkout: React.FC = () => {
           finishWorkoutClickHandler={() => setShowEndWorkoutAlert(true)}
           isCustomWorkout={isCustomWorkout}
         />
+
+        <AlertConfirm
+          showAlert={showExistingWorkoutAlert}
+          messageText={`"${activeWorkout && activeWorkout.name}" is not finished. Starting a new workout will clear all progress.`}
+        >
+          <AlertButtonPurple onClick={() => setActiveWorkout(workoutFromUrl)}>
+            Start new workout
+          </AlertButtonPurple>
+          <AlertButtonGrey
+            onClick={() => setShowExistingWorkoutAlert(false)}
+            to={`/workouts/${activeWorkout && activeWorkout.id}/`}
+          >
+            Continue existing workout
+          </AlertButtonGrey>
+        </AlertConfirm>
 
         <AlertConfirm
           cancelAlert={() => setShowEndWorkoutAlert(false)}

@@ -14,7 +14,7 @@ export interface SingleSetAction {
 
 // State shape
 export interface State {
-  activeWorkout?: Workout;
+  activeWorkout: Workout | null;
   profile: Profile;
   settings: Settings;
   workouts: Workouts;
