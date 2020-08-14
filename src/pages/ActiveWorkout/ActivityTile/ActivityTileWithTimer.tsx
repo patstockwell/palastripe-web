@@ -1,16 +1,16 @@
-import React, { useEffect, useState } from 'react';
-import styled, { keyframes } from 'styled-components';
-import { SpringValue } from 'react-spring';
+import React, {useEffect, useState} from 'react';
+import styled, {keyframes} from 'styled-components';
+import {SpringValue} from 'react-spring';
 
-import { useAudio } from '../../../context/useAudio';
+import {useAudio} from '../../../context/useAudio';
 import HiddenTimerArea from './HiddenTimerArea';
-import { ShowHiddenAreaArrowWrapper } from './ActivityTileWithReps';
-import { ToggleSetCompleteButton } from './ToggleSetCompleteButton';
-import { StartTimedExerciseButton } from './StartTimedExerciseButton';
-import { tileStyle } from './ActivityTileSharedStyles';
+import {ShowHiddenAreaArrowWrapper} from './ActivityTileWithReps';
+import {ToggleSetCompleteButton} from './ToggleSetCompleteButton';
+import {StartTimedExerciseButton} from './StartTimedExerciseButton';
+import {tileStyle} from './ActivityTileSharedStyles';
 import DownArrow from '../../../assets/svg/DownArrow';
-import { TimedActivity } from '../../../helpers/types';
-import { formatSeconds, useInterval } from '../../../helpers/functions';
+import {TimedActivity} from '../../../helpers/types';
+import {formatSeconds, useInterval} from '../../../helpers/functions';
 import {
   green,
   lightGrey3,
@@ -18,8 +18,8 @@ import {
   tileMinHeight,
   ONE_SECOND,
 } from '../../../helpers/constants';
-import { Details, Title, Duration, VisibleArea } from './index';
-import { useActiveWorkout } from '../../../reducers/activeWorkoutReducer';
+import {Details, Title, Duration, VisibleArea} from './index';
+import {useActiveWorkout} from '../../../reducers/activeWorkoutReducer';
 
 const Tile = styled.li<{ selected: boolean }>`
   ${tileStyle}
@@ -88,8 +88,8 @@ export const ActivityTileWithTimer: React.FC<Props> = ({
   const [preparationComplete, setPreparationComplete] = useState(false);
   const [preparationStarted, setPreparationStarted] = useState(false);
   const [paused, setPaused] = useState(false);
-  const { toggleSetComplete } = useActiveWorkout();
-  const { playStart, playComplete } = useAudio();
+  const {toggleSetComplete} = useActiveWorkout();
+  const {playStart, playComplete} = useAudio();
 
   const inProgress = selected && !completed && preparationStarted;
 

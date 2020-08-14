@@ -227,8 +227,9 @@ export const getTimeSince = (timeStamp: string): string => {
 };
 
 export const formatSeconds = (seconds: number): string => {
-  const mins = Math.floor(seconds / 60);
-  const secs = seconds % 60;
+  const secondsGreaterThanZero = seconds < 0 ? 0 : seconds;
+  const mins = Math.floor(secondsGreaterThanZero / 60);
+  const secs = secondsGreaterThanZero % 60;
   return `${mins}:${secs <= 9 ? `0${secs}` : secs}`;
 };
 
