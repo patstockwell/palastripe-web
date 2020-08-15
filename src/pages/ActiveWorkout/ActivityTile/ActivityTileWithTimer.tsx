@@ -18,7 +18,7 @@ import {
   tileMinHeight,
   ONE_SECOND,
 } from '../../../helpers/constants';
-import {Details, Title, Duration, VisibleArea} from './index';
+import {Details, Title, Duration, VisibleArea, SubTitle} from './index';
 import {useActiveWorkout} from '../../../reducers/activeWorkoutReducer';
 
 const Tile = styled.li<{ selected: boolean }>`
@@ -142,10 +142,8 @@ export const ActivityTileWithTimer: React.FC<Props> = ({
 
         <Details onClick={toggleShowHiddenArea}>
           <Title>{name}</Title>
+          <SubTitle>{formattedTime}</SubTitle>
         </Details>
-        <Duration>
-          <p>{formattedTime}</p>
-        </Duration>
         {preparationStarted || completed ? (
           <ToggleSetCompleteButton
             handleClick={() => handleClick()}

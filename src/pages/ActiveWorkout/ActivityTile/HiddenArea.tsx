@@ -190,7 +190,6 @@ const EditableInput: React.FC<EditableInputProps> = ({
           autoFocus
           value={inputValue}
           onChange={handleChange}
-          placeholder="0"
           onKeyPress={handleKeyPress}
         />
       ) : (

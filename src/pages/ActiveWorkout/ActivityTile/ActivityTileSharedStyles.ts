@@ -21,8 +21,10 @@ export const tileStyle = css<{ selected: boolean }>`
 export const selectCompleteButtonStyle = `
   padding: 0;
   order: 3;
-  width: 48px;
   display: flex;
+  padding-right: 16px;
+  padding-left: 12px;
+  margin-right: -16px;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;

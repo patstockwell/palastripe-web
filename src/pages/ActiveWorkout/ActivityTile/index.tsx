@@ -11,6 +11,7 @@ import {
   tileMinHeight,
   lightGrey3,
   activeWorkoutWindowHeight,
+  gutterWidth,
 } from '../../../helpers/constants';
 import {useSelectedExercise} from '../../../context/useSelectedExercise';
 import {useRestTimer} from '../../../context/useRestTimer';
@@ -24,7 +25,6 @@ export const Details = styled.div`
   align-items: flex-start;
   justify-content: center;
   flex-direction: column;
-  padding: 0 8px;
   order: 2;
   flex-grow: 1;
   overflow: hidden;
@@ -61,6 +61,7 @@ export const VisibleArea = styled.div<{ selected?: boolean }>`
   align-items: stretch;
   flex-direction: row;
   justify-content: flex-start;
+  padding: 0 ${gutterWidth}px;
   min-height: ${tileMinHeight}px;
   background-color: ${props => {
     if (props.selected === undefined) {

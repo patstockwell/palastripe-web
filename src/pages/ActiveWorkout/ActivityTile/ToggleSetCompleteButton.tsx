@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { CheckboxTick } from '../../../components/Checkbox';
-import { selectCompleteButtonStyle } from './ActivityTileSharedStyles';
+import {CheckboxTick} from '../../../components/Checkbox';
+import {selectCompleteButtonStyle} from './ActivityTileSharedStyles';
 
 const SelectCompleteButton = styled.button`
   ${selectCompleteButtonStyle}

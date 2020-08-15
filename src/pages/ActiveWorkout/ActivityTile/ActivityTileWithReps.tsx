@@ -9,7 +9,7 @@ import { tileStyle } from './ActivityTileSharedStyles';
 import DownArrow from '../../../assets/svg/DownArrow';
 import { WeightedActivity, State } from '../../../helpers/types';
 import { formatWeight } from '../../../helpers/functions';
-import { Details, Title, SubTitle, Duration, VisibleArea } from './index';
+import { Details, Title, SubTitle, VisibleArea } from './index';
 import { useActiveWorkout } from '../../../reducers/activeWorkoutReducer';
 import { DraggableTileDelete } from './DraggableTileDelete';
 
@@ -92,12 +92,9 @@ export const ActivityTileWithReps: React.FC<Props> = ({
             <Details onClick={toggleShowHiddenArea}>
               <Title>{name}</Title>
               <SubTitle>
-                Weight: {weight} {label}
+                {repsAchieved} x {weight} {label}
               </SubTitle>
             </Details>
-            <Duration>
-              <p>{repsAchieved} x</p>
-            </Duration>
             <ToggleSetCompleteButton
               onAnimationEnd={onSetComplete}
               handleClick={handleClick}
