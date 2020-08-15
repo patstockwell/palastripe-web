@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {useSelector} from 'react-redux';
 import {useParams} from 'react-router-dom';
+import {isAfter, add} from 'date-fns';
 
 import {AudioProvider} from '../../context/useAudio';
 import {
@@ -25,6 +26,7 @@ import {RestTimerProvider} from '../../context/useRestTimer';
 export const ActiveWorkout: React.FC = () => {
   const [showEndWorkoutAlert, setShowEndWorkoutAlert] = useState(false);
   const [showExistingWorkoutAlert, setShowExistingWorkoutAlert] = useState(false);
+  const [showWorkoutTooLongAlert, setShowWorkoutTooLongAlert] = useState(false);
   const {setActivityPageScrollPosition} = useScrollPosition();
   const addToHistory = useAddWorkoutToHistory();
   const updateWorkoutTemplate = useUpdateWorkout();
@@ -58,6 +60,12 @@ export const ActiveWorkout: React.FC = () => {
     && workoutFromUrl !== undefined
     && idFromUrl !== activeWorkout.id);
 
+  const maxWorkoutLength = add(new Date(activeWorkout.startTime), { hours: 4 });
+  const workoutIsStale = isAfter(new Date(), maxWorkoutLength);
+  if (workoutIsStale && !unfinsihedWorkoutExists && !showWorkoutTooLongAlert) {
+    setShowWorkoutTooLongAlert(true);
+  }
+
   const checkUnfinishedWorkout = (callback: () => void) => {
     if (unfinsihedWorkoutExists && !showExistingWorkoutAlert) {
       setShowExistingWorkoutAlert(true);
@@ -78,10 +86,13 @@ export const ActiveWorkout: React.FC = () => {
 
   const finishWorkoutWithAlertTransition = () => {
     clearActiveWorkout(); // activeWorkoutReducer
-    addToHistory(activeWorkout); // historyReducer
     updateWorkoutTemplate(activeWorkout); // workoutsReducer
     setSelectedExercise({ index: 0, groupId: '' }); // reset selected exercise
     setActivityPageScrollPosition(0); // reset scroll for activity history page
+    addToHistory({ // historyReducer
+      ...activeWorkout,
+      finishTime: maxWorkoutLength.toISOString(),
+    });
   };
 
   const startWorkoutFromUrl = () => {
@@ -130,6 +141,19 @@ export const ActiveWorkout: React.FC = () => {
           onStartNewWorkout={startWorkoutFromUrl}
           continueLink={`/workouts/${activeWorkout && activeWorkout.id}/`}
         />
+
+        <AlertConfirm
+          showAlert={showWorkoutTooLongAlert}
+          cancelAlert={() => setShowWorkoutTooLongAlert(false)}
+          messageText="This workout is more than 4 hours long. This will complete and log your workout in its current state."
+        >
+          <AlertButtonPurple
+            to="/workout-complete/"
+            onClick={finishWorkoutWithAlertTransition}
+          >
+            End workout
+          </AlertButtonPurple>
+        </AlertConfirm>
 
         <AlertConfirm
           cancelAlert={() => setShowEndWorkoutAlert(false)}

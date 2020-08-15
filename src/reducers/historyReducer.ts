@@ -11,10 +11,7 @@ const reducers = {
   ): Workout[] => ([
     {
       ...action.payload,
-      // check to see if the startTime was set. The user may have just clicked
-      // the finish workout button without starting any exercises.
-      startTime: action.payload.startTime || (new Date()).toISOString(),
-      finishTime: (new Date()).toISOString(),
+      finishTime: action.payload.finishTime || (new Date()).toISOString(),
     },
     ...state,
   ]),
