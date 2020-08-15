@@ -60,10 +60,14 @@ export const ActiveWorkout: React.FC = () => {
     && workoutFromUrl !== undefined
     && idFromUrl !== activeWorkout.id);
 
-  const maxWorkoutLength = add(new Date(activeWorkout.startTime), { hours: 4 });
-  const workoutIsStale = isAfter(new Date(), maxWorkoutLength);
-  if (workoutIsStale && !unfinsihedWorkoutExists && !showWorkoutTooLongAlert) {
-    setShowWorkoutTooLongAlert(true);
+  // Check if we should alert for a workout that is too long.
+  const workoutStartTime = activeWorkout && activeWorkout.startTime || Date.now();
+  if (!unfinsihedWorkoutExists && !showWorkoutTooLongAlert) {
+    const maxWorkoutLength = add(new Date(workoutStartTime), { hours: 4 });
+    const workoutIsStale = isAfter(new Date(), maxWorkoutLength);
+    if (workoutIsStale) {
+      setShowWorkoutTooLongAlert(true);
+    }
   }
 
   const checkUnfinishedWorkout = (callback: () => void) => {
@@ -84,14 +88,14 @@ export const ActiveWorkout: React.FC = () => {
   // that are no longer in the list of workout ids.
     : workoutFromUrl || activeWorkout;
 
-  const finishWorkoutWithAlertTransition = () => {
+  const finishWorkoutWithAlertTransition = (finishTime?: string) => {
     clearActiveWorkout(); // activeWorkoutReducer
     updateWorkoutTemplate(activeWorkout); // workoutsReducer
     setSelectedExercise({ index: 0, groupId: '' }); // reset selected exercise
     setActivityPageScrollPosition(0); // reset scroll for activity history page
     addToHistory({ // historyReducer
       ...activeWorkout,
-      finishTime: maxWorkoutLength.toISOString(),
+      finishTime: finishTime || activeWorkout.finishTime,
     });
   };
 
@@ -149,7 +153,10 @@ export const ActiveWorkout: React.FC = () => {
         >
           <AlertButtonPurple
             to="/workout-complete/"
-            onClick={finishWorkoutWithAlertTransition}
+            onClick={() => {
+              const finishDate = add(new Date(workoutStartTime), { hours: 4 });
+              finishWorkoutWithAlertTransition(finishDate.toISOString());
+            }}
           >
             End workout
           </AlertButtonPurple>
@@ -162,7 +169,7 @@ export const ActiveWorkout: React.FC = () => {
         >
           <AlertButtonPurple
             to="/workout-complete/"
-            onClick={finishWorkoutWithAlertTransition}
+            onClick={() => finishWorkoutWithAlertTransition()}
           >
             Finish workout
           </AlertButtonPurple>
