@@ -17,7 +17,7 @@ import {ActivityList} from './ActivityList';
 import {State} from '../../helpers/types';
 import {useScrollPosition} from '../../context/useScrollPosition';
 import {useAddWorkoutToHistory} from '../../reducers/historyReducer';
-import {useUpdateWorkout} from '../../reducers/workoutsReducer';
+import {useUpdateWorkout, Workout} from '../../reducers/workoutsReducer';
 import {useActiveWorkout} from '../../reducers/activeWorkoutReducer';
 import {onTheFlyWorkoutId} from '../../workoutData/workouts/onTheFly';
 import {useSelectedExercise} from '../../context/useSelectedExercise';
@@ -88,7 +88,7 @@ export const ActiveWorkout: React.FC = () => {
   // that are no longer in the list of workout ids.
     : workoutFromUrl || activeWorkout;
 
-  const finishWorkoutWithAlertTransition = (finishTime?: string) => {
+  const finishWorkout = (finishTime?: string) => {
     clearActiveWorkout(); // activeWorkoutReducer
     updateWorkoutTemplate(activeWorkout); // workoutsReducer
     setSelectedExercise({ index: 0, groupId: '' }); // reset selected exercise
@@ -146,53 +146,59 @@ export const ActiveWorkout: React.FC = () => {
           continueLink={`/workouts/${activeWorkout && activeWorkout.id}/`}
         />
 
-        <AlertConfirm
-          showAlert={showWorkoutTooLongAlert}
-          cancelAlert={() => setShowWorkoutTooLongAlert(false)}
-          messageText="This workout is more than 4 hours long. This will complete and log your workout in its current state."
-        >
-          <AlertButtonPurple
-            to="/workout-complete/"
-            onClick={() => {
-              const finishDate = add(new Date(workoutStartTime), { hours: 4 });
-              finishWorkoutWithAlertTransition(finishDate.toISOString());
-            }}
-          >
-            End workout
-          </AlertButtonPurple>
-        </AlertConfirm>
-
-        <AlertConfirm
+        <FinishWorkoutAlert
           cancelAlert={() => setShowEndWorkoutAlert(false)}
           showAlert={showEndWorkoutAlert}
-          messageText="This will end your workout and save it to activity history."
-        >
-          <AlertButtonPurple
-            to="/workout-complete/"
-            onClick={() => finishWorkoutWithAlertTransition()}
-          >
-            Finish workout
-          </AlertButtonPurple>
-          <HorizontalRuleSpacer />
-          <AlertButtonGrey onClick={() => setShowEndWorkoutAlert(false)}>
-            Cancel
-          </AlertButtonGrey>
-        </AlertConfirm>
+          finishWorkout={finishWorkout}
+        />
+
+        <WorkoutTooLongAlert
+          cancelAlert={() => setShowWorkoutTooLongAlert(false)}
+          showAlert={showWorkoutTooLongAlert}
+          activeWorkout={activeWorkout}
+          finishWorkout={finishWorkout}
+        />
+
       </AudioProvider>
     </RestTimerProvider>
   );
 };
 
-interface UnfinishedWorkoutAlertProps {
+const FinishWorkoutAlert: React.FC<{
+  cancelAlert: () => void;
+  showAlert: boolean;
+  finishWorkout: (finishTime?: string) => void;
+}> = ({
+  cancelAlert,
+  showAlert,
+  finishWorkout,
+}) => (
+  <AlertConfirm
+    cancelAlert={cancelAlert}
+    showAlert={showAlert}
+    messageText="This will end your workout and save it to activity history."
+  >
+    <AlertButtonPurple
+      to="/workout-complete/"
+      onClick={() => finishWorkout()}
+    >
+      Finish workout
+    </AlertButtonPurple>
+    <HorizontalRuleSpacer />
+    <AlertButtonGrey onClick={cancelAlert}>
+      Cancel
+    </AlertButtonGrey>
+  </AlertConfirm>
+);
+
+export const UnfinishedWorkoutAlert: React.FC<{
   cancelAlert: () => void;
   showAlert: boolean;
   onStartNewWorkout: () => void;
   activeWorkoutName: string;
   continueLink?: string;
   startLink?: string;
-}
-
-export const UnfinishedWorkoutAlert: React.FC<UnfinishedWorkoutAlertProps> = ({
+}> = ({
   onStartNewWorkout,
   cancelAlert,
   showAlert,
@@ -217,3 +223,29 @@ export const UnfinishedWorkoutAlert: React.FC<UnfinishedWorkoutAlertProps> = ({
     </AlertButtonGrey>
   </AlertConfirm>
 );
+
+const WorkoutTooLongAlert: React.FC<{
+  cancelAlert: () => void;
+  showAlert: boolean;
+  activeWorkout: Workout;
+  finishWorkout: (finishTime?: string) => void;
+}> = ({finishWorkout, activeWorkout, showAlert, cancelAlert}) => {
+
+  return activeWorkout && (
+    <AlertConfirm
+      showAlert={showAlert}
+      cancelAlert={cancelAlert}
+      messageText="This workout is more than 4 hours long. This will complete and log your workout in its current state."
+    >
+      <AlertButtonPurple
+        to="/workout-complete/"
+        onClick={() => {
+          const finishDate = add(new Date(activeWorkout.startTime), { hours: 4 });
+          finishWorkout(finishDate.toISOString());
+        }}
+      >
+        End workout
+      </AlertButtonPurple>
+    </AlertConfirm>
+  );
+};
