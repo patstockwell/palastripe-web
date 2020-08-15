@@ -19,7 +19,7 @@ import {ActivityHistoryOptionsMenu} from './ActivityHistoryOptionsMenu';
 
 const Tile = styled.li`
   position: relative;
-  padding: 24px 12px;
+  padding: 24px 0;
   border-bottom: 0.5px solid ${lightGrey3};
   display: flex;
   box-sizing: border-box;
@@ -34,7 +34,6 @@ const TimeSince = styled.p`
 
 const Left = styled.div`
   position: relative;
-  margin-left: 12px;
   margin-right: 16px;
 `;
 

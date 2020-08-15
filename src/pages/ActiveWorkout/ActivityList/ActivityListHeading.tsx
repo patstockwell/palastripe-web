@@ -16,6 +16,7 @@ const HeadingPanel = styled.div<{ top: number }>`
   position: sticky;
   top: ${({ top }) => top || 0}px;
   z-index: 2;
+  padding: 0 ${gutterWidth}px;
 `;
 
 const Input = styled.input`
@@ -36,14 +37,12 @@ const Heading = styled.h2`
   font-size: 12px;
   text-transform: uppercase;
   font-weight: 500;
-  margin: 0 12px;
   text-align: left;
 `;
 
 const Sets = styled.p`
   font-size: 12px;
   color: grey;
-  margin: 0 12px;
   flex-shrink: 0;
 `;
 

@@ -29,10 +29,9 @@ const AddActivityButton = styled(Link)`
 
 interface Props {
   setShowHiddenArea: React.Dispatch<React.SetStateAction<boolean>>;
-  showHiddenArea: boolean;
 }
 
-export const OnTheFlyWorkoutTile: React.FC<Props> = ({setShowHiddenArea}) => {
+export const AddActivityTile: React.FC<Props> = ({setShowHiddenArea}) => {
   const {setSelectedExercise} = useSelectedExercise();
 
   return (

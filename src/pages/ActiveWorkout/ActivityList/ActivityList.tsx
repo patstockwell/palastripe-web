@@ -4,14 +4,14 @@ import {ActivityTile} from '../ActivityTile';
 import {ColouredDot} from '../../../assets/svg/ColouredDot';
 import {ActivityListHeading} from './ActivityListHeading';
 import {
-  orange,
+  pink,
   tileMinHeight,
 } from '../../../helpers/constants';
 import {Activity} from '../../../helpers/types';
 import {Workout} from '../../../reducers/workoutsReducer';
 import {ButtonBase, unorderedListStyle} from '../../../components/SharedStyles';
 import {useSelectedExercise} from '../../../context/useSelectedExercise';
-import {OnTheFlyWorkoutTile} from '../OnTheFlyWorkoutTile';
+import {AddActivityTile} from '../AddActivityTile';
 
 const Ul = styled.ul`
   ${unorderedListStyle}
@@ -40,14 +40,14 @@ const BottomEmptySpace = styled.div<{ stickyTop?: number}>`
 interface Props {
   workout: Workout;
   finishWorkoutClickHandler?: () => void;
-  isOnTheFlyWorkout: boolean;
+  isOnTheFlyWorkout?: boolean;
   checkCanSelectTile: (callback: () => void) => void;
 }
 
 export const ActivityList: React.FC<Props> = ({
   finishWorkoutClickHandler,
   workout: { startTime, exerciseGroups },
-  isOnTheFlyWorkout,
+  isOnTheFlyWorkout = false,
   checkCanSelectTile,
 }) => {
   const [showHiddenArea, setShowHiddenArea] = useState(true);
@@ -104,15 +104,12 @@ export const ActivityList: React.FC<Props> = ({
     <>
       <Ul>{activityListTiles}</Ul>
       {isOnTheFlyWorkout &&
-        <OnTheFlyWorkoutTile
-          setShowHiddenArea={setShowHiddenArea}
-          showHiddenArea={showHiddenArea}
-        />
+        <AddActivityTile setShowHiddenArea={setShowHiddenArea}/>
       }
       {startTime && // Only show the finish button if the workout has started.
         <FlexTile>
           <Button onClick={finishWorkoutClickHandler}>
-            <ColouredDot fill={orange} />
+            <ColouredDot fill={pink} />
             Finish Workout
           </Button>
         </FlexTile>

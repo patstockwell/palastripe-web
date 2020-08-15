@@ -10,6 +10,7 @@ import {
   AlertButtonGrey,
   AlertButtonOrange,
   SuccessAlert,
+  HorizontalRuleSpacer,
 } from '../../components/AlertConfirm';
 import {StopWatch} from '../../assets/svg/StopWatch';
 import {ColouredDot} from '../../assets/svg/ColouredDot';
@@ -188,7 +189,7 @@ export const WorkoutHero: React.FC<Props> = ({
           Reset Workout
         </AlertButtonOrange>
 
-        <br />
+        <HorizontalRuleSpacer />
 
         <AlertButtonGrey onClick={() => setShowResetWorkoutAlert(false)}>
           Cancel

@@ -105,15 +105,15 @@ export const WorkoutSummary: React.FC<Props> = ({
       </PanelWithGutter>
         <Hr />
       <PanelWithGutter>
-        {workout.id !== onTheFlyWorkoutId && // hide badge info for onTheFly workout
-          <Info>
-            <Badge style={{ ...badgeStyle, top: '-1px', fill: 'darkgrey' }} />
-            *All sets and reps were completed successfully.
-          </Info>
-        }
         <Ul>
           {activitySummaryTiles}
         </Ul>
+        {workout.id !== onTheFlyWorkoutId && // hide badge info for onTheFly workout
+          <Info>
+            <Badge style={{ ...badgeStyle, top: '-1px', fill: 'darkgrey' }} />
+            *A badge means all sets and reps were completed successfully.
+          </Info>
+        }
       </PanelWithGutter>
     </>
   );

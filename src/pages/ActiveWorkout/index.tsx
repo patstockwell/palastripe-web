@@ -7,6 +7,7 @@ import {
   AlertButtonPurple,
   AlertButtonGrey,
   AlertConfirm,
+  HorizontalRuleSpacer,
 } from '../../components/AlertConfirm';
 import {BackLinkBanner} from '../../components/BackLinkBanner';
 import {WorkoutHero} from './WorkoutHero';
@@ -50,8 +51,11 @@ export const ActiveWorkout: React.FC = () => {
     setActiveWorkout(workoutFromUrl);
   }
 
+  // An unfinished workout exists if there is an active workout with a start
+  // time, there is an valid workout URL, and these 2 things don't match.
   const unfinsihedWorkoutExists = Boolean(activeWorkout
     && activeWorkout.startTime
+    && workoutFromUrl !== undefined
     && idFromUrl !== activeWorkout.id);
 
   const checkUnfinishedWorkout = (callback: () => void) => {
@@ -80,7 +84,7 @@ export const ActiveWorkout: React.FC = () => {
     setActivityPageScrollPosition(0); // reset scroll for activity history page
   };
 
-  const startNewWorkout = () => {
+  const startWorkoutFromUrl = () => {
     setActiveWorkout({
       ...workoutFromUrl,
       startTime: (new Date).toISOString(),
@@ -91,6 +95,12 @@ export const ActiveWorkout: React.FC = () => {
       groupId: workoutFromUrl.exerciseGroups[0].id,
     });
   };
+
+  // Only when the URL and the active workout match.
+  const isOnTheFlyWorkout =
+    idFromUrl === onTheFlyWorkoutId
+    && activeWorkout
+    && activeWorkout.id === onTheFlyWorkoutId;
 
   return (
     <RestTimerProvider>
@@ -109,7 +119,7 @@ export const ActiveWorkout: React.FC = () => {
         <ActivityList
           workout={displayedWorkout}
           finishWorkoutClickHandler={() => setShowEndWorkoutAlert(true)}
-          isOnTheFlyWorkout={idFromUrl === onTheFlyWorkoutId}
+          isOnTheFlyWorkout={isOnTheFlyWorkout}
           checkCanSelectTile={checkUnfinishedWorkout}
         />
 
@@ -117,8 +127,8 @@ export const ActiveWorkout: React.FC = () => {
           cancelAlert={() => setShowExistingWorkoutAlert(false)}
           showAlert={showExistingWorkoutAlert}
           activeWorkoutName={activeWorkout && activeWorkout.name}
-          activeWorkoutId={activeWorkout && activeWorkout.id}
-          onStartNewWorkout={startNewWorkout}
+          onStartNewWorkout={startWorkoutFromUrl}
+          continueLink={`/workouts/${activeWorkout && activeWorkout.id}/`}
         />
 
         <AlertConfirm
@@ -132,7 +142,7 @@ export const ActiveWorkout: React.FC = () => {
           >
             Finish workout
           </AlertButtonPurple>
-          <br />
+          <HorizontalRuleSpacer />
           <AlertButtonGrey onClick={() => setShowEndWorkoutAlert(false)}>
             Cancel
           </AlertButtonGrey>
@@ -147,31 +157,30 @@ interface UnfinishedWorkoutAlertProps {
   showAlert: boolean;
   onStartNewWorkout: () => void;
   activeWorkoutName: string;
-  activeWorkoutId: string;
+  continueLink?: string;
+  startLink?: string;
 }
 
-const UnfinishedWorkoutAlert: React.FC<UnfinishedWorkoutAlertProps> = ({
+export const UnfinishedWorkoutAlert: React.FC<UnfinishedWorkoutAlertProps> = ({
   onStartNewWorkout,
   cancelAlert,
   showAlert,
-  activeWorkoutId,
   activeWorkoutName,
+  continueLink,
+  startLink,
 }) => (
   <AlertConfirm
     cancelAlert={cancelAlert}
     showAlert={showAlert}
     messageText={`"${activeWorkoutName}" is not finished. Starting a new workout will clear all progress.`}
   >
-    <AlertButtonPurple onClick={onStartNewWorkout}>
+    <AlertButtonPurple onClick={cancelAlert} to={continueLink}>
+      Continue existing workout
+    </AlertButtonPurple>
+    <AlertButtonPurple to={startLink} onClick={onStartNewWorkout}>
       Start new workout
     </AlertButtonPurple>
-    <AlertButtonGrey
-      onClick={cancelAlert}
-      to={`/workouts/${activeWorkoutId}/`}
-    >
-    Continue existing workout
-    </AlertButtonGrey>
-    <br />
+    <HorizontalRuleSpacer />
     <AlertButtonGrey onClick={cancelAlert}>
     Cancel
     </AlertButtonGrey>

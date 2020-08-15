@@ -263,3 +263,10 @@ export const AlertButtonPurple: React.FC<AlertButtonProps> = ({
     color={'white'}
   >{children}</AlertButton>;
 
+export const HorizontalRuleSpacer = styled.hr`
+  border: none;
+  height: 1px;
+  background-color: lightgrey;
+  margin: 16px 0;
+`;
+

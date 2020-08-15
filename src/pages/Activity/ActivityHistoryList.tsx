@@ -11,6 +11,7 @@ import {useDeleteWorkout} from '../../reducers/historyReducer';
 import {
   useActivityHistoryLength,
 } from '../../context/useActivityHistoryLength';
+import {gutterWidth} from '../../helpers/constants';
 
 const BottomSpace = styled.div`
   height: 200px;
@@ -33,10 +34,9 @@ const RoundCorneredTop = styled.ul`
   border-radius: 24px 24px 0 0;
   overflow: hidden;
   background-color: white;
-  padding-top: 24px;
+  padding: 24px ${gutterWidth}px;
   list-style: none;
   margin: 0;
-  padding-left: 0;
 `;
 
 interface Props {

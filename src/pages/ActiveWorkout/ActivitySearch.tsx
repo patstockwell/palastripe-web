@@ -19,11 +19,9 @@ import {onTheFlyWorkoutGroupId} from '../../workoutData/workouts/onTheFly';
 
 export const Input = styled.input`
   color: ${charcoal};
-  width: calc(100% - (2 * ${gutterWidth}px));
+  width: 100%;
   box-sizing: border-box;
   border: 2px solid grey;
-  margin: ${gutterWidth}px;
-  margin-bottom: 0;
   font-size: 18px;
   padding: 12px;
   border-radius: 4px;
@@ -35,9 +33,13 @@ export const Input = styled.input`
   }
 `;
 
+const PanelWithGutter = styled.div`
+  padding: ${gutterWidth}px;
+`;
+
 const Ul = styled.ul`
   padding: 0;
-  margin: 0 12px;
+  margin: 0;
   list-style: none;
   border-left: 1px solid ${lightGrey1};
   border-right: 1px solid ${lightGrey1};
@@ -180,50 +182,52 @@ export const ActivitySearch: React.FC = () => {
         back={{ link: backLinkPath, showArrows: true }}
         continueTo={continueToArgs}
       />
-      <Input
-        ref={inputRef}
-        placeholder="Search or create new exercise"
-        onChange={handleSearchChange}
-        value={searchQuery}
-        autoFocus
-        onKeyDown={handleKeyPress}
-      />
-      <Ul>
-        {multipleMatches.length // show suggestions from the input query
-          ?  multipleMatches.map(exercise => (
-            <SearchSuggestionTile
-              key={exercise.id}
-              onClick={() => endSearchAndAddExercise({
-                name: exercise.name,
-                exerciseId: exercise.id,
-                weightInKilos: exercise.defaultWeightInKilos,
-              })}
-            >
-              <OverflowContainer>
-                {exercise.searchPieces.map(piece => Array.isArray(piece)
-                  // Use an array with only one item in it to represent a section
-                  // of the search that should be bold. This is because an array
-                  // of strings can be rendered in the same way as a string.
-                  ? <strong key={piece[0]}>{piece}</strong> : piece
-                )}
-              </OverflowContainer>
-            </SearchSuggestionTile>
-          )) // else show the recently added exercises as suggestions
-          : Object.values(recentActivities).map((activity: WeightedActivity) => (
-            <SearchSuggestionTile
-              key={activity.id}
-              onClick={() => endSearchAndAddExercise({
-                name: activity.name,
-                repsAchieved: activity.repsAchieved,
-                exerciseId: activity.exerciseId,
-                weightInKilos: activity.weightInKilos,
-              })}
-            >
-              {activity.name}
-            </SearchSuggestionTile>
-          ))
-        }
-      </Ul>
+      <PanelWithGutter>
+        <Input
+          ref={inputRef}
+          placeholder="Search or create new exercise"
+          onChange={handleSearchChange}
+          value={searchQuery}
+          autoFocus
+          onKeyDown={handleKeyPress}
+        />
+        <Ul>
+          {multipleMatches.length // show suggestions from the input query
+            ?  multipleMatches.map(exercise => (
+              <SearchSuggestionTile
+                key={exercise.id}
+                onClick={() => endSearchAndAddExercise({
+                  name: exercise.name,
+                  exerciseId: exercise.id,
+                  weightInKilos: exercise.defaultWeightInKilos,
+                })}
+              >
+                <OverflowContainer>
+                  {exercise.searchPieces.map(piece => Array.isArray(piece)
+                    // Use an array with only one item in it to represent a section
+                    // of the search that should be bold. This is because an array
+                    // of strings can be rendered in the same way as a string.
+                    ? <strong key={piece[0]}>{piece}</strong> : piece
+                  )}
+                </OverflowContainer>
+              </SearchSuggestionTile>
+            )) // else show the recently added exercises as suggestions
+            : Object.values(recentActivities).map((activity: WeightedActivity) => (
+              <SearchSuggestionTile
+                key={activity.id}
+                onClick={() => endSearchAndAddExercise({
+                  name: activity.name,
+                  repsAchieved: activity.repsAchieved,
+                  exerciseId: activity.exerciseId,
+                  weightInKilos: activity.weightInKilos,
+                })}
+              >
+                {activity.name}
+              </SearchSuggestionTile>
+            ))
+          }
+        </Ul>
+      </PanelWithGutter>
     </ActivitySearchBackground>
   );
 };

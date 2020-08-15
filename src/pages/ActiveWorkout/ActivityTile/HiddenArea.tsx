@@ -10,6 +10,7 @@ import {getOneRepMax, formatWeight} from '../../../helpers/functions';
 import {IncrementDecrementPanel} from './IncrementDecrementPanel';
 import {ButtonBase, ButtonStyleProps} from '../../../components/SharedStyles';
 import {useActiveWorkout} from '../../../reducers/activeWorkoutReducer';
+import {gutterWidth} from '../../../helpers/constants';
 
 const MainValue = styled.span`
   font-size: 32px;
@@ -27,9 +28,8 @@ const Button = styled(ButtonBase)<ButtonStyleProps>`
 `;
 
 const OneRepMax = styled.p`
-  position: absolute;
-  right: 12px;
   margin: 0;
+  margin-left: ${gutterWidth}px;
   font-size: 0.75em;
   color: gray;
   text-transform: uppercase;

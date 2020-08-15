@@ -1,7 +1,12 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
-import {orange, blue} from '../../../helpers/constants';
-import {AlertButtonBlue, AlertButtonOrange, AlertConfirm} from '../../../components/AlertConfirm';
+import {orange} from '../../../helpers/constants';
+import {
+  AlertButtonGrey,
+  AlertButtonOrange,
+  AlertConfirm,
+  HorizontalRuleSpacer,
+} from '../../../components/AlertConfirm';
 import {useActiveWorkout} from '../../../reducers/activeWorkoutReducer';
 
 const deleteButtonWidth = 100;
@@ -71,9 +76,10 @@ export const DraggableTileDelete: React.FC<Props> = ({
             <AlertButtonOrange onClick={() => deleteActivity(id)}>
               Delete
             </AlertButtonOrange>
-            <AlertButtonBlue onClick={() => setShowAlert(false)}>
+            <HorizontalRuleSpacer />
+            <AlertButtonGrey onClick={() => setShowAlert(false)}>
               Cancel
-            </AlertButtonBlue>
+            </AlertButtonGrey>
           </AlertConfirm>
         </>
       )}

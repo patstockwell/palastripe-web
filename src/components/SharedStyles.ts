@@ -3,6 +3,7 @@ import styled, {createGlobalStyle, css} from 'styled-components';
 import {
   purple,
   workoutWindowViewport,
+  gutterWidth,
 } from '../helpers/constants';
 import {Link} from 'react-router-dom';
 
@@ -88,11 +89,11 @@ export const workoutTitleStyle = `
 export const workoutHeroWindowStyle = css<{ colour?: string; imageUrl?: string }>`
   min-height: ${workoutWindowViewport}vh;
   position: relative;
-  background-color: ${({ colour }) => colour ? colour : 'black'};
+  background-color: ${props => props.colour || 'black'};
   color: white;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 16px;
+  padding: ${gutterWidth}px;
 `;

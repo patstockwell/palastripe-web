@@ -28,7 +28,7 @@ const Response = styled.p`
 `;
 
 const Input = styled(InputBase)`
-  margin: ${gutterWidth}px;
+  margin: 16px 0;
 
   &::placeholder {
     color: lightgrey;
@@ -50,7 +50,7 @@ const Gutter = styled.div`
 `;
 
 const Label = styled.label`
-  margin: ${gutterWidth}px;
+  margin: 16px 0;
   font-size: 12px;
   text-transform: uppercase;
   font-weight: 500;
