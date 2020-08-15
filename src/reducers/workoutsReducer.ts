@@ -148,7 +148,7 @@ const mergeWorkouts = (
   });
 
   // find all the new workouts (any ids not in localStorage)
-  const missingIds = initialIds.filter(id => !localIds.includes(id));
+  const missingIds = initialIds.filter(id => !localIdsToKeep.includes(id));
   // get each of the workouts for those ids
   const missingWorkouts = missingIds
     .map(id => initialWorkouts[id])
