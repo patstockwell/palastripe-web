@@ -1,21 +1,21 @@
-import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { useDispatch } from 'react-redux';
+import {createSlice, PayloadAction} from '@reduxjs/toolkit';
+import {useDispatch} from 'react-redux';
 
-import { Activity, WeightedActivity, isTimed } from '../helpers/types';
-import { circuitSpeed } from '../workoutData/workouts/circuitSpeed';
-import { fullBodyDumbbellStrength } from '../workoutData/workouts/fullBodyDumbbellStrength';
-import { upperBodyBurner } from '../workoutData/workouts/upperBodyBurner';
-import { overheadStrength } from '../workoutData/workouts/overheadStrength';
-import { fullBodyPower } from '../workoutData/workouts/fullBodyPower';
-import { glutesAndGlory } from '../workoutData/workouts/glutesAndGlory';
-import { squatAndBench } from '../workoutData/workouts/squatAndBench';
-import { shapeAndStrength } from '../workoutData/workouts/shapeAndStrength';
-import { pushAndPull } from '../workoutData/workouts/pushAndPull';
-import { legPower } from '../workoutData/workouts/legPower';
-import { compoundPyramids } from '../workoutData/workouts/compoundPyramids';
-import { customWorkoutId, customWorkout } from '../workoutData/workouts/customWorkout';
-import { getLocalStorage } from '../helpers/functions';
-import { LOCAL_STORAGE_WORKOUTS, WORKOUT_VERSION } from '../helpers/constants';
+import {Activity, WeightedActivity, isTimed} from '../helpers/types';
+import {circuitSpeed} from '../workoutData/workouts/circuitSpeed';
+import {fullBodyDumbbellStrength} from '../workoutData/workouts/fullBodyDumbbellStrength';
+import {upperBodyBurner} from '../workoutData/workouts/upperBodyBurner';
+import {overheadStrength} from '../workoutData/workouts/overheadStrength';
+import {fullBodyPower} from '../workoutData/workouts/fullBodyPower';
+import {glutesAndGlory} from '../workoutData/workouts/glutesAndGlory';
+import {squatAndBench} from '../workoutData/workouts/squatAndBench';
+import {shapeAndStrength} from '../workoutData/workouts/shapeAndStrength';
+import {pushAndPull} from '../workoutData/workouts/pushAndPull';
+import {legPower} from '../workoutData/workouts/legPower';
+import {compoundPyramids} from '../workoutData/workouts/compoundPyramids';
+import {onTheFlyWorkoutId, onTheFly} from '../workoutData/workouts/onTheFly';
+import {getLocalStorage} from '../helpers/functions';
+import {LOCAL_STORAGE_WORKOUTS, WORKOUT_VERSION} from '../helpers/constants';
 
 export interface Workouts {
   byId: {
@@ -110,35 +110,24 @@ const updateCompleted = (e: BoolHash) => (a: Activity) => {
   };
 };
 
+const byId: { [key: string]: Workout } = {
+  'full-body-dumbbell-strength': fullBodyDumbbellStrength,
+  'circuit-speed': circuitSpeed,
+  'upper-body-burner': upperBodyBurner,
+  'overhead-strength': overheadStrength,
+  'full-body-power': fullBodyPower,
+  'glutes-and-glory': glutesAndGlory,
+  'squat-and-bench': squatAndBench,
+  'shape-and-strength': shapeAndStrength,
+  'push-and-pull': pushAndPull,
+  'leg-power': legPower,
+  'compound-pyramids': compoundPyramids,
+  [onTheFlyWorkoutId]: onTheFly,
+};
+
 const allWorkoutTemplates = {
-  byId: {
-    'full-body-dumbbell-strength': fullBodyDumbbellStrength,
-    'circuit-speed': circuitSpeed,
-    'upper-body-burner': upperBodyBurner,
-    'overhead-strength': overheadStrength,
-    'full-body-power': fullBodyPower,
-    'glutes-and-glory': glutesAndGlory,
-    'squat-and-bench': squatAndBench,
-    'shape-and-strength': shapeAndStrength,
-    'push-and-pull': pushAndPull,
-    'leg-power': legPower,
-    'compound-pyramids': compoundPyramids,
-    [customWorkoutId]: customWorkout,
-  },
-  allIds: [
-    'shape-and-strength',
-    'push-and-pull',
-    'leg-power',
-    'compound-pyramids',
-    'full-body-dumbbell-strength',
-    'squat-and-bench',
-    'circuit-speed',
-    'glutes-and-glory',
-    'upper-body-burner',
-    'overhead-strength',
-    'full-body-power',
-    customWorkoutId,
-  ],
+  byId,
+  allIds: Object.keys(byId),
 };
 
 const mergeWorkouts = (
@@ -169,9 +158,6 @@ const mergeWorkouts = (
     byId: {
       ...localById,
       ...missingWorkouts,
-      // Custom workout is never changed by the client. We can override here and
-      // ensure that clients always get the latest version.
-      [customWorkoutId]: customWorkout,
     },
     allIds: [ ...localIdsToKeep, ...missingIds ],
   };

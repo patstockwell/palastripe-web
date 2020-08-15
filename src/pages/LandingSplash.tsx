@@ -5,11 +5,11 @@ import styled from 'styled-components';
 import {DownloadArrow} from '../assets/svg/DownloadArrow';
 import {ButtonBaseWithLink} from '../components/SharedStyles';
 import {ColouredDot} from '../assets/svg/ColouredDot';
-import {gutterWidth, green, bannerHeight} from '../helpers/constants';
+import {gutterWidth, green, bannerHeight, blue} from '../helpers/constants';
 import {ThreeBars} from '../assets/svg/ThreeBars';
 
 const SubscribeLink = styled(Link)`
-  color: grey;
+  color: ${blue};
   display: block;
   margin: 24px 12px;
 `;

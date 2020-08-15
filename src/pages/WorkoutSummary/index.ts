@@ -1,1 +1,1 @@
-export { WorkoutSummary } from './WorkoutSummary';
+export {WorkoutSummary} from './WorkoutSummary';

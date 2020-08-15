@@ -11,7 +11,7 @@ import {
 import {Workout} from '../../reducers/workoutsReducer';
 import {useScrollPosition} from '../../context/useScrollPosition';
 import {useActiveWorkout} from '../../reducers/activeWorkoutReducer';
-import {customWorkoutId} from '../../workoutData/workouts/customWorkout';
+import {onTheFlyWorkoutId} from '../../workoutData/workouts/onTheFly';
 import {useSelector} from 'react-redux';
 
 interface Props {
@@ -29,7 +29,7 @@ export const ActivityHistoryOptionsMenu: React.FC<Props> = ({
   workout,
   historyLink,
 }) => {
-  const {activeWorkout} = useSelector((s: State) => s);
+  const {workouts: {allIds}, activeWorkout} = useSelector((s: State) => s);
   const [showExistingWorkoutAlert, setShowExistingWorkoutAlert] = useState(false);
   const [showDeleteWorkoutAlert, setShowDeleteWorkoutAlert] = useState(false);
   const {setActiveWorkout} = useActiveWorkout();
@@ -57,28 +57,19 @@ export const ActivityHistoryOptionsMenu: React.FC<Props> = ({
   };
 
   const handleRepeatWorkoutConfirmation = () => {
-    console.log('here', workout.id, workout.id === customWorkoutId);
-    // Only set the active workout if it is the custom workout, otherwise,
-    // clear the active workout first by setting it to null, and then let the
-    // component render the workout as usual from the URL.
-    if (workout.id === customWorkoutId) {
-      console.log('inside');
-      const incompleteWorkout: Workout = {
-        ...workout,
-        startTime: (new Date).toISOString(),
-        finishTime: undefined,
-        exerciseGroups: workout.exerciseGroups.map(group => ({
-          ...group,
-          exercises: group.exercises.map((a): Activity => ({
-            ...a, completed: false
-          })),
-        }))
-      };
+    const incompleteWorkout: Workout = {
+      ...workout,
+      startTime: (new Date).toISOString(),
+      finishTime: undefined,
+      exerciseGroups: workout.exerciseGroups.map(group => ({
+        ...group,
+        exercises: group.exercises.map((a): Activity => ({
+          ...a, completed: false
+        })),
+      }))
+    };
 
-      setActiveWorkout(incompleteWorkout);
-    } else {
-      setActiveWorkout(null);
-    }
+    setActiveWorkout(incompleteWorkout);
   };
 
   return (

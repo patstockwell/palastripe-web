@@ -16,7 +16,7 @@ import {calculateWorkoutTime, formatMinutes} from '../helpers/functions';
 import {useScrollPosition} from '../context/useScrollPosition';
 import {LightningBolt} from '../assets/svg/LightningBolt';
 import {State} from '../helpers/types';
-import {customWorkoutId} from '../workoutData/workouts/customWorkout';
+import {onTheFlyWorkoutId} from '../workoutData/workouts/onTheFly';
 
 const Tile = styled.li`
   position: relative;
@@ -93,7 +93,7 @@ interface Props {
   workout: Workout;
 }
 
-export const WorkoutTile: React.FC<Props> = ({ workout }) => {
+export const WorkoutTile: React.FC<Props> = ({workout}) => {
   const {
     id,
     startTime,
@@ -125,7 +125,7 @@ export const WorkoutTile: React.FC<Props> = ({ workout }) => {
   );
 };
 
-export const CustomWorkoutTile: React.FC<{ imageUrl: string }> = ({ imageUrl }) => {
+export const OnTheFlyWorkoutTile: React.FC<{ imageUrl: string }> = ({imageUrl}) => {
   const {
     id,
     startTime,
@@ -138,7 +138,7 @@ export const CustomWorkoutTile: React.FC<{ imageUrl: string }> = ({ imageUrl }) 
           <LightningBolt />
         </Minutes>
       </Square>
-      {startTime && id === customWorkoutId && (
+      {startTime && id === onTheFlyWorkoutId && (
         <InProgress>
           <FastClock style={{
             fill: '#6702ff',
@@ -148,7 +148,7 @@ export const CustomWorkoutTile: React.FC<{ imageUrl: string }> = ({ imageUrl }) 
           In progress...
         </InProgress>
       )}
-      <StyledLink to="/workouts/custom-workout/">
+      <StyledLink to={`/workouts/${onTheFlyWorkoutId}/`}>
         <Name>Track a workout on the fly</Name>
       </StyledLink>
     </Tile>

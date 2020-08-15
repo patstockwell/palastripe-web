@@ -1,4 +1,8 @@
-export const WORKOUT_VERSION = 'Thu 18 Jun 2020 15:24:46 AEST';
+// Any workouts that come from local storage that don't meet this version get
+// removed. That logic lives in a function called mergeWorkouts in the workout
+// reducer. Bump this version with care as clients will lose their progress when
+// workouts are replaced with a newer version.
+export const WORKOUT_VERSION = 'Fri 14 Aug 2020 23:01:51 AEST';
 
 export const appMaxWidth = 812; // 812px is the size of an iPhone X on its side
 export const tileGap: number = 16;

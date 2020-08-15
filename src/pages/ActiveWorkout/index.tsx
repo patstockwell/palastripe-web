@@ -17,7 +17,7 @@ import {useScrollPosition} from '../../context/useScrollPosition';
 import {useAddWorkoutToHistory} from '../../reducers/historyReducer';
 import {useUpdateWorkout} from '../../reducers/workoutsReducer';
 import {useActiveWorkout} from '../../reducers/activeWorkoutReducer';
-import {customWorkoutId} from '../../workoutData/workouts/customWorkout';
+import {onTheFlyWorkoutId} from '../../workoutData/workouts/onTheFly';
 import {useSelectedExercise} from '../../context/useSelectedExercise';
 import {RestTimerProvider} from '../../context/useRestTimer';
 
@@ -37,13 +37,15 @@ export const ActiveWorkout: React.FC = () => {
 
   // get the workout ID from the URL
   const {id: idFromUrl}: {id: string} = useParams();
-  const isCustomWorkout = idFromUrl === customWorkoutId;
   const workoutFromUrl = workouts.byId[idFromUrl];
 
-  if (!workoutFromUrl) {
+  // If the active workout exists but the URL is not recognised, just continue
+  // with the active workout anyway. This allows repeating old workouts, even if
+  // they have been removed from the list of workout ids.
+  if (!workoutFromUrl && activeWorkout === null) {
     return <FourZeroFour />;
   }
-
+  // At this point, we either have a good URL, or an active workout.
   if (!activeWorkout || !activeWorkout.startTime) {
     setActiveWorkout(workoutFromUrl);
   }
@@ -61,8 +63,14 @@ export const ActiveWorkout: React.FC = () => {
   };
 
   const displayedWorkout = activeWorkout && idFromUrl === activeWorkout.id
-    ? activeWorkout // This is the expected case where URL & activeWorkout match.
-    : workoutFromUrl; // An alert will pop up in this case.
+  // This is the expected case where URL & activeWorkout match.
+    ? activeWorkout
+  // There is a fallback (OR) on the false side of the ternary case because
+  // there is a case where the URL is not recognised but there is already an
+  // active workout set. We should allow the workout to be rendered at any
+  // unknown URL as long as a workout is set. This allows repeating workouts
+  // that are no longer in the list of workout ids.
+    : workoutFromUrl || activeWorkout;
 
   const finishWorkoutWithAlertTransition = () => {
     clearActiveWorkout(); // activeWorkoutReducer
@@ -101,7 +109,7 @@ export const ActiveWorkout: React.FC = () => {
         <ActivityList
           workout={displayedWorkout}
           finishWorkoutClickHandler={() => setShowEndWorkoutAlert(true)}
-          isCustomWorkout={isCustomWorkout}
+          isOnTheFlyWorkout={idFromUrl === onTheFlyWorkoutId}
           checkCanSelectTile={checkUnfinishedWorkout}
         />
 

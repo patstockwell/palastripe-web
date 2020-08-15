@@ -1,19 +1,19 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import {useSelector} from 'react-redux';
 import {
   RouteComponentProps,
   Redirect,
 } from 'react-router';
 import styled from 'styled-components';
 
-import { ActivitySummary, badgeOffsetLeft, badgeStyle } from './ActivitySummary';
-import { BackLinkBanner } from '../../components/BackLinkBanner';
-import { State, Activity } from '../../helpers/types';
-import { Workout } from '../../reducers/workoutsReducer';
-import { formatDate } from '../../helpers/functions';
-import { bannerHeight, gutterWidth } from '../../helpers/constants';
+import {ActivitySummary, badgeOffsetLeft, badgeStyle} from './ActivitySummary';
+import {BackLinkBanner} from '../../components/BackLinkBanner';
+import {State, Activity} from '../../helpers/types';
+import {Workout} from '../../reducers/workoutsReducer';
+import {formatDate} from '../../helpers/functions';
+import {bannerHeight, gutterWidth} from '../../helpers/constants';
 import Badge from '../../assets/svg/Badge';
-import {customWorkoutId} from '../../workoutData/workouts/customWorkout';
+import {onTheFlyWorkoutId} from '../../workoutData/workouts/onTheFly';
 
 const Hr = styled.hr`
   border: none;
@@ -105,7 +105,7 @@ export const WorkoutSummary: React.FC<Props> = ({
       </PanelWithGutter>
         <Hr />
       <PanelWithGutter>
-        {workout.id !== customWorkoutId && // hide badge info for custom workout
+        {workout.id !== onTheFlyWorkoutId && // hide badge info for onTheFly workout
           <Info>
             <Badge style={{ ...badgeStyle, top: '-1px', fill: 'darkgrey' }} />
             *All sets and reps were completed successfully.

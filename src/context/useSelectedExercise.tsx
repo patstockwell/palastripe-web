@@ -1,7 +1,7 @@
 import React, {createContext, useState} from 'react';
 import {useSelector} from 'react-redux';
 import {State} from '../helpers/types';
-import {customWorkoutId} from '../workoutData/workouts/customWorkout';
+import {onTheFlyWorkoutId} from '../workoutData/workouts/onTheFly';
 
 const SelectedExerciseContext = createContext<ConsumerValue>(null);
 
@@ -47,11 +47,11 @@ export const SelectedExerciseProvider: React.FC = ({
       const nextGroup = exerciseGroups[groupIndex + 1];
       const newGroupId: string = nextGroup && nextGroup.id;
 
-      if (!nextGroup && id == customWorkoutId) {
-        // The customWorkout is always appending items to the end of the
+      if (!nextGroup && id == onTheFlyWorkoutId) {
+        // The onTheFlyWorkout is always appending items to the end of the
         // workout and immediately checking them off. Completion triggers next
         // exercise being called which looks strange if you have only just
-        // added the exercise. We should return early if the customWorkout is
+        // added the exercise. We should return early if the onTheFlyWorkout is
         // active and there is no next exercise.
         return;
       }

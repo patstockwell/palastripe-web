@@ -15,7 +15,7 @@ import {
 } from '../../helpers/constants';
 import { BackLinkBanner } from '../../components/BackLinkBanner';
 import { useSelectedExercise } from '../../context/useSelectedExercise';
-import { customWorkoutGroupId } from '../../workoutData/workouts/customWorkout';
+import {onTheFlyWorkoutGroupId} from '../../workoutData/workouts/onTheFly';
 
 export const Input = styled.input`
   color: ${charcoal};
@@ -104,7 +104,7 @@ export const ActivitySearch: React.FC = () => {
     return <Redirect to="/workouts/" />;
   }
 
-  // use the first group as there is only one group in the custom workout.
+  // use the first group as there is only one group in the onTheFly workout.
   const newActivityIndex = activeWorkout.exerciseGroups[0].exercises.length;
   const backLinkPath = `/workouts/${activeWorkout.id}`;
 
@@ -119,7 +119,6 @@ export const ActivitySearch: React.FC = () => {
     repsAchieved?: number,
     weightInKilos?: number,
   }) => {
-    // Add this exercise to a custom-exercise list
     addActivity({
       name: name || searchQuery,
       exerciseId: exerciseId || searchQuery.trim().split(' ').join('-').toLowerCase(),
@@ -131,7 +130,7 @@ export const ActivitySearch: React.FC = () => {
     });
     // Set the newly added exercise as `selected`
     setSelectedExercise({
-      groupId: customWorkoutGroupId,
+      groupId: onTheFlyWorkoutGroupId,
       index: newActivityIndex,
     });
     // navigate back to the active workout URL

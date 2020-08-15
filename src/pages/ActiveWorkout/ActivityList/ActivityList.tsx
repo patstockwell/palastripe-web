@@ -11,7 +11,7 @@ import {Activity} from '../../../helpers/types';
 import {Workout} from '../../../reducers/workoutsReducer';
 import {ButtonBase, unorderedListStyle} from '../../../components/SharedStyles';
 import {useSelectedExercise} from '../../../context/useSelectedExercise';
-import {CustomWorkoutTile} from '../CustomWorkoutTile';
+import {OnTheFlyWorkoutTile} from '../OnTheFlyWorkoutTile';
 
 const Ul = styled.ul`
   ${unorderedListStyle}
@@ -40,14 +40,14 @@ const BottomEmptySpace = styled.div<{ stickyTop?: number}>`
 interface Props {
   workout: Workout;
   finishWorkoutClickHandler?: () => void;
-  isCustomWorkout: boolean;
+  isOnTheFlyWorkout: boolean;
   checkCanSelectTile: (callback: () => void) => void;
 }
 
 export const ActivityList: React.FC<Props> = ({
   finishWorkoutClickHandler,
   workout: { startTime, exerciseGroups },
-  isCustomWorkout,
+  isOnTheFlyWorkout,
   checkCanSelectTile,
 }) => {
   const [showHiddenArea, setShowHiddenArea] = useState(true);
@@ -60,7 +60,7 @@ export const ActivityList: React.FC<Props> = ({
 
     return (
       <ActivityTile
-        disableDelete={!isCustomWorkout}
+        disableDelete={!isOnTheFlyWorkout}
         selected={isSelected}
         showHiddenArea={isSelected && showHiddenArea}
         groupId={id}
@@ -93,7 +93,7 @@ export const ActivityList: React.FC<Props> = ({
         heading={group.name}
         activityTotal={tiles.length}
         completedActivities={completedActivities.length}
-        shouldHideCompleted={isCustomWorkout}
+        shouldHideCompleted={isOnTheFlyWorkout}
       >
         <Ul>{tiles}</Ul>
       </ActivityListHeading>
@@ -103,8 +103,8 @@ export const ActivityList: React.FC<Props> = ({
   return (
     <>
       <Ul>{activityListTiles}</Ul>
-      {isCustomWorkout &&
-        <CustomWorkoutTile
+      {isOnTheFlyWorkout &&
+        <OnTheFlyWorkoutTile
           setShowHiddenArea={setShowHiddenArea}
           showHiddenArea={showHiddenArea}
         />

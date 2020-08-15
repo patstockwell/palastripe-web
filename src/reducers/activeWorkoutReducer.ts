@@ -123,8 +123,8 @@ const setActiveWorkout = (_state: Workout, action: PayloadAction<Workout>) => {
 const clearActiveWorkout = (_state: Workout, _action: Action) => null;
 
 const addActivity = (state: Workout, action: PayloadAction<Activity>) => {
-  // We can use the first exerciseGroup because there is only 1 group in a
-  // custom workout.
+  // We can use the first exerciseGroup because there is only 1 group in an
+  // onTheFly workout.
   state.exerciseGroups[0].exercises.push(action.payload);
   if (!state.startTime) {
     state.startTime = (new Date()).toISOString();

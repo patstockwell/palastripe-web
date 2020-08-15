@@ -8,7 +8,7 @@ import {
   lightGrey3,
   charcoal,
 } from '../../helpers/constants';
-import {customWorkoutId} from '../../workoutData/workouts/customWorkout';
+import {onTheFlyWorkoutId} from '../../workoutData/workouts/onTheFly';
 import {activitySearchPath} from './ActivitySearch';
 import {useSelectedExercise} from '../../context/useSelectedExercise';
 
@@ -32,7 +32,7 @@ interface Props {
   showHiddenArea: boolean;
 }
 
-export const CustomWorkoutTile: React.FC<Props> = ({ setShowHiddenArea }) => {
+export const OnTheFlyWorkoutTile: React.FC<Props> = ({setShowHiddenArea}) => {
   const {setSelectedExercise} = useSelectedExercise();
 
   return (
@@ -50,7 +50,7 @@ export const CustomWorkoutTile: React.FC<Props> = ({ setShowHiddenArea }) => {
         // popping up and a tile being opened and pulled into view.
         setSelectedExercise({ index: 0, groupId: '' });
       }}
-      to={`/workouts/${customWorkoutId}/${activitySearchPath}`}
+      to={`/workouts/${onTheFlyWorkoutId}/${activitySearchPath}`}
     >
       + Add a set
     </AddActivityButton>

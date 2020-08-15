@@ -1,29 +1,29 @@
 import React from 'react';
 import styled from 'styled-components';
-import { useLocation, Route, Switch } from 'react-router-dom';
+import {useLocation, Route, Switch} from 'react-router-dom';
 
-import { LandingSplash } from '../pages/LandingSplash';
-import { Workouts } from '../pages/Workouts';
-import { Install } from '../pages/Install';
-import { ActiveWorkout } from '../pages/ActiveWorkout';
-import { Activity } from '../pages/Activity';
-import { FourZeroFour } from '../pages/FourZeroFour';
-import { Profile } from '../pages/Profile';
-import { WorkoutSummary } from '../pages/WorkoutSummary';
-import { ProfileName } from '../pages/ProfileName';
-import { DataExport } from '../pages/DataExport';
-import { Subscribe } from '../pages/Subscribe';
-import { SettingUnitOfMeasurement } from '../pages/SettingUnitOfMeasurement';
-import { SettingAudio } from '../pages/SettingAudio';
-import { SettingUseRestTimer } from '../pages/SettingUseRestTimer';
-import { appMaxWidth } from '../helpers/constants';
-import { WorkoutCompletionSplash } from '../pages/WorkoutCompletionSplash';
-import { AnimateNavigationProvider } from '../context/useAnimateNavigation';
-import { ScrollPositionProvider } from '../context/useScrollPosition';
-import { SelectedExerciseProvider } from '../context/useSelectedExercise';
-import { ActivityHistoryLengthProvider } from '../context/useActivityHistoryLength';
-import { activitySearchPath, ActivitySearch } from '../pages/ActiveWorkout/ActivitySearch';
-import { customWorkoutId } from '../workoutData/workouts/customWorkout';
+import {LandingSplash} from '../pages/LandingSplash';
+import {Workouts} from '../pages/Workouts';
+import {Install} from '../pages/Install';
+import {ActiveWorkout} from '../pages/ActiveWorkout';
+import {Activity} from '../pages/Activity';
+import {FourZeroFour} from '../pages/FourZeroFour';
+import {Profile} from '../pages/Profile';
+import {WorkoutSummary} from '../pages/WorkoutSummary';
+import {ProfileName} from '../pages/ProfileName';
+import {DataExport} from '../pages/DataExport';
+import {Subscribe} from '../pages/Subscribe';
+import {SettingUnitOfMeasurement} from '../pages/SettingUnitOfMeasurement';
+import {SettingAudio} from '../pages/SettingAudio';
+import {SettingUseRestTimer} from '../pages/SettingUseRestTimer';
+import {appMaxWidth} from '../helpers/constants';
+import {WorkoutCompletionSplash} from '../pages/WorkoutCompletionSplash';
+import {AnimateNavigationProvider} from '../context/useAnimateNavigation';
+import {ScrollPositionProvider} from '../context/useScrollPosition';
+import {SelectedExerciseProvider} from '../context/useSelectedExercise';
+import {ActivityHistoryLengthProvider} from '../context/useActivityHistoryLength';
+import {activitySearchPath, ActivitySearch} from '../pages/ActiveWorkout/ActivitySearch';
+import {onTheFlyWorkoutId} from '../workoutData/workouts/onTheFly';
 
 const MaxWidthContainer = styled.div`
   max-width: ${appMaxWidth}px;
@@ -33,6 +33,7 @@ const MaxWidthContainer = styled.div`
 const Routes: React.FC = () => {
   const location = useLocation();
 
+  // TODO: Refactor all routes to use children pattern.
   return (
     <MaxWidthContainer>
       <ScrollPositionProvider>
@@ -51,7 +52,7 @@ const Routes: React.FC = () => {
                 <Route path="/profile/rest-timer/" component={SettingUseRestTimer} />
                 <Route path="/profile/export/" component={DataExport} />
                 <Route path="/profile/unit-of-measurement/" component={SettingUnitOfMeasurement} />
-                <Route path={`/workouts/${customWorkoutId}/${activitySearchPath}`} component={ActivitySearch} />
+                <Route path={`/workouts/${onTheFlyWorkoutId}/${activitySearchPath}`} component={ActivitySearch} />
                 <Route path="/workouts/:id/" component={ActiveWorkout} />
                 <Route path="/workout-complete/" component={WorkoutCompletionSplash} />
                 <Route path="/subscribe/" component={Subscribe} />

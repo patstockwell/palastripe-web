@@ -1,13 +1,12 @@
 import React, {useRef, useEffect, useState} from 'react';
 import styled from 'styled-components';
 import {SpringValue} from 'react-spring';
-import {useSelector} from 'react-redux';
 
 import {RestTimer} from '../RestTimer';
 import {isTimed} from '../../../helpers/types';
 import {ActivityTileWithReps} from './ActivityTileWithReps';
 import {ActivityTileWithTimer} from './ActivityTileWithTimer';
-import {State, Activity} from '../../../helpers/types';
+import {Activity} from '../../../helpers/types';
 import {
   tileMinHeight,
   lightGrey3,
@@ -15,7 +14,6 @@ import {
 } from '../../../helpers/constants';
 import {useSelectedExercise} from '../../../context/useSelectedExercise';
 import {useRestTimer} from '../../../context/useRestTimer';
-import {customWorkoutId} from '../../../workoutData/workouts/customWorkout';
 import {
   scrollElementToTop,
   useHiddenAreaAnimation,
@@ -95,7 +93,6 @@ export const ActivityTile: React.FC<Props> = ({
   disableDelete,
 }) => {
   const [finishedAnimating, setFinishedAnimating] = useState(false);
-  const activeWorkoutId = useSelector((state: State) => state.activeWorkout.id);
   const {selectNextExercise} = useSelectedExercise();
   const {activeRestTimer: restTimer, setActiveRestTimer} = useRestTimer();
   const listElement = useRef<HTMLLIElement>(null);
@@ -108,7 +105,7 @@ export const ActivityTile: React.FC<Props> = ({
 
   useEffect(() => {
     // `finishedAnimating` is initialised to false. When transitioning to a tile
-    // and no animation happens (like when adding a tile during a custom
+    // and no animation happens (like when adding a tile during a onTheFly
     // workout, or when selecting a tile with `showHiddenArea` set to false),
     // the `onRest` callback is not fired. In order to tell if the tile is ready
     // to be scrolled, we compare the animated and the expected heights.

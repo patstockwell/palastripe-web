@@ -1,6 +1,6 @@
-import { v4 as uuidv4 } from 'uuid';
-import { Workout } from '../../reducers/workoutsReducer';
-import { WORKOUT_VERSION } from '../../helpers/constants';
+import {v4 as uuidv4} from 'uuid';
+import {Workout} from '../../reducers/workoutsReducer';
+import {WORKOUT_VERSION} from '../../helpers/constants';
 import Image from '../../assets/images/active-body-crossfit-1533897.jpg';
 
 export const circuitSpeed: Workout = {
