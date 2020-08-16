@@ -4,13 +4,11 @@ import styled from 'styled-components';
 import {useInView} from 'react-intersection-observer';
 
 import {getInitials, formatDate} from '../../helpers/functions';
-import {ActivityHistoryTile} from './ActivityHistoryTile';
+import {ActivityFeedTile} from './ActivityFeedTile';
 import {State} from '../../helpers/types';
 import {Workout} from '../../reducers/workoutsReducer';
 import {useDeleteWorkout} from '../../reducers/historyReducer';
-import {
-  useActivityHistoryLength,
-} from '../../context/useActivityHistoryLength';
+import {useActivityFeedLength} from '../../context/useActivityFeedLength';
 import {gutterWidth} from '../../helpers/constants';
 
 const BottomSpace = styled.div`
@@ -43,7 +41,7 @@ interface Props {
   history: Workout[];
 }
 
-export const ActivityHistoryList: React.FC<Props> = ({history}) => {
+export const ActivityFeed: React.FC<Props> = ({history}) => {
   // undefined is used to denote no tile in list is selected
   const [showMenuIndex, setShowMenuIndex] = useState(undefined);
   const deleteWorkout = useDeleteWorkout();
@@ -55,7 +53,7 @@ export const ActivityHistoryList: React.FC<Props> = ({history}) => {
     threshold: 0,
     rootMargin: '200px',
   });
-  const {viewMore, listLength} = useActivityHistoryLength();
+  const {viewMore, listLength} = useActivityFeedLength();
 
   useEffect(() => {
     if (inView) {
@@ -64,7 +62,7 @@ export const ActivityHistoryList: React.FC<Props> = ({history}) => {
   }, [inView]);
 
   const historyTiles = history.slice(0, listLength).map((w, i) => (
-    <ActivityHistoryTile
+    <ActivityFeedTile
       initials={getInitials(firstName, lastName)}
       key={w.finishTime}
       workout={w}

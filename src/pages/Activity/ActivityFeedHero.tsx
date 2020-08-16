@@ -79,7 +79,7 @@ interface Props {
   workoutsThisWeek: number;
 }
 
-export const ActivityHistoryHero: React.FC<Props> = ({
+export const ActivityFeedHero: React.FC<Props> = ({
   weeklyMinutes,
   totalWorkouts,
   weeklyVolume,

@@ -15,7 +15,7 @@ import {
 } from '../../helpers/functions';
 import {purple, lightGrey3} from '../../helpers/constants';
 import {useScrollPosition} from '../../context/useScrollPosition';
-import {ActivityHistoryOptionsMenu} from './ActivityHistoryOptionsMenu';
+import {ActivityFeedOptionsMenu} from './ActivityFeedOptionsMenu';
 
 const Tile = styled.li`
   position: relative;
@@ -129,7 +129,7 @@ interface Props {
   historyLink: number;
 }
 
-export const ActivityHistoryTile: React.FC<Props> = ({
+export const ActivityFeedTile: React.FC<Props> = ({
   workout,
   toggleMenu,
   showMenu,
@@ -187,7 +187,7 @@ export const ActivityHistoryTile: React.FC<Props> = ({
         </StatsPanel>
       </Right>
 
-      <ActivityHistoryOptionsMenu
+      <ActivityFeedOptionsMenu
         showMenu={showMenu}
         deleteWorkout={deleteWorkout}
         toggleMenu={toggleMenu}

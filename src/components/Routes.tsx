@@ -21,7 +21,7 @@ import {WorkoutCompletionSplash} from '../pages/WorkoutCompletionSplash';
 import {AnimateNavigationProvider} from '../context/useAnimateNavigation';
 import {ScrollPositionProvider} from '../context/useScrollPosition';
 import {SelectedExerciseProvider} from '../context/useSelectedExercise';
-import {ActivityHistoryLengthProvider} from '../context/useActivityHistoryLength';
+import {ActivityFeedLengthProvider} from '../context/useActivityFeedLength';
 import {activitySearchPath, ActivitySearch} from '../pages/ActiveWorkout/ActivitySearch';
 import {onTheFlyWorkoutId} from '../workoutData/workouts/onTheFly';
 
@@ -39,7 +39,7 @@ const Routes: React.FC = () => {
       <ScrollPositionProvider>
         <AnimateNavigationProvider>
           <SelectedExerciseProvider>
-            <ActivityHistoryLengthProvider>
+            <ActivityFeedLengthProvider>
               <Switch location={location}>
                 <Route path="/" exact component={LandingSplash} />
                 <Route path="/install/" exact component={Install} />
@@ -58,7 +58,7 @@ const Routes: React.FC = () => {
                 <Route path="/subscribe/" component={Subscribe} />
                 <Route component={FourZeroFour} />
               </Switch>
-            </ActivityHistoryLengthProvider>
+            </ActivityFeedLengthProvider>
           </SelectedExerciseProvider>
         </AnimateNavigationProvider>
       </ScrollPositionProvider>

@@ -12,7 +12,6 @@ import {
 import {Workout} from '../../reducers/workoutsReducer';
 import {useScrollPosition} from '../../context/useScrollPosition';
 import {useActiveWorkout} from '../../reducers/activeWorkoutReducer';
-import {onTheFlyWorkoutId} from '../../workoutData/workouts/onTheFly';
 import {useSelector} from 'react-redux';
 import {UnfinishedWorkoutAlert} from '../ActiveWorkout';
 
@@ -24,7 +23,7 @@ interface Props {
   historyLink: number;
 }
 
-export const ActivityHistoryOptionsMenu: React.FC<Props> = ({
+export const ActivityFeedOptionsMenu: React.FC<Props> = ({
   deleteWorkout,
   showMenu,
   toggleMenu,

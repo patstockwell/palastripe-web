@@ -94,6 +94,7 @@ export const ActiveWorkout: React.FC = () => {
     setActivityPageScrollPosition(0); // reset scroll for activity history page
     addToHistory({ // historyReducer
       ...activeWorkout,
+      // This enables setting the finishTime when the workout exceeds 4 hours.
       finishTime: finishTime || activeWorkout.finishTime,
     });
     if (workoutFromUrl) {

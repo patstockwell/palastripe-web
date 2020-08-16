@@ -3,9 +3,9 @@ import {useSelector} from 'react-redux';
 import {isThisWeek} from 'date-fns';
 
 import {State} from '../../helpers/types';
-import {ActivityHistoryList} from './ActivityHistoryList';
+import {ActivityFeed} from './ActivityFeed';
 import {Page} from '../../components/Page';
-import {ActivityHistoryHero} from './ActivityHistoryHero';
+import {ActivityFeedHero} from './ActivityFeedHero';
 import {
   getTotalWeightLifted,
   getDiffInMinutes,
@@ -28,14 +28,14 @@ export const Activity: React.FC = () => {
 
   return (
     <Page heading={'Activity'}>
-      <ActivityHistoryHero
+      <ActivityFeedHero
         totalWorkouts={history.length}
         weeklyMinutes={weeklyMinutes}
         weeklyVolume={convertedVolume}
         workoutsThisWeek={workoutsThisWeek.length}
         unitOfWeight={useKilos ? 'kg' : 'lbs'}
       />
-      <ActivityHistoryList history={history} />
+      <ActivityFeed history={history} />
     </Page>
   );
 };
