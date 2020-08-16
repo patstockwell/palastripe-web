@@ -1,6 +1,6 @@
-import React, { useRef } from 'react';
-import { useLocation, Link } from 'react-router-dom';
-import styled, { css, keyframes } from 'styled-components';
+import React, {useRef} from 'react';
+import {useLocation, Link} from 'react-router-dom';
+import styled, {css, keyframes} from 'styled-components';
 
 import ProfileIcon from '../assets/svg/ProfileIcon';
 import {
@@ -11,10 +11,10 @@ import {
   PROFILE_PAGE,
   appMaxWidth,
 } from '../helpers/constants';
-import ActivityBars from '../assets/svg/ActivityBars';
+import {FeedIcon} from '../assets/svg/FeedIcon';
 import Cardiogram from '../assets/svg/Cardiogram';
-import { getCurrentPage } from '../helpers/functions';
-import { useAnimateNavigation } from '../context/useAnimateNavigation';
+import {getCurrentPage} from '../helpers/functions';
+import {useAnimateNavigation} from '../context/useAnimateNavigation';
 
 const Nav = styled.nav`
   display: flex;
@@ -117,7 +117,7 @@ const Navigation: React.FC<Props> = ({ onNavigation }) => {
         innerRef={activityRef}
         x={animationDistance}
       >
-        <ActivityBars />
+        <FeedIcon />
       </NavLink>
       <NavLink
         selected={isOnPage(PROFILE_PAGE)}
