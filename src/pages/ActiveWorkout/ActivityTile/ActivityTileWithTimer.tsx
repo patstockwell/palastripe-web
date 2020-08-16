@@ -3,6 +3,7 @@ import styled, {keyframes} from 'styled-components';
 import {SpringValue} from 'react-spring';
 
 import {useAudio} from '../../../context/useAudio';
+import {useRestTimer} from '../../../context/useRestTimer';
 import HiddenTimerArea from './HiddenTimerArea';
 import {ShowHiddenAreaArrowWrapper} from './ActivityTileWithReps';
 import {ToggleSetCompleteButton} from './ToggleSetCompleteButton';
@@ -18,7 +19,7 @@ import {
   tileMinHeight,
   ONE_SECOND,
 } from '../../../helpers/constants';
-import {Details, Title, Duration, VisibleArea, SubTitle} from './index';
+import {Details, Title, VisibleArea, SubTitle} from './index';
 import {useActiveWorkout} from '../../../reducers/activeWorkoutReducer';
 
 const Tile = styled.li<{ selected: boolean }>`
@@ -73,7 +74,7 @@ interface Props {
 }
 
 export const ActivityTileWithTimer: React.FC<Props> = ({
-  activity: { name, timerInSeconds, completed },
+  activity: {name, timerInSeconds, completed},
   handleSelect,
   selected,
   toggleShowHiddenArea,
@@ -90,6 +91,7 @@ export const ActivityTileWithTimer: React.FC<Props> = ({
   const [paused, setPaused] = useState(false);
   const {toggleSetComplete} = useActiveWorkout();
   const {playStart, playComplete} = useAudio();
+  const {setActiveRestTimer} = useRestTimer();
 
   const inProgress = selected && !completed && preparationStarted;
 
@@ -152,7 +154,13 @@ export const ActivityTileWithTimer: React.FC<Props> = ({
           />
         ) : (
           <StartTimedExerciseButton
-            handleClick={() => selected && setPreparationStarted(true)}
+            handleClick={() => {
+              if (selected) {
+                setPreparationStarted(true);
+                // Kill the rest timer before starting a timed exercise.
+                setActiveRestTimer({ index: 0, groupId: '' });
+              }
+            }}
             showIcon={selected}
           />
         )}
