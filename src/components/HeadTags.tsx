@@ -13,7 +13,7 @@ const MetaTags: React.FC<StateProps> = ({workouts, activeWorkout}) => {
       <Route path="/workouts/:id/" render={props => {
         // get the workout ID from the URL
         const {id: workoutId}: { id: string } = props.match.params;
-        const {name, imageUrl, id} = activeWorkout || workouts.byId[workoutId] || {};
+        const {name = '', imageUrl, id} = activeWorkout || workouts.byId[workoutId] || {};
 
         return (
           <Helmet>

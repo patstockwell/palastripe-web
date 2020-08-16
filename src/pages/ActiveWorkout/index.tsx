@@ -29,7 +29,7 @@ export const ActiveWorkout: React.FC = () => {
   const [showWorkoutTooLongAlert, setShowWorkoutTooLongAlert] = useState(false);
   const {setActivityPageScrollPosition} = useScrollPosition();
   const addToHistory = useAddWorkoutToHistory();
-  const updateWorkoutTemplate = useUpdateWorkout();
+  const {updateWorkout} = useUpdateWorkout();
   const {clearActiveWorkout, setActiveWorkout} = useActiveWorkout();
   const {setSelectedExercise} = useSelectedExercise();
   const {
@@ -90,13 +90,15 @@ export const ActiveWorkout: React.FC = () => {
 
   const finishWorkout = (finishTime?: string) => {
     clearActiveWorkout(); // activeWorkoutReducer
-    updateWorkoutTemplate(activeWorkout); // workoutsReducer
     setSelectedExercise({ index: 0, groupId: '' }); // reset selected exercise
     setActivityPageScrollPosition(0); // reset scroll for activity history page
     addToHistory({ // historyReducer
       ...activeWorkout,
       finishTime: finishTime || activeWorkout.finishTime,
     });
+    if (workoutFromUrl) {
+      updateWorkout(activeWorkout); // workoutsReducer
+    }
   };
 
   const startWorkoutFromUrl = () => {

@@ -195,10 +195,12 @@ const workoutsSlice = createSlice<Workouts, typeof reducers>({
 
 export const useUpdateWorkout = () => {
   const dispatch = useDispatch();
-  return (workout: Workout) => dispatch({
-    type: workoutsSlice.actions.updateWorkout.type,
-    payload: workout,
-  });
+  return {
+    updateWorkout: (workout: Workout) => dispatch({
+      type: workoutsSlice.actions.updateWorkout.type,
+      payload: workout,
+    }),
+  };
 };
 
 export default workoutsSlice.reducer;
