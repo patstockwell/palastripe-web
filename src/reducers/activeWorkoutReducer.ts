@@ -141,7 +141,7 @@ const deleteActivity = (state: Workout, action: PayloadAction<string>) => {
   }
 };
 
-const startWorkout = (state: Workout, _action: Action): Workout => ({
+const setStartTime = (state: Workout, _action: Action): Workout => ({
   ...state,
   // Only set the startTime if the workout hasn't already started.
   startTime: state.startTime || (new Date()).toISOString(),
@@ -156,7 +156,7 @@ const reducers = {
   clearActiveWorkout,
   addActivity,
   deleteActivity,
-  startWorkout,
+  setStartTime,
 };
 
 const activeWorkoutSlice = createSlice<Workout, typeof reducers>({
@@ -214,7 +214,7 @@ export const useActiveWorkout = () => {
 
   const clearActiveWorkout = () => dispatch({ type: actions.clearActiveWorkout.type });
 
-  const startWorkout = () => dispatch({ type: actions.startWorkout.type });
+  const setStartTime = () => dispatch({ type: actions.setStartTime.type });
 
   return {
     setWeight,
@@ -225,7 +225,7 @@ export const useActiveWorkout = () => {
     addActivity,
     clearActiveWorkout,
     deleteActivity,
-    startWorkout,
+    setStartTime,
   };
 };
 

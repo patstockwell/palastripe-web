@@ -87,15 +87,6 @@ const HiddenTimerArea: React.FC<Props> = ({
           const start = new Audio(startAudio);
           const complete = new Audio(completeAudio);
           setAudio(start, complete);
-
-          // TODO: Replace setAudio in the audio context.
-          // Create a single startAudio() function that gets called here.
-          // startAudio() should create buffers (using the audio api and
-          // creating a 'sine' wave, and wait 5 seconds before playing.
-          // Then is should wait another minute (or however long the exercise is)
-          // and then play the complete tone.
-          // This means no matching to the animation end events. Just hope that
-          // the sound, the counter, and the animation all line up :P
         }}
         disabled={completed}
         background={background}

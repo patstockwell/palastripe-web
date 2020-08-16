@@ -92,6 +92,7 @@ export const ActivityTileWithTimer: React.FC<Props> = ({
   const {toggleSetComplete} = useActiveWorkout();
   const {playStart, playComplete} = useAudio();
   const {setActiveRestTimer} = useRestTimer();
+  const {setStartTime} = useActiveWorkout();
 
   const inProgress = selected && !completed && preparationStarted;
 
@@ -109,9 +110,19 @@ export const ActivityTileWithTimer: React.FC<Props> = ({
 
   const formattedTime: string = formatSeconds(timerInSeconds - count);
 
-  const handleClick = (completed?: boolean) => {
+  const toggleComplete = (completed?: boolean) => {
     if (selected) {
       toggleSetComplete({ groupId, index, completed });
+    }
+  };
+
+  const handleStartTimer = () => {
+    if (selected) {
+      setPreparationStarted(true);
+      // Kill the rest timer before starting a timed exercise.
+      setActiveRestTimer({ index: 0, groupId: '' });
+      // This will set the workout startTime only if it is undefined.
+      setStartTime();
     }
   };
 
@@ -129,7 +140,7 @@ export const ActivityTileWithTimer: React.FC<Props> = ({
             timer={timerInSeconds + 1} // add 1 to allow for the count to finish
             onAnimationEnd={() => {
               playComplete();
-              handleClick(true);
+              toggleComplete(true);
             }}
           />
         ) : (
@@ -148,19 +159,13 @@ export const ActivityTileWithTimer: React.FC<Props> = ({
         </Details>
         {preparationStarted || completed ? (
           <ToggleSetCompleteButton
-            handleClick={() => handleClick()}
+            handleClick={() => toggleComplete()}
             completed={completed}
             onAnimationEnd={onSetComplete}
           />
         ) : (
           <StartTimedExerciseButton
-            handleClick={() => {
-              if (selected) {
-                setPreparationStarted(true);
-                // Kill the rest timer before starting a timed exercise.
-                setActiveRestTimer({ index: 0, groupId: '' });
-              }
-            }}
+            handleClick={handleStartTimer}
             showIcon={selected}
           />
         )}
@@ -174,7 +179,7 @@ export const ActivityTileWithTimer: React.FC<Props> = ({
         started={preparationStarted}
         paused={paused}
         handleButtonClick={() => !preparationStarted
-          ? setPreparationStarted(true)
+          ? handleStartTimer()
           : setPaused(!paused)
         }
       />

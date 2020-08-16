@@ -126,7 +126,7 @@ export const WorkoutHero: React.FC<Props> = ({
   const [showResetWorkoutAlert, setShowResetWorkoutAlert] = useState(false);
   const {pathname} = useLocation();
   const {setSelectedExercise} = useSelectedExercise();
-  const {startWorkout, clearActiveWorkout} = useActiveWorkout();
+  const {setStartTime, clearActiveWorkout} = useActiveWorkout();
   const {soundOn} = useSelector((state: State) => state.settings);
   const {setUseSound} = useSettings();
   const time = formatMinutes(calculateWorkoutTime(workout));
@@ -141,9 +141,14 @@ export const WorkoutHero: React.FC<Props> = ({
     // This function will check for an existing workout, set an alert if it
     // exists, or call the function if not.
     checkCanStartWorkout(() => {
-      startWorkout();
+      setStartTime();
       setSelectedExercise({ index: 0, groupId: firstGroup.id });
     });
+  };
+
+  const handleReset = () => {
+    setShowResetWorkoutAlert(true);
+    setSelectedExercise({ index: 0, groupId: '' });
   };
 
   const displayedTime = workout.startTime
@@ -166,7 +171,7 @@ export const WorkoutHero: React.FC<Props> = ({
         {displayedTime}
       </Time>
       {workout.startTime ? (
-        <ResetButton onClick={() => setShowResetWorkoutAlert(true)}>
+        <ResetButton onClick={handleReset}>
           <ColouredDot fill={orange} />
           Reset Workout
         </ResetButton>
