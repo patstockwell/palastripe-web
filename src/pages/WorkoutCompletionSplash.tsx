@@ -59,7 +59,7 @@ export const WorkoutCompletionSplash: React.FC = () => {
         <Title>{workoutName}</Title>
         <GoldCup height="80px" />
         <p>Workout done! Get some nutritious food and take a well earned rest.</p>
-        <Button to="/activity/">Continue</Button>
+        <Button to="/workout-summary/">Continue</Button>
       </Page>
     </>
   );

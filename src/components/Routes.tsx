@@ -55,6 +55,7 @@ const Routes: React.FC = () => {
                 <Route path={`/workouts/${onTheFlyWorkoutId}/${activitySearchPath}`} component={ActivitySearch} />
                 <Route path="/workouts/:id/" component={ActiveWorkout} />
                 <Route path="/workout-complete/" component={WorkoutCompletionSplash} />
+                <Route path="/workout-summary/" component={WorkoutSummary} />
                 <Route path="/subscribe/" component={Subscribe} />
                 <Route component={FourZeroFour} />
               </Switch>

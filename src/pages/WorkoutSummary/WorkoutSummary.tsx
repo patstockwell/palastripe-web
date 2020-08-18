@@ -7,6 +7,7 @@ import {
 import styled from 'styled-components';
 
 import {ActivitySummary, badgeOffsetLeft, badgeStyle} from './ActivitySummary';
+import {ButtonBaseWithLink} from '../../components/SharedStyles';
 import {BackLinkBanner} from '../../components/BackLinkBanner';
 import {State, Activity} from '../../helpers/types';
 import {Workout} from '../../reducers/workoutsReducer';
@@ -57,6 +58,18 @@ const Info = styled.p`
   font-size: 0.75em;
 `;
 
+const StickyBottomButtonPanel = styled.div`
+  position: sticky;
+  bottom: 0;
+  background-color: rgba(256, 256, 256, 0.9);
+  padding: ${gutterWidth}px;
+`;
+
+const Button = styled(ButtonBaseWithLink)`
+  margin: 0 auto;
+  max-width: 300px;
+`;
+
 interface ExerciseHash {
   [key: string]: Activity[];
 }
@@ -81,9 +94,12 @@ const createExerciseHash = (workout: Workout): ExerciseHash => {
 type Props = RouteComponentProps<{ index?: string }>
 
 export const WorkoutSummary: React.FC<Props> = ({
-  match: { params: { index } }
+  match: {params: {index}},
+  location: {pathname},
 }) => {
-  const workout: Workout = useSelector((state: State) => state.history[index]);
+  const dedicatedSummaryPage = /workout-summary/.test(pathname);
+  const workoutIndex = dedicatedSummaryPage || !index ? 0 : index;
+  const workout: Workout = useSelector((state: State) => state.history[workoutIndex]);
 
   if (!workout) {
     return <Redirect to="/activity/" />;
@@ -98,7 +114,7 @@ export const WorkoutSummary: React.FC<Props> = ({
   return (
     <>
       <BackLinkBanner heading="Workout Summary" back={{
-        showArrows: true,
+        showArrows: !dedicatedSummaryPage,
         link: '/activity/',
       }}/>
       <PanelWithGutter>
@@ -117,6 +133,11 @@ export const WorkoutSummary: React.FC<Props> = ({
           </Info>
         }
       </PanelWithGutter>
+      {dedicatedSummaryPage &&
+        <StickyBottomButtonPanel>
+          <Button to='/activity/'>Done</Button>
+        </StickyBottomButtonPanel>
+      }
     </>
   );
 };
