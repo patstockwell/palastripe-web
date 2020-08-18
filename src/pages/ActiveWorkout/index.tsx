@@ -42,13 +42,10 @@ export const ActiveWorkout: React.FC = () => {
   const {id: idFromUrl}: {id: string} = useParams();
   const workoutFromUrl = workouts.byId[idFromUrl];
 
-  // If the active workout exists but the URL is not recognised, just continue
-  // with the active workout anyway. This allows repeating old workouts, even if
-  // they have been removed from the list of workout ids.
-  if (!workoutFromUrl && activeWorkout === null) {
+  if (!workoutFromUrl) {
     return <FourZeroFour />;
   }
-  // At this point, we either have a good URL, or an active workout.
+
   if (!activeWorkout || !activeWorkout.startTime) {
     setActiveWorkout(workoutFromUrl);
   }
@@ -79,14 +76,8 @@ export const ActiveWorkout: React.FC = () => {
   };
 
   const displayedWorkout = activeWorkout && idFromUrl === activeWorkout.id
-  // This is the expected case where URL & activeWorkout match.
-    ? activeWorkout
-  // There is a fallback (OR) on the false side of the ternary case because
-  // there is a case where the URL is not recognised but there is already an
-  // active workout set. We should allow the workout to be rendered at any
-  // unknown URL as long as a workout is set. This allows repeating workouts
-  // that are no longer in the list of workout ids.
-    : workoutFromUrl || activeWorkout;
+    ? activeWorkout // This is the expected case where URL & activeWorkout match
+    : workoutFromUrl;
 
   const finishWorkout = (finishTime?: string) => {
     clearActiveWorkout(); // activeWorkoutReducer
@@ -114,12 +105,6 @@ export const ActiveWorkout: React.FC = () => {
     });
   };
 
-  // Only when the URL and the active workout match.
-  const isOnTheFlyWorkout =
-    idFromUrl === onTheFlyWorkoutId
-    && activeWorkout
-    && activeWorkout.id === onTheFlyWorkoutId;
-
   return (
     <RestTimerProvider>
       <AudioProvider soundOn={soundOn}>
@@ -137,7 +122,7 @@ export const ActiveWorkout: React.FC = () => {
         <ActivityList
           workout={displayedWorkout}
           finishWorkoutClickHandler={() => setShowEndWorkoutAlert(true)}
-          isOnTheFlyWorkout={isOnTheFlyWorkout}
+          isOnTheFlyWorkout={idFromUrl === onTheFlyWorkoutId}
           checkCanSelectTile={checkUnfinishedWorkout}
         />
 

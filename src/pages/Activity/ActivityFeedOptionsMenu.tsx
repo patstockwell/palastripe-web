@@ -30,16 +30,13 @@ export const ActivityFeedOptionsMenu: React.FC<Props> = ({
   workout,
   historyLink,
 }) => {
-  const {activeWorkout} = useSelector((s: State) => s);
   const [showExistingWorkoutAlert, setShowExistingWorkoutAlert] = useState(false);
   const [showDeleteWorkoutAlert, setShowDeleteWorkoutAlert] = useState(false);
   const {setActiveWorkout} = useActiveWorkout();
   const {setActivityPageScrollPosition} = useScrollPosition();
   const history = useHistory();
-  const {
-    name: activeWorkoutName,
-    id: activeWorkoutId,
-  } = useSelector((state: State) => state.activeWorkout) || {};
+  const {activeWorkout, workouts: {allIds}} = useSelector((s: State) => s);
+  const {name: activeWorkoutName, id: activeWorkoutId} = activeWorkout || {};
 
   const handleDeleteConfirmationClick = () => {
     deleteWorkout();
@@ -73,6 +70,8 @@ export const ActivityFeedOptionsMenu: React.FC<Props> = ({
     setActiveWorkout(incompleteWorkout);
   };
 
+  const canRepeatWorkout = allIds.includes(workout.id);
+
   return (
     <>
       <AlertConfirm
@@ -96,9 +95,11 @@ export const ActivityFeedOptionsMenu: React.FC<Props> = ({
           Delete Workout
         </AlertButtonPurple>
 
-        <AlertButtonPurple onClick={handleRepeatWorkoutInitialClick} >
-          Repeat Workout
-        </AlertButtonPurple>
+        {canRepeatWorkout &&
+          <AlertButtonPurple onClick={handleRepeatWorkoutInitialClick} >
+            Repeat Workout
+          </AlertButtonPurple>
+        }
 
         <HorizontalRuleSpacer />
 
