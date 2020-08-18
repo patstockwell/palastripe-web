@@ -7,7 +7,10 @@ const buildSW = () => {
     swSrc: 'src/sw-template.js',
     swDest: 'build/sw.js', // this is the final service worker file output
     globDirectory: 'build',
-    globPatterns: [],
+    globPatterns: [
+      '**\/**\/*.{js,css,png,woff2,xml,ico,json,jpg,mp3}',
+      'index.html',
+    ],
   }).then(({count, size, warnings}) => {
     // Optionally, log any warnings and details.
     warnings.forEach(console.warn);
