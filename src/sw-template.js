@@ -9,11 +9,11 @@ if ('function' === typeof importScripts) {
 
     workbox.routing.registerRoute(
       /\.(?:png|gif|jpg|jpeg|mp3|svg|woff2|ico)$/,
-      new workbox.strategies.CacheFirst({
+      new workbox.strategies.StaleWhileRevalidate({
         cacheName: 'assets',
         plugins: [
           new workbox.expiration.Plugin({
-            maxEntries: 60,
+            maxEntries: 160,
             maxAgeSeconds: 30 * 24 * 60 * 60, // 30 Days
           }),
         ],
@@ -23,10 +23,11 @@ if ('function' === typeof importScripts) {
     workbox.routing.registerRoute(
       /\.(?:css|js|json|xml)$/,
       new workbox.strategies.NetworkFirst({
+        networkTimeoutSeconds: 3,
         cacheName: 'source-files',
         plugins: [
           new workbox.expiration.Plugin({
-            maxEntries: 60,
+            maxEntries: 160,
             maxAgeSeconds: 30 * 24 * 60 * 60, // 30 Days
           }),
         ],
@@ -37,6 +38,7 @@ if ('function' === typeof importScripts) {
     workbox.routing.registerRoute(
       new RegExp('/'),
       new workbox.strategies.NetworkFirst({
+        networkTimeoutSeconds: 3,
         cacheName: 'slash',
         plugins: [
           new workbox.expiration.Plugin({
