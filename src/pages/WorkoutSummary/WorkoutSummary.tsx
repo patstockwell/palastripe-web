@@ -23,8 +23,10 @@ const Hr = styled.hr`
 `;
 
 const PanelWithGutter = styled.div`
-  padding: ${gutterWidth}px;
+  padding-right: ${gutterWidth}px;
   padding-left: ${gutterWidth + badgeOffsetLeft}px;
+  padding-top: 0;
+  padding-bottom: ${gutterWidth}px;
 `;
 
 const Ul = styled.ul`
