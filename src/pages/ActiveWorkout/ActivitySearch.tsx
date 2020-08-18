@@ -1,11 +1,11 @@
-import React, { useState, useRef, useMemo } from 'react';
-import { useHistory, Redirect } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-import { v4 as uuidv4 } from 'uuid';
+import React, {useState, useRef, useMemo} from 'react';
+import {useHistory, Redirect} from 'react-router-dom';
+import {useSelector} from 'react-redux';
+import {v4 as uuidv4} from 'uuid';
 import styled from 'styled-components';
-import { useActiveWorkout } from '../../reducers/activeWorkoutReducer';
-import { exercises } from '../../workoutData/exercises';
-import { Exercise, State, WeightedActivity } from '../../helpers/types';
+import {useActiveWorkout} from '../../reducers/activeWorkoutReducer';
+import {exercises} from '../../workoutData/exercises';
+import {Exercise, State, WeightedActivity} from '../../helpers/types';
 import {
   appMaxWidth,
   gutterWidth,
@@ -13,8 +13,8 @@ import {
   charcoal,
   lightGrey3,
 } from '../../helpers/constants';
-import { BackLinkBanner } from '../../components/BackLinkBanner';
-import { useSelectedExercise } from '../../context/useSelectedExercise';
+import {BackLinkBanner} from '../../components/BackLinkBanner';
+import {useSelectedExercise} from '../../context/useSelectedExercise';
 import {onTheFlyWorkoutGroupId} from '../../workoutData/workouts/onTheFly';
 
 export const Input = styled.input`
@@ -121,20 +121,23 @@ export const ActivitySearch: React.FC = () => {
     repsAchieved?: number,
     weightInKilos?: number,
   }) => {
-    addActivity({
-      name: name || searchQuery,
-      exerciseId: exerciseId || searchQuery.trim().split(' ').join('-').toLowerCase(),
-      id: uuidv4(),
-      repsAchieved,
-      weightInKilos,
-      autoIncrement: 0,
-      completed: true,
-    });
-    // Set the newly added exercise as `selected`
-    setSelectedExercise({
-      groupId: onTheFlyWorkoutGroupId,
-      index: newActivityIndex,
-    });
+    if (searchQuery !== '') {
+      addActivity({
+        name: name || searchQuery,
+        exerciseId: exerciseId || searchQuery.trim().split(' ').join('-').toLowerCase(),
+        id: uuidv4(),
+        repsAchieved,
+        weightInKilos,
+        autoIncrement: 0,
+        completed: true,
+      });
+      // Set the newly added exercise as `selected`
+      setSelectedExercise({
+        groupId: onTheFlyWorkoutGroupId,
+        index: newActivityIndex,
+      });
+    }
+
     // navigate back to the active workout URL
     history.push(`/workouts/${activeWorkout.id}`);
   };
