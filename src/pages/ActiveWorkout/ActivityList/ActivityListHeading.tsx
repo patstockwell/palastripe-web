@@ -52,7 +52,6 @@ interface Props {
   stickyTop?: number;
   id?: string;
   completedActivities?: number;
-  shouldHideCompleted?: boolean;
 }
 
 export const ActivityListHeading: React.FC<Props> = ({
@@ -61,7 +60,6 @@ export const ActivityListHeading: React.FC<Props> = ({
   children,
   heading,
   stickyTop,
-  shouldHideCompleted,
 }) => {
   const [showInput, setShowInput] = useState(false);
   const handleKeyPress = (e: React.KeyboardEvent) => {
@@ -85,7 +83,7 @@ export const ActivityListHeading: React.FC<Props> = ({
           <Heading>{heading}</Heading>
         )}
         <Sets>
-          {!shouldHideCompleted && `${completedActivities}/`}
+          {completedActivities > 0 && `${completedActivities}/`}
           {activityTotal || 0} {activityTotal === 1 ? 'set' : 'sets'}
         </Sets>
       </HeadingPanel>

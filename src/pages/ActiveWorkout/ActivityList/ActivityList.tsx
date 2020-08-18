@@ -93,7 +93,6 @@ export const ActivityList: React.FC<Props> = ({
         heading={group.name}
         activityTotal={tiles.length}
         completedActivities={completedActivities.length}
-        shouldHideCompleted={isOnTheFlyWorkout}
       >
         <Ul>{tiles}</Ul>
       </ActivityListHeading>
