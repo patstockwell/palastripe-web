@@ -30,6 +30,7 @@ export interface Workout {
   startTime?: string;
   finishTime?: string;
   name: string;
+  description: string;
   version?: string;
   exerciseGroups: ActivityGroup[];
 }
@@ -111,6 +112,7 @@ const updateCompleted = (e: BoolHash) => (a: Activity) => {
 };
 
 const byId: { [key: string]: Workout } = {
+  [onTheFlyWorkoutId]: onTheFly,
   'full-body-dumbbell-strength': fullBodyDumbbellStrength,
   'circuit-speed': circuitSpeed,
   'upper-body-burner': upperBodyBurner,
@@ -122,7 +124,6 @@ const byId: { [key: string]: Workout } = {
   'push-and-pull': pushAndPull,
   'leg-power': legPower,
   'compound-pyramids': compoundPyramids,
-  [onTheFlyWorkoutId]: onTheFly,
 };
 
 const allWorkoutTemplates = {

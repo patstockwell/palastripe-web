@@ -6,6 +6,7 @@ import Image from '../../assets/images/benchpress.jpg';
 export const pushAndPull: Workout = {
   id: 'push-and-pull',
   name: 'Push And Pull',
+  description: '',
   imageUrl: Image,
   version: WORKOUT_VERSION,
   exerciseGroups: [

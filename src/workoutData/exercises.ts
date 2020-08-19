@@ -240,6 +240,12 @@ const byId: ById = {
     id: 'sit_ups',
     name: 'Sit Ups',
   },
+  star_jumps: {
+    defaultWeightInKilos: 0,
+    tags: [],
+    id: 'star_jumps',
+    name: 'Star Jumps',
+  },
   right_arm_cross_body_stretch: {
     defaultWeightInKilos: 0,
     tags: ['stretch'],

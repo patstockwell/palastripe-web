@@ -2,12 +2,11 @@
 // removed. That logic lives in a function called mergeWorkouts in the workout
 // reducer. Bump this version with care as clients will lose their progress when
 // workouts are replaced with a newer version.
-export const WORKOUT_VERSION = 'Fri 14 Aug 2020 23:01:51 AEST';
+export const WORKOUT_VERSION = 'Wed 19 Aug 2020 22:48:43 AEST';
 
 export const appMaxWidth = 812; // 812px is the size of an iPhone X on its side
 export const tileGap = 16;
 export const tileMinHeight = 88;
-export const workoutTileMinHeight = 100;
 export const navBarHeight = 48;
 export const bannerHeight = 48;
 export const activeWorkoutWindowHeight = 350;

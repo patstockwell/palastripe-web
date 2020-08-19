@@ -8,6 +8,7 @@ export const onTheFlyWorkoutGroupId = 'on-the-fly-workout-first-group';
 
 export const onTheFly: Workout = {
   id: onTheFlyWorkoutId,
+  description: 'Nothing planned? Start here with a blank workout and track your exercises as you do them.',
   name: 'On The Fly',
   imageUrl: Image,
   exerciseGroups: [{

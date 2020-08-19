@@ -102,7 +102,9 @@ export const ActivityList: React.FC<Props> = ({
   return (
     <>
       <Ul>{activityListTiles}</Ul>
-      <AddActivityTile setShowHiddenArea={setShowHiddenArea}/>
+      {isOnTheFlyWorkout &&
+        <AddActivityTile setShowHiddenArea={setShowHiddenArea}/>
+      }
       {startTime && // Only show the finish button if the workout has started.
         <FlexTile>
           <Button onClick={finishWorkoutClickHandler}>

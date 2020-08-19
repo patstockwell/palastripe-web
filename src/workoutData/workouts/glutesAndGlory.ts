@@ -6,6 +6,7 @@ import Image from '../../assets/images/active-athlete-barbell-2261482.jpg';
 export const glutesAndGlory: Workout = {
   id: 'glutes-and-glory',
   name: 'Glutes & Glory',
+  description: '',
   imageUrl: Image,
   version: WORKOUT_VERSION,
   exerciseGroups: [

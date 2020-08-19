@@ -6,6 +6,7 @@ import Image from '../../assets/images/active-adult-aerobics-206573.jpg';
 export const fullBodyPower: Workout = {
   id: 'full-body-power',
   name: 'Full Body Power',
+  description: '',
   imageUrl: Image,
   version: WORKOUT_VERSION,
   exerciseGroups: [

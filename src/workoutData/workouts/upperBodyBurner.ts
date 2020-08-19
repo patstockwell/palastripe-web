@@ -6,6 +6,7 @@ import Image from '../../assets/images/athlete-biceps-body-136405.jpg';
 export const upperBodyBurner: Workout = {
   id: 'upper-body-burner',
   name: 'Upper Body Burner',
+  description: '',
   imageUrl: Image,
   version: WORKOUT_VERSION,
   exerciseGroups: [

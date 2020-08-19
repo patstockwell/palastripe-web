@@ -6,6 +6,7 @@ import Image from '../../assets/images/squat.jpg';
 export const legPower: Workout = {
   id: 'leg-power',
   name: 'Leg Power',
+  description: 'Based on two classic barbell movements, the squat and the deadlift, this leg workout will build strength and power.',
   imageUrl: Image,
   version: WORKOUT_VERSION,
   exerciseGroups: [
@@ -124,7 +125,7 @@ export const legPower: Workout = {
 
     {
       id: '772e9e1f-8c2a-4adf-8f3e-53e8944e0809',
-      name: 'Core Strength',
+      name: 'Anterior Chain',
       exercises: [
         {
           id: uuidv4(),

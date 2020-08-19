@@ -121,7 +121,7 @@ export const ActivitySearch: React.FC = () => {
     repsAchieved?: number,
     weightInKilos?: number,
   }) => {
-    if (searchQuery !== '') {
+    if (searchQuery !== '' || name) {
       addActivity({
         name: name || searchQuery,
         exerciseId: exerciseId || searchQuery.trim().split(' ').join('-').toLowerCase(),

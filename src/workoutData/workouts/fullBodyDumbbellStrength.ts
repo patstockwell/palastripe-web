@@ -6,6 +6,7 @@ import Image from '../../assets/images/bicep-workout-1851820.jpg';
 export const fullBodyDumbbellStrength: Workout = {
   id: 'full-body-dumbbell-strength',
   name: 'Full Body Dumbbell Strength',
+  description: 'Only got a pair of dumbbells? Combine deadlift, curl, and press in this workout that can be done at home or the gym.',
   imageUrl: Image,
   version: WORKOUT_VERSION,
   exerciseGroups: [

@@ -6,6 +6,7 @@ import Image from '../../assets/images/athlete-barbell-body-931321.jpg';
 export const overheadStrength: Workout = {
   id: 'overhead-strength',
   name: 'Overhead Strength',
+  description: '',
   imageUrl: Image,
   version: WORKOUT_VERSION,
   exerciseGroups: [

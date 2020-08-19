@@ -6,6 +6,7 @@ import Image from '../../assets/images/athlete-barbell-biceps-497934.jpg';
 export const squatAndBench: Workout = {
   id: 'squat-and-bench',
   name: 'Squat And Bench',
+  description: '',
   imageUrl: Image,
   version: WORKOUT_VERSION,
   exerciseGroups: [

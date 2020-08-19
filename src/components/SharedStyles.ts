@@ -35,21 +35,6 @@ export const unorderedListStyle = `
   list-style: none;
 `;
 
-export const opaqueImageInAfter = css<{ image: string }>`
-  content: ' ';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-image: url(${props => props.image});
-  background-size: cover;
-  background-position-y: top;
-  background-position-x: center;
-  opacity: 0.5;
-  z-index: -1;
-`;
-
 export interface ButtonStyleProps { background?: string; color?: string; }
 
 const buttonStyle = `

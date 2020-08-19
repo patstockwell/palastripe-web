@@ -6,6 +6,7 @@ import Image from '../../assets/images/leg-press-dark.jpg';
 export const compoundPyramids: Workout = {
   id: 'compound-pyramids',
   name: 'Compound Pyramids',
+  description: '',
   imageUrl: Image,
   version: WORKOUT_VERSION,
   exerciseGroups: [

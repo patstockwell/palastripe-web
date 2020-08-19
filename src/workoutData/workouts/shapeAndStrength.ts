@@ -6,6 +6,7 @@ import Image from '../../assets/images/overhead-press.jpg';
 export const shapeAndStrength: Workout = {
   id: 'shape-and-strength',
   name: 'Shape And Strength',
+  description: '',
   imageUrl: Image,
   version: WORKOUT_VERSION,
   exerciseGroups: [
