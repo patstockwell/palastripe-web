@@ -34,7 +34,7 @@ const ImageContainer = styled.div<{ image?: string }>`
   padding: 0 ${gutterWidth}px;
   overflow: hidden;
   background-color: black;
-  z-index: -2;
+  z-index: 0;
 
   // put the image in an 'after' pseudo element. Set it behind the original
   // element which has opacity giving it the dark filter look

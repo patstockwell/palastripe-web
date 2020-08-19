@@ -31,7 +31,7 @@ export const Workouts: React.FC<Props> = () => {
   const mappedWorkouts = allIds.map(id => byId[id]);
   const workoutCards = mappedWorkouts.map((w: Workout) =>
     w.id === onTheFlyWorkoutId
-      ? <OnTheFlyWorkoutCard workout={w}/>
+      ? <OnTheFlyWorkoutCard key={w.id} workout={w}/>
       : <WorkoutCard key={w.id} workout={w} />
   );
 
