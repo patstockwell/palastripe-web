@@ -1,15 +1,16 @@
-import { v4 as uuidv4 } from 'uuid';
-import { Workout } from '../../reducers/workoutsReducer';
-import { WORKOUT_VERSION } from '../../helpers/constants';
+import {v4 as uuidv4} from 'uuid';
+import {Workout} from '../../reducers/workoutsReducer';
+import {WORKOUT_VERSION} from '../../helpers/constants';
 import Image from '../../assets/images/leg-press-dark.jpg';
 
 export const compoundPyramids: Workout = {
   id: 'compound-pyramids',
   name: 'Compound Pyramids',
-  description: '',
+  description: 'Pyramid up to heavier weights using decreasing repetitions each set, in this full-body, compound-movement workout',
   imageUrl: Image,
   version: WORKOUT_VERSION,
   exerciseGroups: [
+
     {
       id: 'a1bf1ecf-9132-4edb-b827-81ac8c01ad6f',
       name: 'Legs',
@@ -56,6 +57,7 @@ export const compoundPyramids: Workout = {
         },
       ],
     },
+
     {
       id: 'bde934ab-0004-4c59-9eab-0737b884e6ed',
       name: 'Shoulders',
@@ -65,9 +67,9 @@ export const compoundPyramids: Workout = {
           exerciseId: 'overhead_press',
           name: 'Overhead Press',
           autoIncrement: 0,
-          repsGoal: 3,
-          repsAchieved: 3,
-          weightInKilos: 20,
+          repsGoal: 10,
+          repsAchieved: 10,
+          weightInKilos: 30,
           restPeriodInSeconds: 90,
         },
         {
@@ -75,9 +77,9 @@ export const compoundPyramids: Workout = {
           exerciseId: 'overhead_press',
           name: 'Overhead Press',
           autoIncrement: 0,
-          repsGoal: 3,
-          repsAchieved: 3,
-          weightInKilos: 20,
+          repsGoal: 8,
+          repsAchieved: 8,
+          weightInKilos: 30,
           restPeriodInSeconds: 90,
         },
         {
@@ -85,9 +87,9 @@ export const compoundPyramids: Workout = {
           exerciseId: 'overhead_press',
           name: 'Overhead Press',
           autoIncrement: 0,
-          repsGoal: 3,
-          repsAchieved: 3,
-          weightInKilos: 20,
+          repsGoal: 6,
+          repsAchieved: 6,
+          weightInKilos: 40,
           restPeriodInSeconds: 90,
         },
         {
@@ -95,59 +97,61 @@ export const compoundPyramids: Workout = {
           exerciseId: 'overhead_press',
           name: 'Overhead Press',
           autoIncrement: 0,
-          repsGoal: 3,
-          repsAchieved: 3,
-          weightInKilos: 20,
+          repsGoal: 4,
+          repsAchieved: 4,
+          weightInKilos: 50,
           restPeriodInSeconds: 90,
         },
       ],
     },
+
     {
       id: '1be96981-96ca-4c91-b696-ae624f7ec03a',
       name: 'Back',
       exercises: [
         {
           id: uuidv4(),
-          exerciseId: 'upright_row',
-          name: 'Upright Row',
+          exerciseId: 'bent_over_row',
+          name: 'Bent-over Row',
           autoIncrement: 0,
-          repsGoal: 8,
-          repsAchieved: 8,
+          repsGoal: 12,
+          repsAchieved: 12,
           weightInKilos: 20,
           restPeriodInSeconds: 90,
         },
         {
           id: uuidv4(),
-          exerciseId: 'upright_row',
-          name: 'Upright Row',
+          exerciseId: 'bent_over_row',
+          name: 'Bent-over Row',
           autoIncrement: 0,
-          repsGoal: 8,
-          repsAchieved: 8,
-          weightInKilos: 20,
+          repsGoal: 10,
+          repsAchieved: 10,
+          weightInKilos: 30,
           restPeriodInSeconds: 90,
         },
         {
           id: uuidv4(),
-          exerciseId: 'upright_row',
-          name: 'Upright Row',
+          exerciseId: 'bent_over_row',
+          name: 'Bent-over Row',
           autoIncrement: 0,
           repsGoal: 8,
           repsAchieved: 8,
-          weightInKilos: 20,
+          weightInKilos: 40,
           restPeriodInSeconds: 90,
         },
         {
           id: uuidv4(),
-          exerciseId: 'upright_row',
-          name: 'Upright Row',
+          exerciseId: 'bent_over_row',
+          name: 'Bent-over Row',
           autoIncrement: 0,
           repsGoal: 8,
           repsAchieved: 8,
-          weightInKilos: 20,
+          weightInKilos: 40,
           restPeriodInSeconds: 90,
         },
       ],
     },
+
     {
       id: '7f409783-1e1e-44df-be20-b503cdfa665b',
       name: 'Chest',
@@ -194,6 +198,7 @@ export const compoundPyramids: Workout = {
         },
       ],
     },
+
     {
       id: '2cec2d24-5936-46d4-b8ab-c5b63204bd34',
       name: 'stretch',
@@ -203,42 +208,49 @@ export const compoundPyramids: Workout = {
           exerciseId: 'right_arm_cross_body_stretch',
           name: 'Right Arm Cross Body',
           timerInSeconds: 60,
+          restPeriodInSeconds: 0,
         },
         {
           id: uuidv4(),
           exerciseId: 'left_arm_cross_body_stretch',
           name: 'Left Arm Cross Body',
           timerInSeconds: 60,
+          restPeriodInSeconds: 0,
         },
         {
           id: uuidv4(),
           exerciseId: 'kneeling_right_hip_flexor_stretch',
           name: 'Kneeling Right Hip-Flexor Stretch',
           timerInSeconds: 45,
+          restPeriodInSeconds: 0,
         },
         {
           id: uuidv4(),
           exerciseId: 'kneeling_left_hip_flexor_stretch',
           name: 'Kneeling Left Hip-Flexor Stretch',
           timerInSeconds: 45,
+          restPeriodInSeconds: 0,
         },
         {
           id: uuidv4(),
           exerciseId: 'left_glute_pigeon_pose_stretch',
           name: 'Left Glute Pigeon Pose',
           timerInSeconds: 60,
+          restPeriodInSeconds: 0,
         },
         {
           id: uuidv4(),
           exerciseId: 'right_glute_pigeon_pose_stretch',
           name: 'Right Glute Pigeon Pose',
           timerInSeconds: 60,
+          restPeriodInSeconds: 0,
         },
         {
           id: uuidv4(),
           exerciseId: 'overhead_band_chest_stretch',
           name: 'Overhead Band Chest Stretch',
           timerInSeconds: 60,
+          restPeriodInSeconds: 0,
         },
       ],
     },

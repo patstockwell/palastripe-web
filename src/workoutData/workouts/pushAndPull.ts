@@ -6,7 +6,7 @@ import Image from '../../assets/images/benchpress.jpg';
 export const pushAndPull: Workout = {
   id: 'push-and-pull',
   name: 'Push And Pull',
-  description: '',
+  description: 'Focusing on four key exercises, this workout will get you pressing, pulling, rowing, and curling.',
   imageUrl: Image,
   version: WORKOUT_VERSION,
   exerciseGroups: [
@@ -127,9 +127,9 @@ export const pushAndPull: Workout = {
       exercises: [
         {
           id: uuidv4(),
-          exerciseId: 'upright_row',
-          name: 'Upright Row',
-          weightInKilos: 20,
+          exerciseId: 'bent_over_row',
+          name: 'Bent-over Row',
+          weightInKilos: 30,
           repsGoal: 12,
           repsAchieved: 12,
           autoIncrement: 0,
@@ -148,9 +148,9 @@ export const pushAndPull: Workout = {
 
         {
           id: uuidv4(),
-          exerciseId: 'upright_row',
-          name: 'Upright Row',
-          weightInKilos: 20,
+          exerciseId: 'bent_over_row',
+          name: 'Bent-over Row',
+          weightInKilos: 30,
           repsGoal: 12,
           repsAchieved: 12,
           autoIncrement: 5,
@@ -169,9 +169,9 @@ export const pushAndPull: Workout = {
 
         {
           id: uuidv4(),
-          exerciseId: 'upright_row',
-          name: 'Upright Row',
-          weightInKilos: 20,
+          exerciseId: 'bent_over_row',
+          name: 'Bent-over Row',
+          weightInKilos: 30,
           repsGoal: 12,
           repsAchieved: 12,
           autoIncrement: 5,
@@ -190,9 +190,9 @@ export const pushAndPull: Workout = {
 
         {
           id: uuidv4(),
-          exerciseId: 'upright_row',
-          name: 'Upright Row',
-          weightInKilos: 20,
+          exerciseId: 'bent_over_row',
+          name: 'Bent-over Row',
+          weightInKilos: 30,
           repsGoal: 12,
           repsAchieved: 12,
           autoIncrement: 5,
@@ -221,42 +221,49 @@ export const pushAndPull: Workout = {
           exerciseId: 'left_leg_hamstring_stretch',
           name: 'Left Leg Hamstring stretch',
           timerInSeconds: 45,
+          restPeriodInSeconds: 0,
         },
         {
           id: uuidv4(),
           exerciseId: 'right_leg_hamstring_stretch',
           name: 'Right Leg Hamstring stretch',
           timerInSeconds: 45,
+          restPeriodInSeconds: 0,
         },
         {
           id: uuidv4(),
           exerciseId: 'right_arm_cross_body_stretch',
           name: 'Right Arm Cross Body',
           timerInSeconds: 60,
+          restPeriodInSeconds: 0,
         },
         {
           id: uuidv4(),
           exerciseId: 'left_arm_cross_body_stretch',
           name: 'Left Arm Cross Body',
           timerInSeconds: 60,
+          restPeriodInSeconds: 0,
         },
         {
           id: uuidv4(),
           exerciseId: 'left_glute_pigeon_pose_stretch',
           name: 'Left Glute Pigeon Pose',
           timerInSeconds: 60,
+          restPeriodInSeconds: 0,
         },
         {
           id: uuidv4(),
           exerciseId: 'right_glute_pigeon_pose_stretch',
           name: 'Right Glute Pigeon Pose',
           timerInSeconds: 60,
+          restPeriodInSeconds: 0,
         },
         {
           id: uuidv4(),
           exerciseId: 'overhead_band_chest_stretch',
           name: 'Overhead Band Chest Stretch',
           timerInSeconds: 60,
+          restPeriodInSeconds: 0,
         },
       ],
     },

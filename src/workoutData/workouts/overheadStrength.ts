@@ -1,12 +1,12 @@
-import { v4 as uuidv4 } from 'uuid';
-import { Workout } from '../../reducers/workoutsReducer';
-import { WORKOUT_VERSION } from '../../helpers/constants';
+import {v4 as uuidv4} from 'uuid';
+import {Workout} from '../../reducers/workoutsReducer';
+import {WORKOUT_VERSION} from '../../helpers/constants';
 import Image from '../../assets/images/athlete-barbell-body-931321.jpg';
 
 export const overheadStrength: Workout = {
   id: 'overhead-strength',
   name: 'Overhead Strength',
-  description: '',
+  description: 'This upper body workout will get you pushing and pulling overhead with superset pairs.',
   imageUrl: Image,
   version: WORKOUT_VERSION,
   exerciseGroups: [
@@ -30,6 +30,7 @@ export const overheadStrength: Workout = {
         },
       ],
     },
+
     {
       id: '0ee1a57b-6dfc-43fb-95c9-f17597660a96',
       name: 'Press Superset 1',
@@ -119,15 +120,36 @@ export const overheadStrength: Workout = {
         },
       ],
     },
+
     {
       name: 'Press Superset 2',
       id: '07e22d5d-75d8-4414-bcfc-4d879d9fee79',
       exercises: [
         {
           id: uuidv4(),
-          exerciseId: 'push_ups',
-          name: 'Push Ups',
+          exerciseId: 'overhead_tricep_extension_dumbbell',
+          name: 'Overhead Tricep Extension - Dumbbell',
+          weightInKilos: 5,
+          repsGoal: 10,
+          repsAchieved: 10,
+          autoIncrement: 0,
+          restPeriodInSeconds: 60,
+        },
+        {
+          id: uuidv4(),
+          exerciseId: 'chin_up',
+          name: 'Chin Up',
           weightInKilos: 0,
+          repsGoal: 6,
+          repsAchieved: 6,
+          autoIncrement: 0,
+          restPeriodInSeconds: 60,
+        },
+        {
+          id: uuidv4(),
+          exerciseId: 'overhead_tricep_extension_dumbbell',
+          name: 'Overhead Tricep Extension - Dumbbell',
+          weightInKilos: 5,
           repsGoal: 10,
           repsAchieved: 10,
           autoIncrement: 0,
@@ -135,19 +157,19 @@ export const overheadStrength: Workout = {
         },
         {
           id: uuidv4(),
-          exerciseId: 'machine_chest_flys',
-          name: 'Machine Chest Flys',
-          weightInKilos: 7,
-          repsGoal: 10,
-          repsAchieved: 10,
-          autoIncrement: 0,
-          restPeriodInSeconds: 60,
-        },
-        {
-          id: uuidv4(),
-          exerciseId: 'push_ups',
-          name: 'Push Ups',
+          exerciseId: 'chin_up',
+          name: 'Chin Up',
           weightInKilos: 0,
+          repsGoal: 6,
+          repsAchieved: 6,
+          autoIncrement: 0,
+          restPeriodInSeconds: 60,
+        },
+        {
+          id: uuidv4(),
+          exerciseId: 'overhead_tricep_extension_dumbbell',
+          name: 'Overhead Tricep Extension - Dumbbell',
+          weightInKilos: 5,
           repsGoal: 10,
           repsAchieved: 10,
           autoIncrement: 0,
@@ -155,19 +177,19 @@ export const overheadStrength: Workout = {
         },
         {
           id: uuidv4(),
-          exerciseId: 'machine_chest_flys',
-          name: 'Machine Chest Flys',
-          weightInKilos: 7,
-          repsGoal: 10,
-          repsAchieved: 10,
-          autoIncrement: 0,
-          restPeriodInSeconds: 60,
-        },
-        {
-          id: uuidv4(),
-          exerciseId: 'push_ups',
-          name: 'Push Ups',
+          exerciseId: 'chin_up',
+          name: 'Chin Up',
           weightInKilos: 0,
+          repsGoal: 6,
+          repsAchieved: 6,
+          autoIncrement: 0,
+          restPeriodInSeconds: 60,
+        },
+        {
+          id: uuidv4(),
+          exerciseId: 'overhead_tricep_extension_dumbbell',
+          name: 'Overhead Tricep Extension - Dumbbell',
+          weightInKilos: 5,
           repsGoal: 10,
           repsAchieved: 10,
           autoIncrement: 0,
@@ -175,16 +197,17 @@ export const overheadStrength: Workout = {
         },
         {
           id: uuidv4(),
-          exerciseId: 'machine_chest_flys',
-          name: 'Machine Chest Flys',
-          weightInKilos: 7,
-          repsGoal: 10,
-          repsAchieved: 10,
+          exerciseId: 'chin_up',
+          name: 'Chin Up',
+          weightInKilos: 0,
+          repsGoal: 6,
+          repsAchieved: 6,
           autoIncrement: 0,
           restPeriodInSeconds: 60,
         },
       ],
     },
+
     {
       name: 'Stretch',
       id: '61a1c4a9-9116-4ac8-b74b-25d19b11fb62',
@@ -194,42 +217,49 @@ export const overheadStrength: Workout = {
           exerciseId: 'right_arm_cross_body_stretch',
           name: 'Right Arm Cross Body',
           timerInSeconds: 60,
+          restPeriodInSeconds: 0,
         },
         {
           id: uuidv4(),
           exerciseId: 'left_arm_cross_body_stretch',
           name: 'Left Arm Cross Body',
           timerInSeconds: 60,
+          restPeriodInSeconds: 0,
         },
         {
           id: uuidv4(),
           exerciseId: 'right_leg_hamstring_stretch',
           name: 'Right Leg Hamstring stretch',
           timerInSeconds: 45,
+          restPeriodInSeconds: 0,
         },
         {
           id: uuidv4(),
           exerciseId: 'left_leg_hamstring_stretch',
           name: 'Left Leg Hamstring stretch',
           timerInSeconds: 45,
+          restPeriodInSeconds: 0,
         },
         {
           id: uuidv4(),
           exerciseId: 'right_glute_pigeon_pose_stretch',
           name: 'Right Glute Pigeon Pose',
           timerInSeconds: 60,
+          restPeriodInSeconds: 0,
         },
         {
           id: uuidv4(),
           exerciseId: 'left_glute_pigeon_pose_stretch',
           name: 'Left Glute Pigeon Pose',
           timerInSeconds: 60,
+          restPeriodInSeconds: 0,
         },
         {
           id: uuidv4(),
           exerciseId: 'overhead_band_chest_stretch',
           name: 'Overhead Band Chest Stretch',
           timerInSeconds: 60,
+          restPeriodInSeconds: 0,
         },
       ],
     },

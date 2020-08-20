@@ -6,10 +6,11 @@ import Image from '../../assets/images/active-athlete-barbell-2261482.jpg';
 export const glutesAndGlory: Workout = {
   id: 'glutes-and-glory',
   name: 'Glutes & Glory',
-  description: '',
+  description: 'Blast your quads, glutes, and hamstrings with this high volume leg workout. Gotta love leg day.',
   imageUrl: Image,
   version: WORKOUT_VERSION,
   exerciseGroups: [
+
     {
       id: 'f3985524-f9a8-4383-963e-a4b32e5642b9',
       name: 'Compound Barbell Exercises',
@@ -117,6 +118,7 @@ export const glutesAndGlory: Workout = {
         },
       ],
     },
+
     {
       name: 'a7ecd3f8-27e4-41d7-b9a9-6207081ab8ed',
       id: 'calves',
@@ -399,42 +401,49 @@ export const glutesAndGlory: Workout = {
           exerciseId: 'left_leg_hamstring_stretch',
           name: 'Left Leg Hamstring stretch',
           timerInSeconds: 45,
+          restPeriodInSeconds: 0,
         },
         {
           id: uuidv4(),
           exerciseId: 'right_leg_hamstring_stretch',
           name: 'Right Leg Hamstring stretch',
           timerInSeconds: 45,
+          restPeriodInSeconds: 0,
         },
         {
           id: uuidv4(),
           exerciseId: 'left_glute_pigeon_pose_stretch',
           name: 'Left Glute Pigeon Pose',
           timerInSeconds: 45,
+          restPeriodInSeconds: 0,
         },
         {
           id: uuidv4(),
           exerciseId: 'right_glute_pigeon_pose_stretch',
           name: 'Right Glute Pigeon Pose',
           timerInSeconds: 45,
+          restPeriodInSeconds: 0,
         },
         {
           id: uuidv4(),
           exerciseId: 'kneeling_left_hip_flexor_stretch',
           name: 'Kneeling Left Hip-Flexor Stretch',
           timerInSeconds: 45,
+          restPeriodInSeconds: 0,
         },
         {
           id: uuidv4(),
           exerciseId: 'kneeling_right_hip_flexor_stretch',
           name: 'Kneeling Right Hip-Flexor Stretch',
           timerInSeconds: 45,
+          restPeriodInSeconds: 0,
         },
         {
           id: uuidv4(),
           exerciseId: 'overhead_band_chest_stretch',
           name: 'Overhead Band Chest Stretch',
           timerInSeconds: 45,
+          restPeriodInSeconds: 0,
         },
       ],
     },

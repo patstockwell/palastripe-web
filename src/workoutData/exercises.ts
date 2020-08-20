@@ -1,5 +1,5 @@
-import { Exercises, Exercise } from '../helpers/types';
-import { getIdsForStretchExercises } from '../helpers/functions';
+import {Exercises, Exercise} from '../helpers/types';
+import {getIdsForStretchExercises} from '../helpers/functions';
 
 interface ById {
   [key: string]: Exercise

@@ -1,12 +1,12 @@
-import React, { useRef, useState } from 'react';
+import React, {useRef, useState} from 'react';
 import styled from 'styled-components';
-import { useSpring, animated } from 'react-spring';
-import { useSelector } from 'react-redux';
+import {useSpring, animated} from 'react-spring';
+import {useSelector} from 'react-redux';
 
-import { ONE_SECOND, appMaxWidth } from '../../helpers/constants';
-import { useInterval } from '../../helpers/functions';
-import { green, orange } from '../../helpers/constants';
-import { State } from '../../helpers/types';
+import {ONE_SECOND, appMaxWidth} from '../../helpers/constants';
+import {useInterval} from '../../helpers/functions';
+import {green, orange} from '../../helpers/constants';
+import {State} from '../../helpers/types';
 
 const TimerBackground = styled(animated.div)`
   display: flex;
@@ -40,12 +40,12 @@ export const RestTimer: React.FC<Props> = ({
   handleClick,
   restPeriod = 90, // default rest period of 90 seconds
 }) => {
-  const { useRestTimer = true } = useSelector((s: State) => s.settings);
-  const [ count, setCount ] = useState(0);
-  const [ divStyle, setDivStyle ] = useSpring(() => ({
+  const {useRestTimer = true} = useSelector((s: State) => s.settings);
+  const [count, setCount] = useState(0);
+  const [divStyle, setDivStyle] = useSpring(() => ({
     opacity: 1,
-    from: { opacity: 0 },
-    config: { mass: 1, tension: 470, friction: 40 },
+    from: {opacity: 0},
+    config: {mass: 1, tension: 470, friction: 40},
   }));
 
   // The timer tick is created by storing the time at zero (when the component
@@ -55,6 +55,10 @@ export const RestTimer: React.FC<Props> = ({
   useInterval(() => (
     setCount(Math.floor(Date.now() / 1000) - timeAtZero.current)
   ), ONE_SECOND);
+
+  if (restPeriod <= 0) {
+    return null;
+  }
 
   // graceful way to unmount
   const fadeAndReset = () => {

@@ -1,12 +1,12 @@
-import { v4 as uuidv4 } from 'uuid';
-import { Workout } from '../../reducers/workoutsReducer';
-import { WORKOUT_VERSION } from '../../helpers/constants';
+import {v4 as uuidv4} from 'uuid';
+import {Workout} from '../../reducers/workoutsReducer';
+import {WORKOUT_VERSION} from '../../helpers/constants';
 import Image from '../../assets/images/active-adult-aerobics-206573.jpg';
 
 export const fullBodyPower: Workout = {
   id: 'full-body-power',
   name: 'Full Body Power',
-  description: '',
+  description: 'This workout will help build both strength and power by using short reps and compound movements.',
   imageUrl: Image,
   version: WORKOUT_VERSION,
   exerciseGroups: [
