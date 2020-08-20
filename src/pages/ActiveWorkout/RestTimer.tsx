@@ -31,6 +31,8 @@ const Message = styled(animated.p)`
   margin-left: 0.75em;
 `;
 
+const ONE_HOUR_IN_SECONDS = 60 * 60;
+
 interface Props {
   restPeriod: number;
   handleClick: () => void;
@@ -76,7 +78,7 @@ export const RestTimer: React.FC<Props> = ({
   return useRestTimer && (
     <TimerBackground style={divStyle} onClick={fadeAndReset} >
       <Count color={count < restPeriod ? orange : green}>
-        {formatTimer(count)}
+        {formatTimer(count > ONE_HOUR_IN_SECONDS ? ONE_HOUR_IN_SECONDS : count)}
       </Count>
       <Message>
         Great job, take a <strong>{formatTimer(restPeriod)}</strong> rest.
