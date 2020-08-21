@@ -2,12 +2,16 @@ import React from 'react';
 import {RouteProps} from 'react-router-dom';
 import {useSelector} from 'react-redux';
 import styled from 'styled-components';
+import {HorizontalRuleSpacer} from '../../components/AlertConfirm';
 import {WorkoutCard, OnTheFlyWorkoutCard} from './WorkoutCard';
 import {Page} from '../../components/Page';
 import {State} from '../../helpers/types';
-import {navBarHeight} from '../../helpers/constants';
-import {Workout} from '../../reducers/workoutsReducer';
+import {gutterWidth, navBarHeight} from '../../helpers/constants';
 import {onTheFlyWorkoutId} from '../../workoutData/workouts/onTheFly';
+
+const PageGutter = styled.div`
+  padding: ${gutterWidth}px;
+`;
 
 const EmptySpace = styled.div`
   height: ${2 * navBarHeight}px;
@@ -29,18 +33,25 @@ export const Workouts: React.FC<Props> = () => {
   const { allIds, byId } = useSelector((state: State) => state.workouts);
 
   const mappedWorkouts = allIds.map(id => byId[id]);
-  const workoutCards = mappedWorkouts.map((w: Workout) =>
-    w.id === onTheFlyWorkoutId
-      ? <OnTheFlyWorkoutCard key={w.id} workout={w}/>
-      : <WorkoutCard key={w.id} workout={w} />
-  );
+  const onTheFly = mappedWorkouts
+    .filter(w => w.id === onTheFlyWorkoutId)
+    .pop();
+  const workoutCards = mappedWorkouts
+    .filter(w => w.id !== onTheFlyWorkoutId)
+    .map(w => <WorkoutCard key={w.id} workout={w} />);
 
   return (
     <Page heading={'Workouts'}>
-      <Ul>
-        {workoutCards}
-      </Ul>
-      <EmptySpace />
+      <PageGutter>
+        <h2>Quick Start</h2>
+        <OnTheFlyWorkoutCard key={onTheFly.id} workout={onTheFly}/>
+        <HorizontalRuleSpacer />
+        <h2>Recommended</h2>
+        <Ul>
+          {workoutCards}
+        </Ul>
+        <EmptySpace />
+      </PageGutter>
     </Page>
   );
 };

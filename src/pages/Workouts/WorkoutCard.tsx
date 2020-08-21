@@ -16,7 +16,7 @@ const Card = styled.li`
   min-height: 400px;
   border-radius: 24px;
   box-shadow: 0px 4px 36px ${lightGrey2};
-  margin: ${gutterWidth * 2}px ${gutterWidth}px;
+  margin: ${gutterWidth * 2}px 0;
   position: relative;
   overflow: hidden;
 `;
@@ -25,12 +25,14 @@ const Description = styled.p`
   color: grey;
 `;
 
+const ImageContainerMinHeight = 270;
 const ImageContainer = styled.div<{ image?: string }>`
-  min-height: 300px
+  min-height: ${ImageContainerMinHeight}px;
   position: relative;
   display: flex;
-  align-items: flex-end;
-  justify-content: flex-start;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-end;
   padding: 0 ${gutterWidth}px;
   overflow: hidden;
   background-color: black;
@@ -135,6 +137,21 @@ export const WorkoutCard: React.FC<Props> = ({workout}) => {
   );
 };
 
+const BlockTitle = styled.h3`
+  color: white;
+  font-size: 2em;
+  text-transform: uppercase;
+  max-width: 150px;
+`;
+
+const CardDark = styled(Card)`
+  background-color: black;
+  color: white;
+  min-height: ${ImageContainerMinHeight}px;
+  padding-bottom: ${gutterWidth}px;
+
+`;
+
 export const OnTheFlyWorkoutCard: React.FC<Props> = ({workout}) => {
   const {
     id,
@@ -142,13 +159,22 @@ export const OnTheFlyWorkoutCard: React.FC<Props> = ({workout}) => {
   } = useSelector((state: State) => state.activeWorkout) || {};
 
   return (
-    <Card>
+    <CardDark>
       <ImageContainer image={workout.imageUrl}>
-        <Minutes>
-          <LightningBolt />
-        </Minutes>
-      </ImageContainer>
-      <CardDetails>
+        <LightningBolt style={{
+          backgroundColor: 'white',
+          fill: 'black',
+          borderRadius: '50%',
+          padding: '4px',
+          position: 'absolute',
+          right: '16px',
+          top: '16px',
+        }}/>
+        <StyledLink to={`/workouts/${onTheFlyWorkoutId}/`}>
+          <BlockTitle>
+            {workout.name}
+          </BlockTitle>
+        </StyledLink>
         {startTime && id === onTheFlyWorkoutId && (
           <InProgress>
             <FastClock style={{
@@ -159,11 +185,8 @@ export const OnTheFlyWorkoutCard: React.FC<Props> = ({workout}) => {
             In progress...
           </InProgress>
         )}
-        <StyledLink to={`/workouts/${onTheFlyWorkoutId}/`}>
-          <Name>{workout.name}</Name>
-        </StyledLink>
-        <Description>{workout.description}</Description>
-      </CardDetails>
-    </Card>
+        <p>{workout.description}</p>
+      </ImageContainer>
+    </CardDark>
   );
 };
