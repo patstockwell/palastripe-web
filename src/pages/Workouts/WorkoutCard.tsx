@@ -1,10 +1,13 @@
 import React from 'react';
+import {format} from 'date-fns';
 import {Link} from 'react-router-dom';
 import styled from 'styled-components';
 import {useSelector} from 'react-redux';
 
+import {Time} from '../ActiveWorkout/WorkoutHero';
+import {StopWatch} from '../../assets/svg/StopWatch';
 import {Workout} from '../../reducers/workoutsReducer';
-import {gutterWidth, lightGrey2} from '../../helpers/constants';
+import {gutterWidth, lightGrey1} from '../../helpers/constants';
 import {FastClock} from '../../assets/svg/FastClock';
 import {calculateWorkoutTime, formatMinutes} from '../../helpers/functions';
 import {useScrollPosition} from '../../context/useScrollPosition';
@@ -15,7 +18,7 @@ import {onTheFlyWorkoutId} from '../../workoutData/workouts/onTheFly';
 const Card = styled.li`
   min-height: 400px;
   border-radius: 24px;
-  box-shadow: 0px 4px 36px ${lightGrey2};
+  box-shadow: 0px 4px 36px ${lightGrey1};
   margin: ${gutterWidth * 2}px 0;
   position: relative;
   overflow: hidden;
@@ -24,16 +27,14 @@ const Card = styled.li`
 
 const Description = styled.p`
   color: grey;
+  margin-bottom: 4px;
+  margin-top: 10px;
 `;
 
 const ImageContainerMinHeight = 270;
 const ImageContainer = styled.div<{ image?: string }>`
   min-height: ${ImageContainerMinHeight}px;
   position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: flex-end;
   padding: 0 ${gutterWidth}px;
   overflow: hidden;
   background-color: black;
@@ -59,18 +60,21 @@ const ImageContainer = styled.div<{ image?: string }>`
 
 const Name = styled.h3`
   font-size: 1.5em;
+  margin: 0;
+  margin-bottom: 0.5em;
 `;
 
 const Minutes = styled.p`
   color: white;
   font-weight: 800;
-  text-align: center;
   font-size: 1.5em
+  position: absolute;
+  bottom: 0px;
 `;
 
 const StyledLink = styled(Link)`
   text-decoration: none;
-  color: initial;
+  color: inherit;
 
   ::after {
     content: '';
@@ -96,7 +100,7 @@ export const InProgress = styled.p`
 `;
 
 const CardDetails = styled.div`
-  padding: 0 ${gutterWidth}px ${gutterWidth}px;
+  padding: ${gutterWidth}px ${gutterWidth}px;
 `;
 
 interface Props {
@@ -126,19 +130,21 @@ export const WorkoutCard: React.FC<Props> = ({workout}) => {
             In progress...
           </InProgress>
         )}
-        <StyledLink
-          onClick={() => setWorkoutPageScrollPosition()}
-          to={`/workouts/${workout.id}/`}
-        >
-          <Name>{workout.name}</Name>
-        </StyledLink>
+        <Name>
+          <StyledLink
+            onClick={() => setWorkoutPageScrollPosition()}
+            to={`/workouts/${workout.id}/`}
+          >
+            {workout.name}
+          </StyledLink>
+        </Name>
         <Description>{workout.description}</Description>
       </CardDetails>
     </Card>
   );
 };
 
-const BlockTitle = styled.h3`
+const BlockTitleDark = styled.h3`
   color: white;
   font-size: 2em;
   text-transform: uppercase;
@@ -161,6 +167,7 @@ export const OnTheFlyWorkoutCard: React.FC<Props> = ({workout}) => {
     id,
     startTime,
   } = useSelector((state: State) => state.activeWorkout) || {};
+  const {setWorkoutPageScrollPosition} = useScrollPosition();
 
   return (
     <CardDark>
@@ -170,15 +177,17 @@ export const OnTheFlyWorkoutCard: React.FC<Props> = ({workout}) => {
           fill: 'black',
           borderRadius: '50%',
           padding: '4px',
-          position: 'absolute',
-          left: '16px',
-          top: '16px',
+          display: 'block',
+          marginTop: `${gutterWidth}px`,
         }}/>
-        <StyledLink to={`/workouts/${onTheFlyWorkoutId}/`}>
-          <BlockTitle>
+        <BlockTitleDark>
+          <StyledLink
+            to={`/workouts/${onTheFlyWorkoutId}/`}
+            onClick={() => setWorkoutPageScrollPosition()}
+          >
             {workout.name}
-          </BlockTitle>
-        </StyledLink>
+          </StyledLink>
+        </BlockTitleDark>
         {startTime && id === onTheFlyWorkoutId && (
           <InProgress>
             <FastClock style={{
@@ -192,5 +201,54 @@ export const OnTheFlyWorkoutCard: React.FC<Props> = ({workout}) => {
         <DescriptionDark>{workout.description}</DescriptionDark>
       </ImageContainer>
     </CardDark>
+  );
+};
+
+const smallCardHeight = 100;
+
+const CardSmall = styled(Card)`
+  min-height: ${smallCardHeight}px;
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-between;
+`;
+
+const ImageContainerLight = styled(ImageContainer)`
+  background-color: grey;
+  min-height: ${smallCardHeight}px;
+  padding: ${gutterWidth}px;
+  box-sizing: border-box;
+  flex-basis: 100px;
+  flex-shrink: 0;
+`;
+
+const ProgressTime = styled(Time)`
+  color: black;
+  margin: 0;
+`;
+
+export const InProgressCard: React.FC<{ workout: Workout }> = ({workout}) => {
+  const {setWorkoutPageScrollPosition} = useScrollPosition();
+
+  return (
+    <CardSmall>
+      <ImageContainerLight image={workout.imageUrl}>
+      </ImageContainerLight>
+      <CardDetails>
+        <Name>
+          <StyledLink
+            to={`/workouts/${workout.id}/`}
+            onClick={() => setWorkoutPageScrollPosition()}
+          >
+            {workout.name}
+          </StyledLink>
+        </Name>
+        <ProgressTime>
+          <StopWatch style={{ fill: 'black', marginRight: '8px' }}/>
+          {format(new Date(workout.startTime), 'p')}
+        </ProgressTime>
+        <Description>Continue where you left off.</Description>
+      </CardDetails>
+    </CardSmall>
   );
 };

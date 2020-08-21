@@ -3,7 +3,7 @@ import {RouteProps} from 'react-router-dom';
 import {useSelector} from 'react-redux';
 import styled from 'styled-components';
 import {HorizontalRuleSpacer} from '../../components/AlertConfirm';
-import {WorkoutCard, OnTheFlyWorkoutCard} from './WorkoutCard';
+import {WorkoutCard, OnTheFlyWorkoutCard, InProgressCard} from './WorkoutCard';
 import {Page} from '../../components/Page';
 import {State} from '../../helpers/types';
 import {gutterWidth, navBarHeight} from '../../helpers/constants';
@@ -30,7 +30,10 @@ interface OwnProps {
 type Props = RouteProps & OwnProps;
 
 export const Workouts: React.FC<Props> = () => {
-  const { allIds, byId } = useSelector((state: State) => state.workouts);
+  const {
+    workouts: {allIds, byId},
+    activeWorkout,
+  } = useSelector((state: State) => state);
 
   const mappedWorkouts = allIds.map(id => byId[id]);
   const onTheFly = mappedWorkouts
@@ -43,6 +46,13 @@ export const Workouts: React.FC<Props> = () => {
   return (
     <Page heading={'Workouts'}>
       <PageGutter>
+        {activeWorkout && activeWorkout.startTime &&
+          <>
+            <h2>In Progress</h2>
+            <InProgressCard workout={activeWorkout} />
+            <HorizontalRuleSpacer />
+          </>
+        }
         <h2>Quick Start</h2>
         <OnTheFlyWorkoutCard key={onTheFly.id} workout={onTheFly}/>
         <HorizontalRuleSpacer />
