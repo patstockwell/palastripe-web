@@ -111,7 +111,7 @@ export const ActivityFeedOptionsMenu: React.FC<Props> = ({
       <AlertConfirm
         cancelAlert={() => setShowDeleteWorkoutAlert(false)}
         showAlert={showDeleteWorkoutAlert}
-        messageText="This completed workout will be deleted. This action cannot be undone."
+        messageText={`"${workout.name}" will be deleted from activity. This action cannot be undone.`}
       >
         <AlertButtonOrange onClick={handleDeleteConfirmationClick}>
           Delete
