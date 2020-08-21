@@ -52,7 +52,7 @@ if ('function' === typeof importScripts) {
     workbox.precaching.precacheAndRoute([
   {
     "url": "asset-manifest.json",
-    "revision": "8658c7856c708d2d0461453b48bbc0ec"
+    "revision": "f6a48b607968692f9842d0afd0b11dff"
   },
   {
     "url": "browserconfig.xml",
@@ -75,7 +75,7 @@ if ('function' === typeof importScripts) {
     "revision": "6152586b7728b6a692bd794fedc45ed2"
   },
   {
-    "url": "favicon.ico",
+    "url": "c-favicon.ico",
     "revision": "734276dfc292488b224d26e271ee1186"
   },
   {
@@ -147,12 +147,12 @@ if ('function' === typeof importScripts) {
     "revision": "c589cd31557de9636d1449a8aa97e503"
   },
   {
-    "url": "static/js/2.d9852f96.chunk.js",
-    "revision": "696e9d798606f79605ffa1decbb922e9"
+    "url": "static/js/2.65bf13db.chunk.js",
+    "revision": "81d3a44e7ee4a89d5852cf2bbb21a1c7"
   },
   {
-    "url": "static/js/main.bcda8b63.chunk.js",
-    "revision": "b264e057a5dcdf30aaa22747356ecdd4"
+    "url": "static/js/main.1d91a5c8.chunk.js",
+    "revision": "86574d6067fb988b8383f5d7e875f431"
   },
   {
     "url": "static/js/runtime~main.a8a9905a.js",
@@ -256,7 +256,7 @@ if ('function' === typeof importScripts) {
   },
   {
     "url": "index.html",
-    "revision": "5e59e521e2a9ed65d6680f8114fc03ce"
+    "revision": "e9ec587400fcd3f2ba942c7a8c68a88f"
   }
 ], {
       // Ignore all URL parameters for precaching
