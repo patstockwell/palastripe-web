@@ -94,12 +94,14 @@ export const activitySearchPath = 'activity-search';
 export const ActivitySearch: React.FC = () => {
   const inputRef = useRef(null);
   const history = useHistory();
-  const { activeWorkout } = useSelector((state: State) => state);
-  const { addActivity } = useActiveWorkout();
+  const {activeWorkout} = useSelector((state: State) => state);
+  const {addActivity} = useActiveWorkout();
   const [searchQuery, setSearchQuery] = useState('');
-  const { setSelectedExercise } = useSelectedExercise();
+  const {setSelectedExercise} = useSelectedExercise();
   const exerciseList = useMemo(() => (
-    exercises.allIds.map((id: string): Exercise => exercises.byId[id])
+    exercises.allIds
+      .map((id: string): Exercise => exercises.byId[id])
+      .sort((a, b) => a.name < b.name ? -1 : a.name > b.name ? 1 : 0)
   ), [exercises]);
 
   if (!activeWorkout) {
@@ -229,6 +231,21 @@ export const ActivitySearch: React.FC = () => {
               </SearchSuggestionTile>
             ))
           }
+        </Ul>
+
+        <h4>All Exercises</h4>
+        <Ul>
+          {Object.values(exerciseList).map(e => (
+            <SearchSuggestionTile
+              key={e.id}
+              onClick={() => endSearchAndAddExercise({
+                name: e.name,
+                exerciseId: e.id,
+              })}
+            >
+              {e.name}
+            </SearchSuggestionTile>
+          ))}
         </Ul>
       </PanelWithGutter>
     </ActivitySearchBackground>
