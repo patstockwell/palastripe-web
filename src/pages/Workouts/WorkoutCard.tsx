@@ -19,6 +19,7 @@ const Card = styled.li`
   margin: ${gutterWidth * 2}px 0;
   position: relative;
   overflow: hidden;
+  list-style: none;
 `;
 
 const Description = styled.p`
@@ -148,8 +149,11 @@ const CardDark = styled(Card)`
   background-color: black;
   color: white;
   min-height: ${ImageContainerMinHeight}px;
-  padding-bottom: ${gutterWidth}px;
+`;
 
+const DescriptionDark = styled.p`
+  color: white;
+  padding-bottom: ${gutterWidth}px;
 `;
 
 export const OnTheFlyWorkoutCard: React.FC<Props> = ({workout}) => {
@@ -167,7 +171,7 @@ export const OnTheFlyWorkoutCard: React.FC<Props> = ({workout}) => {
           borderRadius: '50%',
           padding: '4px',
           position: 'absolute',
-          right: '16px',
+          left: '16px',
           top: '16px',
         }}/>
         <StyledLink to={`/workouts/${onTheFlyWorkoutId}/`}>
@@ -185,7 +189,7 @@ export const OnTheFlyWorkoutCard: React.FC<Props> = ({workout}) => {
             In progress...
           </InProgress>
         )}
-        <p>{workout.description}</p>
+        <DescriptionDark>{workout.description}</DescriptionDark>
       </ImageContainer>
     </CardDark>
   );
