@@ -89,6 +89,11 @@ const ActivitySearchBackground = styled.div`
   z-index: 3;
 `;
 
+const Details = styled.details`
+  margin-top: 48px;
+  cursor: pointer;
+`;
+
 export const activitySearchPath = 'activity-search';
 
 export const ActivitySearch: React.FC = () => {
@@ -233,20 +238,22 @@ export const ActivitySearch: React.FC = () => {
           }
         </Ul>
 
-        <h4>All Exercises</h4>
-        <Ul>
-          {Object.values(exerciseList).map(e => (
-            <SearchSuggestionTile
-              key={e.id}
-              onClick={() => endSearchAndAddExercise({
-                name: e.name,
-                exerciseId: e.id,
-              })}
-            >
-              {e.name}
-            </SearchSuggestionTile>
-          ))}
-        </Ul>
+        <Details>
+          <summary>All Exercises (click to see list)</summary>
+          <Ul>
+            {Object.values(exerciseList).map(e => (
+              <SearchSuggestionTile
+                key={e.id}
+                onClick={() => endSearchAndAddExercise({
+                  name: e.name,
+                  exerciseId: e.id,
+                })}
+              >
+                {e.name}
+              </SearchSuggestionTile>
+            ))}
+          </Ul>
+        </Details>
       </PanelWithGutter>
     </ActivitySearchBackground>
   );

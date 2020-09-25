@@ -356,7 +356,7 @@ const byId: ById = {
   },
   wide_grip_bench_press: {
     defaultWeightInKilos: 60,
-    tags: ['chest'],
+    tags: ['chest', 'compound', 'barbell'],
     id: 'wide_grip_bench_press',
     name: 'Wide-Grip Bench Press',
   },
