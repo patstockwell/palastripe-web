@@ -354,6 +354,12 @@ const byId: ById = {
     id: 'chest_dips',
     name: 'Chest Dips',
   },
+  wide_grip_bench_press: {
+    defaultWeightInKilos: 60,
+    tags: ['chest'],
+    id: 'wide_grip_bench_press',
+    name: 'Wide-Grip Bench Press',
+  },
 };
 
 const allIds = Object.keys(byId);
