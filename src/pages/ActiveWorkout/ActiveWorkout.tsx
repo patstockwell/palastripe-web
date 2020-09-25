@@ -223,12 +223,15 @@ const WorkoutTooLongAlert: React.FC<{
     <AlertConfirm
       showAlert={showAlert}
       cancelAlert={cancelAlert}
-      messageText="This workout is more than 4 hours long. This will complete and log your workout in its current state."
+      messageText="This workout was started more than 4 hours ago. This will complete and log your workout in its current state."
     >
       <AlertButtonPurple
         to="/workout-complete/"
         onClick={() => {
-          const finishDate = add(new Date(activeWorkout.startTime), { hours: 4 });
+          // We check for stale workouts by checking if the workout started
+          // more than 4 hours ago. The default workout length for a stale
+          // workout is just 1 hour.
+          const finishDate = add(new Date(activeWorkout.startTime), { hours: 1 });
           finishWorkout(finishDate.toISOString());
         }}
       >
