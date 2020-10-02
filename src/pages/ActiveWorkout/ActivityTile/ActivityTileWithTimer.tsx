@@ -91,7 +91,7 @@ export const ActivityTileWithTimer: React.FC<Props> = ({
   const [paused, setPaused] = useState(false);
   const {toggleSetComplete} = useActiveWorkout();
   const {playStart, playComplete} = useAudio();
-  const {setActiveRestTimer} = useRestTimer();
+  const {clearRestTimer} = useRestTimer();
   const {setStartTime} = useActiveWorkout();
 
   const inProgress = selected && !completed && preparationStarted;
@@ -120,7 +120,7 @@ export const ActivityTileWithTimer: React.FC<Props> = ({
     if (selected) {
       setPreparationStarted(true);
       // Kill the rest timer before starting a timed exercise.
-      setActiveRestTimer({ index: 0, groupId: '' });
+      clearRestTimer();
       // This will set the workout startTime only if it is undefined.
       setStartTime();
     }

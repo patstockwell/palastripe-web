@@ -95,7 +95,12 @@ export const ActivityTile: React.FC<Props> = ({
 }) => {
   const [finishedAnimating, setFinishedAnimating] = useState(false);
   const {selectNextExercise} = useSelectedExercise();
-  const {activeRestTimer: restTimer, setActiveRestTimer} = useRestTimer();
+  const {
+    activeRestTimer,
+    setActiveRestTimer,
+    clearRestTimer,
+    count,
+  } = useRestTimer();
   const listElement = useRef<HTMLLIElement>(null);
 
   const animatedStyles: {[x: string]: SpringValue<any>} = useHiddenAreaAnimation({
@@ -132,8 +137,8 @@ export const ActivityTile: React.FC<Props> = ({
   };
 
   const showTheRestTimer =
-    restTimer.groupId === groupId
-    && restTimer.index === index
+    activeRestTimer.groupId === groupId
+    && activeRestTimer.index === index
     && activity.completed;
 
   return (
@@ -171,8 +176,9 @@ export const ActivityTile: React.FC<Props> = ({
 
       {showTheRestTimer && (
         <RestTimer
+          count={count}
           restPeriod={activity.restPeriodInSeconds}
-          handleClick={() => setActiveRestTimer({ groupId: '', index: 0 })}
+          handleClick={clearRestTimer}
         />
       )}
     </>

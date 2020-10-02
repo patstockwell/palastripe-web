@@ -1,10 +1,9 @@
-import React, {useRef, useState} from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import {useSpring, animated} from 'react-spring';
 import {useSelector} from 'react-redux';
 
-import {ONE_SECOND, appMaxWidth} from '../../helpers/constants';
-import {useInterval} from '../../helpers/functions';
+import {appMaxWidth} from '../../helpers/constants';
 import {green, orange} from '../../helpers/constants';
 import {State} from '../../helpers/types';
 
@@ -34,29 +33,22 @@ const Message = styled(animated.p)`
 const ONE_HOUR_IN_SECONDS = 60 * 60;
 
 interface Props {
+  count: number;
   restPeriod: number;
   handleClick: () => void;
 }
 
 export const RestTimer: React.FC<Props> = ({
+  count,
   handleClick,
   restPeriod = 90, // default rest period of 90 seconds
 }) => {
   const {useRestTimer = true} = useSelector((s: State) => s.settings);
-  const [count, setCount] = useState(0);
   const [divStyle, setDivStyle] = useSpring(() => ({
     opacity: 1,
     from: {opacity: 0},
     config: {mass: 1, tension: 470, friction: 40},
   }));
-
-  // The timer tick is created by storing the time at zero (when the component
-  // first mounts) and then at each interval taking the difference between the
-  // current time and the zero time.
-  const timeAtZero = useRef(Math.floor(Date.now() / 1000));
-  useInterval(() => (
-    setCount(Math.floor(Date.now() / 1000) - timeAtZero.current)
-  ), ONE_SECOND);
 
   if (restPeriod <= 0) {
     return null;

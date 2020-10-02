@@ -21,7 +21,6 @@ import {useUpdateWorkout, Workout} from '../../reducers/workoutsReducer';
 import {useActiveWorkout} from '../../reducers/activeWorkoutReducer';
 import {onTheFlyWorkoutId} from '../../workoutData/workouts/onTheFly';
 import {useSelectedExercise} from '../../context/useSelectedExercise';
-import {RestTimerProvider} from '../../context/useRestTimer';
 
 export const ActiveWorkout: React.FC = () => {
   const [showEndWorkoutAlert, setShowEndWorkoutAlert] = useState(false);
@@ -106,49 +105,47 @@ export const ActiveWorkout: React.FC = () => {
   };
 
   return (
-    <RestTimerProvider>
-      <AudioProvider soundOn={soundOn}>
-        <BackLinkBanner
-          sticky={false}
-          back={{
-            showArrows: true,
-            link: '/workouts/',
-          }}
-        />
-        <WorkoutHero
-          workout={displayedWorkout}
-          checkCanStartWorkout={checkUnfinishedWorkout}
-        />
-        <ActivityList
-          workout={displayedWorkout}
-          finishWorkoutClickHandler={() => setShowEndWorkoutAlert(true)}
-          isOnTheFlyWorkout={idFromUrl === onTheFlyWorkoutId}
-          checkCanSelectTile={checkUnfinishedWorkout}
-        />
+    <AudioProvider soundOn={soundOn}>
+      <BackLinkBanner
+        sticky={false}
+        back={{
+          showArrows: true,
+          link: '/workouts/',
+        }}
+      />
+      <WorkoutHero
+        workout={displayedWorkout}
+        checkCanStartWorkout={checkUnfinishedWorkout}
+      />
+      <ActivityList
+        workout={displayedWorkout}
+        finishWorkoutClickHandler={() => setShowEndWorkoutAlert(true)}
+        isOnTheFlyWorkout={idFromUrl === onTheFlyWorkoutId}
+        checkCanSelectTile={checkUnfinishedWorkout}
+      />
 
-        <UnfinishedWorkoutAlert
-          cancelAlert={() => setShowExistingWorkoutAlert(false)}
-          showAlert={showExistingWorkoutAlert}
-          activeWorkoutName={activeWorkout && activeWorkout.name}
-          onStartNewWorkout={startWorkoutFromUrl}
-          continueLink={`/workouts/${activeWorkout && activeWorkout.id}/`}
-        />
+      <UnfinishedWorkoutAlert
+        cancelAlert={() => setShowExistingWorkoutAlert(false)}
+        showAlert={showExistingWorkoutAlert}
+        activeWorkoutName={activeWorkout && activeWorkout.name}
+        onStartNewWorkout={startWorkoutFromUrl}
+        continueLink={`/workouts/${activeWorkout && activeWorkout.id}/`}
+      />
 
-        <FinishWorkoutAlert
-          cancelAlert={() => setShowEndWorkoutAlert(false)}
-          showAlert={showEndWorkoutAlert}
-          finishWorkout={finishWorkout}
-        />
+      <FinishWorkoutAlert
+        cancelAlert={() => setShowEndWorkoutAlert(false)}
+        showAlert={showEndWorkoutAlert}
+        finishWorkout={finishWorkout}
+      />
 
-        <WorkoutTooLongAlert
-          cancelAlert={() => setShowWorkoutTooLongAlert(false)}
-          showAlert={showWorkoutTooLongAlert}
-          activeWorkout={activeWorkout}
-          finishWorkout={finishWorkout}
-        />
+      <WorkoutTooLongAlert
+        cancelAlert={() => setShowWorkoutTooLongAlert(false)}
+        showAlert={showWorkoutTooLongAlert}
+        activeWorkout={activeWorkout}
+        finishWorkout={finishWorkout}
+      />
 
-      </AudioProvider>
-    </RestTimerProvider>
+    </AudioProvider>
   );
 };
 

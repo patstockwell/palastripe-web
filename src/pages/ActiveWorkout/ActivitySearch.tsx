@@ -16,6 +16,7 @@ import {
 import {BackLinkBanner} from '../../components/BackLinkBanner';
 import {useSelectedExercise} from '../../context/useSelectedExercise';
 import {onTheFlyWorkoutGroupId} from '../../workoutData/workouts/onTheFly';
+import {useRestTimer} from '../../context/useRestTimer';
 
 export const Input = styled.input`
   color: ${charcoal};
@@ -103,6 +104,7 @@ export const ActivitySearch: React.FC = () => {
   const {addActivity} = useActiveWorkout();
   const [searchQuery, setSearchQuery] = useState('');
   const {setSelectedExercise} = useSelectedExercise();
+  const {clearRestTimer} = useRestTimer();
   const exerciseList = useMemo(() => (
     exercises.allIds
       .map((id: string): Exercise => exercises.byId[id])
@@ -143,6 +145,9 @@ export const ActivitySearch: React.FC = () => {
         groupId: onTheFlyWorkoutGroupId,
         index: newActivityIndex,
       });
+      // Considering that newly added exercises are completed on creation, we
+      // should reset the rest timer here before showing the newly created tile.
+      clearRestTimer();
     }
 
     // navigate back to the active workout URL

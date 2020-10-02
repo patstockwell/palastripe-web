@@ -1,7 +1,7 @@
-import { useEffect, useRef } from 'react';
-import { useLocation } from 'react-router-dom';
-import { useSpring, SpringValue } from 'react-spring';
-import { formatDistance } from 'date-fns';
+import {useEffect, useRef} from 'react';
+import {useLocation} from 'react-router-dom';
+import {useSpring, SpringValue} from 'react-spring';
+import {formatDistance} from 'date-fns';
 
 import {
   DAYS_OF_THE_WEEK,
@@ -22,8 +22,7 @@ import {
   Activity,
   Exercise,
 } from './types';
-
-import { ActivityGroup, Workout } from '../reducers/workoutsReducer';
+import {ActivityGroup, Workout} from '../reducers/workoutsReducer';
 
 export function useFeatureToggle(key: string) {
   const query = new URLSearchParams(useLocation().search);
