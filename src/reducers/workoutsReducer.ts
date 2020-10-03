@@ -26,13 +26,13 @@ export interface Workouts {
 
 export interface Workout {
   id: string;
-  imageUrl?: string;
+  imageUrl: string;
+  name: string;
+  version: string;
+  exerciseGroups: ActivityGroup[];
   startTime?: string;
   finishTime?: string;
-  name: string;
-  description: string;
-  version?: string;
-  exerciseGroups: ActivityGroup[];
+  description?: string;
 }
 
 export interface ActivityGroup {
