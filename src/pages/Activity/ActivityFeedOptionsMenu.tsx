@@ -57,7 +57,7 @@ export const ActivityFeedOptionsMenu: React.FC<Props> = ({
   const handleRepeatWorkoutConfirmation = () => {
     const incompleteWorkout: Workout = {
       ...workout,
-      startTime: (new Date).toISOString(),
+      startTime: (new Date()).toISOString(),
       finishTime: undefined,
       exerciseGroups: workout.exerciseGroups.map(group => ({
         ...group,

@@ -59,7 +59,7 @@ export const ActivityFeed: React.FC<Props> = ({history}) => {
     if (inView) {
       viewMore();
     }
-  }, [inView]);
+  }, [viewMore, inView]);
 
   const historyTiles = history.slice(0, listLength).map((w, i) => (
     <ActivityFeedTile
@@ -84,7 +84,9 @@ export const ActivityFeed: React.FC<Props> = ({history}) => {
         {listLength < history.length && (
           <p>loading...</p>
         )}
-        <div>Joined palastripe 🎉 </div>
+        <div>Joined palastripe{' '}
+          <span aria-label="celebration image" role="img">🎉 </span>
+        </div>
         <span>on {date} {month}, {year}</span>
       </BottomSpace>
     </RoundCorneredTop>

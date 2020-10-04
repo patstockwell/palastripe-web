@@ -109,7 +109,7 @@ export const ActivitySearch: React.FC = () => {
     exercises.allIds
       .map((id: string): Exercise => exercises.byId[id])
       .sort((a, b) => a.name < b.name ? -1 : a.name > b.name ? 1 : 0)
-  ), [exercises]);
+  ), []);
 
   if (!activeWorkout) {
     return <Redirect to="/workouts/" />;

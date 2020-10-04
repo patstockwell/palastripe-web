@@ -57,7 +57,8 @@ export const ActiveWorkout: React.FC = () => {
     && idFromUrl !== activeWorkout.id);
 
   // Check if we should alert for a workout that is too long.
-  const workoutStartTime = activeWorkout && activeWorkout.startTime || Date.now();
+  // TODO: Optional chaining rather than &&
+  const workoutStartTime = (activeWorkout && activeWorkout.startTime) || Date.now();
   if (!unfinsihedWorkoutExists && !showWorkoutTooLongAlert) {
     const maxWorkoutLength = add(new Date(workoutStartTime), { hours: 4 });
     const workoutIsStale = isAfter(new Date(), maxWorkoutLength);
@@ -95,7 +96,7 @@ export const ActiveWorkout: React.FC = () => {
   const startWorkoutFromUrl = () => {
     setActiveWorkout({
       ...workoutFromUrl,
-      startTime: (new Date).toISOString(),
+      startTime: (new Date()).toISOString(),
     });
     setShowExistingWorkoutAlert(false);
     setSelectedExercise({

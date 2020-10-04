@@ -47,7 +47,7 @@ export const SelectedExerciseProvider: React.FC = ({
       const nextGroup = exerciseGroups[groupIndex + 1];
       const newGroupId: string = nextGroup && nextGroup.id;
 
-      if (!nextGroup && id == onTheFlyWorkoutId) {
+      if (!nextGroup && id === onTheFlyWorkoutId) {
         // The onTheFlyWorkout is always appending items to the end of the
         // workout and immediately checking them off. Completion triggers next
         // exercise being called which looks strange if you have only just

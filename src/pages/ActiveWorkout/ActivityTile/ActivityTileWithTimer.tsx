@@ -100,13 +100,13 @@ export const ActivityTileWithTimer: React.FC<Props> = ({
   useInterval(() => setCount(n => n + 1), shouldUseInterval ? ONE_SECOND : null);
 
   useEffect(() => {
-    if (!selected && completed || !selected && preparationStarted) { // reset
+    if ((!selected && completed) || (!selected && preparationStarted)) { // reset
       setPreparationComplete(false);
       setCount(0);
       setPreparationStarted(false);
       setPaused(false);
     }
-  });
+  }, [selected, completed, preparationStarted]);
 
   const formattedTime: string = formatSeconds(timerInSeconds - count);
 

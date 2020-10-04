@@ -35,7 +35,7 @@ export const ScrollPositionProvider: React.FC = ({ children }) => {
   useEffect(() => {
     const scrollY = scrollHash[getCurrentPage(pathname)] || 0;
     window.scrollTo(0, scrollY);
-  }, [pathname]);
+  }, [scrollHash, pathname]);
 
   const scrollProviderValue = {
     setActivityPageScrollPosition: (y?: number) =>

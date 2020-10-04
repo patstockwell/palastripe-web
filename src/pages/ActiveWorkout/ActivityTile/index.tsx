@@ -127,7 +127,7 @@ export const ActivityTile: React.FC<Props> = ({
     if (!selected && finishedAnimating) {
       setFinishedAnimating(false);
     }
-  }, [showHiddenArea, selected, finishedAnimating]);
+  }, [animatedStyles.height, showHiddenArea, selected, finishedAnimating]);
 
   const onSetComplete = () => {
     if (selected) {

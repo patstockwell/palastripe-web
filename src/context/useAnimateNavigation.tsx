@@ -16,7 +16,7 @@ export const AnimateNavigationProvider: React.FC = ({children}) => {
     if (!animatablePaths.includes(pathname)) {
       setAnimationDistance(0);
     }
-  }, [pathname]);
+  }, [pathname, animatablePaths]);
 
   return (
     <AnimateNavigationContext.Provider

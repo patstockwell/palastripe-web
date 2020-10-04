@@ -6,7 +6,7 @@ import {
   LOCAL_STORAGE_ACTIVE_WORKOUT,
 } from '../helpers/constants';
 import {
-  convertKilosToDisplayedWeight,
+  convertKilosToDisplayedWeight as convert,
   convertDisplayedWeightToKilos,
   getLocalStorage,
 } from '../helpers/functions';
@@ -53,9 +53,8 @@ const changeWeight = (
   const largeIncrement = useKilos ? 2.5 : twoAndAHalfPoundsInKilos;
 
   // check if the increment should be 0.5 or 2.5
-  const useLargeIncrement: boolean =
-    convertKilosToDisplayedWeight(weight, useKilos) > 20
-    || convertKilosToDisplayedWeight(weight, useKilos) === 20 && shouldIncrement;
+  const useLargeIncrement: boolean = convert(weight, useKilos) > 20
+    || (convert(weight, useKilos) === 20 && shouldIncrement);
   const increment: number = useLargeIncrement ? largeIncrement : smallIncrement ;
 
   // should we increment or decrement?
