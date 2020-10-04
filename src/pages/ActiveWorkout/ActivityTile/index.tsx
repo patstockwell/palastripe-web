@@ -1,6 +1,6 @@
 import React, {useRef, useEffect, useState} from 'react';
 import styled from 'styled-components';
-import {SpringValue} from 'react-spring';
+import {SpringValue} from '@react-spring/web';
 
 import {RestTimer} from '../RestTimer';
 import {isTimed} from '../../../helpers/types';

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { animated, SpringValue } from 'react-spring';
+import { animated, SpringValue } from '@react-spring/web';
 import styled from 'styled-components';
 
 import { HiddenArea } from './HiddenArea';

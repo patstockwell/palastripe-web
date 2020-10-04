@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import styled, {keyframes} from 'styled-components';
-import {SpringValue} from 'react-spring';
+import {SpringValue} from '@react-spring/web';
 
 import {useAudio} from '../../../context/useAudio';
 import {useRestTimer} from '../../../context/useRestTimer';

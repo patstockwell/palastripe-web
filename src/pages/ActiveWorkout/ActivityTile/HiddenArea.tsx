@@ -3,7 +3,7 @@ import {useSelector} from 'react-redux';
 import {
   animated,
   SpringValue
-} from 'react-spring';
+} from '@react-spring/web';
 import styled from 'styled-components';
 import {State, WeightedActivity} from '../../../helpers/types';
 import {getOneRepMax, formatWeight} from '../../../helpers/functions';

@@ -1,5 +1,5 @@
 import React, {useState, useRef} from 'react';
-import {useTransition, animated} from 'react-spring';
+import {useTransition, animated} from '@react-spring/web';
 import styled, {keyframes} from 'styled-components';
 
 import {CheckboxTick} from '../components/Checkbox';

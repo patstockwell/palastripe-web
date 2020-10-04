@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import {useSpring, animated} from 'react-spring';
+import {useSpring, animated} from '@react-spring/web';
 import {useSelector} from 'react-redux';
 
 import {appMaxWidth} from '../../helpers/constants';
