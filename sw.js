@@ -52,7 +52,7 @@ if ('function' === typeof importScripts) {
     workbox.precaching.precacheAndRoute([
   {
     "url": "asset-manifest.json",
-    "revision": "2b0417ac3acf69d06f58e34025514682"
+    "revision": "656ac3d4bb6fc4708116e7b6a4c496a2"
   },
   {
     "url": "browserconfig.xml",
@@ -147,16 +147,16 @@ if ('function' === typeof importScripts) {
     "revision": "c589cd31557de9636d1449a8aa97e503"
   },
   {
-    "url": "static/js/2.7bff8c93.chunk.js",
-    "revision": "ad1fe4f1245cce0755567707378e752e"
+    "url": "static/js/2.943cd5fc.chunk.js",
+    "revision": "eb24e64de8e5858801588fa65dd7c9e4"
   },
   {
-    "url": "static/js/main.3beb091f.chunk.js",
-    "revision": "496380882203b2cdabb5ab444a376839"
+    "url": "static/js/main.414c3651.chunk.js",
+    "revision": "c3b6b8a62022cd7496e1729af32d8ced"
   },
   {
-    "url": "static/js/runtime~main.a8a9905a.js",
-    "revision": "238c9148d722c1b6291779bd879837a1"
+    "url": "static/js/runtime-main.094a4040.js",
+    "revision": "e6eb8cd5b51af42e071e297e5d9f436b"
   },
   {
     "url": "static/media/active-adult-aerobics-206573.57b9cb6b.jpg",
@@ -256,7 +256,7 @@ if ('function' === typeof importScripts) {
   },
   {
     "url": "index.html",
-    "revision": "e013b43a3b5c0b6dc819268edb0fb822"
+    "revision": "6d341d8d1a107cab253bbf31e24490a4"
   }
 ], {
       // Ignore all URL parameters for precaching
