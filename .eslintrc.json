@@ -13,8 +13,9 @@
       "beforeEach": true
     },
     "extends": [
+      "eslint:recommended",
       "plugin:react/recommended",
-      "eslint:recommended"
+      "plugin:react-hooks/recommended"
     ],
     "settings": {
     "react": {
@@ -42,6 +43,8 @@
         "react", "@typescript-eslint"
     ],
     "rules": {
+        "no-mixed-operators": "warn",
+        "new-parens": ["warn", "always"],
         "react/prop-types": [0],
         "no-unused-vars": "off",
         "@typescript-eslint/no-unused-vars": [
