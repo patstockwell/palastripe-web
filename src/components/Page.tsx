@@ -56,10 +56,10 @@ export const Page: React.FC<Props> = ({
     <>
       <Banner heading={headingHidden && heading}/>
       {heading &&
-        <React.Fragment>
+        <>
           <Heading ref={observerTarget} >{heading}</Heading>
           <Hr />
-        </React.Fragment>
+        </>
       }
       {children}
       {!hideNavigation &&
