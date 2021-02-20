@@ -11,12 +11,12 @@ interface ConsumerValue {
 export const AnimateNavigationProvider: React.FC = ({children}) => {
   const [animationDistance, setAnimationDistance] = useState(0);
   const {pathname} = useLocation();
-  const animatablePaths = ['/workouts/', '/activity/', '/profile/'];
   useEffect(() => {
+    const animatablePaths = ['/workouts/', '/activity/', '/profile/'];
     if (!animatablePaths.includes(pathname)) {
       setAnimationDistance(0);
     }
-  }, [pathname, animatablePaths]);
+  }, [pathname]);
 
   return (
     <AnimateNavigationContext.Provider
