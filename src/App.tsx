@@ -1,11 +1,11 @@
 import React from 'react';
-import { configureStore } from '@reduxjs/toolkit';
-import { Provider } from 'react-redux';
-import { BrowserRouter as Router } from 'react-router-dom';
+import {configureStore} from '@reduxjs/toolkit';
+import {Provider} from 'react-redux';
+import {BrowserRouter as Router} from 'react-router-dom';
 
 import rootReducer from './reducers';
-import { GlobalStyle } from './components/GlobalStyle';
-import LocalStorageSetter from './components/LocalStorageSetter';
+import {GlobalStyle} from './components/GlobalStyle';
+import {LocalStorageSetter} from './components/LocalStorageSetter';
 import Routes from './components/Routes';
 import HeadTags from './components/HeadTags';
 

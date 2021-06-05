@@ -1,4 +1,4 @@
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { State } from '../helpers/types';
 import {
   LOCAL_STORAGE_HISTORY,
@@ -8,14 +8,14 @@ import {
   LOCAL_STORAGE_PROFILE,
 } from '../helpers/constants';
 
-const LocalStorageSetter: React.FC<State> = props => {
+export const LocalStorageSetter: React.FC = () => {
   const {
     history,
     settings,
     workouts,
     activeWorkout,
     profile,
-  } = props;
+  } = useSelector((state: State) => state);
   localStorage.setItem(LOCAL_STORAGE_HISTORY, JSON.stringify(history));
   localStorage.setItem(LOCAL_STORAGE_SETTINGS, JSON.stringify(settings));
   localStorage.setItem(LOCAL_STORAGE_WORKOUTS, JSON.stringify(workouts));
@@ -24,7 +24,3 @@ const LocalStorageSetter: React.FC<State> = props => {
 
   return null;
 };
-
-const mapState = (state: State): State => state;
-
-export default connect<State, {}, {}>(mapState)(LocalStorageSetter);
