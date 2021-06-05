@@ -52,7 +52,7 @@ if ('function' === typeof importScripts) {
     workbox.precaching.precacheAndRoute([
   {
     "url": "asset-manifest.json",
-    "revision": "91bc77612141531369fadcd0137086d1"
+    "revision": "ee2d34f886cff687cde5574a861a18f2"
   },
   {
     "url": "browserconfig.xml",
@@ -147,12 +147,12 @@ if ('function' === typeof importScripts) {
     "revision": "c589cd31557de9636d1449a8aa97e503"
   },
   {
-    "url": "static/js/2.2f6896b5.chunk.js",
-    "revision": "80ccc3f5ea93d98f514541424bb380c6"
+    "url": "static/js/2.fe12fe69.chunk.js",
+    "revision": "d2467703b70d46b81d8f03a92dec7a8a"
   },
   {
-    "url": "static/js/main.f5c03b82.chunk.js",
-    "revision": "c608e21647daa322fdd3a41b0c9add92"
+    "url": "static/js/main.4ac27ff4.chunk.js",
+    "revision": "6f1b9cc8f643d6021575f4027dadebb1"
   },
   {
     "url": "static/js/runtime-main.094a4040.js",
@@ -256,7 +256,7 @@ if ('function' === typeof importScripts) {
   },
   {
     "url": "index.html",
-    "revision": "ad75eee611627eb8fc1f0a151d29c2b0"
+    "revision": "fa086c0ab7a0f7bafff87891d08a9edc"
   }
 ], {
       // Ignore all URL parameters for precaching
