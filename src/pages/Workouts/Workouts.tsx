@@ -23,13 +23,7 @@ const Ul = styled.ul`
   padding: 0;
 `;
 
-interface OwnProps {
-  animationStyles: React.CSSProperties;
-}
-
-type Props = RouteProps & OwnProps;
-
-export const Workouts: React.FC<Props> = () => {
+export const Workouts: React.FC<RouteProps> = () => {
   const {
     workouts: {allIds, byId},
     activeWorkout,

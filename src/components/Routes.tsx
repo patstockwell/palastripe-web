@@ -34,7 +34,6 @@ const MaxWidthContainer = styled.div`
 const Routes: React.FC = () => {
   const location = useLocation();
 
-  // TODO: Refactor all routes to use children pattern.
   return (
     <MaxWidthContainer>
       <ScrollPositionProvider>
@@ -43,23 +42,57 @@ const Routes: React.FC = () => {
             <RestTimerProvider>
               <ActivityFeedLengthProvider>
                 <Switch location={location}>
-                  <Route path="/" exact component={LandingSplash} />
-                  <Route path="/install/" exact component={Install} />
-                  <Route path="/workouts/" exact component={Workouts} />
-                  <Route path="/activity/" exact component={Activity} />
-                  <Route path="/activity/:index/" component={WorkoutSummary} />
-                  <Route path="/profile/" exact component={Profile} />
-                  <Route path="/profile/name/" component={ProfileName} />
-                  <Route path="/profile/audio/" component={SettingAudio} />
-                  <Route path="/profile/rest-timer/" component={SettingUseRestTimer} />
-                  <Route path="/profile/export/" component={DataExport} />
-                  <Route path="/profile/unit-of-measurement/" component={SettingUnitOfMeasurement} />
-                  <Route path={`/workouts/${onTheFlyWorkoutId}/${activitySearchPath}`} component={ActivitySearch} />
-                  <Route path="/workouts/:id/" component={ActiveWorkout} />
-                  <Route path="/workout-complete/" component={WorkoutCompletionSplash} />
-                  <Route path="/workout-summary/" component={WorkoutSummary} />
-                  <Route path="/subscribe/" component={Subscribe} />
-                  <Route component={FourZeroFour} />
+                  <Route path="/" exact>
+                    <LandingSplash />
+                  </Route>
+                  <Route path="/install/" exact>
+                    <Install />
+                  </Route>
+                  <Route path="/workouts/" exact>
+                    <Workouts />
+                  </Route>
+                  <Route path="/activity/" exact>
+                    <Activity />
+                  </Route>
+                  <Route path="/activity/:index/">
+                    <WorkoutSummary />
+                  </Route>
+                  <Route path="/workout-summary/">
+                    <WorkoutSummary />
+                  </Route>
+                  <Route path="/profile/" exact>
+                    <Profile />
+                  </Route>
+                  <Route path="/profile/name/">
+                    <ProfileName />
+                  </Route>
+                  <Route path="/profile/audio/">
+                    <SettingAudio />
+                  </Route>
+                  <Route path="/profile/rest-timer/">
+                    <SettingUseRestTimer />
+                  </Route>
+                  <Route path="/profile/export/">
+                    <DataExport />
+                  </Route>
+                  <Route path="/profile/unit-of-measurement/">
+                    <SettingUnitOfMeasurement />
+                  </Route>
+                  <Route path={`/workouts/${onTheFlyWorkoutId}/${activitySearchPath}`}>
+                    <ActivitySearch />
+                  </Route>
+                  <Route path="/workouts/:id/">
+                    <ActiveWorkout />
+                  </Route>
+                  <Route path="/workout-complete/">
+                    <WorkoutCompletionSplash />
+                  </Route>
+                  <Route path="/subscribe/">
+                    <Subscribe />
+                  </Route>
+                  <Route>
+                    <FourZeroFour />
+                  </Route>
                 </Switch>
               </ActivityFeedLengthProvider>
             </RestTimerProvider>

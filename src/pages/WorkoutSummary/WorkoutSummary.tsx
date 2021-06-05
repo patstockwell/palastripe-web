@@ -1,10 +1,8 @@
 import React from 'react';
 import {useSelector} from 'react-redux';
-import {
-  RouteComponentProps,
-  Redirect,
-} from 'react-router';
+import {Redirect} from 'react-router';
 import styled from 'styled-components';
+import {useLocation, useRouteMatch} from 'react-router-dom';
 
 import {ActivitySummary, badgeOffsetLeft, badgeStyle} from './ActivitySummary';
 import {ButtonBaseWithLink} from '../../components/SharedStyles';
@@ -91,15 +89,13 @@ const createExerciseHash = (workout: Workout): ExerciseHash => {
     }, {});
 };
 
-type Props = RouteComponentProps<{ index?: string }>
-
-export const WorkoutSummary: React.FC<Props> = ({
-  match: {params: {index}},
-  location: {pathname},
-}) => {
+export const WorkoutSummary: React.FC = () => {
+  const { params: { index }} = useRouteMatch();
+  const { pathname } = useLocation();
+  console.log(pathname);
   const dedicatedSummaryPage = /workout-summary/.test(pathname);
   const workoutIndex = dedicatedSummaryPage || !index ? 0 : index;
-  const workout: Workout = useSelector((state: State) => state.history[workoutIndex]);
+  const workout: Workout = useSelector((s: State) => s.history[workoutIndex]);
 
   if (!workout) {
     return <Redirect to="/activity/" />;
@@ -121,7 +117,7 @@ export const WorkoutSummary: React.FC<Props> = ({
         <H2>{workout.name}</H2>
         <H3>{formattedDateString}</H3>
       </PanelWithGutter>
-        <Hr />
+      <Hr />
       <PanelWithGutter>
         <Ul>
           {activitySummaryTiles}
