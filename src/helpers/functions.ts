@@ -217,13 +217,11 @@ export const getDiffInMinutes = (start: string, finish: string): number => {
   ) : 0;
 };
 
-export const getTimeSince = (timeStamp: string): string => {
-  return formatDistance(
-    new Date(timeStamp),
-    new Date(),
-    { addSuffix: true },
-  );
-};
+export const getTimeSince = (timeStamp: string): string => formatDistance(
+  new Date(timeStamp),
+  new Date(),
+  { addSuffix: true },
+);
 
 export const formatSeconds = (seconds: number): string => {
   const secondsGreaterThanZero = seconds < 0 ? 0 : seconds;

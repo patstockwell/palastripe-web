@@ -13,7 +13,7 @@ import {
   getTotalWeightLifted,
   formatWeight,
 } from '../../helpers/functions';
-import {purple, lightGrey3} from '../../helpers/constants';
+import {DAYS_OF_THE_WEEK, purple, lightGrey3} from '../../helpers/constants';
 import {useScrollPosition} from '../../context/useScrollPosition';
 import {ActivityFeedOptionsMenu} from './ActivityFeedOptionsMenu';
 
@@ -26,7 +26,7 @@ const Tile = styled.li`
   min-height: 180px;
 `;
 
-const TimeSince = styled.p`
+const TimeStamp = styled.p`
   color: grey;
   font-size: 12px;
   margin: 0;
@@ -70,7 +70,6 @@ const SummaryLink = styled(Link)`
 
   & span {
     font-weight: initial;
-    // font-size: 0.9em;
   }
 
   ::after {
@@ -141,6 +140,7 @@ export const ActivityFeedTile: React.FC<Props> = ({
 
   const {name: workoutName, startTime, finishTime} = workout;
   const timeSince = getTimeSince(finishTime);
+  const day = DAYS_OF_THE_WEEK[new Date(finishTime).getDay()];
   const {
     mins, hours, minsLabel, hoursLabel,
   } = getHoursAndMinutes(getDiffInMinutes(startTime, finishTime));
@@ -161,7 +161,7 @@ export const ActivityFeedTile: React.FC<Props> = ({
           <OptionsButton onClick={toggleMenu}>
             <Dots />
           </OptionsButton>
-          <TimeSince>{timeSince}</TimeSince>
+          <TimeStamp>{day}, {timeSince}</TimeStamp>
           <SummaryLink
             onClick={() => setActivityPageScrollPosition(window.scrollY)}
             to={`/activity/${historyLink}`}
