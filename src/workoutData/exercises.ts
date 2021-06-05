@@ -6,6 +6,24 @@ interface ById {
 }
 
 const byId: ById = {
+  incline_bench_press: {
+    id: 'incline_bench_press',
+    name: 'Incline Bench Press',
+    tags: ['barbell', 'bench', 'press', 'arms'],
+    defaultWeightInKilos: 30,
+  },
+  incline_dumbbell_press: {
+    id: 'incline_dumbbell_press',
+    name: 'Incline Dumbbell Press',
+    tags: ['arms', 'chest', 'bench'],
+    defaultWeightInKilos: 10.5,
+  },
+  hip_thrust: {
+    id: 'hip_thrust',
+    name: 'Hip Thrust',
+    tags: ['glutes', 'hamstrings', 'hamstring'],
+    defaultWeightInKilos: 40,
+  },
   box_step_up: {
     defaultWeightInKilos: 20,
     id: 'box_step_up',
