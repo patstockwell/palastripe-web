@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.js": "/static/js/main.4ac27ff4.chunk.js",
-    "main.js.map": "/static/js/main.4ac27ff4.chunk.js.map",
+    "main.js": "/static/js/main.85293555.chunk.js",
+    "main.js.map": "/static/js/main.85293555.chunk.js.map",
     "runtime-main.js": "/static/js/runtime-main.094a4040.js",
     "runtime-main.js.map": "/static/js/runtime-main.094a4040.js.map",
-    "static/js/2.fe12fe69.chunk.js": "/static/js/2.fe12fe69.chunk.js",
-    "static/js/2.fe12fe69.chunk.js.map": "/static/js/2.fe12fe69.chunk.js.map",
+    "static/js/2.c06dc690.chunk.js": "/static/js/2.c06dc690.chunk.js",
+    "static/js/2.c06dc690.chunk.js.map": "/static/js/2.c06dc690.chunk.js.map",
     "index.html": "/index.html",
-    "precache-manifest.127d734efcc090b7c8b7938bfa3cdede.js": "/precache-manifest.127d734efcc090b7c8b7938bfa3cdede.js",
+    "precache-manifest.5cf983e21c599d51ea421d98787860bb.js": "/precache-manifest.5cf983e21c599d51ea421d98787860bb.js",
     "service-worker.js": "/service-worker.js",
-    "static/js/2.fe12fe69.chunk.js.LICENSE.txt": "/static/js/2.fe12fe69.chunk.js.LICENSE.txt",
+    "static/js/2.c06dc690.chunk.js.LICENSE.txt": "/static/js/2.c06dc690.chunk.js.LICENSE.txt",
     "static/media/active-adult-aerobics-206573.jpg": "/static/media/active-adult-aerobics-206573.57b9cb6b.jpg",
     "static/media/active-athlete-barbell-2261482.jpg": "/static/media/active-athlete-barbell-2261482.c4693443.jpg",
     "static/media/active-body-crossfit-1533897.jpg": "/static/media/active-body-crossfit-1533897.4fc94c9d.jpg",
@@ -28,7 +28,7 @@
   },
   "entrypoints": [
     "static/js/runtime-main.094a4040.js",
-    "static/js/2.fe12fe69.chunk.js",
-    "static/js/main.4ac27ff4.chunk.js"
+    "static/js/2.c06dc690.chunk.js",
+    "static/js/main.85293555.chunk.js"
   ]
 }
