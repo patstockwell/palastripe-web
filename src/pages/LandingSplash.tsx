@@ -76,7 +76,11 @@ export const LandingSplash: React.FC = () => {
           palastripe
         </Logo>
       </LogoWrapper>
-      <p>Track your gym workouts, visualise your progress, and take control of your strength training goals with <strong>palastripe</strong>.</p>
+      <p>
+        Track your gym workouts, visualise your progress, and take control of your strength training goals with{' '}
+        <br />
+        <strong>palastripe</strong>
+      </p>
       <StartButton to="/workouts/">
         <ColouredDot fill={green} />
         Start a workout
