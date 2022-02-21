@@ -28,13 +28,13 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "postbuild": "react-snap && yarn clean-cra-sw && yarn build-sw",
+    "postbuild": "react-snap && npm run clean-cra-sw && npm run build-sw",
     "build-sw": "node ./src/sw-build.js",
     "clean-cra-sw": "rm -f build/precache-manifest.*.js && rm -f build/service-worker.js",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "lint": "eslint './src/**'",
-    "prepush": "yarn build",
+    "prepush": "npm run build",
     "push": "gh-pages -d master -d build"
   },
   "eslintConfig": {
