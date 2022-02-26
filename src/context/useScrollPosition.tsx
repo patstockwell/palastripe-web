@@ -26,16 +26,16 @@ export const ScrollPositionProvider: React.FC = ({ children }) => {
   const [profileScrollY, setProfileScrollY] = useState(0);
   const { pathname } = useLocation();
 
-  const scrollHash = {
-    [WORKOUTS_PAGE]: workoutScrollY,
-    [ACTIVITY_PAGE]: activityScrollY,
-    [PROFILE_PAGE]: profileScrollY,
-  };
-
   useEffect(() => {
+    const scrollHash = {
+      [WORKOUTS_PAGE]: workoutScrollY,
+      [ACTIVITY_PAGE]: activityScrollY,
+      [PROFILE_PAGE]: profileScrollY,
+    };
+
     const scrollY = scrollHash[getCurrentPage(pathname)] || 0;
     window.scrollTo(0, scrollY);
-  }, [scrollHash, pathname]);
+  }, [workoutScrollY, activityScrollY, profileScrollY, pathname]);
 
   const scrollProviderValue = {
     setActivityPageScrollPosition: (y?: number) =>
