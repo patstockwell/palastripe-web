@@ -1,4 +1,4 @@
-import { combineReducers } from 'redux';
+import { combineReducers } from '@reduxjs/toolkit';
 import settings from './settingsReducer';
 import profile from './profileReducer';
 import activeWorkout from './activeWorkoutReducer';
