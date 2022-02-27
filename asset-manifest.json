@@ -1,34 +1,25 @@
 {
   "files": {
-    "main.js": "/static/js/main.85293555.chunk.js",
-    "main.js.map": "/static/js/main.85293555.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.094a4040.js",
-    "runtime-main.js.map": "/static/js/runtime-main.094a4040.js.map",
-    "static/js/2.c06dc690.chunk.js": "/static/js/2.c06dc690.chunk.js",
-    "static/js/2.c06dc690.chunk.js.map": "/static/js/2.c06dc690.chunk.js.map",
+    "main.js": "/static/js/main.d7302970.js",
+    "static/media/squat.jpg": "/static/media/squat.397d2c28d317c7fb55ac.jpg",
+    "static/media/athlete-barbell-biceps-497934.jpg": "/static/media/athlete-barbell-biceps-497934.8356bcc8d2896ed1ac04.jpg",
+    "static/media/bicep-workout-1851820.jpg": "/static/media/bicep-workout-1851820.607c334ed0b64a2f847c.jpg",
+    "static/media/active-adult-aerobics-206573.jpg": "/static/media/active-adult-aerobics-206573.9aa33626ad0c24e8f0ed.jpg",
+    "static/media/benchpress.jpg": "/static/media/benchpress.e19aa4af06f1f9187c7b.jpg",
+    "static/media/active-athlete-barbell-2261482.jpg": "/static/media/active-athlete-barbell-2261482.02656acea1bed1c1cfc9.jpg",
+    "static/media/active-body-crossfit-1533897.jpg": "/static/media/active-body-crossfit-1533897.9adebb066ad5739b3bc2.jpg",
+    "static/media/overhead-press.jpg": "/static/media/overhead-press.73f1c2653b91945e18fe.jpg",
+    "static/media/athlete-biceps-body-136405.jpg": "/static/media/athlete-biceps-body-136405.ea13f80ef7b91ff2586b.jpg",
+    "static/media/athlete-barbell-body-931321.jpg": "/static/media/athlete-barbell-body-931321.94cce97cbc474f9aa62d.jpg",
+    "static/media/custom-workout-image.jpg": "/static/media/custom-workout-image.7fb25e5ed060ef69e6da.jpg",
+    "static/media/leg-press-dark.jpg": "/static/media/leg-press-dark.2dc4f018407fe5887dd3.jpg",
+    "static/media/activityEnd.mp3": "/static/media/activityEnd.beba2533397c62c5259e.mp3",
+    "static/media/activityStart.mp3": "/static/media/activityStart.a2d1cfc900c894ecbe0f.mp3",
+    "static/media/muli.woff2": "/static/media/muli.a9c655b9e5a596ab0e3f.woff2",
     "index.html": "/index.html",
-    "precache-manifest.5cf983e21c599d51ea421d98787860bb.js": "/precache-manifest.5cf983e21c599d51ea421d98787860bb.js",
-    "service-worker.js": "/service-worker.js",
-    "static/js/2.c06dc690.chunk.js.LICENSE.txt": "/static/js/2.c06dc690.chunk.js.LICENSE.txt",
-    "static/media/active-adult-aerobics-206573.jpg": "/static/media/active-adult-aerobics-206573.57b9cb6b.jpg",
-    "static/media/active-athlete-barbell-2261482.jpg": "/static/media/active-athlete-barbell-2261482.c4693443.jpg",
-    "static/media/active-body-crossfit-1533897.jpg": "/static/media/active-body-crossfit-1533897.4fc94c9d.jpg",
-    "static/media/activityEnd.mp3": "/static/media/activityEnd.b3398441.mp3",
-    "static/media/activityStart.mp3": "/static/media/activityStart.291d2235.mp3",
-    "static/media/athlete-barbell-biceps-497934.jpg": "/static/media/athlete-barbell-biceps-497934.78ed658d.jpg",
-    "static/media/athlete-barbell-body-931321.jpg": "/static/media/athlete-barbell-body-931321.358d0420.jpg",
-    "static/media/athlete-biceps-body-136405.jpg": "/static/media/athlete-biceps-body-136405.02196806.jpg",
-    "static/media/benchpress.jpg": "/static/media/benchpress.0d697d4c.jpg",
-    "static/media/bicep-workout-1851820.jpg": "/static/media/bicep-workout-1851820.a44045de.jpg",
-    "static/media/custom-workout-image.jpg": "/static/media/custom-workout-image.6bbed9b0.jpg",
-    "static/media/leg-press-dark.jpg": "/static/media/leg-press-dark.122eed84.jpg",
-    "static/media/muli.woff2": "/static/media/muli.c99bf4eb.woff2",
-    "static/media/overhead-press.jpg": "/static/media/overhead-press.3e8e7eac.jpg",
-    "static/media/squat.jpg": "/static/media/squat.38f6e29e.jpg"
+    "main.d7302970.js.map": "/static/js/main.d7302970.js.map"
   },
   "entrypoints": [
-    "static/js/runtime-main.094a4040.js",
-    "static/js/2.c06dc690.chunk.js",
-    "static/js/main.85293555.chunk.js"
+    "static/js/main.d7302970.js"
   ]
 }
