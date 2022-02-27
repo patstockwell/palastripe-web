@@ -24,7 +24,7 @@
     "uuid": "^7.0.3"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "PORT=5044 react-scripts start",
     "build": "react-scripts build",
     "clean": "rm -rf ./build",
     "postbuild": "react-snap && npm run clean-cra-sw && npm run build-sw",
