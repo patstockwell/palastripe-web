@@ -65,7 +65,7 @@ const AvatarWrapper = styled.div`
 
 const SummaryLink = styled(Link)`
   font-weight: 500;
-  text-decoration: none
+  text-decoration: none;
   color: inherit;
 
   & span {
