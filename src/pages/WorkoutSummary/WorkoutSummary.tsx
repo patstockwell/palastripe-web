@@ -93,7 +93,6 @@ export const WorkoutSummary: React.FC = () => {
   // TODO: Test this.
   const { index } = useParams();
   const { pathname } = useLocation();
-  console.log(pathname);
   const dedicatedSummaryPage = /workout-summary/.test(pathname);
   const workoutIndex = dedicatedSummaryPage || !index ? 0 : index;
   const workout: Workout = useSelector((s: State) => s.history[workoutIndex]);
