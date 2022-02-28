@@ -51,12 +51,7 @@ const ProfileNameLink: React.FC<StateProps> = ({
 }) => (
   <FlexWrapper>
     <Avatar isLargeSize />
-    <NameAndEditIcon
-      to={{
-        pathname: '/profile/name/',
-        state: { immediate: false },
-      }}
-    >
+    <NameAndEditIcon to="/profile/name/" state={{ immediate: false }} >
       <EditIconPencil height={12} width={12} style={{ fill: 'grey' }} />
       {(firstName || lastName) ?
         <Name>{firstName} {lastName}</Name>

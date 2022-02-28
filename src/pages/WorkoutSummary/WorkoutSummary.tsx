@@ -1,8 +1,8 @@
 import React from 'react';
 import {useSelector} from 'react-redux';
-import {Redirect} from 'react-router';
+import {Navigate} from 'react-router';
 import styled from 'styled-components';
-import {useLocation, useRouteMatch} from 'react-router-dom';
+import {useLocation, useParams} from 'react-router-dom';
 
 import {ActivitySummary, badgeOffsetLeft, badgeStyle} from './ActivitySummary';
 import {ButtonBaseWithLink} from '../../components/SharedStyles';
@@ -90,7 +90,8 @@ const createExerciseHash = (workout: Workout): ExerciseHash => {
 };
 
 export const WorkoutSummary: React.FC = () => {
-  const { params: { index }} = useRouteMatch();
+  // TODO: Test this.
+  const { index } = useParams();
   const { pathname } = useLocation();
   console.log(pathname);
   const dedicatedSummaryPage = /workout-summary/.test(pathname);
@@ -98,7 +99,7 @@ export const WorkoutSummary: React.FC = () => {
   const workout: Workout = useSelector((s: State) => s.history[workoutIndex]);
 
   if (!workout) {
-    return <Redirect to="/activity/" />;
+    return <Navigate to="/activity/" />;
   }
 
   const { formattedDateString } = formatDate(workout.finishTime);

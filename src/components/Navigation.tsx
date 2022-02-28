@@ -105,7 +105,7 @@ const Navigation: React.FC<Props> = ({ onNavigation }) => {
         selected={isOnPage(WORKOUTS_PAGE)}
         to="/workouts/"
         onClick={() => handleClick(WORKOUTS_PAGE)}
-        innerRef={workoutsRef}
+        ref={workoutsRef}
         x={animationDistance}
       >
         <Cardiogram />
@@ -114,7 +114,7 @@ const Navigation: React.FC<Props> = ({ onNavigation }) => {
         selected={isOnPage(ACTIVITY_PAGE)}
         to="/activity/"
         onClick={() => handleClick(ACTIVITY_PAGE)}
-        innerRef={activityRef}
+        ref={activityRef}
         x={animationDistance}
       >
         <FeedIcon />
@@ -123,7 +123,7 @@ const Navigation: React.FC<Props> = ({ onNavigation }) => {
         selected={isOnPage(PROFILE_PAGE)}
         onClick={() => handleClick(PROFILE_PAGE)}
         to="/profile/"
-        innerRef={profileRef}
+        ref={profileRef}
         x={animationDistance}
       >
         <ProfileIcon />
@@ -132,4 +132,4 @@ const Navigation: React.FC<Props> = ({ onNavigation }) => {
   );
 };
 
-export default Navigation;
+export { Navigation };

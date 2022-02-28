@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {useHistory} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 
 import {ReduxAction, Activity, State} from '../../helpers/types';
 import {
@@ -34,7 +34,7 @@ export const ActivityFeedOptionsMenu: React.FC<Props> = ({
   const [showDeleteWorkoutAlert, setShowDeleteWorkoutAlert] = useState(false);
   const {setActiveWorkout} = useActiveWorkout();
   const {setActivityPageScrollPosition} = useScrollPosition();
-  const history = useHistory();
+  const navigate = useNavigate();
   const {activeWorkout, workouts: {allIds}} = useSelector((s: State) => s);
   const {name: activeWorkoutName, id: activeWorkoutId} = activeWorkout || {};
 
@@ -50,7 +50,7 @@ export const ActivityFeedOptionsMenu: React.FC<Props> = ({
       toggleMenu();
     } else {
       handleRepeatWorkoutConfirmation();
-      history.push(`/workouts/${workout.id}/`); // Else go straight there.
+      navigate(`/workouts/${workout.id}/`); // Else go straight there.
     }
   };
 

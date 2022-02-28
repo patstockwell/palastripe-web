@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import {useLocation, Route, Switch} from 'react-router-dom';
+import {Route, Routes as Switch} from 'react-router-dom';
 
 import {LandingSplash} from '../pages/LandingSplash';
 import {Workouts} from '../pages/Workouts';
@@ -32,8 +32,6 @@ const MaxWidthContainer = styled.div`
 `;
 
 const Routes: React.FC = () => {
-  const location = useLocation();
-
   return (
     <MaxWidthContainer>
       <ScrollPositionProvider>
@@ -41,58 +39,74 @@ const Routes: React.FC = () => {
           <SelectedExerciseProvider>
             <RestTimerProvider>
               <ActivityFeedLengthProvider>
-                <Switch location={location}>
-                  <Route path="/" exact>
-                    <LandingSplash />
-                  </Route>
-                  <Route path="/install/" exact>
-                    <Install />
-                  </Route>
-                  <Route path="/workouts/" exact>
-                    <Workouts />
-                  </Route>
-                  <Route path="/activity/" exact>
-                    <Activity />
-                  </Route>
-                  <Route path="/activity/:index/">
-                    <WorkoutSummary />
-                  </Route>
-                  <Route path="/workout-summary/">
-                    <WorkoutSummary />
-                  </Route>
-                  <Route path="/profile/" exact>
-                    <Profile />
-                  </Route>
-                  <Route path="/profile/name/">
-                    <ProfileName />
-                  </Route>
-                  <Route path="/profile/audio/">
-                    <SettingAudio />
-                  </Route>
-                  <Route path="/profile/rest-timer/">
-                    <SettingUseRestTimer />
-                  </Route>
-                  <Route path="/profile/export/">
-                    <DataExport />
-                  </Route>
-                  <Route path="/profile/unit-of-measurement/">
-                    <SettingUnitOfMeasurement />
-                  </Route>
-                  <Route path={`/workouts/${onTheFlyWorkoutId}/${activitySearchPath}`}>
-                    <ActivitySearch />
-                  </Route>
-                  <Route path="/workouts/:id/">
-                    <ActiveWorkout />
-                  </Route>
-                  <Route path="/workout-complete/">
-                    <WorkoutCompletionSplash />
-                  </Route>
-                  <Route path="/subscribe/">
-                    <Subscribe />
-                  </Route>
-                  <Route>
-                    <FourZeroFour />
-                  </Route>
+                <Switch>
+                  <Route
+                    index
+                    element={<LandingSplash />}
+                  />
+                  <Route
+                    path="install"
+                    element={<Install />}
+                  />
+                  <Route
+                    path="workouts"
+                    element={<Workouts />}
+                  />
+                  <Route
+                    path="activity"
+                    element={<Activity />}
+                  />
+                  <Route
+                    path="activity/:index"
+                    element={<WorkoutSummary />}
+                  />
+                  <Route
+                    path="workout-summary"
+                    element={<WorkoutSummary />}
+                  />
+                  <Route
+                    path="profile"
+                    element={<Profile />}
+                  />
+                  <Route
+                    path="profile/name"
+                    element={<ProfileName />}
+                  />
+                  <Route
+                    path="profile/audio"
+                    element={<SettingAudio />}
+                  />
+                  <Route
+                    path="profile/rest-timer"
+                    element={<SettingUseRestTimer />}
+                  />
+                  <Route
+                    path="profile/export"
+                    element={<DataExport />}
+                  />
+                  <Route
+                    path="profile/unit-of-measurement"
+                    element={<SettingUnitOfMeasurement />}
+                  />
+                  <Route
+                    path={`/workouts/${onTheFlyWorkoutId}/${activitySearchPath}`}
+                    element={<ActivitySearch />}
+                  />
+                  <Route
+                    path="workouts/:id"
+                    element={<ActiveWorkout />}
+                  />
+                  <Route
+                    path="workout-complete"
+                    element={<WorkoutCompletionSplash />}
+                  />
+                  <Route
+                    path="subscribe"
+                    element={<Subscribe />}
+                  />
+                  <Route
+                    element={<FourZeroFour />}
+                  />
                 </Switch>
               </ActivityFeedLengthProvider>
             </RestTimerProvider>

@@ -22,6 +22,10 @@ import {useActiveWorkout} from '../../reducers/activeWorkoutReducer';
 import {onTheFlyWorkoutId} from '../../workoutData/workouts/onTheFly';
 import {useSelectedExercise} from '../../context/useSelectedExercise';
 
+// TODO: Update react router
+// TODO: Add jsurl dependency
+// TODO: Put complete workout in URL
+// TODO: Remove the name of the workout from the path and just use the query
 export const ActiveWorkout: React.FC = () => {
   const [showEndWorkoutAlert, setShowEndWorkoutAlert] = useState(false);
   const [showExistingWorkoutAlert, setShowExistingWorkoutAlert] = useState(false);
@@ -38,7 +42,7 @@ export const ActiveWorkout: React.FC = () => {
   } = useSelector((state: State) => state);
 
   // get the workout ID from the URL
-  const {id: idFromUrl}: {id: string} = useParams();
+  const {id: idFromUrl} = useParams();
   const workoutFromUrl = workouts.byId[idFromUrl];
 
   if (!workoutFromUrl) {

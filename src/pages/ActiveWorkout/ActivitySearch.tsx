@@ -1,5 +1,5 @@
 import React, {useState, useRef, useMemo} from 'react';
-import {useHistory, Redirect} from 'react-router-dom';
+import {useNavigate, Navigate} from 'react-router-dom';
 import {useSelector} from 'react-redux';
 import {v4 as uuidv4} from 'uuid';
 import styled from 'styled-components';
@@ -99,7 +99,7 @@ export const activitySearchPath = 'activity-search';
 
 export const ActivitySearch: React.FC = () => {
   const inputRef = useRef(null);
-  const history = useHistory();
+  const navigate = useNavigate();
   const {activeWorkout} = useSelector((state: State) => state);
   const {addActivity} = useActiveWorkout();
   const [searchQuery, setSearchQuery] = useState('');
@@ -112,7 +112,7 @@ export const ActivitySearch: React.FC = () => {
   ), []);
 
   if (!activeWorkout) {
-    return <Redirect to="/workouts/" />;
+    return <Navigate to="/workouts/" />;
   }
 
   // use the first group as there is only one group in the onTheFly workout.
@@ -151,7 +151,7 @@ export const ActivitySearch: React.FC = () => {
     }
 
     // navigate back to the active workout URL
-    history.push(`/workouts/${activeWorkout.id}`);
+    navigate(`/workouts/${activeWorkout.id}`);
   };
 
   const handleKeyPress = (e: React.KeyboardEvent) => {

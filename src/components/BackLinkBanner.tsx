@@ -65,7 +65,8 @@ export const BackLinkBanner: React.FC<Props> = ({
 
       {back &&
         <StyledLink
-          to={{ pathname: back.link, state: { immediate: false } }}
+          to={back.link}
+          state={{ immediate: false }}
           onClick={back.handleClick}
         >
           {back.showArrows &&
@@ -83,7 +84,8 @@ export const BackLinkBanner: React.FC<Props> = ({
 
       {continueTo &&
         <StyledLink
-          to={{ pathname: continueTo.link , state: { immediate: false } }}
+          to={continueTo.link}
+          state={{ immediate: false }}
           onClick={continueTo.handleClick}
         >
           {continueTo.text}

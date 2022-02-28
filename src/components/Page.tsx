@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { useLocation } from 'react-router-dom';
 
 import { Banner } from './Banner';
-import Navigation from './Navigation';
+import { Navigation } from './Navigation';
 import {
   gutterWidth,
   bannerHeight,
