@@ -52,7 +52,7 @@ if ('function' === typeof importScripts) {
     workbox.precaching.precacheAndRoute([
   {
     "url": "asset-manifest.json",
-    "revision": "5cb4b027c1e48f04be4ef194968807d0"
+    "revision": "04294a6ea06b40908cefa6d0371c99a6"
   },
   {
     "url": "browserconfig.xml",
@@ -147,8 +147,8 @@ if ('function' === typeof importScripts) {
     "revision": "c589cd31557de9636d1449a8aa97e503"
   },
   {
-    "url": "static/js/main.d7302970.js",
-    "revision": "98b47512b8bab40dcdc467dffd8fa997"
+    "url": "static/js/main.1006320d.js",
+    "revision": "a15f64c0e5ecee77a9cda3513f16033c"
   },
   {
     "url": "static/media/active-adult-aerobics-206573.9aa33626ad0c24e8f0ed.jpg",
@@ -248,7 +248,7 @@ if ('function' === typeof importScripts) {
   },
   {
     "url": "index.html",
-    "revision": "ac83442b21b3b6eccb2dbd6f084dbaae"
+    "revision": "90a4730d1aa1737c8c9250ad2f24d91d"
   }
 ], {
       // Ignore all URL parameters for precaching
