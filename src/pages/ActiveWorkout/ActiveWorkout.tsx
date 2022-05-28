@@ -22,7 +22,6 @@ import {useActiveWorkout} from '../../reducers/activeWorkoutReducer';
 import {onTheFlyWorkoutId} from '../../workoutData/workouts/onTheFly';
 import {useSelectedExercise} from '../../context/useSelectedExercise';
 
-// TODO: Update react router
 // TODO: Add jsurl dependency
 // TODO: Put complete workout in URL
 // TODO: Remove the name of the workout from the path and just use the query
