@@ -1,8 +1,6 @@
 import { reduceCompletedExercises, adjustWeight } from '../workoutsReducer';
-import {
-  Activity, // eslint-disable-line no-unused-vars
-  Workout, // eslint-disable-line no-unused-vars
-} from '../../helpers/types';
+import { Activity } from '../../helpers/types';
+import { Workout } from '../workoutsReducer';
 
 describe('the workoutsReducer', () => {
   const workout: Workout = {
@@ -10,8 +8,8 @@ describe('the workoutsReducer', () => {
     name: 'Tester',
     version: 'some version',
     imageUrl: 'url',
-    startTime: 4,
-    finishTime: 8,
+    startTime: '2',
+    finishTime: '8',
     exerciseGroups: [
       {
         id: 'group1',
@@ -21,7 +19,7 @@ describe('the workoutsReducer', () => {
             name: 'Exercise 1',
             id: 'exercise1',
             weightInKilos: 70,
-            tags: [],
+            exerciseId: 'exercise1',
             repsGoal: 8,
             repsAchieved: 8,
             autoIncrement: 0,
@@ -31,7 +29,7 @@ describe('the workoutsReducer', () => {
             name: 'Exercise 2',
             id: 'exercise2',
             weightInKilos: 70,
-            tags: [],
+            exerciseId: 'exercise2',
             repsGoal: 8,
             repsAchieved: 8,
             autoIncrement: 0,
@@ -41,7 +39,7 @@ describe('the workoutsReducer', () => {
             name: 'Exercise 4',
             id: 'exercise4',
             weightInKilos: 70,
-            tags: [],
+            exerciseId: 'exercise4',
             repsGoal: 8,
             repsAchieved: 8,
             autoIncrement: 0,
@@ -57,7 +55,7 @@ describe('the workoutsReducer', () => {
             name: 'Exercise 3',
             id: 'exercise3',
             weightInKilos: 73,
-            tags: [],
+            exerciseId: 'exercise3',
             repsGoal: 8,
             repsAchieved: 8,
             autoIncrement: 0,
@@ -67,7 +65,7 @@ describe('the workoutsReducer', () => {
             name: 'Exercise 4',
             id: 'exercise4',
             weightInKilos: 70,
-            tags: [],
+            exerciseId: 'exercise4',
             repsGoal: 8,
             repsAchieved: 8,
             autoIncrement: 0,
@@ -92,10 +90,10 @@ describe('the workoutsReducer', () => {
   describe('the adjustWeight function', () => {
     it('returns the activity with an updated weight', () => {
       const activity: Activity = {
+        exerciseId: '1',
         name: 'exercise3',
         id: 'differentId',
         weightInKilos: 70,
-        tags: [],
         repsGoal: 99,
         repsAchieved: 7,
         autoIncrement: 10,
@@ -107,7 +105,7 @@ describe('the workoutsReducer', () => {
         name: 'exercise3',
         id: 'differentId',
         weightInKilos: 70,
-        tags: [],
+        exerciseId: '1',
         repsGoal: 99,
         repsAchieved: 7,
         autoIncrement: 10,

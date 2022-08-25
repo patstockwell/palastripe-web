@@ -378,6 +378,43 @@ const byId: ById = {
     id: 'wide_grip_bench_press',
     name: 'Wide-Grip Bench Press',
   },
+  // ATG Split Squat
+  // Banded Push Up
+  // Barbell Bicep Curl
+  // Barbell Bicep Curl
+  // Barbell Shrug
+  // Box Step Up
+  // Bulgarian Split Squat
+  // Dead Hang
+  // Dumbbell Chest Fly
+  // Dumbbell Deadlift And Press
+  // Dumbbell Row
+  // Dumbbell Shrug
+  // EZ Bar Reverse-Grip Curl
+  // Elephant Walk
+  // Goblet Squat
+  // Good Morning
+  // Hindu Squat
+  // Hip Thrust
+  // Lying Leg Lift
+  // McGill Curl Up
+  // Neck Curls
+  // Neck front raise
+  // Overhead Squat
+  // Patrick Step
+  // Pec Band Cross
+  // Romanian Deadlift
+  // Seated Good Morning
+  // Seated Incline Dumbbell Bicep Curl
+  // Seated Psoas Curl
+  // Single-Leg Deadlift
+  // Single-Leg March
+  // Single-Leg Leg Extension
+  // Single-Leg Standing Calf Raise
+  // Standing Psoas Curl
+  // Overhead Tricep Extension - Band
+  // Walking Lunges
+  // Wide-grip Bench Press
 };
 
 const allIds = Object.keys(byId);
