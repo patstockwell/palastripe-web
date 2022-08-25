@@ -383,8 +383,6 @@ const byId: ById = {
   // Barbell Bicep Curl
   // Barbell Bicep Curl
   // Barbell Shrug
-  // Box Step Up
-  // Bulgarian Split Squat
   // Dead Hang
   // Dumbbell Chest Fly
   // Dumbbell Deadlift And Press
@@ -395,7 +393,6 @@ const byId: ById = {
   // Goblet Squat
   // Good Morning
   // Hindu Squat
-  // Hip Thrust
   // Lying Leg Lift
   // McGill Curl Up
   // Neck Curls
