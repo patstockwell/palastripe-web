@@ -378,7 +378,54 @@ const byId: ById = {
     id: 'wide_grip_bench_press',
     name: 'Wide-Grip Bench Press',
   },
-  // ATG Split Squat
+  tibialis_raise: {
+    defaultWeightInKilos: 0,
+    tags: ['legs', 'kneesovertoesguy', 'bodyweight'],
+    id: 'tibialis_raise',
+    name: 'Tibialis Raise',
+  },
+  fhl_calf_raise: {
+    defaultWeightInKilos: 0,
+    tags: ['legs', 'kneesovertoesguy', 'bodyweight'],
+    id: 'fhl_calf_raise',
+    name: 'FHL Calf Raise',
+  },
+  kot_calf_raise: {
+    defaultWeightInKilos: 0,
+    tags: ['legs', 'kneesovertoesguy', 'bodyweight'],
+    id: 'kot_calf_raise',
+    name: 'Knees Over Toes (KOT) Calf Raise',
+  },
+  patrick_step: {
+    defaultWeightInKilos: 0,
+    tags: ['legs', 'kneesovertoesguy', 'bodyweight'],
+    id: 'patrick_step',
+    name: 'Patrick Step',
+  },
+  atg_split_squat: {
+    defaultWeightInKilos: 0,
+    tags: ['legs', 'kneesovertoesguy', 'bodyweight'],
+    id: 'atg_split_squat',
+    name: 'ATG Split Squat',
+  },
+  elephant_walk: {
+    defaultWeightInKilos: 0,
+    tags: ['legs', 'kneesovertoesguy', 'bodyweight'],
+    id: 'elephant_walk',
+    name: 'Elephant Walk',
+  },
+  l_sit: {
+    defaultWeightInKilos: 0,
+    tags: ['legs', 'kneesovertoesguy', 'bodyweight'],
+    id: 'l_sit',
+    name: 'L-Sit',
+  },
+  couch_stretch: {
+    defaultWeightInKilos: 0,
+    tags: ['legs', 'kneesovertoesguy', 'bodyweight', 'stretch'],
+    id: 'couch_stretch',
+    name: 'Couch Stretch',
+  },
   // Banded Push Up
   // Barbell Bicep Curl
   // Barbell Bicep Curl
@@ -389,7 +436,6 @@ const byId: ById = {
   // Dumbbell Row
   // Dumbbell Shrug
   // EZ Bar Reverse-Grip Curl
-  // Elephant Walk
   // Goblet Squat
   // Good Morning
   // Hindu Squat
@@ -398,7 +444,6 @@ const byId: ById = {
   // Neck Curls
   // Neck front raise
   // Overhead Squat
-  // Patrick Step
   // Pec Band Cross
   // Romanian Deadlift
   // Seated Good Morning
