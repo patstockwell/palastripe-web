@@ -14,6 +14,7 @@ import {pushAndPull} from '../workoutData/workouts/pushAndPull';
 import {legPower} from '../workoutData/workouts/legPower';
 import {compoundPyramids} from '../workoutData/workouts/compoundPyramids';
 import {onTheFlyWorkoutId, onTheFly} from '../workoutData/workouts/onTheFly';
+import {zero} from '../workoutData/workouts/zero';
 import {getLocalStorage} from '../helpers/functions';
 import {LOCAL_STORAGE_WORKOUTS, WORKOUT_VERSION} from '../helpers/constants';
 
@@ -113,6 +114,7 @@ const updateCompleted = (e: BoolHash) => (a: Activity) => {
 
 const byId: { [key: string]: Workout } = {
   [onTheFlyWorkoutId]: onTheFly,
+  'zero': zero,
   'full-body-dumbbell-strength': fullBodyDumbbellStrength,
   'circuit-speed': circuitSpeed,
   'upper-body-burner': upperBodyBurner,
