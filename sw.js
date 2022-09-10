@@ -52,7 +52,7 @@ if ('function' === typeof importScripts) {
     workbox.precaching.precacheAndRoute([
   {
     "url": "asset-manifest.json",
-    "revision": "04294a6ea06b40908cefa6d0371c99a6"
+    "revision": "c698f1a06bd4d011d3cbe9df4b62c0e1"
   },
   {
     "url": "browserconfig.xml",
@@ -147,8 +147,8 @@ if ('function' === typeof importScripts) {
     "revision": "c589cd31557de9636d1449a8aa97e503"
   },
   {
-    "url": "static/js/main.1006320d.js",
-    "revision": "a15f64c0e5ecee77a9cda3513f16033c"
+    "url": "static/js/main.250bc31e.js",
+    "revision": "3c3c776843a889e779678d08947f4e8f"
   },
   {
     "url": "static/media/active-adult-aerobics-206573.9aa33626ad0c24e8f0ed.jpg",
@@ -211,6 +211,10 @@ if ('function' === typeof importScripts) {
     "revision": "38f6e29ea991a9e0b8b0a2d349518d3c"
   },
   {
+    "url": "static/media/the-knees-over-toes-zero.21051a7e2ee576a004be.jpg",
+    "revision": "65386626d2b69e5eca4ff9f509a4c037"
+  },
+  {
     "url": "touch-icons/c-apple-touch-icon-114x114.png",
     "revision": "e8f0a0a00ba7455d18c2cb4d1399b7d8"
   },
@@ -248,7 +252,7 @@ if ('function' === typeof importScripts) {
   },
   {
     "url": "index.html",
-    "revision": "90a4730d1aa1737c8c9250ad2f24d91d"
+    "revision": "11077f5968d7912b183915b2134594da"
   }
 ], {
       // Ignore all URL parameters for precaching

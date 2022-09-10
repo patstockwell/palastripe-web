@@ -1,6 +1,7 @@
 {
   "files": {
-    "main.js": "/static/js/main.1006320d.js",
+    "main.js": "/static/js/main.250bc31e.js",
+    "static/media/the-knees-over-toes-zero.jpg": "/static/media/the-knees-over-toes-zero.21051a7e2ee576a004be.jpg",
     "static/media/squat.jpg": "/static/media/squat.397d2c28d317c7fb55ac.jpg",
     "static/media/athlete-barbell-biceps-497934.jpg": "/static/media/athlete-barbell-biceps-497934.8356bcc8d2896ed1ac04.jpg",
     "static/media/bicep-workout-1851820.jpg": "/static/media/bicep-workout-1851820.607c334ed0b64a2f847c.jpg",
@@ -17,9 +18,9 @@
     "static/media/activityStart.mp3": "/static/media/activityStart.a2d1cfc900c894ecbe0f.mp3",
     "static/media/muli.woff2": "/static/media/muli.a9c655b9e5a596ab0e3f.woff2",
     "index.html": "/index.html",
-    "main.1006320d.js.map": "/static/js/main.1006320d.js.map"
+    "main.250bc31e.js.map": "/static/js/main.250bc31e.js.map"
   },
   "entrypoints": [
-    "static/js/main.1006320d.js"
+    "static/js/main.250bc31e.js"
   ]
 }
